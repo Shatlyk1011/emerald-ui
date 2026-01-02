@@ -1,15 +1,9 @@
-import { FileUploadInput } from "@/components/FileUpload";
+import Hero from "@/components/sections/Hero";
 
 export default function Home() {
   return (
-    <div className="flex h-full flex-1 items-start pt-30 justify-center font-sans px-20">
-      <section className="flex items-center flex-col w-full gap-8">
-        <div className="text-center">
-          <h1 className="text-4xl font-semibold mb-2 -tracking-two">Build something great</h1>
-          <p className="text-base text-primary/70">Create apps and websites by chatting with AI</p>
-        </div>
-        <FileUploadInput />
-      </section>
-    </div>
+    <section className="mx-auto mb-16 h-full min-h-[40vw] w-full w-full bg-red-500 min-h-svh flex items-center max-w-5xl justify-center px-12 pt-6 max-lg:px-8 max-sm:px-4 max-sm:pt-2">
+      <Hero />
+    </section>
   );
 }
