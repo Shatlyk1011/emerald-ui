@@ -1,10 +1,10 @@
 'use client'
-import { FC } from 'react'
+
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 
-// import ThemeToggle from "@/components/ui/ThemeToggle";
+import ThemeToggle from '@/components/ui/theme-toggle'
 
 const { components, inspiration } = {
   inspiration: '/inspiration',
@@ -50,8 +50,7 @@ const Header = () => {
       </nav>
 
       <div className='flex w-20 justify-end max-sm:w-14'>
-        toggle
-        {/* <ThemeToggle /> */}
+        <ThemeToggle />
       </div>
     </header>
   )

@@ -21,7 +21,7 @@ export default function FileExplorer({
   })
 
   return (
-    <div className='bg-muted/10 flex h-full w-48 flex-col border-r text-sm'>
+    <div className='bg-muted/10 flex h-full w-30 flex-col border-r text-sm'>
       <div className='text-muted-foreground border-b p-3 text-xs font-semibold tracking-wider uppercase'>
         Explorer
       </div>
@@ -35,7 +35,7 @@ export default function FileExplorer({
               className={cn(
                 'hover:bg-accent/50 hover:text-accent-foreground flex w-full items-center gap-2 px-4 py-1.5 text-left transition-colors',
                 isActive &&
-                  'bg-accent text-accent-foreground border-primary border-l-2 pl-[14px] font-medium'
+                'bg-accent text-accent-foreground border-primary border-l-2 pl-3.5 font-medium'
               )}
             >
               <File className='h-4 w-4 opacity-70' />

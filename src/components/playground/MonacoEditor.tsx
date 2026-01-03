@@ -31,7 +31,7 @@ export default function MonacoEditor({
         defaultLanguage='javascript'
         options={{
           minimap: { enabled: false },
-          fontSize: 14,
+          fontSize: 13,
           scrollBeyondLastLine: false,
           padding: { top: 16, bottom: 16 },
           fontFamily: 'var(--font-mono)',
