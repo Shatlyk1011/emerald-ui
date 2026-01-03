@@ -1,9 +1,9 @@
-"use client";
+'use client'
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react'
 
 interface PreviewFrameProps {
-    files: Record<string, string>;
+  files: Record<string, string>
 }
 
 const IFRAME_HTML = `
@@ -133,46 +133,49 @@ const IFRAME_HTML = `
     </script>
   </body>
 </html>
-`;
+`
 
 export default function PreviewFrame({ files }: PreviewFrameProps) {
-    const iframeRef = useRef<HTMLIFrameElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null)
 
-    useEffect(() => {
-        const iframe = iframeRef.current;
-        if (!iframe) return;
+  useEffect(() => {
+    const iframe = iframeRef.current
+    if (!iframe) return
 
-        // Send files to iframe
-        const handleLoad = () => {
-            iframe.contentWindow?.postMessage({ type: "COMPILE", files }, "*");
-        };
+    // Send files to iframe
+    const handleLoad = () => {
+      iframe.contentWindow?.postMessage({ type: 'COMPILE', files }, '*')
+    }
 
-        // If already loaded
-        if (iframe.contentDocument?.readyState === 'complete') {
-            handleLoad();
-        } else {
-            iframe.addEventListener('load', handleLoad);
-            return () => iframe.removeEventListener('load', handleLoad);
-        }
-    }, []); // Only on mount logic? No, we need to send updates.
+    // If already loaded
+    if (iframe.contentDocument?.readyState === 'complete') {
+      handleLoad()
+    } else {
+      iframe.addEventListener('load', handleLoad)
+      return () => iframe.removeEventListener('load', handleLoad)
+    }
+  }, []) // Only on mount logic? No, we need to send updates.
 
-    // Debounced update
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            iframeRef.current?.contentWindow?.postMessage({ type: "COMPILE", files }, "*");
-        }, 500); // 500ms debounce
-        return () => clearTimeout(timer);
-    }, [files]);
+  // Debounced update
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      iframeRef.current?.contentWindow?.postMessage(
+        { type: 'COMPILE', files },
+        '*'
+      )
+    }, 500) // 500ms debounce
+    return () => clearTimeout(timer)
+  }, [files])
 
-    return (
-        <div className="h-full w-full bg-white relative">
-            <iframe
-                ref={iframeRef}
-                srcDoc={IFRAME_HTML}
-                className="h-full w-full border-0"
-                title="Preview"
-                sandbox="allow-scripts allow-same-origin allow-popups" // need same-origin for react?
-            />
-        </div>
-    );
+  return (
+    <div className='relative h-full w-full bg-white'>
+      <iframe
+        ref={iframeRef}
+        srcDoc={IFRAME_HTML}
+        className='h-full w-full border-0'
+        title='Preview'
+        sandbox='allow-scripts allow-same-origin allow-popups' // need same-origin for react?
+      />
+    </div>
+  )
 }

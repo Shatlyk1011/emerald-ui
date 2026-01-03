@@ -89,4 +89,4 @@ export const SYSTEM_PROMPT = `
     "/components/Footer.jsx": "JSX CODE"
   }
 
-  `;
+  `

@@ -1,13 +1,5 @@
-"use client"
+'use client'
 
-import { Textarea } from "@/components/ui/textarea"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { cn } from "@/lib/utils"
 import {
   Children,
   cloneElement,
@@ -19,8 +11,16 @@ import {
   useLayoutEffect,
   useRef,
   useState,
-} from "react"
-import { createPortal } from "react-dom"
+} from 'react'
+import { createPortal } from 'react-dom'
+import { cn } from '@/lib/utils'
+import { Textarea } from '@/components/ui/textarea'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 type FileUploadContextValue = {
   isDragging: boolean
@@ -89,23 +89,23 @@ function FileUpload({
       }
     }
 
-    window.addEventListener("dragenter", handleDragIn)
-    window.addEventListener("dragleave", handleDragOut)
-    window.addEventListener("dragover", handleDrag)
-    window.addEventListener("drop", handleDrop)
+    window.addEventListener('dragenter', handleDragIn)
+    window.addEventListener('dragleave', handleDragOut)
+    window.addEventListener('dragover', handleDrag)
+    window.addEventListener('drop', handleDrop)
 
     return () => {
-      window.removeEventListener("dragenter", handleDragIn)
-      window.removeEventListener("dragleave", handleDragOut)
-      window.removeEventListener("dragover", handleDrag)
-      window.removeEventListener("drop", handleDrop)
+      window.removeEventListener('dragenter', handleDragIn)
+      window.removeEventListener('dragleave', handleDragOut)
+      window.removeEventListener('dragover', handleDrag)
+      window.removeEventListener('drop', handleDrop)
     }
   }, [handleFiles, onFilesAdded, multiple])
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
       handleFiles(e.target.files)
-      e.target.value = ""
+      e.target.value = ''
     }
   }
 
@@ -114,10 +114,10 @@ function FileUpload({
       value={{ isDragging, inputRef, multiple, disabled }}
     >
       <input
-        type="file"
+        type='file'
         ref={inputRef}
         onChange={handleFileSelect}
-        className="hidden"
+        className='hidden'
         multiple={multiple}
         accept={accept}
         aria-hidden
@@ -129,7 +129,7 @@ function FileUpload({
 }
 
 export type FileUploadTriggerProps =
-  React.ComponentPropsWithoutRef<"button"> & {
+  React.ComponentPropsWithoutRef<'button'> & {
     asChild?: boolean
   }
 
@@ -148,7 +148,7 @@ function FileUploadTrigger({
     >
     return cloneElement(child, {
       ...props,
-      role: "button",
+      role: 'button',
       className: cn(className, child.props.className),
       onClick: (e: React.MouseEvent) => {
         e.stopPropagation()
@@ -160,7 +160,7 @@ function FileUploadTrigger({
 
   return (
     <button
-      type="button"
+      type='button'
       className={className}
       onClick={handleClick}
       {...props}
@@ -175,7 +175,6 @@ type FileUploadContentProps = React.HTMLAttributes<HTMLDivElement>
 function FileUploadContent({ className, ...props }: FileUploadContentProps) {
   const context = useContext(FileUploadContext)
 
-
   if (!context?.isDragging || context?.disabled) {
     return null
   }
@@ -183,8 +182,8 @@ function FileUploadContent({ className, ...props }: FileUploadContentProps) {
   const content = (
     <div
       className={cn(
-        "bg-background/80 fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm",
-        "animate-in fade-in-0 slide-in-from-bottom-10 zoom-in-90 duration-150",
+        'bg-background/80 fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm',
+        'animate-in fade-in-0 slide-in-from-bottom-10 zoom-in-90 duration-150',
         className
       )}
       {...props}
@@ -208,7 +207,7 @@ type PromptInputContextType = {
 
 const PromptInputContext = createContext<PromptInputContextType>({
   isLoading: false,
-  value: "",
+  value: '',
   setValue: () => {},
   maxHeight: 240,
   onSubmit: undefined,
@@ -229,7 +228,7 @@ export type PromptInputProps = {
   children: React.ReactNode
   className?: string
   disabled?: boolean
-} & React.ComponentProps<"div">
+} & React.ComponentProps<'div'>
 
 function PromptInput({
   className,
@@ -243,7 +242,7 @@ function PromptInput({
   onClick,
   ...props
 }: PromptInputProps) {
-  const [internalValue, setInternalValue] = useState(value || "")
+  const [internalValue, setInternalValue] = useState(value || '')
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
   const handleChange = (newValue: string) => {
@@ -272,8 +271,8 @@ function PromptInput({
         <div
           onClick={handleClick}
           className={cn(
-            "border-input bg-background cursor-text rounded-3xl border p-2 shadow-xs",
-            disabled && "cursor-not-allowed opacity-60",
+            'border-input bg-background cursor-text rounded-3xl border p-2 shadow-xs',
+            disabled && 'cursor-not-allowed opacity-60',
             className
           )}
           {...props}
@@ -301,9 +300,9 @@ function PromptInputTextarea({
   const adjustHeight = (el: HTMLTextAreaElement | null) => {
     if (!el || disableAutosize) return
 
-    el.style.height = "auto"
+    el.style.height = 'auto'
 
-    if (typeof maxHeight === "number") {
+    if (typeof maxHeight === 'number') {
       el.style.height = `${Math.min(el.scrollHeight, maxHeight)}px`
     } else {
       el.style.height = `min(${el.scrollHeight}px, ${maxHeight})`
@@ -319,9 +318,9 @@ function PromptInputTextarea({
     if (!textareaRef.current || disableAutosize) return
 
     const el = textareaRef.current
-    el.style.height = "auto"
+    el.style.height = 'auto'
 
-    if (typeof maxHeight === "number") {
+    if (typeof maxHeight === 'number') {
       el.style.height = `${Math.min(el.scrollHeight, maxHeight)}px`
     } else {
       el.style.height = `min(${el.scrollHeight}px, ${maxHeight})`
@@ -340,7 +339,7 @@ function PromptInputTextarea({
       value={value}
       onChange={handleChange}
       className={cn(
-        "text-primary min-h-[44px] w-full resize-none border-none bg-transparent shadow-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0",
+        'text-primary min-h-[44px] w-full resize-none border-none bg-transparent shadow-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0',
         className
       )}
       rows={1}
@@ -358,7 +357,7 @@ function PromptInputActions({
   ...props
 }: PromptInputActionsProps) {
   return (
-    <div className={cn("flex items-center gap-2", className)} {...props}>
+    <div className={cn('flex items-center gap-2', className)} {...props}>
       {children}
     </div>
   )
@@ -368,14 +367,14 @@ export type PromptInputActionProps = {
   className?: string
   tooltip: React.ReactNode
   children: React.ReactNode
-  side?: "top" | "bottom" | "left" | "right"
+  side?: 'top' | 'bottom' | 'left' | 'right'
 } & React.ComponentProps<typeof Tooltip>
 
 function PromptInputAction({
   tooltip,
   children,
   className,
-  side = "top",
+  side = 'top',
   ...props
 }: PromptInputActionProps) {
   const { disabled } = usePromptInput()

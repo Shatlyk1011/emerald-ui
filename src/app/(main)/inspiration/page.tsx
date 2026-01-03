@@ -1,8 +1,7 @@
-
 export default function Inspiration() {
   return (
-    <div className="flex h-full flex-1 items-start pt-30 justify-center font-sans px-20">
+    <div className='flex h-full flex-1 items-start justify-center px-20 pt-30 font-sans'>
       inspiration page
     </div>
-  );
+  )
 }

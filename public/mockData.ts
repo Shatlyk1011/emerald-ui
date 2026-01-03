@@ -187,5 +187,5 @@ export const MOCK_COMPONENTS = {
       <p>&copy; 2026 UltraUI Inc. All rights reserved.</p>
     </div>
   </div>
-</footer>`
-};
+</footer>`,
+}
