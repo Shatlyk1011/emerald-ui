@@ -5,6 +5,7 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/componen
 import MonacoEditor from "./MonacoEditor";
 import FileExplorer from "./FileExplorer";
 import PreviewFrame from "./PreviewFrame";
+import { useAppStore } from "@/store/useAppStore";
 
 // Initial Template Files
 const INITIAL_FILES = {
@@ -143,9 +144,20 @@ export default function Footer() {
 `
 };
 
+
 export default function GlobalPlayground() {
-  const [files, setFiles] = useState<Record<string, string>>(INITIAL_FILES);
+  const generatedFiles = useAppStore((state) => state.generatedFiles);
+  const [files, setFiles] = useState<Record<string, string>>(generatedFiles || INITIAL_FILES);
   const [activeFile, setActiveFile] = useState("/App.jsx");
+
+  // Reset/Update files if generatedFiles changes (e.g. new generation while on same page, though unlikely with current flow)
+  // Actually, we want to respect local edits, so we only use generatedFiles as INITIAL value or if explicitly reset.
+  // Since we navigate to /result, this component mounts fresh or re-renders. 
+  // Let's use an effect to sync if generatedFiles changes explicitly to support re-generation flows.
+  // BUT: be careful not to overwrite user edits if store updates for other reasons.
+  // Given the flow: Chat -> setStore -> Push -> Result Mounts.
+  // The state initialization `useState(generatedFiles || INITIAL_FILES)` handles the mount correctly.
+
 
   // Handle changes from Monaco
   const handleCodeChange = (value: string | undefined) => {
@@ -157,7 +169,7 @@ export default function GlobalPlayground() {
   };
 
   return (
-    <div className="h-full w-full flex flex-col bg-background">
+    <section className="h-full w-full flex flex-col bg-background">
       <div className="flex-1 min-h-0">
         <ResizablePanelGroup direction="horizontal">
           {/* Left Panel: Preview */}
@@ -193,6 +205,6 @@ export default function GlobalPlayground() {
           </ResizablePanel>
         </ResizablePanelGroup>
       </div>
-    </div>
+    </section>
   );
 }

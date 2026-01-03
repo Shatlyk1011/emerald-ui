@@ -12,13 +12,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
       <div
-        className={`flex flex-col min-h-svh`}
+        className="flex flex-col min-h-svh"
       >
         <Header />
         {children}
-      </div>
-    </html>
+    </div>
   );
 }

@@ -15,23 +15,54 @@ import { Button } from "@/components/ui/button"
 import { ArrowUp, Paperclip, Square, X } from "lucide-react"
 import { useState } from "react"
 
+import { useRouter } from "next/navigation"
+import { useAppStore } from "@/store/useAppStore"
+
+import { toast } from "sonner"
+
 export function FileUploadInput() {
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [files, setFiles] = useState<File[]>([])
+  const router = useRouter()
+  const setGeneratedFiles = useAppStore((state) => state.setGeneratedFiles)
 
   const handleFilesAdded = (newFiles: File[]) => {
     setFiles((prev) => [...prev, ...newFiles])
   }
 
-  const handleSubmit = () => {
-    if (input.trim() || files.length > 0) {
-      setIsLoading(true)
-      setTimeout(() => {
-        setIsLoading(false)
-        setInput("")
-        setFiles([])
-      }, 2000)
+  const handleSubmit = async () => {
+    if (!input.trim() && files.length === 0) return;
+
+    setIsLoading(true);
+    try {
+      // Prepare prompt including file context if needed (future scope: reading file content)
+      // For now, we only use the text input for generation.
+
+      const response = await fetch('/api/generate-ui', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: input }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success && result.files) {
+        setGeneratedFiles(result.files);
+        toast.success("UI generated successfully!");
+        router.push("/result");
+      } else {
+        toast.error(result.error || "Failed to generate UI");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+      setInput("");
+      setFiles([]);
     }
   }
 
@@ -104,7 +135,7 @@ export function FileUploadInput() {
       </PromptInput>
 
       <FileUploadContent>
-        <div className="flex min-h-[200px] w-full items-center justify-center backdrop-blur-sm">
+        <div className="flex min-h-50 w-full items-center justify-center backdrop-blur-sm">
           <div className="bg-background/90 m-4 w-full max-w-full rounded-lg border p-8 shadow-lg">
             <div className="mb-4 flex justify-center">
               <svg
