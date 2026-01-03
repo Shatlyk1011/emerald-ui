@@ -35,7 +35,7 @@ export default function FileExplorer({
               className={cn(
                 'hover:bg-accent/50 hover:text-accent-foreground flex w-full items-center gap-2 px-4 py-1.5 text-left transition-colors',
                 isActive &&
-                'bg-accent text-accent-foreground border-primary border-l-2 pl-3.5 font-medium'
+                  'bg-accent text-accent-foreground border-primary border-l-2 pl-3.5 font-medium'
               )}
             >
               <File className='h-4 w-4 opacity-70' />

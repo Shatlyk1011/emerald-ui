@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
-
 import ThemeToggle from '@/components/ui/theme-toggle'
 
 const { components, inspiration } = {
