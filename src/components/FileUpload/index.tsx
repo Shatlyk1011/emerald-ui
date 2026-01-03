@@ -20,6 +20,12 @@ import { useAppStore } from "@/store/useAppStore"
 
 import { toast } from "sonner"
 
+// dev environment
+// import OpenAI from 'openai';
+// import { SYSTEM_PROMPT } from "@/lib/constants"
+// const apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
+
+
 export function FileUploadInput() {
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -39,6 +45,28 @@ export function FileUploadInput() {
       // Prepare prompt including file context if needed (future scope: reading file content)
       // For now, we only use the text input for generation.
 
+        // const openai = new OpenAI({
+        //   apiKey,
+        //   dangerouslyAllowBrowser: true
+        // })
+
+        // const completion = await openai.chat.completions.create({
+        //   model: 'gpt-4o',
+        //   messages: [
+        //     { role: 'system', content: SYSTEM_PROMPT },
+        //     { role: 'user', content: input },
+        //   ],
+        //   response_format: { type: 'json_object' },
+        // })
+
+        // const content = completion.choices[0].message.content
+        // if (content) {
+        //   const files = JSON.parse(content)
+        //   console.log('files', files)
+        //   setGeneratedFiles(files);
+        //   router.push("/result");
+        // }
+
       const response = await fetch('/api/generate-ui', {
         method: 'POST',
         headers: {
@@ -56,6 +84,8 @@ export function FileUploadInput() {
       } else {
         toast.error(result.error || "Failed to generate UI");
       }
+
+
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong");

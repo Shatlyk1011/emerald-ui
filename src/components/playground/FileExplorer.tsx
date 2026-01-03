@@ -1,6 +1,6 @@
 "use client";
 
-import { File, Folder } from "lucide-react";
+import { File } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface FileExplorerProps {

@@ -1,6 +1,6 @@
 "use client";
 
-import Editor, { OnMount } from "@monaco-editor/react";
+import Editor from "@monaco-editor/react";
 
 interface MonacoEditorProps {
   code: string;
@@ -12,7 +12,6 @@ interface MonacoEditorProps {
 export default function MonacoEditor({
   code,
   onChange,
-  language = "javascript",
   filename,
 }: MonacoEditorProps) {
   // Simple theme strategy: hardcode vs-dark as it's standard for dev tools
