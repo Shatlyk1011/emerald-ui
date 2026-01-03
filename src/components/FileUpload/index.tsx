@@ -19,17 +19,19 @@ import { useRouter } from "next/navigation"
 import { useAppStore } from "@/store/useAppStore"
 
 import { toast } from "sonner"
+import BackgroundGradient from "../ui/background-gradient"
 
 // dev environment
 // import OpenAI from 'openai';
 // import { SYSTEM_PROMPT } from "@/lib/constants"
 // const apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
 
-
 export function FileUploadInput() {
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [files, setFiles] = useState<File[]>([])
+
+  const [isFocus, setFocus] = useState(false)
   const router = useRouter()
   const setGeneratedFiles = useAppStore((state) => state.setGeneratedFiles)
 
@@ -42,9 +44,6 @@ export function FileUploadInput() {
 
     setIsLoading(true);
     try {
-      // Prepare prompt including file context if needed (future scope: reading file content)
-      // For now, we only use the text input for generation.
-
         // const openai = new OpenAI({
         //   apiKey,
         //   dangerouslyAllowBrowser: true
@@ -105,15 +104,18 @@ export function FileUploadInput() {
       onFilesAdded={handleFilesAdded}
       accept=".jpg,.jpeg,.png,.pdf,.docx"
     >
-      <PromptInput
-        value={input}
-        onValueChange={setInput}
-        isLoading={isLoading}
-        onSubmit={handleSubmit}
-        className="w-full max-w-md"
-      >
 
-        <PromptInputTextarea className="min-h-16 rounded-2xl " placeholder="Type a message or drop files..." />
+      <BackgroundGradient containerClassName=" max-w-md w-full" isFocus={isFocus}>
+        <PromptInput
+          value={input}
+          onValueChange={setInput}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+          isLoading={isLoading}
+          onSubmit={handleSubmit}
+          className="w-full"
+        >
+          <PromptInputTextarea className="min-h-20 rounded-2xl " placeholder="Type a message or drop files..." />
 
           {files.length > 0 && (
             <div className="grid grid-cols-2 gap-2 pt-2">
@@ -140,29 +142,30 @@ export function FileUploadInput() {
             </div>
           )}
 
-        <PromptInputActions className="flex items-center justify-between gap-2 pt-2">
-          <PromptInputAction tooltip="Attach files">
-            <FileUploadTrigger asChild>
-              <div className="hover:bg-secondary-foreground/10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-2xl">
-                <Paperclip className="text-primary size-5" />
-              </div>
-            </FileUploadTrigger>
-          </PromptInputAction>
+          <PromptInputActions className="flex items-center justify-between gap-2 pt-2">
+            <PromptInputAction tooltip="Attach files">
+              <FileUploadTrigger asChild>
+                <div className="hover:bg-secondary-foreground/10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-2xl">
+                  <Paperclip className="text-primary size-5" />
+                </div>
+              </FileUploadTrigger>
+            </PromptInputAction>
 
-          <Button
-            variant="default"
-            size="icon"
-            className="h-8 w-8 rounded-full"
-            onClick={handleSubmit}
-          >
-            {isLoading ? (
-              <Square className="size-4 fill-current" />
-            ) : (
-              <ArrowUp className="size-5" />
-            )}
-          </Button>
-        </PromptInputActions>
-      </PromptInput>
+            <Button
+              variant="default"
+              size="icon"
+              className="h-8 w-8 rounded-full"
+              onClick={handleSubmit}
+            >
+              {isLoading ? (
+                <Square className="size-4 fill-current" />
+              ) : (
+                <ArrowUp className="size-5" />
+              )}
+            </Button>
+          </PromptInputActions>
+        </PromptInput>
+      </BackgroundGradient>
 
       <FileUploadContent>
         <div className="flex min-h-50 w-full items-center justify-center backdrop-blur-sm">
