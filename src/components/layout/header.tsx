@@ -1,16 +1,57 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+"use client";
+import { FC } from "react";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
-export default function Header() {
+import Link from "next/link";
+// import ThemeToggle from "@/components/ui/ThemeToggle";
+
+const { components, inspiration } = {
+  inspiration: "/inspiration",
+  components: "/components",
+};
+
+const Header = () => {
+  const pathname = usePathname();
+
   return (
-    <header className="flex items-center justify-between p-4 border-b">
-      <Link href="/" className="text-base font-bold">
-        Ui Design
+    <header className="flex items-center justify-between py-4 px-8 border-b font-mono ">
+      <Link href="/" className="w-20 max-sm:min-w-8">
+        <span className="">Logo</span>
       </Link>
-      <div className="flex items-center gap-4">
-        <Button variant={"secondary"}>Get Started</Button>
-        <Button>Login</Button>
+
+      <nav className="flex flex-1 justify-center">
+        <ul className="flex items-center text-sm font-medium -tracking-one max-sm:text-sm">
+          <li>
+            <Link
+              href={components}
+              className={cn(
+                "px-4 py-2.5 transition max-sm:px-2",
+                pathname === components && "text-chart-2 font-medium opacity-100",
+              )}
+            >
+              Components
+            </Link>
+          </li>
+          <li>
+            <Link
+              href={inspiration}
+              className={cn(
+                "px-4 py-2 transition max-sm:px-2",
+                pathname === inspiration && "text-chart-2 font-medium opacity-100",
+              )}
+            >
+              Inspiration
+            </Link>
+          </li>
+        </ul>
+      </nav>
+
+      <div className="flex w-20 justify-end max-sm:w-14">
+        toggle
+        {/* <ThemeToggle /> */}
       </div>
     </header>
   );
-}
+};
+export default Header;
