@@ -105,7 +105,7 @@ export function FileUploadInput() {
       accept=".jpg,.jpeg,.png,.pdf,.docx"
     >
 
-      <BackgroundGradient containerClassName=" max-w-md w-full" isFocus={isFocus}>
+      <BackgroundGradient containerClassName=" max-w-md w-full" isActive={isFocus || !!input}>
         <PromptInput
           value={input}
           onValueChange={setInput}

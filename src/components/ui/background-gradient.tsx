@@ -6,13 +6,13 @@ const BackgroundGradient = ({
   children,
   className,
   containerClassName,
-  isFocus,
+  isActive,
   animate = true,
 }: {
   children?: React.ReactNode;
   className?: string;
   containerClassName?: string;
-  isFocus: boolean
+    isActive: boolean
   animate?: boolean;
 }) => {
   const variants = {
@@ -43,7 +43,7 @@ const BackgroundGradient = ({
         }}
         className={cn(
           "absolute inset-0 rounded-3xl blur-lg z-1 transition duration-500 will-change-transform",
-          " bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)]", isFocus ? 'opacity-100' : 'opacity-60'
+          " bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)]", isActive ? 'opacity-100' : 'opacity-60'
         )}
       />
       <motion.div

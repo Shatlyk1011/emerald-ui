@@ -14,8 +14,7 @@ export default function RootLayout({
   return (
       <div
         className="flex flex-col min-h-svh"
-      >
-        <Header />
+    >
         {children}
     </div>
   );
