@@ -26,6 +26,7 @@ export const syncUser = async (req: PayloadRequest): Promise<Response> => {
   }
 
   // Get user data from request body
+  // @ts-expect-error valid?
   const body = await req.json()
   console.log('req body', body)
   const { auth0Id, email, name, picture, provider, ip } = body
