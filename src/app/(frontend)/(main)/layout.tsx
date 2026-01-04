@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <div className='flex min-h-svh flex-col '>
+    <div className='flex min-h-svh flex-col'>
       <Header />
       {children}
     </div>

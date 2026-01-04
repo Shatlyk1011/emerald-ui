@@ -1,12 +1,9 @@
-"use client";
+'use client'
 
 export default function LogoutButton() {
   return (
-    <a
-      href="/auth/logout"
-      className="button logout"
-    >
+    <a href='/auth/logout' className='button logout'>
       Log Out
     </a>
-  );
+  )
 }

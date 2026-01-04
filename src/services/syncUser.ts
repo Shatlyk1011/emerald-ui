@@ -2,11 +2,11 @@ import { PayloadRequest } from 'payload'
 
 export const syncUser = async (req: PayloadRequest): Promise<Response> => {
   const { payload } = req
-  
+
   // Verify API key
   const authHeader = req.headers.get('Authorization')
   const apiKey = authHeader?.replace('Bearer ', '')
-  
+
   if (!apiKey) {
     return Response.json({ error: 'Missing API key' }, { status: 401 })
   }
@@ -27,11 +27,14 @@ export const syncUser = async (req: PayloadRequest): Promise<Response> => {
 
   // Get user data from request body
   const body = await req.json()
-  console.log('req body', body )
+  console.log('req body', body)
   const { auth0Id, email, name, picture, provider, ip } = body
 
   if (!auth0Id || !email) {
-    return Response.json({ error: 'Missing required fields: auth0Id, email' }, { status: 400 })
+    return Response.json(
+      { error: 'Missing required fields: auth0Id, email' },
+      { status: 400 }
+    )
   }
 
   try {

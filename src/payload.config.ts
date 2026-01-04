@@ -7,7 +7,7 @@ import sharp from 'sharp'
 // collections
 import AdminUsers from './app/(payload)/collections/AdminUsers'
 import ApiKeys from './app/(payload)/collections/ApiKeys'
-import Users from './app/(payload)/collections/Users';
+import Users from './app/(payload)/collections/Users'
 import { syncUser } from './services/syncUser'
 
 const filename = fileURLToPath(import.meta.url)
