@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
-import Header from '@/components/layout/header'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
+import { Auth0Provider } from '@auth0/nextjs-auth0'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -35,8 +35,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          {children}
+          <Auth0Provider>
+            {children}
+          </Auth0Provider>
         </ThemeProvider>
       </body>
     </html>
