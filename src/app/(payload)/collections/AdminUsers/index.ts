@@ -1,9 +1,7 @@
-import type { CollectionConfig } from "payload";
-
-import { ensureFirstUserIsAdmin } from "./hooks/ensureFirstUserIsAdmin";
-
-import { checkRole } from "../../utils/checkRole";
-import { admins } from "../../utils/admins";
+import type { CollectionConfig } from 'payload'
+import { admins } from '../../utils/admins'
+import { checkRole } from '../../utils/checkRole'
+import { ensureFirstUserIsAdmin } from './hooks/ensureFirstUserIsAdmin'
 
 const AdminUsers: CollectionConfig = {
   access: {
@@ -11,21 +9,21 @@ const AdminUsers: CollectionConfig = {
     create: admins,
     delete: admins,
     read: ({ req }) => {
-      if (checkRole(["admin", "moderator"], req.user)) {
-        return true;
+      if (checkRole(['admin', 'moderator'], req.user)) {
+        return true
       }
       if (req.user?.isBlocked) {
-        return false;
+        return false
       }
 
-      return false;
+      return false
     },
     update: admins,
   },
 
   admin: {
-    defaultColumns: ["name", "phone", "roles"],
-    useAsTitle: "name",
+    defaultColumns: ['name', 'phone', 'roles'],
+    useAsTitle: 'name',
   },
 
   auth: {
@@ -36,56 +34,56 @@ const AdminUsers: CollectionConfig = {
 
   fields: [
     {
-      name: "name",
-      label: "Name",
-      type: "text",
+      name: 'name',
+      label: 'Name',
+      type: 'text',
     },
     {
-      name: "phone",
-      label: "Phone",
+      name: 'phone',
+      label: 'Phone',
       required: false,
-      type: "text",
+      type: 'text',
     },
 
     {
-      name: "isBlocked",
+      name: 'isBlocked',
       access: {
-        read: ({ req }) => checkRole(["admin"], req.user),
-        update: ({ req }) => checkRole(["admin"], req.user),
+        read: ({ req }) => checkRole(['admin'], req.user),
+        update: ({ req }) => checkRole(['admin'], req.user),
       },
       defaultValue: false,
-      label: "Is blocked?",
+      label: 'Is blocked?',
       required: false,
-      type: "checkbox",
+      type: 'checkbox',
     },
 
     {
-      name: "roles",
-      defaultValue: "moderator",
+      name: 'roles',
+      defaultValue: 'moderator',
       hasMany: true,
       hooks: {
         beforeChange: [ensureFirstUserIsAdmin],
       },
       options: [
         {
-          label: "Admin",
-          value: "admin",
+          label: 'Admin',
+          value: 'admin',
         },
         {
-          label: "Moderator",
-          value: "moderator",
+          label: 'Moderator',
+          value: 'moderator',
         },
         {
-          label: "Guest",
-          value: "guest",
+          label: 'Guest',
+          value: 'guest',
         },
       ],
-      type: "select",
+      type: 'select',
     },
   ],
 
-  slug: "adminUsers",
+  slug: 'adminUsers',
   timestamps: true,
-};
+}
 
-export default AdminUsers;
+export default AdminUsers

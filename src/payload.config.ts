@@ -1,19 +1,16 @@
-import sharp from "sharp";
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
-
-import path from "path";
-import { fileURLToPath } from "node:url";
-
-import { mongooseAdapter } from "@payloadcms/db-mongodb";
-import { buildConfig } from "payload";
-
+import path from 'path'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { fileURLToPath } from 'node:url'
+import { buildConfig } from 'payload'
+import sharp from 'sharp'
 // collections
-import AdminUsers from "./app/(payload)/collections/AdminUsers";
-import Users from "./app/(payload)/collections/Users";
-import ApiKeys from "./app/(payload)/collections/ApiKeys";
+import AdminUsers from './app/(payload)/collections/AdminUsers'
+import ApiKeys from './app/(payload)/collections/ApiKeys'
+import Users from './app/(payload)/collections/Users'
 
-const filename = fileURLToPath(import.meta.url);
-const dirname = path.dirname(filename);
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
 
 export default buildConfig({
   editor: lexicalEditor({}),
@@ -36,11 +33,11 @@ export default buildConfig({
   collections: [AdminUsers, Users, ApiKeys],
 
   // Your Payload secret - should be a complex and secure string, unguessable
-  secret: process.env.PAYLOAD_SECRET || "",
+  secret: process.env.PAYLOAD_SECRET || '',
   // Whichever Database Adapter you're using should go here
   // Mongoose is shown as an example, but you can also use Postgres
   db: mongooseAdapter({
-    url: process.env.DATABASE_URI || "",
+    url: process.env.DATABASE_URI || '',
   }),
   sharp,
-});
+})
