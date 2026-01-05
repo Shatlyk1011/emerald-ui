@@ -1,0 +1,17 @@
+{
+  "title": "Components",
+  "description": "The headless library",
+  "root": true,
+  "pages": [
+    "---Get Started---",
+    "index",
+    "---Templates ---",
+    "[Agenta](https://kokonutui.pro/templates#agenta)",
+    "[Lume](https://kokonutui.pro/templates#lume)",
+    "[Sonae](https://kokonutui.pro/templates#sonae)",
+    "[AI](https://kokonutui.pro/templates#ai)",
+    "[Futur](https://kokonutui.pro/templates#futur)",
+    "[Postly](https://kokonutui.pro/templates#postly)",
+    "[Startup](https://kokonutui.pro/templates#startup)"
+  ]
+}
