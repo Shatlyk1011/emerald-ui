@@ -13,8 +13,6 @@ import { AnimatePresence, motion } from 'motion/react'
 import { copyComponent } from '@/lib/action'
 import { cn } from '@/lib/utils'
 
-// import { OpenInV0Button } from "../open-in-v0-button";
-
 function SuccessParticles({
   buttonRef,
 }: {
@@ -44,7 +42,7 @@ function SuccessParticles({
             // eslint-disable-next-line react-hooks/purity
             y: [0, -Math.random() * 50 - 20],
           }}
-          className='fixed h-1 w-1 rounded-full bg-black dark:bg-white'
+          className='fixed h-1 w-1 rounded-full bg-foreground'
           initial={{
             scale: 0,
             x: 0,
@@ -65,11 +63,9 @@ function SuccessParticles({
 
 export default function PreviewContent({
   link,
-  prePath,
   isBlock = false,
 }: {
-  link: string
-  prePath: string
+    link: string
   isBlock?: boolean
 }) {
   const [isPending, startTransition] = useTransition()
@@ -78,13 +74,11 @@ export default function PreviewContent({
     content: '',
     success: false,
   })
-  const [showLoginDialog, setShowLoginDialog] = useState(false)
   const [isCopied, setIsCopied] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
-  const [isTerminalCopied, setIsTerminalCopied] = useState(false)
 
   const handleCopyClick = async () => {
     const [folder, filename] = link.split('/')
+
 
     startTransition(async () => {
       const formData = new FormData()
@@ -95,40 +89,9 @@ export default function PreviewContent({
     })
   }
 
-  const handleTerminalClick = (packageManager: string) => {
-    const [folder, filename] = link.split('/')
-    const componentName = filename ? filename : folder
-
-    let commandToCopy: string
-    const componentAddCommand = `shadcn@latest add ${prePath}/${componentName}`
-
-    if (packageManager === 'pnpm') {
-      commandToCopy = `pnpm dlx ${componentAddCommand}`
-    } else if (packageManager === 'npm') {
-      commandToCopy = `npx ${componentAddCommand}`
-    } else {
-      commandToCopy = `bunx --bun ${componentAddCommand}`
-    }
-
-    navigator.clipboard.writeText(commandToCopy)
-    setIsTerminalCopied(true)
-    setTimeout(() => {
-      setIsTerminalCopied(false)
-    }, 1000)
-  }
-
-  const openInV0 = () => {
-    const [folder, filename] = link.split('/')
-
-    return filename ? filename : folder
-  }
-
   useEffect(() => {
-    if (state.error) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setShowLoginDialog(true)
-    }
     if (state.success && state.content) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsCopied(true)
       navigator.clipboard.writeText(state.content)
 
@@ -138,25 +101,16 @@ export default function PreviewContent({
     }
   }, [state])
 
-  const terminalButtonRef = useRef<HTMLButtonElement>(null)
   const copyButtonRef = useRef<HTMLButtonElement>(null)
 
   return (
     <>
-      {isTerminalCopied ? (
-        <SuccessParticles
-          buttonRef={terminalButtonRef as RefObject<HTMLButtonElement>}
-        />
-      ) : null}
       {isCopied ? (
         <SuccessParticles
           buttonRef={copyButtonRef as RefObject<HTMLButtonElement>}
         />
       ) : null}
-      <div className='relative flex w-full flex-col items-start justify-between gap-1 sm:flex-row sm:items-center sm:gap-2'>
-        <div className='w-full sm:w-auto'>package manager tabs section</div>
-        <div className='mt-1 flex w-full items-center justify-end gap-2 sm:mt-0 sm:w-auto'>
-          {/* <OpenInV0Button name={openInV0()} /> */}
+        <div className='mt-1 flex w-full items-center justify-start gap-2 sm:mt-0 sm:w-auto'>
 
           {!isBlock && (
             <form
@@ -170,10 +124,10 @@ export default function PreviewContent({
                 className={cn(
                   'relative overflow-hidden',
                   'h-7 px-2 text-xs font-medium',
-                  'bg-black dark:bg-white',
-                  'text-white dark:text-black',
-                  'hover:bg-black/90 dark:hover:bg-white/90',
-                  'hover:text-white dark:hover:text-black',
+                  'bg-foreground',
+                  'text-background',
+                  'hover:bg-foreground/90',
+                  'hover:text-background',
                   'transition-all duration-200',
                   'group flex items-center justify-center gap-1',
                   'rounded-sm',
@@ -185,7 +139,7 @@ export default function PreviewContent({
                 type='submit'
               >
                 {isCopied ? (
-                  <CheckCheck className='h-3.5 w-3.5 text-white dark:text-black' />
+                  <CheckCheck className='h-3.5 w-3.5 text-background' />
                 ) : (
                   <Copy
                     className={cn(
@@ -200,7 +154,7 @@ export default function PreviewContent({
             </form>
           )}
         </div>
-      </div>
     </>
   )
 }
+

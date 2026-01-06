@@ -14,7 +14,7 @@ const Header = () => {
   const pathname = usePathname()
 
   return (
-    <header className='flex items-center justify-between border-b px-8 py-4 font-sans'>
+    <header className='flex items-center justify-between border-b px-8 py-2 font-sans'>
       <Link href='/' className='w-20 max-sm:min-w-8'>
         <span className=''>Logo</span>
       </Link>

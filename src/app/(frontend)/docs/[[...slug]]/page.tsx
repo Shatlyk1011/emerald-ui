@@ -33,10 +33,11 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
         <MDX
           components={{
             ...defaultMdxComponents,
-            a: createRelativeLink(source, page),
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            a: createRelativeLink(source as any, page as any),
             Preview,
             PreviewClient,
-            PreviewTemplate,
             WhatIncluded,
           }}
         />

@@ -1,12 +1,11 @@
 import { DocsLayout } from 'fumadocs-ui/layouts/notebook'
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { source } from '@/lib/source'
 import { baseOptions } from '../layout.config'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | ??',
+    template: '%s | Node UI',
     default: 'components',
   },
 }
