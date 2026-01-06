@@ -1,35 +1,35 @@
-"use client";
+'use client'
 
-import * as React from "react";
-import Preview from "./preview";
-import { RefreshButton } from "./refresh-button";
+import * as React from 'react'
+import Preview from './preview'
+import { RefreshButton } from './refresh-button'
 
 interface PreviewClientProps {
-    children: React.ReactNode;
-    className?: string;
-    isPremium?: boolean;
-    link: string;
-    useIframe?: boolean;
-    height?: string;
-    compact?: boolean;
-    comment?: string[];
+  children: React.ReactNode
+  className?: string
+  isPremium?: boolean
+  link: string
+  useIframe?: boolean
+  height?: string
+  compact?: boolean
+  comment?: string[]
 }
 
 function PreviewClient(props: PreviewClientProps) {
-    const [key, setKey] = React.useState(0);
+  const [key, setKey] = React.useState(0)
 
-    const handleRefresh = () => {
-        setKey((prev) => prev + 1);
-    };
+  const handleRefresh = () => {
+    setKey((prev) => prev + 1)
+  }
 
-    return (
-        <div className="relative">
-            <RefreshButton onRefresh={handleRefresh} />
-            <div key={key}>
-                <Preview {...props} />
-            </div>
-        </div>
-    );
+  return (
+    <div className='relative'>
+      <RefreshButton onRefresh={handleRefresh} />
+      <div key={key}>
+        <Preview {...props} />
+      </div>
+    </div>
+  )
 }
 
 export default PreviewClient
