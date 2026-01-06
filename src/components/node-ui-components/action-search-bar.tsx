@@ -1,15 +1,14 @@
 'use client'
 
 /**
- * @author: @kokonutui
+ * @author: @nodeui
  * @description: A modern search bar component with action buttons and suggestions
  * @version: 1.0.0
  * @date: 2025-06-26
  * @license: MIT
- * @website: https://kokonutui.com
- * @github: https://github.com/kokonut-labs/kokonutui
+ * @website: https://nodeui.com
  */
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import {
   Search,
   Send,
@@ -104,7 +103,7 @@ const allActionsSample = [
   },
   {
     id: '5',
-    label: 'Kokonut UI - Pro',
+    label: 'Node UI - Pro',
     icon: <LayoutGrid className='h-4 w-4 text-blue-500' />,
     description: 'Components',
     short: '',

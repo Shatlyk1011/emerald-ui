@@ -12,7 +12,7 @@ interface PreviewTemplateProps {
 
 export default function PreviewTemplate({
   previewLink,
-  buyLink = 'https://kokonutui.pro/',
+  buyLink = '',
   videoUrl,
   className,
 }: PreviewTemplateProps) {

@@ -14,7 +14,7 @@ type PreviewProps = {
   isBlock?: boolean
 }
 
-const PRE_PATH = '@kokonutui'
+const PRE_PATH = '@nodeUI'
 
 function Preview({
   children,
@@ -27,7 +27,7 @@ function Preview({
 }: PreviewProps) {
   return (
     <div className={cn('w-full overflow-hidden', className)}>
-      <PreviewContent isBlock={isBlock} link={link} prePath={PRE_PATH} />
+      <PreviewContent isBlock={isBlock} link={link} />
 
       {useIframe ? (
         <div className='my-4 w-full rounded-md border border-zinc-400 dark:border-zinc-700'>
@@ -58,7 +58,7 @@ function Preview({
         <div className='mt-6 mb-4 flex flex-wrap gap-3'>
           {comment.map((text) => (
             <div
-              className='rounded-md border border-purple-200 bg-purple-100 px-4 py-2 text-sm font-medium text-purple-700 shadow-xs transition-colors hover:bg-purple-200/70 dark:border-purple-800/50 dark:bg-purple-950/30 dark:text-purple-300 dark:hover:bg-purple-950/50'
+              className='rounded-md border border-border bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-xs transition-colors '
               key={text}
             >
               {text}
