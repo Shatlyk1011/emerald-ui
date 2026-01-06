@@ -7,7 +7,7 @@ import ThemeToggle from '@/components/ui/theme-toggle'
 
 const { components, inspiration } = {
   inspiration: '/inspiration',
-  components: '/components',
+  components: '/docs',
 }
 
 const Header = () => {
