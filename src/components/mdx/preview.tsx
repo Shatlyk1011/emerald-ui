@@ -58,7 +58,7 @@ function Preview({
         <div className='mt-6 mb-4 flex flex-wrap gap-3'>
           {comment.map((text) => (
             <div
-              className='rounded-md border border-border bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-xs transition-colors '
+              className='rounded-md border border-current/20 dark:bg-emerald-900 px-4 py-2 text-sm font-medium dark:text-emerald-50 shadow-xs transition-colors bg-emerald-50 text-emerald-900'
               key={text}
             >
               {text}

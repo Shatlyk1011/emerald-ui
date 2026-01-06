@@ -34,7 +34,12 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/components',
-        destination: '/docs/components/',
+        destination: '/docs/components/test',
+        permanent: true,
+      },
+    {
+        source: '/docs/components',
+        destination: '/docs',
         permanent: true,
       },
       {

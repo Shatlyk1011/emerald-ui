@@ -42,7 +42,7 @@ const Header = () => {
                   'text-chart-2 font-medium opacity-100'
               )}
             >
-              Components
+              Node UI
             </Link>
           </li>
         </ul>
