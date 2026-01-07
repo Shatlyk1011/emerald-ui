@@ -37,7 +37,7 @@ const nextConfig: NextConfig = {
         destination: '/docs/components/test',
         permanent: true,
       },
-    {
+      {
         source: '/docs/components',
         destination: '/docs',
         permanent: true,

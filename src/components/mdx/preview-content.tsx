@@ -42,7 +42,7 @@ function SuccessParticles({
             // eslint-disable-next-line react-hooks/purity
             y: [0, -Math.random() * 50 - 20],
           }}
-          className='fixed h-1 w-1 rounded-full bg-foreground'
+          className='bg-foreground fixed h-1 w-1 rounded-full'
           initial={{
             scale: 0,
             x: 0,
@@ -65,7 +65,7 @@ export default function PreviewContent({
   link,
   isBlock = false,
 }: {
-    link: string
+  link: string
   isBlock?: boolean
 }) {
   const [isPending, startTransition] = useTransition()
@@ -78,7 +78,6 @@ export default function PreviewContent({
 
   const handleCopyClick = async () => {
     const [folder, filename] = link.split('/')
-
 
     startTransition(async () => {
       const formData = new FormData()
@@ -110,51 +109,49 @@ export default function PreviewContent({
           buttonRef={copyButtonRef as RefObject<HTMLButtonElement>}
         />
       ) : null}
-        <div className='mt-1 flex w-full items-center justify-start gap-2 sm:mt-0 sm:w-auto'>
-
-          {!isBlock && (
-            <form
-              className='w-full sm:w-auto'
-              onSubmit={(e) => {
-                e.preventDefault()
-                handleCopyClick()
-              }}
+      <div className='mt-1 flex w-full items-center justify-start gap-2 sm:mt-0 sm:w-auto'>
+        {!isBlock && (
+          <form
+            className='w-full sm:w-auto'
+            onSubmit={(e) => {
+              e.preventDefault()
+              handleCopyClick()
+            }}
+          >
+            <button
+              className={cn(
+                'relative overflow-hidden',
+                'h-7 px-2 text-xs font-medium',
+                'bg-foreground',
+                'text-background',
+                'hover:bg-foreground/90',
+                'hover:text-background',
+                'transition-all duration-200',
+                'group flex items-center justify-center gap-1',
+                'rounded-sm',
+                'my-0 py-0 shadow-none',
+                'w-fit md:w-full'
+              )}
+              disabled={isPending}
+              ref={copyButtonRef}
+              type='submit'
             >
-              <button
-                className={cn(
-                  'relative overflow-hidden',
-                  'h-7 px-2 text-xs font-medium',
-                  'bg-foreground',
-                  'text-background',
-                  'hover:bg-foreground/90',
-                  'hover:text-background',
-                  'transition-all duration-200',
-                  'group flex items-center justify-center gap-1',
-                  'rounded-sm',
-                  'my-0 py-0 shadow-none',
-                  'w-fit md:w-full'
-                )}
-                disabled={isPending}
-                ref={copyButtonRef}
-                type='submit'
-              >
-                {isCopied ? (
-                  <CheckCheck className='h-3.5 w-3.5 text-background' />
-                ) : (
-                  <Copy
-                    className={cn(
-                      'h-3.5 w-3.5',
-                      'transition-all duration-200',
-                      'group-hover:rotate-12'
-                    )}
-                  />
-                )}
-                <span>Copy</span>
-              </button>
-            </form>
-          )}
-        </div>
+              {isCopied ? (
+                <CheckCheck className='text-background h-3.5 w-3.5' />
+              ) : (
+                <Copy
+                  className={cn(
+                    'h-3.5 w-3.5',
+                    'transition-all duration-200',
+                    'group-hover:rotate-12'
+                  )}
+                />
+              )}
+              <span>Copy</span>
+            </button>
+          </form>
+        )}
+      </div>
     </>
   )
 }
-

@@ -15,8 +15,8 @@ const Header = () => {
   const pathname = usePathname()
 
   return (
-    <div className='border-b border-border'>
-      <header className='flex items-center justify-between max-w-7xl mx-auto w-full  px-8 py-2 font-sans'>
+    <div className='border-border border-b'>
+      <header className='mx-auto flex w-full max-w-7xl items-center justify-between px-8 py-2 font-sans'>
         <Link href='/' className='w-20 max-sm:min-w-8'>
           <span className=''>Logo</span>
         </Link>
@@ -28,8 +28,7 @@ const Header = () => {
                 href={home}
                 className={cn(
                   'px-4 py-2 transition max-sm:px-2',
-                  pathname === home &&
-                  'text-chart-2 font-medium opacity-100'
+                  pathname === home && 'text-chart-2 font-medium opacity-100'
                 )}
               >
                 Home
@@ -41,7 +40,7 @@ const Header = () => {
                 className={cn(
                   'px-4 py-2 transition max-sm:px-2',
                   pathname === inspiration &&
-                  'text-chart-2 font-medium opacity-100'
+                    'text-chart-2 font-medium opacity-100'
                 )}
               >
                 Inspiration
@@ -53,7 +52,7 @@ const Header = () => {
                 className={cn(
                   'px-4 py-2.5 transition max-sm:px-2',
                   pathname === components &&
-                  'text-chart-2 font-medium opacity-100'
+                    'text-chart-2 font-medium opacity-100'
                 )}
               >
                 Node UI
@@ -67,7 +66,6 @@ const Header = () => {
         </div>
       </header>
     </div>
-
   )
 }
 export default Header

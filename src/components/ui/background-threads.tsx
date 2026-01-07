@@ -1,6 +1,6 @@
 'use client'
-import { useEffect, useRef } from 'react';
-import { Renderer, Program, Mesh, Triangle, Color } from 'ogl';
+import { useEffect, useRef } from 'react'
+import { Renderer, Program, Mesh, Triangle, Color } from 'ogl'
 
 const vertexShader = `
 attribute vec2 position;
@@ -10,7 +10,7 @@ void main() {
   vUv = uv;
   gl_Position = vec4(position, 0.0, 1.0);
 }
-`;
+`
 
 const fragmentShader = `
 precision highp float;
@@ -117,68 +117,78 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 void main() {
     mainImage(gl_FragColor, gl_FragCoord.xy);
 }
-`;
+`
 
-const BackgroundThreads = ({ color = [84, 87, 87], amplitude = 0.3, distance = 0.85, ...rest }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const animationFrameId = useRef<number | null>(null);
+const BackgroundThreads = ({
+  color = [84, 87, 87],
+  amplitude = 0.3,
+  distance = 0.85,
+  ...rest
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const animationFrameId = useRef<number | null>(null)
 
   useEffect(() => {
-    if (!containerRef.current) return;
-    const container = containerRef.current;
+    if (!containerRef.current) return
+    const container = containerRef.current
 
-    const renderer = new Renderer({ alpha: true });
-    const gl = renderer.gl;
-    gl.clearColor(0, 0, 0, 0);
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-    container.appendChild(gl.canvas);
+    const renderer = new Renderer({ alpha: true })
+    const gl = renderer.gl
+    gl.clearColor(0, 0, 0, 0)
+    gl.enable(gl.BLEND)
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
+    container.appendChild(gl.canvas)
 
-    const geometry = new Triangle(gl);
+    const geometry = new Triangle(gl)
     const program = new Program(gl, {
       vertex: vertexShader,
       fragment: fragmentShader,
       uniforms: {
         iTime: { value: 0 },
         iResolution: {
-          value: new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height)
+          value: new Color(
+            gl.canvas.width,
+            gl.canvas.height,
+            gl.canvas.width / gl.canvas.height
+          ),
         },
         uColor: { value: new Color(...color) },
         uAmplitude: { value: amplitude },
         uDistance: { value: distance },
-      }
-    });
+      },
+    })
 
-    const mesh = new Mesh(gl, { geometry, program });
+    const mesh = new Mesh(gl, { geometry, program })
 
     function resize() {
-      const { clientWidth, clientHeight } = container;
-      renderer.setSize(clientWidth, clientHeight);
-      program.uniforms.iResolution.value.r = clientWidth;
-      program.uniforms.iResolution.value.g = clientHeight;
-      program.uniforms.iResolution.value.b = clientWidth / clientHeight;
+      const { clientWidth, clientHeight } = container
+      renderer.setSize(clientWidth, clientHeight)
+      program.uniforms.iResolution.value.r = clientWidth
+      program.uniforms.iResolution.value.g = clientHeight
+      program.uniforms.iResolution.value.b = clientWidth / clientHeight
     }
-    window.addEventListener('resize', resize);
-    resize();
+    window.addEventListener('resize', resize)
+    resize()
 
     function update(t: number) {
-      program.uniforms.iTime.value = t * 0.001;
+      program.uniforms.iTime.value = t * 0.001
 
-      renderer.render({ scene: mesh });
-      animationFrameId.current = requestAnimationFrame(update);
+      renderer.render({ scene: mesh })
+      animationFrameId.current = requestAnimationFrame(update)
     }
-    animationFrameId.current = requestAnimationFrame(update);
+    animationFrameId.current = requestAnimationFrame(update)
 
     return () => {
-      if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
-      window.removeEventListener('resize', resize);
+      if (animationFrameId.current)
+        cancelAnimationFrame(animationFrameId.current)
+      window.removeEventListener('resize', resize)
 
-      if (container.contains(gl.canvas)) container.removeChild(gl.canvas);
-      gl.getExtension('WEBGL_lose_context')?.loseContext();
-    };
-  }, [color, amplitude, distance]);
+      if (container.contains(gl.canvas)) container.removeChild(gl.canvas)
+      gl.getExtension('WEBGL_lose_context')?.loseContext()
+    }
+  }, [color, amplitude, distance])
 
-  return <div ref={containerRef} className="w-full h-full relative" {...rest} />;
-};
+  return <div ref={containerRef} className='relative h-full w-full' {...rest} />
+}
 
-export default BackgroundThreads;
+export default BackgroundThreads

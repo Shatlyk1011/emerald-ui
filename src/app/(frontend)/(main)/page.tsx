@@ -1,9 +1,9 @@
-import { FileUploadInput } from '@/components/FileUpload'
 import BackgroundThreads from '@/components/ui/background-threads'
+import { FileUploadInput } from '@/components/FileUpload'
 
 export default function Home() {
   return (
-    <main className='mx-auto mb-16 flex h-full w-full max-w-5xl min-h-[200vh] items-top justify-center px-12 pt-30 max-lg:px-8 max-sm:px-4 max-sm:pt-2 overflow-x-hidden'>
+    <main className='items-top mx-auto mb-16 flex h-full min-h-[200vh] w-full max-w-5xl justify-center overflow-x-hidden px-12 pt-30 max-lg:px-8 max-sm:px-4 max-sm:pt-2'>
       <section className='flex w-full flex-col items-center gap-8'>
         <div className='text-center'>
           <h1 className='-tracking-two mb-2 text-4xl font-semibold'>
@@ -15,9 +15,9 @@ export default function Home() {
         </div>
         <FileUploadInput />
       </section>
-      <div className='absolute top-0 left-0 w-full h-svh -z-1'>
+      <div className='absolute top-0 left-0 -z-1 h-svh w-full'>
         <BackgroundThreads />
-      </div> 
+      </div>
     </main>
   )
 }

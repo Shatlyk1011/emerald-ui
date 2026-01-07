@@ -1,5 +1,5 @@
-import ThemeToggle from '@/components/ui/theme-toggle'
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared'
+import ThemeToggle from '@/components/ui/theme-toggle'
 
 export const baseOptions = (): BaseLayoutProps => ({
   nav: {
@@ -19,5 +19,4 @@ export const baseOptions = (): BaseLayoutProps => ({
     ),
   },
   themeSwitch: { component: <ThemeToggle /> },
-
 })

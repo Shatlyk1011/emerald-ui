@@ -1,6 +1,6 @@
 'use server'
 
-import path from 'path';
+import path from 'path'
 import { cache } from 'react'
 import { promises as fs } from 'fs'
 
