@@ -10,7 +10,7 @@ export default async function LoginPage() {
   console.log('user', user)
 
   return (
-    <div className='app-container'>
+    <main className='app-container'>
       <div className='main-card-wrapper'>
         <img
           src='https://cdn.auth0.com/quantum-assets/dist/latest/logos/auth0/auth0-lockup-en-ondark.png'
@@ -36,6 +36,6 @@ export default async function LoginPage() {
           )}
         </div>
       </div>
-    </div>
+    </main>
   )
 }
