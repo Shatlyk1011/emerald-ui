@@ -1,8 +1,8 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { cn } from '@/lib/utils'
 import ThemeToggle from '@/components/ui/theme-toggle'
 
 const { components, inspiration, home } = {
@@ -40,7 +40,7 @@ const Header = () => {
                 className={cn(
                   'px-4 py-2 transition max-sm:px-2',
                   pathname === inspiration &&
-                    'text-chart-2 font-medium opacity-100'
+                  'text-chart-2 font-medium opacity-100'
                 )}
               >
                 Inspiration
@@ -52,7 +52,7 @@ const Header = () => {
                 className={cn(
                   'px-4 py-2.5 transition max-sm:px-2',
                   pathname === components &&
-                    'text-chart-2 font-medium opacity-100'
+                  'text-chart-2 font-medium opacity-100'
                 )}
               >
                 Node UI

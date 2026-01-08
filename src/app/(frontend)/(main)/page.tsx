@@ -1,6 +1,14 @@
 import BackgroundThreads from '@/components/ui/background-threads'
 import { FileUploadInput } from '@/components/FileUpload'
 
+import { siteConfig } from '@/lib/site-config'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Home',
+  description: siteConfig.description,
+}
+
 export default function Home() {
   return (
     <main className='items-top mx-auto mb-16 flex h-full min-h-[200vh] w-full max-w-5xl justify-center overflow-x-hidden px-12 pt-30 max-lg:px-8 max-sm:px-4 max-sm:pt-2'>

@@ -3,6 +3,13 @@ import LoginButton from '@/components/auth/LoginButton'
 import LogoutButton from '@/components/auth/LogoutButton'
 import Profile from '@/components/auth/Profile'
 
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Login',
+  description: 'Login to access your account.',
+}
+
 export default async function LoginPage() {
   const session = await auth0.getSession()
   const user = session?.user
