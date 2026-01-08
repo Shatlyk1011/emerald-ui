@@ -1,8 +1,8 @@
 import { Auth0Provider } from '@auth0/nextjs-auth0'
 import { RootProvider } from 'fumadocs-ui/provider/next'
-import { siteConfig } from '@/lib/site-config'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { siteConfig } from '@/lib/site-config'
 import { ThemeProvider } from '@/components/theme-provider'
 import './globals.css'
 

@@ -1,6 +1,5 @@
-import GlobalPlayground from '@/components/playground/GlobalPlayground'
-
 import type { Metadata } from 'next'
+import GlobalPlayground from '@/components/playground/GlobalPlayground'
 
 export const metadata: Metadata = {
   title: 'Playground',

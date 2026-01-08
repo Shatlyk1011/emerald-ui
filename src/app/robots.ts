@@ -4,7 +4,7 @@ import { siteConfig } from '@/lib/site-config'
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-        // General crawlers
+      // General crawlers
       {
         userAgent: '*',
         allow: '/',

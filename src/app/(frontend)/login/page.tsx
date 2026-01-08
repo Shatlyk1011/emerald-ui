@@ -1,9 +1,8 @@
+import type { Metadata } from 'next'
 import { auth0 } from '@/lib/auth0'
 import LoginButton from '@/components/auth/LoginButton'
 import LogoutButton from '@/components/auth/LogoutButton'
 import Profile from '@/components/auth/Profile'
-
-import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Login',

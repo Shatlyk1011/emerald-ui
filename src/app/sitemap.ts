@@ -3,7 +3,7 @@ import { siteConfig } from '@/lib/site-config'
 import { source } from '@/lib/source'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-   const currentDate = new Date();
+  const currentDate = new Date()
   const routes = ['', '/docs'].map((route) => ({
     url: `${siteConfig.url}${route}`,
     lastModified: currentDate,
@@ -15,11 +15,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const docsUrls: MetadataRoute.Sitemap = source
     .generateParams()
     .map(({ slug }) => ({
-      url: `${siteConfig.url}/docs/${slug?.join("/") || ""}`,
+      url: `${siteConfig.url}/docs/${slug?.join('/') || ''}`,
       lastModified: currentDate,
-      changeFrequency: "monthly",
+      changeFrequency: 'monthly',
       priority: 0.5,
-    }));
+    }))
 
   return [...routes, ...docsUrls]
 }

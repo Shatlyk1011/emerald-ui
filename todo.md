@@ -1,6 +1,5 @@
-* improve chat ui - length, options, scale
+- improve chat ui - length, options, scale
 
-* connect with togetherai
+- connect with togetherai
 
-* add inspiration details page
-
+- add inspiration details page

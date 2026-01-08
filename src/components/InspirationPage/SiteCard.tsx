@@ -1,4 +1,3 @@
-
 interface SiteCardProps {
   title: string
   description: string
@@ -9,39 +8,34 @@ interface SiteCardProps {
   logoLetter: string
 }
 
-function SiteCard({
-  title,
-  description,
-  isNew = false,
-}: SiteCardProps) {
+function SiteCard({ title, description, isNew = false }: SiteCardProps) {
   return (
-    <div className="group relative flex flex-col gap-3 cursor-pointer">
+    <div className='group relative flex cursor-pointer flex-col gap-3'>
       {/* Card Image Area */}
-      <div className="relative aspect-4/3 w-full bg-card rounded-xl overflow-hidden border border-border/50 group-hover:border-white/10 transition-colors shadow-lg">
+      <div className='bg-card border-border/50 relative aspect-4/3 w-full overflow-hidden rounded-xl border shadow-lg transition-colors group-hover:border-white/10'>
         {/* Mock Preview Content */}
-        <div className="absolute inset-4 rounded-lg overflow-hidden bg-[#222]">
-        </div>
+        <div className='absolute inset-4 overflow-hidden rounded-lg bg-[#222]'></div>
 
         {/* Badges */}
         {isNew && (
-          <div className="absolute top-2 left-2 bg-card text-[9px] font-semibold px-2 rounded-md uppercase tracking-two border border-border leading-0 py-2.5">
+          <div className='bg-card tracking-two border-border absolute top-2 left-2 rounded-md border px-2 py-2.5 text-[9px] leading-0 font-semibold uppercase'>
             New
           </div>
         )}
       </div>
 
       {/* Card Footer */}
-      <div className="flex items-start gap-3 px-1">
+      <div className='flex items-start gap-3 px-1'>
         <div
-          className={`w-8 h-8 rounded-md bg-card flex items-center justify-center shrink-0 mt-0.5`}
+          className={`bg-card mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md`}
         >
-          <span className="font-bold text-xs">{'a'}</span>
+          <span className='text-xs font-bold'>{'a'}</span>
         </div>
-        <div className="flex flex-col">
-          <h3 className="font-semibold text-sm leading-tight group-hover:text-white transition-colors">
+        <div className='flex flex-col'>
+          <h3 className='text-sm leading-tight font-semibold transition-colors group-hover:text-white'>
             {title}
           </h3>
-          <p className="text-gray-500 text-xs mt-0.5 leading-snug">
+          <p className='mt-0.5 text-xs leading-snug text-gray-500'>
             {description}
           </p>
         </div>
