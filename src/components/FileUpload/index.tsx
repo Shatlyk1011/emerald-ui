@@ -20,7 +20,7 @@ import {
 // import { SYSTEM_PROMPT } from "@/lib/constants"
 // const apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
 
-export function FileUploadInput() {
+function FileUploadInput() {
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [files, setFiles] = useState<File[]>([])
@@ -35,6 +35,10 @@ export function FileUploadInput() {
 
   const handleSubmit = async () => {
     if (!input.trim() && files.length === 0) return
+
+    const res = await fetch('https://api.scrnify.com/capture?key=sLofaw2ETcujMegENZ8T0142bL_Kvt25&url=https%3A%2F%2Fwww.bbc.com%2F&type=image&format=jpeg&width=1920&height=1080&waitUntil=firstMeaningfulPaint&blockCookieDefault=true')
+    console.log('res', res)
+    return 
 
     setIsLoading(true)
     try {
@@ -194,3 +198,5 @@ export function FileUploadInput() {
     </FileUpload>
   )
 }
+
+export default FileUploadInput
