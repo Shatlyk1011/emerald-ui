@@ -2,6 +2,7 @@
 import FilterSection from '@/components/InspirationPage/FilterSection'
 import SiteCard from '@/components/InspirationPage/SiteCard'
 import { MOCK_SITES } from '../../../../../public/mockData'
+import Link from 'next/link'
 
 export default function InspirationPage() {
   return (
@@ -15,16 +16,17 @@ export default function InspirationPage() {
 
         <div className='grid grid-cols-1 gap-x-3 gap-y-6 sm:grid-cols-2 lg:grid-cols-4'>
           {[...MOCK_SITES, ...MOCK_SITES].map((site, i) => (
-            <SiteCard
-              key={i}
-              title={site.title}
-              description={site.description}
-              imageColor={site.imageColor}
-              logoColor={site.logoColor}
-              logoLetter={site.logoLetter}
-              isNew={site.isNew}
-              isLocked={site.isLocked}
-            />
+            <Link key={i} href="inspiration/1" >
+              <SiteCard
+                title={site.title}
+                description={site.description}
+                imageColor={site.imageColor}
+                logoColor={site.logoColor}
+                logoLetter={site.logoLetter}
+                isNew={site.isNew}
+                isLocked={site.isLocked}
+              />
+            </Link>
           ))}
         </div>
       </main>

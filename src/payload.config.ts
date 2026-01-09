@@ -1,5 +1,6 @@
-import path from 'path'
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import path from 'path';
+import { postgresAdapter } from '@payloadcms/db-postgres'
+import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { fileURLToPath } from 'node:url'
 import { buildConfig } from 'payload'
@@ -8,7 +9,6 @@ import sharp from 'sharp'
 import AdminUsers from './app/(payload)/collections/AdminUsers'
 import ApiKeys from './app/(payload)/collections/ApiKeys'
 import Users from './app/(payload)/collections/Users'
-import { syncUser } from './services/syncUser'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -24,23 +24,17 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  endpoints: [
-    {
-      path: '/sync-user',
-      method: 'post',
-      handler: syncUser,
-    },
-  ],
 
-  // Define and configure your collections in this array
   collections: [AdminUsers, Users, ApiKeys],
-
-  // Your Payload secret - should be a complex and secure string, unguessable
+  plugins: [payloadCloudPlugin()],
   secret: process.env.PAYLOAD_SECRET || '',
-  // Whichever Database Adapter you're using should go here
-  // Mongoose is shown as an example, but you can also use Postgres
-  db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
+  typescript: {
+    outputFile: path.resolve(dirname, 'payload-types.ts'),
+  },
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.DATABASE_URI || '',
+    },
   }),
   sharp,
 })
