@@ -1,7 +1,7 @@
 'use server'
 
-import { NextResponse } from 'next/server';
-import OpenAI from 'openai';
+import { NextResponse } from 'next/server'
+import OpenAI from 'openai'
 import { SYSTEM_PROMPT } from '@/lib/constants'
 
 const apiKey = process.env.OPENAI_API_KEY || ''

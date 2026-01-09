@@ -7,5 +7,5 @@
 - n8n auto adding websites
 
 {
-  title, description, imageUrl, favicon, category, style, mode: (dark or light)
+title, description, imageUrl, favicon, category, style, mode: (dark or light)
 }

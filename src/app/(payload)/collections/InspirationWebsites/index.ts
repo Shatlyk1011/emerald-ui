@@ -35,7 +35,7 @@ const InspirationWebsites: CollectionConfig = {
         { label: 'Light', value: 'light' },
         { label: 'Hybrid', value: 'hybrid' },
       ],
-      required:false
+      required: false,
     },
     {
       name: 'imgUrl',
@@ -47,7 +47,6 @@ const InspirationWebsites: CollectionConfig = {
       type: 'text',
       required: false,
     },
-    
   ],
 }
 
