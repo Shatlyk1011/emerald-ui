@@ -1,5 +1,9 @@
-import { CollectionConfig } from 'payload'
+import { CollectionConfig } from 'payload';
 import { uploadScreenshot } from '../../utils/supabase';
+
+
+
+
 
 
 
@@ -23,6 +27,7 @@ const InspirationWebsites: CollectionConfig = {
             apiUrl.searchParams.set('url', doc.pageUrl)
             apiUrl.searchParams.set('type', 'image')
             apiUrl.searchParams.set('format', 'jpeg')
+            apiUrl.searchParams.set('quality', '75')
             apiUrl.searchParams.set('width', '1920')
             apiUrl.searchParams.set('height', '1080')
             apiUrl.searchParams.set('waitUntil', 'firstMeaningfulPaint')
@@ -69,7 +74,7 @@ const InspirationWebsites: CollectionConfig = {
   },
   fields: [
     {
-      name: 'Title',
+      name: 'title',
       type: 'text',
       required: true,
     },
