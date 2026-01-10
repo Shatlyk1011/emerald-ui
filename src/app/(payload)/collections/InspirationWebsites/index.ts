@@ -7,6 +7,16 @@ import { uploadScreenshot } from '../../utils/supabase';
 
 
 
+
+
+
+
+
+
+
+
+
+
 const InspirationWebsites: CollectionConfig = {
   slug: 'inpiration-websites',
   access: {
@@ -19,54 +29,9 @@ const InspirationWebsites: CollectionConfig = {
     useAsTitle: 'title',
   },
   hooks: {
-    afterOperation: [
-      async ({ operation, result }) => {
-        if (
-          operation === 'create' &&
-          result &&
-          result.pageUrl &&
-          !result.imgUrl
-        ) {
-          try {
-            const apiUrl = new URL('https://api.scrnify.com/capture')
-            apiUrl.searchParams.set('key', 'sLofaw2ETcujMegENZ8T0142bL_Kvt25')
-            apiUrl.searchParams.set('url', result.pageUrl)
-            apiUrl.searchParams.set('type', 'image')
-            apiUrl.searchParams.set('format', 'jpeg')
-            apiUrl.searchParams.set('quality', '75')
-            apiUrl.searchParams.set('width', '1920')
-            apiUrl.searchParams.set('height', '1080')
-            apiUrl.searchParams.set('waitUntil', 'firstMeaningfulPaint')
-            apiUrl.searchParams.set('blockCookieDefault', 'true')
-
-            const res = await fetch(apiUrl.toString())
-
-            if (res.ok) {
-              const buffer = await res.arrayBuffer()
-              const screenshotBuffer = Buffer.from(buffer)
-
-              const urlSlug = result.pageUrl
-                .replace(/^https?:\/\//, '')
-                .replace(/[^a-z0-9]/gi, '-')
-                .toLowerCase()
-              const filename = `${urlSlug}-${Date.now()}.jpeg`
-
-              const publicUrl = await uploadScreenshot(
-                screenshotBuffer,
-                filename
-              )
-
-              result.imgUrl = publicUrl
-            }
-          } catch (error) {
-            console.error('Error processing screenshot:', error)
-          }
-        }
-        return result
-      },
-    ],
-    afterChange: [
+    beforeChange: [
       async ({ data }) => {
+        // Only fetch screenshot if pageUrl exists and imgUrl is not set
         if (data && data.pageUrl && !data.imgUrl) {
           try {
             const apiUrl = new URL('https://api.scrnify.com/capture')
@@ -97,15 +62,17 @@ const InspirationWebsites: CollectionConfig = {
                 filename
               )
 
+              // Set the imgUrl before the document is saved
               data.imgUrl = publicUrl
+              console.log('Screenshot captured and uploaded:', publicUrl)
+            } else {
+              console.error('Scrnify API error:', res.status, res.statusText)
             }
-
           } catch (error) {
             console.error('Error 2 processing screenshot:', error)
           }
         }
         return data
-
       },
     ],
   },
