@@ -1,11 +1,6 @@
 import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins';
-import { uploadScreenshot } from '../../utils/supabase'
-
-
-
-
-
+import { uploadScreenshot } from '../../utils/supabase';
 
 
 
@@ -25,7 +20,7 @@ const InspirationWebsites: CollectionConfig = {
   },
   hooks: {
     afterOperation: [
-      async ({ operation, result, req }) => {
+      async ({ operation, result }) => {
         if (
           operation === 'create' &&
           result &&
@@ -61,14 +56,6 @@ const InspirationWebsites: CollectionConfig = {
                 filename
               )
 
-              await req.payload.update({
-                collection: 'inpiration-websites',
-                id: result.id,
-                data: {
-                  imgUrl: publicUrl,
-                },
-              })
-
               result.imgUrl = publicUrl
             }
           } catch (error) {
@@ -76,6 +63,46 @@ const InspirationWebsites: CollectionConfig = {
           }
         }
         return result
+      },
+    ],
+    afterChange: [
+      async ({ data }) => {
+        if (data && data.pageUrl && !data.imgUrl) {
+          try {
+            const apiUrl = new URL('https://api.scrnify.com/capture')
+            apiUrl.searchParams.set('key', 'sLofaw2ETcujMegENZ8T0142bL_Kvt25')
+            apiUrl.searchParams.set('url', data.pageUrl)
+            apiUrl.searchParams.set('type', 'image')
+            apiUrl.searchParams.set('format', 'jpeg')
+            apiUrl.searchParams.set('quality', '75')
+            apiUrl.searchParams.set('width', '1920')
+            apiUrl.searchParams.set('height', '1080')
+            apiUrl.searchParams.set('waitUntil', 'firstMeaningfulPaint')
+            apiUrl.searchParams.set('blockCookieDefault', 'true')
+
+            const res = await fetch(apiUrl.toString())
+
+            if (res.ok) {
+              const buffer = await res.arrayBuffer()
+              const screenshotBuffer = Buffer.from(buffer)
+
+              const urlSlug = data.pageUrl
+                .replace(/^https?:\/\//, '')
+                .replace(/[^a-z0-9]/gi, '-')
+                .toLowerCase()
+              const filename = `${urlSlug}-${Date.now()}.jpeg`
+
+              const publicUrl = await uploadScreenshot(
+                screenshotBuffer,
+                filename
+              )
+
+              data.imgUrl = publicUrl
+            }
+          } catch (error) {
+            console.error('Error 2 processing screenshot:', error)
+          }
+        }
       },
     ],
   },
