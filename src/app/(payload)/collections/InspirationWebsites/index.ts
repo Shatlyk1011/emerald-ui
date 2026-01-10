@@ -2,6 +2,16 @@ import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins';
 import { uploadScreenshot } from '../../utils/supabase'
 
+
+
+
+
+
+
+
+
+
+
 const InspirationWebsites: CollectionConfig = {
   slug: 'inpiration-websites',
   access: {
@@ -14,17 +24,18 @@ const InspirationWebsites: CollectionConfig = {
     useAsTitle: 'title',
   },
   hooks: {
-    afterChange: [
-      async ({ doc }) => {
-        // If we have a pageUrl but no imgUrl, fetch screenshot and upload
-        console.log('DOC', doc)
-
-        if (doc.pageUrl && !doc.imgUrl) {
+    afterOperation: [
+      async ({ operation, result, req }) => {
+        if (
+          operation === 'create' &&
+          result &&
+          result.pageUrl &&
+          !result.imgUrl
+        ) {
           try {
-            // Build Scrnify API URL with proper parameters
             const apiUrl = new URL('https://api.scrnify.com/capture')
             apiUrl.searchParams.set('key', 'sLofaw2ETcujMegENZ8T0142bL_Kvt25')
-            apiUrl.searchParams.set('url', doc.pageUrl)
+            apiUrl.searchParams.set('url', result.pageUrl)
             apiUrl.searchParams.set('type', 'image')
             apiUrl.searchParams.set('format', 'jpeg')
             apiUrl.searchParams.set('quality', '75')
@@ -33,39 +44,38 @@ const InspirationWebsites: CollectionConfig = {
             apiUrl.searchParams.set('waitUntil', 'firstMeaningfulPaint')
             apiUrl.searchParams.set('blockCookieDefault', 'true')
 
-            console.log('Fetching screenshot from:', apiUrl.toString())
             const res = await fetch(apiUrl.toString())
-            console.log('res', res)
 
             if (res.ok) {
               const buffer = await res.arrayBuffer()
               const screenshotBuffer = Buffer.from(buffer)
 
-              console.log('doc.pageUrl', doc.pageUrl)
-              if (screenshotBuffer) {
-                // Generate filename from URL
-                const urlSlug = doc.pageUrl
-                  .replace(/^https?:\/\//, '')
-                  .replace(/[^a-z0-9]/gi, '-')
-                  .toLowerCase()
-                const filename = `${urlSlug}-${Date.now()}.jpeg`
+              const urlSlug = result.pageUrl
+                .replace(/^https?:\/\//, '')
+                .replace(/[^a-z0-9]/gi, '-')
+                .toLowerCase()
+              const filename = `${urlSlug}-${Date.now()}.jpeg`
 
-                // Upload to Supabase
-                const publicUrl = await uploadScreenshot(
-                  screenshotBuffer,
-                  filename
-                )
-                // Attach the URL to the document
-                doc.imgUrl = publicUrl
-              }
+              const publicUrl = await uploadScreenshot(
+                screenshotBuffer,
+                filename
+              )
+
+              await req.payload.update({
+                collection: 'inpiration-websites',
+                id: result.id,
+                data: {
+                  imgUrl: publicUrl,
+                },
+              })
+
+              result.imgUrl = publicUrl
             }
           } catch (error) {
             console.error('Error processing screenshot:', error)
-            // Don't throw - allow the read to continue even if screenshot fails
           }
         }
-
-        return doc
+        return result
       },
     ],
   },
