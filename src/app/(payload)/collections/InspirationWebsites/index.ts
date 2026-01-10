@@ -99,10 +99,13 @@ const InspirationWebsites: CollectionConfig = {
 
               data.imgUrl = publicUrl
             }
+
           } catch (error) {
             console.error('Error 2 processing screenshot:', error)
           }
         }
+        return data
+
       },
     ],
   },
