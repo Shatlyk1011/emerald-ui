@@ -5,20 +5,17 @@ import { uploadScreenshot } from '../../utils/supabase';
 
 
 
-
-
-
-
 const InspirationWebsites: CollectionConfig = {
   slug: 'inpiration-websites',
   admin: {
-    useAsTitle: 'Title',
+    useAsTitle: 'title',
   },
   hooks: {
-    beforeChange: [
-      async ({ originalDoc: doc }) => {
+    afterChange: [
+      async ({ doc }) => {
         // If we have a pageUrl but no imgUrl, fetch screenshot and upload
         console.log('DOC', doc)
+
         if (doc.pageUrl && !doc.imgUrl) {
           try {
             // Build Scrnify API URL with proper parameters
@@ -55,9 +52,6 @@ const InspirationWebsites: CollectionConfig = {
                   screenshotBuffer,
                   filename
                 )
-
-                console.log('publicUrl', publicUrl)
-
                 // Attach the URL to the document
                 doc.imgUrl = publicUrl
               }
@@ -84,14 +78,6 @@ const InspirationWebsites: CollectionConfig = {
       required: true,
     },
     {
-      name: 'pageUrl',
-      type: 'text',
-      required: false,
-      admin: {
-        description: 'URL of the website to capture screenshot from',
-      },
-    },
-    {
       name: 'category',
       type: 'text',
       required: false,
@@ -101,6 +87,14 @@ const InspirationWebsites: CollectionConfig = {
       type: 'text',
       hasMany: true,
       required: true,
+    },
+    {
+      name: 'pageUrl',
+      type: 'text',
+      required: false,
+      admin: {
+        description: 'URL of the website to capture screenshot from',
+      },
     },
     {
       name: 'mode',
