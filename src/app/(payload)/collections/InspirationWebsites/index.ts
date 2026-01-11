@@ -7,16 +7,6 @@ import { uploadScreenshot } from '../../utils/supabase';
 
 
 
-
-
-
-
-
-
-
-
-
-
 const InspirationWebsites: CollectionConfig = {
   slug: 'inpiration-websites',
   access: {
@@ -29,9 +19,8 @@ const InspirationWebsites: CollectionConfig = {
     useAsTitle: 'title',
   },
   hooks: {
-    beforeChange: [
+    afterChange: [
       async ({ data }) => {
-        // Only fetch screenshot if pageUrl exists and imgUrl is not set
         if (data && data.pageUrl && !data.imgUrl) {
           try {
             const apiUrl = new URL('https://api.scrnify.com/capture')
