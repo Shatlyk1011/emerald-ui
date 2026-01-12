@@ -2,8 +2,11 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useUser } from '@auth0/nextjs-auth0/client'
 import { cn } from '@/lib/utils'
 import ThemeToggle from '@/components/ui/theme-toggle'
+import LoginButton from '@/components/auth/LoginButton'
+import Profile from '@/components/auth/Profile'
 
 const { components, inspiration, home } = {
   home: '/',
@@ -13,6 +16,7 @@ const { components, inspiration, home } = {
 
 const Header = () => {
   const pathname = usePathname()
+  const { user, isLoading } = useUser()
 
   return (
     <div className='border-border border-b'>
@@ -61,7 +65,8 @@ const Header = () => {
           </ul>
         </nav>
 
-        <div className='flex w-20 justify-end max-sm:w-14'>
+        <div className='flex items-center gap-2 max-sm:gap-1'>
+          {!isLoading && (user ? <Profile /> : <LoginButton />)}
           <ThemeToggle />
         </div>
       </header>

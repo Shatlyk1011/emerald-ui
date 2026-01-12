@@ -13,8 +13,6 @@ export default async function LoginPage() {
   const session = await auth0.getSession()
   const user = session?.user
 
-  console.log('user', user)
-
   return (
     <main className='app-container'>
       <div className='main-card-wrapper'>
