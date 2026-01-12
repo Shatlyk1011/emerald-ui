@@ -1,13 +1,12 @@
-import path from 'path'
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import { fileURLToPath } from 'node:url'
-import { buildConfig } from 'payload'
-import sharp from 'sharp'
+import path from 'path';
+import { mongooseAdapter } from '@payloadcms/db-mongodb';
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { fileURLToPath } from 'node:url';
+import { buildConfig } from 'payload';
+import sharp from 'sharp';
 // collections
 import AdminUsers from './app/(payload)/collections/AdminUsers'
 import InspirationWebsites from './app/(payload)/collections/InspirationWebsites'
-import Users from './app/(payload)/collections/Users'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -25,7 +24,7 @@ export default buildConfig({
   },
 
   // Define and configure your collections in this array
-  collections: [AdminUsers, Users, InspirationWebsites],
+  collections: [AdminUsers, InspirationWebsites],
 
   // Your Payload secret - should be a complex and secure string, unguessable
   secret: process.env.PAYLOAD_SECRET || '',
