@@ -36,9 +36,11 @@ function FileUploadInput() {
   const handleSubmit = async () => {
     if (!input.trim() && files.length === 0) return
 
-    const res = await fetch('https://api.scrnify.com/capture?key=sLofaw2ETcujMegENZ8T0142bL_Kvt25&url=https%3A%2F%2Fwww.bbc.com%2F&type=image&format=jpeg&width=1920&height=1080&waitUntil=firstMeaningfulPaint&blockCookieDefault=true')
+    const res = await fetch(
+      'https://api.scrnify.com/capture?key=sLofaw2ETcujMegENZ8T0142bL_Kvt25&url=https%3A%2F%2Fwww.bbc.com%2F&type=image&format=jpeg&width=1920&height=1080&waitUntil=firstMeaningfulPaint&blockCookieDefault=true'
+    )
     console.log('res', res)
-    return 
+    return
 
     setIsLoading(true)
     try {

@@ -1,11 +1,6 @@
-import { CollectionConfig } from 'payload';
-import { admins } from '../../utils/admins';
-import { uploadScreenshot } from '../../utils/supabase';
-
-
-
-
-
+import { CollectionConfig } from 'payload'
+import { admins } from '../../utils/admins'
+import { uploadScreenshot } from '../../utils/supabase'
 
 const InspirationWebsites: CollectionConfig = {
   slug: 'inpiration-websites',
