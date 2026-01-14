@@ -8,10 +8,11 @@ import ThemeToggle from '@/components/ui/theme-toggle'
 import LoginButton from '@/components/auth/LoginButton'
 import Profile from '@/components/auth/Profile'
 
-const { components, inspiration, home } = {
+const { components, inspiration, home, pricing } = {
   home: '/',
   inspiration: '/inspiration',
   components: '/docs',
+  pricing: '/pricing',
 }
 
 const Header = () => {
@@ -60,6 +61,18 @@ const Header = () => {
                 )}
               >
                 Node UI
+              </Link>
+            </li>
+            <li>
+              <Link
+                href={pricing}
+                className={cn(
+                  'px-4 py-2.5 transition max-sm:px-2',
+                  pathname === pricing &&
+                  'text-chart-2 font-medium opacity-100'
+                )}
+              >
+                Pricing
               </Link>
             </li>
           </ul>
