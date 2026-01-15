@@ -1,7 +1,27 @@
 'use client'
 import Together from 'together-ai';
-import { SYSTEM_PROMPT } from '@/lib/constants'
-import { PLANNING_PROMPT } from '../../public/prompts'
+import { SYSTEM_PROMPT } from '@/lib/constants';
+import { PLANNING_PROMPT } from '../../public/prompts';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const together = new Together({
   apiKey: 'tgp_v1_JMzZOUYRzIVIrCc9YsyOddKzb2U9WkWVJdwW1olj-io',
@@ -32,18 +52,14 @@ export async function generateReactApp(userRequest: string) {
       messages: [
         {
           role: 'system',
-          content: PLANNING_PROMPT,
-        },
-        {
-          role: 'user',
-          content: userRequest,
+          content: `${data}. Return only valid code to use with monaco editor `,
         },
       ],
       temperature: 0.5,
 
       model: 'deepseek-ai/DeepSeek-V3.1',
     })
-    console.log('data 2', components)
+    console.log('data 2', components.choices[0].message?.content)
 
     return components.choices[0].message?.content
   }
