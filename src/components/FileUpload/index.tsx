@@ -16,9 +16,10 @@ import {
 } from './ui'
 
 // dev environment
-// import OpenAI from 'openai';
-// import { SYSTEM_PROMPT } from "@/lib/constants"
-// const apiKey = process.env.NEXT_PUBLIC_OPENAI_API_KEY;
+import OpenAI from 'openai';
+import { SYSTEM_PROMPT } from "@/lib/constants"
+import { PLANNING_SAMPLE } from '../../../public/prompts'
+import { generateReactApp } from '@/services/gemini'
 
 function FileUploadInput() {
   const [input, setInput] = useState('')
@@ -36,61 +37,9 @@ function FileUploadInput() {
   const handleSubmit = async () => {
     if (!input.trim() && files.length === 0) return
 
-    const res = await fetch(
-      'https://api.scrnify.com/capture?key=sLofaw2ETcujMegENZ8T0142bL_Kvt25&url=https%3A%2F%2Fwww.bbc.com%2F&type=image&format=jpeg&width=1920&height=1080&waitUntil=firstMeaningfulPaint&blockCookieDefault=true'
-    )
+    const res = await generateReactApp(input)
     console.log('res', res)
-    return
-
-    setIsLoading(true)
-    try {
-      // const openai = new OpenAI({
-      //   apiKey,
-      //   dangerouslyAllowBrowser: true
-      // })
-
-      // const completion = await openai.chat.completions.create({
-      //   model: 'gpt-4o',
-      //   messages: [
-      //     { role: 'system', content: SYSTEM_PROMPT },
-      //     { role: 'user', content: input },
-      //   ],
-      //   response_format: { type: 'json_object' },
-      // })
-
-      // const content = completion.choices[0].message.content
-      // if (content) {
-      //   const files = JSON.parse(content)
-      //   console.log('files', files)
-      //   setGeneratedFiles(files);
-      //   router.push("/result");
-      // }
-
-      const response = await fetch('/api/generate-ui', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ prompt: input }),
-      })
-
-      const result = await response.json()
-
-      if (response.ok && result.success && result.files) {
-        setGeneratedFiles(result.files)
-        toast.success('UI generated successfully!')
-        router.push('/result')
-      } else {
-        toast.error(result.error || 'Failed to generate UI')
-      }
-    } catch (error) {
-      console.error(error)
-      toast.error('Something went wrong')
-    } finally {
-      setIsLoading(false)
-      setInput('')
-      setFiles([])
-    }
+    return res
   }
 
   const removeFile = (index: number) => {

@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { siteConfig } from '@/lib/site-config'
-import { useUser } from '@auth0/nextjs-auth0'
 
 export const metadata: Metadata = {
   title: 'Profile',
@@ -8,8 +7,8 @@ export const metadata: Metadata = {
 }
 
 export default function ProfilePage() {
-  const { user, isLoading } = useUser()
-  console.log('user', user)
+  // const { user, isLoading } = useUser()
+  // console.log('user', user)
 
   return (
     <main className='items-top mx-auto mb-16 flex h-full min-h-[200vh] w-full max-w-5xl justify-center overflow-x-hidden px-12 pt-30 max-lg:px-8 max-sm:px-4 max-sm:pt-2'>
