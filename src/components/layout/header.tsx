@@ -3,6 +3,7 @@
 import { useUser } from '@auth0/nextjs-auth0/client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useUser } from '@auth0/nextjs-auth0/client'
 import { cn } from '@/lib/utils'
 import ThemeToggle from '@/components/ui/theme-toggle'
 import LoginButton from '@/components/auth/LoginButton'
