@@ -89,7 +89,7 @@ export const SYSTEM_PROMPT = `
     "/components/Footer.jsx": "JSX CODE"
   }
 
-  `
+`
 
 export const DEMO_SITE = {
   '/main.jsx': `import React from 'react';

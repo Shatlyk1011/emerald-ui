@@ -12,6 +12,7 @@
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.14.0",
     "@babel/standalone": "^7.28.5",
+    "@google/genai": "^1.35.0",
     "@monaco-editor/react": "^4.7.0",
     "@payloadcms/db-mongodb": "3.62.0",
     "@payloadcms/next": "3.62.0",
@@ -40,6 +41,8 @@
     "sharp": "^0.34.5",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
+    "zod": "^4.3.5",
+    "zod-to-json-schema": "^3.25.1",
     "zustand": "^5.0.9"
   },
   "devDependencies": {
