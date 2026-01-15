@@ -1,6 +1,11 @@
-import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
-import { uploadScreenshot } from '../../utils/supabase'
+import { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
+import { uploadScreenshot } from '../../utils/supabase';
+
+
+
+
+
 
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
@@ -14,7 +19,7 @@ const InspirationWebsites: CollectionConfig = {
     useAsTitle: 'title',
   },
   hooks: {
-    afterChange: [
+    beforeChange: [
       async ({ data }) => {
         if (data && data.pageUrl && !data.imgUrl) {
           try {
@@ -46,14 +51,14 @@ const InspirationWebsites: CollectionConfig = {
                 filename
               )
 
-              // Set the imgUrl before the document is saved
               data.imgUrl = publicUrl
               console.log('Screenshot captured and uploaded:', publicUrl)
+              return data
             } else {
               console.error('Scrnify API error:', res.status, res.statusText)
             }
           } catch (error) {
-            console.error('Error 2 processing screenshot:', error)
+            console.error('Error processing screenshot:', error)
           }
         }
         return data
