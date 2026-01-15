@@ -1,8 +1,11 @@
 'use server'
-import { GoogleGenAI } from '@google/genai'
+import { GoogleGenAI } from '@google/genai';
+
+
+
 
 export async function generateReactApp(userRequest: string) {
-  const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY })
+  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
 
   // Use Gemini 2.5 models for "Thinking" and better coding
   const result = await ai.models.generateContent({
