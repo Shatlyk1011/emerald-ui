@@ -17,7 +17,7 @@ const { components, inspiration, home, pricing } = {
 
 const Header = () => {
   const pathname = usePathname()
-  const { user, isLoading } = useUser()
+  // const { user, isLoading } = useUser()
 
   return (
     <div className='border-border border-b'>
@@ -78,7 +78,7 @@ const Header = () => {
         </nav>
 
         <div className='flex items-center gap-2 max-sm:gap-1'>
-          {!isLoading && (user ? <Profile /> : <LoginButton />)}
+          {/* {!isLoading && (user ? <Profile /> : <LoginButton />)} */}
           <ThemeToggle />
         </div>
       </header>
