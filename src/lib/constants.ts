@@ -17,6 +17,7 @@ export const SYSTEM_PROMPT = `
   7. Do NOT include any files not explicitly required.
   8. Do NOT reference external libraries beyond React and ReactDOM.
   9. Code must be directly pasteable into Monaco Editor without modification.
+  10. Use images with following pattern: <img/> element with url from https://unsplash.com.
 
   ========================
   REQUIRED FILES (ALWAYS)
