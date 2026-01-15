@@ -12,6 +12,26 @@ import { PLANNING_PROMPT } from '../../public/prompts';
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const part1 = `
 ### 1. UI IDEA & PRODUCT VISION
 - **High-level concept**: A modern, visually-driven coffee shop landing page that emphasizes aesthetics, minimalism, and user engagement. It should feel premium, inviting, and functional.
@@ -167,7 +187,7 @@ export async function generateReactApp(userRequest: string) {
 
       model: 'deepseek-ai/DeepSeek-V3.1',
     })
-    console.log('data 2', components.choices[0].message?.content)
+    console.log('data 2', components)
 
     return components.choices[0].message?.content
   }
