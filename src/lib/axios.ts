@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import { TOKEN } from '@/shared/constrants'
 import { getCookie } from 'cookies-next/client'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || ''

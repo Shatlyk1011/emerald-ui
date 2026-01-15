@@ -1,10 +1,29 @@
-// components
 import Link from 'next/link'
+import { stringify } from "qs-esm";
+// components
 import FilterSection from '@/components/InspirationPage/FilterSection'
 import SiteCard from '@/components/InspirationPage/SiteCard'
 import { MOCK_SITES } from '../../../../../public/mockData'
+import { useGetWebsites as websites } from '@/services/useGetInspirationSites';
 
-export default function InspirationPage() {
+const stringifiedQuery = stringify(
+  {
+    where: {
+      isVisible: {
+        equals: true,
+      },
+    },
+    limit: 24,
+  },
+  { addQueryPrefix: true },
+);
+
+export default async function InspirationPage() {
+  const { getWebsites } = websites()
+
+  const initialData = await getWebsites(stringifiedQuery)
+  console.log('initialData', initialData);
+
   return (
     <div className='bg-background min-h-screen font-sans text-white selection:bg-white/20'>
       <main className='mx-auto max-w-7xl px-6 py-10'>

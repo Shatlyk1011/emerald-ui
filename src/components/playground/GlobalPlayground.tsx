@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useAppStore } from '@/store/useAppStore'
-import { DEMO_SITE } from '@/lib/constants'
 import {
   ResizableHandle,
   ResizablePanel,
@@ -23,16 +22,19 @@ root.render(<App />);
 `,
   '/App.jsx': '',
 }
+const FINAL = {
+
+}
 
 export default function GlobalPlayground() {
   const generatedFiles = useAppStore((state) => state.generatedFiles)
   console.log('generatedFiles', generatedFiles)
 
-  const [files, setFiles] = useState<Record<string, string>>({
-    ...INITIAL_FILES,
-    ...generatedFiles,
-  })
-  // const [files, setFiles] = useState<Record<string, string>>(DEMO_SITE)
+  // const [files, setFiles] = useState<Record<string, string>>({
+  // ...INITIAL_FILES,
+  // ...generatedFiles,
+  // })
+  const [files, setFiles] = useState<Record<string, string>>(FINAL)
   const [activeFile, setActiveFile] = useState('/main.jsx')
 
   // Handle changes from Monaco

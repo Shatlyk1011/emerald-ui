@@ -3,7 +3,7 @@ import { admins } from '../../utils/admins'
 import { uploadScreenshot } from '../../utils/supabase'
 
 const InspirationWebsites: CollectionConfig = {
-  slug: 'inpiration-websites',
+  slug: 'inspiration-websites',
   access: {
     create: admins,
     update: admins,
@@ -109,6 +109,12 @@ const InspirationWebsites: CollectionConfig = {
       name: 'faviconUrl',
       type: 'text',
       required: false,
+    },
+    {
+      name: 'isVisible',
+      type: 'checkbox',
+      required: false,
+      defaultValue: true,
     },
   ],
 }
