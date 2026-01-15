@@ -24,9 +24,9 @@ export default async function InspirationPage() {
 
 
 
-  const response: AxiosResponse<IWebsites> = await axios(`/inspiration-websites/${stringifiedQuery || ""}`);
+  // const response: AxiosResponse<IWebsites> = await axios(`/inspi2ration-websites/${stringifiedQuery || ""}`) || [];
 
-  console.log('initialData', response.data);
+  // console.log('initialData', response.data);
 
   return (
     <div className='bg-background min-h-screen font-sans text-white selection:bg-white/20'>
