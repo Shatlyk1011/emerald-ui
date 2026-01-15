@@ -4,7 +4,6 @@
 
 LLM:
 
-- review nutlope code structure
 - research preview editor with multiple page support
 - review user input, create app component structure
 - if image, review image, and generate app component structure
@@ -14,3 +13,7 @@ LLM:
 Gemini:
 
 - daily component generation for Node UI?
+
+Inspiration workflow: 
+- configure categories, tags and so on (new collection)
+- configure scrinify params - move scrinify key to env
