@@ -4,7 +4,9 @@ import { stringify } from "qs-esm";
 import FilterSection from '@/components/InspirationPage/FilterSection'
 import SiteCard from '@/components/InspirationPage/SiteCard'
 import { MOCK_SITES } from '../../../../../public/mockData'
-import { useGetWebsites as websites } from '@/services/useGetInspirationSites';
+import { IWebsites } from '@/types/inspiration';
+import { axios } from '@/lib/axios';
+import { AxiosResponse } from 'axios';
 
 const stringifiedQuery = stringify(
   {
@@ -19,10 +21,12 @@ const stringifiedQuery = stringify(
 );
 
 export default async function InspirationPage() {
-  const { getWebsites } = websites()
 
-  const initialData = await getWebsites(stringifiedQuery)
-  console.log('initialData', initialData);
+
+
+  const response: AxiosResponse<IWebsites> = await axios(`/inspiration-websites/${stringifiedQuery || ""}`);
+
+  console.log('initialData', response.data);
 
   return (
     <div className='bg-background min-h-screen font-sans text-white selection:bg-white/20'>

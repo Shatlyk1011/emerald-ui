@@ -1,7 +1,11 @@
-import axios from 'axios'
-import { getCookie } from 'cookies-next/client'
+import axios from 'axios';
+import { getCookie } from 'cookies-next/client';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || ''
+
+
+
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api'
 
 const instance = axios.create({
   baseURL: API_URL,
