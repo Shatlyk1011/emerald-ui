@@ -16,7 +16,7 @@ export default function Profile() {
   if (isLoading) {
     return (
       <div className='flex h-8 w-8 items-center justify-center'>
-        <div className='h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent' />
+        <div className='border-primary h-4 w-4 animate-spin rounded-full border-2 border-t-transparent' />
       </div>
     )
   }
@@ -27,11 +27,11 @@ export default function Profile() {
 
   const initials = user.name
     ? user.name
-      .split(' ')
-      .map((n) => n[0])
-      .join('')
-      .toUpperCase()
-      .slice(0, 2)
+        .split(' ')
+        .map((n) => n[0])
+        .join('')
+        .toUpperCase()
+        .slice(0, 2)
     : user.email?.[0]?.toUpperCase() || 'U'
 
   return (
@@ -52,7 +52,7 @@ export default function Profile() {
               />
             ) : null}
             <div
-              className={`flex h-6 w-6 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground ${user.picture ? 'hidden' : ''}`}
+              className={`bg-primary text-primary-foreground flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-medium ${user.picture ? 'hidden' : ''}`}
             >
               {initials}
             </div>
@@ -68,13 +68,13 @@ export default function Profile() {
                   className='h-10 w-10 rounded-full object-cover'
                 />
               ) : (
-                <div className='flex h-10 w-10 items-center justify-center rounded-full bg-primary text-sm font-medium text-primary-foreground'>
+                <div className='bg-primary text-primary-foreground flex h-10 w-10 items-center justify-center rounded-full text-sm font-medium'>
                   {initials}
                 </div>
               )}
               <div className='flex-1 overflow-hidden'>
                 <p className='truncate text-sm font-medium'>{user.name}</p>
-                <p className='truncate text-xs text-muted-foreground'>
+                <p className='text-muted-foreground truncate text-xs'>
                   {user.email}
                 </p>
               </div>

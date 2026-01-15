@@ -1,9 +1,9 @@
-import path from 'path';
-import { mongooseAdapter } from '@payloadcms/db-mongodb';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
-import { fileURLToPath } from 'node:url';
-import { buildConfig } from 'payload';
-import sharp from 'sharp';
+import path from 'path'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { fileURLToPath } from 'node:url'
+import { buildConfig } from 'payload'
+import sharp from 'sharp'
 // collections
 import AdminUsers from './app/(payload)/collections/AdminUsers'
 import InspirationWebsites from './app/(payload)/collections/InspirationWebsites'

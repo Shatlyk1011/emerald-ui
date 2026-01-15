@@ -1,5 +1,5 @@
-import type { Metadata } from 'next'
 import { Check } from 'lucide-react'
+import type { Metadata } from 'next'
 import { siteConfig } from '@/lib/site-config'
 import { Button } from '@/components/ui/button'
 
@@ -73,13 +73,13 @@ export default function PricingPage() {
         </p>
       </div>
 
-      <div className='grid gap-8 md:grid-cols-3 max-md:max-w-md max-md:mx-auto'>
+      <div className='grid gap-8 max-md:mx-auto max-md:max-w-md md:grid-cols-3'>
         {pricingPlans.map((plan) => (
           <div
             key={plan.name}
             className={`bg-card border-border relative flex flex-col rounded-lg border p-8 shadow-sm transition-all hover:shadow-md ${
               plan.popular
-                ? 'ring-primary border-primary ring-2 scale-105 max-md:scale-100'
+                ? 'ring-primary border-primary scale-105 ring-2 max-md:scale-100'
                 : ''
             }`}
           >

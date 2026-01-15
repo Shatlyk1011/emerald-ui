@@ -28,7 +28,10 @@ export default function GlobalPlayground() {
   const generatedFiles = useAppStore((state) => state.generatedFiles)
   console.log('generatedFiles', generatedFiles)
 
-  const [files, setFiles] = useState<Record<string, string>>({ ...INITIAL_FILES, ...generatedFiles });
+  const [files, setFiles] = useState<Record<string, string>>({
+    ...INITIAL_FILES,
+    ...generatedFiles,
+  })
   // const [files, setFiles] = useState<Record<string, string>>(DEMO_SITE)
   const [activeFile, setActiveFile] = useState('/main.jsx')
 

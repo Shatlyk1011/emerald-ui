@@ -1,8 +1,8 @@
 'use client'
 
+import { useUser } from '@auth0/nextjs-auth0/client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useUser } from '@auth0/nextjs-auth0/client'
 import { cn } from '@/lib/utils'
 import ThemeToggle from '@/components/ui/theme-toggle'
 import LoginButton from '@/components/auth/LoginButton'
@@ -68,8 +68,7 @@ const Header = () => {
                 href={pricing}
                 className={cn(
                   'px-4 py-2.5 transition max-sm:px-2',
-                  pathname === pricing &&
-                  'text-chart-2 font-medium opacity-100'
+                  pathname === pricing && 'text-chart-2 font-medium opacity-100'
                 )}
               >
                 Pricing

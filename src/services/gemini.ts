@@ -1,28 +1,27 @@
 'use server'
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI } from '@google/genai'
 
 export async function generateReactApp(userRequest: string) {
-  const ai = new GoogleGenAI({apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY,});
-  
+  const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY })
+
   // Use Gemini 2.5 models for "Thinking" and better coding
-  const result = await ai.models.generateContent({ 
-    model: "gemini-2.5-pro",
-     contents: [{ role: "user", parts: [{ text: userRequest }] }],
-     config: {
-      
-      responseMimeType: "application/json",
+  const result = await ai.models.generateContent({
+    model: 'gemini-2.5-pro',
+    contents: [{ role: 'user', parts: [{ text: userRequest }] }],
+    config: {
+      responseMimeType: 'application/json',
       responseJsonSchema: {
         fileName: 'Path e.g. /components/Header.tsx',
         content: 'The full React/JSX source code with Tailwind',
       },
       // Thinking config allows the AI to plan the component structure first
-      thinkingConfig: { includeThoughts: true } 
-    }
-  });
+      thinkingConfig: { includeThoughts: true },
+    },
+  })
   console.log('result', result)
-  if(result?.data) {
-    const webApp = JSON.parse(result.data);
-    return webApp;
+  if (result?.data) {
+    const webApp = JSON.parse(result.data)
+    return webApp
   }
 
   return 'No result'

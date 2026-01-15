@@ -1,11 +1,16 @@
 'use client'
 
 import { useState } from 'react'
+import { generateReactApp } from '@/services/gemini'
 import { useAppStore } from '@/store/useAppStore'
 import { ArrowUp, Paperclip, Square, X } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+// dev environment
+import OpenAI from 'openai'
 import { toast } from 'sonner'
+import { SYSTEM_PROMPT } from '@/lib/constants'
 import { Button } from '@/components/ui/button'
+import { PLANNING_SAMPLE } from '../../../public/prompts'
 import BackgroundGradient from '../ui/background-gradient'
 import { FileUpload, FileUploadContent, FileUploadTrigger } from './ui'
 import {
@@ -14,12 +19,6 @@ import {
   PromptInputActions,
   PromptInputTextarea,
 } from './ui'
-
-// dev environment
-import OpenAI from 'openai';
-import { SYSTEM_PROMPT } from "@/lib/constants"
-import { PLANNING_SAMPLE } from '../../../public/prompts'
-import { generateReactApp } from '@/services/gemini'
 
 function FileUploadInput() {
   const [input, setInput] = useState('')
