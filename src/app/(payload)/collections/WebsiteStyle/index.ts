@@ -1,8 +1,12 @@
 import { CollectionConfig } from "payload";
 import { admins } from "../../utils/admins";
 
-const Categories: CollectionConfig = {
-  slug: "categories",
+
+
+
+
+const WebsiteStyle: CollectionConfig = {
+  slug: 'website-style',
   access: {
     create: admins,
     delete: admins,
@@ -11,36 +15,35 @@ const Categories: CollectionConfig = {
   },
 
   admin: {
-    defaultColumns: ["category", "value"],
+    defaultColumns: ['style', 'value'],
 
-    useAsTitle: "category",
+    useAsTitle: 'style',
   },
 
   fields: [
     {
-      name: "category",
-      label: "Categories",
+      name: 'style',
+      label: 'Website Style',
       required: true,
-      type: "text",
+      type: 'text',
       unique: true,
     },
     {
-      name: "value",
-      label: "Value",
+      name: 'value',
+      label: 'Value',
       required: true,
-      type: "text",
+      type: 'text',
       unique: true,
     },
     {
-      name: "order",
-      label: "Order",
+      name: 'order',
+      label: 'Order',
       required: false,
-      type: "number",
+      type: 'number',
     },
-    
   ],
-  labels: { plural: "Categories", singular: "Category" },
+  labels: { plural: 'Website Style', singular: 'Website Style' },
   timestamps: false,
-};
+}
 
-export default Categories;
+export default WebsiteStyle
