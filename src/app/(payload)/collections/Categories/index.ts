@@ -1,8 +1,12 @@
 import { CollectionConfig } from "payload";
 import { admins } from "../../utils/admins";
 
+
+
+
+
 const Categories: CollectionConfig = {
-  slug: "categories",
+  slug: 'categories',
   access: {
     create: admins,
     delete: admins,
@@ -11,36 +15,34 @@ const Categories: CollectionConfig = {
   },
 
   admin: {
-    defaultColumns: ["category", "value"],
-
-    useAsTitle: "category",
+    defaultColumns: ['category', 'value'],
+    useAsTitle: 'category',
   },
 
   fields: [
     {
-      name: "category",
-      label: "Categories",
+      name: 'category',
+      label: 'Categories',
       required: true,
-      type: "text",
+      type: 'text',
       unique: true,
     },
     {
-      name: "value",
-      label: "Value",
+      name: 'value',
+      label: 'Value',
       required: true,
-      type: "text",
+      type: 'text',
       unique: true,
     },
     {
-      name: "order",
-      label: "Order",
+      name: 'order',
+      label: 'Order',
       required: false,
-      type: "number",
+      type: 'number',
     },
-    
   ],
-  labels: { plural: "Categories", singular: "Category" },
+  labels: { plural: 'Categories', singular: 'Category' },
   timestamps: false,
-};
+}
 
 export default Categories;
