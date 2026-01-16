@@ -6,7 +6,9 @@ import { buildConfig } from 'payload'
 import sharp from 'sharp'
 // collections
 import AdminUsers from './app/(payload)/collections/AdminUsers'
+import Categories from './app/(payload)/collections/Categories'
 import InspirationWebsites from './app/(payload)/collections/InspirationWebsites'
+import WebsiteStyle from './app/(payload)/collections/WebsiteStyle'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -24,7 +26,7 @@ export default buildConfig({
   },
 
   // Define and configure your collections in this array
-  collections: [AdminUsers, InspirationWebsites],
+  collections: [AdminUsers, Categories, WebsiteStyle, InspirationWebsites],
 
   // Your Payload secret - should be a complex and secure string, unguessable
   secret: process.env.PAYLOAD_SECRET || '',
