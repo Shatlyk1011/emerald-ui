@@ -1,9 +1,5 @@
-import { CollectionConfig } from "payload";
-import { admins } from "../../utils/admins";
-
-
-
-
+import { CollectionConfig } from 'payload'
+import { admins } from '../../utils/admins'
 
 const WebsiteStyle: CollectionConfig = {
   slug: 'website-style',
@@ -126,4 +122,3 @@ const WebsiteStyle: CollectionConfig = {
 }
 
 export default WebsiteStyle
- 

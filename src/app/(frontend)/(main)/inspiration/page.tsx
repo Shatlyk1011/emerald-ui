@@ -1,12 +1,12 @@
+import { AxiosResponse } from 'axios'
+import { IWebsites } from '@/types/inspiration'
 import Link from 'next/link'
-import { stringify } from "qs-esm";
+import { stringify } from 'qs-esm'
+import { axios } from '@/lib/axios'
 // components
 import FilterSection from '@/components/InspirationPage/FilterSection'
 import SiteCard from '@/components/InspirationPage/SiteCard'
 import { MOCK_SITES } from '../../../../../public/mockData'
-import { IWebsites } from '@/types/inspiration';
-import { axios } from '@/lib/axios';
-import { AxiosResponse } from 'axios';
 
 const stringifiedQuery = stringify(
   {
@@ -17,13 +17,10 @@ const stringifiedQuery = stringify(
     },
     limit: 24,
   },
-  { addQueryPrefix: true },
-);
+  { addQueryPrefix: true }
+)
 
 export default async function InspirationPage() {
-
-
-
   // const response: AxiosResponse<IWebsites> = await axios(`/inspi2ration-websites/${stringifiedQuery || ""}`) || [];
 
   // console.log('initialData', response.data);

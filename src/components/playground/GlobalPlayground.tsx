@@ -22,9 +22,7 @@ root.render(<App />);
 `,
   '/App.jsx': '',
 }
-const FINAL = {
-
-}
+const FINAL = {}
 
 export default function GlobalPlayground() {
   const generatedFiles = useAppStore((state) => state.generatedFiles)

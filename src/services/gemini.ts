@@ -1,51 +1,7 @@
 'use client'
-import Together from 'together-ai';
-import { SYSTEM_PROMPT } from '@/lib/constants';
-import { PLANNING_PROMPT } from '../../public/prompts';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import Together from 'together-ai'
+import { SYSTEM_PROMPT } from '@/lib/constants'
+import { PLANNING_PROMPT } from '../../public/prompts'
 
 const part1 = `
 ### 1. UI IDEA & PRODUCT VISION

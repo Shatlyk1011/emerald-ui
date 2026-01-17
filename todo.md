@@ -14,7 +14,7 @@ Gemini:
 
 - daily component generation for Node UI?
 
-Inspiration workflow: 
+Inspiration workflow:
 
 - configure scrinify params - move scrinify key to env
 - add favicons

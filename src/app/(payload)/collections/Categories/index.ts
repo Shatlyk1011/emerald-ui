@@ -1,9 +1,5 @@
-import { CollectionConfig } from "payload";
-import { admins } from "../../utils/admins";
-
-
-
-
+import { CollectionConfig } from 'payload'
+import { admins } from '../../utils/admins'
 
 const Categories: CollectionConfig = {
   slug: 'categories',
@@ -45,4 +41,4 @@ const Categories: CollectionConfig = {
   timestamps: false,
 }
 
-export default Categories;
+export default Categories

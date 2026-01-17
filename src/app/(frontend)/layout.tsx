@@ -1,12 +1,11 @@
-import './globals.css'
 import { Auth0Provider } from '@auth0/nextjs-auth0'
 import { RootProvider } from 'fumadocs-ui/provider/next'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { siteConfig } from '@/lib/site-config'
-import ThemeProvider from '@/components/_providers/theme-provider'
 import TanstackQueryProvider from '@/components/_providers/tanstack-query'
-
+import ThemeProvider from '@/components/_providers/theme-provider'
+import './globals.css'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -58,7 +57,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <TanstackQueryProvider>
-            <Auth0Provider>{children}</Auth0Provider>
+              <Auth0Provider>{children}</Auth0Provider>
             </TanstackQueryProvider>
           </ThemeProvider>
         </RootProvider>
