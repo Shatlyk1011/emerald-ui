@@ -1,5 +1,9 @@
-import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
+import { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
+
+
+
+
 
 const WebsiteStyle: CollectionConfig = {
   slug: 'website-style',
@@ -101,14 +105,12 @@ const WebsiteStyle: CollectionConfig = {
       label: 'Website Style',
       required: true,
       type: 'text',
-      unique: false,
     },
     {
       name: 'value',
       label: 'Value',
       required: true,
       type: 'text',
-      unique: false,
     },
     {
       name: 'order',
