@@ -16,5 +16,5 @@ Gemini:
 
 Inspiration workflow:
 
-- configure scrinify params - move scrinify key to env
-- add favicons
+- fix main page white shader colors 
+

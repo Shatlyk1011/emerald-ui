@@ -1,6 +1,11 @@
-import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
-import { uploadScreenshot, uploadFavicon } from '../../utils/supabase'
+import { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
+import { uploadScreenshot, uploadFavicon } from '../../utils/supabase';
+
+
+
+
+
 
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
@@ -19,15 +24,16 @@ const InspirationWebsites: CollectionConfig = {
         // Handle screenshot capture
         if (data && data.pageUrl && !data.imgUrl) {
           try {
+            // make screenshot
             const apiUrl = new URL('https://api.scrnify.com/capture')
             apiUrl.searchParams.set('key', process.env.SCRIFY_TOKEN || '')
             apiUrl.searchParams.set('url', data.pageUrl)
             apiUrl.searchParams.set('type', 'image')
-            apiUrl.searchParams.set('format', 'jpeg')
+            apiUrl.searchParams.set('format', 'png')
             apiUrl.searchParams.set('quality', '75')
             apiUrl.searchParams.set('width', '1200')
             apiUrl.searchParams.set('height', '900')
-            apiUrl.searchParams.set('waitUntil', 'firstImagePaint')
+            apiUrl.searchParams.set('waitUntil', 'firstMeaningfulPaint')
             apiUrl.searchParams.set('blockCookieDefault', 'true')
 
             const res = await fetch(apiUrl.toString())
@@ -40,7 +46,7 @@ const InspirationWebsites: CollectionConfig = {
                 .replace(/^https?:\/\//, '')
                 .replace(/[^a-z0-9]/gi, '-')
                 .toLowerCase()
-              const filename = `${urlSlug}-${Date.now()}.jpeg`
+              const filename = `${urlSlug}-${Date.now()}.png`
 
               const publicUrl = await uploadScreenshot(
                 screenshotBuffer,

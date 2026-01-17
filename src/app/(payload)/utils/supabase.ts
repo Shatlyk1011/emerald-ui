@@ -1,5 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 
+
+
+
 // Initialize Supabase client
 const supabaseUrl = process.env.SUPABASE_URL || ''
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || ''
@@ -26,7 +29,7 @@ export async function uploadScreenshot(
     const { data, error } = await supabase.storage
       .from(bucketName)
       .upload(filename, imageBuffer, {
-        contentType: 'image/jpeg',
+        contentType: 'image/png',
         upsert: true,
       })
 
@@ -81,6 +84,44 @@ export async function uploadFavicon(
     return publicUrl
   } catch (error) {
     console.error('Error uploading favicon:', error)
+    throw error
+  }
+}
+
+/**
+ * Upload image to Supabase storage (generic function for manual uploads)
+ * @param imageBuffer - Buffer containing the image data
+ * @param filename - Name for the uploaded file
+ * @param contentType - MIME type of the image (default: 'image/*')
+ * @returns Public URL of the uploaded image
+ */
+export async function uploadImage(
+  imageBuffer: Buffer,
+  filename: string,
+  contentType: string = 'image/*'
+): Promise<string> {
+  try {
+    // Upload to Supabase storage
+    const { data, error } = await supabase.storage
+      .from(bucketName)
+      .upload(filename, imageBuffer, {
+        contentType,
+        upsert: true,
+      })
+
+    if (error) {
+      console.error('Supabase image upload error:', error)
+      throw new Error(`Failed to upload image: ${error.message}`)
+    }
+
+    // Get public URL
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from(bucketName).getPublicUrl(data.path)
+
+    return publicUrl
+  } catch (error) {
+    console.error('Error uploading image:', error)
     throw error
   }
 }
