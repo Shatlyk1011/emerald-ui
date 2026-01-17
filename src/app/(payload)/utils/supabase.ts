@@ -1,4 +1,7 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js';
+
+
+
 
 // Initialize Supabase client
 const supabaseUrl = process.env.SUPABASE_URL || ''
@@ -43,6 +46,44 @@ export async function uploadScreenshot(
     return publicUrl
   } catch (error) {
     console.error('Error uploading screenshot:', error)
+    throw error
+  }
+}
+
+/**
+ * Upload favicon to Supabase storage
+ * @param imageBuffer - Buffer containing the favicon image data
+ * @param filename - Name for the uploaded file
+ * @returns Public URL of the uploaded favicon
+ */
+export async function uploadFavicon(
+  imageBuffer: Buffer,
+  filename: string
+): Promise<string> {
+  const faviconBucket = process.env.SUPABASE_FAVICONS_BUCKET || 'favicons'
+
+  try {
+    // Upload to Supabase storage
+    const { data, error } = await supabase.storage
+      .from(faviconBucket)
+      .upload(filename, imageBuffer, {
+        contentType: 'image/png',
+        upsert: true,
+      })
+
+    if (error) {
+      console.error('Supabase favicon upload error:', error)
+      throw new Error(`Failed to upload favicon: ${error.message}`)
+    }
+
+    // Get public URL
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from(faviconBucket).getPublicUrl(data.path)
+
+    return publicUrl
+  } catch (error) {
+    console.error('Error uploading favicon:', error)
     throw error
   }
 }

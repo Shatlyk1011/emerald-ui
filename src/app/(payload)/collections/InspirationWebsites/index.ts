@@ -1,6 +1,16 @@
 import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins';
-import { uploadScreenshot } from '../../utils/supabase';
+import { uploadScreenshot, uploadFavicon } from '../../utils/supabase'
+
+
+
+
+
+
+
+
+
+
 
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
@@ -16,6 +26,7 @@ const InspirationWebsites: CollectionConfig = {
   hooks: {
     beforeChange: [
       async ({ data }) => {
+        // Handle screenshot capture
         if (data && data.pageUrl && !data.imgUrl) {
           try {
             const apiUrl = new URL('https://api.scrnify.com/capture')
@@ -48,7 +59,6 @@ const InspirationWebsites: CollectionConfig = {
 
               data.imgUrl = publicUrl
               console.log('Screenshot captured and uploaded:', publicUrl)
-              return data
             } else {
               console.error('Scrnify API error:', res.status, res.statusText)
             }
@@ -56,6 +66,45 @@ const InspirationWebsites: CollectionConfig = {
             console.error('Error processing screenshot:', error)
           }
         }
+
+        // Handle favicon download and upload
+        if (data && data.faviconUrl && !data.favicon) {
+          try {
+            const faviconRes = await fetch(data.faviconUrl)
+
+            if (faviconRes.ok) {
+              const buffer = await faviconRes.arrayBuffer()
+              const faviconBuffer = Buffer.from(buffer)
+
+              // Create filename from the URL
+              const urlSlug = data.pageUrl
+                ? data.pageUrl
+                    .replace(/^https?:\/\//, '')
+                    .replace(/[^a-z0-9]/gi, '-')
+                    .toLowerCase()
+                : data.faviconUrl
+                    .replace(/^https?:\/\//, '')
+                    .replace(/[^a-z0-9]/gi, '-')
+                    .toLowerCase()
+
+              const filename = `${urlSlug}-${Date.now()}.png`
+
+              const publicUrl = await uploadFavicon(faviconBuffer, filename)
+
+              data.favicon = publicUrl
+              console.log('Favicon downloaded and uploaded:', publicUrl)
+            } else {
+              console.error(
+                'Favicon download error:',
+                faviconRes.status,
+                faviconRes.statusText
+              )
+            }
+          } catch (error) {
+            console.error('Error processing favicon:', error)
+          }
+        }
+
         return data
       },
     ],
@@ -91,14 +140,12 @@ const InspirationWebsites: CollectionConfig = {
       },
     },
     {
-      name: 'mode',
-      type: 'select',
-      options: [
-        { label: 'Dark', value: 'dark' },
-        { label: 'Light', value: 'light' },
-        { label: 'Hybrid', value: 'hybrid' },
-      ],
+      name: 'faviconUrl',
+      type: 'text',
       required: false,
+      admin: {
+        description: 'URL of the favicon',
+      },
     },
     {
       name: 'imgUrl',
@@ -106,8 +153,18 @@ const InspirationWebsites: CollectionConfig = {
       required: false,
     },
     {
-      name: 'faviconUrl',
+      name: 'favicon',
       type: 'text',
+      required: false,
+    },
+    {
+      name: 'mode',
+      type: 'select',
+      options: [
+        { label: 'Dark', value: 'dark' },
+        { label: 'Light', value: 'light' },
+        { label: 'Hybrid', value: 'hybrid' },
+      ],
       required: false,
     },
     {
