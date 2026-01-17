@@ -2,11 +2,6 @@ import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins';
 import { uploadScreenshot } from '../../utils/supabase';
 
-
-
-
-
-
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
   access: {
@@ -24,14 +19,14 @@ const InspirationWebsites: CollectionConfig = {
         if (data && data.pageUrl && !data.imgUrl) {
           try {
             const apiUrl = new URL('https://api.scrnify.com/capture')
-            apiUrl.searchParams.set('key', 'sLofaw2ETcujMegENZ8T0142bL_Kvt25')
+            apiUrl.searchParams.set('key', process.env.SCRIFY_TOKEN || '')
             apiUrl.searchParams.set('url', data.pageUrl)
             apiUrl.searchParams.set('type', 'image')
             apiUrl.searchParams.set('format', 'jpeg')
             apiUrl.searchParams.set('quality', '75')
-            apiUrl.searchParams.set('width', '1920')
-            apiUrl.searchParams.set('height', '1080')
-            apiUrl.searchParams.set('waitUntil', 'firstMeaningfulPaint')
+            apiUrl.searchParams.set('width', '1200')
+            apiUrl.searchParams.set('height', '900')
+            apiUrl.searchParams.set('waitUntil', 'firstImagePaint')
             apiUrl.searchParams.set('blockCookieDefault', 'true')
 
             const res = await fetch(apiUrl.toString())
