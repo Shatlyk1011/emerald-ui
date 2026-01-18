@@ -1,19 +1,40 @@
 - improve chat ui - length, options, scale
 
-- connect with togetherai
+- Integrate stripe with OAUTH
 
 LLM:
 
 - research preview editor with multiple page support
-- review user input, create app component structure
 - if image, review image, and generate app component structure
 - using app component structure, generate actual components using react + tailwind + framer motion and unsplash images
 - find a way to deploy the actual app - push to custom page with actual code and token. add is private boolean. verify token by comparing user id and code data id. (for private deployments)
 
-Gemini:
+Node ui:
 
-- daily component generation for Node UI?
+- gemini daily component generation for Node UI?
 
-Inspiration workflow:
+- discord components
 
-- fix main page white shader colors
+Inspiration page:
+
+- integrate endpoint with iframe (global)
+
+- add light mode
+
+- Test custom image upload feature 
+
+
+Result page:
+- Find money for claude api
+
+- Upgrade tab & chat ui (see magicpatterns) 
+
+- Remove links from responses
+
+- Integrate claude skills
+
+Global:
+
+- add what's new section in main layout
+
+- add wishlists
