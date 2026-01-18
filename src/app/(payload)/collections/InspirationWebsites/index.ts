@@ -7,6 +7,11 @@ import { uploadScreenshot, uploadFavicon } from '../../utils/supabase';
 
 
 
+
+
+
+
+
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
   access: {
@@ -30,7 +35,7 @@ const InspirationWebsites: CollectionConfig = {
             apiUrl.searchParams.set('url', data.pageUrl)
             apiUrl.searchParams.set('type', 'image')
             apiUrl.searchParams.set('format', 'png')
-            apiUrl.searchParams.set('quality', '75')
+            apiUrl.searchParams.set('quality', '70')
             apiUrl.searchParams.set('width', '1200')
             apiUrl.searchParams.set('height', '900')
             apiUrl.searchParams.set('waitUntil', 'firstMeaningfulPaint')

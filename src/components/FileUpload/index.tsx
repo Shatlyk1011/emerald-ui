@@ -5,10 +5,8 @@ import { useAppStore } from '@/store/useAppStore'
 import { ArrowUp, Paperclip, Square, X } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 // dev environment
-import OpenAI from 'openai'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
-import { PLANNING_SAMPLE } from '../../../public/prompts'
 import BackgroundGradient from '../ui/background-gradient'
 import { FileUpload, FileUploadContent, FileUploadTrigger } from './ui'
 import {
@@ -34,7 +32,35 @@ function FileUploadInput() {
   const handleSubmit = async () => {
     if (!input.trim() && files.length === 0) return
 
-    // const res = await generateReactApp(input)
+    setIsLoading(true)
+    try {
+      const response = await fetch('/api/generate-ui', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompt: input }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to generate UI')
+      }
+
+      setGeneratedFiles(data.files)
+      router.push('/result')
+      toast.success('UI generated successfully!')
+      setInput('')
+      setFiles([])
+    } catch (error) {
+      console.error(error)
+      toast.error(
+        error instanceof Error ? error.message : 'Something went wrong'
+      )
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const removeFile = (index: number) => {

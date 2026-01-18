@@ -1,28 +1,22 @@
 'use server'
 
-import { NextResponse } from 'next/server';
-import OpenAI from 'openai'
-import { SYSTEM_PROMPT } from '../../../../../public/prompts'
+import { generateComponentCode, generateProjectPlan } from '@/services/gemini'
+import { NextResponse } from 'next/server'
 
 
 
 
 
 
-const apiKey = process.env.OPENAI_API_KEY || ''
 
-const openai = new OpenAI({
-  apiKey,
-})
 
-export async function GET() {
-  return NextResponse.json({ hello: 'world' })
-}
+
+const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY
 
 export async function POST(req: Request) {
   if (!apiKey) {
     return NextResponse.json(
-      { error: 'OpenAI API key is not configured' },
+      { error: 'Gemini API key is not configured' },
       { status: 502 }
     )
   }
@@ -30,40 +24,30 @@ export async function POST(req: Request) {
   try {
     const body = await req.json()
     const { prompt } = body
-    console.log('prompt', prompt)
+    console.log('User Prompt:', prompt)
 
     if (!prompt) {
       return NextResponse.json({ error: 'Prompt is required' }, { status: 400 })
     }
 
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-4o',
-      messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'user', content: prompt },
-      ],
-      response_format: { type: 'json_object' },
-    })
+    // Step 1: Generate Project Plan
+    console.log('Generating Project Plan...')
+    const plan = await generateProjectPlan(prompt)
 
-    const content = completion.choices[0].message.content
+    if (!plan) {
+      throw new Error('Failed to generate project plan')
+    }
+    console.log('Project Plan Generated:', plan.substring(0, 200) + '...') // Log summary
 
-    if (!content) {
-      return NextResponse.json(
-        { error: 'No content received from OpenAI' },
-        { status: 500 }
-      )
+    // Step 2: Generate Component Code from Plan
+    console.log('Generating Component Code...')
+    const files = await generateComponentCode(plan)
+
+    if (!files) {
+      throw new Error('Failed to generate component code')
     }
 
-    try {
-      const files = JSON.parse(content)
-      return NextResponse.json({ success: true, files })
-    } catch (parseError) {
-      console.error('JSON Parse Error:', parseError)
-      return NextResponse.json(
-        { error: 'Failed to parse OpenAI response' },
-        { status: 500 }
-      )
-    }
+    return NextResponse.json({ success: true, files, plan }) // Added plan to response for debugging/transparency
   } catch (error) {
     console.error('Generate UI Error:', error)
     return NextResponse.json(
