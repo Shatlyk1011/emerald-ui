@@ -1,5 +1,9 @@
-import { GoogleGenAI } from '@google/genai'
-import { PLANNING_PROMPT, SYSTEM_PROMPT } from '../../public/prompts'
+import { GoogleGenAI } from '@google/genai';
+import { PLANNING_PROMPT, SYSTEM_PROMPT } from '../../public/prompts';
+
+
+
+
 
 const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY
 const genAI = new GoogleGenAI({ apiKey })
@@ -17,7 +21,7 @@ export async function generateProjectPlan(userPrompt: string) {
     })
 
     if (response) {
-      return response.text()
+      return response.text
     }
   } catch (error) {
     console.error('Gemini Plan Generation Error:', error)
@@ -47,7 +51,7 @@ export async function generateComponentCode(plan: string) {
       ],
     })
 
-    const text = response.text()
+    const text = response.text
     if (!text) {
       throw new Error('No content received from Gemini')
     }

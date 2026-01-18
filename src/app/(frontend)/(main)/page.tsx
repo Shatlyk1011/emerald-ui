@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { siteConfig } from '@/lib/site-config'
 import BackgroundThreads from '@/components/ui/background-threads'
 import FileUploadInput from '@/components/FileUpload'
+import DesignGenerationApp from '@/components/claude-test'
 
 export const metadata: Metadata = {
   title: 'Home',
@@ -20,7 +21,8 @@ export default function Home() {
             Create apps and websites by chatting with AI
           </p>
         </div>
-        <FileUploadInput />
+        {/* <FileUploadInput /> */}
+        <DesignGenerationApp />
       </section>
       <div className='absolute top-0 left-0 -z-1 h-svh w-full'>
         <BackgroundThreads />
