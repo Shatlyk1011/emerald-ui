@@ -16,5 +16,4 @@ Gemini:
 
 Inspiration workflow:
 
-- fix main page white shader colors 
-
+- fix main page white shader colors

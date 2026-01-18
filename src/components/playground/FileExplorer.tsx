@@ -21,7 +21,7 @@ export default function FileExplorer({
   })
 
   return (
-    <div className='bg-muted/10 flex h-full flex-col border-r text-sm w-full'>
+    <div className='bg-muted/10 flex h-full w-full flex-col border-r text-sm'>
       <div className='text-muted-foreground border-b p-3 text-xs font-semibold tracking-wider uppercase'>
         Explorer
       </div>

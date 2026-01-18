@@ -1,9 +1,8 @@
 'use client'
-import { useState } from 'react';
-import { cn } from '@/lib/utils';
-
-import { PricingCard, PricingTier } from './PricingCard';
-import { Switch } from '../ui/switch';
+import { useState } from 'react'
+import { cn } from '@/lib/utils'
+import { Switch } from '../ui/switch'
+import { PricingCard, PricingTier } from './PricingCard'
 
 const pricingPlans: PricingTier[] = [
   {
@@ -21,7 +20,7 @@ const pricingPlans: PricingTier[] = [
     ctaVariant: 'blue',
     featuresIntro: 'Everything in Free, plus:',
     priceDetail: 'per seat/mo',
-    isAnnual: true
+    isAnnual: true,
   },
   {
     name: 'Pro',
@@ -40,7 +39,7 @@ const pricingPlans: PricingTier[] = [
     ctaVariant: 'blue',
     featuresIntro: 'Everything in Hobby, plus:',
     priceDetail: 'per seat/mo',
-    isAnnual: false
+    isAnnual: false,
   },
   {
     name: 'Enterprise',
@@ -58,7 +57,7 @@ const pricingPlans: PricingTier[] = [
     ctaText: 'Contact Sales',
     ctaVariant: 'black',
     featuresIntro: 'Everything in Pro, plus:',
-    isAnnual: true
+    isAnnual: true,
   },
 ]
 
@@ -69,21 +68,42 @@ const PricingSection = () => {
 
   return (
     <>
-      <div className='flex gap-1.5 items-center text-sm font-normal  justify-center mb-4'>
-        <span className={cn("transition-colors", isAnnual && 'text-muted-foreground')}>Monthly</span>
-        <Switch className='bg-red-500' color="red" checked={isAnnual} onCheckedChange={(checked) => setAnnual(checked)} />
+      <div className='mb-4 flex items-center justify-center gap-1.5 text-sm font-normal'>
+        <span
+          className={cn(
+            'transition-colors',
+            isAnnual && 'text-muted-foreground'
+          )}
+        >
+          Monthly
+        </span>
+        <Switch
+          className='bg-red-500'
+          color='red'
+          checked={isAnnual}
+          onCheckedChange={(checked) => setAnnual(checked)}
+        />
         <p className='relative'>
-          <span className={cn("transition-colors",!isAnnual && 'text-muted-foreground')}>Annual</span>
-          <span className='absolute text-xs bg-blue-400/20 text-blue-400 w-max text-[10px] text-nowrap font-medium tracking-one rounded-full px-1.5 leading-[1.2] py-0.5 left-12.5 top-1/2 -translate-y-1/2'>Save 20%</span>
+          <span
+            className={cn(
+              'transition-colors',
+              !isAnnual && 'text-muted-foreground'
+            )}
+          >
+            Annual
+          </span>
+          <span className='tracking-one absolute top-1/2 left-12.5 w-max -translate-y-1/2 rounded-full bg-blue-400/20 px-1.5 py-0.5 text-xs text-[10px] leading-[1.2] font-medium text-nowrap text-blue-400'>
+            Save 20%
+          </span>
         </p>
       </div>
-    
-      <section className='grid grid-cols-3 justify-center max-w-full px-10 max-lg:px-0  gap-3 mx-auto h-full'>
+
+      <section className='mx-auto grid h-full max-w-full grid-cols-3 justify-center gap-3 px-10 max-lg:px-0'>
         {pricingPlans.map((plan) => (
           <PricingCard key={plan.name} item={plan} />
         ))}
       </section>
     </>
   )
-};
+}
 export default PricingSection

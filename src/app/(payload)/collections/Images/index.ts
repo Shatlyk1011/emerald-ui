@@ -12,7 +12,7 @@ const Images: CollectionConfig = {
     beforeChange: [
       async ({ data, req }) => {
         // Only process when a new file is uploaded
-        if (data && !data.imageUrl ) {
+        if (data && !data.imageUrl) {
           try {
             // Get the file path
             const fs = await import('fs/promises')
@@ -24,17 +24,26 @@ const Images: CollectionConfig = {
             const filename = `${urlSlug}-${Date.now()}`
 
             // Construct the file path
-            const filePath = path.join(process.cwd(), 'public', 'uploads', filename)
+            const filePath = path.join(
+              process.cwd(),
+              'public',
+              'uploads',
+              filename
+            )
 
             console.log('filePath', filePath)
-            
+
             const fileBuffer = await fs.readFile(filePath)
-            
+
             const contentType = 'image/png'
-            
-            const publicUrl = await uploadImage(fileBuffer, filename, contentType)
+
+            const publicUrl = await uploadImage(
+              fileBuffer,
+              filename,
+              contentType
+            )
             console.log('publicUrl', publicUrl)
-            
+
             // Update the document with the Supabase URL
             await req.payload.update({
               collection: 'images',
@@ -44,13 +53,13 @@ const Images: CollectionConfig = {
               },
               req,
             })
-            
+
             console.log('Image uploaded to Supabase:', publicUrl)
           } catch (error) {
             console.error('Error uploading image to Supabase:', error)
           }
         }
-        
+
         return data
       },
     ],
@@ -64,7 +73,7 @@ const Images: CollectionConfig = {
 
   admin: {
     defaultColumns: ['siteUrl', 'description', 'imgUrl'],
-    useAsTitle: 'siteUrl'
+    useAsTitle: 'siteUrl',
   },
 
   fields: [
@@ -102,4 +111,3 @@ const Images: CollectionConfig = {
 }
 
 export default Images
-

@@ -1,6 +1,7 @@
 import { CheckCircle } from 'lucide-react'
-import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
+import { Button } from '../ui/button'
+
 export interface PricingTier {
   name: string
   description: string
@@ -10,32 +11,33 @@ export interface PricingTier {
   ctaVariant: 'blue' | 'black'
   featuresIntro: string
   features: string[]
-  isAnnual?:boolean
+  isAnnual?: boolean
 }
 interface PricingCardProps {
   item: PricingTier
 }
 export function PricingCard({ item }: PricingCardProps) {
-  
   return (
-    <div className="flex flex-col w-full rounded-xl border border-border bg-background p-7 shadow-sm hover:shadow-md transition-shadow">
-      <div className="min-h-22 mb-4">
-        <h3 className="text-2xl font-semibold text-foreground">{item.name}</h3>
-        <p className="mt-2 text-base text-foreground/70 line-clamp-2">
+    <div className='border-border bg-background flex w-full flex-col rounded-xl border p-7 shadow-sm transition-shadow hover:shadow-md'>
+      <div className='mb-4 min-h-22'>
+        <h3 className='text-foreground text-2xl font-semibold'>{item.name}</h3>
+        <p className='text-foreground/70 mt-2 line-clamp-2 text-base'>
           {item.description}
         </p>
       </div>
 
-      <div className="mb-6 ">
-        <div className="flex items-end">
-          <span className="text-3xl leading-8 font-mono -tracking-two font-medium ">
+      <div className='mb-6'>
+        <div className='flex items-end'>
+          <span className='-tracking-two font-mono text-3xl leading-8 font-medium'>
             {item.price}
           </span>
-          
+
           {item.priceDetail && (
-            <span className="ml-2 text-xs text-muted-foreground max-w-[80px] leading-tight">
+            <span className='text-muted-foreground ml-2 max-w-[80px] text-xs leading-tight'>
               {item.isAnnual && (
-                <span>billed annually <br/></span>
+                <span>
+                  billed annually <br />
+                </span>
               )}
               {item.priceDetail}
             </span>
@@ -43,22 +45,27 @@ export function PricingCard({ item }: PricingCardProps) {
         </div>
       </div>
 
-      <Button className={cn("w-full text-sm font-semibold text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors", 'bg-foreground text-background hover:bg-foreground/80')}
-
+      <Button
+        className={cn(
+          'w-full text-sm font-semibold text-white shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2',
+          'bg-foreground text-background hover:bg-foreground/80'
+        )}
       >
         {item.ctaText}
       </Button>
 
-      <div className="mt-8 flex flex-1 flex-col">
-        <p className="text-sm text-foreground/80 font-medium mb-4">{item.featuresIntro}</p>
-        <ul className="space-y-3 ">
+      <div className='mt-8 flex flex-1 flex-col'>
+        <p className='text-foreground/80 mb-4 text-sm font-medium'>
+          {item.featuresIntro}
+        </p>
+        <ul className='space-y-3'>
           {item.features.map((feature) => (
-            <li key={feature} className="flex gap-2 items-start">
+            <li key={feature} className='flex items-start gap-2'>
               <CheckCircle
-                className="h-4 w-4 text-muted-foreground"
-                aria-hidden="true"
+                className='text-muted-foreground h-4 w-4'
+                aria-hidden='true'
               />
-              <span className="text-sm text-foreground/70">{feature}</span>
+              <span className='text-foreground/70 text-sm'>{feature}</span>
             </li>
           ))}
         </ul>

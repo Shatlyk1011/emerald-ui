@@ -3,14 +3,6 @@
 import { generateComponentCode, generateProjectPlan } from '@/services/gemini'
 import { NextResponse } from 'next/server'
 
-
-
-
-
-
-
-
-
 const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY
 
 export async function POST(req: Request) {
