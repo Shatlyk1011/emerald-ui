@@ -10,6 +10,7 @@ import {
 import FileExplorer from './FileExplorer'
 import MonacoEditor from './MonacoEditor'
 import PreviewFrame from './PreviewFrame'
+import { DEMO_SITE } from '@/lib/constants'
 
 // Initial Template Files
 const INITIAL_FILES = {
@@ -28,11 +29,11 @@ export default function GlobalPlayground() {
   const generatedFiles = useAppStore((state) => state.generatedFiles)
   console.log('generatedFiles', generatedFiles)
 
-  // const [files, setFiles] = useState<Record<string, string>>({
-  // ...INITIAL_FILES,
-  // ...generatedFiles,
-  // })
-  const [files, setFiles] = useState<Record<string, string>>(FINAL)
+  const [files, setFiles] = useState<Record<string, string>>({
+    ...INITIAL_FILES,
+    ...DEMO_SITE,
+  })
+  // const [files, setFiles] = useState<Record<string, string>>(FINAL)
   const [activeFile, setActiveFile] = useState('/main.jsx')
 
   // Handle changes from Monaco
@@ -60,23 +61,27 @@ export default function GlobalPlayground() {
             <div className='flex h-full flex-col'>
               {/* Toolbar / Tabs */}
               <div className='bg-muted/40 flex overflow-x-auto border-b'>
+                123123123
                 {/* Better Tab UI could go here, for now using just the content area or integrating FileExplorer */}
               </div>
+              <ResizablePanelGroup className='flex min-h-0 flex-1' direction='horizontal'>
+                <ResizablePanel defaultSize={30} minSize={20} maxSize={40}>
+                  <FileExplorer
+                    files={files}
+                    activeFile={activeFile}
+                    onSelect={setActiveFile}
+                  />
+                </ResizablePanel>
+                <ResizableHandle />
 
-              <div className='flex min-h-0 flex-1'>
-                <FileExplorer
-                  files={files}
-                  activeFile={activeFile}
-                  onSelect={setActiveFile}
-                />
-                <div className='min-w-0 flex-1 bg-[#1e1e1e]'>
+                <ResizablePanel defaultSize={85} minSize={30} maxSize={80} className='min-w-0 flex-1 bg-[#1e1e1e] w-full'>
                   <MonacoEditor
                     filename={activeFile}
                     code={files[activeFile]}
                     onChange={handleCodeChange}
                   />
-                </div>
-              </div>
+                </ResizablePanel>
+              </ResizablePanelGroup>
             </div>
           </ResizablePanel>
         </ResizablePanelGroup>
