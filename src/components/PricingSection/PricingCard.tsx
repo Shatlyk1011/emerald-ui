@@ -16,13 +16,12 @@ interface PricingCardProps {
   item: PricingTier
 }
 export function PricingCard({ item }: PricingCardProps) {
-  const isBlue = item.ctaVariant === 'blue'
   
   return (
     <div className="flex flex-col w-full rounded-xl border border-border bg-background p-7 shadow-sm hover:shadow-md transition-shadow">
       <div className="min-h-22 mb-4">
         <h3 className="text-2xl font-semibold text-foreground">{item.name}</h3>
-        <p className="mt-2 text-base text-foreground/80 line-clamp-2">
+        <p className="mt-2 text-base text-foreground/70 line-clamp-2">
           {item.description}
         </p>
       </div>
@@ -44,7 +43,8 @@ export function PricingCard({ item }: PricingCardProps) {
         </div>
       </div>
 
-      <Button className={cn(`w-full text-sm font-semibold text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors`, isBlue ? 'bg-blue-700 hover:bg-blue-700/90' : 'bg-foreground text-background') }
+      <Button className={cn("w-full text-sm font-semibold text-white shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 transition-colors", 'bg-foreground text-background hover:bg-foreground/80')}
+
       >
         {item.ctaText}
       </Button>
@@ -55,7 +55,7 @@ export function PricingCard({ item }: PricingCardProps) {
           {item.features.map((feature) => (
             <li key={feature} className="flex gap-2 items-start">
               <CheckCircle
-                className="h-4 w-4 text-emerald-700"
+                className="h-4 w-4 text-muted-foreground"
                 aria-hidden="true"
               />
               <span className="text-sm text-foreground/70">{feature}</span>
