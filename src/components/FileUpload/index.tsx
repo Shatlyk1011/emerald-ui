@@ -1,14 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { generateReactApp } from '@/services/gemini'
 import { useAppStore } from '@/store/useAppStore'
 import { ArrowUp, Paperclip, Square, X } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 // dev environment
 import OpenAI from 'openai'
 import { toast } from 'sonner'
-import { SYSTEM_PROMPT } from '@/lib/constants'
 import { Button } from '@/components/ui/button'
 import { PLANNING_SAMPLE } from '../../../public/prompts'
 import BackgroundGradient from '../ui/background-gradient'
@@ -36,9 +34,7 @@ function FileUploadInput() {
   const handleSubmit = async () => {
     if (!input.trim() && files.length === 0) return
 
-    const res = await generateReactApp(input)
-    console.log('res', res)
-    return res
+    // const res = await generateReactApp(input)
   }
 
   const removeFile = (index: number) => {
