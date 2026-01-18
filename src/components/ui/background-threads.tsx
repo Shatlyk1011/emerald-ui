@@ -1,5 +1,6 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useMemo } from 'react'
+import { useTheme } from 'next-themes'
 import { Renderer, Program, Mesh, Triangle, Color } from 'ogl'
 
 const vertexShader = `
@@ -120,13 +121,26 @@ void main() {
 `
 
 const BackgroundThreads = ({
-  color = [84, 87, 87],
+  color,
   amplitude = 0.3,
   distance = 0.85,
   ...rest
-}) => {
+}: {
+  color?: number[]
+  amplitude?: number
+  distance?: number
+} & React.HTMLAttributes<HTMLDivElement>) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const animationFrameId = useRef<number | null>(null)
+  const { resolvedTheme } = useTheme()
+
+  // Determine color based on theme if not explicitly provided
+  const shaderColor = useMemo(
+    () => color || (resolvedTheme === 'dark' ? [255, 255, 255] : [0, 0, 0]),
+    [color, resolvedTheme]
+  )
+
+  console.log('shaderColor', shaderColor)
 
   useEffect(() => {
     if (!containerRef.current) return
@@ -152,7 +166,7 @@ const BackgroundThreads = ({
             gl.canvas.width / gl.canvas.height
           ),
         },
-        uColor: { value: new Color(...color) },
+        uColor: { value: new Color(...shaderColor) },
         uAmplitude: { value: amplitude },
         uDistance: { value: distance },
       },
@@ -186,7 +200,7 @@ const BackgroundThreads = ({
       if (container.contains(gl.canvas)) container.removeChild(gl.canvas)
       gl.getExtension('WEBGL_lose_context')?.loseContext()
     }
-  }, [color, amplitude, distance])
+  }, [color, amplitude, distance, shaderColor])
 
   return <div ref={containerRef} className='relative h-full w-full' {...rest} />
 }
