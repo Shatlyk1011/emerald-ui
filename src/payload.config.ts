@@ -1,11 +1,11 @@
-import path from 'path'
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import { fileURLToPath } from 'node:url'
+import path from 'path';
+import { mongooseAdapter } from '@payloadcms/db-mongodb';
+import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { fileURLToPath } from 'node:url';
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
-// collections
 import AdminUsers from './app/(payload)/collections/AdminUsers'
+// collections
 import Categories from './app/(payload)/collections/Categories'
 import Images from './app/(payload)/collections/Images'
 import InspirationWebsites from './app/(payload)/collections/InspirationWebsites'
@@ -14,10 +14,12 @@ import WebsiteStyle from './app/(payload)/collections/WebsiteStyle'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-console.log('dirname', dirname)
-
 export default buildConfig({
   editor: lexicalEditor({}),
+
+  typescript: {
+    outputFile: path.resolve(dirname, '../src/payload-types.ts'),
+  },
 
   admin: {
     user: AdminUsers.slug,

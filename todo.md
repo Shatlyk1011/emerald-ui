@@ -29,7 +29,7 @@ Inspiration page:
 
 - integrate full website image as well
 
-- add 2 version of preview dialog - video and fullscreen image
+- add 2 version of preview dialog - video and image - video priority
 
 Result page:
 - Find money for claude api
@@ -45,3 +45,7 @@ Global:
 - add what's new section in main layout
 
 - add wishlists
+
+- add loading states
+
+- add seo (blog)
