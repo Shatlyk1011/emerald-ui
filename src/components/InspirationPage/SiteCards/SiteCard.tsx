@@ -1,5 +1,8 @@
+'use client'
+
 import { Sticker } from "lucide-react"
 import { InspirationWebsite } from "../../../../payload-types"
+import { useAppStore } from "@/store/useAppStore"
 
 interface SiteCardProps {
   item: InspirationWebsite
@@ -7,8 +10,18 @@ interface SiteCardProps {
 
 function SiteCard({ item }: SiteCardProps) {
   const isNew = true
+  const openSiteDialog = useAppStore((state) => state.openSiteDialog)
+
+  const handleClick = () => {
+    openSiteDialog(item)
+  }
+
   return (
-    <div className='group relative flex cursor-pointer flex-col gap-3' role="button">
+    <div
+      className='group relative flex cursor-pointer flex-col gap-3'
+      role="button"
+      onClick={handleClick}
+    >
       <div className="py-16 px-8 relative bg-card border-border/50 rounded-xl border shadow-lg transition-colors group-hover:border-border">
         <div className='relative aspect-4/3 w-full overflow-hidden '>
           <figure className='absolute inset-0 overflow-hidden rounded-lg bg-'>
