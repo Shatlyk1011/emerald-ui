@@ -23,6 +23,9 @@ Inspiration page:
 
 - Test custom image upload feature 
 
+- add type image or video. upload to storage videos as well
+
+- integrate full website image as well
 
 Result page:
 - Find money for claude api

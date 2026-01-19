@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import { Category, WebsiteStyle } from '../../../payload-types'
 
 const sections = ['About', 'Features', 'How It Works', 'Hero', 'Blog']
@@ -9,17 +10,18 @@ interface FilterSectionProps {
 
 function FilterSection({ categories, styles }: FilterSectionProps) {
   return (
-    <div className='gap-6 px-2 py-12'>
+    <div className='mb-20'>
       {/* Categories Column */}
-      <div className='flex justify-between'>
-        <div>
-          <h4 className='tracking-four mb-3 text-xs font-medium uppercase opacity-60'>
+      {/* <h2 className='mb-4 text-2xl'>Filter by</h2>   */}
+      <div className='flex gap-12 justify-between'>
+        <div className='flex-1 flex flex-col group'>
+          <h3 className='tracking-four mb-4 text-sm group-hover:text-foreground transition-colors ease-in-out font-medium uppercase text-muted-foreground'>
             Categories
-          </h4>
-          <ul className='flex flex-col flex-wrap text-xl font-medium'>
-            {categories.map((item) => (
-              <li key={item.id}>
-                <button className='block opacity-90 transition-colors'>
+          </h3>
+          <ul className='flex -ml-1 flex-1 place-content-start h-max flex-wrap gap-x-2 gap-y-1 text-base capitalize font-normal'>
+            {categories.map((item, i) => (
+              <li key={item.id} className={cn('max-h-max px-1.5 py-1 group-hover:text-muted-foreground hover:text-foreground rounded-lg leading-none ring ring-transparent ', (i === 3 || i === 2) && "ring-current text-foreground! bg-card")}>
+                <button className='capitalize -tracking-one transition-colors ease-in-out'>
                   {item.category}
                 </button>
               </li>
@@ -27,29 +29,14 @@ function FilterSection({ categories, styles }: FilterSectionProps) {
           </ul>
         </div>
 
-        <div>
-          <h4 className='tracking-four mb-3 text-xs font-medium uppercase opacity-60'>
-            Sections
-          </h4>
-          <ul className='flex flex-col text-xl font-medium'>
-            {sections.map((item) => (
-              <li key={item}>
-                <button className='block opacity-90 transition-colors '>
-                  {item}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h4 className='tracking-four mb-3 text-xs font-medium uppercase opacity-60'>
+        <div className='flex-1 flex flex-col group'>
+          <h3 className='tracking-four mb-4 text-sm font-medium group-hover:text-foreground transition-colors ease-in-out uppercase text-muted-foreground'>
             Styles
-          </h4>
-          <ul className='flex flex-col text-xl font-medium'>
-            {styles.map((item) => (
-              <li key={item.id}>
-                <button className='block opacity-90 transition-colors '>
+          </h3>
+          <ul className='flex -ml-1 flex-1 place-content-start h-max flex-wrap gap-x-2 gap-y-1 text-base capitalize font-normal'>
+            {styles.map((item, i) => (
+              <li key={item.id} className={cn('max-h-max px-1.5 py-1 group-hover:text-muted-foreground hover:text-foreground rounded-lg leading-none ring ring-transparent ', (i === 0 || i === 4) && "ring-current text-foreground! bg-card")} >
+                <button className='capitalize -tracking-one transition-colors ease-in-out'>
                   {item.style}
                 </button>
               </li>

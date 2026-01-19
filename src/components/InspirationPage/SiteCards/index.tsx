@@ -8,13 +8,11 @@ interface Props {
 
 const SiteCards:FC<Props> = ({ initialData }) => {
   return (
-    <div className='grid gap-x-3 gap-y-6 grid-cols-3'>
-      {initialData.docs.map((item, i) => (
-        <div key={i} >
-          <SiteCard item={item} />
-        </div>
+    <section className='grid gap-x-6 gap-y-6 grid-cols-3'>
+      {initialData.docs.map((item) => (
+        <SiteCard key={item.id} item={item} />
       ))}
-    </div>
+    </section>
   )
 };
 export default SiteCards
