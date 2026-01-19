@@ -1,5 +1,5 @@
-import { cn } from '@/lib/utils'
 import { Category, WebsiteStyle } from '@/payload-types'
+import { cn } from '@/lib/utils'
 
 interface FilterSectionProps {
   categories: Category[]
@@ -9,15 +9,22 @@ interface FilterSectionProps {
 function FilterSection({ categories, styles }: FilterSectionProps) {
   return (
     <div className='mb-20'>
-      <div className='flex gap-12 justify-between'>
-        <div className='flex-1 flex flex-col group'>
-          <h3 className='tracking-four mb-4 text-sm group-hover:text-foreground transition-colors ease-in-out font-medium uppercase text-muted-foreground'>
+      <div className='flex justify-between gap-12'>
+        <div className='group flex flex-1 flex-col'>
+          <h3 className='tracking-four group-hover:text-foreground text-muted-foreground mb-4 text-sm font-medium uppercase transition-colors ease-in-out'>
             Categories
           </h3>
-          <ul className='flex -ml-1 flex-1 place-content-start h-max flex-wrap gap-x-2 gap-y-1 text-base capitalize font-normal'>
+          <ul className='-ml-1 flex h-max flex-1 flex-wrap place-content-start gap-x-2 gap-y-1 text-base font-normal capitalize'>
             {categories.map((item, i) => (
-              <li key={item.id} className={cn('max-h-max px-1.5 py-1 group-hover:text-muted-foreground hover:text-foreground rounded-lg leading-none ring ring-transparent ', (i === 3 || i === 2) && "ring-current text-foreground! bg-card")}>
-                <button className='capitalize -tracking-one transition-colors ease-in-out'>
+              <li
+                key={item.id}
+                className={cn(
+                  'group-hover:text-muted-foreground hover:text-foreground max-h-max rounded-lg px-1.5 py-1 leading-none ring ring-transparent',
+                  (i === 3 || i === 2) &&
+                    'text-foreground! bg-card ring-current'
+                )}
+              >
+                <button className='-tracking-one capitalize transition-colors ease-in-out'>
                   {item.category}
                 </button>
               </li>
@@ -25,14 +32,21 @@ function FilterSection({ categories, styles }: FilterSectionProps) {
           </ul>
         </div>
 
-        <div className='flex-1 flex flex-col group'>
-          <h3 className='tracking-four mb-4 text-sm font-medium group-hover:text-foreground transition-colors ease-in-out uppercase text-muted-foreground'>
+        <div className='group flex flex-1 flex-col'>
+          <h3 className='tracking-four group-hover:text-foreground text-muted-foreground mb-4 text-sm font-medium uppercase transition-colors ease-in-out'>
             Styles
           </h3>
-          <ul className='flex -ml-1 flex-1 place-content-start h-max flex-wrap gap-x-2 gap-y-1 text-base capitalize font-normal'>
+          <ul className='-ml-1 flex h-max flex-1 flex-wrap place-content-start gap-x-2 gap-y-1 text-base font-normal capitalize'>
             {styles.map((item, i) => (
-              <li key={item.id} className={cn('max-h-max px-1.5 py-1 group-hover:text-muted-foreground hover:text-foreground rounded-lg leading-none ring ring-transparent ', (i === 0 || i === 4) && "ring-current text-foreground! bg-card")} >
-                <button className='capitalize -tracking-one transition-colors ease-in-out'>
+              <li
+                key={item.id}
+                className={cn(
+                  'group-hover:text-muted-foreground hover:text-foreground max-h-max rounded-lg px-1.5 py-1 leading-none ring ring-transparent',
+                  (i === 0 || i === 4) &&
+                    'text-foreground! bg-card ring-current'
+                )}
+              >
+                <button className='-tracking-one capitalize transition-colors ease-in-out'>
                   {item.style}
                 </button>
               </li>

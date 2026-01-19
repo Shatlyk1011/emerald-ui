@@ -1,9 +1,5 @@
-import { GoogleGenAI } from '@google/genai';
-import { PLANNING_PROMPT, SYSTEM_PROMPT } from '../../public/prompts';
-
-
-
-
+import { GoogleGenAI } from '@google/genai'
+import { PLANNING_PROMPT, SYSTEM_PROMPT } from '../../public/prompts'
 
 const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY
 const genAI = new GoogleGenAI({ apiKey })

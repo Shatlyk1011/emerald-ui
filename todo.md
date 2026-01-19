@@ -21,7 +21,7 @@ Inspiration page:
 
 - add light mode
 
-- Test custom image upload feature 
+- Test custom image upload feature
 
 - before deleting inspiration website, delete image as well
 
@@ -32,9 +32,10 @@ Inspiration page:
 - add 2 version of preview dialog - video and image - video priority
 
 Result page:
+
 - Find money for claude api
 
-- Upgrade tab & chat ui (see magicpatterns) 
+- Upgrade tab & chat ui (see magicpatterns)
 
 - Remove links from responses
 

@@ -1,10 +1,6 @@
 import { CollectionConfig } from 'payload'
 import { admins } from '../../utils/admins'
 
-
-
-
-
 const WebsiteStyle: CollectionConfig = {
   slug: 'website-style',
   hooks: {

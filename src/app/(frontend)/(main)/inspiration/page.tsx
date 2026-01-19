@@ -2,10 +2,9 @@ import { AxiosResponse } from 'axios'
 import { IWebsites, ICategories, IWebsiteStyles } from '@/types/inspiration'
 import { stringify } from 'qs-esm'
 import { axios } from '@/lib/axios'
-
+import FilterSection from '@/components/InspirationPage/FilterSection'
 // components
 import SiteCards from '@/components/InspirationPage/SiteCards'
-import FilterSection from '@/components/InspirationPage/FilterSection'
 import SitePreviewDialog from '@/components/InspirationPage/SitePreviewDialog'
 
 const stringifiedQuery = stringify(
@@ -21,7 +20,7 @@ const stringifiedQuery = stringify(
 )
 
 const getInitialData = async () => {
-  return axios(`/inspiration-websites/${stringifiedQuery || ""}`)
+  return axios(`/inspiration-websites/${stringifiedQuery || ''}`)
 }
 
 const getCategories = async () => {
@@ -33,7 +32,6 @@ const getStyles = async () => {
 }
 
 export default async function InspirationPage() {
-
   const initialData = await getInitialData()
   const categories = await getCategories()
   const websiteStyles = await getStyles()
@@ -41,13 +39,12 @@ export default async function InspirationPage() {
   const [data, categoriesData, stylesData]: [
     AxiosResponse<IWebsites>,
     AxiosResponse<ICategories>,
-    AxiosResponse<IWebsiteStyles>
+    AxiosResponse<IWebsiteStyles>,
   ] = await Promise.all([initialData, categories, websiteStyles])
 
   return (
     <div className='bg-background min-h-screen font-sans'>
       <main className='mx-auto max-w-7xl px-6 py-10'>
-
         <FilterSection
           categories={categoriesData.data.docs}
           styles={stylesData.data.docs}

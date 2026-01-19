@@ -1,14 +1,22 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-nocheck 
+// @ts-nocheck
 'use client'
-import { useState, useCallback } from 'react';
-import { Send, Image, Link, Code, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { useState, useCallback } from 'react'
+import {
+  Send,
+  Image,
+  Link,
+  Code,
+  Loader2,
+  CheckCircle,
+  AlertCircle,
+} from 'lucide-react'
 
 // Skills configuration
 const SKILLS = {
   url_analyzer: {
-    name: "URL Website Analyzer",
-    description: "Fetches and analyzes website structure from a URL",
+    name: 'URL Website Analyzer',
+    description: 'Fetches and analyzes website structure from a URL',
     systemPrompt: `You are a website analyzer. Analyze the provided website and return:
 - Layout structure and grid system
 - Color palette and design tokens
@@ -16,24 +24,24 @@ const SKILLS = {
 - Component patterns identified
 - Responsive breakpoints
 Return your analysis in structured JSON format.`,
-    requiresUrl: true
+    requiresUrl: true,
   },
-  
+
   component_extractor: {
-    name: "Component Extractor",
-    description: "Identifies and extracts UI components from designs",
+    name: 'Component Extractor',
+    description: 'Identifies and extracts UI components from designs',
     systemPrompt: `You are a component extraction specialist. Analyze the design and:
 - List all identifiable UI components
 - Extract their visual properties (colors, sizes, spacing)
 - Determine component hierarchy
 - Specify component states (hover, active, disabled)
 Return structured component specifications.`,
-    requiresImage: true
+    requiresImage: true,
   },
-  
+
   image_to_code: {
-    name: "Image to Code Converter",
-    description: "Converts design screenshots to React/HTML code",
+    name: 'Image to Code Converter',
+    description: 'Converts design screenshots to React/HTML code',
     systemPrompt: `You are an expert at converting visual designs into code.
 Generate clean, production-ready React code with:
 - Semantic HTML structure
@@ -41,100 +49,103 @@ Generate clean, production-ready React code with:
 - Proper component composition
 - Accessibility attributes (ARIA labels, roles)
 - Responsive design patterns`,
-    requiresImage: true
+    requiresImage: true,
   },
-  
+
   layout_analyzer: {
-    name: "Layout Analyzer",
-    description: "Analyzes and extracts layout patterns",
+    name: 'Layout Analyzer',
+    description: 'Analyzes and extracts layout patterns',
     systemPrompt: `You are a layout analysis expert. Analyze the design and extract:
 - Grid system (columns, gutters, margins)
 - Spacing scale and rhythm
 - Container widths and breakpoints
 - Flexbox/Grid usage patterns
-Provide a detailed layout specification.`
+Provide a detailed layout specification.`,
   },
-  
+
   code_generator: {
-    name: "Code Generator",
-    description: "Generates React components from specifications",
+    name: 'Code Generator',
+    description: 'Generates React components from specifications',
     systemPrompt: `You are a senior React developer. Generate production-ready code:
 - Follow React best practices and hooks patterns
 - Use TypeScript if applicable
 - Implement proper error handling
 - Include comprehensive comments
 - Ensure accessibility compliance
-- Make components reusable and maintainable`
+- Make components reusable and maintainable`,
   },
-  
+
   design_system_builder: {
-    name: "Design System Builder",
-    description: "Creates design system tokens from analysis",
+    name: 'Design System Builder',
+    description: 'Creates design system tokens from analysis',
     systemPrompt: `You are a design systems expert. Create a comprehensive design system including:
 - Color tokens (primary, secondary, semantic colors)
 - Typography scale (font families, sizes, weights, line heights)
 - Spacing scale
 - Border radius values
 - Shadow definitions
-Export as CSS variables or JS tokens.`
-  }
-};
+Export as CSS variables or JS tokens.`,
+  },
+}
 
 const DesignGenerationApp = () => {
-  const [userRequest, setUserRequest] = useState('');
-  const [url, setUrl] = useState('');
-  const [imageFile, setImageFile] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [logs, setLogs] = useState<unknown[]>([]);
-  const [result, setResult] = useState(null);
-  const [error, setError] = useState(null);
+  const [userRequest, setUserRequest] = useState('')
+  const [url, setUrl] = useState('')
+  const [imageFile, setImageFile] = useState(null)
+  const [imagePreview, setImagePreview] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [logs, setLogs] = useState<unknown[]>([])
+  const [result, setResult] = useState(null)
+  const [error, setError] = useState(null)
 
   // Add log entry
-  const addLog = useCallback((message:string, type = 'info') => {
-    setLogs(prev => {
-      return [...prev, {
-        message,
-        type,
-        timestamp: new Date().toLocaleTimeString()
-      }];
-    });
-  }, []);
+  const addLog = useCallback((message: string, type = 'info') => {
+    setLogs((prev) => {
+      return [
+        ...prev,
+        {
+          message,
+          type,
+          timestamp: new Date().toLocaleTimeString(),
+        },
+      ]
+    })
+  }, [])
 
   // Convert image to base64
   const imageToBase64 = (file) => {
     return new Promise((resolve, reject) => {
-      const reader = new FileReader();
+      const reader = new FileReader()
       reader.onload = () => {
-        const base64 = reader.result.split(',')[1];
-        resolve(base64);
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  };
+        const base64 = reader.result.split(',')[1]
+        resolve(base64)
+      }
+      reader.onerror = reject
+      reader.readAsDataURL(file)
+    })
+  }
 
   // Handle image selection
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
     if (file) {
-      setImageFile(file);
-      const reader = new FileReader();
-      reader.onload = (e) => setImagePreview(e.target.result);
-      reader.readAsDataURL(file);
+      setImageFile(file)
+      const reader = new FileReader()
+      reader.onload = (e) => setImagePreview(e.target.result)
+      reader.readAsDataURL(file)
     }
-  };
+  }
 
   // Call Claude API
   const callClaude = async (messages, systemPrompt = null) => {
     const requestBody = {
       model: 'claude-sonnet-4-20250514',
       max_tokens: 4000,
-      messages
-    };
+      messages,
+    }
 
     if (systemPrompt) {
-      requestBody.system = systemPrompt;
+      requestBody.system = systemPrompt
     }
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -142,27 +153,34 @@ const DesignGenerationApp = () => {
       headers: {
         'Content-Type': 'application/json',
         // Note: In production, use a backend proxy to avoid exposing API key
-        'x-api-key': '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',
+        'x-api-key':
+          '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',
         // 'anthropic-version': '2023-06-01'
-        "anthropic-dangerous-direct-browser-access": 'true'
+        'anthropic-dangerous-direct-browser-access': 'true',
       },
-      body: JSON.stringify(requestBody)
-    });
+      body: JSON.stringify(requestBody),
+    })
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(`Claude API error: ${errorData.error?.message || response.statusText}`);
+      const errorData = await response.json()
+      throw new Error(
+        `Claude API error: ${errorData.error?.message || response.statusText}`
+      )
     }
 
-    const data = await response.json();
-    return data.content[0].text;
-  };
+    const data = await response.json()
+    return data.content[0].text
+  }
 
   // Determine which skills to use
-  const determineSkills = async (request: string, hasUrl: boolean, hasImage: boolean) => {
+  const determineSkills = async (
+    request: string,
+    hasUrl: boolean,
+    hasImage: boolean
+  ) => {
     const skillsList = Object.entries(SKILLS)
       .map(([id, skill]) => `- ${id}: ${skill.description}`)
-      .join('\n');
+      .join('\n')
 
     const routerPrompt = `You are a request router for a design generation system.
 
@@ -184,31 +202,39 @@ Respond ONLY with valid JSON (no markdown, no backticks):
   "skills_needed": ["skill_id1", "skill_id2"],
   "reasoning": "explanation",
   "execution_order": ["skill_id1", "skill_id2"]
-}`;
+}`
 
-    const response = await callClaude([{
-      role: 'user',
-      content: routerPrompt
-    }]);
+    const response = await callClaude([
+      {
+        role: 'user',
+        content: routerPrompt,
+      },
+    ])
 
     // Parse response, removing any markdown code blocks
-    let jsonText = response.trim();
-    jsonText = jsonText.replace(/```json\n?/g, '').replace(/```\n?/g, '');
-    
-    return JSON.parse(jsonText);
-  };
+    let jsonText = response.trim()
+    jsonText = jsonText.replace(/```json\n?/g, '').replace(/```\n?/g, '')
+
+    return JSON.parse(jsonText)
+  }
 
   // Execute a single skill
-  const executeSkill = async (skillId, request, imageBase64, urlValue, previousResults) => {
-    const skill = SKILLS[skillId];
-    
+  const executeSkill = async (
+    skillId,
+    request,
+    imageBase64,
+    urlValue,
+    previousResults
+  ) => {
+    const skill = SKILLS[skillId]
+
     if (!skill) {
-      throw new Error(`Unknown skill: ${skillId}`);
+      throw new Error(`Unknown skill: ${skillId}`)
     }
 
     // Build the content array
-    const content = [];
-    
+    const content = []
+
     // Add image if skill requires it and it's available
     if (skill.requiresImage && imageBase64) {
       content.push({
@@ -216,36 +242,41 @@ Respond ONLY with valid JSON (no markdown, no backticks):
         source: {
           type: 'base64',
           media_type: imageFile?.type || 'image/jpeg',
-          data: imageBase64
-        }
-      });
+          data: imageBase64,
+        },
+      })
     }
-    
+
     // Build text prompt
-    let textPrompt = `User request: ${request}\n\n`;
-    
+    let textPrompt = `User request: ${request}\n\n`
+
     if (skill.requiresUrl && urlValue) {
-      textPrompt += `URL to analyze: ${urlValue}\n\n`;
+      textPrompt += `URL to analyze: ${urlValue}\n\n`
     }
-    
+
     if (Object.keys(previousResults).length > 0) {
-      textPrompt += `Previous skill results:\n${JSON.stringify(previousResults, null, 2)}\n\n`;
+      textPrompt += `Previous skill results:\n${JSON.stringify(previousResults, null, 2)}\n\n`
     }
-    
-    textPrompt += `Execute your task according to your role.`;
-    
+
+    textPrompt += `Execute your task according to your role.`
+
     content.push({
       type: 'text',
-      text: textPrompt
-    });
+      text: textPrompt,
+    })
 
-    const response = await callClaude([{
-      role: 'user',
-      content
-    }], skill.systemPrompt);
+    const response = await callClaude(
+      [
+        {
+          role: 'user',
+          content,
+        },
+      ],
+      skill.systemPrompt
+    )
 
-    return response;
-  };
+    return response
+  }
 
   // Synthesize final output
   const synthesizeOutput = async (request, routing, skillResults) => {
@@ -259,185 +290,193 @@ Reasoning: ${routing.reasoning}
 Skill results:
 ${JSON.stringify(skillResults, null, 2)}
 
-Based on all the gathered information, generate the final output that best fulfills the user's request. This should be production-ready code or a comprehensive design specification, depending on what was requested.`;
+Based on all the gathered information, generate the final output that best fulfills the user's request. This should be production-ready code or a comprehensive design specification, depending on what was requested.`
 
-    return await callClaude([{
-      role: 'user',
-      content: synthesisPrompt
-    }], 'You are an expert at synthesizing information from multiple sources to create cohesive, production-ready outputs.');
-  };
+    return await callClaude(
+      [
+        {
+          role: 'user',
+          content: synthesisPrompt,
+        },
+      ],
+      'You are an expert at synthesizing information from multiple sources to create cohesive, production-ready outputs.'
+    )
+  }
 
   // Main generation function
   const handleGenerate = async () => {
     if (!userRequest && !url && !imageFile) {
-      setError('Please provide at least a text description, URL, or image');
-      return;
+      setError('Please provide at least a text description, URL, or image')
+      return
     }
 
-    setLoading(true);
-    setLogs([]);
-    setResult(null);
-    setError(null);
+    setLoading(true)
+    setLogs([])
+    setResult(null)
+    setError(null)
 
     try {
       // Convert image to base64 if present
-      let imageBase64 = null;
+      let imageBase64 = null
       if (imageFile) {
-        addLog('Converting image to base64...', 'info');
-        imageBase64 = await imageToBase64(imageFile);
+        addLog('Converting image to base64...', 'info')
+        imageBase64 = await imageToBase64(imageFile)
       }
 
       // Step 1: Determine which skills are needed
-      addLog('Analyzing request context...', 'info');
-      const routing = await determineSkills(userRequest, !!url, !!imageBase64);
-      
-      addLog(`Selected skills: ${routing.skills_needed.join(', ')}`, 'success');
-      addLog(`Reasoning: ${routing.reasoning}`, 'info');
+      addLog('Analyzing request context...', 'info')
+      const routing = await determineSkills(userRequest, !!url, !!imageBase64)
+
+      addLog(`Selected skills: ${routing.skills_needed.join(', ')}`, 'success')
+      addLog(`Reasoning: ${routing.reasoning}`, 'info')
 
       // Step 2: Execute skills in order
-      const skillResults = {};
-      
+      const skillResults = {}
+
       for (const skillId of routing.execution_order) {
-        addLog(`Executing skill: ${SKILLS[skillId].name}...`, 'info');
-        
+        addLog(`Executing skill: ${SKILLS[skillId].name}...`, 'info')
+
         const result = await executeSkill(
           skillId,
           userRequest,
           imageBase64,
           url,
           skillResults
-        );
-        
-        skillResults[skillId] = result;
-        addLog(`✓ Completed: ${SKILLS[skillId].name}`, 'success');
+        )
+
+        skillResults[skillId] = result
+        addLog(`✓ Completed: ${SKILLS[skillId].name}`, 'success')
       }
 
       // Step 3: Synthesize final output
-      addLog('Synthesizing final output...', 'info');
-      const finalOutput = await synthesizeOutput(userRequest, routing, skillResults);
-      
+      addLog('Synthesizing final output...', 'info')
+      const finalOutput = await synthesizeOutput(
+        userRequest,
+        routing,
+        skillResults
+      )
+
       setResult({
         code: finalOutput,
         skillsUsed: routing.skills_needed,
         reasoning: routing.reasoning,
-        intermediateResults: skillResults
-      });
-      
-      addLog('✓ Generation complete!', 'success');
-      
+        intermediateResults: skillResults,
+      })
+
+      addLog('✓ Generation complete!', 'success')
     } catch (err) {
-      console.error('Generation error:', err);
-      setError(err.message);
-      addLog(`Error: ${err.message}`, 'error');
+      console.error('Generation error:', err)
+      setError(err.message)
+      addLog(`Error: ${err.message}`, 'error')
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const clearAll = () => {
-    setUserRequest('');
-    setUrl('');
-    setImageFile(null);
-    setImagePreview(null);
-    setLogs([]);
-    setResult(null);
-    setError(null);
-  };
+    setUserRequest('')
+    setUrl('')
+    setImageFile(null)
+    setImagePreview(null)
+    setLogs([])
+    setResult(null)
+    setError(null)
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4 md:p-8">
-      <div className="max-w-7xl mx-auto">
+    <div className='min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4 md:p-8'>
+      <div className='mx-auto max-w-7xl'>
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-5xl font-bold text-white mb-3 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">
+        <div className='mb-8 text-center'>
+          <h1 className='mb-3 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-3xl font-bold text-transparent text-white md:text-5xl'>
             AI Design Generator
           </h1>
-          <p className="text-purple-200 text-sm md:text-base">
+          <p className='text-sm text-purple-200 md:text-base'>
             Claude API with Smart Skill Routing
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div className='mb-6 grid grid-cols-1 gap-6 lg:grid-cols-2'>
           {/* Input Panel */}
-          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 shadow-2xl">
-            <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-              <Code className="w-5 h-5" />
+          <div className='rounded-xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-lg'>
+            <h2 className='mb-4 flex items-center gap-2 text-xl font-semibold text-white'>
+              <Code className='h-5 w-5' />
               Input
             </h2>
-            
-            <div className="space-y-4">
+
+            <div className='space-y-4'>
               <div>
-                <label className="block text-sm font-medium text-purple-200 mb-2">
+                <label className='mb-2 block text-sm font-medium text-purple-200'>
                   Text Description
                 </label>
                 <textarea
                   value={userRequest}
                   onChange={(e) => setUserRequest(e.target.value)}
-                  placeholder="Describe the component you want to generate..."
-                  className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+                  placeholder='Describe the component you want to generate...'
+                  className='w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-white/40 transition-all focus:ring-2 focus:ring-purple-500 focus:outline-none'
                   rows={4}
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-purple-200 mb-2 flex items-center gap-2">
-                  <Link className="w-4 h-4" />
+                <label className='mb-2 block flex items-center gap-2 text-sm font-medium text-purple-200'>
+                  <Link className='h-4 w-4' />
                   Website URL (optional)
                 </label>
                 <input
-                  type="text"
+                  type='text'
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
-                  placeholder="https://example.com"
-                  className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+                  placeholder='https://example.com'
+                  className='w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white placeholder-white/40 transition-all focus:ring-2 focus:ring-purple-500 focus:outline-none'
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-purple-200 mb-2 flex items-center gap-2">
-                  <Image className="w-4 h-4" />
+                <label className='mb-2 block flex items-center gap-2 text-sm font-medium text-purple-200'>
+                  <Image className='h-4 w-4' />
                   Design Image (optional)
                 </label>
                 <input
-                  type="file"
-                  accept="image/*"
+                  type='file'
+                  accept='image/*'
                   onChange={handleImageChange}
-                  className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-purple-500 file:text-white hover:file:bg-purple-600 file:cursor-pointer transition-all"
+                  className='w-full rounded-lg border border-white/20 bg-white/5 px-4 py-3 text-white transition-all file:mr-4 file:cursor-pointer file:rounded-md file:border-0 file:bg-purple-500 file:px-4 file:py-2 file:text-white hover:file:bg-purple-600'
                 />
                 {imagePreview && (
-                  <div className="mt-3 relative rounded-lg overflow-hidden border border-white/20">
-                    <img 
-                      src={imagePreview} 
-                      alt="Preview" 
-                      className="w-full h-40 object-cover"
+                  <div className='relative mt-3 overflow-hidden rounded-lg border border-white/20'>
+                    <img
+                      src={imagePreview}
+                      alt='Preview'
+                      className='h-40 w-full object-cover'
                     />
                   </div>
                 )}
               </div>
 
-              <div className="flex gap-3">
+              <div className='flex gap-3'>
                 <button
                   onClick={handleGenerate}
                   disabled={loading || (!userRequest && !url && !imageFile)}
-                  className="flex-1 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 disabled:from-gray-500 disabled:to-gray-600 text-white rounded-lg font-medium transition-all flex items-center justify-center gap-2 shadow-lg disabled:cursor-not-allowed"
+                  className='flex flex-1 items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 font-medium text-white shadow-lg transition-all hover:from-purple-600 hover:to-pink-600 disabled:cursor-not-allowed disabled:from-gray-500 disabled:to-gray-600'
                 >
                   {loading ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Loader2 className='h-4 w-4 animate-spin' />
                       Generating...
                     </>
                   ) : (
                     <>
-                      <Send className="w-4 h-4" />
+                      <Send className='h-4 w-4' />
                       Generate
                     </>
                   )}
                 </button>
-                
+
                 <button
                   onClick={clearAll}
                   disabled={loading}
-                  className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className='rounded-lg bg-white/10 px-6 py-3 font-medium text-white transition-all hover:bg-white/20 disabled:cursor-not-allowed disabled:opacity-50'
                 >
                   Clear
                 </button>
@@ -445,36 +484,51 @@ Based on all the gathered information, generate the final output that best fulfi
             </div>
 
             {error && (
-              <div className="mt-4 p-4 bg-red-500/20 border border-red-500/50 rounded-lg flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
-                <p className="text-red-200 text-sm">{error}</p>
+              <div className='mt-4 flex items-start gap-3 rounded-lg border border-red-500/50 bg-red-500/20 p-4'>
+                <AlertCircle className='mt-0.5 h-5 w-5 flex-shrink-0 text-red-400' />
+                <p className='text-sm text-red-200'>{error}</p>
               </div>
             )}
           </div>
 
           {/* Logs Panel */}
-          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 shadow-2xl">
-            <h2 className="text-xl font-semibold text-white mb-4">Execution Log</h2>
-            
-            <div className="space-y-2 max-h-96 overflow-y-auto pr-2 custom-scrollbar">
+          <div className='rounded-xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-lg'>
+            <h2 className='mb-4 text-xl font-semibold text-white'>
+              Execution Log
+            </h2>
+
+            <div className='custom-scrollbar max-h-96 space-y-2 overflow-y-auto pr-2'>
               {logs.length === 0 ? (
-                <div className="text-center py-8">
-                  <Loader2 className="w-8 h-8 text-purple-300/40 mx-auto mb-2" />
-                  <p className="text-purple-200/60 text-sm">Waiting for request...</p>
+                <div className='py-8 text-center'>
+                  <Loader2 className='mx-auto mb-2 h-8 w-8 text-purple-300/40' />
+                  <p className='text-sm text-purple-200/60'>
+                    Waiting for request...
+                  </p>
                 </div>
               ) : (
                 logs.map((log, i) => (
-                  <div key={i} className="flex items-start gap-2 text-sm p-2 rounded bg-white/5">
-                    <span className="text-purple-300 font-mono text-xs flex-shrink-0">
+                  <div
+                    key={i}
+                    className='flex items-start gap-2 rounded bg-white/5 p-2 text-sm'
+                  >
+                    <span className='flex-shrink-0 font-mono text-xs text-purple-300'>
                       {log.timestamp}
                     </span>
-                    <span className={`flex-1 ${
-                      log.type === 'success' ? 'text-green-400' :
-                      log.type === 'error' ? 'text-red-400' :
-                      'text-purple-200'
-                    }`}>
-                      {log.type === 'success' && <CheckCircle className="w-3 h-3 inline mr-1" />}
-                      {log.type === 'error' && <AlertCircle className="w-3 h-3 inline mr-1" />}
+                    <span
+                      className={`flex-1 ${
+                        log.type === 'success'
+                          ? 'text-green-400'
+                          : log.type === 'error'
+                            ? 'text-red-400'
+                            : 'text-purple-200'
+                      }`}
+                    >
+                      {log.type === 'success' && (
+                        <CheckCircle className='mr-1 inline h-3 w-3' />
+                      )}
+                      {log.type === 'error' && (
+                        <AlertCircle className='mr-1 inline h-3 w-3' />
+                      )}
                       {log.message}
                     </span>
                   </div>
@@ -486,29 +540,32 @@ Based on all the gathered information, generate the final output that best fulfi
 
         {/* Result Panel */}
         {result && (
-          <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 shadow-2xl mb-6">
-            <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-green-400" />
+          <div className='mb-6 rounded-xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-lg'>
+            <h2 className='mb-4 flex items-center gap-2 text-xl font-semibold text-white'>
+              <CheckCircle className='h-5 w-5 text-green-400' />
               Generated Output
             </h2>
-            
-            <div className="mb-4 p-4 bg-white/5 rounded-lg border border-white/10">
-              <p className="text-sm text-purple-200 mb-2">
-                <strong className="text-purple-300">Skills Used:</strong>{' '}
-                {result.skillsUsed.map(skillId => SKILLS[skillId].name).join(', ')}
+
+            <div className='mb-4 rounded-lg border border-white/10 bg-white/5 p-4'>
+              <p className='mb-2 text-sm text-purple-200'>
+                <strong className='text-purple-300'>Skills Used:</strong>{' '}
+                {result.skillsUsed
+                  .map((skillId) => SKILLS[skillId].name)
+                  .join(', ')}
               </p>
-              <p className="text-sm text-purple-200">
-                <strong className="text-purple-300">Reasoning:</strong> {result.reasoning}
+              <p className='text-sm text-purple-200'>
+                <strong className='text-purple-300'>Reasoning:</strong>{' '}
+                {result.reasoning}
               </p>
             </div>
-            
-            <div className="relative">
-              <pre className="bg-slate-950 p-4 rounded-lg overflow-x-auto text-green-400 font-mono text-sm max-h-96 border border-green-500/20">
+
+            <div className='relative'>
+              <pre className='max-h-96 overflow-x-auto rounded-lg border border-green-500/20 bg-slate-950 p-4 font-mono text-sm text-green-400'>
                 {result.code}
               </pre>
               <button
                 onClick={() => navigator.clipboard.writeText(result.code)}
-                className="absolute top-2 right-2 px-3 py-1 bg-purple-500 hover:bg-purple-600 text-white text-xs rounded transition-colors"
+                className='absolute top-2 right-2 rounded bg-purple-500 px-3 py-1 text-xs text-white transition-colors hover:bg-purple-600'
               >
                 Copy
               </button>
@@ -517,19 +574,32 @@ Based on all the gathered information, generate the final output that best fulfi
         )}
 
         {/* Skills Reference */}
-        <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 shadow-2xl">
-          <h2 className="text-xl font-semibold text-white mb-4">Available Skills</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className='rounded-xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur-lg'>
+          <h2 className='mb-4 text-xl font-semibold text-white'>
+            Available Skills
+          </h2>
+          <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
             {Object.entries(SKILLS).map(([id, skill]) => (
-              <div key={id} className="bg-white/5 rounded-lg p-4 border border-white/10 hover:bg-white/10 transition-all">
-                <h3 className="font-semibold text-purple-300 mb-2 text-sm">{skill.name}</h3>
-                <p className="text-xs text-purple-200/80 leading-relaxed">{skill.description}</p>
-                <div className="mt-2 flex gap-2">
+              <div
+                key={id}
+                className='rounded-lg border border-white/10 bg-white/5 p-4 transition-all hover:bg-white/10'
+              >
+                <h3 className='mb-2 text-sm font-semibold text-purple-300'>
+                  {skill.name}
+                </h3>
+                <p className='text-xs leading-relaxed text-purple-200/80'>
+                  {skill.description}
+                </p>
+                <div className='mt-2 flex gap-2'>
                   {skill.requiresUrl && (
-                    <span className="px-2 py-1 bg-blue-500/20 text-blue-300 text-xs rounded">URL</span>
+                    <span className='rounded bg-blue-500/20 px-2 py-1 text-xs text-blue-300'>
+                      URL
+                    </span>
                   )}
                   {skill.requiresImage && (
-                    <span className="px-2 py-1 bg-pink-500/20 text-pink-300 text-xs rounded">Image</span>
+                    <span className='rounded bg-pink-500/20 px-2 py-1 text-xs text-pink-300'>
+                      Image
+                    </span>
                   )}
                 </div>
               </div>
@@ -555,7 +625,7 @@ Based on all the gathered information, generate the final output that best fulfi
         }
       `}</style>
     </div>
-  );
-};
+  )
+}
 
-export default DesignGenerationApp;
+export default DesignGenerationApp

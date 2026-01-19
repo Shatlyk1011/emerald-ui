@@ -1,18 +1,18 @@
-import { FC } from 'react';
-import SiteCard from './SiteCard';
-import { IWebsites } from '@/types/inspiration';
+import { FC } from 'react'
+import { IWebsites } from '@/types/inspiration'
+import SiteCard from './SiteCard'
 
 interface Props {
   initialData: IWebsites
-};
+}
 
-const SiteCards:FC<Props> = ({ initialData }) => {
+const SiteCards: FC<Props> = ({ initialData }) => {
   return (
-    <section className='grid gap-x-6 gap-y-6 grid-cols-3'>
+    <section className='grid grid-cols-3 gap-x-6 gap-y-6'>
       {initialData.docs.map((item) => (
         <SiteCard key={item.id} item={item} />
       ))}
     </section>
   )
-};
+}
 export default SiteCards
