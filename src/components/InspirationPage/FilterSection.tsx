@@ -1,8 +1,6 @@
 import { cn } from '@/lib/utils'
 import { Category, WebsiteStyle } from '../../../payload-types'
 
-const sections = ['About', 'Features', 'How It Works', 'Hero', 'Blog']
-
 interface FilterSectionProps {
   categories: Category[]
   styles: WebsiteStyle[]
@@ -11,8 +9,6 @@ interface FilterSectionProps {
 function FilterSection({ categories, styles }: FilterSectionProps) {
   return (
     <div className='mb-20'>
-      {/* Categories Column */}
-      {/* <h2 className='mb-4 text-2xl'>Filter by</h2>   */}
       <div className='flex gap-12 justify-between'>
         <div className='flex-1 flex flex-col group'>
           <h3 className='tracking-four mb-4 text-sm group-hover:text-foreground transition-colors ease-in-out font-medium uppercase text-muted-foreground'>

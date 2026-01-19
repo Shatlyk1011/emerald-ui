@@ -35,32 +35,29 @@ const getStyles = async () => {
 export default async function InspirationPage() {
 
   const initialData = await getInitialData()
-  // const categories = await getCategories()
-  // const websiteStyles = await getStyles()
+  const categories = await getCategories()
+  const websiteStyles = await getStyles()
 
-  console.log('initialData', initialData)
-  // console.log('categories', categories)
-  // console.log('websiteStyles', websiteStyles)
-  // const [data, categoriesData, stylesData]: [
-  //   AxiosResponse<IWebsites>,
-  //   AxiosResponse<ICategories>,
-  //   AxiosResponse<IWebsiteStyles>
-  // ] = await Promise.all([initialData, categories, websiteStyles])
+  const [data, categoriesData, stylesData]: [
+    AxiosResponse<IWebsites>,
+    AxiosResponse<ICategories>,
+    AxiosResponse<IWebsiteStyles>
+  ] = await Promise.all([initialData, categories, websiteStyles])
 
   return (
     <div className='bg-background min-h-screen font-sans'>
       <main className='mx-auto max-w-7xl px-6 py-10'>
 
-        {/* <FilterSection
-          categories={categories.data.docs}
-          styles={websiteStyles.data.docs}
-        /> */}
+        <FilterSection
+          categories={categoriesData.data.docs}
+          styles={stylesData.data.docs}
+        />
 
         <h1 className='-tracking-two mb-6 text-3xl font-semibold'>
           Explore curated websites
         </h1>
 
-        <SiteCards initialData={initialData.data} />
+        <SiteCards initialData={data.data} />
       </main>
 
       <SitePreviewDialog />
