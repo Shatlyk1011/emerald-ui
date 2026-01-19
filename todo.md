@@ -23,9 +23,13 @@ Inspiration page:
 
 - Test custom image upload feature 
 
+- before deleting inspiration website, delete image as well
+
 - add type image or video. upload to storage videos as well
 
 - integrate full website image as well
+
+- add 2 version of preview dialog - video and fullscreen image
 
 Result page:
 - Find money for claude api

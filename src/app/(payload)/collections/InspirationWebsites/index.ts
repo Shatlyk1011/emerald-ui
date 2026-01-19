@@ -1,5 +1,5 @@
-import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
+import { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
 import { uploadScreenshot, uploadFavicon } from '../../utils/supabase'
 
 const InspirationWebsites: CollectionConfig = {
@@ -55,6 +55,55 @@ const InspirationWebsites: CollectionConfig = {
             }
           } catch (error) {
             console.error('Error processing screenshot:', error)
+          }
+        }
+
+        // Handle full page screenshot capture
+        if (data && data.pageUrl && !data.fullPageImgUrl) {
+          try {
+            // make full page screenshot
+            const apiUrl = new URL('https://api.scrnify.com/capture')
+            apiUrl.searchParams.set('key', process.env.SCRIFY_TOKEN || '')
+            apiUrl.searchParams.set('url', data.pageUrl)
+            apiUrl.searchParams.set('type', 'image')
+            apiUrl.searchParams.set('format', 'png')
+            apiUrl.searchParams.set('quality', '70')
+            apiUrl.searchParams.set('width', '1200')
+            apiUrl.searchParams.set('fullPage', 'true')
+            apiUrl.searchParams.set('waitUntil', 'firstMeaningfulPaint')
+            apiUrl.searchParams.set('blockCookieDefault', 'true')
+
+            const res = await fetch(apiUrl.toString())
+
+            if (res.ok) {
+              const buffer = await res.arrayBuffer()
+              const screenshotBuffer = Buffer.from(buffer)
+
+              const urlSlug = data.pageUrl
+                .replace(/^https?:\/\//, '')
+                .replace(/[^a-z0-9]/gi, '-')
+                .toLowerCase()
+              const filename = `${urlSlug}-fullpage-${Date.now()}.png`
+
+              const publicUrl = await uploadScreenshot(
+                screenshotBuffer,
+                filename
+              )
+
+              data.fullPageImgUrl = publicUrl
+              console.log(
+                'Full page screenshot captured and uploaded:',
+                publicUrl
+              )
+            } else {
+              console.error(
+                'Scrnify API error (fullpage):',
+                res.status,
+                res.statusText
+              )
+            }
+          } catch (error) {
+            console.error('Error processing full page screenshot:', error)
           }
         }
 
@@ -142,6 +191,14 @@ const InspirationWebsites: CollectionConfig = {
       name: 'imgUrl',
       type: 'text',
       required: false,
+    },
+    {
+      name: 'fullPageImgUrl',
+      type: 'text',
+      required: false,
+      admin: {
+        description: 'Full page screenshot URL',
+      },
     },
     {
       name: 'favicon',
