@@ -1,19 +1,13 @@
 import { AxiosResponse } from 'axios';
-import { useQuery } from '@tanstack/react-query';
-import { unstable_cache } from '@/composables/unstable-cache'
+import { useQuery } from '@tanstack/react-query'
 import { IWebsites } from '@/types/inspiration'
 import { axios } from '@/lib/axios'
-import { siteConfig } from '@/lib/site-config'
 import { InspirationWebsite } from '../../payload-types'
 
 export const useGetWebsites = () => {
-  const getWebsite = unstable_cache(
-    async (id: string): Promise<InspirationWebsite> => {
-      return (await axios(`/inspiration-websites/${id}`)).data
-    },
-    ['getJob'],
-    { revalidate: siteConfig.revalidateTime }
-  )
+  const getWebsite = async (id: string): Promise<InspirationWebsite> => {
+    return (await axios(`/inspiration-websites/${id}`)).data
+  }
 
   const getWebsites = async (query?: string): Promise<IWebsites> => {
     const response: AxiosResponse<IWebsites> = await axios(

@@ -188,6 +188,10 @@ export interface InspirationWebsite {
    */
   faviconUrl?: string | null;
   imgUrl?: string | null;
+  /**
+   * Full page screenshot URL
+   */
+  fullPageImgUrl?: string | null;
   favicon?: string | null;
   mode?: ('dark' | 'light' | 'hybrid') | null;
   isVisible?: boolean | null;
@@ -365,6 +369,7 @@ export interface InspirationWebsitesSelect<T extends boolean = true> {
   pageUrl?: T;
   faviconUrl?: T;
   imgUrl?: T;
+  fullPageImgUrl?: T;
   favicon?: T;
   mode?: T;
   isVisible?: T;
