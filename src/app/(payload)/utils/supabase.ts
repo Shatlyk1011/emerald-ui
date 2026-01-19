@@ -1,4 +1,7 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js';
+
+
+
 
 // Initialize Supabase client
 const supabaseUrl = process.env.SUPABASE_URL || ''
@@ -26,7 +29,7 @@ export async function uploadScreenshot(
     const { data, error } = await supabase.storage
       .from(bucketName)
       .upload(filename, imageBuffer, {
-        contentType: 'image/png',
+        contentType: 'image/webp',
         upsert: true,
       })
 
@@ -64,7 +67,7 @@ export async function uploadFavicon(
     const { data, error } = await supabase.storage
       .from(faviconBucket)
       .upload(filename, imageBuffer, {
-        contentType: 'image/png',
+        contentType: 'image/webp',
         upsert: true,
       })
 

@@ -1,6 +1,11 @@
-import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
-import { uploadScreenshot, uploadFavicon } from '../../utils/supabase'
+import { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
+import { uploadScreenshot, uploadFavicon } from '../../utils/supabase';
+
+
+
+
+
 
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
@@ -24,7 +29,7 @@ const InspirationWebsites: CollectionConfig = {
             apiUrl.searchParams.set('key', process.env.SCRIFY_TOKEN || '')
             apiUrl.searchParams.set('url', data.pageUrl)
             apiUrl.searchParams.set('type', 'image')
-            apiUrl.searchParams.set('format', 'png')
+            apiUrl.searchParams.set('format', 'webp')
             apiUrl.searchParams.set('quality', '70')
             apiUrl.searchParams.set('width', '1200')
             apiUrl.searchParams.set('height', '900')
@@ -41,7 +46,7 @@ const InspirationWebsites: CollectionConfig = {
                 .replace(/^https?:\/\//, '')
                 .replace(/[^a-z0-9]/gi, '-')
                 .toLowerCase()
-              const filename = `${urlSlug}-${Date.now()}.png`
+              const filename = `${urlSlug}-${Date.now()}.webp`
 
               const publicUrl = await uploadScreenshot(
                 screenshotBuffer,
@@ -78,7 +83,7 @@ const InspirationWebsites: CollectionConfig = {
                     .replace(/[^a-z0-9]/gi, '-')
                     .toLowerCase()
 
-              const filename = `${urlSlug}-${Date.now()}.png`
+              const filename = `${urlSlug}-${Date.now()}.webp`
 
               const publicUrl = await uploadFavicon(faviconBuffer, filename)
 

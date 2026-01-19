@@ -41,7 +41,7 @@ const Images: CollectionConfig = {
 
             const fileBuffer = await fs.readFile(filePath)
 
-            const contentType = 'image/png'
+            const contentType = 'image/webp'
 
             const publicUrl = await uploadImage(
               fileBuffer,
