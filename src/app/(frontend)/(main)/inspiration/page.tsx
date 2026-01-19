@@ -1,12 +1,11 @@
 import { AxiosResponse } from 'axios'
-import { IWebsites } from '@/types/inspiration'
-import Link from 'next/link'
+import { IWebsites, ICategories, IWebsiteStyles } from '@/types/inspiration'
 import { stringify } from 'qs-esm'
 import { axios } from '@/lib/axios'
+
 // components
+import SiteCards from '@/components/InspirationPage/SiteCards'
 import FilterSection from '@/components/InspirationPage/FilterSection'
-import SiteCard from '@/components/InspirationPage/SiteCard'
-import { MOCK_SITES } from '../../../../../public/mockData'
 
 const stringifiedQuery = stringify(
   {
@@ -21,34 +20,33 @@ const stringifiedQuery = stringify(
 )
 
 export default async function InspirationPage() {
-  // const response: AxiosResponse<IWebsites> = await axios(`/inspi2ration-websites/${stringifiedQuery || ""}`) || [];
+  const [initialData, categoriesData, stylesData]: [
+    AxiosResponse<IWebsites>,
+    AxiosResponse<ICategories>,
+    AxiosResponse<IWebsiteStyles>
+  ] = await Promise.all([
+    axios(`/inspiration-websites/${stringifiedQuery || ""}`),
+    axios('/categories'),
+    axios('/website-style')
+  ])
 
-  // console.log('initialData', response.data);
+  console.log('initialData', initialData.data)
+  console.log('categoriesData', categoriesData.data)
+  console.log('stylesData', stylesData.data)
 
   return (
-    <div className='bg-background min-h-screen font-sans text-white selection:bg-white/20'>
+    <div className='bg-background min-h-screen font-sans'>
       <main className='mx-auto max-w-7xl px-6 py-10'>
-        {/* <FilterSection /> */}
-
-        <h2 className='-tracking-two mb-6 text-2xl font-semibold'>
+        <h1 className='-tracking-two mb-6 text-3xl font-semibold'>
           Explore curated websites
-        </h2>
+        </h1>
 
-        <div className='grid grid-cols-1 gap-x-3 gap-y-6 sm:grid-cols-2 lg:grid-cols-4'>
-          {[...MOCK_SITES, ...MOCK_SITES].map((site, i) => (
-            <Link key={i} href='inspiration/1'>
-              <SiteCard
-                title={site.title}
-                description={site.description}
-                imageColor={site.imageColor}
-                logoColor={site.logoColor}
-                logoLetter={site.logoLetter}
-                isNew={site.isNew}
-                isLocked={site.isLocked}
-              />
-            </Link>
-          ))}
-        </div>
+        <FilterSection
+          categories={categoriesData.data.docs}
+          styles={stylesData.data.docs}
+        />
+
+        <SiteCards initialData={initialData.data} />
       </main>
     </div>
   )

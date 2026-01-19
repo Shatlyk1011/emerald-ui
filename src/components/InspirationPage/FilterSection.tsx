@@ -1,8 +1,13 @@
-const categories = ['Social', 'Business', 'Finance', 'Lifestyle', 'Portfolio']
-const sections = ['About', 'Features', 'How It Works', 'Hero', 'Blog']
-const styles = ['Illustration', 'Minimal', 'Motion', 'Dark', 'Scroll Effects']
+import { Category, WebsiteStyle } from '../../../payload-types'
 
-function FilterSection() {
+const sections = ['About', 'Features', 'How It Works', 'Hero', 'Blog']
+
+interface FilterSectionProps {
+  categories: Category[]
+  styles: WebsiteStyle[]
+}
+
+function FilterSection({ categories, styles }: FilterSectionProps) {
   return (
     <div className='gap-6 px-2 py-12'>
       {/* Categories Column */}
@@ -13,9 +18,9 @@ function FilterSection() {
           </h4>
           <ul className='flex flex-col flex-wrap text-xl font-medium'>
             {categories.map((item) => (
-              <li key={item}>
-                <button className='block opacity-90 transition-colors hover:text-white'>
-                  {item}
+              <li key={item.id}>
+                <button className='block opacity-90 transition-colors'>
+                  {item.category}
                 </button>
               </li>
             ))}
@@ -29,7 +34,7 @@ function FilterSection() {
           <ul className='flex flex-col text-xl font-medium'>
             {sections.map((item) => (
               <li key={item}>
-                <button className='block opacity-90 transition-colors hover:text-white'>
+                <button className='block opacity-90 transition-colors '>
                   {item}
                 </button>
               </li>
@@ -43,9 +48,9 @@ function FilterSection() {
           </h4>
           <ul className='flex flex-col text-xl font-medium'>
             {styles.map((item) => (
-              <li key={item}>
-                <button className='block opacity-90 transition-colors hover:text-white'>
-                  {item}
+              <li key={item.id}>
+                <button className='block opacity-90 transition-colors '>
+                  {item.style}
                 </button>
               </li>
             ))}
