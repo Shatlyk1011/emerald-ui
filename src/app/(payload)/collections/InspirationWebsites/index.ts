@@ -7,6 +7,51 @@ import { uploadScreenshot, uploadFavicon } from '../../utils/supabase';
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
   access: {
@@ -16,6 +61,7 @@ const InspirationWebsites: CollectionConfig = {
     delete: admins,
   },
   admin: {
+    defaultColumns: ['pageUrl', 'title', 'imgUrl', 'favicon'],
     useAsTitle: 'title',
   },
   hooks: {
@@ -46,7 +92,7 @@ const InspirationWebsites: CollectionConfig = {
                 .replace(/^https?:\/\//, '')
                 .replace(/[^a-z0-9]/gi, '-')
                 .toLowerCase()
-              const filename = `${urlSlug}-${Date.now()}.webp`
+              const filename = `${urlSlug}.webp`
 
               const publicUrl = await uploadScreenshot(
                 screenshotBuffer,
@@ -83,7 +129,7 @@ const InspirationWebsites: CollectionConfig = {
                     .replace(/[^a-z0-9]/gi, '-')
                     .toLowerCase()
 
-              const filename = `${urlSlug}-${Date.now()}.webp`
+              const filename = `${urlSlug}.webp`
 
               const publicUrl = await uploadFavicon(faviconBuffer, filename)
 
@@ -111,28 +157,49 @@ const InspirationWebsites: CollectionConfig = {
       type: 'text',
       required: true,
     },
+
     {
       name: 'description',
       type: 'text',
       required: true,
     },
+
     {
       name: 'category',
       type: 'text',
       required: false,
     },
+
     {
       name: 'style',
       type: 'text',
       hasMany: true,
       required: true,
     },
+
     {
       name: 'pageUrl',
       type: 'text',
       required: false,
       admin: {
         description: 'URL of the website to capture screenshot from',
+      },
+    },
+
+    {
+      name: 'imgUrl',
+      type: 'text',
+      required: false,
+      admin: {
+        description: 'Screenshot URL (auto-generated from pageUrl)',
+        components: {
+          afterInput: [
+            {
+              path: '@/app/(payload)/components/ImagePreviewField#ImagePreviewField',
+              exportName: 'ImagePreviewField',
+            },
+          ],
+        },
       },
     },
     {
@@ -144,14 +211,20 @@ const InspirationWebsites: CollectionConfig = {
       },
     },
     {
-      name: 'imgUrl',
-      type: 'text',
-      required: false,
-    },
-    {
       name: 'favicon',
       type: 'text',
       required: false,
+      admin: {
+        description: 'Favicon URL (auto-generated from faviconUrl)',
+        components: {
+          afterInput: [
+            {
+              path: '@/app/(payload)/components/FaviconPreviewField#FaviconPreviewField',
+              exportName: 'FaviconPreviewField',
+            },
+          ],
+        },
+      },
     },
     {
       name: 'mode',

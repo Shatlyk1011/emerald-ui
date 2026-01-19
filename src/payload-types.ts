@@ -59,394 +59,393 @@ export type SupportedTimezones =
   | 'Pacific/Guam'
   | 'Pacific/Noumea'
   | 'Pacific/Auckland'
-  | 'Pacific/Fiji'
+  | 'Pacific/Fiji';
 
 export interface Config {
   auth: {
-    adminUsers: AdminUserAuthOperations
-  }
-  blocks: {}
+    adminUsers: AdminUserAuthOperations;
+  };
+  blocks: {};
   collections: {
-    adminUsers: AdminUser
-    categories: Category
-    'website-style': WebsiteStyle
-    'inspiration-websites': InspirationWebsite
-    images: Image
-    'payload-kv': PayloadKv
-    'payload-locked-documents': PayloadLockedDocument
-    'payload-preferences': PayloadPreference
-    'payload-migrations': PayloadMigration
-  }
-  collectionsJoins: {}
+    adminUsers: AdminUser;
+    categories: Category;
+    'website-style': WebsiteStyle;
+    'inspiration-websites': InspirationWebsite;
+    images: Image;
+    'payload-kv': PayloadKv;
+    'payload-locked-documents': PayloadLockedDocument;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
+  };
+  collectionsJoins: {};
   collectionsSelect: {
-    adminUsers: AdminUsersSelect<false> | AdminUsersSelect<true>
-    categories: CategoriesSelect<false> | CategoriesSelect<true>
-    'website-style': WebsiteStyleSelect<false> | WebsiteStyleSelect<true>
-    'inspiration-websites':
-      | InspirationWebsitesSelect<false>
-      | InspirationWebsitesSelect<true>
-    images: ImagesSelect<false> | ImagesSelect<true>
-    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>
-    'payload-locked-documents':
-      | PayloadLockedDocumentsSelect<false>
-      | PayloadLockedDocumentsSelect<true>
-    'payload-preferences':
-      | PayloadPreferencesSelect<false>
-      | PayloadPreferencesSelect<true>
-    'payload-migrations':
-      | PayloadMigrationsSelect<false>
-      | PayloadMigrationsSelect<true>
-  }
+    adminUsers: AdminUsersSelect<false> | AdminUsersSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    'website-style': WebsiteStyleSelect<false> | WebsiteStyleSelect<true>;
+    'inspiration-websites': InspirationWebsitesSelect<false> | InspirationWebsitesSelect<true>;
+    images: ImagesSelect<false> | ImagesSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+  };
   db: {
-    defaultIDType: string
-  }
-  globals: {}
-  globalsSelect: {}
-  locale: null
+    defaultIDType: string;
+  };
+  globals: {};
+  globalsSelect: {};
+  locale: null;
   user: AdminUser & {
-    collection: 'adminUsers'
-  }
+    collection: 'adminUsers';
+  };
   jobs: {
-    tasks: unknown
-    workflows: unknown
-  }
+    tasks: unknown;
+    workflows: unknown;
+  };
 }
 export interface AdminUserAuthOperations {
   forgotPassword: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   login: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   registerFirstUser: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   unlock: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "adminUsers".
  */
 export interface AdminUser {
-  id: string
-  name?: string | null
-  phone?: string | null
-  isBlocked?: boolean | null
-  roles?: ('admin' | 'moderator' | 'guest')[] | null
-  updatedAt: string
-  createdAt: string
-  email: string
-  resetPasswordToken?: string | null
-  resetPasswordExpiration?: string | null
-  salt?: string | null
-  hash?: string | null
-  loginAttempts?: number | null
-  lockUntil?: string | null
+  id: string;
+  name?: string | null;
+  phone?: string | null;
+  isBlocked?: boolean | null;
+  roles?: ('admin' | 'moderator' | 'guest')[] | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
   sessions?:
     | {
-        id: string
-        createdAt?: string | null
-        expiresAt: string
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
       }[]
-    | null
-  password?: string | null
+    | null;
+  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories".
  */
 export interface Category {
-  id: string
-  category: string
-  value: string
-  order?: number | null
+  id: string;
+  category: string;
+  value: string;
+  order?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "website-style".
  */
 export interface WebsiteStyle {
-  id: string
-  style: string
-  value: string
-  order?: number | null
+  id: string;
+  style: string;
+  value: string;
+  order?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "inspiration-websites".
  */
 export interface InspirationWebsite {
-  id: string
-  title: string
-  description: string
-  category?: string | null
-  style: string[]
+  id: string;
+  title: string;
+  description: string;
+  category?: string | null;
+  style: string[];
   /**
    * URL of the website to capture screenshot from
    */
-  pageUrl?: string | null
+  pageUrl?: string | null;
+  /**
+   * Screenshot URL (auto-generated from pageUrl)
+   */
+  imgUrl?: string | null;
   /**
    * URL of the favicon
    */
-  faviconUrl?: string | null
-  imgUrl?: string | null
-  favicon?: string | null
-  mode?: ('dark' | 'light' | 'hybrid') | null
-  isVisible?: boolean | null
-  updatedAt: string
-  createdAt: string
+  faviconUrl?: string | null;
+  /**
+   * Favicon URL (auto-generated from faviconUrl)
+   */
+  favicon?: string | null;
+  mode?: ('dark' | 'light' | 'hybrid') | null;
+  isVisible?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "images".
  */
 export interface Image {
-  id: string
-  siteUrl: string
+  id: string;
+  siteUrl: string;
   /**
    * Public URL of the image stored in Supabase
    */
-  imgUrl?: string | null
-  altText?: string | null
-  description?: string | null
-  updatedAt: string
-  createdAt: string
-  url?: string | null
-  thumbnailURL?: string | null
-  filename?: string | null
-  mimeType?: string | null
-  filesize?: number | null
-  width?: number | null
-  height?: number | null
-  focalX?: number | null
-  focalY?: number | null
+  imgUrl?: string | null;
+  altText?: string | null;
+  description?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: string
-  key: string
+  id: string;
+  key: string;
   data:
     | {
-        [k: string]: unknown
+        [k: string]: unknown;
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null
+    | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string
+  id: string;
   document?:
     | ({
-        relationTo: 'adminUsers'
-        value: string | AdminUser
+        relationTo: 'adminUsers';
+        value: string | AdminUser;
       } | null)
     | ({
-        relationTo: 'categories'
-        value: string | Category
+        relationTo: 'categories';
+        value: string | Category;
       } | null)
     | ({
-        relationTo: 'website-style'
-        value: string | WebsiteStyle
+        relationTo: 'website-style';
+        value: string | WebsiteStyle;
       } | null)
     | ({
-        relationTo: 'inspiration-websites'
-        value: string | InspirationWebsite
+        relationTo: 'inspiration-websites';
+        value: string | InspirationWebsite;
       } | null)
     | ({
-        relationTo: 'images'
-        value: string | Image
+        relationTo: 'images';
+        value: string | Image;
       } | null)
     | ({
-        relationTo: 'payload-kv'
-        value: string | PayloadKv
-      } | null)
-  globalSlug?: string | null
+        relationTo: 'payload-kv';
+        value: string | PayloadKv;
+      } | null);
+  globalSlug?: string | null;
   user: {
-    relationTo: 'adminUsers'
-    value: string | AdminUser
-  }
-  updatedAt: string
-  createdAt: string
+    relationTo: 'adminUsers';
+    value: string | AdminUser;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string
+  id: string;
   user: {
-    relationTo: 'adminUsers'
-    value: string | AdminUser
-  }
-  key?: string | null
+    relationTo: 'adminUsers';
+    value: string | AdminUser;
+  };
+  key?: string | null;
   value?:
     | {
-        [k: string]: unknown
+        [k: string]: unknown;
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null
-  updatedAt: string
-  createdAt: string
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string
-  name?: string | null
-  batch?: number | null
-  updatedAt: string
-  createdAt: string
+  id: string;
+  name?: string | null;
+  batch?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "adminUsers_select".
  */
 export interface AdminUsersSelect<T extends boolean = true> {
-  name?: T
-  phone?: T
-  isBlocked?: T
-  roles?: T
-  updatedAt?: T
-  createdAt?: T
-  email?: T
-  resetPasswordToken?: T
-  resetPasswordExpiration?: T
-  salt?: T
-  hash?: T
-  loginAttempts?: T
-  lockUntil?: T
+  name?: T;
+  phone?: T;
+  isBlocked?: T;
+  roles?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
   sessions?:
     | T
     | {
-        id?: T
-        createdAt?: T
-        expiresAt?: T
-      }
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
-  category?: T
-  value?: T
-  order?: T
+  category?: T;
+  value?: T;
+  order?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "website-style_select".
  */
 export interface WebsiteStyleSelect<T extends boolean = true> {
-  style?: T
-  value?: T
-  order?: T
+  style?: T;
+  value?: T;
+  order?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "inspiration-websites_select".
  */
 export interface InspirationWebsitesSelect<T extends boolean = true> {
-  title?: T
-  description?: T
-  category?: T
-  style?: T
-  pageUrl?: T
-  faviconUrl?: T
-  imgUrl?: T
-  favicon?: T
-  mode?: T
-  isVisible?: T
-  updatedAt?: T
-  createdAt?: T
+  title?: T;
+  description?: T;
+  category?: T;
+  style?: T;
+  pageUrl?: T;
+  imgUrl?: T;
+  faviconUrl?: T;
+  favicon?: T;
+  mode?: T;
+  isVisible?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "images_select".
  */
 export interface ImagesSelect<T extends boolean = true> {
-  siteUrl?: T
-  imgUrl?: T
-  altText?: T
-  description?: T
-  updatedAt?: T
-  createdAt?: T
-  url?: T
-  thumbnailURL?: T
-  filename?: T
-  mimeType?: T
-  filesize?: T
-  width?: T
-  height?: T
-  focalX?: T
-  focalY?: T
+  siteUrl?: T;
+  imgUrl?: T;
+  altText?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
-  key?: T
-  data?: T
+  key?: T;
+  data?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
-  document?: T
-  globalSlug?: T
-  user?: T
-  updatedAt?: T
-  createdAt?: T
+  document?: T;
+  globalSlug?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences_select".
  */
 export interface PayloadPreferencesSelect<T extends boolean = true> {
-  user?: T
-  key?: T
-  value?: T
-  updatedAt?: T
-  createdAt?: T
+  user?: T;
+  key?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations_select".
  */
 export interface PayloadMigrationsSelect<T extends boolean = true> {
-  name?: T
-  batch?: T
-  updatedAt?: T
-  createdAt?: T
+  name?: T;
+  batch?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
-  [k: string]: unknown
+  [k: string]: unknown;
 }
+
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}

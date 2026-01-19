@@ -25,6 +25,10 @@ Inspiration page:
 
 - before deleting inspiration website, delete image as well
 
+- custom image delete button?
+
+- add default image and favicon
+
 - add type image or video. upload to storage videos as well
 
 - integrate full website image as well
