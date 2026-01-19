@@ -2,17 +2,28 @@ import { CollectionConfig } from 'payload'
 import { admins } from '../../utils/admins'
 import { uploadImage } from '../../utils/supabase'
 
+
+
+
+
+
 const Images: CollectionConfig = {
   slug: 'images',
   upload: {
     staticDir: './public/uploads',
     mimeTypes: ['image/*'],
   },
+  access: {
+    create: admins,
+    delete: admins,
+    read: () => true,
+    update: admins,
+  },
   hooks: {
     beforeChange: [
       async ({ data, req }) => {
         // Only process when a new file is uploaded
-        if (data && !data.imageUrl) {
+        if (data && !data.imgUrl) {
           try {
             // Get the file path
             const fs = await import('fs/promises')
@@ -63,12 +74,6 @@ const Images: CollectionConfig = {
         return data
       },
     ],
-  },
-  access: {
-    create: admins,
-    delete: admins,
-    read: () => true,
-    update: admins,
   },
 
   admin: {
