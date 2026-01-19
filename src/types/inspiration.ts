@@ -1,16 +1,14 @@
 import { IBaseFields } from '.'
-
-export interface IWebsite {
-  title: string
-  description: string
-  category: string
-  style: string
-  pageUrl: string
-  mode: 'dark' | 'light' | 'hybrid'
-  imgUrl?: string
-  faviconUrl?: string
-}
+import { InspirationWebsite, Category, WebsiteStyle } from '../../payload-types'
 
 export interface IWebsites extends IBaseFields {
-  docs: IWebsite[]
+  docs: InspirationWebsite[]
+}
+
+export interface ICategories extends IBaseFields {
+  docs: Category[]
+}
+
+export interface IWebsiteStyles extends IBaseFields {
+  docs: WebsiteStyle[]
 }
