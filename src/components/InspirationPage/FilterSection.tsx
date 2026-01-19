@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { Category, WebsiteStyle } from '../../../payload-types'
+import { Category, WebsiteStyle } from '@/payload-types'
 
 interface FilterSectionProps {
   categories: Category[]

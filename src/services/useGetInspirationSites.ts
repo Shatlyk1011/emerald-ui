@@ -1,8 +1,15 @@
 import { AxiosResponse } from 'axios';
-import { useQuery } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query';
+import { InspirationWebsite } from '@/payload-types';
 import { IWebsites } from '@/types/inspiration'
 import { axios } from '@/lib/axios'
-import { InspirationWebsite } from '../../payload-types'
+
+
+
+
+
+
+
 
 export const useGetWebsites = () => {
   const getWebsite = async (id: string): Promise<InspirationWebsite> => {

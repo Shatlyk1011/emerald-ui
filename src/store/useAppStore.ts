@@ -1,9 +1,5 @@
+import { InspirationWebsite } from '@/payload-types'
 import { create } from 'zustand'
-import { InspirationWebsite } from '../../payload-types';
-
-
-
-
 
 interface AppState {
   generatedFiles: Record<string, string> | null

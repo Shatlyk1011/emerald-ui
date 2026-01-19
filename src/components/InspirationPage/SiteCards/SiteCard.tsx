@@ -1,7 +1,7 @@
 'use client'
 
 import { Sticker } from "lucide-react"
-import { InspirationWebsite } from "../../../../payload-types"
+import { InspirationWebsite } from "@/payload-types"
 import { useAppStore } from "@/store/useAppStore"
 
 interface SiteCardProps {

@@ -1,5 +1,5 @@
+import { InspirationWebsite, Category, WebsiteStyle } from '@/payload-types'
 import { IBaseFields } from '.'
-import { InspirationWebsite, Category, WebsiteStyle } from '../../payload-types'
 
 export interface IWebsites extends IBaseFields {
   docs: InspirationWebsite[]
