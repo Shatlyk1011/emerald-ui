@@ -2,6 +2,11 @@ import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins';
 import { beforeDeleteHook, afterChangeHook } from './hooks';
 
+
+
+
+
+
 const Media: CollectionConfig = {
   slug: 'media',
 
@@ -30,6 +35,21 @@ const Media: CollectionConfig = {
       type: 'text',
       admin: {
         description: "The original website's url",
+        position: 'sidebar',
+      },
+    },
+
+    {
+      name: 'type',
+      label: 'Media Type',
+      type: 'select',
+      options: [
+        { label: 'Image', value: 'image' },
+        { label: 'Video', value: 'video' },
+      ],
+      required: false,
+      admin: {
+        description: 'Type of media (auto-detected from file)',
         position: 'sidebar',
       },
     },

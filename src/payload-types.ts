@@ -196,10 +196,6 @@ export interface InspirationWebsite {
    */
   favicon?: string | null;
   /**
-   * Specify whether the additional media is an image or video
-   */
-  additionalMediaType?: ('image' | 'video') | null;
-  /**
    * Additional media (video or image)
    */
   additionalMedia?: (string | null) | Media;
@@ -217,7 +213,11 @@ export interface Media {
   /**
    * The original website's url
    */
-  siteUrl: string;
+  pageUrl: string;
+  /**
+   * Type of media (auto-detected from file)
+   */
+  type?: ('image' | 'video') | null;
   /**
    * Upload image or video directly to Supabase
    */
@@ -374,7 +374,6 @@ export interface InspirationWebsitesSelect<T extends boolean = true> {
   imgUrl?: T;
   faviconUrl?: T;
   favicon?: T;
-  additionalMediaType?: T;
   additionalMedia?: T;
   mode?: T;
   isVisible?: T;
@@ -386,7 +385,8 @@ export interface InspirationWebsitesSelect<T extends boolean = true> {
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  siteUrl?: T;
+  pageUrl?: T;
+  type?: T;
   mediaUrl?: T;
   altText?: T;
   description?: T;

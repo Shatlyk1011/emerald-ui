@@ -41,7 +41,6 @@ export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({
           id: website.id,
           data: {
             additionalMedia: null,
-            additionalMediaType: null,
           },
         })
       }

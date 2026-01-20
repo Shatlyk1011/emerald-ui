@@ -6,15 +6,17 @@ import { useState, useEffect } from 'react'
 export const AdditionalMediaPreviewField = () => {
   const { data } = useDocumentInfo()
   const [mediaUrl, setMediaUrl] = useState<string | null>(null)
+  const [mediaType, setMediaType] = useState<'image' | 'video' | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const { additionalMedia, additionalMediaType } = data || {}
+  const { additionalMedia } = data || {}
 
   // Fetch media document when additionalMedia ID changes
   useEffect(() => {
     if (!additionalMedia) {
       setMediaUrl(null)
+      setMediaType(null)
       return
     }
 
@@ -31,6 +33,7 @@ export const AdditionalMediaPreviewField = () => {
 
         const mediaDoc = await response.json()
         setMediaUrl(mediaDoc.mediaUrl)
+        setMediaType(mediaDoc.type || 'image') // Default to image if not set
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load media')
         console.error('Error fetching media:', err)
@@ -156,7 +159,7 @@ export const AdditionalMediaPreviewField = () => {
     )
   }
 
-  const mediaType: 'image' | 'video' = additionalMediaType
+  // mediaType is now set from the fetched media document
 
   return (
     <div style={{ marginTop: '1rem' }}>
@@ -237,7 +240,8 @@ export const AdditionalMediaPreviewField = () => {
           wordBreak: 'break-all',
         }}
       >
-        URL: {mediaUrl}
+        <span style={{ userSelect: 'none', color: 'var(--theme-elevation-600)' }}>URL:</span> {" "} <span style={{ color: 'var(--theme-elevation-750)' }}>{mediaUrl}</span>
+
       </div>
       {data.description && (
         <div

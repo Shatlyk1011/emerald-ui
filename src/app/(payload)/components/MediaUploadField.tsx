@@ -5,6 +5,7 @@ import { useField } from '@payloadcms/ui'
 
 export const MediaUploadField = () => {
   const { value: mediaUrl, setValue } = useField<string>({ path: 'mediaUrl' })
+  const { setValue: setType } = useField<string>({ path: 'type' })
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [uploadProgress, setUploadProgress] = useState(0)
@@ -45,8 +46,8 @@ export const MediaUploadField = () => {
 
       // Simulate progress for better UX
       const progressInterval = setInterval(() => {
-        setUploadProgress((prev) => Math.min(prev + 10, 90))
-      }, 200)
+        setUploadProgress((prev) => Math.min(prev + 5, 90))
+      }, 150)
 
       const response = await fetch('/api/upload-media', {
         method: 'POST',
@@ -63,6 +64,10 @@ export const MediaUploadField = () => {
 
       const data = await response.json()
       setValue(data.url)
+
+      // Auto-detect and set media type based on file type
+      const isVideo = file.type.startsWith('video/') || file.name.match(/\.(mp4|webm|mov|avi|mpeg)$/i)
+      setType(isVideo ? 'video' : 'image')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload failed')
       console.error('Upload error:', err)

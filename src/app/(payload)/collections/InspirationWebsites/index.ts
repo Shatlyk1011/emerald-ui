@@ -99,21 +99,6 @@ const InspirationWebsites: CollectionConfig = {
       },
     },
     {
-      name: 'additionalMediaType',
-      label: 'Additional Media Type',
-      type: 'select',
-      options: [
-        { label: 'Image', value: 'image' },
-        { label: 'Video', value: 'video' },
-      ],
-      required: false,
-      admin: {
-        description:
-          'Specify whether the additional media is an image or video',
-        condition: (data) => !!data.additionalMedia,
-      },
-    },
-    {
       name: 'additionalMedia',
       label: 'Additonal Media',
       relationTo: 'media',
