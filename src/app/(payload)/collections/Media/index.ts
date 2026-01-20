@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload';
-import { admins } from '../../utils/admins'
+import { admins } from '../../utils/admins';
 import { beforeDeleteHook } from './hooks'
 
 const Media: CollectionConfig = {
@@ -29,6 +29,7 @@ const Media: CollectionConfig = {
       type: 'text',
       admin: {
         description: "The original website's url",
+        position: 'sidebar',
       },
     },
 
@@ -52,6 +53,9 @@ const Media: CollectionConfig = {
       label: 'Alt Text',
       required: false,
       type: 'text',
+      admin: {
+        position: 'sidebar',
+      },
     },
     {
       name: 'description',

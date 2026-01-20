@@ -1,21 +1,162 @@
 'use client'
 
 import { useDocumentInfo } from '@payloadcms/ui'
+import { useState, useEffect } from 'react'
 
 export const AdditionalMediaPreviewField = () => {
   const { data } = useDocumentInfo()
+  const [mediaUrl, setMediaUrl] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  console.log('xxx', data)
-  if(!data) {
-    return <span>No media preview available</span>
-  }
-  
-  const {additionalMedia, additionalMediaType} = data
-  if(!additionalMedia && !additionalMediaType) {
-    return <span>No url or type selected</span>
+  const { additionalMedia, additionalMediaType } = data || {}
+
+  // Fetch media document when additionalMedia ID changes
+  useEffect(() => {
+    if (!additionalMedia) {
+      setMediaUrl(null)
+      return
+    }
+
+    const fetchMedia = async () => {
+      setLoading(true)
+      setError(null)
+
+      try {
+        const response = await fetch(`/api/collections/media/${additionalMedia}`)
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch media')
+        }
+
+        const mediaDoc = await response.json()
+        setMediaUrl(mediaDoc.mediaUrl)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to load media')
+        console.error('Error fetching media:', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchMedia()
+  }, [additionalMedia])
+
+  if (!data || !additionalMedia) {
+    return (
+      <div
+        style={{
+          marginTop: '1rem',
+          padding: '1rem',
+          backgroundColor: 'var(--theme-elevation-100)',
+          border: '1px solid var(--theme-elevation-200)',
+          borderRadius: '4px',
+          textAlign: 'center',
+          color: 'var(--theme-elevation-600)',
+          fontSize: '0.875rem',
+        }}
+      >
+        No media selected
+      </div>
+    )
   }
 
-  const mediaType: 'image' | "video" = additionalMediaType
+  if (loading) {
+    return (
+      <div
+        style={{
+          marginTop: '1rem',
+          padding: '1.5rem',
+          backgroundColor: 'var(--theme-elevation-50)',
+          border: '1px solid var(--theme-elevation-200)',
+          borderRadius: '4px',
+          textAlign: 'center',
+        }}
+      >
+        <div
+          style={{
+            display: 'inline-block',
+            width: '20px',
+            height: '20px',
+            border: '3px solid var(--theme-elevation-300)',
+            borderTop: '3px solid var(--theme-success-500)',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+          }}
+        />
+        <style>{`
+          @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+        `}</style>
+        <div
+          style={{
+            marginTop: '0.75rem',
+            color: 'var(--theme-elevation-700)',
+            fontSize: '0.875rem',
+            fontWeight: '500',
+          }}
+        >
+          Loading media preview...
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div
+        style={{
+          marginTop: '1rem',
+          padding: '1rem',
+          backgroundColor: 'var(--theme-error-50)',
+          border: '1px solid var(--theme-error-200)',
+          borderRadius: '4px',
+          textAlign: 'center',
+        }}
+      >
+        <div
+          style={{
+            fontSize: '1.5rem',
+            marginBottom: '0.5rem',
+          }}
+        >
+          ⚠️
+        </div>
+        <div
+          style={{
+            color: 'var(--theme-error-700)',
+            fontSize: '0.875rem',
+            fontWeight: '500',
+          }}
+        >
+          {error}
+        </div>
+      </div>
+    )
+  }
+
+  if (!mediaUrl) {
+    return (
+      <div
+        style={{
+          marginTop: '1rem',
+          padding: '1rem',
+          backgroundColor: 'var(--theme-warning-50)',
+          border: '1px solid var(--theme-warning-200)',
+          borderRadius: '4px',
+          textAlign: 'center',
+          color: 'var(--theme-warning-700)',
+          fontSize: '0.875rem',
+        }}
+      >
+        No media URL available
+      </div>
+    )
+  }
+
+  const mediaType: 'image' | 'video' = additionalMediaType
 
   return (
     <div style={{ marginTop: '1rem' }}>
@@ -41,7 +182,7 @@ export const AdditionalMediaPreviewField = () => {
         {mediaType === 'image' ? (
           /* eslint-disable-next-line @next/next/no-img-element */
           <img
-            src={additionalMedia}
+            src={mediaUrl}
             alt={'Additional media preview'}
             style={{
               maxWidth: '100%',
@@ -64,7 +205,7 @@ export const AdditionalMediaPreviewField = () => {
           />
         ) : (
           <video
-            src={additionalMedia}
+              src={mediaUrl}
             controls
             style={{
               maxWidth: '100%',
@@ -96,7 +237,7 @@ export const AdditionalMediaPreviewField = () => {
           wordBreak: 'break-all',
         }}
       >
-        URL: {additionalMedia}
+        URL: {mediaUrl}
       </div>
       {data.description && (
         <div
