@@ -1,6 +1,11 @@
 import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins';
-import { beforeDeleteHook, beforeChangeHook } from './hooks'
+import { beforeDeleteHook, beforeChangeHook } from './hooks';
+
+
+
+
+
 
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
@@ -12,7 +17,7 @@ const InspirationWebsites: CollectionConfig = {
   },
   admin: {
     defaultColumns: ['pageUrl', 'title', 'imgUrl', 'favicon'],
-    useAsTitle: 'title',
+    useAsTitle: 'pageUrl',
   },
   hooks: {
     beforeDelete: [beforeDeleteHook],

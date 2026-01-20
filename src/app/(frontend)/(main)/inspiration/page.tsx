@@ -43,8 +43,8 @@ export default async function InspirationPage() {
   ] = await Promise.all([initialData, categories, websiteStyles])
 
   return (
-    <div className='bg-background min-h-screen font-sans'>
-      <main className='mx-auto max-w-7xl px-6 py-10'>
+    <main className='bg-background min-h-screen font-sans'>
+      <div className='mx-auto max-w-7xl px-6 py-10'>
         <FilterSection
           categories={categoriesData.data.docs}
           styles={stylesData.data.docs}
@@ -55,9 +55,9 @@ export default async function InspirationPage() {
         </h1>
 
         <SiteCards initialData={data.data} />
-      </main>
+      </div>
 
       <SitePreviewDialog />
-    </div>
+    </main>
   )
 }

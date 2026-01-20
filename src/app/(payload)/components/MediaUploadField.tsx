@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useField } from '@payloadcms/ui'
 
 export const MediaUploadField = () => {
-  const { value, setValue } = useField<string>({ path: 'mediaUrl' })
+  const { value: mediaUrl, setValue } = useField<string>({ path: 'mediaUrl' })
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [uploadProgress, setUploadProgress] = useState(0)
@@ -18,6 +18,28 @@ export const MediaUploadField = () => {
     setUploadProgress(0)
 
     try {
+      // Delete previous media if it exists
+      if (mediaUrl) {
+        try {
+          // Determine bucket based on file extension
+          const isVideo = mediaUrl.match(/\.(mp4|webm|mov|avi|mpeg)$/i)
+          const bucket = isVideo ? 'videos' : 'images'
+
+          await fetch('/api/delete-media', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url: mediaUrl, bucket }),
+          })
+
+          console.log('Previous media deleted successfully')
+        } catch (deleteError) {
+          console.warn('Failed to delete previous media:', deleteError)
+          // Continue with upload even if deletion fails
+        }
+      }
+
       const formData = new FormData()
       formData.append('file', file)
 
@@ -50,8 +72,9 @@ export const MediaUploadField = () => {
     }
   }
 
-  const isVideo = value?.match(/\.(mp4|webm|mov|avi|mpeg)$/i)
-  const isImage = value && !isVideo
+
+  const isVideo = mediaUrl?.match(/\.(mp4|webm|mov|avi|mpeg)$/i)
+  const isImage = mediaUrl && !isVideo
 
   return (
     <div style={{ marginTop: '1rem' }}>
@@ -144,7 +167,7 @@ export const MediaUploadField = () => {
         </div>
       )}
 
-      {value && (
+      {mediaUrl && (
         <div>
           <div
             style={{
@@ -168,7 +191,7 @@ export const MediaUploadField = () => {
             {isImage && (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
-                src={value}
+                src={mediaUrl}
                 alt='Preview'
                 style={{
                   maxWidth: '100%',
@@ -192,7 +215,7 @@ export const MediaUploadField = () => {
             )}
             {isVideo && (
               <video
-                src={value}
+                src={mediaUrl}
                 controls
                 style={{
                   maxWidth: '100%',
@@ -223,7 +246,7 @@ export const MediaUploadField = () => {
               wordBreak: 'break-all',
             }}
           >
-            URL: {value}
+            URL: {mediaUrl}
           </div>
         </div>
       )}

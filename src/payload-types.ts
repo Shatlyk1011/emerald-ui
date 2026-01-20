@@ -196,13 +196,13 @@ export interface InspirationWebsite {
    */
   favicon?: string | null;
   /**
-   * Additional media (video or image)
-   */
-  additionalMedia?: (string | null) | Media;
-  /**
    * Specify whether the additional media is an image or video
    */
   additionalMediaType?: ('image' | 'video') | null;
+  /**
+   * Additional media (video or image)
+   */
+  additionalMedia?: (string | null) | Media;
   mode?: ('dark' | 'light' | 'hybrid') | null;
   isVisible?: boolean | null;
   updatedAt: string;
@@ -374,8 +374,8 @@ export interface InspirationWebsitesSelect<T extends boolean = true> {
   imgUrl?: T;
   faviconUrl?: T;
   favicon?: T;
-  additionalMedia?: T;
   additionalMediaType?: T;
+  additionalMedia?: T;
   mode?: T;
   isVisible?: T;
   updatedAt?: T;
