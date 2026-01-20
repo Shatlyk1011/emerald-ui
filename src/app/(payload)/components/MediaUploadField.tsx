@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useField } from '@payloadcms/ui'
 
 export const MediaUploadField = () => {
-  const { value: mediaUrl, setValue } = useField<string>({ path: 'mediaUrl' })
+  const { value: mediaUrl, setValue: setMediaUrl } = useField<string>({ path: 'mediaUrl' })
   const { setValue: setType } = useField<string>({ path: 'type' })
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -63,11 +63,9 @@ export const MediaUploadField = () => {
       }
 
       const data = await response.json()
-      setValue(data.url)
+      setMediaUrl(data.url)
+      setType(data.mediaType)
 
-      // Auto-detect and set media type based on file type
-      const isVideo = file.type.startsWith('video/') || file.name.match(/\.(mp4|webm|mov|avi|mpeg)$/i)
-      setType(isVideo ? 'video' : 'image')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload failed')
       console.error('Upload error:', err)
@@ -250,7 +248,7 @@ export const MediaUploadField = () => {
               fontSize: '1.25rem',
               marginTop: '0.5rem',
               wordBreak: 'break-all',
-              paddingInline: "1rem",
+              paddingBlock: "1rem",
               lineHeight: '2rem'
             }}
           >

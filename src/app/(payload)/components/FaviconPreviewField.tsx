@@ -3,11 +3,12 @@
 import { useField } from '@payloadcms/ui'
 
 export const FaviconPreviewField = () => {
-  const { value } = useField<string>({ path: 'favicon' })
-
-  if (!value) {
+  const { value: favicon } = useField<string>({ path: 'favicon' })
+  // const { value } = useField<string>({ path: 'faviconUrl' })
+  if (!favicon) {
     return null
   }
+
 
   return (
     <div style={{ marginTop: '1rem' }}>
@@ -33,7 +34,7 @@ export const FaviconPreviewField = () => {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={value}
+          src={favicon}
           alt={`favicon preview`}
           style={{
             maxWidth: '100%',

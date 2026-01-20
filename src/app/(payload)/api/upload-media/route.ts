@@ -1,5 +1,9 @@
-import { uploadMedia } from '@/app/(payload)/utils/supabase'
-import { NextRequest, NextResponse } from 'next/server'
+import { uploadMedia } from '@/app/(payload)/utils/supabase';
+import { NextRequest, NextResponse } from 'next/server';
+
+
+
+
 
 
 
@@ -65,6 +69,9 @@ export async function POST(request: NextRequest) {
 
     // Determine bucket based on file type
     const bucket = ALLOWED_VIDEO_TYPES.includes(file.type) ? 'videos' : 'images'
+    const mediaType = ALLOWED_VIDEO_TYPES.includes(file.type)
+      ? 'video'
+      : 'image'
 
     // Upload to Supabase
     const publicUrl = await uploadMedia(buffer, filename, file.type, bucket)
@@ -72,6 +79,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       url: publicUrl,
+      mediaType,
       filename,
       contentType: file.type,
       size: file.size,
