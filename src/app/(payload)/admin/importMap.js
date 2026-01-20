@@ -1,6 +1,13 @@
-import { FaviconPreviewField } from '@/app/(payload)/components/FaviconPreviewField'
-import { ImagePreviewField } from '@/app/(payload)/components/ImagePreviewField'
-import { MediaUploadField } from '@/app/(payload)/components/MediaUploadField'
+import { AdditionalMediaPreviewField } from '@/app/(payload)/components/AdditionalMediaPreviewField';
+import { FaviconPreviewField } from '@/app/(payload)/components/FaviconPreviewField';
+import { ImagePreviewField } from '@/app/(payload)/components/ImagePreviewField';
+import { MediaUploadField } from '@/app/(payload)/components/MediaUploadField';
+
+
+
+
+
+
 
 export const importMap = {
   '@/app/(payload)/components/ImagePreviewField#ImagePreviewField': () =>
@@ -15,4 +22,9 @@ export const importMap = {
     import('@/app/(payload)/components/MediaUploadField').then(() => (
       <MediaUploadField />
     )),
+  '@/app/(payload)/components/AdditionalMediaPreviewField#AdditionalMediaPreviewField':
+    () =>
+      import('@/app/(payload)/components/AdditionalMediaPreviewField').then(
+        () => <AdditionalMediaPreviewField />
+      ),
 }

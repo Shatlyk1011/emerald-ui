@@ -232,6 +232,14 @@ const InspirationWebsites: CollectionConfig = {
       type: 'relationship',
       admin: {
         description: 'Additional media (video or image)',
+        components: {
+          afterInput: [
+            {
+              path: '@/app/(payload)/components/AdditionalMediaPreviewField#AdditionalMediaPreviewField',
+              exportName: 'AdditionalMediaPreviewField',
+            },
+          ],
+        },
       },
     },
     {

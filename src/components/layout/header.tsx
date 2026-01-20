@@ -21,7 +21,7 @@ const Header = () => {
 
   return (
     <div className='border-border border-b'>
-      <header className='mx-auto flex w-full max-w-7xl items-center justify-between px-8 py-2 font-sans'>
+      <header className='mx-auto flex w-full  items-center justify-between px-8 py-2 font-sans'>
         <Link href='/' className='w-20 max-sm:min-w-8'>
           <span className=''>Logo</span>
         </Link>
