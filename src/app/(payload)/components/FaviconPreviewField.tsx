@@ -1,11 +1,11 @@
 'use client'
 
-import { useDocumentInfo } from '@payloadcms/ui'
+import { useField } from '@payloadcms/ui'
 
 export const FaviconPreviewField = () => {
-  const { data } = useDocumentInfo()
+  const { value } = useField<string>({ path: 'favicon' })
 
-  if (!data) {
+  if (!value) {
     return null
   }
 
@@ -33,7 +33,7 @@ export const FaviconPreviewField = () => {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={data.favicon}
+          src={value}
           alt={`favicon preview`}
           style={{
             maxWidth: '100%',

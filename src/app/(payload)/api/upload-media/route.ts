@@ -1,6 +1,10 @@
 import { uploadMedia } from '@/app/(payload)/utils/supabase'
 import { NextRequest, NextResponse } from 'next/server'
 
+
+
+
+
 // Allowed file types
 const ALLOWED_IMAGE_TYPES = [
   'image/jpeg',
@@ -59,8 +63,11 @@ export async function POST(request: NextRequest) {
     const sanitizedName = file.name.replace(/[^a-z0-9.-]/gi, '-').toLowerCase()
     const filename = sanitizedName
 
+    // Determine bucket based on file type
+    const bucket = ALLOWED_VIDEO_TYPES.includes(file.type) ? 'videos' : 'images'
+
     // Upload to Supabase
-    const publicUrl = await uploadMedia(buffer, filename, file.type)
+    const publicUrl = await uploadMedia(buffer, filename, file.type, bucket)
 
     return NextResponse.json({
       success: true,

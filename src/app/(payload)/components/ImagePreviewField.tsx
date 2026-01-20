@@ -1,11 +1,11 @@
 'use client'
 
-import { useDocumentInfo } from '@payloadcms/ui'
+import { useField } from '@payloadcms/ui'
 
 export const ImagePreviewField = () => {
-  const { data } = useDocumentInfo()
+  const { value } = useField<string>({ path: 'imgUrl' })
 
-  if (!data) {
+  if (!value) {
     return null
   }
   return (
@@ -32,7 +32,7 @@ export const ImagePreviewField = () => {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={data.imgUrl}
+          src={value}
           alt='Preview'
           style={{
             maxWidth: '100%',

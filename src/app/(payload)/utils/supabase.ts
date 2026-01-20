@@ -3,6 +3,9 @@ import { createClient } from '@supabase/supabase-js';
 
 
 
+
+
+
 // Initialize Supabase client
 const supabaseUrl = process.env.SUPABASE_URL || ''
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || ''
@@ -135,12 +138,13 @@ export async function uploadImage(
 export async function uploadMedia(
   fileBuffer: Buffer,
   filename: string,
-  contentType: string
+  contentType: string,
+  bucket: 'videos' | 'images' | 'favicons' = 'images'
 ): Promise<string> {
   try {
     // Upload to Supabase storage
     const { data, error } = await supabase.storage
-      .from(imagesBucket)
+      .from(bucket)
       .upload(filename, fileBuffer, {
         contentType,
         upsert: true,

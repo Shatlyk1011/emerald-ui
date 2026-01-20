@@ -6,6 +6,21 @@ import {
   deleteMediaFromUrl,
 } from '../../utils/supabase'
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
   access: {
@@ -210,14 +225,28 @@ const InspirationWebsites: CollectionConfig = {
       },
     },
     {
-      name: 'videoUrl',
-      label: 'Video',
-      // te
+      name: 'additionalMedia',
+      label: 'Additonal Media',
       relationTo: 'media',
       required: false,
       type: 'relationship',
       admin: {
-        description: 'Video',
+        description: 'Additional media (video or image)',
+      },
+    },
+    {
+      name: 'additionalMediaType',
+      label: 'Additional Media Type',
+      type: 'select',
+      options: [
+        { label: 'Image', value: 'image' },
+        { label: 'Video', value: 'video' },
+      ],
+      required: false,
+      admin: {
+        description:
+          'Specify whether the additional media is an image or video',
+        condition: (data) => !!data.additionalMedia,
       },
     },
     {
