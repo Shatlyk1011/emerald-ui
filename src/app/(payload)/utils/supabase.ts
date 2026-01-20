@@ -6,6 +6,9 @@ import { createClient } from '@supabase/supabase-js';
 
 
 
+
+
+
 // Initialize Supabase client
 const supabaseUrl = process.env.SUPABASE_URL || ''
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || ''
@@ -158,7 +161,7 @@ export async function uploadMedia(
     // Get public URL
     const {
       data: { publicUrl },
-    } = supabase.storage.from(imagesBucket).getPublicUrl(data.path)
+    } = supabase.storage.from(bucket).getPublicUrl(data.path)
 
     return publicUrl
   } catch (error) {
