@@ -2,11 +2,6 @@ import { CollectionConfig } from 'payload'
 import { admins } from '../../utils/admins'
 import { uploadImage } from '../../utils/supabase'
 
-
-
-
-
-
 const Media: CollectionConfig = {
   slug: 'media',
   upload: {

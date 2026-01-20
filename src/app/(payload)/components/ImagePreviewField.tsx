@@ -4,9 +4,8 @@ import { useDocumentInfo } from '@payloadcms/ui'
 
 export const ImagePreviewField = () => {
   const { data } = useDocumentInfo()
-  
 
-  if(!data) {
+  if (!data) {
     return null
   }
   return (
@@ -34,7 +33,7 @@ export const ImagePreviewField = () => {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={data.imgUrl}
-          alt="Preview"
+          alt='Preview'
           style={{
             maxWidth: '100%',
             height: 'auto',

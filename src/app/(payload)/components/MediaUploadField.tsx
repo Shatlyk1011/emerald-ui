@@ -1,7 +1,7 @@
 'use client'
 
-import { useField } from '@payloadcms/ui'
 import { useState } from 'react'
+import { useField } from '@payloadcms/ui'
 
 export const MediaUploadField = () => {
   const { value, setValue } = useField<string>({ path: 'mediaUrl' })
@@ -61,7 +61,7 @@ export const MediaUploadField = () => {
         }}
       >
         <label
-          htmlFor="media-upload"
+          htmlFor='media-upload'
           style={{
             display: 'inline-block',
             padding: '0.5rem 1rem',
@@ -76,7 +76,8 @@ export const MediaUploadField = () => {
           }}
           onMouseEnter={(e) => {
             if (!uploading) {
-              e.currentTarget.style.backgroundColor = 'var(--theme-elevation-150)'
+              e.currentTarget.style.backgroundColor =
+                'var(--theme-elevation-150)'
             }
           }}
           onMouseLeave={(e) => {
@@ -86,9 +87,9 @@ export const MediaUploadField = () => {
           {uploading ? 'Uploading...' : 'Choose Image or Video'}
         </label>
         <input
-          id="media-upload"
-          type="file"
-          accept="image/*,video/*"
+          id='media-upload'
+          type='file'
+          accept='image/*,video/*'
           onChange={handleFileChange}
           disabled={uploading}
           style={{ display: 'none' }}
@@ -168,7 +169,7 @@ export const MediaUploadField = () => {
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
                 src={value}
-                alt="Preview"
+                alt='Preview'
                 style={{
                   maxWidth: '100%',
                   height: 'auto',

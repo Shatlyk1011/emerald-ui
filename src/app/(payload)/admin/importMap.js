@@ -1,4 +1,4 @@
-import { FaviconPreviewField } from '@/app/(payload)/components/FaviconPreviewField';
+import { FaviconPreviewField } from '@/app/(payload)/components/FaviconPreviewField'
 import { ImagePreviewField } from '@/app/(payload)/components/ImagePreviewField'
 import { MediaUploadField } from '@/app/(payload)/components/MediaUploadField'
 

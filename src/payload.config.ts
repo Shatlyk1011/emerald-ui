@@ -1,10 +1,10 @@
-import path from 'path';
-import { mongooseAdapter } from '@payloadcms/db-mongodb';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
-import { fileURLToPath } from 'node:url';
-import { buildConfig } from 'payload';
-import sharp from 'sharp';
-import AdminUsers from './app/(payload)/collections/AdminUsers';
+import path from 'path'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { fileURLToPath } from 'node:url'
+import { buildConfig } from 'payload'
+import sharp from 'sharp'
+import AdminUsers from './app/(payload)/collections/AdminUsers'
 // collections
 import Categories from './app/(payload)/collections/Categories'
 import InspirationWebsites from './app/(payload)/collections/InspirationWebsites'

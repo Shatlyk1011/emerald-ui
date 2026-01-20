@@ -49,7 +49,6 @@ Global:
 
 - add seo (blog)
 
-
-<!-- 
+<!--
   in the /results page, there is editor with editor and chat tabs.
  -->

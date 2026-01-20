@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from 'next/server'
 import { uploadMedia } from '@/app/(payload)/utils/supabase'
+import { NextRequest, NextResponse } from 'next/server'
 
 // Allowed file types
 const ALLOWED_IMAGE_TYPES = [
