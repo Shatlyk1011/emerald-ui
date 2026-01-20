@@ -1,6 +1,10 @@
-import { CollectionConfig } from 'payload'
+import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins'
-import { uploadScreenshot, uploadFavicon } from '../../utils/supabase'
+import {
+  uploadScreenshot,
+  uploadFavicon,
+  deleteMediaFromUrl,
+} from '../../utils/supabase'
 
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
@@ -15,6 +19,35 @@ const InspirationWebsites: CollectionConfig = {
     useAsTitle: 'title',
   },
   hooks: {
+    beforeDelete: [
+      async ({ id, req }) => {
+        try {
+          // Fetch the document to get image URLs
+          const doc = await req.payload.findByID({
+            collection: 'inspiration-websites',
+            id,
+          })
+
+          // Delete screenshot from images bucket
+          if (doc.imgUrl) {
+            await deleteMediaFromUrl(doc.imgUrl)
+          }
+
+          // Delete favicon from favicons bucket
+          if (doc.favicon) {
+            await deleteMediaFromUrl(
+              doc.favicon,
+              process.env.SUPABASE_FAVICONS_BUCKET || 'favicons'
+            )
+          }
+
+          console.log(`Deleted images for inspiration website: ${id}`)
+        } catch (error) {
+          console.error('Error deleting images during beforeDelete:', error)
+          // Don't throw - we still want to delete the document even if image cleanup fails
+        }
+      },
+    ],
     beforeChange: [
       async ({ data }) => {
         // Handle screenshot capture

@@ -1,9 +1,13 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js';
+
+
+
 
 // Initialize Supabase client
 const supabaseUrl = process.env.SUPABASE_URL || ''
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || ''
-const bucketName = process.env.SUPABASE_IMAGES_BUCKET || 'images'
+const imagesBucket = process.env.SUPABASE_IMAGES_BUCKET || 'images'
+const faviconsBucket = process.env.SUPABASE_FAVICONS_BUCKET || 'favicons'
 
 if (!supabaseUrl || !supabaseServiceKey) {
   console.warn('Supabase credentials not configured')
@@ -24,7 +28,7 @@ export async function uploadScreenshot(
   try {
     // Upload to Supabase storage
     const { data, error } = await supabase.storage
-      .from(bucketName)
+      .from(imagesBucket)
       .upload(filename, imageBuffer, {
         contentType: 'image/webp',
         upsert: true,
@@ -38,7 +42,7 @@ export async function uploadScreenshot(
     // Get public URL
     const {
       data: { publicUrl },
-    } = supabase.storage.from(bucketName).getPublicUrl(data.path)
+    } = supabase.storage.from(imagesBucket).getPublicUrl(data.path)
 
     return publicUrl
   } catch (error) {
@@ -57,12 +61,10 @@ export async function uploadFavicon(
   imageBuffer: Buffer,
   filename: string
 ): Promise<string> {
-  const faviconBucket = process.env.SUPABASE_FAVICONS_BUCKET || 'favicons'
-
   try {
     // Upload to Supabase storage
     const { data, error } = await supabase.storage
-      .from(faviconBucket)
+      .from(faviconsBucket)
       .upload(filename, imageBuffer, {
         contentType: 'image/webp',
         upsert: true,
@@ -76,7 +78,7 @@ export async function uploadFavicon(
     // Get public URL
     const {
       data: { publicUrl },
-    } = supabase.storage.from(faviconBucket).getPublicUrl(data.path)
+    } = supabase.storage.from(faviconsBucket).getPublicUrl(data.path)
 
     return publicUrl
   } catch (error) {
@@ -100,7 +102,7 @@ export async function uploadImage(
   try {
     // Upload to Supabase storage
     const { data, error } = await supabase.storage
-      .from(bucketName)
+      .from(imagesBucket)
       .upload(filename, imageBuffer, {
         contentType,
         upsert: true,
@@ -114,7 +116,7 @@ export async function uploadImage(
     // Get public URL
     const {
       data: { publicUrl },
-    } = supabase.storage.from(bucketName).getPublicUrl(data.path)
+    } = supabase.storage.from(imagesBucket).getPublicUrl(data.path)
 
     return publicUrl
   } catch (error) {
@@ -138,7 +140,7 @@ export async function uploadMedia(
   try {
     // Upload to Supabase storage
     const { data, error } = await supabase.storage
-      .from(bucketName)
+      .from(imagesBucket)
       .upload(filename, fileBuffer, {
         contentType,
         upsert: true,
@@ -152,11 +154,52 @@ export async function uploadMedia(
     // Get public URL
     const {
       data: { publicUrl },
-    } = supabase.storage.from(bucketName).getPublicUrl(data.path)
+    } = supabase.storage.from(imagesBucket).getPublicUrl(data.path)
 
     return publicUrl
   } catch (error) {
     console.error('Error uploading media:', error)
     throw error
+  }
+}
+
+/**
+ * Delete image from Supabase storage
+ * @param publicUrl - The public URL of the image to delete
+ * @param bucket - The bucket name (default: 'images')
+ * @returns Promise<void>
+ */
+export async function deleteMediaFromUrl(
+  publicUrl: string,
+  bucket: string = imagesBucket
+): Promise<void> {
+  if (!publicUrl) return
+
+  try {
+    // Extract filename from public URL
+    // URL format: https://{project}.supabase.co/storage/v1/object/public/{bucket}/{filename}
+    const url = new URL(publicUrl)
+    const pathParts = url.pathname.split('/')
+    const filename = pathParts[pathParts.length - 1]
+
+    if (!filename) {
+      console.warn('Could not extract filename from URL:', publicUrl)
+      return
+    }
+
+    // Delete from Supabase storage
+    const { error } = await supabase.storage.from(bucket).remove([filename])
+
+    if (error) {
+      console.error('Supabase delete error:', error)
+      throw new Error(`Failed to delete image: ${error.message}`)
+    }
+
+    console.log(
+      `Successfully deleted image: ${filename} from bucket: ${bucket}`
+    )
+  } catch (error) {
+    console.error('Error deleting image from URL:', publicUrl, error)
+    // Don't throw - we don't want to block deletion if image cleanup fails
   }
 }
