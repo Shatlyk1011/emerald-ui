@@ -71,7 +71,7 @@ export interface Config {
     categories: Category;
     'website-style': WebsiteStyle;
     'inspiration-websites': InspirationWebsite;
-    images: Image;
+    media: Media;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -83,7 +83,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'website-style': WebsiteStyleSelect<false> | WebsiteStyleSelect<true>;
     'inspiration-websites': InspirationWebsitesSelect<false> | InspirationWebsitesSelect<true>;
-    images: ImagesSelect<false> | ImagesSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -180,7 +180,7 @@ export interface InspirationWebsite {
   category?: string | null;
   style: string[];
   /**
-   * URL of the website to capture screenshot from
+   * Original website URL (for screenshots)
    */
   pageUrl?: string | null;
   /**
@@ -188,13 +188,17 @@ export interface InspirationWebsite {
    */
   imgUrl?: string | null;
   /**
-   * URL of the favicon
+   * Original favicon URL
    */
   faviconUrl?: string | null;
   /**
    * Favicon URL (auto-generated from faviconUrl)
    */
   favicon?: string | null;
+  /**
+   * Video
+   */
+  videoUrl?: (string | null) | Media;
   mode?: ('dark' | 'light' | 'hybrid') | null;
   isVisible?: boolean | null;
   updatedAt: string;
@@ -202,15 +206,19 @@ export interface InspirationWebsite {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "images".
+ * via the `definition` "media".
  */
-export interface Image {
+export interface Media {
   id: string;
   siteUrl: string;
   /**
    * Public URL of the image stored in Supabase
    */
   imgUrl?: string | null;
+  /**
+   * Upload image or video directly to Supabase
+   */
+  mediaUrl?: string | null;
   altText?: string | null;
   description?: string | null;
   updatedAt: string;
@@ -266,8 +274,8 @@ export interface PayloadLockedDocument {
         value: string | InspirationWebsite;
       } | null)
     | ({
-        relationTo: 'images';
-        value: string | Image;
+        relationTo: 'media';
+        value: string | Media;
       } | null)
     | ({
         relationTo: 'payload-kv';
@@ -372,6 +380,7 @@ export interface InspirationWebsitesSelect<T extends boolean = true> {
   imgUrl?: T;
   faviconUrl?: T;
   favicon?: T;
+  videoUrl?: T;
   mode?: T;
   isVisible?: T;
   updatedAt?: T;
@@ -379,11 +388,12 @@ export interface InspirationWebsitesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "images_select".
+ * via the `definition` "media_select".
  */
-export interface ImagesSelect<T extends boolean = true> {
+export interface MediaSelect<T extends boolean = true> {
   siteUrl?: T;
   imgUrl?: T;
+  mediaUrl?: T;
   altText?: T;
   description?: T;
   updatedAt?: T;

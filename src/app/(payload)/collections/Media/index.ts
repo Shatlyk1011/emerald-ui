@@ -2,11 +2,16 @@ import { CollectionConfig } from 'payload'
 import { admins } from '../../utils/admins'
 import { uploadImage } from '../../utils/supabase'
 
-const Images: CollectionConfig = {
-  slug: 'images',
+
+
+
+
+
+const Media: CollectionConfig = {
+  slug: 'media',
   upload: {
     staticDir: './public/uploads',
-    mimeTypes: ['image/*'],
+    mimeTypes: ['image/*', 'video/*'],
   },
   access: {
     create: admins,
@@ -52,7 +57,7 @@ const Images: CollectionConfig = {
 
             // Update the document with the Supabase URL
             await req.payload.update({
-              collection: 'images',
+              collection: 'media',
               id: data.id,
               data: {
                 imgUrl: publicUrl,
@@ -72,7 +77,7 @@ const Images: CollectionConfig = {
   },
 
   admin: {
-    defaultColumns: ['siteUrl', 'description', 'imgUrl'],
+    defaultColumns: ['siteUrl', 'description', 'mediaUrl', 'imgUrl'],
     useAsTitle: 'siteUrl',
   },
 
@@ -94,6 +99,21 @@ const Images: CollectionConfig = {
       },
     },
     {
+      name: 'mediaUrl',
+      label: 'Media URL (Custom Upload)',
+      required: false,
+      type: 'text',
+      admin: {
+        description: 'Upload image or video directly to Supabase',
+        components: {
+          Field: {
+            path: '@/app/(payload)/components/MediaUploadField#MediaUploadField',
+            exportName: 'MediaUploadField',
+          },
+        },
+      },
+    },
+    {
       name: 'altText',
       label: 'Alt Text',
       required: false,
@@ -106,8 +126,8 @@ const Images: CollectionConfig = {
       type: 'textarea',
     },
   ],
-  labels: { plural: 'Images', singular: 'Image' },
+  labels: { plural: 'Media', singular: 'Image' },
   timestamps: true,
 }
 
-export default Images
+export default Media

@@ -77,7 +77,7 @@ const Header = () => {
           </ul>
         </nav>
 
-        <div className='flex items-center gap-2 max-sm:gap-1'>
+        <div className='flex items-center justify-end gap-2 max-sm:gap-1 min-w-20'>
           {/* {!isLoading && (user ? <Profile /> : <LoginButton />)} */}
           <ThemeToggle />
         </div>

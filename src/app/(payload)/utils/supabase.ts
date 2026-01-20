@@ -3,6 +3,9 @@ import { createClient } from '@supabase/supabase-js';
 
 
 
+
+
+
 // Initialize Supabase client
 const supabaseUrl = process.env.SUPABASE_URL || ''
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || ''
@@ -122,6 +125,44 @@ export async function uploadImage(
     return publicUrl
   } catch (error) {
     console.error('Error uploading image:', error)
+    throw error
+  }
+}
+
+/**
+ * Upload media (image or video) to Supabase storage
+ * @param fileBuffer - Buffer containing the media data
+ * @param filename - Name for the uploaded file
+ * @param contentType - MIME type of the media
+ * @returns Public URL of the uploaded media
+ */
+export async function uploadMedia(
+  fileBuffer: Buffer,
+  filename: string,
+  contentType: string
+): Promise<string> {
+  try {
+    // Upload to Supabase storage
+    const { data, error } = await supabase.storage
+      .from(bucketName)
+      .upload(filename, fileBuffer, {
+        contentType,
+        upsert: true,
+      })
+
+    if (error) {
+      console.error('Supabase media upload error:', error)
+      throw new Error(`Failed to upload media: ${error.message}`)
+    }
+
+    // Get public URL
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from(bucketName).getPublicUrl(data.path)
+
+    return publicUrl
+  } catch (error) {
+    console.error('Error uploading media:', error)
     throw error
   }
 }

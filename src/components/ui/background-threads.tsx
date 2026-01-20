@@ -140,7 +140,6 @@ const BackgroundThreads = ({
     [color, resolvedTheme]
   )
 
-  console.log('shaderColor', shaderColor)
 
   useEffect(() => {
     if (!containerRef.current) return

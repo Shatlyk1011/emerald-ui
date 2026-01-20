@@ -17,10 +17,6 @@ Node ui:
 
 Inspiration page:
 
-- integrate endpoint with iframe (global)
-
-- add light mode
-
 - Test custom image upload feature
 
 - before deleting inspiration website, delete image as well
@@ -30,8 +26,6 @@ Inspiration page:
 - add default image and favicon
 
 - add type image or video. upload to storage videos as well
-
-- integrate full website image as well
 
 - add 2 version of preview dialog - video and image - video priority
 
@@ -54,3 +48,8 @@ Global:
 - add loading states
 
 - add seo (blog)
+
+
+<!-- 
+  in the /results page, there is editor with editor and chat tabs.
+ -->

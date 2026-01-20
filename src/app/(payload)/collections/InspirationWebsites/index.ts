@@ -12,46 +12,6 @@ import { uploadScreenshot, uploadFavicon } from '../../utils/supabase';
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
   access: {
@@ -182,7 +142,7 @@ const InspirationWebsites: CollectionConfig = {
       type: 'text',
       required: false,
       admin: {
-        description: 'URL of the website to capture screenshot from',
+        description: 'Original website URL (for screenshots)',
       },
     },
 
@@ -207,7 +167,7 @@ const InspirationWebsites: CollectionConfig = {
       type: 'text',
       required: false,
       admin: {
-        description: 'URL of the favicon',
+        description: 'Original favicon URL',
       },
     },
     {
@@ -224,6 +184,17 @@ const InspirationWebsites: CollectionConfig = {
             },
           ],
         },
+      },
+    },
+    {
+      name: 'videoUrl',
+      label: 'Video',
+      // te
+      relationTo: 'media',
+      required: false,
+      type: 'relationship',
+      admin: {
+        description: 'Video',
       },
     },
     {
