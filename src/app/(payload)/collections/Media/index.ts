@@ -1,12 +1,13 @@
-import { CollectionConfig } from 'payload'
+import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins'
-
-
-
-
+import { beforeDeleteHook } from './hooks'
 
 const Media: CollectionConfig = {
   slug: 'media',
+
+  hooks: {
+    beforeDelete: [beforeDeleteHook],
+  },
 
   access: {
     create: admins,
