@@ -195,6 +195,7 @@ export const MediaUploadField = () => {
                 alt='Preview'
                 style={{
                   maxWidth: '100%',
+                  aspectRatio: '4/3',
                   height: 'auto',
                   display: 'block',
                   borderRadius: '4px',
@@ -220,6 +221,7 @@ export const MediaUploadField = () => {
                 style={{
                   maxWidth: '100%',
                   height: 'auto',
+                  aspectRatio: '4/3',
                   display: 'block',
                   borderRadius: '4px',
                 }}
@@ -240,13 +242,14 @@ export const MediaUploadField = () => {
           </div>
           <div
             style={{
-              fontSize: '0.75rem',
-              color: 'var(--theme-elevation-600)',
+              fontSize: '1.25rem',
               marginTop: '0.5rem',
               wordBreak: 'break-all',
+              paddingInline: "1rem",
+              lineHeight: '2rem'
             }}
           >
-            URL: {mediaUrl}
+            <span style={{ userSelect: 'none', color: 'var(--theme-elevation-600)' }}>URL:</span> {" "} <span style={{ color: 'var(--theme-elevation-750)' }}>{mediaUrl}</span>
           </div>
         </div>
       )}
