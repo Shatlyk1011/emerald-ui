@@ -26,14 +26,14 @@ const Header = () => {
           <span className=''>Logo</span>
         </Link>
 
-        <nav className='flex flex-1 justify-center'>
-          <ul className='-tracking-one flex items-center text-sm font-medium max-sm:text-sm'>
+        <nav className='flex flex-1 justify-start text-muted-foreground'>
+          <ul className='tracking-one flex items-center text-sm font-medium max-sm:text-sm'>
             <li>
               <Link
                 href={home}
                 className={cn(
-                  'px-4 py-2 transition max-sm:px-2',
-                  pathname === home && 'text-chart-2 font-medium opacity-100'
+                  'px-3 py-2 transition ease-out max-sm:px-2 hover:bg-primary/5 hover:text-foreground rounded-md',
+                  pathname === home && 'text-foreground font-medium opacity-100'
                 )}
               >
                 Home
@@ -43,9 +43,9 @@ const Header = () => {
               <Link
                 href={inspiration}
                 className={cn(
-                  'px-4 py-2 transition max-sm:px-2',
+                  'px-3 py-2 transition ease-out max-sm:px-2 hover:bg-primary/5 hover:text-foreground rounded-md',
                   pathname === inspiration &&
-                    'text-chart-2 font-medium opacity-100'
+                  'text-foreground font-medium opacity-100'
                 )}
               >
                 Inspiration
@@ -55,9 +55,9 @@ const Header = () => {
               <Link
                 href={components}
                 className={cn(
-                  'px-4 py-2.5 transition max-sm:px-2',
+                  'px-3 py-2 transition ease-out max-sm:px-2 hover:bg-primary/5 hover:text-foreground rounded-md',
                   pathname === components &&
-                    'text-chart-2 font-medium opacity-100'
+                  'text-foreground font-medium opacity-100'
                 )}
               >
                 Node UI
@@ -67,8 +67,8 @@ const Header = () => {
               <Link
                 href={pricing}
                 className={cn(
-                  'px-4 py-2.5 transition max-sm:px-2',
-                  pathname === pricing && 'text-chart-2 font-medium opacity-100'
+                  'px-3 py-2 transition ease-out max-sm:px-2 hover:bg-primary/5 hover:text-foreground rounded-md',
+                  pathname === pricing && 'text-foreground font-medium opacity-100'
                 )}
               >
                 Pricing

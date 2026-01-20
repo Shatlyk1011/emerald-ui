@@ -50,5 +50,5 @@ Global:
 - add seo (blog)
 
 <!--
-  in the /results page, there is editor with editor and chat tabs.
+  in the /results page, there is editor with editor and chat tabs. in chat component, add mock chat history with agent and user
  -->
