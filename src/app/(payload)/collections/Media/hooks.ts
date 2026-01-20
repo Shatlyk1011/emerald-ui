@@ -1,7 +1,10 @@
-import { CollectionBeforeDeleteHook } from 'payload'
+import { CollectionBeforeDeleteHook, withNullableJSONSchemaType } from 'payload'
 import { deleteMediaFromUrl } from '../../utils/supabase'
 
-export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({ req, id }) => {
+export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({
+  req,
+  id,
+}) => {
   try {
     // Fetch the document to get the mediaUrl before deletion
     const doc = await req.payload.findByID({
@@ -19,8 +22,34 @@ export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({ req, id }) 
 
       console.log(`Deleted media file from ${bucket} bucket: ${doc.mediaUrl}`)
     }
+
+    // Clean up references in InspirationWebsites collection
+    const referencingWebsites = await req.payload.find({
+      collection: 'inspiration-websites',
+      where: {
+        additionalMedia: {
+          equals: id,
+        },
+      },
+    })
+
+    // Update each website to remove the reference
+    if (referencingWebsites.docs.length > 0) {
+      for (const website of referencingWebsites.docs) {
+        await req.payload.update({
+          collection: 'inspiration-websites',
+          id: website.id,
+          data: {
+            additionalMedia: null,
+            additionalMediaType: null,
+          },
+        })
+      }
+      console.log(
+        `Cleaned up ${referencingWebsites.docs.length} media reference(s) from InspirationWebsites`
+      )
+    }
   } catch (error) {
     console.error('Error deleting media file from storage:', error)
-    // Don't throw - we don't want to block deletion if storage cleanup fails
   }
 }
