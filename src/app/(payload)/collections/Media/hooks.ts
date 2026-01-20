@@ -1,4 +1,4 @@
-import { CollectionBeforeDeleteHook, withNullableJSONSchemaType } from 'payload'
+import { CollectionBeforeDeleteHook, CollectionAfterChangeHook } from 'payload'
 import { deleteMediaFromUrl } from '../../utils/supabase'
 
 export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({
@@ -52,4 +52,45 @@ export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({
   } catch (error) {
     console.error('Error deleting media file from storage:', error)
   }
+}
+
+export const afterChangeHook: CollectionAfterChangeHook = async ({
+  doc,
+  req,
+  operation,
+}) => {
+  // Only run on create operations
+  if (operation === 'create' && doc.pageUrl) {
+    try {
+      // Find WebsiteInspiration items with matching pageUrl
+      const matchingWebsites = await req.payload.find({
+        collection: 'inspiration-websites',
+        where: {
+          pageUrl: {
+            equals: doc.pageUrl,
+          },
+        },
+      })
+
+      // Update each matching website to reference this media
+      if (matchingWebsites.docs.length > 0) {
+        for (const website of matchingWebsites.docs) {
+          await req.payload.update({
+            collection: 'inspiration-websites',
+            id: website.id,
+            data: {
+              additionalMedia: doc.id,
+            },
+          })
+        }
+        console.log(
+          `Linked Media item ${doc.id} to ${matchingWebsites.docs.length} WebsiteInspiration item(s)`
+        )
+      }
+    } catch (error) {
+      console.error('Error linking media to website inspiration:', error)
+    }
+  }
+
+  return doc
 }

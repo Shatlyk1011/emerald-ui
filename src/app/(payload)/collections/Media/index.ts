@@ -1,12 +1,13 @@
 import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins';
-import { beforeDeleteHook } from './hooks'
+import { beforeDeleteHook, afterChangeHook } from './hooks';
 
 const Media: CollectionConfig = {
   slug: 'media',
 
   hooks: {
     beforeDelete: [beforeDeleteHook],
+    afterChange: [afterChangeHook],
   },
 
   access: {
@@ -17,13 +18,13 @@ const Media: CollectionConfig = {
   },
 
   admin: {
-    defaultColumns: ['siteUrl', 'mediaUrl', 'description'],
-    useAsTitle: 'siteUrl',
+    defaultColumns: ['pageUrl', 'mediaUrl', 'description'],
+    useAsTitle: 'pageUrl',
   },
 
   fields: [
     {
-      name: 'siteUrl',
+      name: 'pageUrl',
       label: 'Site URL',
       required: true,
       type: 'text',
