@@ -2,11 +2,6 @@ import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins';
 import { beforeDeleteHook, afterChangeHook } from './hooks';
 
-
-
-
-
-
 const Media: CollectionConfig = {
   slug: 'media',
 

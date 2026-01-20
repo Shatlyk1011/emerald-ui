@@ -1,5 +1,9 @@
-import { CollectionBeforeDeleteHook, CollectionAfterChangeHook } from 'payload'
-import { deleteMediaFromUrl } from '../../utils/supabase'
+import { CollectionBeforeDeleteHook, CollectionAfterChangeHook } from 'payload';
+import { deleteMediaFromUrl } from '../../utils/supabase';
+
+
+
+
 
 export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({
   req,
@@ -61,12 +65,15 @@ export const afterChangeHook: CollectionAfterChangeHook = async ({
   // Only run on create operations
   if (operation === 'create' && doc.pageUrl) {
     try {
-      // Find WebsiteInspiration items with matching pageUrl
+      const normalizedUrl = doc.pageUrl.replace(/\/$/, '')
+      const urlsToMatch = [normalizedUrl, `${normalizedUrl}/`]
+
+      // Find WebsiteInspiration items with matching pageUrl (ignoring trailing slash)
       const matchingWebsites = await req.payload.find({
         collection: 'inspiration-websites',
         where: {
           pageUrl: {
-            equals: doc.pageUrl,
+            in: urlsToMatch,
           },
         },
       })
