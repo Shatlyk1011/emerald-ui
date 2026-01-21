@@ -67,8 +67,8 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    media: Media;
     'inspiration-websites': InspirationWebsite;
+    media: Media;
     categories: Category;
     'website-style': WebsiteStyle;
     adminUsers: AdminUser;
@@ -79,8 +79,8 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    media: MediaSelect<false> | MediaSelect<true>;
     'inspiration-websites': InspirationWebsitesSelect<false> | InspirationWebsitesSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'website-style': WebsiteStyleSelect<false> | WebsiteStyleSelect<true>;
     adminUsers: AdminUsersSelect<false> | AdminUsersSelect<true>;
@@ -122,31 +122,6 @@ export interface AdminUserAuthOperations {
   };
 }
 /**
- * Upload and manage additional media assets (images and videos) for inspiration websites. Media items are automatically linked to InspirationWebsites when pageUrl matches.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: string;
-  /**
-   * The original website's url
-   */
-  pageUrl: string;
-  /**
-   * Type of media (auto-detected from file)
-   */
-  type?: ('image' | 'video') | null;
-  /**
-   * Upload image or video directly to Supabase
-   */
-  mediaUrl?: string | null;
-  altText?: string | null;
-  description?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
  * Main collection for storing website inspiration entries. Automatically captures screenshots and favicons from provided URLs. Supports categorization, styling tags, and additional media attachments.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -180,6 +155,31 @@ export interface InspirationWebsite {
   additionalMedia?: (string | null) | Media;
   mode?: ('dark' | 'light' | 'hybrid') | null;
   isVisible?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Upload and manage additional media assets (images and videos) for inspiration websites. Media items are automatically linked to InspirationWebsites when pageUrl matches.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: string;
+  /**
+   * The original website's url
+   */
+  pageUrl: string;
+  /**
+   * Type of media (auto-detected from file)
+   */
+  type?: ('image' | 'video') | null;
+  /**
+   * Upload image or video directly to Supabase
+   */
+  mediaUrl?: string | null;
+  altText?: string | null;
+  description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -262,12 +262,12 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
-        relationTo: 'media';
-        value: string | Media;
-      } | null)
-    | ({
         relationTo: 'inspiration-websites';
         value: string | InspirationWebsite;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: string | Media;
       } | null)
     | ({
         relationTo: 'categories';
@@ -329,19 +329,6 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
- */
-export interface MediaSelect<T extends boolean = true> {
-  pageUrl?: T;
-  type?: T;
-  mediaUrl?: T;
-  altText?: T;
-  description?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "inspiration-websites_select".
  */
 export interface InspirationWebsitesSelect<T extends boolean = true> {
@@ -356,6 +343,19 @@ export interface InspirationWebsitesSelect<T extends boolean = true> {
   additionalMedia?: T;
   mode?: T;
   isVisible?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  pageUrl?: T;
+  type?: T;
+  mediaUrl?: T;
+  altText?: T;
+  description?: T;
   updatedAt?: T;
   createdAt?: T;
 }

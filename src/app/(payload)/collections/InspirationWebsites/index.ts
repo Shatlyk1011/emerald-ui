@@ -189,20 +189,7 @@ const InspirationWebsites: CollectionConfig = {
         },
       },
     },
-
-    {
-      name: 'mode',
-      type: 'select',
-      options: [
-        { label: 'Dark', value: 'dark' },
-        { label: 'Light', value: 'light' },
-        { label: 'Hybrid', value: 'hybrid' },
-      ],
-      required: false,
-      admin: {
-        position: 'sidebar',
-      },
-    },
+    
     {
       name: 'isVisible',
       type: 'checkbox',

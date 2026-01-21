@@ -132,3 +132,10 @@
     @apply bg-background text-foreground overflow-x-hidden font-sans;
   }
 }
+
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+}
