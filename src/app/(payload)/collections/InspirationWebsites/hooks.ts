@@ -1,13 +1,11 @@
 import type { CollectionBeforeDeleteHook, CollectionBeforeChangeHook } from 'payload';
-import {
-  extractGradientColor,
-  extractGradientColorFromUrl,
-} from '../../utils/extractColor'
+import { extractGradientColor } from '../../utils/extractColor'
 import {
   deleteMediaFromUrl,
   uploadScreenshot,
   uploadFavicon,
 } from '../../utils/supabase'
+import { createUrlSlug, getFaviconExtension } from './utils'
 
 export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({
   id,
@@ -83,7 +81,7 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({
 
         // Extract gradient color from the screenshot buffer
         try {
-          const gradientColor = await extractGradientColor(screenshotBuffer)
+          const gradientColor = await extractGradientColor(publicUrl)
           data.gradientColor = gradientColor
           console.log('Gradient color extracted:', gradientColor)
         } catch (error) {
@@ -100,78 +98,27 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({
   // Handle favicon download and upload
   if (data && data.faviconUrl && !data.favicon) {
     try {
-      const faviconRes = await fetch(data.faviconUrl)
-
-      if (faviconRes.ok) {
-        const buffer = await faviconRes.arrayBuffer()
-        const faviconBuffer = Buffer.from(buffer)
-
-        // Detect content type from response headers
-        const contentType =
-          faviconRes.headers.get('content-type') || 'image/x-icon'
-
-        // Determine file extension based on content type or URL
-        let extension = 'ico'
-        if (contentType.includes('svg')) {
-          extension = 'svg'
-        } else if (contentType.includes('png')) {
-          extension = 'png'
-        } else if (
-          contentType.includes('jpeg') ||
-          contentType.includes('jpg')
-        ) {
-          extension = 'jpg'
-        } else if (contentType.includes('webp')) {
-          extension = 'webp'
-        } else if (contentType.includes('gif')) {
-          extension = 'gif'
-        } else {
-          // Try to extract extension from URL as fallback
-          const urlPath = new URL(data.faviconUrl).pathname
-          const urlExtension = urlPath.split('.').pop()?.toLowerCase()
-          if (
-            urlExtension &&
-            ['svg', 'png', 'jpg', 'jpeg', 'webp', 'gif', 'ico'].includes(
-              urlExtension
-            )
-          ) {
-            extension = urlExtension === 'jpeg' ? 'jpg' : urlExtension
-          }
-        }
-
-        // Create filename from the URL
-        const urlSlug = data.pageUrl
-          ? data.pageUrl
-              .replace(/^https?:\/\//, '')
-              .replace(/[^a-z0-9]/gi, '-')
-              .toLowerCase()
-          : data.faviconUrl
-              .replace(/^https?:\/\//, '')
-              .replace(/[^a-z0-9]/gi, '-')
-              .toLowerCase()
-
-        const filename = `${urlSlug}.${extension}`
-
-        const publicUrl = await uploadFavicon(
-          faviconBuffer,
-          filename,
-          contentType
-        )
-
-        data.favicon = publicUrl
-        console.log(
-          'Favicon downloaded and uploaded:',
-          publicUrl,
-          'as',
-          contentType
-        )
-      } else {
-        console.error(
-          'Favicon download error:',
-          faviconRes.status,
-          faviconRes.statusText
-        )
+      const res = await fetch(data.faviconUrl)
+      if (!res.ok) {
+        console.error('Favicon download error:', res.status, res.statusText)
+        return
       }
+
+      const buffer = Buffer.from(await res.arrayBuffer())
+      const contentType = res.headers.get('content-type') ?? 'image/x-icon'
+
+      const extension = getFaviconExtension(contentType, data.faviconUrl)
+      const filename = `${createUrlSlug(data.pageUrl ?? data.faviconUrl)}.${extension}`
+
+      const publicUrl = await uploadFavicon(buffer, filename, contentType)
+
+      data.favicon = publicUrl
+      console.log(
+        'Favicon downloaded and uploaded:',
+        publicUrl,
+        'as',
+        contentType
+      )
     } catch (error) {
       console.error('Error processing favicon:', error)
     }
@@ -185,7 +132,7 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({
     data.imgUrl !== originalDoc.imgUrl
   ) {
     try {
-      const gradientColor = await extractGradientColorFromUrl(data.imgUrl)
+      const gradientColor = await extractGradientColor(data.imgUrl)
       data.gradientColor = gradientColor
       console.log('Gradient color extracted from manual URL:', gradientColor)
     } catch (error) {
