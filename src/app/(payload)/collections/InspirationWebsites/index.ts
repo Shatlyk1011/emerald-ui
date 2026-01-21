@@ -22,11 +22,6 @@ import { beforeDeleteHook, beforeChangeHook } from './hooks';
 
 
 
-
-
-
-
-
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
   access: {
@@ -189,7 +184,18 @@ const InspirationWebsites: CollectionConfig = {
         },
       },
     },
-    
+
+    {
+      name: 'gradientColor',
+      type: 'text',
+      required: false,
+      defaultValue: 'transparent',
+      admin: {
+        description: 'Pre-computed gradient color extracted from screenshot',
+        position: 'sidebar',
+      },
+    },
+
     {
       name: 'isVisible',
       type: 'checkbox',

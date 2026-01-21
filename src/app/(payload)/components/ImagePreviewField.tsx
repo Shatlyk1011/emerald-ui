@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { useField } from '@payloadcms/ui'
 
 export const ImagePreviewField = () => {
-  const { value, setValue } = useField<string>({ path: 'imgUrl' })
+  const { value: imgUrl, setValue: setImgUrl } = useField<string>({ path: 'imgUrl' })
+  const { setValue: setGradientColor } = useField<string>({ path: 'gradientColor' })
   const [uploading, setUploading] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -43,7 +44,7 @@ export const ImagePreviewField = () => {
       const data = await response.json()
 
       // Update the imgUrl field with the uploaded image URL
-      setValue(data.url)
+      setImgUrl(data.url)
       console.log('Image uploaded successfully:', data.url)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload failed')
@@ -55,7 +56,7 @@ export const ImagePreviewField = () => {
   }
 
   const handleDelete = async () => {
-    if (!value || !confirm('Are you sure you want to delete this image?')) {
+    if (!imgUrl || !confirm('Are you sure you want to delete this image?')) {
       return
     }
 
@@ -68,7 +69,7 @@ export const ImagePreviewField = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ url: value, bucket: 'images' }),
+        body: JSON.stringify({ url: imgUrl, bucket: 'images' }),
       })
 
       if (!response.ok) {
@@ -77,7 +78,8 @@ export const ImagePreviewField = () => {
       }
 
       // Clear the field value
-      setValue(null)
+      setImgUrl(null)
+      setGradientColor("transparent")
       console.log('Image deleted successfully')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Delete failed')
@@ -88,7 +90,7 @@ export const ImagePreviewField = () => {
   }
 
   // Show upload UI when no image exists
-  if (!value) {
+  if (!imgUrl) {
     return (
       <div style={{ marginTop: '1rem' }}>
         <div
@@ -260,7 +262,7 @@ export const ImagePreviewField = () => {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={value}
+          src={imgUrl}
           alt="Preview"
           style={{
             maxWidth: '100%',

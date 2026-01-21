@@ -1,13 +1,13 @@
 import type { CollectionBeforeDeleteHook, CollectionBeforeChangeHook } from 'payload';
-import { deleteMediaFromUrl, uploadScreenshot, uploadFavicon } from '../../utils/supabase';
-
-
-
-
-
-
-
-
+import {
+  extractGradientColor,
+  extractGradientColorFromUrl,
+} from '../../utils/extractColor'
+import {
+  deleteMediaFromUrl,
+  uploadScreenshot,
+  uploadFavicon,
+} from '../../utils/supabase'
 
 export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({
   id,
@@ -80,6 +80,15 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({
 
         data.imgUrl = publicUrl
         console.log('Screenshot captured and uploaded:', publicUrl)
+
+        // Extract gradient color from the screenshot buffer
+        try {
+          const gradientColor = await extractGradientColor(screenshotBuffer)
+          data.gradientColor = gradientColor
+          console.log('Gradient color extracted:', gradientColor)
+        } catch (error) {
+          console.error('Error extracting gradient color:', error)
+        }
       } else {
         console.error('Scrnify API error:', res.status, res.statusText)
       }
@@ -165,6 +174,22 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({
       }
     } catch (error) {
       console.error('Error processing favicon:', error)
+    }
+  }
+
+  // Handle manual image URL changes - extract color from the new URL
+  if (
+    data &&
+    data.imgUrl &&
+    originalDoc &&
+    data.imgUrl !== originalDoc.imgUrl
+  ) {
+    try {
+      const gradientColor = await extractGradientColorFromUrl(data.imgUrl)
+      data.gradientColor = gradientColor
+      console.log('Gradient color extracted from manual URL:', gradientColor)
+    } catch (error) {
+      console.error('Error extracting gradient color from URL:', error)
     }
   }
 
