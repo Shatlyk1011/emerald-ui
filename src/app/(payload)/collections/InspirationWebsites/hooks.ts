@@ -5,6 +5,10 @@ import { deleteMediaFromUrl, uploadScreenshot, uploadFavicon } from '../../utils
 
 
 
+
+
+
+
 export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({
   id,
   req,
@@ -85,7 +89,7 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({
   }
 
   // Handle favicon download and upload
-  if (data && data.faviconUrl && !data.favicon && isCreating) {
+  if (data && data.faviconUrl && !data.favicon) {
     try {
       const faviconRes = await fetch(data.faviconUrl)
 
