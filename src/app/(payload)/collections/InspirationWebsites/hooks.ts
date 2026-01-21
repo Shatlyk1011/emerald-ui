@@ -1,5 +1,9 @@
-import type { CollectionBeforeDeleteHook, CollectionBeforeChangeHook } from 'payload'
-import { deleteMediaFromUrl, uploadScreenshot, uploadFavicon } from '../../utils/supabase'
+import type { CollectionBeforeDeleteHook, CollectionBeforeChangeHook } from 'payload';
+import { deleteMediaFromUrl, uploadScreenshot, uploadFavicon } from '../../utils/supabase';
+
+
+
+
 
 export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({ id, req }) => {
   try {
@@ -78,6 +82,39 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({ data }) => 
         const buffer = await faviconRes.arrayBuffer()
         const faviconBuffer = Buffer.from(buffer)
 
+        // Detect content type from response headers
+        const contentType =
+          faviconRes.headers.get('content-type') || 'image/x-icon'
+
+        // Determine file extension based on content type or URL
+        let extension = 'ico'
+        if (contentType.includes('svg')) {
+          extension = 'svg'
+        } else if (contentType.includes('png')) {
+          extension = 'png'
+        } else if (
+          contentType.includes('jpeg') ||
+          contentType.includes('jpg')
+        ) {
+          extension = 'jpg'
+        } else if (contentType.includes('webp')) {
+          extension = 'webp'
+        } else if (contentType.includes('gif')) {
+          extension = 'gif'
+        } else {
+          // Try to extract extension from URL as fallback
+          const urlPath = new URL(data.faviconUrl).pathname
+          const urlExtension = urlPath.split('.').pop()?.toLowerCase()
+          if (
+            urlExtension &&
+            ['svg', 'png', 'jpg', 'jpeg', 'webp', 'gif', 'ico'].includes(
+              urlExtension
+            )
+          ) {
+            extension = urlExtension === 'jpeg' ? 'jpg' : urlExtension
+          }
+        }
+
         // Create filename from the URL
         const urlSlug = data.pageUrl
           ? data.pageUrl
@@ -89,12 +126,21 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({ data }) => 
               .replace(/[^a-z0-9]/gi, '-')
               .toLowerCase()
 
-        const filename = `${urlSlug}.webp`
+        const filename = `${urlSlug}.${extension}`
 
-        const publicUrl = await uploadFavicon(faviconBuffer, filename)
+        const publicUrl = await uploadFavicon(
+          faviconBuffer,
+          filename,
+          contentType
+        )
 
         data.favicon = publicUrl
-        console.log('Favicon downloaded and uploaded:', publicUrl)
+        console.log(
+          'Favicon downloaded and uploaded:',
+          publicUrl,
+          'as',
+          contentType
+        )
       } else {
         console.error(
           'Favicon download error:',

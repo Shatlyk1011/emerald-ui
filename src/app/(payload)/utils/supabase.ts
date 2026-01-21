@@ -9,6 +9,9 @@ import { createClient } from '@supabase/supabase-js';
 
 
 
+
+
+
 // Initialize Supabase client
 const supabaseUrl = process.env.SUPABASE_URL || ''
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || ''
@@ -61,18 +64,20 @@ export async function uploadScreenshot(
  * Upload favicon to Supabase storage
  * @param imageBuffer - Buffer containing the favicon image data
  * @param filename - Name for the uploaded file
+ * @param contentType - MIME type of the favicon (default: 'image/x-icon')
  * @returns Public URL of the uploaded favicon
  */
 export async function uploadFavicon(
   imageBuffer: Buffer,
-  filename: string
+  filename: string,
+  contentType: string = 'image/x-icon'
 ): Promise<string> {
   try {
     // Upload to Supabase storage
     const { data, error } = await supabase.storage
       .from(faviconsBucket)
       .upload(filename, imageBuffer, {
-        contentType: 'image/webp',
+        contentType,
         upsert: true,
       })
 
