@@ -1,11 +1,7 @@
 import type { CollectionBeforeDeleteHook, CollectionBeforeChangeHook } from 'payload';
-import { extractGradientColor } from '../../utils/extractColor'
-import {
-  deleteMediaFromUrl,
-  uploadScreenshot,
-  uploadFavicon,
-} from '../../utils/supabase'
-import { createUrlSlug, getFaviconExtension } from './utils'
+import { extractGradientColor } from '../../utils/extractColor';
+import { deleteMediaFromUrl, uploadScreenshot, uploadFavicon } from '../../utils/supabase';
+import { createUrlSlug, getFaviconExtension } from './utils';
 
 export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({
   id,

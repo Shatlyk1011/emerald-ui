@@ -30,6 +30,7 @@ const InspirationWebsites: CollectionConfig = {
           const gradientColor = await extractGradientColor(doc.imgUrl)
           doc.gradientColor = gradientColor
         }
+        return doc
       },
     ],
   },
