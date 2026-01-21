@@ -67,11 +67,11 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    adminUsers: AdminUser;
+    media: Media;
+    'inspiration-websites': InspirationWebsite;
     categories: Category;
     'website-style': WebsiteStyle;
-    'inspiration-websites': InspirationWebsite;
-    media: Media;
+    adminUsers: AdminUser;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -79,11 +79,11 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    adminUsers: AdminUsersSelect<false> | AdminUsersSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    'inspiration-websites': InspirationWebsitesSelect<false> | InspirationWebsitesSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'website-style': WebsiteStyleSelect<false> | WebsiteStyleSelect<true>;
-    'inspiration-websites': InspirationWebsitesSelect<false> | InspirationWebsitesSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
+    adminUsers: AdminUsersSelect<false> | AdminUsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -122,54 +122,33 @@ export interface AdminUserAuthOperations {
   };
 }
 /**
+ * Upload and manage additional media assets (images and videos) for inspiration websites. Media items are automatically linked to InspirationWebsites when pageUrl matches.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "adminUsers".
+ * via the `definition` "media".
  */
-export interface AdminUser {
+export interface Media {
   id: string;
-  name?: string | null;
-  phone?: string | null;
-  isBlocked?: boolean | null;
-  roles?: ('admin' | 'moderator' | 'guest')[] | null;
+  /**
+   * The original website's url
+   */
+  pageUrl: string;
+  /**
+   * Type of media (auto-detected from file)
+   */
+  type?: ('image' | 'video') | null;
+  /**
+   * Upload image or video directly to Supabase
+   */
+  mediaUrl?: string | null;
+  altText?: string | null;
+  description?: string | null;
   updatedAt: string;
   createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
 }
 /**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: string;
-  category: string;
-  value: string;
-  order?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "website-style".
- */
-export interface WebsiteStyle {
-  id: string;
-  style: string;
-  value: string;
-  order?: number | null;
-}
-/**
+ * Main collection for storing website inspiration entries. Automatically captures screenshots and favicons from provided URLs. Supports categorization, styling tags, and additional media attachments.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "inspiration-websites".
  */
@@ -205,27 +184,58 @@ export interface InspirationWebsite {
   createdAt: string;
 }
 /**
+ * Manage website categories for organizing inspiration entries. Categories provide taxonomical classification to help filter and group websites by type or purpose.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
+ * via the `definition` "categories".
  */
-export interface Media {
+export interface Category {
   id: string;
-  /**
-   * The original website's url
-   */
-  pageUrl: string;
-  /**
-   * Type of media (auto-detected from file)
-   */
-  type?: ('image' | 'video') | null;
-  /**
-   * Upload image or video directly to Supabase
-   */
-  mediaUrl?: string | null;
-  altText?: string | null;
-  description?: string | null;
+  category: string;
+  value: string;
+  order?: number | null;
+}
+/**
+ * Define and manage style tags for inspiration websites. Style tags help categorize websites by visual design patterns, aesthetics, or UI/UX approaches (e.g., minimalist, glassmorphism, dark mode).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "website-style".
+ */
+export interface WebsiteStyle {
+  id: string;
+  style: string;
+  value: string;
+  order?: number | null;
+}
+/**
+ * Manage admin panel users and their access permissions. Configure user roles (admin, moderator, guest) to control who can create, edit, and delete content.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "adminUsers".
+ */
+export interface AdminUser {
+  id: string;
+  name?: string | null;
+  phone?: string | null;
+  isBlocked?: boolean | null;
+  roles?: ('admin' | 'moderator' | 'guest')[] | null;
   updatedAt: string;
   createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -252,8 +262,12 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
-        relationTo: 'adminUsers';
-        value: string | AdminUser;
+        relationTo: 'media';
+        value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'inspiration-websites';
+        value: string | InspirationWebsite;
       } | null)
     | ({
         relationTo: 'categories';
@@ -264,12 +278,8 @@ export interface PayloadLockedDocument {
         value: string | WebsiteStyle;
       } | null)
     | ({
-        relationTo: 'inspiration-websites';
-        value: string | InspirationWebsite;
-      } | null)
-    | ({
-        relationTo: 'media';
-        value: string | Media;
+        relationTo: 'adminUsers';
+        value: string | AdminUser;
       } | null)
     | ({
         relationTo: 'payload-kv';
@@ -319,6 +329,56 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  pageUrl?: T;
+  type?: T;
+  mediaUrl?: T;
+  altText?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "inspiration-websites_select".
+ */
+export interface InspirationWebsitesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  category?: T;
+  style?: T;
+  pageUrl?: T;
+  imgUrl?: T;
+  faviconUrl?: T;
+  favicon?: T;
+  additionalMedia?: T;
+  mode?: T;
+  isVisible?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  category?: T;
+  value?: T;
+  order?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "website-style_select".
+ */
+export interface WebsiteStyleSelect<T extends boolean = true> {
+  style?: T;
+  value?: T;
+  order?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "adminUsers_select".
  */
 export interface AdminUsersSelect<T extends boolean = true> {
@@ -342,56 +402,6 @@ export interface AdminUsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories_select".
- */
-export interface CategoriesSelect<T extends boolean = true> {
-  category?: T;
-  value?: T;
-  order?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "website-style_select".
- */
-export interface WebsiteStyleSelect<T extends boolean = true> {
-  style?: T;
-  value?: T;
-  order?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "inspiration-websites_select".
- */
-export interface InspirationWebsitesSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  category?: T;
-  style?: T;
-  pageUrl?: T;
-  imgUrl?: T;
-  faviconUrl?: T;
-  favicon?: T;
-  additionalMedia?: T;
-  mode?: T;
-  isVisible?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
- */
-export interface MediaSelect<T extends boolean = true> {
-  pageUrl?: T;
-  type?: T;
-  mediaUrl?: T;
-  altText?: T;
-  description?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

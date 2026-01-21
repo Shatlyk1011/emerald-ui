@@ -16,6 +16,14 @@ function SiteCard({ item }: SiteCardProps) {
     openSiteDialog(item)
   }
 
+  // Determine which media to display (prioritize additionalMedia)
+  const displayMedia =
+    item.additionalMedia && typeof item.additionalMedia === 'object' && item.additionalMedia.mediaUrl
+      ? item.additionalMedia
+      : null
+  const displayUrl = displayMedia?.mediaUrl || item.imgUrl
+  const isVideo = displayMedia?.type === 'video'
+
   return (
     <div
       className='group relative flex cursor-pointer flex-col gap-3'
@@ -24,13 +32,24 @@ function SiteCard({ item }: SiteCardProps) {
     >
       <div className='bg-card border-border/50 group-hover:border-border relative rounded-xl border px-8 py-16 shadow-lg transition-colors'>
         <div className='relative aspect-4/3 w-full overflow-hidden'>
-          <figure className='bg- absolute inset-0 overflow-hidden rounded-lg'>
-            {item.imgUrl ? (
-              <img
-                src={item.imgUrl}
-                className='h-full w-full object-cover'
-                alt={item.title + 'image'}
-              />
+          <figure className='absolute inset-0 overflow-hidden rounded-lg'>
+            {displayUrl ? (
+              isVideo ? (
+                <video
+                  src={displayUrl}
+                  className='h-full w-full object-cover'
+                  muted
+                  autoPlay
+                  loop
+                  playsInline
+                />
+              ) : (
+                <img
+                    src={displayUrl}
+                    className='h-full w-full object-cover'
+                    alt={item.title + ' image'}
+                  />
+                )
             ) : (
               <span>no image</span>
             )}
@@ -39,7 +58,7 @@ function SiteCard({ item }: SiteCardProps) {
           {/* Badges */}
         </div>
         {isNew && (
-          <span className='bg-background text-foreground tracking-four border-border absolute top-3 left-3 rounded-md border px-2 py-2.5 font-sans text-xs leading-0 font-semibold uppercase'>
+          <span className='bg-background font-mono text-foreground tracking-[0.1em] border-border absolute top-3 left-3 rounded-md border px-2 py-2.5 text-[11px] leading-0 font-semibold uppercase'>
             New
           </span>
         )}
