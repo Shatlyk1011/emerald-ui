@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useAppStore } from '@/store/useAppStore'
-import { DEMO_SITE } from '@/lib/constants'
+import { DEMO_SITE, MOCK_CHAT_HISTORY } from '@/lib/constants'
 import {
   ResizableHandle,
   ResizablePanel,
@@ -24,6 +24,7 @@ root.render(<App />);
 `,
   '/App.jsx': '',
 }
+
 export default function GlobalPlayground() {
   const generatedFiles = useAppStore((state) => state.generatedFiles)
   console.log('generatedFiles', generatedFiles)
@@ -113,9 +114,36 @@ export default function GlobalPlayground() {
                   className='mt-0 min-h-0 flex-1 flex-col p-4 data-[state=active]:flex'
                 >
                   <div className='flex h-full flex-col gap-4'>
-                    <div className='bg-muted/20 flex-1 rounded-lg border p-4'>
-                      <div className='text-muted-foreground mt-10 text-center text-sm'>
-                        Chat history will appear here...
+                    <div className='bg-muted/20 flex-1 overflow-y-auto rounded-lg border p-4'>
+                      <div className='flex flex-col gap-4'>
+                        {MOCK_CHAT_HISTORY.map((message) => (
+                          <div
+                            key={message.id}
+                            className={`flex ${message.role === 'user'
+                                ? 'justify-end'
+                                : 'justify-start'
+                              }`}
+                          >
+                            <div
+                              className={`max-w-[80%] rounded-lg px-4 py-2 ${message.role === 'user'
+                                  ? 'bg-primary text-primary-foreground'
+                                  : 'bg-muted text-foreground'
+                                }`}
+                            >
+                              <div className='flex items-center gap-2 mb-1'>
+                                <span className='text-xs font-semibold'>
+                                  {message.role === 'user' ? 'You' : 'Agent'}
+                                </span>
+                                <span className='text-xs opacity-70'>
+                                  {message.timestamp}
+                                </span>
+                              </div>
+                              <p className='text-sm leading-relaxed'>
+                                {message.content}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
                     <div className='flex gap-2'>

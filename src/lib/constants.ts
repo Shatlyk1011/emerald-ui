@@ -133,3 +133,45 @@ export default function Footer() {
 }
 `,
 }
+
+export const MOCK_CHAT_HISTORY = [
+  {
+    id: 1,
+    role: 'user',
+    content: 'Create a modern landing page with a hero section',
+    timestamp: '10:30 AM',
+  },
+  {
+    id: 2,
+    role: 'agent',
+    content:
+      "I'll create a modern landing page with a hero section for you. I'll include a gradient background, compelling headline, and call-to-action buttons.",
+    timestamp: '10:30 AM',
+  },
+  {
+    id: 3,
+    role: 'user',
+    content: 'Can you add a features section below the hero?',
+    timestamp: '10:32 AM',
+  },
+  {
+    id: 4,
+    role: 'agent',
+    content:
+      "Absolutely! I've added a features section with three feature cards showcasing key benefits. Each card has an icon, title, and description.",
+    timestamp: '10:32 AM',
+  },
+  {
+    id: 5,
+    role: 'user',
+    content: 'Make the buttons more prominent with better colors',
+    timestamp: '10:35 AM',
+  },
+  {
+    id: 6,
+    role: 'agent',
+    content:
+      "Done! I've updated the buttons with a vibrant gradient and added hover effects for better interactivity.",
+    timestamp: '10:35 AM',
+  },
+]
