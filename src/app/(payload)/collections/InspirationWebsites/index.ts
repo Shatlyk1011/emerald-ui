@@ -7,6 +7,11 @@ import { beforeDeleteHook, beforeChangeHook } from './hooks';
 
 
 
+
+
+
+
+
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
   access: {
@@ -53,6 +58,7 @@ const InspirationWebsites: CollectionConfig = {
 
     {
       name: 'pageUrl',
+      label: 'Site URL',
       type: 'text',
       required: false,
       admin: {

@@ -21,8 +21,8 @@ export default function Home() {
             Create apps and websites by chatting with AI
           </p>
         </div>
-        <FileUploadInput />
-        {/* <DesignGenerationApp /> */}
+        {/* <FileUploadInput /> */}
+        <DesignGenerationApp />
       </section>
       <div className='absolute top-0 left-0 -z-1 h-svh w-full'>
         <BackgroundThreads />
