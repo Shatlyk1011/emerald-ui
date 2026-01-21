@@ -5,7 +5,10 @@ import { deleteMediaFromUrl, uploadScreenshot, uploadFavicon } from '../../utils
 
 
 
-export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({ id, req }) => {
+export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({
+  id,
+  req,
+}) => {
   try {
     // Fetch the document to get image URLs
     const doc = await req.payload.findByID({
@@ -33,9 +36,17 @@ export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({ id, req }) 
   }
 }
 
-export const beforeChangeHook: CollectionBeforeChangeHook = async ({ data }) => {
+export const beforeChangeHook: CollectionBeforeChangeHook = async ({
+  data,
+  operation,
+  originalDoc,
+}) => {
+  // Only auto-fetch images and favicons on creation, not on updates
+  // This prevents re-fetching when users manually delete media
+  const isCreating = operation === 'create' || !originalDoc
+
   // Handle screenshot capture
-  if (data && data.pageUrl && !data.imgUrl) {
+  if (data && data.pageUrl && !data.imgUrl && isCreating) {
     try {
       // make screenshot
       const apiUrl = new URL('https://api.scrnify.com/capture')
@@ -74,7 +85,7 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({ data }) => 
   }
 
   // Handle favicon download and upload
-  if (data && data.faviconUrl && !data.favicon) {
+  if (data && data.faviconUrl && !data.favicon && isCreating) {
     try {
       const faviconRes = await fetch(data.faviconUrl)
 
@@ -155,3 +166,4 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({ data }) => 
 
   return data
 }
+
