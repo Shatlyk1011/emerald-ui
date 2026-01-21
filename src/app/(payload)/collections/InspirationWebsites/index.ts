@@ -1,26 +1,7 @@
 import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins';
-import { beforeDeleteHook, beforeChangeHook } from './hooks';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import { extractGradientColor } from '../../utils/extractColor'
+import { beforeDeleteHook, beforeChangeHook } from './hooks'
 
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
@@ -39,6 +20,18 @@ const InspirationWebsites: CollectionConfig = {
   hooks: {
     beforeDelete: [beforeDeleteHook],
     beforeChange: [beforeChangeHook],
+    beforeRead: [
+      async ({ doc }) => {
+        console.log('xxx', doc)
+        if (
+          (!doc.gradientColor || doc.gradientColor === 'transparent') &&
+          doc.imgUrl
+        ) {
+          const gradientColor = await extractGradientColor(doc.imgUrl)
+          doc.gradientColor = gradientColor
+        }
+      },
+    ],
   },
   fields: [
     {
