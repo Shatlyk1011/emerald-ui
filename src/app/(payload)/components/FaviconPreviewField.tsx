@@ -29,7 +29,8 @@ export const FaviconPreviewField = () => {
           padding: '0.5rem',
           backgroundColor: 'var(--theme-elevation-50)',
           maxWidth: '64px',
-          cursor: 'default',
+          display: 'flex',
+          justifyContent: 'center'
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}

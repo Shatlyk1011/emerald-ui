@@ -67,9 +67,9 @@ function SiteCard({ item }: SiteCardProps) {
       {/* Card Footer */}
       <div className='flex items-start gap-3 px-1'>
         <div className='bg-card mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md'>
-          {item.faviconUrl ? (
+          {item.favicon ? (
             <img
-              src={item.faviconUrl}
+              src={item.favicon}
               className='h-full w-full object-contain'
               alt=''
             />
