@@ -68,14 +68,14 @@ export default function SitePreviewDialog() {
                           muted
                           playsInline
                           loop
-                          className='h-full w-full object-cover'
+                          className='h-full w-full object-contain'
                           aria-label={selectedSite.additionalMedia.altText || `${selectedSite.title} video`}
                         />
                       ) : (
                         <img
                           src={selectedSite.additionalMedia!.mediaUrl!}
                           alt={selectedSite.additionalMedia!.altText || `${selectedSite.title} additional media`}
-                          className='h-full w-full object-cover'
+                            className='h-full w-full object-contain'
                         />
                       )}
                     </div>
@@ -90,7 +90,7 @@ export default function SitePreviewDialog() {
                     <img
                         src={selectedSite.imgUrl!}
                         alt={`${selectedSite.title} screenshot`}
-                        className='h-full w-full object-cover'
+                        className='h-full w-full object-contain'
                       />
                     </div>
                   )}
@@ -103,14 +103,14 @@ export default function SitePreviewDialog() {
                           muted
                           playsInline
                           loop
-                          className='h-full w-full object-cover'
+                          className='h-full w-full object-contain'
                           aria-label={selectedSite.additionalMedia!.altText || `${selectedSite.title} video`}
                         />
                       ) : (
                         <img
                           src={selectedSite.additionalMedia!.mediaUrl!}
                           alt={selectedSite.additionalMedia!.altText || `${selectedSite.title} additional media`}
-                          className='h-full w-full object-cover'
+                            className='h-full w-full object-contain'
                         />
                       )}
                     </div>

@@ -234,27 +234,17 @@ export const AdditionalMediaPreviewField = () => {
       </div>
       <div
         style={{
-          fontSize: '0.75rem',
-          color: 'var(--theme-elevation-600)',
+          fontSize: '1.25rem',
           marginTop: '0.5rem',
           wordBreak: 'break-all',
+          paddingBlock: "1rem",
+          lineHeight: '2rem'
         }}
       >
         <span style={{ userSelect: 'none', color: 'var(--theme-elevation-600)' }}>URL:</span> {" "} <span style={{ color: 'var(--theme-elevation-750)' }}>{mediaUrl}</span>
 
       </div>
-      {data.description && (
-        <div
-          style={{
-            fontSize: '0.875rem',
-            color: 'var(--theme-elevation-700)',
-            marginTop: '0.5rem',
-            fontStyle: 'italic',
-          }}
-        >
-          {data.description}
-        </div>
-      )}
+
     </div>
   )
 }
