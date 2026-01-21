@@ -2,6 +2,11 @@ import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins';
 import { beforeDeleteHook, afterChangeHook } from './hooks';
 
+
+
+
+
+
 const Media: CollectionConfig = {
   slug: 'media',
 
@@ -20,6 +25,8 @@ const Media: CollectionConfig = {
   admin: {
     defaultColumns: ['pageUrl', 'mediaUrl', 'description'],
     useAsTitle: 'pageUrl',
+    description:
+      'Upload and manage additional media assets (images and videos) for inspiration websites. Media items are automatically linked to InspirationWebsites when pageUrl matches.',
   },
 
   fields: [

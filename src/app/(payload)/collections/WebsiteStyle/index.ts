@@ -2,6 +2,16 @@ import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins'
 import { beforeChangeHook, afterChangeHook } from './hooks'
 
+
+
+
+
+
+
+
+
+
+
 const WebsiteStyle: CollectionConfig = {
   slug: 'website-style',
   hooks: {
@@ -17,8 +27,9 @@ const WebsiteStyle: CollectionConfig = {
 
   admin: {
     defaultColumns: ['style', 'value'],
-
     useAsTitle: 'style',
+    description:
+      'Define and manage style tags for inspiration websites. Style tags help categorize websites by visual design patterns, aesthetics, or UI/UX approaches (e.g., minimalist, glassmorphism, dark mode).',
   },
 
   fields: [
@@ -41,6 +52,9 @@ const WebsiteStyle: CollectionConfig = {
       label: 'Order',
       required: false,
       type: 'number',
+      admin: {
+        position: 'sidebar',
+      },
     },
   ],
   labels: { plural: 'Website Style', singular: 'Website Style' },

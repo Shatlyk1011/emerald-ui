@@ -1,5 +1,5 @@
 import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins';
+import { admins } from '../../utils/admins'
 import { afterChangeHook } from './hooks'
 
 const Categories: CollectionConfig = {
@@ -18,6 +18,8 @@ const Categories: CollectionConfig = {
   admin: {
     defaultColumns: ['category', 'value'],
     useAsTitle: 'category',
+    description:
+      'Manage website categories for organizing inspiration entries. Categories provide taxonomical classification to help filter and group websites by type or purpose.',
   },
 
   fields: [
@@ -40,6 +42,9 @@ const Categories: CollectionConfig = {
       label: 'Order',
       required: false,
       type: 'number',
+      admin: {
+        position: 'sidebar',
+      },
     },
   ],
   labels: { plural: 'Categories', singular: 'Category' },

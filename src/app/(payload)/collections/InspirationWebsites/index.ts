@@ -18,6 +18,8 @@ const InspirationWebsites: CollectionConfig = {
   admin: {
     defaultColumns: ['pageUrl', 'title', 'imgUrl', 'favicon'],
     useAsTitle: 'pageUrl',
+    description:
+      'Main collection for storing website inspiration entries. Automatically captures screenshots and favicons from provided URLs. Supports categorization, styling tags, and additional media attachments.',
   },
   hooks: {
     beforeDelete: [beforeDeleteHook],
@@ -55,6 +57,7 @@ const InspirationWebsites: CollectionConfig = {
       required: false,
       admin: {
         description: 'Original website URL (for screenshots)',
+        position: 'sidebar',
       },
     },
 
@@ -80,6 +83,7 @@ const InspirationWebsites: CollectionConfig = {
       required: false,
       admin: {
         description: 'Original favicon URL',
+        position: 'sidebar',
       },
     },
     {
@@ -88,6 +92,7 @@ const InspirationWebsites: CollectionConfig = {
       required: false,
       admin: {
         description: 'Favicon URL (auto-generated from faviconUrl)',
+        position: 'sidebar',
         components: {
           afterInput: [
             {
@@ -126,12 +131,18 @@ const InspirationWebsites: CollectionConfig = {
         { label: 'Hybrid', value: 'hybrid' },
       ],
       required: false,
+      admin: {
+        position: 'sidebar',
+      },
     },
     {
       name: 'isVisible',
       type: 'checkbox',
       required: false,
       defaultValue: true,
+      admin: {
+        position: 'sidebar',
+      },
     },
   ],
 }

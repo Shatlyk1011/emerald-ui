@@ -1,7 +1,13 @@
-import type { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
-import { checkRole } from '../../utils/checkRole'
-import { ensureFirstUserIsAdmin } from './hooks/ensureFirstUserIsAdmin'
+import type { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
+import { checkRole } from '../../utils/checkRole';
+import { ensureFirstUserIsAdmin } from './hooks/ensureFirstUserIsAdmin';
+
+
+
+
+
+
 
 const AdminUsers: CollectionConfig = {
   slug: 'adminUsers',
@@ -25,6 +31,8 @@ const AdminUsers: CollectionConfig = {
   admin: {
     defaultColumns: ['name', 'phone', 'roles'],
     useAsTitle: 'name',
+    description:
+      'Manage admin panel users and their access permissions. Configure user roles (admin, moderator, guest) to control who can create, edit, and delete content.',
   },
 
   auth: {

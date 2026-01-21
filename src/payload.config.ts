@@ -11,6 +11,20 @@ import InspirationWebsites from './app/(payload)/collections/InspirationWebsites
 import Media from './app/(payload)/collections/Media'
 import WebsiteStyle from './app/(payload)/collections/WebsiteStyle'
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -30,11 +44,11 @@ export default buildConfig({
 
   // Define and configure your collections in this array
   collections: [
-    AdminUsers,
+    Media,
+    InspirationWebsites,
     Categories,
     WebsiteStyle,
-    InspirationWebsites,
-    Media,
+    AdminUsers,
   ],
 
   // Your Payload secret - should be a complex and secure string, unguessable
