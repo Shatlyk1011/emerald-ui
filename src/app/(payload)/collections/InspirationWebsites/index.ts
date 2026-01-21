@@ -12,6 +12,21 @@ import { beforeDeleteHook, beforeChangeHook } from './hooks';
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
   access: {
@@ -64,6 +79,53 @@ const InspirationWebsites: CollectionConfig = {
       admin: {
         description: 'Original website URL (for screenshots)',
         position: 'sidebar',
+      },
+      // @ts-expect-error - Payload validation types are complex, but this function works correctly
+      validate: async (value: string, options) => {
+        if (!value) return true
+
+        const { req, id } = options
+
+        // Normalize URL for comparison
+        const normalizeUrl = (url: string) => {
+          return url
+            .replace(/^https?:\/\//, '')
+            .replace(/^www\./, '')
+            .replace(/\/$/, '')
+            .toLowerCase()
+        }
+
+        const normalizedValue = normalizeUrl(value)
+
+        // Query for existing documents with the same URL
+        const existingDocs = await req.payload.find({
+          collection: 'inspiration-websites',
+          where: {
+            pageUrl: {
+              exists: true,
+            },
+          },
+          limit: 100,
+        })
+
+        // Check if any existing document has the same normalized URL
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const duplicate = existingDocs.docs.find((doc: any) => {
+          // Skip the current document when updating
+          if (id && doc.id === id) return false
+
+          if (doc.pageUrl) {
+            const existingNormalized = normalizeUrl(doc.pageUrl)
+            return existingNormalized === normalizedValue
+          }
+          return false
+        })
+
+        if (duplicate) {
+          return `This website URL already exists: ${duplicate.pageUrl}`
+        }
+
+        return true
       },
     },
 
