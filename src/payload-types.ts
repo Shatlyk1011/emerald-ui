@@ -153,7 +153,10 @@ export interface InspirationWebsite {
    * Additional media (video or image)
    */
   additionalMedia?: (string | null) | Media;
-  mode?: ('dark' | 'light' | 'hybrid') | null;
+  /**
+   * Pre-computed gradient color extracted from screenshot
+   */
+  gradientColor?: string | null;
   isVisible?: boolean | null;
   updatedAt: string;
   createdAt: string;
@@ -341,7 +344,7 @@ export interface InspirationWebsitesSelect<T extends boolean = true> {
   faviconUrl?: T;
   favicon?: T;
   additionalMedia?: T;
-  mode?: T;
+  gradientColor?: T;
   isVisible?: T;
   updatedAt?: T;
   createdAt?: T;

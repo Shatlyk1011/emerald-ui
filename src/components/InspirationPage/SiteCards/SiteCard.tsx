@@ -1,8 +1,9 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import { InspirationWebsite } from '@/payload-types'
 import { useAppStore } from '@/store/useAppStore'
-import { Sticker } from 'lucide-react'
+import { BotIcon, Sticker } from 'lucide-react'
 
 interface SiteCardProps {
   item: InspirationWebsite
@@ -12,10 +13,6 @@ function SiteCard({ item }: SiteCardProps) {
   const isNew = true
   const openSiteDialog = useAppStore((state) => state.openSiteDialog)
 
-  const handleClick = () => {
-    openSiteDialog(item)
-  }
-
   // Determine which media to display (prioritize additionalMedia)
   const displayMedia =
     item.additionalMedia && typeof item.additionalMedia === 'object' && item.additionalMedia.mediaUrl
@@ -24,13 +21,25 @@ function SiteCard({ item }: SiteCardProps) {
   const displayUrl = displayMedia?.mediaUrl || item.imgUrl
   const isVideo = displayMedia?.type === 'video'
 
+  // Use pre-computed gradient color from database
+  const bgColor = item.gradientColor!
+
+  const handleClick = () => {
+    if (!displayUrl) return
+    openSiteDialog(item)
+  }
+
   return (
-    <div
-      className='group relative flex cursor-pointer flex-col gap-3'
-      role='button'
-      onClick={handleClick}
-    >
-      <div className='bg-card border-border/50 group-hover:border-border relative rounded-xl border px-8 py-16 shadow-lg transition-colors'>
+    <div className='relative flex flex-col gap-3'>
+      <div 
+        role='button'
+        onClick={handleClick} 
+        className={cn('border-border relative rounded-xl border px-8 py-16 shadow-lg transition-all bg-transparent duration-300', displayUrl ? 'hover:border-foreground/20 hover:shadow-xl' : "hover:border-destructive/20")}
+        style={{
+          transition: 'background 0.4s ease-in',
+          background: bgColor
+        }}
+      >
         <div className='relative aspect-4/3 w-full overflow-hidden'>
           <figure className='absolute inset-0 overflow-hidden rounded-lg'>
             {displayUrl ? (
@@ -48,10 +57,15 @@ function SiteCard({ item }: SiteCardProps) {
                     src={displayUrl}
                     className='h-full w-full object-cover'
                     alt={item.title + ' image'}
+                    crossOrigin='anonymous'
                   />
                 )
             ) : (
-              <span>no image</span>
+                <div className='flex flex-col items-center justify-center h-full w-full opacity-80 border-border border rounded-lg'>
+                  <p className='text-xl -tracking-two font-medium font-mono '>No image</p>
+                  <BotIcon className='w-8 h-8' />
+                  {/* <Button size='sm' className='mt-2 py-0 min-h-6'>Report</Button> */}
+                </div>
             )}
           </figure>
 
@@ -79,7 +93,7 @@ function SiteCard({ item }: SiteCardProps) {
         </div>
 
         <div className='flex flex-col'>
-          <h3 className='text-sm leading-tight font-semibold transition-colors group-hover:text-white'>
+          <h3 className='text-sm leading-tight font-semibold transition-colors'>
             {item.title}
           </h3>
           <p className='mt-0.5 text-xs leading-snug text-gray-500'>
