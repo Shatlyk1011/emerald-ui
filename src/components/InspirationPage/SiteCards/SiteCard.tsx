@@ -33,10 +33,6 @@ function SiteCard({ item, index }: SiteCardProps) {
     openSiteDialog(item)
   }
 
-  const preventDrag = (e: React.DragEvent) => {
-    e.preventDefault()
-  }
-
   return (
     <div className='relative flex flex-col gap-3'>
       <div 
@@ -59,7 +55,7 @@ function SiteCard({ item, index }: SiteCardProps) {
                   loop
                   playsInline
                   draggable={false}
-
+                  psi
                   onContextMenu={(e) => e.preventDefault()}
                 />
               ) : (
@@ -70,7 +66,7 @@ function SiteCard({ item, index }: SiteCardProps) {
                     crossOrigin='anonymous'
                     loading={loadingStrategy}
                     draggable={false}
-
+                    psi
                     onContextMenu={(e) => e.preventDefault()}
                   />
                 )
@@ -101,7 +97,7 @@ function SiteCard({ item, index }: SiteCardProps) {
               className='h-full w-full object-contain'
               alt=''
               draggable={false}
-
+              psi
             />
           ) : (
             <Sticker />
