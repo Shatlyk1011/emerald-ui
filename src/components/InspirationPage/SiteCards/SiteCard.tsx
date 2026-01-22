@@ -55,7 +55,6 @@ function SiteCard({ item, index }: SiteCardProps) {
                   loop
                   playsInline
                   draggable={false}
-                  psi
                   onContextMenu={(e) => e.preventDefault()}
                 />
               ) : (
@@ -66,7 +65,6 @@ function SiteCard({ item, index }: SiteCardProps) {
                     crossOrigin='anonymous'
                     loading={loadingStrategy}
                     draggable={false}
-                    psi
                     onContextMenu={(e) => e.preventDefault()}
                   />
                 )
@@ -97,7 +95,6 @@ function SiteCard({ item, index }: SiteCardProps) {
               className='h-full w-full object-contain'
               alt=''
               draggable={false}
-              psi
             />
           ) : (
             <Sticker />
