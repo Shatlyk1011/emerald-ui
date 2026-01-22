@@ -2,6 +2,7 @@
 
 import { useAppStore } from '@/store/useAppStore'
 import { ExternalLink, Sparkles } from 'lucide-react'
+
 import {
   Dialog,
   DialogContent,
@@ -34,11 +35,11 @@ export default function SitePreviewDialog() {
       }}
 
     >
-      <DialogContent className='scrollbar-thin max-h-[90vh] w-[80vw] max-w-none! overflow-hidden p-0 overflow-y-auto '>
+      <DialogContent className='scrollbar-thin max-h-[90vh] w-[80vw] max-sm:w-[95vw] max-w-none! overflow-hidden p-0 overflow-y-auto '>
         {/* Two-column layout */}
         <div className='grid h-full max-lg:grid-cols-1 grid-cols-[1fr_320px] '>
           {/* Left: Image Preview Area */}
-          <div className='bg-muted/30 flex flex-col overflow-y-auto px-4 py-6'>
+          <div className='flex flex-col overflow-y-auto px-4 py-4 max-lg:py-6 ' style={{ background: selectedSite.gradientColor! }}>
             {/* Media Gallery with Tabs */}
             <div className='flex-1'>
               {showTabs ? (
@@ -129,19 +130,19 @@ export default function SitePreviewDialog() {
           </div>
 
           {/* Right: Sidebar with Details */}
-          <div className='border-l bg-background flex flex-col overflow-y-auto'>
+          <div className='border-l  bg-background flex flex-col overflow-y-auto'>
             {/* Content Section */}
             <div className='flex-1 space-y-6 p-6 min-h-100 max-lg:min-h-auto'>
               <DialogHeader className='mb-6'>
-                <DialogTitle className='text-3xl font-bold tracking-tight'>
+                <DialogTitle className='text-3xl text-start font-bold tracking-tight'>
                   {selectedSite.title}
                 </DialogTitle>
               </DialogHeader>
               <div>
-                <h3 className='text-muted-foreground mb-3 text-xs font-semibold uppercase tracking-three'>
+                <h3 className='text-muted-foreground font-mono mb-1 text-xs font-semibold uppercase tracking-one'>
                   Description
                 </h3>
-                <p className='text-foreground/90 leading-relaxed'>
+                <p className='text-foreground/90 leading-[1.4]'>
                   {selectedSite.description}
                 </p>
               </div>
@@ -149,10 +150,10 @@ export default function SitePreviewDialog() {
               <div className='space-y-4'>
                 {selectedSite.category && (
                   <div>
-                    <h3 className='text-muted-foreground mb-2 text-xs font-semibold uppercase tracking-three'>
+                    <h3 className='text-muted-foreground mb-1 font-mono text-xs font-semibold uppercase tracking-one'>
                       Category
                     </h3>
-                    <p className='text-foreground font-medium'>{selectedSite.category}</p>
+                    <p className='text-foreground font-medium capitalize'>{selectedSite.category}</p>
                   </div>
                 )}
 
@@ -161,14 +162,14 @@ export default function SitePreviewDialog() {
               {/* Styles */}
               {selectedSite.style && selectedSite.style.length > 0 && (
                 <div>
-                  <h3 className='text-muted-foreground mb-3 text-xs font-semibold uppercase tracking-three'>
+                  <h3 className='text-muted-foreground mb-1 text-xs font-mono font-semibold uppercase tracking-one'>
                     Styles
                   </h3>
                   <div className='flex flex-wrap gap-2'>
                     {selectedSite.style.map((style) => (
                       <span
                         key={style}
-                        className='bg-secondary leading-none text-secondary-foreground rounded-full px-3 py-1.5 text-xs font-medium'
+                        className='bg-secondary leading-[0.9] text-secondary-foreground rounded-lg px-2.25 py-1.75 capitalize text-xs font-medium'
                       >
                         {style}
                       </span>
@@ -179,7 +180,7 @@ export default function SitePreviewDialog() {
             </div>
 
             {/* Action Buttons - Fixed at bottom */}
-            <div className='border-t bg-muted/20 space-y-3 p-6'>
+            <div className='border-t  bg-muted/20 space-y-3 p-6'>
               {/* Regenerate Website Button */}
               <Button
                 className='w-full'

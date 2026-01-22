@@ -1,7 +1,13 @@
 import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins';
-import { extractGradientColor } from '../../utils/extractColor'
-import { beforeDeleteHook, beforeChangeHook } from './hooks'
+import { extractGradientColor } from '../../utils/extractColor';
+import { beforeDeleteHook, beforeChangeHook } from './hooks';
+
+
+
+
+
+
 
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
@@ -187,6 +193,7 @@ const InspirationWebsites: CollectionConfig = {
       admin: {
         description: 'Pre-computed gradient color extracted from screenshot',
         position: 'sidebar',
+        hidden: true,
       },
     },
 
