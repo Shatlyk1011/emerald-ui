@@ -13,7 +13,12 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Button } from '../ui/button'
 import Lens from '../ui/lens'
 
-export default function SitePreviewDialog() {
+interface SitePreviewDialogProps {
+  onCategoryClick: (category: string) => void
+  onStyleClick: (style: string) => void
+}
+
+export default function SitePreviewDialog({ onCategoryClick, onStyleClick }: SitePreviewDialogProps) {
   const { selectedSite, isDialogOpen, closeSiteDialog, isZoomEnabled } = useAppStore()
 
   if (!selectedSite) return null
@@ -162,7 +167,13 @@ export default function SitePreviewDialog() {
                     <h3 className='text-muted-foreground mb-1 font-mono text-xs font-semibold uppercase tracking-one'>
                       Category
                     </h3>
-                    <p className='text-foreground font-medium capitalize'>{selectedSite.category}</p>
+                    <button
+                      // @ts-expect-error this is string
+                      onClick={() => onCategoryClick(selectedSite.category)}
+                      className='text-foreground hover:text-primary font-medium capitalize transition-colors underline-offset-2 hover:underline'
+                    >
+                      {Array.isArray(selectedSite.category) ? selectedSite.category[0] : selectedSite.category}
+                    </button>
                   </div>
                 )}
 
@@ -176,12 +187,13 @@ export default function SitePreviewDialog() {
                   </h3>
                   <div className='flex flex-wrap gap-2'>
                     {selectedSite.style.map((style) => (
-                      <span
+                      <button
                         key={style}
-                        className='bg-secondary leading-[0.9] text-secondary-foreground rounded-lg px-2.25 py-1.75 capitalize text-xs font-medium'
+                        onClick={() => onStyleClick(style)}
+                        className='bg-secondary hover:bg-secondary/80 leading-[0.9] text-secondary-foreground rounded-lg px-2.25 py-1.75 capitalize text-xs font-medium transition-colors'
                       >
                         {style}
-                      </span>
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -200,7 +212,7 @@ export default function SitePreviewDialog() {
               >
                 <span className='relative z-10 flex items-center justify-center gap-2'>
                   <Sparkles className='h-4 w-4' />
-                  Regenerate This Website
+                  Regenerate This Template
                 </span>
               </Button>
 
