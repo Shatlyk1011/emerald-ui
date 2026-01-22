@@ -1,4 +1,7 @@
-import { getAverageColor } from 'fast-average-color-node'
+import { getAverageColor } from 'fast-average-color-node';
+
+
+
 
 /**
  * Extracts the dominant color from an image buffer and returns a gradient string
@@ -9,12 +12,12 @@ export async function extractGradientColor(imgUrl: string): Promise<string> {
   try {
     // Extract color using the same algorithm as the client-side implementation
     const { rgb } = await getAverageColor(imgUrl, {
-      algorithm: 'simple',
+      algorithm: 'dominant',
       mode: 'speed',
     })
 
     // Return the same gradient format used in SiteCard component
-    const gradient = `linear-gradient(to right, ${rgb.replace(')', ', 0.25)')}, ${rgb.replace(')', ', 0.12)')})`
+    const gradient = `linear-gradient(to right, ${rgb.replace(')', ', 0.20)')}, ${rgb.replace(')', ', 0.10)')})`
 
     return gradient
   } catch (error) {

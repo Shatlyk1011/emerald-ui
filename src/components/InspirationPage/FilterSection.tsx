@@ -1,56 +1,136 @@
-import { Category, WebsiteStyle } from '@/payload-types'
+'use client'
+import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
+import { Category, WebsiteStyle } from '@/payload-types'
+import { Input } from '../ui/input'
+import { Where } from 'payload'
 
 interface FilterSectionProps {
   categories: Category[]
   styles: WebsiteStyle[]
+  handleFilterRequest: (query: Where) => void;
 }
 
-function FilterSection({ categories, styles }: FilterSectionProps) {
+function FilterSection({ categories, styles, handleFilterRequest }: FilterSectionProps) {
+  const [mounted, setMounted] = useState(false);
+
+  const [search, setSearch] = useState('')
+  const [selectedCategories, setCategories] = useState<string[]>([])
+  const [selectedStyles, setStyles] = useState<string[]>([])
+
+  const isCategorySelected = selectedCategories.length > 0
+  const isStyleSelected = selectedStyles.length > 0
+
+  const handleCategory = (c: string) => {
+    if (selectedCategories.includes(c)) {
+      setCategories((prev) => prev.filter((item) => item !== c))
+    } else {
+      setCategories((prev) => ([...prev, c]))
+    }
+  }
+
+  const handleStyle = (s: string) => {
+    if (selectedStyles.includes(s)) {
+      setStyles((prev) => prev.filter((item) => item !== s))
+    } else {
+      setStyles((prev) => ([...prev, s]))
+    }
+  }
+
+  useEffect(() => {
+    const query: Where = {
+      and: [
+        {
+          // search
+          title: {
+            contains: search,
+          },
+        },
+        {
+          isVisible: {
+            equals: true,
+          },
+        },
+        {
+          category: {
+            in: selectedCategories,
+          },
+        },
+        {
+          style: {
+            in: selectedStyles,
+          },
+        },
+      ],
+    };
+    // prevent initial fetch
+    setMounted(true);
+    if (!mounted) return;
+    handleFilterRequest(query);
+  }, [search, selectedCategories, selectedStyles])
+
   return (
-    <div className='mb-20'>
+    <div className='mb-12'>
       <div className='flex justify-between gap-12'>
+        {/* Search Column */}
         <div className='group flex flex-1 flex-col'>
-          <h3 className='tracking-four group-hover:text-foreground text-muted-foreground mb-4 text-sm font-medium uppercase transition-colors ease-in-out'>
+          <label className='tracking-four group-hover:text-foreground text-muted-foreground mb-3 text-sm font-medium uppercase transition-colors ease-in-out'>
+            Search
+          </label>
+          <Input value={search} onChange={(e) => setSearch(e.currentTarget.value)} placeholder='Type url or website name' className='h-11' />
+        </div>
+
+        {/* Categories Column */}
+        <div className='group flex flex-1 flex-col'>
+          <h3 className={cn('tracking-three text-muted-foreground mb-3 text-sm font-medium uppercase transition-colors ease-in-out', isCategorySelected ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground')}>
             Categories
           </h3>
           <ul className='-ml-1 flex h-max flex-1 flex-wrap place-content-start gap-x-2 gap-y-1 text-base font-normal capitalize'>
-            {categories.map((item, i) => (
-              <li
+            {categories.map((item) => {
+              const isActive = selectedCategories.some(c => c == item.category)
+              return (
+                <li
                 key={item.id}
                 className={cn(
-                  'group-hover:text-muted-foreground hover:text-foreground max-h-max rounded-lg px-1.5 py-1 leading-none ring ring-transparent',
-                  (i === 3 || i === 2) &&
-                    'text-foreground! bg-card ring-current'
+                  'hover:text-foreground max-h-max rounded-lg px-1.5 py-1 leading-none ring ring-transparent',
+                  isActive && 'text-foreground! bg-card ring-current', isCategorySelected ? "text-muted-foreground" : "group-hover:text-muted-foreground "
                 )}
               >
-                <button className='-tracking-one capitalize transition-colors ease-in-out'>
+                  <button className='-tracking-one  transition-colors ease-in-out' onClick={() => handleCategory(item.category)}>
                   {item.category}
                 </button>
               </li>
-            ))}
+              )
+            }
+
+            )}
           </ul>
         </div>
 
+        {/* Styles Column */}
         <div className='group flex flex-1 flex-col'>
-          <h3 className='tracking-four group-hover:text-foreground text-muted-foreground mb-4 text-sm font-medium uppercase transition-colors ease-in-out'>
+          <h3 className={cn('tracking-three mb-3 text-sm font-medium uppercase transition-colors ease-in-out', isStyleSelected ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground')}>
             Styles
           </h3>
           <ul className='-ml-1 flex h-max flex-1 flex-wrap place-content-start gap-x-2 gap-y-1 text-base font-normal capitalize'>
-            {styles.map((item, i) => (
-              <li
-                key={item.id}
-                className={cn(
-                  'group-hover:text-muted-foreground hover:text-foreground max-h-max rounded-lg px-1.5 py-1 leading-none ring ring-transparent',
-                  (i === 0 || i === 4) &&
-                    'text-foreground! bg-card ring-current'
-                )}
-              >
-                <button className='-tracking-one capitalize transition-colors ease-in-out'>
-                  {item.style}
-                </button>
-              </li>
-            ))}
+            {styles.map((item) => {
+              const isActive = selectedStyles.some(s => s == item.style)
+
+              return (
+                <li
+                  key={item.id}
+                  className={cn(
+                    'hover:text-foreground max-h-max rounded-lg px-1.5 py-1 leading-none ring ring-transparent',
+                    isActive && 'text-foreground! bg-card ring-current', isStyleSelected ? "text-muted-foreground" : "group-hover:text-muted-foreground "
+                  )}
+                >
+                  <button className='-tracking-one capitalize transition-colors ease-in-out' onClick={() => handleStyle(item.style)}>
+                    {item.style}
+                  </button>
+                </li>
+              )
+            }
+            )}
           </ul>
         </div>
       </div>

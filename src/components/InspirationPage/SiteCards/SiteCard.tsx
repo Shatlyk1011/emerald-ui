@@ -34,9 +34,8 @@ function SiteCard({ item }: SiteCardProps) {
       <div 
         role='button'
         onClick={handleClick} 
-        className={cn('border-border relative rounded-xl border px-8 py-16 shadow-lg transition-all bg-transparent duration-300', displayUrl ? 'hover:border-foreground/20 hover:shadow-xl' : "hover:border-destructive/20")}
+        className={cn('relative rounded-xl border px-8 py-16 shadow-lg transition-all bg-transparent duration-300', displayUrl ? 'hover:border-foreground/20 hover:shadow-xl' : "hover:border-destructive/20")}
         style={{
-          transition: 'background 0.4s ease-in',
           background: bgColor
         }}
       >
