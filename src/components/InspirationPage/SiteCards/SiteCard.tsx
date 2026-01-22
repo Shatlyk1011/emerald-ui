@@ -7,9 +7,10 @@ import { BotIcon, Sticker } from 'lucide-react'
 
 interface SiteCardProps {
   item: InspirationWebsite
+  index: number
 }
 
-function SiteCard({ item }: SiteCardProps) {
+function SiteCard({ item, index }: SiteCardProps) {
   const isNew = true
   const openSiteDialog = useAppStore((state) => state.openSiteDialog)
 
@@ -24,9 +25,16 @@ function SiteCard({ item }: SiteCardProps) {
   // Use pre-computed gradient color from database
   const bgColor = item.gradientColor!
 
+  // Lazy loading strategy: first 12 images load eagerly, rest load lazily
+  const loadingStrategy = index < 12 ? 'eager' : 'lazy'
+
   const handleClick = () => {
     if (!displayUrl) return
     openSiteDialog(item)
+  }
+
+  const preventDrag = (e: React.DragEvent) => {
+    e.preventDefault()
   }
 
   return (
@@ -50,6 +58,9 @@ function SiteCard({ item }: SiteCardProps) {
                   autoPlay
                   loop
                   playsInline
+                  draggable={false}
+
+                  onContextMenu={(e) => e.preventDefault()}
                 />
               ) : (
                 <img
@@ -57,6 +68,10 @@ function SiteCard({ item }: SiteCardProps) {
                     className='h-full w-full object-cover'
                     alt={item.title + ' image'}
                     crossOrigin='anonymous'
+                    loading={loadingStrategy}
+                    draggable={false}
+
+                    onContextMenu={(e) => e.preventDefault()}
                   />
                 )
             ) : (
@@ -85,6 +100,8 @@ function SiteCard({ item }: SiteCardProps) {
               src={item.favicon}
               className='h-full w-full object-contain'
               alt=''
+              draggable={false}
+
             />
           ) : (
             <Sticker />
