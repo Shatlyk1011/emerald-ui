@@ -9,6 +9,12 @@ import { beforeDeleteHook, beforeChangeHook } from './hooks';
 
 
 
+
+
+
+
+
+
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
   access: {
@@ -55,6 +61,7 @@ const InspirationWebsites: CollectionConfig = {
     {
       name: 'category',
       type: 'text',
+      hasMany: true,
       required: false,
     },
 
