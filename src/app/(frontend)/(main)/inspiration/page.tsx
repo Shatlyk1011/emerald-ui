@@ -4,7 +4,6 @@ import { stringify } from 'qs-esm'
 import { axios } from '@/lib/axios'
 // components
 import InspirationContent from '@/components/InspirationPage/InspirationContent'
-import SitePreviewDialog from '@/components/InspirationPage/SitePreviewDialog'
 
 const stringifiedQuery = stringify(
   {
@@ -51,7 +50,6 @@ export default async function InspirationPage() {
           styles={stylesData.data.docs} 
         />
       </div>
-      <SitePreviewDialog />
     </main>
   )
 }

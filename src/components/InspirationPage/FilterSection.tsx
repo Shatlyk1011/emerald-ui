@@ -1,9 +1,17 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import dynamic from 'next/dynamic'
+import { useEffect, useRef, useState, Suspense } from 'react'
+
 import { cn } from '@/lib/utils'
 import { Category, WebsiteStyle } from '@/payload-types'
 import { Input } from '../ui/input'
 import { Where } from 'payload'
+import { useAppStore } from '@/store/useAppStore'
+
+// Lazy load the dialog for better performance
+const SitePreviewDialog = dynamic(() => import('./SitePreviewDialog'), {
+  ssr: false
+})
 
 interface FilterSectionProps {
   categories: Category[]
@@ -13,6 +21,7 @@ interface FilterSectionProps {
 
 function FilterSection({ categories, styles, handleFilterRequest }: FilterSectionProps) {
   const isFirstRender = useRef(true);
+  const { closeSiteDialog } = useAppStore()
 
   const [search, setSearch] = useState('')
   const [selectedCategories, setCategories] = useState<string[]>([])
@@ -36,6 +45,20 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
       setStyles((prev) => ([...prev, s]))
     }
   }
+
+  // Handlers for dialog filter clicks
+  const handleDialogCategoryClick = (category: string) => {
+    closeSiteDialog()
+    setCategories([category])
+    setSearch('')
+  }
+
+  const handleDialogStyleClick = (style: string) => {
+    closeSiteDialog()
+    setStyles([style])
+    setSearch('')
+  }
+
 
   useEffect(() => {
     // Skip the filter request on initial mount
@@ -137,6 +160,14 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
           </ul>
         </div>
       </div>
+
+      {/* Lazy-loaded Site Preview Dialog */}
+      <Suspense fallback={null}>
+        <SitePreviewDialog
+          onCategoryClick={handleDialogCategoryClick}
+          onStyleClick={handleDialogStyleClick}
+        />
+      </Suspense>
     </div>
   )
 }
