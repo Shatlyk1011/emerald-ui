@@ -1,13 +1,6 @@
 import { uploadMedia } from '@/app/(payload)/utils/supabase';
 import { NextRequest, NextResponse } from 'next/server';
-
-
-
-
-
-
-
-
+import sharp from 'sharp'
 
 // Allowed file types
 const ALLOWED_IMAGE_TYPES = [
@@ -61,20 +54,45 @@ export async function POST(request: NextRequest) {
 
     // Convert file to buffer
     const arrayBuffer = await file.arrayBuffer()
-    const buffer = Buffer.from(arrayBuffer)
+    let buffer = Buffer.from(arrayBuffer)
 
     // Generate unique filename
     const sanitizedName = file.name.replace(/[^a-z0-9.-]/gi, '-').toLowerCase()
-    const filename = sanitizedName
+    let filename = sanitizedName
+    let contentType = file.type
 
-    // Determine bucket based on file type
-    const bucket = ALLOWED_VIDEO_TYPES.includes(file.type) ? 'videos' : 'images'
-    const mediaType = ALLOWED_VIDEO_TYPES.includes(file.type)
-      ? 'video'
-      : 'image'
+    // Determine bucket and media type based on file type
+    const isVideo = ALLOWED_VIDEO_TYPES.includes(file.type)
+    const bucket = isVideo ? 'videos' : 'images'
+    const mediaType = isVideo ? 'video' : 'image'
+
+    // Optimize images with Sharp (convert to WebP with quality reduction)
+    if (!isVideo && ALLOWED_IMAGE_TYPES.includes(file.type)) {
+      try {
+        // Process image with Sharp: convert to WebP and reduce quality
+        const optimizedBuffer = await sharp(buffer)
+          .webp({ quality: 70 })
+          .toBuffer()
+
+        buffer = optimizedBuffer as Buffer<ArrayBuffer>
+
+        // Update filename extension to .webp
+        const nameWithoutExt = sanitizedName.replace(/\.[^.]+$/, '')
+        filename = `${nameWithoutExt}.webp`
+
+        // Update content type
+        contentType = 'image/webp'
+
+        console.log(`Image optimized: ${file.name} -> ${filename}`)
+      } catch (error) {
+        console.error('Sharp optimization error:', error)
+        // If optimization fails, continue with original buffer
+        console.warn('Falling back to original image without optimization')
+      }
+    }
 
     // Upload to Supabase
-    const publicUrl = await uploadMedia(buffer, filename, file.type, bucket)
+    const publicUrl = await uploadMedia(buffer, filename, contentType, bucket)
 
     return NextResponse.json({
       success: true,
