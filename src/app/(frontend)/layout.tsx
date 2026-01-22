@@ -1,4 +1,3 @@
-import { Auth0Provider } from '@auth0/nextjs-auth0'
 import { RootProvider } from 'fumadocs-ui/provider/next'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
@@ -57,7 +56,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <TanstackQueryProvider>
-              <Auth0Provider>{children}</Auth0Provider>
+              {children}
             </TanstackQueryProvider>
           </ThemeProvider>
         </RootProvider>

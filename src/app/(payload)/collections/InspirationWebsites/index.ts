@@ -28,7 +28,6 @@ const InspirationWebsites: CollectionConfig = {
     beforeChange: [beforeChangeHook],
     beforeRead: [
       async ({ doc }) => {
-        console.log('xxx', doc)
         if (
           (!doc.gradientColor || doc.gradientColor === 'transparent') &&
           doc.imgUrl

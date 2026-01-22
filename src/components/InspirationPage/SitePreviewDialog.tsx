@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dialog'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Button } from '../ui/button'
+import Lens from '../ui/lens'
 
 export default function SitePreviewDialog() {
   const { selectedSite, isDialogOpen, closeSiteDialog } = useAppStore()
@@ -96,11 +97,13 @@ export default function SitePreviewDialog() {
                   <div className='h-full'>
                     {hasScreenshot && (
                       <div className='bg-background relative h-full w-full overflow-hidden rounded-md border shadow-lg'>
-                        <img
-                        src={selectedSite.imgUrl!}
-                        alt={`${selectedSite.title} screenshot`}
-                        className='h-full w-full object-contain'
-                      />
+                        <Lens>
+                          <img
+                            src={selectedSite.imgUrl!}
+                            alt={`${selectedSite.title} screenshot`}
+                            className='h-full w-full object-contain'
+                          />
+                        </Lens>
                     </div>
                   )}
                   {!hasScreenshot && hasAdditionalMedia && typeof selectedSite.additionalMedia === 'object' && (
