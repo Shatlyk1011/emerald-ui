@@ -5,33 +5,25 @@ import { AnimatePresence, motion } from "motion/react";
 
 interface LensProps {
   children: React.ReactNode;
-  zoomFactor?: number;
   lensSize?: number;
   position?: {
     x: number;
     y: number;
   };
   isFocusing?: () => void;
-  hovering?: boolean;
-  setHovering?: (hovering: boolean) => void;
+  disableZoom?: boolean;
 }
 
 const Lens: React.FC<LensProps> = ({
   children,
-  zoomFactor = 1.5,
-  lensSize = 600,
-  position = { x: 200, y: 150 },
-  hovering,
-  setHovering,
+  lensSize = 400,
+  disableZoom = false
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const [localIsHovering, setLocalIsHovering] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const [zoomFactor, setZoomFactor] = useState(1.3);
 
-  const isHovering = hovering !== undefined ? hovering : localIsHovering;
-  const setIsHovering = setHovering || setLocalIsHovering;
-
-  // const [isHovering, setIsHovering] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 100, y: 100 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -44,9 +36,13 @@ const Lens: React.FC<LensProps> = ({
   return (
     <div
       ref={containerRef}
-      className="relative overflow-hidden rounded-lg z-20"
+      className="relative overflow-visible rounded-lg z-20"
       onMouseEnter={() => {
         setIsHovering(true);
+      }}
+      onWheel={(e) => {
+        // min-max 1.1 - 3
+        setZoomFactor((prev) => Math.min(Math.max(prev - e.deltaY * 0.001, 1.1), 3));
       }}
       onMouseLeave={() => setIsHovering(false)}
       onMouseMove={handleMouseMove}
@@ -54,14 +50,14 @@ const Lens: React.FC<LensProps> = ({
       {children}
 
       <AnimatePresence>
-        {isHovering && (
+        {isHovering && !disableZoom && (
           <div>
             <motion.div
               initial={{ opacity: 0, scale: 0.58 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="absolute inset-0 overflow-hidden"
+              className="absolute inset-0 overflow-visible"
               style={{
                 maskImage: `radial-gradient(circle ${lensSize / 2}px at ${
                   mousePosition.x
