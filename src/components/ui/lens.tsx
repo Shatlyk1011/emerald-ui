@@ -27,6 +27,7 @@ const Lens: React.FC<LensProps> = ({
   const [mousePosition, setMousePosition] = useState({ x: 100, y: 100 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (disableZoom) return
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -38,13 +39,18 @@ const Lens: React.FC<LensProps> = ({
       ref={containerRef}
       className="relative overflow-visible rounded-lg z-20"
       onMouseEnter={() => {
+        if (disableZoom) return
         setIsHovering(true);
       }}
       onWheel={(e) => {
+        if (disableZoom) return
         // min-max 1.1 - 3
         setZoomFactor((prev) => Math.min(Math.max(prev - e.deltaY * 0.001, 1.1), 3));
       }}
-      onMouseLeave={() => setIsHovering(false)}
+      onMouseLeave={() => {
+        if (disableZoom) return
+        setIsHovering(false)
+      }}
       onMouseMove={handleMouseMove}
     >
       {children}

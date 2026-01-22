@@ -14,7 +14,7 @@ import { Button } from '../ui/button'
 import Lens from '../ui/lens'
 
 export default function SitePreviewDialog() {
-  const { selectedSite, isDialogOpen, closeSiteDialog } = useAppStore()
+  const { selectedSite, isDialogOpen, closeSiteDialog, isZoomEnabled } = useAppStore()
 
   if (!selectedSite) return null
 
@@ -61,11 +61,13 @@ export default function SitePreviewDialog() {
                   </TabsList>
                   <TabsContent value='screenshot' className='mt-0 h-[calc(100%-3rem)]'>
                     <div className='bg-background relative h-full w-full overflow-hidden rounded-md border shadow-lg'>
-                      <img
-                        src={selectedSite.imgUrl!}
-                        alt={`${selectedSite.title} screenshot`}
-                        className='h-full w-full object-contain aspect-4/3'
-                      />
+                      <Lens disableZoom={!isZoomEnabled}>
+                        <img
+                          src={selectedSite.imgUrl!}
+                          alt={`${selectedSite.title} screenshot`}
+                          className='h-full w-full object-contain aspect-4/3'
+                        />
+                      </Lens>
                     </div>
                   </TabsContent>
                   <TabsContent value='media' className='mt-0 h-[calc(100%-3rem)]'>
@@ -82,11 +84,13 @@ export default function SitePreviewDialog() {
                             aria-label={selectedSite.additionalMedia.altText || `${selectedSite.title} video`}
                           />
                         ) : (
-                          <img
-                            src={selectedSite.additionalMedia!.mediaUrl!}
-                            alt={selectedSite.additionalMedia!.altText || `${selectedSite.title} additional media`}
-                            className='h-full w-full object-contain aspect-4/3'
-                          />
+                            <Lens disableZoom={!isZoomEnabled}>
+                              <img
+                                src={selectedSite.additionalMedia!.mediaUrl!}
+                                alt={selectedSite.additionalMedia!.altText || `${selectedSite.title} additional media`}
+                                className='h-full w-full object-contain aspect-4/3'
+                              />
+                            </Lens>
                         )}
                       </div>
                     )}
@@ -97,7 +101,7 @@ export default function SitePreviewDialog() {
                   <div className='h-full'>
                     {hasScreenshot && (
                       <div className='bg-background relative h-full w-full overflow-hidden rounded-md border shadow-lg'>
-                        <Lens>
+                        <Lens disableZoom={!isZoomEnabled}>
                           <img
                             src={selectedSite.imgUrl!}
                             alt={`${selectedSite.title} screenshot`}
@@ -106,7 +110,7 @@ export default function SitePreviewDialog() {
                         </Lens>
                     </div>
                   )}
-                  {!hasScreenshot && hasAdditionalMedia && typeof selectedSite.additionalMedia === 'object' && (
+                    {/* {!hasScreenshot && hasAdditionalMedia && typeof selectedSite.additionalMedia === 'object' && (
                       <div className='bg-background relative h-full w-full overflow-hidden rounded-md border shadow-lg'>
                       {selectedSite.additionalMedia!.type === 'video' ? (
                         <video
@@ -119,14 +123,16 @@ export default function SitePreviewDialog() {
                           aria-label={selectedSite.additionalMedia!.altText || `${selectedSite.title} video`}
                         />
                       ) : (
-                        <img
-                          src={selectedSite.additionalMedia!.mediaUrl!}
-                          alt={selectedSite.additionalMedia!.altText || `${selectedSite.title} additional media`}
-                              className='h-full w-full object-contain'
-                        />
+                            <Lens disableZoom={!isZoomEnabled}>
+                              <img
+                                src={selectedSite.additionalMedia!.mediaUrl!}
+                                alt={selectedSite.additionalMedia!.altText || `${selectedSite.title} additional media`}
+                                className='h-full w-full object-contain'
+                              />
+                            </Lens>
                       )}
                     </div>
-                  )}
+                  )} */}
                 </div>
               )}
             </div>

@@ -1,5 +1,6 @@
 import { InspirationWebsite } from '@/payload-types'
-import { create } from 'zustand'
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware'
 
 interface AppState {
   generatedFiles: Record<string, string> | null
@@ -10,15 +11,32 @@ interface AppState {
   isDialogOpen: boolean
   openSiteDialog: (site: InspirationWebsite) => void
   closeSiteDialog: () => void
+
+  // Zoom toggle state (persisted to localStorage)
+  isZoomEnabled: boolean
+  toggleZoom: () => void
 }
 
-export const useAppStore = create<AppState>((set) => ({
-  generatedFiles: null,
-  setGeneratedFiles: (files) => set({ generatedFiles: files }),
+export const useAppStore = create<AppState>()(
+  persist(
+    (set) => ({
+      generatedFiles: null,
+      setGeneratedFiles: (files) => set({ generatedFiles: files }),
 
-  // Site preview dialog actions
-  selectedSite: null,
-  isDialogOpen: false,
-  openSiteDialog: (site) => set({ selectedSite: site, isDialogOpen: true }),
-  closeSiteDialog: () => set({ selectedSite: null, isDialogOpen: false }),
-}))
+      // Site preview dialog actions
+      selectedSite: null,
+      isDialogOpen: false,
+      openSiteDialog: (site) => set({ selectedSite: site, isDialogOpen: true }),
+      closeSiteDialog: () => set({ selectedSite: null, isDialogOpen: false }),
+
+      // Zoom toggle actions
+      isZoomEnabled: true,
+      toggleZoom: () =>
+        set((state) => ({ isZoomEnabled: !state.isZoomEnabled })),
+    }),
+    {
+      name: 'app-storage', // localStorage key
+      partialize: (state) => ({ isZoomEnabled: state.isZoomEnabled }), // Only persist zoom state
+    }
+  )
+)

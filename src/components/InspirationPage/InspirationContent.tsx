@@ -6,6 +6,8 @@ import { Category, WebsiteStyle } from '@/payload-types'
 import { IWebsites } from '@/types/inspiration'
 import { useInfiniteInspirationSites } from '@/services/useGetInspirationSites'
 import { Where } from 'payload'
+import { useAppStore } from '@/store/useAppStore'
+import { Switch } from '@/components/ui/switch'
 import FilterSection from './FilterSection'
 import SiteCards from './SiteCards'
 
@@ -17,6 +19,7 @@ interface Props {
 
 export default function InspirationContent({ initialData, categories, styles }: Props) {
   const [filterQuery, setFilterQuery] = useState<Where>({ isVisible: { equals: true } })
+  const { isZoomEnabled, toggleZoom } = useAppStore()
   
   const {
     data,
@@ -27,7 +30,7 @@ export default function InspirationContent({ initialData, categories, styles }: 
 
   const { ref, inView } = useInView({
     threshold: 0,
-    rootMargin: '100px',
+    rootMargin: '160px',
   })
 
   // Fetch next page when the sentinel element comes into view
@@ -52,9 +55,24 @@ export default function InspirationContent({ initialData, categories, styles }: 
         handleFilterRequest={handleFilterRequest}
       />
       
-      <h1 className='-tracking-two mb-6 text-3xl font-semibold'>
-        Explore curated websites
-      </h1>
+      <div className='flex items-center justify-between mb-6'>
+        <h1 className='-tracking-two text-3xl font-semibold'>
+          Explore curated websites
+        </h1>
+        <div className='flex items-center gap-2.5'>
+          <label
+            htmlFor='zoom-toggle'
+            className='text-sm font-medium text-muted-foreground cursor-pointer select-none'
+          >
+            Image Zoom
+          </label>
+          <Switch
+            id='zoom-toggle'
+            checked={isZoomEnabled}
+            onCheckedChange={() => toggleZoom()}
+          />
+        </div>
+      </div>
 
       <SiteCards websites={allWebsites} />
 

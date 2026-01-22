@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { Category, WebsiteStyle } from '@/payload-types'
 import { Input } from '../ui/input'
@@ -12,7 +12,7 @@ interface FilterSectionProps {
 }
 
 function FilterSection({ categories, styles, handleFilterRequest }: FilterSectionProps) {
-  const [mounted, setMounted] = useState(false);
+  const isFirstRender = useRef(true);
 
   const [search, setSearch] = useState('')
   const [selectedCategories, setCategories] = useState<string[]>([])
@@ -38,6 +38,12 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
   }
 
   useEffect(() => {
+    // Skip the filter request on initial mount
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     const query: Where = {
       and: [
         {
@@ -63,9 +69,6 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
         },
       ],
     };
-    // prevent initial fetch
-    setMounted(true);
-    if (!mounted) return;
     handleFilterRequest(query);
   }, [search, selectedCategories, selectedStyles])
 
