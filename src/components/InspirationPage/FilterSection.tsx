@@ -30,7 +30,7 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
   const isCategorySelected = selectedCategories.length > 0
   const isStyleSelected = selectedStyles.length > 0
 
-  const handleCategory = (c: string) => {
+  const toggleCategory = (c: string) => {
     if (selectedCategories.includes(c)) {
       setCategories((prev) => prev.filter((item) => item !== c))
     } else {
@@ -38,7 +38,7 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
     }
   }
 
-  const handleStyle = (s: string) => {
+  const toggleStyle = (s: string) => {
     if (selectedStyles.includes(s)) {
       setStyles((prev) => prev.filter((item) => item !== s))
     } else {
@@ -82,7 +82,7 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
         },
         {
           category: {
-            in: selectedCategories,
+            in: selectedCategories.map((item) => item.toLowerCase()),
           },
         },
         {
@@ -122,13 +122,12 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
                   isActive && 'text-foreground! bg-card ring-current', isCategorySelected ? "text-muted-foreground" : "group-hover:text-muted-foreground "
                 )}
               >
-                  <button className='-tracking-one  transition-colors ease-in-out' onClick={() => handleCategory(item.category)}>
+                  <button className='-tracking-one  transition-colors ease-in-out' onClick={() => toggleCategory(item.category)}>
                   {item.category}
                 </button>
               </li>
               )
             }
-
             )}
           </ul>
         </div>
@@ -150,7 +149,7 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
                     isActive && 'text-foreground! bg-card ring-current', isStyleSelected ? "text-muted-foreground" : "group-hover:text-muted-foreground "
                   )}
                 >
-                  <button className='-tracking-one capitalize transition-colors ease-in-out' onClick={() => handleStyle(item.style)}>
+                  <button className='-tracking-one capitalize transition-colors ease-in-out' onClick={() => toggleStyle(item.style)}>
                     {item.style}
                   </button>
                 </li>

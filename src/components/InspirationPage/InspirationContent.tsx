@@ -42,10 +42,10 @@ export default function InspirationContent({ initialData, categories, styles }: 
 
   // Fetch next page when the sentinel element comes into view
   useEffect(() => {
-    if (inView && hasNextPage && !isFetchingNextPage) {
+    if (inView && hasNextPage && !isLoading) {
       fetchNextPage()
     }
-  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage])
+  }, [inView, hasNextPage, fetchNextPage])
 
   // Flatten all pages into a single array
   const allWebsites = data?.pages.flatMap((page) => page.docs) ?? []

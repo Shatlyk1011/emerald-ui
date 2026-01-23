@@ -41,7 +41,7 @@ export default function SitePreviewDialog({ onCategoryClick, onStyleClick }: Sit
       }}
 
     >
-      <DialogContent className='scrollbar-thin max-h-[90vh] w-[80vw] max-sm:w-[95vw] max-w-none! overflow-hidden p-0 overflow-y-auto '>
+      <DialogContent className='scrollbar-thin max-h-[90vh] w-[80vw] max-sm:w-[95vw] max-w-none! overflow-hidden p-0 max-lg:overflow-auto '>
         {/* Two-column layout */}
         <div className='grid h-full max-lg:grid-cols-1 grid-cols-[1fr_320px] '>
           {/* Left: Image Preview Area */}
@@ -65,7 +65,7 @@ export default function SitePreviewDialog({ onCategoryClick, onStyleClick }: Sit
                     </TabsTrigger>
                   </TabsList>
                   <TabsContent value='screenshot' className='mt-0 h-[calc(100%-3rem)]'>
-                    <div className='bg-background relative h-full w-full overflow-hidden rounded-md border shadow-lg'>
+                    <div className='bg-background relative h-full w-full overflow-hidden rounded-md border shadow-lg flex items-center'>
                       <Lens disableZoom={!isZoomEnabled}>
                         <img
                           src={selectedSite.imgUrl!}
@@ -105,7 +105,7 @@ export default function SitePreviewDialog({ onCategoryClick, onStyleClick }: Sit
                 // Single media view (no tabs)
                   <div className='h-full'>
                     {hasScreenshot && (
-                      <div className='bg-background relative h-full w-full overflow-hidden rounded-md border shadow-lg'>
+                      <div className='bg-background relative h-full w-full overflow-hidden rounded-md border shadow-lg flex items-center'>
                         <Lens disableZoom={!isZoomEnabled}>
                           <img
                             src={selectedSite.imgUrl!}
@@ -116,7 +116,7 @@ export default function SitePreviewDialog({ onCategoryClick, onStyleClick }: Sit
                     </div>
                   )}
                     {/* {!hasScreenshot && hasAdditionalMedia && typeof selectedSite.additionalMedia === 'object' && (
-                      <div className='bg-background relative h-full w-full overflow-hidden rounded-md border shadow-lg'>
+                      <div className='bg-background relative h-full w-full overflow-hidden rounded-md border shadow-lg items-center'>
                       {selectedSite.additionalMedia!.type === 'video' ? (
                         <video
                           src={selectedSite.additionalMedia!.mediaUrl!}
@@ -234,6 +234,9 @@ export default function SitePreviewDialog({ onCategoryClick, onStyleClick }: Sit
           </div>
         </div>
       </DialogContent>
+      <div className='fixed bottom-6 right-10'>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae impedit veritatis ad voluptates beatae porro tenetur rerum earum quam excepturi expedita, laborum similique. Porro, eius voluptatum quod quae, voluptates hic nulla inventore vel ex nisi facilis dolore. Soluta, eius ratione.</p>
+      </div>
     </Dialog>
   )
 }
