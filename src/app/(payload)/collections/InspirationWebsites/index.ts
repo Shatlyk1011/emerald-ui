@@ -9,18 +9,6 @@ import { beforeDeleteHook, beforeChangeHook } from './hooks';
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
   access: {
@@ -30,7 +18,7 @@ const InspirationWebsites: CollectionConfig = {
     delete: admins,
   },
   admin: {
-    defaultColumns: ['pageUrl', 'title', 'imgUrl', 'favicon'],
+    defaultColumns: ['pageUrl', 'title', 'imgUrl', 'isViewed'],
     useAsTitle: 'pageUrl',
     description:
       'Main collection for storing website inspiration entries. Automatically captures screenshots and favicons from provided URLs. Supports categorization, styling tags, and additional media attachments.',
@@ -46,6 +34,27 @@ const InspirationWebsites: CollectionConfig = {
         ) {
           const gradientColor = await extractGradientColor(doc.imgUrl)
           doc.gradientColor = gradientColor
+        }
+        return doc
+      },
+    ],
+    afterRead: [
+      async ({ doc, req, context }) => {
+        // Only update isViewed when accessing from admin panel (not in list view)
+        // context.depth indicates if this is a relationship/list fetch (depth > 0) or direct access (depth === 0)
+        if (!doc.isViewed && req?.user && context?.depth === 0) {
+          try {
+            await req.payload.update({
+              collection: 'inspiration-websites',
+              id: doc.id,
+              data: {
+                isViewed: true,
+              },
+            })
+            doc.isViewed = true
+          } catch (error) {
+            console.error('Error updating isViewed:', error)
+          }
         }
         return doc
       },
@@ -215,6 +224,19 @@ const InspirationWebsites: CollectionConfig = {
       defaultValue: true,
       admin: {
         position: 'sidebar',
+      },
+    },
+
+    {
+      name: 'isViewed',
+      type: 'checkbox',
+      required: false,
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description:
+          'Automatically set to true when document is opened in admin panel',
+        hidden: true,
       },
     },
   ],

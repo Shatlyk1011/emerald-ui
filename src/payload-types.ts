@@ -131,7 +131,7 @@ export interface InspirationWebsite {
   id: string;
   title: string;
   description: string;
-  category?: string[] | null;
+  category?: string | null;
   style: string[];
   /**
    * Original website URL (for screenshots)
@@ -158,6 +158,10 @@ export interface InspirationWebsite {
    */
   gradientColor?: string | null;
   isVisible?: boolean | null;
+  /**
+   * Automatically set to true when document is opened in admin panel
+   */
+  isViewed?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -346,6 +350,7 @@ export interface InspirationWebsitesSelect<T extends boolean = true> {
   additionalMedia?: T;
   gradientColor?: T;
   isVisible?: T;
+  isViewed?: T;
   updatedAt?: T;
   createdAt?: T;
 }
