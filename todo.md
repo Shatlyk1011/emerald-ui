@@ -11,33 +11,33 @@ LLM:
 
 Node ui:
 
+- explore gemini tasks/skills and generate them via llm (github like)
+
 - gemini daily component generation for Node UI?
 
 - discord components
 
+- test filter apply fetaure
+
+<!-- !!! ISSUE WHEN APPLYING FILTER IN dialog - remove this logic?? -->
+
 Inspiration page:
+- add suggest website button and collection (with rate limit of 2-3) (later)
 
-- Test custom image upload feature
+- filters to be apply in... sekundomer (later)
 
-- before deleting inspiration website, delete image as well
+- viewed checkbox (later)
 
-- custom image delete button?
-
-- add default image and favicon
-
-- add type image or video. upload to storage videos as well
-
-- add 2 version of preview dialog - video and image - video priority
 
 Result page:
 
 - Find money for claude api
 
-- Upgrade tab & chat ui (see magicpatterns)
-
 - Remove links from responses
 
-- Integrate claude skills
+- Upgrade tab & chat ui (see magicpatterns)
+
+- Integrate claude skills (check github like)
 
 Global:
 
@@ -49,6 +49,7 @@ Global:
 
 - add seo (blog)
 
-<!--
-  in the /results page, there is editor with editor and chat tabs. in chat component, add mock chat history with agent and user
+
+<!-- 
+  combine working solution with claude-test component
  -->

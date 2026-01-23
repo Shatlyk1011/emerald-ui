@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { createClient } from '@/lib/supabase-client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { loginSchema, type LoginFormData } from '@/lib/login-schema'
+import { loginSchema } from '@/lib/login-schema'
 import { Chrome, Github, Apple } from 'lucide-react'
 
 export default function LoginPage() {
@@ -49,7 +49,7 @@ export default function LoginPage() {
       const result = loginSchema.safeParse({ email })
       
       if (!result.success) {
-        setError(result.error.errors[0].message)
+        // setError(result.error.errors[0].message)
         setLoading(false)
         return
       }
@@ -167,7 +167,7 @@ export default function LoginPage() {
 
           {magicLinkSent && (
             <div className="rounded-md border border-green-900/50 bg-green-950/50 p-3 text-sm text-green-400">
-              Check your email! We've sent you a magic link to sign in.
+              Check your email! We&apos;ve sent you a magic link to sign in.
             </div>
           )}
 
