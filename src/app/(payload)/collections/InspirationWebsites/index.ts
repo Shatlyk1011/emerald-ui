@@ -9,6 +9,12 @@ import { beforeDeleteHook, beforeChangeHook } from './hooks';
 
 
 
+
+
+
+
+
+
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
   access: {
@@ -39,10 +45,10 @@ const InspirationWebsites: CollectionConfig = {
       },
     ],
     afterRead: [
-      async ({ doc, req, context }) => {
+      async ({ doc, req }) => {
         // Only update isViewed when accessing from admin panel (not in list view)
         // context.depth indicates if this is a relationship/list fetch (depth > 0) or direct access (depth === 0)
-        if (!doc.isViewed && req?.user && context?.depth === 0) {
+        if (!doc.isViewed && req?.user) {
           try {
             await req.payload.update({
               collection: 'inspiration-websites',
