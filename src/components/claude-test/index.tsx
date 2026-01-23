@@ -2,6 +2,14 @@
 // @ts-nocheck
 'use client'
 import { useState, useCallback } from 'react'
+import Anthropic from '@anthropic-ai/sdk'
+
+// Initialize Anthropic client
+const anthropic = new Anthropic({
+  apiKey: process.env.NEXT_PUBLIC_ANTHROPIC_API_KEY || '',
+  dangerouslyAllowBrowser: true, // Required for client-side usage
+})
+
 import {
   Send,
   Image,
@@ -136,40 +144,20 @@ const DesignGenerationApp = () => {
     }
   }
 
-  // Call Claude API
+  // Call Claude API using the SDK
   const callClaude = async (messages, systemPrompt = null) => {
-    const requestBody = {
+    const params = {
       model: 'claude-sonnet-4-20250514',
       max_tokens: 4000,
       messages,
     }
 
     if (systemPrompt) {
-      requestBody.system = systemPrompt
+      params.system = systemPrompt
     }
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        // Note: In production, use a backend proxy to avoid exposing API key
-        'x-api-key':
-          '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',
-        // 'anthropic-version': '2023-06-01'
-        'anthropic-dangerous-direct-browser-access': 'true',
-      },
-      body: JSON.stringify(requestBody),
-    })
-
-    if (!response.ok) {
-      const errorData = await response.json()
-      throw new Error(
-        `Claude API error: ${errorData.error?.message || response.statusText}`
-      )
-    }
-
-    const data = await response.json()
-    return data.content[0].text
+    const response = await anthropic.messages.create(params)
+    return response.content[0].text
   }
 
   // Determine which skills to use

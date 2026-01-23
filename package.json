@@ -12,6 +12,7 @@
     "generate:types": "payload generate:types"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.2",
     "@babel/standalone": "^7.28.5",
     "@google/genai": "^1.35.0",
     "@monaco-editor/react": "^4.7.0",
