@@ -12,7 +12,7 @@ import FilterSection from './FilterSection'
 import SiteCards from './SiteCards'
 import SiteCardsSkeleton from './SiteCards/SiteCardsSkeleton'
 import { debounce } from '@/composables/utils'
-import EmptySite from './SiteCards/EmptySite'
+import EmptyResult from './SiteCards/EmptyResult'
 
 interface Props {
   initialData: IWebsites
@@ -86,7 +86,7 @@ export default function InspirationContent({ initialData, categories, styles }: 
       {isLoading ? (
         <SiteCardsSkeleton />
       ) : allWebsites.length === 0 ? (
-        <EmptySite handleResetFilters={handleResetFilters} />
+          <EmptyResult handleResetFilters={handleResetFilters} />
       ) : (
             <SiteCards websites={allWebsites} />
       )}
