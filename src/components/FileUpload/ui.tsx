@@ -8,7 +8,6 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useLayoutEffect,
   useRef,
   useState,
 } from 'react'
@@ -199,7 +198,6 @@ type PromptInputContextType = {
   isLoading: boolean
   value: string
   setValue: (value: string) => void
-  maxHeight: number | string
   onSubmit?: () => void
   disabled?: boolean
   textareaRef: React.RefObject<HTMLTextAreaElement | null>
@@ -208,8 +206,7 @@ type PromptInputContextType = {
 const PromptInputContext = createContext<PromptInputContextType>({
   isLoading: false,
   value: '',
-  setValue: () => {},
-  maxHeight: 240,
+  setValue: () => { },
   onSubmit: undefined,
   disabled: false,
   textareaRef: createRef<HTMLTextAreaElement>(),
@@ -223,7 +220,6 @@ export type PromptInputProps = {
   isLoading?: boolean
   value?: string
   onValueChange?: (value: string) => void
-  maxHeight?: number | string
   onSubmit?: () => void
   children: React.ReactNode
   className?: string
@@ -233,7 +229,6 @@ export type PromptInputProps = {
 function PromptInput({
   className,
   isLoading = false,
-  maxHeight = 240,
   value,
   onValueChange,
   onSubmit,
@@ -262,7 +257,6 @@ function PromptInput({
           isLoading,
           value: value ?? internalValue,
           setValue: onValueChange ?? handleChange,
-          maxHeight,
           onSubmit,
           disabled,
           textareaRef,
@@ -271,7 +265,7 @@ function PromptInput({
         <div
           onClick={handleClick}
           className={cn(
-            'border-input bg-background cursor-text rounded-3xl border p-2 shadow-xs',
+            'border-input bg-background cursor-text rounded-3xl flex flex-col border p-2 shadow-xs h-full',
             disabled && 'cursor-not-allowed opacity-60',
             className
           )}
@@ -285,61 +279,27 @@ function PromptInput({
 }
 
 export type PromptInputTextareaProps = {
-  disableAutosize?: boolean
 } & React.ComponentProps<typeof Textarea>
 
 function PromptInputTextarea({
   className,
   onKeyDown,
-  disableAutosize = false,
   ...props
 }: PromptInputTextareaProps) {
-  const { value, setValue, maxHeight, onSubmit, disabled, textareaRef } =
+  const { value, setValue, disabled } =
     usePromptInput()
 
-  const adjustHeight = (el: HTMLTextAreaElement | null) => {
-    if (!el || disableAutosize) return
-
-    el.style.height = 'auto'
-
-    if (typeof maxHeight === 'number') {
-      el.style.height = `${Math.min(el.scrollHeight, maxHeight)}px`
-    } else {
-      el.style.height = `min(${el.scrollHeight}px, ${maxHeight})`
-    }
-  }
-
-  const handleRef = (el: HTMLTextAreaElement | null) => {
-    textareaRef.current = el
-    adjustHeight(el)
-  }
-
-  useLayoutEffect(() => {
-    if (!textareaRef.current || disableAutosize) return
-
-    const el = textareaRef.current
-    el.style.height = 'auto'
-
-    if (typeof maxHeight === 'number') {
-      el.style.height = `${Math.min(el.scrollHeight, maxHeight)}px`
-    } else {
-      el.style.height = `min(${el.scrollHeight}px, ${maxHeight})`
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value, maxHeight, disableAutosize])
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    adjustHeight(e.target)
     setValue(e.target.value)
   }
 
   return (
     <Textarea
-      ref={handleRef}
       value={value}
       onChange={handleChange}
       className={cn(
-        'text-primary min-h-[44px] w-full resize-none border-none bg-transparent shadow-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0',
+        'text-primary h-full w-full resize-none border-none bg-transparent shadow-none outline-none focus-visible:ring-0 focus-visible:ring-offset-0',
         className
       )}
       rows={1}

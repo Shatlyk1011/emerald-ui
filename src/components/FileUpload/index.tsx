@@ -73,7 +73,7 @@ function FileUploadInput() {
       accept='.jpg,.jpeg,.png,.pdf,.docx'
     >
       <BackgroundGradient
-        containerClassName=' max-w-md w-full'
+        containerClassName='max-w-xl w-full'
         isActive={isFocus || !!input}
       >
         <PromptInput
@@ -83,10 +83,10 @@ function FileUploadInput() {
           onBlur={() => setFocus(false)}
           isLoading={isLoading}
           onSubmit={handleSubmit}
-          className='w-full'
+          className='w-full min-h-20'
         >
           <PromptInputTextarea
-            className='min-h-20 rounded-2xl'
+            className='h-full rounded-2xl min-h-30'
             placeholder='Type a message or drop files...'
           />
 
@@ -115,7 +115,7 @@ function FileUploadInput() {
             </div>
           )}
 
-          <PromptInputActions className='flex items-center justify-between gap-2 pt-2'>
+          <PromptInputActions className='flex items-center justify-between gap-2 pt-2 '>
             <PromptInputAction tooltip='Attach files'>
               <FileUploadTrigger asChild>
                 <div className='hover:bg-secondary-foreground/10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-2xl'>
