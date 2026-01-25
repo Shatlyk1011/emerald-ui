@@ -49,7 +49,13 @@ Global:
 
 - add seo (blog)
 
+- change colors (dark slate as primary?)?
+
 
 <!-- 
   combine working solution with claude-test component
  -->
+
+ <!-- 
+  dorabotat auth
+  -->

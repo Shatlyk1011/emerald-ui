@@ -7,22 +7,10 @@ import sharp from 'sharp';
 import AdminUsers from './app/(payload)/collections/AdminUsers';
 // collections
 import Categories from './app/(payload)/collections/Categories';
-import InspirationWebsites from './app/(payload)/collections/InspirationWebsites';
-import Media from './app/(payload)/collections/Media';
-import WebsiteStyle from './app/(payload)/collections/WebsiteStyle';
-
-
-
-
-
-
-
-
-
-
-
-
-
+import CreditHistory from './app/(payload)/collections/CreditHistory'
+import InspirationWebsites from './app/(payload)/collections/InspirationWebsites'
+import Media from './app/(payload)/collections/Media'
+import WebsiteStyle from './app/(payload)/collections/WebsiteStyle'
 
 
 
@@ -63,6 +51,7 @@ export default buildConfig({
     Categories,
     WebsiteStyle,
     AdminUsers,
+    CreditHistory,
   ],
 
   // Your Payload secret - should be a complex and secure string, unguessable

@@ -72,6 +72,7 @@ export interface Config {
     categories: Category;
     'website-style': WebsiteStyle;
     adminUsers: AdminUser;
+    'credit-history': CreditHistory;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'website-style': WebsiteStyleSelect<false> | WebsiteStyleSelect<true>;
     adminUsers: AdminUsersSelect<false> | AdminUsersSelect<true>;
+    'credit-history': CreditHistorySelect<false> | CreditHistorySelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -245,6 +247,45 @@ export interface AdminUser {
   password?: string | null;
 }
 /**
+ * Track user credit history including monthly free credits and purchased credits. Credits expire after 1 month.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "credit-history".
+ */
+export interface CreditHistory {
+  id: string;
+  /**
+   * Supabase user ID
+   */
+  userId: string;
+  /**
+   * Number of credits (5 for monthly free, variable for purchased)
+   */
+  creditAmount: number;
+  /**
+   * Type of credit allocation
+   */
+  type: 'monthly_free' | 'purchased';
+  /**
+   * Date when credits were allocated
+   */
+  createdDate: string;
+  /**
+   * Date when credits expire (1 month from creation)
+   */
+  expiredDate: string;
+  /**
+   * Auto-calculated based on expiration date
+   */
+  isExpired?: boolean | null;
+  /**
+   * Block these credits from being used
+   */
+  isBlocked?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -287,6 +328,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'adminUsers';
         value: string | AdminUser;
+      } | null)
+    | ({
+        relationTo: 'credit-history';
+        value: string | CreditHistory;
       } | null)
     | ({
         relationTo: 'payload-kv';
@@ -410,6 +455,21 @@ export interface AdminUsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "credit-history_select".
+ */
+export interface CreditHistorySelect<T extends boolean = true> {
+  userId?: T;
+  creditAmount?: T;
+  type?: T;
+  createdDate?: T;
+  expiredDate?: T;
+  isExpired?: T;
+  isBlocked?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
