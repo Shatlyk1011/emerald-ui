@@ -9,3 +9,5 @@ export interface IBaseFields {
   totalDocs: number
   totalPages: number
 }
+
+export type AuthProviders = 'google' | 'github' | 'apple'
