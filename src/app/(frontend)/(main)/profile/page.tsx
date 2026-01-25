@@ -1,0 +1,250 @@
+import type { Metadata } from 'next'
+import { siteConfig } from '@/lib/site-config'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import { CreditCard, Crown, Calendar } from 'lucide-react'
+import Link from 'next/link'
+import { getUser } from '@/lib/auth-helpers'
+
+export const metadata: Metadata = {
+  title: 'Profile',
+  description: siteConfig.description,
+}
+
+// Mock user data
+const mockUser = {
+  firstName: 'Shatlyk',
+  lastName: '',
+  email: 'gj_wp@mail.ru',
+  billingEmail: 'gj_wp@mail.ru',
+  avatarUrl: '',
+  plan: 'Free Plan',
+  creditsRemaining: 3,
+  totalCredits: 5,
+}
+
+// Mock credit history
+const mockCreditHistory = [
+  { id: 1, date: '2026-01-01', amount: 5, type: 'Monthly Credits', description: 'Free monthly credits' },
+  { id: 2, date: '2025-12-01', amount: 5, type: 'Monthly Credits', description: 'Free monthly credits' },
+  { id: 3, date: '2025-11-01', amount: 5, type: 'Monthly Credits', description: 'Free monthly credits' },
+  { id: 4, date: '2025-10-01', amount: 5, type: 'Monthly Credits', description: 'Free monthly credits' },
+]
+
+// Mock invoice history
+const mockInvoices = [
+  { id: 1, date: '2026-01-15', amount: 0, status: 'Paid', description: 'Free Plan - January 2026' },
+  { id: 2, date: '2025-12-15', amount: 0, status: 'Paid', description: 'Free Plan - December 2025' },
+  { id: 3, date: '2025-11-15', amount: 0, status: 'Paid', description: 'Free Plan - November 2025' },
+]
+
+export default async function ProfilePage() {
+  const user = await getUser()
+  console.log('user', user)
+
+  // // This should be handled by middleware, but as a fallback
+  // if (!user) {
+  //   // redirect('/login')
+  // }
+
+  // // Get user initials for avatar fallback
+  // const getUserInitials = () => {
+  //   if (user.user_metadata?.full_name) {
+  //     const names = user.user_metadata.full_name.split(' ')
+  //     return names.length > 1
+  //       ? `${names[0][0]}${names[names.length - 1][0]}`.toUpperCase()
+  //       : names[0][0].toUpperCase()
+  //   }
+  //   if (user.email) {
+  //     return user.email[0].toUpperCase()
+  //   }
+  //   return 'U'
+  // }
+
+  // Format date
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+  }
+
+  const getUserInitials = () => {
+    if (mockUser.firstName) {
+      return mockUser.firstName[0].toUpperCase()
+    }
+    return mockUser.email[0].toUpperCase()
+  }
+
+  return (
+    <main className='mx-auto mb-16 w-full max-w-6xl px-8 pt-24 max-lg:px-6 max-sm:px-4'>
+      {/* Header */}
+      <div className='mb-8'>
+        <h1 className='mb-2 text-4xl font-bold'>Profile</h1>
+        <p className='text-muted-foreground'>
+          Manage your profile, preferences, view credit history, download invoices, and manage API keys.
+        </p>
+      </div>
+
+      {/* Profile Settings Card */}
+      <div className='mb-6 rounded-xl border bg-card/20 p-8'>
+        <div className='mb-6 flex items-center gap-4'>
+          <Avatar className='size-16'>
+            <AvatarImage src={mockUser.avatarUrl} alt={mockUser.firstName} />
+            <AvatarFallback className='text-xl'>{getUserInitials()}</AvatarFallback>
+          </Avatar>
+          <h2 className='text-2xl font-semibold'>Profile Settings</h2>
+        </div>
+
+        <div className='flex gap-4 text-sm font-medium mb-10'>
+          <div className='flex-1'>
+            <label className='mb-2 block'>Name</label>
+            <div className='rounded-md border bg-muted/50 px-3 py-2 text-foreground'>
+              {mockUser.firstName}
+            </div>
+          </div>
+
+          <div className='flex-1'>
+            <label className='mb-2 block'>Email</label>
+            <div className='rounded-md border bg-muted/50 px-3 py-2 text-foreground'>
+              {mockUser.email}
+            </div>
+          </div>
+        </div>
+
+        <div className='mb-3 flex items-center gap-4 justify-between'>
+          <h2 className='text-xl font-medium'>
+            <span className='opacity-80'>Your Current Plan:</span> <span className='font-bold'>Free</span>
+          </h2>
+          <Button className='bg-blue-600 hover:bg-blue-700 text-foreground' asChild>
+            <Link href="/pricing">
+              <Crown className='size-4' />
+              Upgrade
+            </Link>
+          </Button>
+        </div>
+
+        <div className='rounded-lg bg-muted/30 p-6'>
+          <div className='mb-2 flex items-center justify-between'>
+            <h3 className='text-lg font-semibold'>{mockUser.plan}</h3>
+            <span className='text-sm text-muted-foreground'>
+              {mockUser.creditsRemaining} credits remaining
+            </span>
+          </div>
+          <p className='text-sm text-muted-foreground'>
+            For exploring and trialing our platform.
+          </p>
+
+          {/* Credits Progress Bar */}
+          <div className='mt-4'>
+            <div className='mb-2 flex items-center justify-between text-sm'>
+              <span className='font-medium'>Credits Used</span>
+              <span className='text-muted-foreground'>
+                {mockUser.totalCredits - mockUser.creditsRemaining} / {mockUser.totalCredits}
+              </span>
+            </div>
+            <div className='h-2 w-full overflow-hidden rounded-full bg-muted'>
+              <div
+                className='h-full bg-blue-600 transition-all'
+                style={{
+                  width: `${((mockUser.totalCredits - mockUser.creditsRemaining) / mockUser.totalCredits) * 100}%`,
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className='mb-6 rounded-xl border  bg-card/20 p-8 shadow-sm'>
+        <h2 className='mb-6 text-xl font-semibold'>Credit History</h2>
+
+        <div className='overflow-hidden rounded-lg border'>
+          <table className='w-full text-nowrap'>
+            <thead className='bg-muted/50'>
+              <tr>
+                <th className='px-6 py-3 text-left text-sm font-medium'>Date</th>
+                <th className='px-6 py-3 text-left text-sm font-medium'>Type</th>
+                <th className='px-6 py-3 text-left text-sm font-medium'>Description</th>
+                <th className='px-6 py-3 text-right text-sm font-medium'>Credits</th>
+              </tr>
+            </thead>
+            <tbody className='divide-y'>
+              {mockCreditHistory.map((credit) => (
+                <tr key={credit.id} className='transition-colors hover:bg-muted/30'>
+                  <td className='px-6 py-4 text-sm'>
+                    <div className='flex items-center gap-2'>
+                      <Calendar className='size-4 text-muted-foreground' />
+                      {formatDate(credit.date)}
+                    </div>
+                  </td>
+                  <td className='px-6 py-4 text-sm font-medium'>{credit.type}</td>
+                  <td className='px-6 py-4 text-sm text-muted-foreground'>
+                    {credit.description}
+                  </td>
+                  <td className='px-6 py-4 text-right text-sm font-semibold text-green-600'>
+                    +{credit.amount}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Invoice History */}
+      <div className='mb-6 rounded-xl border  bg-card/20 p-8 shadow-sm'>
+        <h2 className='mb-6 text-xl font-semibold'>Invoice History</h2>
+
+        <div className='overflow-hidden rounded-lg border'>
+          <table className='w-full'>
+            <thead className='bg-muted/50'>
+              <tr>
+                <th className='px-6 py-3 text-left text-sm font-medium'>Date</th>
+                <th className='px-6 py-3 text-left text-sm font-medium'>Description</th>
+                <th className='px-6 py-3 text-left text-sm font-medium'>Status</th>
+                <th className='px-6 py-3 text-right text-sm font-medium'>Amount</th>
+                <th className='px-6 py-3 text-right text-sm font-medium'>Action</th>
+              </tr>
+            </thead>
+            <tbody className='divide-y'>
+              {mockInvoices?.map((invoice) => (
+                <tr key={invoice.id} className='transition-colors hover:bg-muted/30'>
+                  <td className='px-6 py-4 text-sm'>
+                    <div className='flex items-center gap-2'>
+                      <Calendar className='size-4 text-muted-foreground' />
+                      {formatDate(invoice.date)}
+                    </div>
+                  </td>
+                  <td className='px-6 py-4 text-sm'>{invoice.description}</td>
+                  <td className='px-6 py-4 text-sm'>
+                    <span className='inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900/30 dark:text-green-400'>
+                      {invoice.status}
+                    </span>
+                  </td>
+                  <td className='px-6 py-4 text-right text-sm font-semibold'>
+                    ${invoice.amount.toFixed(2)}
+                  </td>
+                  <td className='px-6 py-4 text-right'>
+                    <Button variant='ghost' size='sm' className='text-blue-600 hover:text-blue-700'>
+                      <CreditCard className='mr-2 size-4' />
+                      Download
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+            {!mockInvoices.length && (
+                <div className='py-2 text-center'>
+                  {/* <span>You are on the free plan</span>  */}
+                  <Button variant='link' size="sm" asChild className='text-blue-500 hover:text-blue-600'>
+                    <Link href="/pricing">Upgrade your plan to receive invoices.</Link>
+                  </Button>
+                </div>
+              )}
+        </div>
+      </div>
+    </main>
+  )
+}

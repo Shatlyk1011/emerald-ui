@@ -81,7 +81,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden ">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden">
 
 
       {/* left */}
@@ -199,7 +199,7 @@ export default function LoginPage() {
 
 
       {/* right */}
-      <div className='flex-1'>
+      <div className='flex-1 bg-slate-900 h-screen flex items-center justify-center'>
         hello world
       </div>
     </div>
