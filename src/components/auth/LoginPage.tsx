@@ -126,14 +126,6 @@ export default function LoginPage() {
               Continue with GitHub
             </Button>
 
-            <Button
-              onClick={() => handleOAuthSignIn('apple')}
-              disabled={loading}
-              className="w-full border h-12 bg-background text-foreground rounded-lg hover:bg-background cursor-pointer"
-            >
-              <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09z"></path><path d="M15.53 3.83c.893-1.09 1.479-2.58 1.309-4.081-1.27.052-2.82.863-3.74 1.93-.831.942-1.558 2.484-1.35 3.941 1.43.111 2.889-.724 3.781-1.79z"></path></svg>
-              Continue with Apple
-            </Button>
           </div>
 
           {/* Divider */}

@@ -1,27 +1,5 @@
-import { getPayload } from 'payload'
 import config from '@payload-config'
-import { CreditHistory } from '@/payload-types'
-
-/**
- * Get total available (non-expired, non-blocked) credits for a user
- */
-export async function getUserAvailableCredits(userId: string): Promise<number> {
-  const payload = await getPayload({ config })
-
-  const credits = await payload.find({
-    collection: 'credit-history',
-    where: {
-      and: [
-        { userId: { equals: userId } },
-        { isExpired: { equals: false } },
-        { isBlocked: { equals: false } },
-      ],
-    },
-    limit: 1000,
-  })
-
-  return credits.docs.reduce((sum, doc: CreditHistory) => sum + (doc.creditAmount || 0), 0)
-}
+import { getPayload } from 'payload'
 
 /**
  * Create initial credits for a new user (called when user signs up via Supabase)
@@ -58,22 +36,11 @@ export async function getUserCreditHistory(userId: string) {
   const credits = await payload.find({
     collection: 'credit-history',
     where: {
-      userId: { equals: userId },
+      and: [{ userId: { equals: userId } }, { isBlocked: { equals: false } }],
     },
     sort: '-createdDate',
     limit: 100,
   })
 
   return credits.docs
-}
-
-/**
- * Check if user has enough credits
- */
-export async function hasEnoughCredits(
-  userId: string,
-  requiredAmount: number
-): Promise<boolean> {
-  const available = await getUserAvailableCredits(userId)
-  return available >= requiredAmount
 }

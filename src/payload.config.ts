@@ -5,27 +5,13 @@ import { fileURLToPath } from 'node:url';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
 import AdminUsers from './app/(payload)/collections/AdminUsers';
+
 // collections
 import Categories from './app/(payload)/collections/Categories';
 import CreditHistory from './app/(payload)/collections/CreditHistory'
 import InspirationWebsites from './app/(payload)/collections/InspirationWebsites'
 import Media from './app/(payload)/collections/Media'
 import WebsiteStyle from './app/(payload)/collections/WebsiteStyle'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
