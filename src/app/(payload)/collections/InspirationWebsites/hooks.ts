@@ -1,7 +1,15 @@
-import type { CollectionBeforeDeleteHook, CollectionBeforeChangeHook } from 'payload';
-import { extractGradientColor } from '../../utils/extractColor';
-import { deleteMediaFromUrl, uploadScreenshot, uploadFavicon } from '../../utils/supabase';
-import { createUrlSlug, getFaviconExtension } from './utils';
+import type {
+  CollectionBeforeDeleteHook,
+  CollectionBeforeChangeHook,
+  CollectionAfterReadHook,
+} from 'payload'
+import { extractGradientColor } from '../../utils/extractColor'
+import {
+  deleteMediaFromUrl,
+  uploadScreenshot,
+  uploadFavicon,
+} from '../../utils/supabase'
+import { createUrlSlug, getFaviconExtension } from './utils'
 
 export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({
   id,
@@ -139,3 +147,38 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({
   return data
 }
 
+/**
+ * AfterRead hook to mark documents as viewed when opened in admin panel
+ * Only triggers on direct document access, not on list views or relationship fetches
+ */
+export const afterReadHook: CollectionAfterReadHook = async ({
+  doc,
+  req,
+  context,
+}) => {
+  // Only update isViewed when:
+  // 1. Document hasn't been viewed yet
+  // 2. User is authenticated (admin panel access)
+  // 3. This is a direct document access (not triggered by our own update)
+  const isDirectAccess = context?.triggerAfterRead !== false
+  const isAdminUser = req?.user
+  const notViewed = !doc.isViewed
+
+  if (notViewed && isAdminUser && isDirectAccess) {
+    try {
+      // Prevent infinite loop by setting context to skip afterRead on this update
+      await req.payload.update({
+        collection: 'inspiration-websites',
+        id: doc.id,
+        data: { isViewed: true },
+        context: { triggerAfterRead: false },
+      })
+      doc.isViewed = true
+      console.log(`Marked document ${doc.id} as viewed`)
+    } catch (error) {
+      console.error('Error updating isViewed:', error)
+    }
+  }
+
+  return doc
+}

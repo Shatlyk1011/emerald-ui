@@ -1,7 +1,7 @@
 import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins';
 import { extractGradientColor } from '../../utils/extractColor';
-import { beforeDeleteHook, beforeChangeHook } from './hooks';
+import { beforeDeleteHook, beforeChangeHook, afterReadHook } from './hooks'
 
 
 
@@ -44,27 +44,7 @@ const InspirationWebsites: CollectionConfig = {
         return doc
       },
     ],
-    afterRead: [
-      async ({ doc, req }) => {
-        // Only update isViewed when accessing from admin panel (not in list view)
-        // context.depth indicates if this is a relationship/list fetch (depth > 0) or direct access (depth === 0)
-        if (!doc.isViewed && req?.user) {
-          try {
-            await req.payload.update({
-              collection: 'inspiration-websites',
-              id: doc.id,
-              data: {
-                isViewed: true,
-              },
-            })
-            doc.isViewed = true
-          } catch (error) {
-            console.error('Error updating isViewed:', error)
-          }
-        }
-        return doc
-      },
-    ],
+    afterRead: [afterReadHook],
   },
   fields: [
     {
