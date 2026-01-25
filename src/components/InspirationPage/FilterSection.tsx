@@ -87,10 +87,10 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
         },
         {
           style: {
-            in: selectedStyles,
-          },
-        },
-      ],
+            in: selectedStyles.map((item) => item.toLowerCase())
+          }
+        }
+      ]
     };
     handleFilterRequest(query);
   }, [search, selectedCategories, selectedStyles])

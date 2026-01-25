@@ -1,9 +1,21 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import ThemeToggle from '@/components/ui/theme-toggle'
+import { useUser } from '@/hooks/use-user'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Button } from '@/components/ui/button'
+import { LogOut, User as UserIcon } from 'lucide-react'
 
 const { components, inspiration, home, pricing } = {
   home: '/',
@@ -14,6 +26,26 @@ const { components, inspiration, home, pricing } = {
 
 const Header = () => {
   const pathname = usePathname()
+  const router = useRouter()
+  const { user, isLoading, signOut } = useUser()
+
+  // Get user initials for avatar fallback
+  const getUserInitials = () => {
+    if (user?.user_metadata?.full_name) {
+      const names = user.user_metadata.full_name.split(' ')
+      return names.length > 1
+        ? `${names[0][0]}${names[names.length - 1][0]}`.toUpperCase()
+        : names[0][0].toUpperCase()
+    }
+    if (user?.email) {
+      return user.email[0].toUpperCase()
+    }
+    return 'U'
+  }
+
+  const handleSignOut = async () => {
+    await signOut()
+  }
 
   return (
     <div className='border-border border-b'>
@@ -75,6 +107,62 @@ const Header = () => {
 
         <div className='flex min-w-20 items-center justify-end gap-2 max-sm:gap-1'>
           <ThemeToggle />
+
+          {!isLoading && (
+            <>
+              {user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button className='flex items-center gap-2 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2'>
+                      <Avatar className='size-8 cursor-pointer'>
+                        <AvatarImage
+                          src={user.user_metadata?.avatar_url}
+                          alt={user.user_metadata?.full_name || user.email || 'User'}
+                        />
+                        <AvatarFallback>{getUserInitials()}</AvatarFallback>
+                      </Avatar>
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align='end' className='w-56'>
+                    <DropdownMenuLabel>
+                      <div className='flex flex-col space-y-1'>
+                        <p className='text-sm font-medium leading-none'>
+                          {user.user_metadata?.full_name || 'User'}
+                        </p>
+                        <p className='text-xs leading-none text-muted-foreground'>
+                          {user.email}
+                        </p>
+                      </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link href='/profile' className='cursor-pointer'>
+                        <UserIcon className='mr-2 size-4' />
+                        Profile
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={handleSignOut}
+                      className='cursor-pointer text-red-600 focus:text-red-600'
+                    >
+                      <LogOut className='mr-2 size-4' />
+                      Sign Out
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Button
+                  variant='outline'
+                  size='sm'
+                  onClick={() => router.push('/login')}
+                  className='ml-2'
+                >
+                  Sign In
+                </Button>
+              )}
+            </>
+          )}
         </div>
       </header>
     </div>
