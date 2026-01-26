@@ -1,6 +1,11 @@
-import { getPayload } from 'payload'
-import config from '@payload-config'
-import { CreditHistory } from '@/payload-types'
+import { CreditHistory } from '@/payload-types';
+import config from '@payload-config';
+import { getPayload } from 'payload';
+
+
+
+
+
 
 /** 
  * Cron job to add monthly free credits to all users
@@ -10,7 +15,7 @@ export async function addMonthlyCredits() {
   const payload = await getPayload({ config })
 
   try {
-    console.log('Starting monthly credits cron job...')
+    console.log('Cron: Starting monthly credits cron job...')
 
     // Get all unique user IDs from existing credit history
     const existingCredits = await payload.find({
@@ -18,11 +23,13 @@ export async function addMonthlyCredits() {
       limit: 10000,
     })
 
-    const uniqueUserIds = [...new Set(existingCredits.docs.map((doc: CreditHistory) => doc.userId))]
+    const uniqueUserIds = [
+      ...new Set(existingCredits.docs.map((doc: CreditHistory) => doc.userId)),
+    ]
 
-    console.log('uniqueUserIds', uniqueUserIds)
+    console.log('Cron: uniqueUserIds', uniqueUserIds)
 
-    console.log(`Found ${uniqueUserIds.length} unique users`)
+    console.log(`Cron: Found ${uniqueUserIds.length} unique users`)
 
     // Add 5 free credits for each user
     for (const userId of uniqueUserIds) {
@@ -43,13 +50,15 @@ export async function addMonthlyCredits() {
         },
       })
 
-      console.log(`✓ Added 5 monthly credits for user: ${userId}`)
+      console.log(`Cron: ✓ Added 5 monthly credits for user: ${userId}`)
     }
 
-    console.log(`✓ Monthly credits added for ${uniqueUserIds.length} users`)
+    console.log(
+      `Cron: ✓ Monthly credits added for ${uniqueUserIds.length} users`
+    )
     return { success: true, usersProcessed: uniqueUserIds.length }
   } catch (error) {
-    console.error('Error adding monthly credits:', error)
+    console.error('Cron: Error adding monthly credits:', error)
     throw error
   }
 }
