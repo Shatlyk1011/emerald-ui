@@ -7,6 +7,16 @@ import sharp from 'sharp';
 
 
 
+
+
+
+
+
+
+
+
+
+
 // Allowed file types
 const ALLOWED_IMAGE_TYPES = [
   'image/jpeg',
@@ -76,7 +86,7 @@ export async function POST(request: NextRequest) {
       try {
         // Process image with Sharp: convert to WebP and reduce quality
         const optimizedBuffer = await sharp(buffer)
-          .webp({ quality: 85 })
+          .webp({ quality: 95 })
           .toBuffer()
 
         buffer = optimizedBuffer as Buffer<ArrayBuffer>

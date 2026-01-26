@@ -2,11 +2,6 @@ import { NextResponse } from 'next/server';
 import { getClientByUserId, getUserCreditHistory } from '@/lib/credit-helpers'
 import { createClient } from '@/lib/supabase-server'
 
-
-
-
-
-
 export async function GET() {
   try {
     const supabase = await createClient()
