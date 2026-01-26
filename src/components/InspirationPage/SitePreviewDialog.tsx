@@ -15,10 +15,9 @@ import Lens from '../ui/lens'
 
 interface SitePreviewDialogProps {
   onCategoryClick: (category: string) => void
-  onStyleClick: (style: string) => void
 }
 
-export default function SitePreviewDialog({ onCategoryClick, onStyleClick }: SitePreviewDialogProps) {
+export default function SitePreviewDialog({ onCategoryClick }: SitePreviewDialogProps) {
   const { selectedSite, isDialogOpen, closeSiteDialog, isZoomEnabled } = useAppStore()
 
   if (!selectedSite) return null
@@ -41,7 +40,7 @@ export default function SitePreviewDialog({ onCategoryClick, onStyleClick }: Sit
       }}
 
     >
-      <DialogContent className='scrollbar-thin max-h-[90vh] w-[80vw] max-sm:w-[95vw] max-w-none! overflow-hidden p-0 max-lg:overflow-auto '>
+      <DialogContent className='scrollbar-thin max-h-[90vh]  overflow-hidden p-0 max-lg:overflow-auto '>
         {/* Two-column layout */}
         <div className='grid h-full max-lg:grid-cols-1 grid-cols-[1fr_320px] '>
           {/* Left: Image Preview Area */}
@@ -66,7 +65,7 @@ export default function SitePreviewDialog({ onCategoryClick, onStyleClick }: Sit
                   </TabsList>
                   <TabsContent value='screenshot' className='mt-0 h-[calc(100%-3rem)]'>
                     <div className='bg-background relative h-full w-full overflow-hidden rounded-md border shadow-lg flex items-center'>
-                      <Lens disableZoom={!isZoomEnabled}>
+                      <Lens disableZoom={!isZoomEnabled} background={selectedSite.gradientColor!}>
                         <img
                           src={selectedSite.imgUrl!}
                           alt={`${selectedSite.title} screenshot`}
@@ -89,7 +88,7 @@ export default function SitePreviewDialog({ onCategoryClick, onStyleClick }: Sit
                             aria-label={selectedSite.additionalMedia.altText || `${selectedSite.title} video`}
                           />
                         ) : (
-                            <Lens disableZoom={!isZoomEnabled}>
+                            <Lens disableZoom={!isZoomEnabled} background={selectedSite.gradientColor!}>
                               <img
                                 src={selectedSite.additionalMedia!.mediaUrl!}
                                 alt={selectedSite.additionalMedia!.altText || `${selectedSite.title} additional media`}
@@ -104,40 +103,15 @@ export default function SitePreviewDialog({ onCategoryClick, onStyleClick }: Sit
               ) : (
                 // Single media view (no tabs)
                   <div className='h-full'>
-                    {hasScreenshot && (
-                      <div className='bg-background relative h-full w-full overflow-hidden rounded-md border shadow-lg flex items-center'>
-                        <Lens disableZoom={!isZoomEnabled}>
-                          <img
-                            src={selectedSite.imgUrl!}
-                            alt={`${selectedSite.title} screenshot`}
-                            className='h-full w-full object-contain'
-                          />
-                        </Lens>
-                    </div>
-                  )}
-                    {/* {!hasScreenshot && hasAdditionalMedia && typeof selectedSite.additionalMedia === 'object' && (
-                      <div className='bg-background relative h-full w-full overflow-hidden rounded-md border shadow-lg items-center'>
-                      {selectedSite.additionalMedia!.type === 'video' ? (
-                        <video
-                          src={selectedSite.additionalMedia!.mediaUrl!}
-                          autoPlay
-                          muted
-                          playsInline
-                          loop
+                    <div className='bg-background relative h-full overflow-hidden rounded-md border shadow-lg'>
+                      <Lens disableZoom={!isZoomEnabled} background={selectedSite.gradientColor!}>
+                        <img
+                          src={selectedSite.imgUrl!}
+                          alt={`${selectedSite.title} screenshot`}
                           className='h-full w-full object-contain'
-                          aria-label={selectedSite.additionalMedia!.altText || `${selectedSite.title} video`}
                         />
-                      ) : (
-                            <Lens disableZoom={!isZoomEnabled}>
-                              <img
-                                src={selectedSite.additionalMedia!.mediaUrl!}
-                                alt={selectedSite.additionalMedia!.altText || `${selectedSite.title} additional media`}
-                                className='h-full w-full object-contain'
-                              />
-                            </Lens>
-                      )}
+                      </Lens>
                     </div>
-                  )} */}
                 </div>
               )}
             </div>
@@ -187,13 +161,12 @@ export default function SitePreviewDialog({ onCategoryClick, onStyleClick }: Sit
                   </h3>
                   <div className='flex flex-wrap gap-2'>
                     {selectedSite.style.map((style) => (
-                      <button
+                      <span
                         key={style}
-                        onClick={() => onStyleClick(style)}
                         className='bg-secondary hover:bg-secondary/80 leading-[0.9] text-secondary-foreground rounded-lg px-2.25 py-1.75 capitalize text-xs font-medium transition-colors'
                       >
                         {style}
-                      </button>
+                      </span>
                     ))}
                   </div>
                 </div>

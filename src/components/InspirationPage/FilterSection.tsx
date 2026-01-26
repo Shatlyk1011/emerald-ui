@@ -53,13 +53,6 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
     setSearch('')
   }
 
-  const handleDialogStyleClick = (style: string) => {
-    closeSiteDialog()
-    setStyles([style])
-    setSearch('')
-  }
-
-
   useEffect(() => {
     // Skip the filter request on initial mount
     if (isFirstRender.current) {
@@ -111,21 +104,21 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
           <h3 className={cn('tracking-three text-muted-foreground mb-3 text-sm font-medium uppercase transition-colors ease-in-out', isCategorySelected ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground')}>
             Categories
           </h3>
-          <ul className='-ml-1 flex h-max flex-1 flex-wrap place-content-start gap-x-2 gap-y-1 text-base font-normal capitalize'>
-            {categories.map((item) => {
-              const isActive = selectedCategories.some(c => c == item.category)
+          <ul className='-ml-1 flex h-max flex-1 flex-wrap place-content-start gap-x-2 gap-y-1 text-base font-normal '>
+            {categories.map(({ value, category }) => {
+              const isActive = selectedCategories.some(c => c == value)
               return (
                 <li
-                key={item.id}
-                className={cn(
-                  'hover:text-foreground max-h-max rounded-lg px-1.5 py-1 leading-none ring ring-transparent',
-                  isActive && 'text-foreground! bg-card ring-current', isCategorySelected ? "text-muted-foreground" : "group-hover:text-muted-foreground "
-                )}
-              >
-                  <button className='-tracking-one  transition-colors ease-in-out' onClick={() => toggleCategory(item.category)}>
-                  {item.category}
-                </button>
-              </li>
+                  key={category}
+                  className={cn(
+                    'hover:text-foreground max-h-max rounded-lg px-1.5 py-1 leading-none ring ring-transparent',
+                    isActive && 'text-foreground! bg-card ring-current ', isCategorySelected ? "text-muted-foreground" : "group-hover:text-muted-foreground "
+                  )}
+                >
+                  <button className='-tracking-one transition-colors ease-in-out ' onClick={() => toggleCategory(value)}>
+                    {category}
+                  </button>
+                </li>
               )
             }
             )}
@@ -162,10 +155,7 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
 
       {/* Lazy-loaded Site Preview Dialog */}
       <Suspense fallback={null}>
-        <SitePreviewDialog
-          onCategoryClick={handleDialogCategoryClick}
-          onStyleClick={handleDialogStyleClick}
-        />
+        <SitePreviewDialog onCategoryClick={handleDialogCategoryClick} />
       </Suspense>
     </div>
   )

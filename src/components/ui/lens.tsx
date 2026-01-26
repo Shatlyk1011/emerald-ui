@@ -12,12 +12,14 @@ interface LensProps {
   };
   isFocusing?: () => void;
   disableZoom?: boolean;
+  background?: string;
 }
 
 const Lens: React.FC<LensProps> = ({
   children,
   lensSize = 400,
-  disableZoom = false
+  disableZoom = false,
+  background
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -37,7 +39,8 @@ const Lens: React.FC<LensProps> = ({
   return (
     <div
       ref={containerRef}
-      className="relative overflow-visible rounded-lg z-20"
+      className="relative overflow-visible z-20 h-full"
+      style={{ background: background || 'transparent' }}
       onMouseEnter={() => {
         if (disableZoom) return
         setIsHovering(true);
