@@ -19,7 +19,7 @@ export const useGetCreditHistory = () => {
   return useQuery<CreditHistoryResponse>({
     queryKey: ['credit-history'],
     queryFn: async () => {
-      const response = await axios.get('/api/credit-history')
+      const response = await axios.get('/credit-history')
       return response.data
     },
   })
