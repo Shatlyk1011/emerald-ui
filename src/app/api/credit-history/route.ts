@@ -1,6 +1,11 @@
+import { NextResponse } from 'next/server';
+import { getClientByUserId, getUserCreditHistory } from '@/lib/credit-helpers'
 import { createClient } from '@/lib/supabase-server'
-import { NextResponse } from 'next/server'
-import { getUserCreditHistory } from '@/lib/credit-helpers'
+
+
+
+
+
 
 export async function GET() {
   try {
@@ -13,10 +18,24 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    // Fetch credit history and available credits
+    // Fetch client data and credit history
+    const client = await getClientByUserId(user.id)
+    
+    if (!client) {
+      return NextResponse.json({ error: 'Client not found' }, { status: 404 })
+    }
+
     const history = await getUserCreditHistory(user.id)
 
-    return NextResponse.json({history})
+    return NextResponse.json({
+      client: {
+        userId: client.userId,
+        email: client.email,
+        currentPlan: client.currentPlan,
+        isBlocked: client.isBlocked,
+      },
+      history,
+    })
   } catch (error) {
     console.error('Error fetching credit history:', error)
     return NextResponse.json(

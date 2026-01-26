@@ -69,10 +69,11 @@ export interface Config {
   collections: {
     'inspiration-websites': InspirationWebsite;
     media: Media;
+    clients: Client;
+    'credit-history': CreditHistory;
     categories: Category;
     'website-style': WebsiteStyle;
     adminUsers: AdminUser;
-    'credit-history': CreditHistory;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,10 +83,11 @@ export interface Config {
   collectionsSelect: {
     'inspiration-websites': InspirationWebsitesSelect<false> | InspirationWebsitesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    clients: ClientsSelect<false> | ClientsSelect<true>;
+    'credit-history': CreditHistorySelect<false> | CreditHistorySelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'website-style': WebsiteStyleSelect<false> | WebsiteStyleSelect<true>;
     adminUsers: AdminUsersSelect<false> | AdminUsersSelect<true>;
-    'credit-history': CreditHistorySelect<false> | CreditHistorySelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -193,6 +195,68 @@ export interface Media {
   createdAt: string;
 }
 /**
+ * Manage client accounts and their subscription plans. Each client is linked to their credit history.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clients".
+ */
+export interface Client {
+  id: string;
+  /**
+   * Supabase user ID (unique identifier)
+   */
+  userId: string;
+  /**
+   * User email address (optional, can be provided by user)
+   */
+  email?: string | null;
+  /**
+   * User subscription plan
+   */
+  currentPlan?: ('free' | 'pro' | 'enterprise') | null;
+  /**
+   * Block this user from using credits and accessing services
+   */
+  isBlocked?: boolean | null;
+  /**
+   * All credit transactions for this user
+   */
+  creditHistory?: (string | CreditHistory)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Track user credit history including monthly free credits and purchased credits. Credits expire after 1 month.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "credit-history".
+ */
+export interface CreditHistory {
+  id: string;
+  /**
+   * Supabase user ID
+   */
+  userId: string;
+  /**
+   * Number of credits (5 for monthly free, variable for purchased)
+   */
+  creditAmount: number;
+  /**
+   * Type of credit allocation
+   */
+  type: 'monthly_free' | 'purchased';
+  /**
+   * Date when credits were allocated
+   */
+  createdDate: string;
+  /**
+   * Date when credits expire (1 month from creation)
+   */
+  expiredDate: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Manage website categories for organizing inspiration entries. Categories provide taxonomical classification to help filter and group websites by type or purpose.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -247,45 +311,6 @@ export interface AdminUser {
   password?: string | null;
 }
 /**
- * Track user credit history including monthly free credits and purchased credits. Credits expire after 1 month.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "credit-history".
- */
-export interface CreditHistory {
-  id: string;
-  /**
-   * Supabase user ID
-   */
-  userId: string;
-  /**
-   * Number of credits (5 for monthly free, variable for purchased)
-   */
-  creditAmount: number;
-  /**
-   * Type of credit allocation
-   */
-  type: 'monthly_free' | 'purchased';
-  /**
-   * Date when credits were allocated
-   */
-  createdDate: string;
-  /**
-   * Date when credits expire (1 month from creation)
-   */
-  expiredDate: string;
-  /**
-   * Auto-calculated based on expiration date
-   */
-  isExpired?: boolean | null;
-  /**
-   * Block these credits from being used
-   */
-  isBlocked?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -318,6 +343,14 @@ export interface PayloadLockedDocument {
         value: string | Media;
       } | null)
     | ({
+        relationTo: 'clients';
+        value: string | Client;
+      } | null)
+    | ({
+        relationTo: 'credit-history';
+        value: string | CreditHistory;
+      } | null)
+    | ({
         relationTo: 'categories';
         value: string | Category;
       } | null)
@@ -328,10 +361,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'adminUsers';
         value: string | AdminUser;
-      } | null)
-    | ({
-        relationTo: 'credit-history';
-        value: string | CreditHistory;
       } | null)
     | ({
         relationTo: 'payload-kv';
@@ -414,6 +443,32 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clients_select".
+ */
+export interface ClientsSelect<T extends boolean = true> {
+  userId?: T;
+  email?: T;
+  currentPlan?: T;
+  isBlocked?: T;
+  creditHistory?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "credit-history_select".
+ */
+export interface CreditHistorySelect<T extends boolean = true> {
+  userId?: T;
+  creditAmount?: T;
+  type?: T;
+  createdDate?: T;
+  expiredDate?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
@@ -455,21 +510,6 @@ export interface AdminUsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "credit-history_select".
- */
-export interface CreditHistorySelect<T extends boolean = true> {
-  userId?: T;
-  creditAmount?: T;
-  type?: T;
-  createdDate?: T;
-  expiredDate?: T;
-  isExpired?: T;
-  isBlocked?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

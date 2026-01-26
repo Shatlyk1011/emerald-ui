@@ -1,7 +1,7 @@
-import config from '@payload-config'
-import { NextResponse } from 'next/server'
+import config from '@payload-config';
+import { NextResponse } from 'next/server';
 import { getPayload } from 'payload'
-import { createInitialCredits } from '@/lib/credit-helpers'
+import { createClientRecord, createInitialCredits } from '@/lib/credit-helpers'
 import { createClient } from '@/lib/supabase-server'
 
 /**
@@ -26,23 +26,25 @@ export async function GET(request: Request) {
 
       if (user) {
         try {
-          // Check if user already has credit history
+          // Check if client record exists
           const payload = await getPayload({ config })
-          const existingCredits = await payload.find({
-            collection: 'credit-history',
-            // TODO: isBlocked?
+          const existingClient = await payload.find({
+            collection: 'clients',
             where: { userId: { equals: user.id } },
             limit: 1,
           })
 
-          // If new user, create initial credits
-          if (existingCredits.docs.length === 0) {
+          // If new user, create client record and initial credits
+          if (existingClient.docs.length === 0) {
+            await createClientRecord(user.id, user.email || undefined)
             await createInitialCredits(user.id)
-            console.log(`✓ Created initial credits for new user: ${user.id}`)
+            console.log(
+              `✓ Created client and initial credits for new user: ${user.id}`
+            )
           }
-        } catch (creditError) {
+        } catch (clientError) {
           // Log error but don't block authentication
-          console.error('Error creating initial credits:', creditError)
+          console.error('Error creating client/credits:', clientError)
         }
       }
 

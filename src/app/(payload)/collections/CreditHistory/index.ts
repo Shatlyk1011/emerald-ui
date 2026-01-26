@@ -33,7 +33,13 @@ const CreditHistory: CollectionConfig = {
     },
   },
   admin: {
-    defaultColumns: ['userId', 'creditAmount', 'type', 'createdDate', 'expiredDate'],
+    defaultColumns: [
+      'userId',
+      'creditAmount',
+      'type',
+      'createdDate',
+      'expiredDate',
+    ],
     useAsTitle: 'userId',
     description:
       'Track user credit history including monthly free credits and purchased credits. Credits expire after 1 month.',
@@ -58,17 +64,6 @@ const CreditHistory: CollectionConfig = {
         return data
       },
     ],
-    beforeRead: [
-      async ({ doc }) => {
-        // Auto-update isExpired status based on current date
-        if (doc.expiredDate) {
-          const now = new Date()
-          const expiredDate = new Date(doc.expiredDate)
-          doc.isExpired = now > expiredDate
-        }
-        return doc
-      },
-    ],
   },
   fields: [
     {
@@ -89,7 +84,8 @@ const CreditHistory: CollectionConfig = {
       defaultValue: 5,
       min: 0,
       admin: {
-        description: 'Number of credits (5 for monthly free, variable for purchased)',
+        description:
+          'Number of credits (5 for monthly free, variable for purchased)',
       },
     },
     {
@@ -128,27 +124,6 @@ const CreditHistory: CollectionConfig = {
           pickerAppearance: 'dayAndTime',
         },
         description: 'Date when credits expire (1 month from creation)',
-      },
-    },
-    {
-      name: 'isExpired',
-      label: 'Is Expired',
-      type: 'checkbox',
-      defaultValue: false,
-      admin: {
-        readOnly: true,
-        description: 'Auto-calculated based on expiration date',
-        position: 'sidebar',
-      },
-    },
-    {
-      name: 'isBlocked',
-      label: 'Is Blocked',
-      type: 'checkbox',
-      defaultValue: false,
-      admin: {
-        description: 'Block these credits from being used',
-        position: 'sidebar',
       },
     },
   ],

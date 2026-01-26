@@ -110,7 +110,7 @@ export default function ProfilePage() {
 
         <div className='mb-3 flex items-center gap-4 justify-between'>
           <h2 className='text-xl font-medium'>
-            <span className='opacity-80'>Your Current Plan:</span> <span className='font-bold'>Free</span>
+            <span className='opacity-80'>Your Current Plan:</span> <span className='font-bold'>Free(mock)</span>
           </h2>
           <Button className='bg-blue-600 hover:bg-blue-700 text-foreground' asChild>
             <Link href="/pricing">
@@ -200,21 +200,6 @@ export default function ProfilePage() {
                     </td>
                     <td className='px-6 py-4 text-sm font-medium'>
                       {getCreditTypeLabel(credit.type)}
-                    </td>
-                    <td className='px-6 py-4 text-sm'>
-                      {credit.isExpired ? (
-                        <span className='inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800 dark:bg-red-900/30 dark:text-red-400'>
-                          Expired
-                        </span>
-                      ) : credit.isBlocked ? (
-                        <span className='inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'>
-                          Blocked
-                        </span>
-                      ) : (
-                        <span className='inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900/30 dark:text-green-400'>
-                          Active
-                        </span>
-                      )}
                     </td>
                     <td className='px-6 py-4 text-right text-sm font-semibold text-green-600'>
                       +{credit.creditAmount}
