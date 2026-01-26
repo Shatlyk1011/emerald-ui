@@ -1,5 +1,9 @@
-import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
+import { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
+
+
+
+
 
 const Clients: CollectionConfig = {
   slug: 'clients',
@@ -72,8 +76,35 @@ const Clients: CollectionConfig = {
       type: 'checkbox',
       defaultValue: false,
       admin: {
-        description: 'Block this user from using credits and accessing services',
+        description:
+          'Block this user from using credits and accessing services',
         position: 'sidebar',
+      },
+    },
+    {
+      name: 'provider',
+      label: 'Auth Provider',
+      type: 'select',
+      required: false,
+      options: [
+        { label: 'Email (Magic Link)', value: 'email' },
+        { label: 'Google', value: 'google' },
+        { label: 'GitHub', value: 'github' },
+      ],
+      admin: {
+        description: 'Authentication provider used during registration',
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'isVerified',
+      label: 'Email Verified',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        description: 'Whether the user has verified their email address',
+        position: 'sidebar',
+        readOnly: true,
       },
     },
     {

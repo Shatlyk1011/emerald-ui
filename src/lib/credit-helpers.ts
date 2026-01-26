@@ -5,12 +5,18 @@ import { getPayload } from 'payload';
 
 
 
+
+
+
+
 /**
  * Create a new client record (called when user signs up via Supabase)
  */
 export async function createClientRecord(
   userId: string,
-  email?: string
+  email?: string,
+  provider?: "email" | "google" | "github" | null | undefined,
+  isVerified?: boolean
 ): Promise<void> {
   const payload = await getPayload({ config })
 
@@ -19,6 +25,8 @@ export async function createClientRecord(
     data: {
       userId,
       email: email || undefined,
+      provider: provider || undefined,
+      isVerified: isVerified || false,
     },
   })
 

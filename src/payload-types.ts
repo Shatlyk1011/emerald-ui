@@ -219,6 +219,14 @@ export interface Client {
    */
   isBlocked?: boolean | null;
   /**
+   * Authentication provider used during registration
+   */
+  provider?: ('email' | 'google' | 'github') | null;
+  /**
+   * Whether the user has verified their email address
+   */
+  isVerified?: boolean | null;
+  /**
    * All credit transactions for this user
    */
   creditHistory?: (string | CreditHistory)[] | null;
@@ -450,6 +458,8 @@ export interface ClientsSelect<T extends boolean = true> {
   email?: T;
   currentPlan?: T;
   isBlocked?: T;
+  provider?: T;
+  isVerified?: T;
   creditHistory?: T;
   updatedAt?: T;
   createdAt?: T;

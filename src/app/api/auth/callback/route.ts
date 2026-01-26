@@ -36,7 +36,16 @@ export async function GET(request: Request) {
 
           // If new user, create client record and initial credits
           if (existingClient.docs.length === 0) {
-            await createClientRecord(user.id, user.email || undefined)
+            // Extract provider from user metadata
+            const provider = user.app_metadata?.provider || 'email'
+            const isVerified = user.email_confirmed_at != null
+
+            await createClientRecord(
+              user.id,
+              user.email || undefined,
+              provider as 'email' | 'google' | 'github' | null | undefined,
+              isVerified
+            )
             await createInitialCredits(user.id)
             console.log(
               `✓ Created client and initial credits for new user: ${user.id}`

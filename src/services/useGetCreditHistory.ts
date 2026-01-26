@@ -1,6 +1,11 @@
-import { useQuery } from '@tanstack/react-query'
-import { CreditHistory } from '@/payload-types'
-import { axios } from '@/lib/axios'
+import { useQuery } from '@tanstack/react-query';
+import { CreditHistory } from '@/payload-types';
+import { axios } from '@/lib/axios';
+
+
+
+
+
 
 export interface CreditHistoryResponse {
   client: {
@@ -8,6 +13,8 @@ export interface CreditHistoryResponse {
     email?: string
     currentPlan: string
     isBlocked: boolean
+    provider?: string
+    isVerified?: boolean
   }
   history: CreditHistory[]
 }

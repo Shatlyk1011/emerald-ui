@@ -28,6 +28,8 @@ export async function GET() {
         email: client.email,
         currentPlan: client.currentPlan,
         isBlocked: client.isBlocked,
+        provider: client.provider,
+        isVerified: client.isVerified,
       },
       history,
     })
