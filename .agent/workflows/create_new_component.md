@@ -13,20 +13,35 @@ description: Create a new custom component and its documentation
 
 2. **Component Design & Implementation**
    - Create the component file in `src/components/node-ui-components/[kebab-case-name].tsx`.
+
    - Use the `Create Component and Docs` skill to follow the code template.
+
    - Design for reusability and demo-ready functionality:
      - Provide sensible default props for all properties so the component works out-of-the-box without any required props.
      - Ensure the component can render immediately with <ComponentName /> for demo purposes.
      - Use default values that showcase the component's primary features and visual appeal.
+
    - Apply the appropriate design philosophy:
      - Fancy/Unusual: Leverage motion/react extensively for creative animations, transitions, and micro-interactions. Prioritize visual appeal and uniqueness.
      - Solid/Usable: Focus on accessibility, performance, and practical functionality with subtle animations where they enhance UX.
+
    - Use lucide-react for icons when needed.
+
    - If refactoring existing code:
      - Preserve the core functionality and user-facing behavior.
      - Restructure the code architecture to make it unique (different variable names, logic flow, component structure).
      - Enhance with improved animations, better prop interfaces, or additional features.
      - Preserve the core functionality and user-facing behavior.
+
+   - Use the correct libraries and utilities:
+     - Tailwind CSS: Use Tailwind utility classes for all styling.
+     - Motion animations: Use `motion/react` (NOT framer-motion) for animations when needed.
+     - shadcn/ui primitives: Always use shadcn/ui components for standard UI elements (Button, Input, Card, Dialog, etc.) instead of building from scratch.
+       - Import pattern: `import { Button } from "@/components/ui/button"`
+       - Available primitives: Button, Input, Card, Badge, Dialog, Select, Checkbox, Switch, Tooltip, and more.
+     - cn() utility*: Use the `cn()` utility function for conditional and merged class names.
+       - Import: `import { cn } from "@/lib/utils"`
+       - Usage: `className={cn("base-classes", condition && "conditional-classes", props.className)}`
 
 3. **Documentation Implementation**
    - Create the documentation file in `src/content/docs/components/[kebab-case-name].mdx`.
