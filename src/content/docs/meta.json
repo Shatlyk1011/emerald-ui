@@ -6,6 +6,8 @@
     "---Get Started---",
     "index",
     "---Components---",
-    "components/action-search-bar"
+    "components/holographic-card",
+    "---Buttons---",
+    "components/social-button"
   ]
 }

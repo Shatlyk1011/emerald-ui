@@ -68,7 +68,7 @@ export default function ProfilePage() {
     return user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User'
   }
 
-  const getCreditTypeLabel = (type: string) => {
+  const getCreditTypeLabel = (type: 'monthly_free' | 'purchased') => {
     return type === 'monthly_free' ? 'Monthly Credits' : 'Purchased Credits'
   }
 
@@ -170,9 +170,9 @@ export default function ProfilePage() {
           <table className='w-full text-nowrap'>
             <thead className='bg-muted/50'>
               <tr>
-                <th className='px-6 py-3 text-left text-sm font-medium'>Date</th>
                 <th className='px-6 py-3 text-left text-sm font-medium'>Type</th>
-                <th className='px-6 py-3 text-left text-sm font-medium'>Status</th>
+                <th className='px-6 py-3 text-left text-sm font-medium'>Date</th>
+                <th className='px-6 py-3 text-left text-sm font-medium'>Granted on</th>
                 <th className='px-6 py-3 text-right text-sm font-medium'>Credits</th>
               </tr>
             </thead>
@@ -192,14 +192,14 @@ export default function ProfilePage() {
               ) : creditData?.history && creditData.history.length > 0 ? (
                 creditData.history.map((credit) => (
                   <tr key={credit.id} className='transition-colors hover:bg-muted/30'>
+                    <td className='px-6 py-4 text-sm font-medium'>
+                      {getCreditTypeLabel(credit.type)}
+                    </td>
                     <td className='px-6 py-4 text-sm'>
                       <div className='flex items-center gap-2'>
                         <Calendar className='size-4 text-muted-foreground' />
                         {formatDate(credit.createdDate)}
                       </div>
-                    </td>
-                    <td className='px-6 py-4 text-sm font-medium'>
-                      {getCreditTypeLabel(credit.type)}
                     </td>
                     <td className='px-6 py-4 text-right text-sm font-semibold text-green-600'>
                       +{credit.creditAmount}
