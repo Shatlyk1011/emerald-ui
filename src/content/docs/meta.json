@@ -8,6 +8,7 @@
     "---Components---",
     "components/holographic-card",
     "---Buttons---",
-    "components/social-button"
+    "components/social-button",
+    "components/interactive-hover-button"
   ]
 }
