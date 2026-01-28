@@ -4,18 +4,48 @@ description: Create a new custom component and its documentation
 
 1. **Information Gathering**
    - Ask the user for the component name (e.g., "Animated Card") and a brief description of its functionality.
-   - Ask for any specific requirements (icons, animations, props).
+   - Ask for any specific requirements (icons, animations, props, design style).
+   - Determine the design approach:
+     - Is this an unusual/fancy component with creative animations?
+     - Is this a solid/usable component focused on practical functionality?
+     - Does the user have existing code that needs refactoring?
+   - If existing code is provided, analyze it to understand the core functionality that must be preserved.
 
-2. **Component Implementation**
+2. **Component Design & Implementation**
    - Create the component file in `src/components/node-ui-components/[kebab-case-name].tsx`.
    - Use the `Create Component and Docs` skill to follow the code template.
-   - Ensure you use `motion/react` for animations and `lucide-react` for icons (if needed).
+   - Design for reusability and demo-ready functionality:
+     - Provide sensible default props for all properties so the component works out-of-the-box without any required props.
+     - Ensure the component can render immediately with <ComponentName /> for demo purposes.
+     - Use default values that showcase the component's primary features and visual appeal.
+   - Apply the appropriate design philosophy:
+     - Fancy/Unusual: Leverage motion/react extensively for creative animations, transitions, and micro-interactions. Prioritize visual appeal and uniqueness.
+     - Solid/Usable: Focus on accessibility, performance, and practical functionality with subtle animations where they enhance UX.
+   - Use lucide-react for icons when needed.
+   - If refactoring existing code:
+     - Preserve the core functionality and user-facing behavior.
+     - Restructure the code architecture to make it unique (different variable names, logic flow, component structure).
+     - Enhance with improved animations, better prop interfaces, or additional features.
+     - Preserve the core functionality and user-facing behavior.
 
 3. **Documentation Implementation**
    - Create the documentation file in `src/content/docs/components/[kebab-case-name].mdx`.
    - Use the `Create Component and Docs` skill to follow the MDX template.
    - Ensure the `<Preview>` component is correctly set up with the link matching the filename.
 
-4. **Verification**
+4. **Metadata Registration**
+   - Open src/content/meta.json.
+   - Determine the appropriate category:
+     - Does this component fit into an existing category (e.g., Buttons, Inputs, Cards, AI Components, Texts)?
+     - If it's a new category, create a new section header.
+   - Add the component to the pages array:
+     - For existing categories: Add the entry as "components/[kebab-case-name]" under the relevant category section.
+     - For new categories:
+       - Add a new category header in the format "---Category Name---" (e.g., "---Buttons---", "---AI Components---")
+       - Add the component entry immediately after: "components/[kebab-case-name]"
+   - Ensure proper JSON formatting (commas, no trailing comma on the last item).
+   - Place the component in a logical position within its category (consider alphabetical ordering or grouping by functionality).
+
+5. **Verification**
    - Run a mental check: Do the filenames match? Is the import path in MDX correct?
    - Notify the user that the component and docs have been created and provide links to the files.

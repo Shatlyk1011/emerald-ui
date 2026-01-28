@@ -71,15 +71,11 @@ full: false
 
 import [ComponentName] from '@/components/node-ui-components/[kebab-case-name]'
 
-<Preview link='[kebab-case-name]' comment={['[Feature 1]', '[Feature 2]']}>
+<Preview link='[kebab-case-name]' comment={['[additional packages if there is any]']}>
   <[ComponentName] />
 </Preview>
 
-## Installation
 
-```tsx
-// Code to install or usage example
-```
 ```
 
 **Key Guidelines:**
