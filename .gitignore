@@ -42,3 +42,7 @@ yarn-error.log*
 next-env.d.ts
 
 /sites.md
+/todo.md
+
+src/content/docs/components/demo.mdx
+src/components/node-ui-components/demo.tsx

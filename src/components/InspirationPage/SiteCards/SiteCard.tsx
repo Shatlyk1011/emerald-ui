@@ -78,7 +78,7 @@ function SiteCard({ item, index }: SiteCardProps) {
           {/* Badges */}
         </div>
         {isNew && (
-          <span className='bg-background font-mono text-foreground tracking-[0.1em] border-border absolute top-3 left-3 rounded-md border px-2 py-2.5 text-[11px] leading-0 font-semibold uppercase'>
+          <span className='bg-background font-mono text-foreground tracking-one border-border absolute top-3 left-3 rounded-md border px-2 py-2.5 text-[11px] leading-0 font-semibold uppercase'>
             New
           </span>
         )}
