@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dialog'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Button } from '../ui/button'
+import { Switch } from '../ui/switch'
 import Lens from '../ui/lens'
 
 interface SitePreviewDialogProps {
@@ -18,7 +19,7 @@ interface SitePreviewDialogProps {
 }
 
 export default function SitePreviewDialog({ onCategoryClick }: SitePreviewDialogProps) {
-  const { selectedSite, isDialogOpen, closeSiteDialog, isZoomEnabled } = useAppStore()
+  const { selectedSite, isDialogOpen, closeSiteDialog, isZoomEnabled, toggleZoom } = useAppStore()
 
   if (!selectedSite) return null
 
@@ -171,6 +172,26 @@ export default function SitePreviewDialog({ onCategoryClick }: SitePreviewDialog
                   </div>
                 </div>
               )}
+
+              {/* Image Zoom Toggle */}
+              <div>
+                <h3 className='text-muted-foreground mb-1 text-xs font-mono font-semibold uppercase tracking-one'>
+                  Image Zoom
+                </h3>
+                <div className='flex items-center gap-2.5'>
+                  <label
+                    htmlFor='zoom-toggle'
+                    className='text-sm font-medium text-muted-foreground cursor-pointer select-none'
+                  >
+                    Enable zoom on images
+                  </label>
+                  <Switch
+                    id='zoom-toggle'
+                    checked={isZoomEnabled}
+                    onCheckedChange={() => toggleZoom()}
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Action Buttons - Fixed at bottom */}
@@ -207,9 +228,6 @@ export default function SitePreviewDialog({ onCategoryClick }: SitePreviewDialog
           </div>
         </div>
       </DialogContent>
-      <div className='fixed bottom-6 right-10'>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae impedit veritatis ad voluptates beatae porro tenetur rerum earum quam excepturi expedita, laborum similique. Porro, eius voluptatum quod quae, voluptates hic nulla inventore vel ex nisi facilis dolore. Soluta, eius ratione.</p>
-      </div>
     </Dialog>
   )
 }
