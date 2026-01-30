@@ -20,9 +20,9 @@ interface FilterSectionProps {
 }
 
 function FilterSection({ categories, styles, handleFilterRequest }: FilterSectionProps) {
-  const isFirstRender = useRef(true);
   const { closeSiteDialog } = useAppStore()
 
+  const [mounted, setMounted] = useState(false)
   const [search, setSearch] = useState('')
   const [selectedCategories, setCategories] = useState<string[]>([])
   const [selectedStyles, setStyles] = useState<string[]>([])
@@ -55,10 +55,6 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
 
   useEffect(() => {
     // Skip the filter request on initial mount
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
 
     const query: Where = {
       and: [
@@ -85,6 +81,11 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
         }
       ]
     };
+    if (!mounted) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setMounted(true)
+      return
+    }
     handleFilterRequest(query);
   }, [search, selectedCategories, selectedStyles])
 
