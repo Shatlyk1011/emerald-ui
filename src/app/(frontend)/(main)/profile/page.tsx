@@ -1,12 +1,12 @@
 
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { CreditCard, Crown, Calendar } from 'lucide-react'
 import Link from 'next/link'
-import { axios } from '@/lib/axios'
-import { AxiosResponse } from 'axios'
 import { CreditHistoryResponse } from '@/types/auth'
 import { formatDate } from '@/composables/utils'
+import { headers } from 'next/headers'
 
 export const dynamic = 'force-dynamic'
 
@@ -29,14 +29,32 @@ const mockInvoices = [
 ]
 
 export default async function ProfilePage() {
-
   let userData: CreditHistoryResponse | null = null
-  const { data } = await axios.get('/credit-history') as AxiosResponse<CreditHistoryResponse>
-  userData = data
+
+  try {
+    // Get cookies to forward to API route
+    const headersList = await headers()
+    const cookie = headersList.get('cookie') || ''
+
+    const response = await fetch('http://localhost:3000/api/credit-history', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Cookie': cookie,
+      },
+      cache: 'no-store',
+    })
+
+    if (response.ok) {
+      userData = await response.json()
+    } else {
+      console.error('Failed to fetch credit history:', response.status, response.statusText)
+    }
+  } catch (err) {
+    console.error('Failed to fetch credit history:', err)
+  }
 
   console.log('userData', userData)
-  console.log('supabaseuser', data)
-
 
   const getUserInitials = () => {
     // if (data?.user_metadata?.full_name) {
