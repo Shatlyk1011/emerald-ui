@@ -37,3 +37,16 @@ export default function TextShimmer({
     </Component>
   )
 }
+
+
+// add this animation to your tailwind.css file
+// @theme {
+//   @keyframes shimmer {
+//     0% {
+//       background-position: 200% 50%;
+//     }
+//     100% {
+//       background-position: -200% 50%;
+//     }
+//   }
+// }
