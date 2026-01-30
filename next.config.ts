@@ -52,6 +52,11 @@ const nextConfig: NextConfig = {
         destination: '/r/:path.json',
         permanent: true,
       },
+      {
+        source: '/login',
+        destination: '/sign-in',
+        permanent: true,
+      },
     ]
   },
 

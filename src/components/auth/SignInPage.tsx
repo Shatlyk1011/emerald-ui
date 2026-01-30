@@ -8,8 +8,9 @@ import { loginSchema } from '@/lib/login-schema'
 import { Github } from 'lucide-react'
 import { AuthProviders } from '@/types'
 import { AxiosError } from 'axios'
+import Link from 'next/link'
 
-export default function LoginPage() {
+export default function SignInPage() {
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -81,22 +82,22 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden">
+    <div className="relative flex min-h-screen items-center justify-center max-sm:items-start max-sm:pt-16 overflow-hidden">
 
 
       {/* left */}
       <div className='flex-1 flex justify-center'>
-        <div className="relative max-w-lg z-10 w-full space-y-8 rounded-2xl p-8 shadow-2xl backdrop-blur-xl">
+        <div className="relative max-w-lg z-10 w-full space-y-8 max-md:space-y-5 rounded-2xl p-8 max-sm:p-5 shadow-2xl backdrop-blur-xl">
           {/* Logo/Brand */}
-          <h1 className="text-3xl text-center font-bold">UI Generate App</h1>
+          <h1 className="text-3xl text-center font-bold max-md:text-2xl">UI Generate App</h1>
 
           <div className="space-y-2 text-center">
-            <h2 className="text-3xl font-semibold">Sign in to your account</h2>
+            <h2 className="text-3xl font-semibold max-md:text-2xl">Sign in to your account</h2>
             <p className="text-sm text-foreground/70">
-              Dont have an account?{" "}
-              <a href="#" className="text-blue-600 dark:text-blue-400 hover:text-blue-500/80 transition-colors">
+              Don&apos;t have an account?{" "}
+              <Link href="/sign-up" className="text-blue-600 dark:text-blue-400 hover:text-blue-500/80 transition-colors">
                 Sign up
-              </a>
+              </Link>
             </p>
           </div>
 
@@ -147,10 +148,11 @@ export default function LoginPage() {
                 id="email"
                 type="email"
                 placeholder="Enter your email"
+                autoComplete='off'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
-                className="border-border bg-secondary h-12 text-white placeholder:text-base"
+                className="border-border bg-secondary h-10 text-white placeholder:text-sm"
               />
             </div>
 
@@ -169,7 +171,7 @@ export default function LoginPage() {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full h-12 bg-blue-600 hover:bg-blue-600/80 text-white"
+              className="w-full h-10 bg-primary-foreground hover:bg-primary-foreground/80 text-white"
             >
               {loading ? 'Sending...' : 'Continue with Email'}
             </Button>
@@ -191,7 +193,7 @@ export default function LoginPage() {
 
 
       {/* right */}
-      <div className='flex-1 bg-slate-900 h-screen flex items-center justify-center'>
+      <div className='flex-1 max-lg:hidden bg-slate-900 h-screen flex items-center justify-center'>
         hello world
       </div>
     </div>
