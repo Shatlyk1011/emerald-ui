@@ -8,8 +8,11 @@
     "---Components---",
     "components/holographic-pricing-table",
     "---Buttons---",
+    "components/button-colorful",
     "components/social-button",
     "components/interactive-hover-button",
+    "---Text---",
+    "components/text-shimmer",
     "---Demo---",
     "components/demo"
   ]
