@@ -3,10 +3,10 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { CreditCard, Crown, Calendar } from 'lucide-react'
 import Link from 'next/link'
-import { createClient } from '@/lib/supabase-server'
 import { axios } from '@/lib/axios'
 import { AxiosResponse } from 'axios'
 import { CreditHistoryResponse } from '@/types/auth'
+import { formatDate } from '@/composables/utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -30,48 +30,30 @@ const mockInvoices = [
 
 export default async function ProfilePage() {
 
-  const supabase = await createClient()
-  const { data: { user }, error } = await supabase.auth.getUser()
-
-  // Only fetch credit history if user is authenticated
   let userData: CreditHistoryResponse | null = null
-  if (user && !error) {
-    try {
-      const { data } = await axios.get('/credit-history') as AxiosResponse<CreditHistoryResponse>
-      userData = data
-    } catch (err) {
-      console.error('Failed to fetch credit history:', err)
-    }
-  }
+  const { data } = await axios.get('/credit-history') as AxiosResponse<CreditHistoryResponse>
+  userData = data
 
   console.log('userData', userData)
-  console.log('supabaseuser', user)
+  console.log('supabaseuser', data)
 
-
-  // Format date
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    })
-  }
 
   const getUserInitials = () => {
-    if (user?.user_metadata?.full_name) {
-      const names = user.user_metadata.full_name.split(' ')
-      return names.length > 1
-        ? `${names[0][0]}${names[names.length - 1][0]}`.toUpperCase()
-        : names[0][0].toUpperCase()
-    }
-    if (user?.email) {
-      return user.email[0].toUpperCase()
-    }
+    // if (data?.user_metadata?.full_name) {
+    //   const names = data.user_metadata.full_name.split(' ')
+    //   return names.length > 1
+    //     ? `${names[0][0]}${names[names.length - 1][0]}`.toUpperCase()
+    //     : names[0][0].toUpperCase()
+    // }
+    // if (user?.email) {
+    //   return user.email[0].toUpperCase()
+    // }
     return 'U'
   }
 
   const getDisplayName = () => {
-    return user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User'
+    // return user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User'
+    return 'User'
   }
 
   const getCreditTypeLabel = (type: 'monthly_free' | 'purchased') => {
@@ -92,7 +74,7 @@ export default async function ProfilePage() {
       <div className='mb-6 rounded-xl border bg-card/20 p-8'>
         <div className='mb-6 flex items-center gap-4'>
           <Avatar className='size-16'>
-            <AvatarImage src={user?.user_metadata?.avatar_url} alt={getDisplayName()} />
+            <AvatarImage src={''} alt={getDisplayName()} />
             <AvatarFallback className='text-xl'>{getUserInitials()}</AvatarFallback>
           </Avatar>
           <h2 className='text-2xl font-semibold'>Profile Settings</h2>
@@ -109,7 +91,7 @@ export default async function ProfilePage() {
           <div className='flex-1'>
             <label className='mb-2 block'>Email</label>
             <div className='rounded-md border bg-muted/50 px-3 py-2 text-foreground'>
-              {user?.email || 'Loading...'}
+              {'test@mail.ru'}
             </div>
           </div>
         </div>

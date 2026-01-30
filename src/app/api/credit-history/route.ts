@@ -1,6 +1,11 @@
 import { NextResponse } from 'next/server';
-import { getClientByUserId, getUserCreditHistory } from '@/lib/credit-helpers'
-import { createClient } from '@/lib/supabase-server'
+import { getClientByUserId, getUserCreditHistory } from '@/lib/credit-helpers';
+import { createClient } from '@/lib/supabase-server';
+
+
+
+
+
 
 export async function GET() {
   try {
@@ -8,6 +13,8 @@ export async function GET() {
     const {
       data: { user },
     } = await supabase.auth.getUser()
+
+    console.log('CREDIT ROUTE', user)
 
     if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
