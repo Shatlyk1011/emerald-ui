@@ -13,7 +13,7 @@ description: Create a new custom component from scratch and its documentation
    - Create the component file in `src/components/node-ui-components/[kebab-case-name].tsx`.
 
    - Use the `Create Component and Docs` skill to follow the code template.
-
+   - Always add dark and light modes. use tailwind colors. for dark mode use dark: utility class. make sure it looks good both in light and dark modes.
    - Design for reusability and demo-ready functionality:
      - Provide sensible default props for all properties so the component works out-of-the-box without any required props.
      - Ensure the component can render immediately with <ComponentName /> for demo purposes.
