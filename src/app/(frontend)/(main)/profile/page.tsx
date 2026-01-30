@@ -1,12 +1,14 @@
-
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { CreditCard, Crown, Calendar, Loader2 } from 'lucide-react'
+import { CreditCard, Crown, Calendar } from 'lucide-react'
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase-client'
 import { axios } from '@/lib/axios'
 import { CreditHistoryResponse } from '@/types/auth'
 import { AxiosResponse } from 'axios'
+
+// Force dynamic rendering to prevent prerendering during build
+export const dynamic = 'force-dynamic'
 
 const mockUser = {
   firstName: 'Shatlyk',
