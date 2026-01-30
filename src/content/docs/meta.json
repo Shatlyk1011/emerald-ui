@@ -6,9 +6,11 @@
     "---Get Started---",
     "index",
     "---Components---",
-    "components/holographic-card",
+    "components/holographic-pricing-table",
     "---Buttons---",
     "components/social-button",
-    "components/interactive-hover-button"
+    "components/interactive-hover-button",
+    "---Demo---",
+    "components/demo"
   ]
 }
