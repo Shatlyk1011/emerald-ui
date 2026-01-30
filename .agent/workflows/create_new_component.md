@@ -1,15 +1,13 @@
 ---
-description: Create a new custom component and its documentation
+description: Create a new custom component from scratch and its documentation
 ---
 
 1. **Information Gathering**
-   - Ask the user for the component name (e.g., "Animated Card") and a brief description of its functionality.
+   - Generate component name and a brief description of its functionality.
    - Ask for any specific requirements (icons, animations, props, design style).
    - Determine the design approach:
      - Is this an unusual/fancy component with creative animations?
      - Is this a solid/usable component focused on practical functionality?
-     - Does the user have existing code that needs refactoring?
-   - If existing code is provided, analyze it to understand the core functionality that must be preserved.
 
 2. **Component Design & Implementation**
    - Create the component file in `src/components/node-ui-components/[kebab-case-name].tsx`.
@@ -22,16 +20,10 @@ description: Create a new custom component and its documentation
      - Use default values that showcase the component's primary features and visual appeal.
 
    - Apply the appropriate design philosophy:
-     - Fancy/Unusual: Leverage motion/react extensively for creative animations, transitions, and micro-interactions. Prioritize visual appeal and uniqueness.
-     - Solid/Usable: Focus on accessibility, performance, and practical functionality with subtle animations where they enhance UX.
+     -  if prompt requires Fancy/Unusual approach, leverage motion/react extensively for creative animations, transitions, and micro-interactions. Prioritize visual appeal and uniqueness.
+     - if prompt requires Solid/Usable approach, focus on accessibility, performance, and practical functionality with subtle animations where they enhance UX.
 
    - Use lucide-react for icons when needed.
-
-   - If refactoring existing code:
-     - Preserve the core functionality and user-facing behavior.
-     - Restructure the code architecture to make it unique (different variable names, logic flow, component structure).
-     - Enhance with improved animations, better prop interfaces, or additional features.
-     - Preserve the core functionality and user-facing behavior.
 
    - Use the correct libraries and utilities:
      - Tailwind CSS: Use Tailwind utility classes for all styling.
