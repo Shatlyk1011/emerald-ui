@@ -75,26 +75,6 @@ import [ComponentName] from '@/components/node-ui-components/[kebab-case-name]'
   <[ComponentName] />
 </Preview>
 
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `items` | `DockItem[]` | 5 default navigation items | Array of dock items with icon, label, and id |
-| `activeId` | `string` | `"home"` | ID of the currently active item |
-| `onItemClick` | `(id: string) => void` | `undefined` | Callback fired when an item is clicked |
-| `className` | `string` | `undefined` | Additional CSS classes for the dock container |
-
-## DockItem Interface
-
-```tsx
-interface DockItem {
-  icon: React.ElementType; // Lucide icon component
-  label: string;           // Tooltip label
-  id: string;              // Unique identifier
-}
-```
-
-
 ```
 
 **Key Guidelines:**
@@ -102,3 +82,4 @@ interface DockItem {
 - Import the component from `@/components/node-ui-components/...`.
 - Wrap the component in `<Preview>`.
 - `link` prop in `<Preview>` should match the filename (without extension).
+- include only the preview component. not need for props table or usage examples or any other additional information.
