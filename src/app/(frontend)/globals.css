@@ -141,3 +141,14 @@
     scrollbar-width: thin;
   }
 }
+
+@theme {
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 50%;
+    }
+    100% {
+      background-position: -200% 50%;
+    }
+  }
+}
