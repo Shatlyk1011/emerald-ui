@@ -1,13 +1,12 @@
-'use client'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { CreditCard, Crown, Calendar, Loader2 } from 'lucide-react'
 import Link from 'next/link'
-import { useGetCreditHistory } from '@/services/useGetCreditHistory'
 import { createClient } from '@/lib/supabase-client'
-import { useEffect, useState } from 'react'
-import { User } from '@supabase/supabase-js'
+import { axios } from '@/lib/axios'
+import { CreditHistoryResponse } from '@/types/auth'
+import { AxiosResponse } from 'axios'
 
 const mockUser = {
   firstName: 'Shatlyk',
@@ -28,19 +27,14 @@ const mockInvoices = [
   { id: 3, date: '2025-11-15', amount: 0, status: 'Paid', description: 'Free Plan - November 2025' },
 ]
 
-export default function ProfilePage() {
-  const [user, setUser] = useState<User | null>(null)
-  const { data: creditData, isLoading, error } = useGetCreditHistory()
+export default async function ProfilePage() {
   const supabase = createClient()
-  console.log('XXX', creditData)
+  const { data: { user } } = await supabase.auth.getUser()
+  const { data: userData } = await axios.get('/credit-history') as AxiosResponse<CreditHistoryResponse>
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      setUser(user)
-    }
-    fetchUser()
-  }, [supabase.auth])
+  console.log('userData', userData)
+  console.log('supabaseuser', user)
+
 
   // Format date
   const formatDate = (dateString: string) => {
@@ -125,11 +119,7 @@ export default function ProfilePage() {
             {/* add user's current plan */}
             <h3 className='text-lg font-semibold'>Free Plan</h3>
             <span className='text-sm text-muted-foreground'>
-              {isLoading ? (
-                <Loader2 className='size-4 animate-spin inline' />
-              ) : (
-                `${mockUser?.creditsRemaining || 0} credits remaining`
-              )}
+              `${mockUser?.creditsRemaining || 0} credits remaining`
             </span>
           </div>
           <p className='text-sm text-muted-foreground'>
@@ -142,11 +132,7 @@ export default function ProfilePage() {
               <span className='font-medium'>Credits Used</span>
               <span className='text-muted-foreground'>
                 {/* ??? */}
-                {isLoading ? (
-                  <Loader2 className='size-4 animate-spin inline' />
-                ) : (
-                  `${mockUser?.creditsRemaining || 0} / ${mockUser?.totalCredits || 0}`
-                )}
+                `${mockUser?.creditsRemaining || 0} / ${mockUser?.totalCredits || 0}`
               </span>
             </div>
             <div className='h-2 w-full overflow-hidden rounded-full bg-muted'>
@@ -177,20 +163,7 @@ export default function ProfilePage() {
               </tr>
             </thead>
             <tbody className='divide-y'>
-              {isLoading ? (
-                <tr>
-                  <td colSpan={4} className='px-6 py-8 text-center'>
-                    <Loader2 className='size-6 animate-spin inline' />
-                  </td>
-                </tr>
-              ) : error ? (
-                <tr>
-                  <td colSpan={4} className='px-6 py-8 text-center text-red-500'>
-                    Failed to load credit history
-                  </td>
-                </tr>
-              ) : creditData?.history && creditData.history.length > 0 ? (
-                creditData.history.map((credit) => (
+              {userData.history.map((credit) => (
                   <tr key={credit.id} className='transition-colors hover:bg-muted/30'>
                     <td className='px-6 py-4 text-sm font-medium'>
                       {getCreditTypeLabel(credit.type)}
@@ -205,14 +178,7 @@ export default function ProfilePage() {
                       +{credit.creditAmount}
                     </td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={4} className='px-6 py-8 text-center text-muted-foreground'>
-                    No credit history available
-                  </td>
-                </tr>
-              )}
+                ))}
             </tbody>
           </table>
         </div>
