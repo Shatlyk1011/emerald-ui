@@ -54,8 +54,13 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(redirectUrl)
   }
 
-  // If user is logged in and tries to access login page, redirect to home
-  if (request.nextUrl.pathname === '/login' && user) {
+  // Auth-only routes - redirect to home if already authenticated
+  const authOnlyPaths = ['/sign-in', '/sign-up']
+  const isAuthOnlyPath = authOnlyPaths.some((path) =>
+    request.nextUrl.pathname.startsWith(path)
+  )
+
+  if (isAuthOnlyPath && user) {
     return NextResponse.redirect(new URL('/', request.url))
   }
 
