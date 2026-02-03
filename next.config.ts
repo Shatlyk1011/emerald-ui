@@ -1,11 +1,20 @@
-import { withPayload } from '@payloadcms/next/withPayload'
-import { createMDX } from 'fumadocs-mdx/next'
-import type { NextConfig } from 'next'
+import { withPayload } from '@payloadcms/next/withPayload';
+import { createMDX } from 'fumadocs-mdx/next';
+import type { NextConfig } from 'next';
+
+
+
+
+
 
 const withMDX = createMDX()
 
 const nextConfig: NextConfig = {
   /* config options here */
+
+  images: {
+    domains: ['images.unsplash.com'],
+  },
 
   async headers() {
     return [

@@ -9,8 +9,8 @@ import { notFound } from 'next/navigation'
 import { source } from '@/lib/source'
 import Preview from '@/components/mdx/preview'
 import PreviewClient from '@/components/mdx/preview-client'
-import PreviewTemplate from '@/components/mdx/preview-template'
 import WhatIncluded from '@/components/mdx/what-included'
+import { cn } from '@/lib/utils'
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params
@@ -29,7 +29,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
       <DocsDescription className='ml-8 text-xl tracking-tighter'>
         {page.data.description}
       </DocsDescription>
-      <DocsBody className='ml-8'>
+      <DocsBody className={cn('ml-8 ', page.data.docsBodyClasses)}>
         <MDX
           components={{
             ...defaultMdxComponents,
