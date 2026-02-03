@@ -78,7 +78,6 @@ const PricingSection = () => {
           Monthly
         </span>
         <Switch
-          className='bg-red-500'
           color='red'
           checked={isAnnual}
           onCheckedChange={(checked) => setAnnual(checked)}

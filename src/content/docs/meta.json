@@ -8,6 +8,7 @@
     "---Components---",
     "components/animated-dropdown",
     "components/holographic-pricing-table",
+    "components/node-ui-pricing-card",
     "components/interactive-data-table",
     "---Buttons---",
     "components/button-colorful",
