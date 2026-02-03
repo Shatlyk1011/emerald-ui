@@ -132,7 +132,7 @@ export default function SocialButton({ className }: { className?: string }) {
 }
 
 
-// helper functions
+// helper functions (suggestion: move them to seperate component file)
 import { useEffect, RefObject } from "react"
 
 const useClickOutside = (ref: RefObject<HTMLDivElement | null>, onClickOutside: () => void) => {
@@ -148,7 +148,6 @@ const useClickOutside = (ref: RefObject<HTMLDivElement | null>, onClickOutside: 
     }
   }, [ref])
 }
-
 
 
 import { FC, ReactNode, useRef } from "react"
