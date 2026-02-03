@@ -94,31 +94,25 @@ Reusability & Flexibility
 ## 3. Quality Assurance
 
  ### 3.1 Functionality Verification
-  - **Verify** all original features work as expected
-  - **Test** new features or enhancements
-  - **Ensure** no regressions in user-facing behavior
-  - **Validate** prop combinations and edge cases
+  - Verify all original features work as expected
+  - Test new features or enhancements
+  - Ensure no regressions in user-facing behavior
+  - Validate prop combinations and edge cases
 
-### 3.2 Code Quality Checks
-  - **Review** TypeScript types for accuracy and completeness
-  - **Check** for unused imports or variables
-  - **Ensure** consistent code style and formatting
-  - **Validate** accessibility (ARIA attributes, keyboard navigation)
-  - **Optimize** performance (memoization, lazy loading if needed)
+3.2 Code Quality Checks
+  - Review TypeScript types for accuracy and completeness
+  - Check for unused imports or variables
+  - Ensure consistent code style and formatting
+  - Validate accessibility (ARIA attributes, keyboard navigation)
+  - Optimize performance (memoization, lazy loading if needed)
 
-### 3.3 Best Practices Compliance
-  - **Verify** React best practices (proper hooks usage, keys for lists)
-  - **Ensure** Tailwind CSS best practices (utility-first, no arbitrary values unless necessary)
-  - **Check** `motion/react` patterns (smooth animations, cleanup)
-- **Validate** shadcn/ui component usage (correct props, variants)
-
-3. **Documentation Implementation**
+4. Documentation Implementation
    - Create or update the documentation file in `src/content/docs/components/[kebab-case-name].mdx`.
    - Use the `Create Component and Docs` skill to follow the MDX template.
    - Ensure the `<Preview>` component is correctly set up with the link matching the filename.
    - Update the "Usage" example to reflect any API changes from the refactor.
 
-4. **Metadata Registration**
+5. Metadata Registration
    - Open src/content/meta.json.
    - Check if the component is already registered.
    - If not, determine the appropriate category and add it (same rules as creating a new component).

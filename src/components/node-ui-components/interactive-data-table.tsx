@@ -269,11 +269,25 @@ export default function InteractiveDataTable({
     return <ArrowDown className="w-4 h-4 ml-1 text-cyan-500" />
   }
 
+
+
   console.log('sortedData', sortedData)
 
   return (
-    <div className={cn('w-full rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden', className)}>
-      <Table>
+    <div className={cn('w-full space-y-6', className)}>
+      {/* Header Section */}
+      <div className="space-y-1 text-center">
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+          Team Members Directory
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400">
+          Manage and view detailed information about your team members. <br /> Click on any row to expand bio.
+        </p>
+      </div>
+
+      {/* Table */}
+      <div className="rounded-lg border border-gray-200 dark:border-gray-800 overflow-hidden">
+        <Table>
         <TableHeader>
           <TableRow className="bg-gray-50 dark:bg-gray-900/50 hover:bg-gray-50 dark:hover:bg-gray-900/50">
             <TableHead className="w-12"></TableHead>
@@ -432,6 +446,7 @@ export default function InteractiveDataTable({
           </AnimatePresence>
         </TableBody>
       </Table>
+      </div>
     </div>
   )
 }
