@@ -1,8 +1,13 @@
 'use server'
 
-import path from 'path'
-import { cache } from 'react'
-import { promises as fs } from 'fs'
+import path from 'path';
+import { cache } from 'react';
+import { promises as fs } from 'fs';
+
+
+
+
+
 
 // Create a cached version of the file reading operation
 const readFileCache = cache(
@@ -11,9 +16,7 @@ const readFileCache = cache(
 
 // Improve caching for the entire component getter
 export const getComponent = async (fileName: string | null, folder: string) => {
-  console.log('here')
   const baseDir = path.join(process.cwd(), 'src/components/node-ui-components')
-  console.log('baseDir', baseDir)
   if (!fileName || fileName === 'undefined') {
     const fullPath = path.join(baseDir, `${folder}.tsx`)
     // console.log("fullPath", fullPath);
@@ -35,7 +38,6 @@ export const copyComponent = async (
   prevState: CopyComponentState,
   formData: FormData
 ) => {
-  console.log('XXX', formData)
   try {
     const folder = formData.get('folder')
     const fileName = formData.get('fileName')
@@ -46,7 +48,6 @@ export const copyComponent = async (
         success: false,
       }
     }
-    console.log('HELLO')
     const content = await getComponent(fileName as string, folder as string)
 
     if (!content) {
