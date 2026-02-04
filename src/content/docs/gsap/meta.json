@@ -6,6 +6,6 @@
     "---Get Started---",
     "index",
     "---GSAP Components---",
-    "components/gsap-animated-card"
+    "components/text-reveal"
   ]
 }

@@ -20,13 +20,13 @@ export default function Layout({ children }: LayoutProps<'/docs'>) {
         tabs: [
           {
             title: 'Motion Components',
-            description: 'Framer Motion, JSX, Tailwind ',
+            description: 'Motion, jsx, tailwind ',
             url: '/docs',
             root: plainSource.pageTree,
           },
           {
             title: 'GSAP Components',
-            description: 'GSAP, JSX, Tailwind',
+            description: 'Gsap, jsx, tailwind',
             url: '/docs/gsap',
             root: gsapSource.pageTree,
           },

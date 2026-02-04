@@ -1,16 +1,16 @@
-import defaultMdxComponents, { createRelativeLink } from 'fumadocs-ui/mdx'
+import defaultMdxComponents, { createRelativeLink } from 'fumadocs-ui/mdx';
+import { cn } from '@/lib/utils';
 import {
   DocsBody,
   DocsDescription,
   DocsPage,
   DocsTitle,
-} from 'fumadocs-ui/page'
-import { notFound } from 'next/navigation'
-import { source } from '@/lib/source'
-import { cn } from '@/lib/utils'
-import Preview from '@/components/mdx/preview'
-import PreviewClient from '@/components/mdx/preview-client'
-import WhatIncluded from '@/components/mdx/what-included'
+} from 'fumadocs-ui/page';
+import { notFound } from 'next/navigation';
+import { source } from '@/lib/source';
+import Preview from '@/components/mdx/preview';
+import PreviewClient from '@/components/mdx/preview-client';
+import WhatIncluded from '@/components/mdx/what-included';
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params
