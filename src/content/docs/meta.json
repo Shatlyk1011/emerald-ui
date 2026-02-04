@@ -22,7 +22,6 @@
     "---Text---",
     "components/text-shimmer",
     "---Demo---",
-    "components/demo",
-    "components/sidebar-tabs-demo"
+    "components/demo"
   ]
 }

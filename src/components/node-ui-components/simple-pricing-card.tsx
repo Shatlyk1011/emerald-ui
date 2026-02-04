@@ -1,5 +1,3 @@
-'use client'
-
 import { cn } from '@/lib/utils';
 import { CircleCheckIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -22,7 +20,7 @@ const DEMO = [
     ],
     list_2_heading: "Additional Features",
     button_text: "Start Free Trial",
-    button_classes: "bg-gray-800 hover:bg-gray-900 dark:bg-zinc-300 dark:text-zinc-900 dark:hover:bg-zinc-800",
+    button_classes: "bg-zinc-800 hover:bg-zinc-900 dark:bg-zinc-300 dark:text-zinc-900 bg- dark:hover:bg-zinc-400",
   },
   {
     plan: "Professional",
@@ -42,7 +40,7 @@ const DEMO = [
     ],
     list_2_heading: "Everything in Starter, plus:",
     button_text: "Get Started",
-    button_classes: "bg-gray-800 hover:bg-gray-900 dark:bg-zinc-300 dark:text-zinc-900 dark:hover:bg-zinc-800",
+    button_classes: "bg-zinc-800 hover:bg-zinc-900 dark:bg-zinc-300 dark:text-zinc-900 bg- dark:hover:bg-zinc-400",
   },
 ]
 
@@ -66,11 +64,11 @@ function PricingCard({item}: Props) {
   const { plan, role, tier, list_1, list_2_heading, list_2, button_text, button_classes, } = item
   return (
     <div className="flex flex-1 max-w-105 w-full flex-col rounded-3xl border border-solid border-gray-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 p-8 pb-13 leading-[0] max-lg:rounded-3xl max-lg:p-6 max-lg:pb-8 max-md:max-w-full max-md:rounded-2xl max-md:p-5 max-md:pb-10">
-      <div className="flex items-start justify-between gap-3 max-lg:flex-col max-md:flex-row">
+      <div className="flex items-center justify-between gap-3 max-lg:flex-col max-md:flex-row">
         <h2 className="text-[26px] leading-[110%] font-medium tracking-[-0.03em] text-zinc-900 dark:text-zinc-100 max-lg:text-2xl max-md:text-[20px]">
           {plan}
         </h2>
-        <span className="rounded-lg text-nowrap bg-yellow-200  dark:bg-yellow-950 px-5 py-2.5 text-base leading-[130%] font-bold max-lg:px-4 max-lg:py-1.5 max-lg:text-sm">
+        <span className="rounded-lg text-nowrap bg-blue-100 dark:bg-blue-950 opacity-90 px-5 py-2.5 text-base leading-[130%] font-bold max-lg:px-4 max-lg:py-1.5 max-lg:text-sm">
           {role}
         </span>
       </div>
@@ -125,14 +123,24 @@ function PricingCard({item}: Props) {
   )
 }
 
-
 // Demo Section
 export default function SimplePricingCardSection () {
   return (
-    <div className="flex w-full justify-center gap-3 max-lg:gap-2 max-md:flex-col max-md:gap-3">
-      {DEMO.map((item) => (
-        <PricingCard key={item.plan} item={item} />
-      ))}
+    <div className="flex flex-col w-full justify-center gap-3 max-lg:gap-2 max-md:flex-col max-md:gap-3">
+      <div className='mb-8 text-center'>
+        <h1 className='mb-2 text-4xl font-bold tracking-tight max-sm:text-3xl'>
+          Simple, Pricing Card
+        </h1>
+        <p className='text-muted-foreground mx-auto max-w-2xl text-lg max-sm:text-base'>
+          Explore our free resources, or get started with a paid plan.
+        </p>
+      </div>
+      <section className='flex w-full justify-center gap-3 max-lg:gap-2 max-md:flex-col max-md:gap-3'>
+
+        {DEMO.map((item) => (
+          <PricingCard key={item.plan} item={item} />
+        ))}
+      </section>
     </div>
 
   )
