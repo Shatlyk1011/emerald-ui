@@ -21,7 +21,7 @@ description: Component Refactoring Workflow
   - Generate component name using kebab-case if not explicitly provided
   - Clarify specific user requirements or preferences for changes
 
-  1.3 Refactoring Strategy Definition
+    1.3 Refactoring Strategy Definition
 
 - Assess what stays the same (core functionality, user experience)
 - Identify what changes (implementation details, structure, dependencies)
@@ -110,7 +110,7 @@ Reusability & Flexibility
 - Ensure no regressions in user-facing behavior
 - Validate prop combinations and edge cases
 
-3.2 Code Quality Checks
+  3.2 Code Quality Checks
 
 - Review TypeScript types for accuracy and completeness
 - Check for unused imports or variables
