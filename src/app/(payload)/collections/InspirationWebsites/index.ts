@@ -1,18 +1,7 @@
 import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins';
 import { extractGradientColor } from '../../utils/extractColor';
-import { beforeDeleteHook, beforeChangeHook, afterReadHook } from './hooks'
-
-
-
-
-
-
-
-
-
-
-
+import { beforeDeleteHook, beforeChangeHook } from './hooks'
 
 
 const InspirationWebsites: CollectionConfig = {
@@ -24,7 +13,7 @@ const InspirationWebsites: CollectionConfig = {
     delete: admins,
   },
   admin: {
-    defaultColumns: ['pageUrl', 'title', 'imgUrl', 'isViewed'],
+    defaultColumns: ['pageUrl', 'title', 'imgUrl'],
     useAsTitle: 'pageUrl',
     description:
       'Main collection for storing website inspiration entries. Automatically captures screenshots and favicons from provided URLs. Supports categorization, styling tags, and additional media attachments.',
@@ -44,7 +33,6 @@ const InspirationWebsites: CollectionConfig = {
         return doc
       },
     ],
-    afterRead: [afterReadHook],
   },
   fields: [
     {
@@ -210,19 +198,6 @@ const InspirationWebsites: CollectionConfig = {
       defaultValue: true,
       admin: {
         position: 'sidebar',
-      },
-    },
-
-    {
-      name: 'isViewed',
-      type: 'checkbox',
-      required: false,
-      defaultValue: false,
-      admin: {
-        position: 'sidebar',
-        description:
-          'Automatically set to true when document is opened in admin panel',
-        hidden: true,
       },
     },
   ],
