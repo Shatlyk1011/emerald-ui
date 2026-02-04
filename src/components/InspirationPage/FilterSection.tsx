@@ -1,10 +1,9 @@
 'use client'
 import dynamic from 'next/dynamic'
-import { useEffect, useRef, useState, Suspense } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 
 import { cn } from '@/lib/utils'
 import { Category, WebsiteStyle } from '@/payload-types'
-import { Input } from '../ui/input'
 import { Where } from 'payload'
 import { useAppStore } from '@/store/useAppStore'
 
@@ -23,7 +22,6 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
   const { closeSiteDialog } = useAppStore()
 
   const [mounted, setMounted] = useState(false)
-  const [search, setSearch] = useState('')
   const [selectedCategories, setCategories] = useState<string[]>([])
   const [selectedStyles, setStyles] = useState<string[]>([])
 
@@ -50,7 +48,6 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
   const handleDialogCategoryClick = (category: string) => {
     closeSiteDialog()
     setCategories([category])
-    setSearch('')
   }
 
   useEffect(() => {
@@ -58,12 +55,6 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
 
     const query: Where = {
       and: [
-        {
-          // search
-          title: {
-            contains: search,
-          },
-        },
         {
           isVisible: {
             equals: true,
@@ -87,19 +78,12 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
       return
     }
     handleFilterRequest(query);
-  }, [search, selectedCategories, selectedStyles])
+  }, [selectedCategories, selectedStyles])
 
   return (
     <div className='mb-12'>
+      {/* Category and Style Filters - Side by Side */}
       <div className='flex justify-between gap-12'>
-        {/* Search Column */}
-        <div className='group flex flex-1 flex-col'>
-          <label className='tracking-four group-hover:text-foreground text-muted-foreground mb-3 text-sm font-medium uppercase transition-colors ease-in-out'>
-            Search
-          </label>
-          <Input value={search} onChange={(e) => setSearch(e.currentTarget.value)} placeholder='Type url or website name' className='h-11' />
-        </div>
-
         {/* Categories Column */}
         <div className='group flex flex-1 flex-col'>
           <h3 className={cn('tracking-three text-muted-foreground mb-3 text-sm font-medium uppercase transition-colors ease-in-out', isCategorySelected ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground')}>
