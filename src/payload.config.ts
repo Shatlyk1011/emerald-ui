@@ -7,11 +7,12 @@ import sharp from 'sharp';
 import AdminUsers from './app/(payload)/collections/AdminUsers';
 // collections
 import Categories from './app/(payload)/collections/Categories';
-import Clients from './app/(payload)/collections/Clients'
+import Clients from './app/(payload)/collections/Clients';
 import CreditHistory from './app/(payload)/collections/CreditHistory';
 import InspirationWebsites from './app/(payload)/collections/InspirationWebsites';
 import Media from './app/(payload)/collections/Media';
 import WebsiteStyle from './app/(payload)/collections/WebsiteStyle';
+import WebsiteSubmissions from './app/(payload)/collections/WebsiteSubmissions'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -38,6 +39,7 @@ export default buildConfig({
     CreditHistory,
     Categories,
     WebsiteStyle,
+    WebsiteSubmissions,
     AdminUsers,
   ],
 

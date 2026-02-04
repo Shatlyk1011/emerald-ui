@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { siteConfig } from '@/lib/site-config'
 import TanstackQueryProvider from '@/components/_providers/tanstack-query'
 import ThemeProvider from '@/components/_providers/theme-provider'
+import { Toaster } from 'sonner'
 import './globals.css'
 
 const geistSans = Geist({
@@ -60,6 +61,7 @@ export default function RootLayout({
             </TanstackQueryProvider>
           </ThemeProvider>
         </RootProvider>
+        <Toaster position='bottom-right' />
       </body>
     </html>
   )

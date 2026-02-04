@@ -73,6 +73,7 @@ export interface Config {
     'credit-history': CreditHistory;
     categories: Category;
     'website-style': WebsiteStyle;
+    'website-submissions': WebsiteSubmission;
     adminUsers: AdminUser;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -87,6 +88,7 @@ export interface Config {
     'credit-history': CreditHistorySelect<false> | CreditHistorySelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'website-style': WebsiteStyleSelect<false> | WebsiteStyleSelect<true>;
+    'website-submissions': WebsiteSubmissionsSelect<false> | WebsiteSubmissionsSelect<true>;
     adminUsers: AdminUsersSelect<false> | AdminUsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -285,6 +287,37 @@ export interface WebsiteStyle {
   order?: number | null;
 }
 /**
+ * User-submitted website requests for the inspiration gallery. Review and approve submissions to add them to the main collection.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "website-submissions".
+ */
+export interface WebsiteSubmission {
+  id: string;
+  /**
+   * Optional name of the person submitting
+   */
+  name?: string | null;
+  /**
+   * Optional email for follow-up
+   */
+  email?: string | null;
+  /**
+   * URL of the website being submitted
+   */
+  websiteUrl: string;
+  /**
+   * Optional message or description from the submitter
+   */
+  message?: string | null;
+  /**
+   * Review status of the submission
+   */
+  status: 'pending' | 'approved' | 'rejected';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Manage admin panel users and their access permissions. Configure user roles (admin, moderator, guest) to control who can create, edit, and delete content.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -361,6 +394,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'website-style';
         value: string | WebsiteStyle;
+      } | null)
+    | ({
+        relationTo: 'website-submissions';
+        value: string | WebsiteSubmission;
       } | null)
     | ({
         relationTo: 'adminUsers';
@@ -489,6 +526,19 @@ export interface WebsiteStyleSelect<T extends boolean = true> {
   style?: T;
   value?: T;
   order?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "website-submissions_select".
+ */
+export interface WebsiteSubmissionsSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  websiteUrl?: T;
+  message?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
