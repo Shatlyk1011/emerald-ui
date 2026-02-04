@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect, useMemo } from 'react'
+import dynamic from 'next/dynamic'
+import { useState, useEffect, useMemo, Suspense } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { Category, WebsiteStyle } from '@/payload-types'
 import { IWebsites } from '@/types/inspiration'
@@ -11,31 +12,39 @@ import SiteCards from './SiteCards'
 import SiteCardsSkeleton from './SiteCards/SiteCardsSkeleton'
 import { debounce } from '@/composables/utils'
 import EmptyResult from './SiteCards/EmptyResult'
+import { Button } from '../ui/button'
+
+const SubmitWebsiteDialog = dynamic(() => import('./SubmitWebsiteDialog'), {
+  ssr: false
+})
 
 interface Props {
   initialData: IWebsites
+  totalDocs: number
   categories: Category[]
   styles: WebsiteStyle[]
 }
 
-export default function InspirationContent({ initialData, categories, styles }: Props) {
+export default function InspirationContent({ initialData, totalDocs, categories, styles }: Props) {
   const [filterQuery, setFilterQuery] = useState<Where>({ isVisible: { equals: true } })
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedStyles, setSelectedStyles] = useState<string[]>([])
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-  
+
+  const { ref, inView } = useInView({
+    threshold: 0,
+    rootMargin: '160px',
+  })
+
   const {
     data,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
     isFetching,
-  } = useInfiniteInspirationSites(initialData, filterQuery)
+  } = useInfiniteInspirationSites(initialData, filterQuery,)
 
-  const { ref, inView } = useInView({
-    threshold: 0,
-    rootMargin: '160px',
-  })
 
   // Derive loading state from query status
   const isLoading = useMemo(() => isFetching && !isFetchingNextPage, [isFetching, isFetchingNextPage])
@@ -49,7 +58,6 @@ export default function InspirationContent({ initialData, categories, styles }: 
 
   // Flatten all pages into a single array
   const allWebsites = data?.pages.flatMap((page) => page.docs) ?? []
-
   // Build filter query from selected categories and styles
   const filterQueryFromSelections = useMemo(() => {
     if (!mounted) {
@@ -81,13 +89,13 @@ export default function InspirationContent({ initialData, categories, styles }: 
 
   // Create debounced setFilterQuery function (memoized to maintain stable reference)
   const debouncedSetFilterQuery = useMemo(
-    () => debounce((query: Where) => setFilterQuery(query), 1000),
+    () => debounce((query: Where) => setFilterQuery(query), 800),
     []
   )
 
   // Update filter query when selections change (with debounce)
   useEffect(() => {
-    if (filterQueryFromSelections) {
+    if (filterQueryFromSelections && mounted) {
       debouncedSetFilterQuery(filterQueryFromSelections)
     }
   }, [filterQueryFromSelections, debouncedSetFilterQuery])
@@ -100,6 +108,21 @@ export default function InspirationContent({ initialData, categories, styles }: 
 
   return (
     <>
+      <section className='flex justify-between gap-10 items-center mb-10 py-20'>
+        <div className='flex flex-col items-start '>
+          <h1 className='-tracking-two text-4xl font-semibold mb-2'>
+            Node Inspiration Websites ({totalDocs})
+          </h1>
+          <div className='text-muted-foreground text-base'>
+            <p className='mb-2'>Explore selected websites for your  next design inspiration</p>
+            <p><Button className='p-0' variant={'link'} onClick={() => setIsDialogOpen(true)}>Submit yours</Button></p>
+          </div>
+        </div>
+        <div>
+          3d marque component area
+        </div>
+      </section>
+
       <FilterSection
         categories={categories}
         styles={styles}
@@ -109,9 +132,7 @@ export default function InspirationContent({ initialData, categories, styles }: 
         setSelectedStyles={setSelectedStyles}
       />
       
-      <h1 className='-tracking-two text-3xl font-semibold mb-6'>
-        Explore curated websites
-      </h1>
+
 
       {isLoading ? (
         <SiteCardsSkeleton />
@@ -139,6 +160,11 @@ export default function InspirationContent({ initialData, categories, styles }: 
           ) : null}
         </div>
       )}
+      <Suspense fallback={null}>
+        {isDialogOpen && (
+          <SubmitWebsiteDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
+        )}
+      </Suspense>
     </>
   )
 }

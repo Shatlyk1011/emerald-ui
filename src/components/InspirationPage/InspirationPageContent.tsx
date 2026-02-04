@@ -40,9 +40,12 @@ export default async function InspirationPageContent() {
     AxiosResponse<IWebsiteStyles>,
   ] = await Promise.all([initialData, categories, websiteStyles])
 
+  const totalDocs = initialData.data.totalDocs as number
+
   return (
     <InspirationContent
       initialData={data.data}
+      totalDocs={totalDocs}
       categories={categoriesData.data.docs}
       styles={stylesData.data.docs} 
     />
