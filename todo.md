@@ -3,7 +3,6 @@
 - Integrate stripe with OAUTH
 
 LLM:
-
 - research preview editor with multiple page support
 - if image, review image, and generate app component structure
 - using app component structure, generate actual components using react + tailwind + framer motion and unsplash images
@@ -13,11 +12,7 @@ Node ui:
 
 - explore gemini tasks/skills and generate them via llm (github like)
 
-- gemini daily component generation for Node UI?
-
 - discord components
-
-- test filter apply fetaure
 
 <!-- !!! ISSUE WHEN APPLYING FILTER IN dialog - remove this logic?? -->
 
@@ -43,7 +38,7 @@ Global:
 
 - add what's new section in main layout
 
-- add wishlists
+- add user form for "what i want to see in this page (or bugs)"
 
 - add loading states
 
@@ -53,9 +48,10 @@ Global:
 
 
 <!-- 
-  combine working solution with claude-test component
  -->
 
- <!-- 
-  dorabotat auth
-  -->
+<!-- 
+  weekly newsletter (n8n) 
+-->
+
+<!-- manually clear db user-history -->
