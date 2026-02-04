@@ -19,7 +19,7 @@ import { LogOut, User as UserIcon } from 'lucide-react'
 
 const { components, inspiration, home, pricing } = {
   home: '/',
-  inspiration: '/inspiration',
+  inspiration: '/node-inspiration',
   components: '/docs',
   pricing: '/pricing',
 }
@@ -76,7 +76,7 @@ const Header = () => {
                   'text-foreground font-medium opacity-100'
                 )}
               >
-                Inspiration
+                Node Inspiration
               </Link>
             </li>
             <li>

@@ -23,10 +23,7 @@ import { axios } from '@/lib/axios'
 
 
 // Infinite Query for Inspiration Sites
-export const useInfiniteInspirationSites = (
-  initialData: IWebsites,
-  query?: Where
-) => {
+export const useInfiniteInspirationSites = (initialData: IWebsites, query?: Where) => {
   return useInfiniteQuery<IWebsites>({
     queryKey: ['inspiration-sites', query],
     queryFn: async ({ pageParam = 1 }) => {

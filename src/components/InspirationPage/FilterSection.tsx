@@ -58,18 +58,18 @@ function FilterSection({
   return (
     <section className='mb-12'>
       <div className='flex gap-12'>
-        <div className='group flex flex-1 flex-col max-w-lg'>
-          <h3 className={cn('tracking-three text-muted-foreground mb-3 text-sm font-medium uppercase transition-colors ease-in-out', isCategorySelected ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground')}>
+        <div className='group flex flex-1 flex-col max-w-md'>
+          <h3 className={cn('tracking-three mb-3 text-xs font-medium uppercase transition-colors ease-in-out', isCategorySelected && 'text-muted-foreground')}>
             Categories
           </h3>
-          <ul className='-ml-1 flex h-max flex-1 flex-wrap place-content-start gap-x-1.5 gap-y-1 text-base font-normal '>
+          <ul className='-ml-1 flex h-max flex-1 flex-wrap place-content-start gap-x-1 gap-y-1 text-sm font-normal '>
             {categories.map(({ value, category }) => {
               const isActive = selectedCategories.some(c => c == value)
               return (
                 <li
                   key={category}
                   className={cn(
-                    'hover:text-foreground max-h-max rounded-lg px-1.5 py-1 leading-none ring ring-transparent',
+                    'hover:text-foreground text-muted-foreground max-h-max rounded-md px-[5px] py-[3px] leading-none ring ring-transparent',
                     isActive && 'text-foreground! bg-card ring-current ', isCategorySelected ? "text-muted-foreground" : "group-hover:text-muted-foreground "
                   )}
                 >
@@ -84,11 +84,11 @@ function FilterSection({
         </div>
 
         {/* Styles Column */}
-        <div className='group flex flex-1 flex-col max-w-lg'>
-          <h3 className={cn('tracking-three mb-3 text-sm font-medium uppercase transition-colors ease-in-out', isStyleSelected ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground')}>
+        <div className='group flex flex-1 flex-col max-w-md'>
+          <h3 className={cn('tracking-three mb-3 text-xs font-medium uppercase transition-colors ease-in-out', isStyleSelected && 'text-muted-foreground')}>
             Styles
           </h3>
-          <ul className='-ml-1 flex h-max flex-1 flex-wrap place-content-start gap-x-1.5 gap-y-1 text-base font-normal capitalize'>
+          <ul className='-ml-1 flex h-max flex-1 flex-wrap place-content-start gap-x-1 gap-y-1 text-sm font-normal capitalize'>
             {styles.map((item) => {
               const isActive = selectedStyles.some(s => s == item.style)
 
@@ -96,7 +96,7 @@ function FilterSection({
                 <li
                   key={item.id}
                   className={cn(
-                    'hover:text-foreground max-h-max rounded-lg px-1.5 py-1 leading-none ring ring-transparent',
+                    'hover:text-foreground text-muted-foreground max-h-max rounded-md px-[5px] py-[3px] leading-none ring ring-transparent',
                     isActive && 'text-foreground! bg-card ring-current', isStyleSelected ? "text-muted-foreground" : "group-hover:text-muted-foreground "
                   )}
                 >
