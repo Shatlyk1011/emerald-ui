@@ -11,8 +11,8 @@ export default function InspirationPageSkeleton() {
         <div className='flex justify-between gap-12'>
           {/* Categories Column */}
           <div className='group flex flex-1 flex-col'>
-            <Skeleton className='h-5 w-24 mb-3' />
-            <div className='flex flex-wrap gap-2 '>
+            <Skeleton className='mb-3 h-5 w-24' />
+            <div className='flex flex-wrap gap-2'>
               {Array.from({ length: 6 }).map((_, i) => (
                 <Skeleton key={`cat-${i}`} className='h-6 w-25 rounded-lg' />
               ))}
@@ -21,8 +21,8 @@ export default function InspirationPageSkeleton() {
 
           {/* Styles Column */}
           <div className='group flex flex-1 flex-col'>
-            <Skeleton className='h-5 w-24 mb-3' />
-            <div className='flex flex-wrap gap-2 '>
+            <Skeleton className='mb-3 h-5 w-24' />
+            <div className='flex flex-wrap gap-2'>
               {Array.from({ length: 6 }).map((_, i) => (
                 <Skeleton key={`style-${i}`} className='h-6 w-25 rounded-lg' />
               ))}
@@ -32,7 +32,7 @@ export default function InspirationPageSkeleton() {
       </div>
 
       {/* Page Title Skeleton */}
-      <Skeleton className='h-9 w-80 mb-6' />
+      <Skeleton className='mb-6 h-9 w-80' />
 
       {/* Site Cards Skeleton */}
       <SiteCardsSkeleton />

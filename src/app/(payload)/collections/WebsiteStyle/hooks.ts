@@ -1,4 +1,7 @@
-import type { CollectionBeforeChangeHook, CollectionAfterChangeHook } from 'payload'
+import type {
+  CollectionBeforeChangeHook,
+  CollectionAfterChangeHook,
+} from 'payload'
 
 export const beforeChangeHook: CollectionBeforeChangeHook = async ({
   data,

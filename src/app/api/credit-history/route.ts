@@ -1,11 +1,6 @@
-import { NextResponse } from 'next/server';
-import { getClientByUserId, getUserCreditHistory } from '@/lib/credit-helpers';
-import { createClient } from '@/lib/supabase-server';
-
-
-
-
-
+import { NextResponse } from 'next/server'
+import { getClientByUserId, getUserCreditHistory } from '@/lib/credit-helpers'
+import { createClient } from '@/lib/supabase-server'
 
 export async function GET() {
   try {
@@ -22,7 +17,7 @@ export async function GET() {
 
     // Fetch client data and credit history
     const client = await getClientByUserId(user.id)
-    
+
     if (!client) {
       return NextResponse.json({ error: 'Client not found' }, { status: 404 })
     }

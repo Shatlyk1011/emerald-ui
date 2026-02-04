@@ -5,7 +5,7 @@ export function getFaviconExtension(contentType: string, url: string): string {
     jpeg: 'jpg',
     jpg: 'jpg',
     webp: 'webp',
-    gif: 'gif'
+    gif: 'gif',
   }
 
   for (const key in typeMap) {
@@ -15,7 +15,10 @@ export function getFaviconExtension(contentType: string, url: string): string {
   }
 
   const urlExt = new URL(url).pathname.split('.').pop()?.toLowerCase()
-  if (urlExt && ['svg', 'png', 'jpg', 'jpeg', 'webp', 'gif', 'ico'].includes(urlExt)) {
+  if (
+    urlExt &&
+    ['svg', 'png', 'jpg', 'jpeg', 'webp', 'gif', 'ico'].includes(urlExt)
+  ) {
     return urlExt === 'jpeg' ? 'jpg' : urlExt
   }
 

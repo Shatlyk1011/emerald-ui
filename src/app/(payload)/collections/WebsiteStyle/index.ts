@@ -1,4 +1,4 @@
-import { CollectionConfig } from 'payload';
+import { CollectionConfig } from 'payload'
 import { admins } from '../../utils/admins'
 import { beforeChangeHook, afterChangeHook } from './hooks'
 

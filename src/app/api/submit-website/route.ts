@@ -1,6 +1,6 @@
+import config from '@payload-config'
 import { NextResponse } from 'next/server'
 import { getPayload } from 'payload'
-import config from '@payload-config'
 
 export async function POST(req: Request) {
   try {

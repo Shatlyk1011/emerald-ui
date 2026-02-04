@@ -83,10 +83,10 @@ function FileUploadInput() {
           onBlur={() => setFocus(false)}
           isLoading={isLoading}
           onSubmit={handleSubmit}
-          className='w-full min-h-20'
+          className='min-h-20 w-full'
         >
           <PromptInputTextarea
-            className='h-full rounded-2xl min-h-30'
+            className='h-full min-h-30 rounded-2xl'
             placeholder='Type a message or drop files...'
           />
 
@@ -115,7 +115,7 @@ function FileUploadInput() {
             </div>
           )}
 
-          <PromptInputActions className='flex items-center justify-between gap-2 pt-2 '>
+          <PromptInputActions className='flex items-center justify-between gap-2 pt-2'>
             <PromptInputAction tooltip='Attach files'>
               <FileUploadTrigger asChild>
                 <div className='hover:bg-secondary-foreground/10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-2xl'>

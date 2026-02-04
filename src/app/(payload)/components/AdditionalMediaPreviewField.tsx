@@ -1,7 +1,7 @@
 'use client'
 
-import { useDocumentInfo } from '@payloadcms/ui'
 import { useState, useEffect } from 'react'
+import { useDocumentInfo } from '@payloadcms/ui'
 
 export const AdditionalMediaPreviewField = () => {
   const { data } = useDocumentInfo()
@@ -25,7 +25,9 @@ export const AdditionalMediaPreviewField = () => {
       setError(null)
 
       try {
-        const response = await fetch(`/api/collections/media/${additionalMedia}`)
+        const response = await fetch(
+          `/api/collections/media/${additionalMedia}`
+        )
 
         if (!response.ok) {
           throw new Error('Failed to fetch media')
@@ -208,7 +210,7 @@ export const AdditionalMediaPreviewField = () => {
           />
         ) : (
           <video
-              src={mediaUrl}
+            src={mediaUrl}
             controls
             style={{
               maxWidth: '100%',
@@ -230,21 +232,23 @@ export const AdditionalMediaPreviewField = () => {
             }}
           />
         )}
-
       </div>
       <div
         style={{
           fontSize: '1.25rem',
           marginTop: '0.5rem',
           wordBreak: 'break-all',
-          paddingBlock: "1rem",
-          lineHeight: '2rem'
+          paddingBlock: '1rem',
+          lineHeight: '2rem',
         }}
       >
-        <span style={{ userSelect: 'none', color: 'var(--theme-elevation-600)' }}>URL:</span> {" "} <span style={{ color: 'var(--theme-elevation-750)' }}>{mediaUrl}</span>
-
+        <span
+          style={{ userSelect: 'none', color: 'var(--theme-elevation-600)' }}
+        >
+          URL:
+        </span>{' '}
+        <span style={{ color: 'var(--theme-elevation-750)' }}>{mediaUrl}</span>
       </div>
-
     </div>
   )
 }

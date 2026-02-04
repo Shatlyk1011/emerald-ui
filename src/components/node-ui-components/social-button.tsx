@@ -1,125 +1,130 @@
-"use client";
+'use client'
 
 /**
  * @author: @nodeui
- * @description: Social Button Component 
+ * @description: Social Button Component
  * @version: 1.0.0
  * @date: 2026-01-27
  * @license: MIT
  * @website: https://nodeui.com
-*/
-
-import { Check, Copy, Instagram, Linkedin, Share2, Twitter } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
+ */
+import { useState } from 'react'
+// helper functions (suggestion: move them to seperate component file)
+import { useEffect, RefObject } from 'react'
+import { FC, ReactNode, useRef } from 'react'
+import { Check, Copy, Instagram, Linkedin, Share2, Twitter } from 'lucide-react'
+import { AnimatePresence, motion } from 'motion/react'
+import { cn } from '@/lib/utils'
 
 const shareButtons = [
   {
     icon: Twitter,
-    label: "Twitter",
-    color: "hover:text-[#1DA1F2] hover:bg-[#1DA1F2]/10",
+    label: 'Twitter',
+    color: 'hover:text-[#1DA1F2] hover:bg-[#1DA1F2]/10',
   },
   {
     icon: Instagram,
-    label: "Instagram",
-    color: "hover:text-[#E1306C] hover:bg-[#E1306C]/10",
+    label: 'Instagram',
+    color: 'hover:text-[#E1306C] hover:bg-[#E1306C]/10',
   },
   {
     icon: Linkedin,
-    label: "LinkedIn",
-    color: "hover:text-[#0A66C2] hover:bg-[#0A66C2]/10",
+    label: 'LinkedIn',
+    color: 'hover:text-[#0A66C2] hover:bg-[#0A66C2]/10',
   },
-];
-
+]
 
 export default function SocialButton({ className }: { className?: string }) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false)
+  const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   return (
     <OnClickOutside onClickOutside={() => setIsExpanded(false)}>
-      <div className={cn("flex items-center justify-center ", className)}>
+      <div className={cn('flex items-center justify-center', className)}>
         <motion.div
           animate={{
-            width: isExpanded ? "auto" : "120px",
-            height: "48px",
+            width: isExpanded ? 'auto' : '120px',
+            height: '48px',
           }}
           className={cn(
-            "relative flex items-center overflow-hidden",
-            "bg-white dark:bg-zinc-900",
-            "border border-zinc-200 dark:border-zinc-800",
-            "shadow-sm hover:shadow-md",
-            "rounded-full cursor-pointer"
+            'relative flex items-center overflow-hidden',
+            'bg-white dark:bg-zinc-900',
+            'border border-zinc-200 dark:border-zinc-800',
+            'shadow-sm hover:shadow-md',
+            'cursor-pointer rounded-full'
           )}
           initial={false}
           onClick={() => !isExpanded && setIsExpanded(true)}
           transition={{
-            type: "spring",
+            type: 'spring',
             stiffness: 300,
             damping: 25,
           }}
         >
-          <AnimatePresence mode="sync">
+          <AnimatePresence mode='sync'>
             {!isExpanded ? (
               <motion.div
-                className="absolute inset-0 flex items-center justify-center gap-2"
+                className='absolute inset-0 flex items-center justify-center gap-2'
                 exit={{ opacity: 0, y: -20 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                key="share-text"
+                key='share-text'
                 transition={{ duration: 0.2 }}
               >
-                <Share2 className="h-4 w-4" />
-                <span className="text-sm font-medium">Share</span>
+                <Share2 className='h-4 w-4' />
+                <span className='text-sm font-medium'>Share</span>
               </motion.div>
             ) : (
               <motion.div
-                className="flex items-center px-1"
+                className='flex items-center px-1'
                 exit={{ opacity: 0, scale: 0.9 }}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                key="actions"
+                key='actions'
                 transition={{ delay: 0.1, duration: 0.2 }}
               >
                 {shareButtons.map((btn) => (
                   <button
                     className={cn(
-                      "flex h-10 w-10 items-center justify-center rounded-full transition-colors",
-                      "text-zinc-600 dark:text-zinc-400",
+                      'flex h-10 w-10 items-center justify-center rounded-full transition-colors',
+                      'text-zinc-600 dark:text-zinc-400',
                       btn.color
                     )}
                     key={btn.label}
-
-                    type="button"
+                    type='button'
                     title={btn.label}
                   >
-                    <btn.icon className="h-5 w-5" />
+                    <btn.icon className='h-5 w-5' />
                   </button>
                 ))}
-                
-                <div className="mx-1 h-6 w-px bg-zinc-200 dark:bg-zinc-800" />
-                
+
+                <div className='mx-1 h-6 w-px bg-zinc-200 dark:bg-zinc-800' />
+
                 <button
                   className={cn(
-                    "flex h-10 w-10 items-center justify-center rounded-full transition-colors",
-                    "text-zinc-600 dark:text-zinc-400",
-                    "hover:bg-zinc-100 dark:hover:bg-zinc-800",
-                    copied && "text-green-500 dark:text-green-500 bg-green-50 dark:bg-green-900/20"
+                    'flex h-10 w-10 items-center justify-center rounded-full transition-colors',
+                    'text-zinc-600 dark:text-zinc-400',
+                    'hover:bg-zinc-100 dark:hover:bg-zinc-800',
+                    copied &&
+                      'bg-green-50 text-green-500 dark:bg-green-900/20 dark:text-green-500'
                   )}
                   onClick={(e) => {
-                    e.stopPropagation();
-                    handleCopy();
+                    e.stopPropagation()
+                    handleCopy()
                   }}
-                  type="button"
-                  title="Copy Link"
+                  type='button'
+                  title='Copy Link'
                 >
-                  {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
+                  {copied ? (
+                    <Check className='h-5 w-5' />
+                  ) : (
+                    <Copy className='h-5 w-5' />
+                  )}
                 </button>
               </motion.div>
             )}
@@ -127,30 +132,25 @@ export default function SocialButton({ className }: { className?: string }) {
         </motion.div>
       </div>
     </OnClickOutside>
-
-  );
+  )
 }
 
-
-// helper functions (suggestion: move them to seperate component file)
-import { useEffect, RefObject } from "react"
-
-const useClickOutside = (ref: RefObject<HTMLDivElement | null>, onClickOutside: () => void) => {
+const useClickOutside = (
+  ref: RefObject<HTMLDivElement | null>,
+  onClickOutside: () => void
+) => {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (ref.current && !ref.current.contains(event.target as Node)) {
         onClickOutside()
       }
     }
-    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener('mousedown', handleClickOutside)
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
+      document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [ref])
 }
-
-
-import { FC, ReactNode, useRef } from "react"
 
 interface Props {
   children: ReactNode

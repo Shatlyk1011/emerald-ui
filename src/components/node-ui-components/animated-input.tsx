@@ -1,12 +1,17 @@
 'use client'
-import { cn } from '@/lib/utils'
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
+import { Search } from 'lucide-react'
 import { motion } from 'motion/react'
+import { cn } from '@/lib/utils'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
-import { Search } from 'lucide-react'
 
-const DYNAMIC_LABELS = ['node ui', 'website inspirations', 'component generation', 'ui design']
+const DYNAMIC_LABELS = [
+  'node ui',
+  'website inspirations',
+  'component generation',
+  'ui design',
+]
 
 export default function AnimatedInput() {
   const [labelIndex, setLabelIndex] = useState(0)
@@ -21,10 +26,10 @@ export default function AnimatedInput() {
 
   return (
     <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 0.5 }}
-    className='max-w-lg w-full'
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className='w-full max-w-lg'
     >
       <form
         onSubmit={handleSearch}
@@ -55,7 +60,7 @@ export default function AnimatedInput() {
                 text={label}
                 isInView={!inputFocus}
                 classes={cn(
-                   // IMPORTANT: if you change placeholder, make sure to adjust "left" className
+                  // IMPORTANT: if you change placeholder, make sure to adjust "left" className
                   'leading-inherit left-[52px] max-sm:left-[66px] inline-block text-base max-sm:text-sm peer-focus:hidden transition'
                 )}
               />
@@ -78,8 +83,7 @@ export default function AnimatedInput() {
   )
 }
 
-
-// Typing Effect 
+// Typing Effect
 interface Props {
   labelIndex: number
   text: string

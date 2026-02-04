@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query'
 import { IWebsites } from '@/types/inspiration'
 import { Where } from 'payload'
 import { stringify } from 'qs-esm'
@@ -20,10 +20,11 @@ import { axios } from '@/lib/axios'
 //   return { getWebsite, getWebsites }
 // }
 
-
-
 // Infinite Query for Inspiration Sites
-export const useInfiniteInspirationSites = (initialData: IWebsites, query?: Where) => {
+export const useInfiniteInspirationSites = (
+  initialData: IWebsites,
+  query?: Where
+) => {
   return useInfiniteQuery<IWebsites>({
     queryKey: ['inspiration-sites', query],
     queryFn: async ({ pageParam = 1 }) => {

@@ -60,15 +60,19 @@ export const FaviconPreviewField = () => {
       >
         <span>Preview:</span>
         <button
-          type="button"
+          type='button'
           onClick={handleDelete}
           disabled={deleting}
           style={{
             padding: '0.375rem 0.75rem',
             fontSize: '0.75rem',
             fontWeight: '500',
-            color: deleting ? 'var(--theme-elevation-400)' : 'var(--theme-error-600)',
-            backgroundColor: deleting ? 'var(--theme-elevation-100)' : 'var(--theme-error-50)',
+            color: deleting
+              ? 'var(--theme-elevation-400)'
+              : 'var(--theme-error-600)',
+            backgroundColor: deleting
+              ? 'var(--theme-elevation-100)'
+              : 'var(--theme-error-50)',
             border: `1px solid ${deleting ? 'var(--theme-elevation-200)' : 'var(--theme-error-200)'}`,
             borderRadius: '4px',
             cursor: deleting ? 'not-allowed' : 'pointer',
@@ -119,7 +123,7 @@ export const FaviconPreviewField = () => {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={favicon}
-          alt="favicon preview"
+          alt='favicon preview'
           style={{
             maxWidth: '100%',
             height: 'auto',

@@ -1,11 +1,12 @@
 'use client'
 
+import { LogOut, User as UserIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import ThemeToggle from '@/components/ui/theme-toggle'
 import { useUser } from '@/hooks/use-user'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,8 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Button } from '@/components/ui/button'
-import { LogOut, User as UserIcon } from 'lucide-react'
+import ThemeToggle from '@/components/ui/theme-toggle'
 
 const { components, inspiration, home, pricing } = {
   home: '/',
@@ -49,18 +49,18 @@ const Header = () => {
 
   return (
     <div className='border-border border-b'>
-      <header className='mx-auto flex w-full  items-center justify-between px-8 py-2 font-sans'>
+      <header className='mx-auto flex w-full items-center justify-between px-8 py-2 font-sans'>
         <Link href='/' className='w-20 max-sm:min-w-8'>
           <span className=''>Logo</span>
         </Link>
 
-        <nav className='flex flex-1 justify-start text-muted-foreground'>
+        <nav className='text-muted-foreground flex flex-1 justify-start'>
           <ul className='tracking-one flex items-center text-sm font-medium max-sm:text-sm'>
             <li>
               <Link
                 href={home}
                 className={cn(
-                  'px-3 py-2 transition ease-out max-sm:px-2 hover:bg-primary/5 hover:text-foreground rounded-md',
+                  'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 transition ease-out max-sm:px-2',
                   pathname === home && 'text-foreground font-medium opacity-100'
                 )}
               >
@@ -71,9 +71,9 @@ const Header = () => {
               <Link
                 href={inspiration}
                 className={cn(
-                  'px-3 py-2 transition ease-out max-sm:px-2 hover:bg-primary/5 hover:text-foreground rounded-md',
+                  'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 transition ease-out max-sm:px-2',
                   pathname === inspiration &&
-                  'text-foreground font-medium opacity-100'
+                    'text-foreground font-medium opacity-100'
                 )}
               >
                 Node Inspiration
@@ -83,9 +83,9 @@ const Header = () => {
               <Link
                 href={components}
                 className={cn(
-                  'px-3 py-2 transition ease-out max-sm:px-2 hover:bg-primary/5 hover:text-foreground rounded-md',
+                  'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 transition ease-out max-sm:px-2',
                   pathname === components &&
-                  'text-foreground font-medium opacity-100'
+                    'text-foreground font-medium opacity-100'
                 )}
               >
                 Node UI
@@ -95,8 +95,9 @@ const Header = () => {
               <Link
                 href={pricing}
                 className={cn(
-                  'px-3 py-2 transition ease-out max-sm:px-2 hover:bg-primary/5 hover:text-foreground rounded-md',
-                  pathname === pricing && 'text-foreground font-medium opacity-100'
+                  'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 transition ease-out max-sm:px-2',
+                  pathname === pricing &&
+                    'text-foreground font-medium opacity-100'
                 )}
               >
                 Pricing
@@ -113,11 +114,15 @@ const Header = () => {
               {user ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <button className='flex items-center gap-2 rounded-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2'>
+                    <button className='focus:ring-primary flex items-center gap-2 rounded-full focus:ring-2 focus:ring-offset-2 focus:outline-none'>
                       <Avatar className='size-8 cursor-pointer'>
                         <AvatarImage
                           src={user.user_metadata?.avatar_url}
-                          alt={user.user_metadata?.full_name || user.email || 'User'}
+                          alt={
+                            user.user_metadata?.full_name ||
+                            user.email ||
+                            'User'
+                          }
                         />
                         <AvatarFallback>{getUserInitials()}</AvatarFallback>
                       </Avatar>
@@ -126,10 +131,10 @@ const Header = () => {
                   <DropdownMenuContent align='end' className='w-56'>
                     <DropdownMenuLabel>
                       <div className='flex flex-col space-y-1'>
-                        <p className='text-sm font-medium leading-none'>
+                        <p className='text-sm leading-none font-medium'>
                           {user.user_metadata?.full_name || 'User'}
                         </p>
-                        <p className='text-xs leading-none text-muted-foreground'>
+                        <p className='text-muted-foreground text-xs leading-none'>
                           {user.email}
                         </p>
                       </div>

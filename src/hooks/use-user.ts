@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { createClient } from '@/lib/supabase-client'
 import type { User } from '@supabase/supabase-js'
 import { useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase-client'
 
 /**
  * Custom hook for managing user authentication state on the client

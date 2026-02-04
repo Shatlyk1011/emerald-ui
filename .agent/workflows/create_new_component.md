@@ -20,7 +20,7 @@ description: Create a new custom component from scratch and its documentation
      - Use default values that showcase the component's primary features and visual appeal.
 
    - Apply the appropriate design philosophy:
-     -  if prompt requires Fancy/Unusual approach, leverage motion/react extensively for creative animations, transitions, and micro-interactions. Prioritize visual appeal and uniqueness.
+     - if prompt requires Fancy/Unusual approach, leverage motion/react extensively for creative animations, transitions, and micro-interactions. Prioritize visual appeal and uniqueness.
      - if prompt requires Solid/Usable approach, focus on accessibility, performance, and practical functionality with subtle animations where they enhance UX.
 
    - Use lucide-react for icons when needed.
@@ -31,7 +31,7 @@ description: Create a new custom component from scratch and its documentation
      - shadcn/ui primitives: Always use shadcn/ui components for standard UI elements (Button, Input, Card, Dialog, etc.) instead of building from scratch.
        - Import pattern: `import { Button } from "@/components/ui/button"`
        - Available primitives: Button, Input, Card, Badge, Dialog, Select, Checkbox, Switch, Tooltip, and more.
-     - cn() utility*: Use the `cn()` utility function for conditional and merged class names.
+     - cn() utility\*: Use the `cn()` utility function for conditional and merged class names.
        - Import: `import { cn } from "@/lib/utils"`
        - Usage: `className={cn("base-classes", condition && "conditional-classes", props.className)}`
 

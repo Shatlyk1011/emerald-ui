@@ -4,8 +4,12 @@ import { useState } from 'react'
 import { useField } from '@payloadcms/ui'
 
 export const ImagePreviewField = () => {
-  const { value: imgUrl, setValue: setImgUrl } = useField<string>({ path: 'imgUrl' })
-  const { setValue: setGradientColor } = useField<string>({ path: 'gradientColor' })
+  const { value: imgUrl, setValue: setImgUrl } = useField<string>({
+    path: 'imgUrl',
+  })
+  const { setValue: setGradientColor } = useField<string>({
+    path: 'gradientColor',
+  })
   const [uploading, setUploading] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -79,7 +83,7 @@ export const ImagePreviewField = () => {
 
       // Clear the field value
       setImgUrl(null)
-      setGradientColor("transparent")
+      setGradientColor('transparent')
       console.log('Image deleted successfully')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Delete failed')
@@ -99,7 +103,7 @@ export const ImagePreviewField = () => {
           }}
         >
           <label
-            htmlFor="image-upload"
+            htmlFor='image-upload'
             style={{
               display: 'inline-block',
               padding: '0.5rem 1rem',
@@ -118,21 +122,23 @@ export const ImagePreviewField = () => {
             }}
             onMouseEnter={(e) => {
               if (!uploading) {
-                e.currentTarget.style.backgroundColor = 'var(--theme-success-200)'
+                e.currentTarget.style.backgroundColor =
+                  'var(--theme-success-200)'
               }
             }}
             onMouseLeave={(e) => {
               if (!uploading) {
-                e.currentTarget.style.backgroundColor = 'var(--theme-success-100)'
+                e.currentTarget.style.backgroundColor =
+                  'var(--theme-success-100)'
               }
             }}
           >
             {uploading ? 'Uploading...' : 'Upload Image'}
           </label>
           <input
-            id="image-upload"
-            type="file"
-            accept="image/*"
+            id='image-upload'
+            type='file'
+            accept='image/*'
             onChange={handleFileChange}
             disabled={uploading}
             style={{ display: 'none' }}
@@ -206,15 +212,19 @@ export const ImagePreviewField = () => {
       >
         <span>Preview:</span>
         <button
-          type="button"
+          type='button'
           onClick={handleDelete}
           disabled={deleting}
           style={{
             padding: '0.375rem 0.75rem',
             fontSize: '0.75rem',
             fontWeight: '500',
-            color: deleting ? 'var(--theme-elevation-400)' : 'var(--theme-error-600)',
-            backgroundColor: deleting ? 'var(--theme-elevation-100)' : 'var(--theme-error-50)',
+            color: deleting
+              ? 'var(--theme-elevation-400)'
+              : 'var(--theme-error-600)',
+            backgroundColor: deleting
+              ? 'var(--theme-elevation-100)'
+              : 'var(--theme-error-50)',
             border: `1px solid ${deleting ? 'var(--theme-elevation-200)' : 'var(--theme-error-200)'}`,
             borderRadius: '4px',
             cursor: deleting ? 'not-allowed' : 'pointer',
@@ -263,7 +273,7 @@ export const ImagePreviewField = () => {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={imgUrl}
-          alt="Preview"
+          alt='Preview'
           style={{
             maxWidth: '100%',
             height: 'auto',

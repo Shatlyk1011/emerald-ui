@@ -47,7 +47,7 @@ export default async function InspirationPageContent() {
       initialData={data.data}
       totalDocs={totalDocs}
       categories={categoriesData.data.docs}
-      styles={stylesData.data.docs} 
+      styles={stylesData.data.docs}
     />
   )
 }

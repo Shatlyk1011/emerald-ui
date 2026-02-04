@@ -8,11 +8,10 @@
  * @license: MIT
  * @website: https://nodeui.com
  */
-
+import { FC } from 'react'
+import { Check, Zap } from 'lucide-react'
 import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
-import { Check, Zap } from 'lucide-react'
-import { FC } from 'react'
 
 // ============================================================================
 // Types
@@ -76,7 +75,6 @@ const defaultTiers: PricingTier[] = [
     popular: true,
     cta: 'Start Free Trial',
   },
-  
 ]
 
 // ============================================================================
@@ -88,10 +86,9 @@ interface PricingTierCardProps {
 }
 
 const PricingTierCard: FC<PricingTierCardProps> = ({ tier }) => {
-
   return (
     <motion.div
-      className="relative group h-full opacity-0 max-w-sm"
+      className='group relative h-full max-w-sm opacity-0'
       animate={{
         opacity: 1,
       }}
@@ -100,14 +97,12 @@ const PricingTierCard: FC<PricingTierCardProps> = ({ tier }) => {
         type: 'spring',
         stiffness: 100,
       }}
-
     >
-
       {/* Main Card */}
       <div
         className={cn(
-          'relative h-full rounded-2xl border overflow-hidden',
-          'bg-white/80 dark:bg-gray-950/50 backdrop-blur-sm',
+          'relative h-full overflow-hidden rounded-2xl border',
+          'bg-white/80 backdrop-blur-sm dark:bg-gray-950/50',
           tier.popular
             ? 'border-cyan-500/50'
             : 'border-gray-200 dark:border-gray-800',
@@ -116,9 +111,10 @@ const PricingTierCard: FC<PricingTierCardProps> = ({ tier }) => {
       >
         {/* diagonal waves */}
         <motion.div
-          className="absolute inset-0 pointer-events-none z-10 opacity-30"
+          className='pointer-events-none absolute inset-0 z-10 opacity-30'
           style={{
-            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(6, 182, 212, 0.1) 10px, rgba(6, 182, 212, 0.1) 20px)',
+            backgroundImage:
+              'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(6, 182, 212, 0.1) 10px, rgba(6, 182, 212, 0.1) 20px)',
           }}
           animate={{
             x: [0, 20, 0],
@@ -139,16 +135,20 @@ const PricingTierCard: FC<PricingTierCardProps> = ({ tier }) => {
         />
 
         {/* Content */}
-        <div className="relative z-20 p-8 flex flex-col h-full">
+        <div className='relative z-20 flex h-full flex-col p-8'>
           {/* Header */}
-          <div className="mb-6">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{tier.name}</h3>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">{tier.description}</p>
+          <div className='mb-6'>
+            <h3 className='mb-2 text-2xl font-bold text-gray-900 dark:text-white'>
+              {tier.name}
+            </h3>
+            <p className='text-sm text-gray-600 dark:text-gray-400'>
+              {tier.description}
+            </p>
           </div>
 
           {/* Price */}
-          <div className="mb-8">
-            <div className="flex items-baseline gap-1">
+          <div className='mb-8'>
+            <div className='flex items-baseline gap-1'>
               <motion.span
                 className={cn(
                   'text-5xl font-bold',
@@ -159,30 +159,42 @@ const PricingTierCard: FC<PricingTierCardProps> = ({ tier }) => {
               >
                 {tier.price}
               </motion.span>
-              <span className="text-gray-500 dark:text-gray-500 text-lg">{tier.period}</span>
+              <span className='text-lg text-gray-500 dark:text-gray-500'>
+                {tier.period}
+              </span>
             </div>
           </div>
 
           {/* Features */}
-          <div className="mb-8 space-y-3">
+          <div className='mb-8 space-y-3'>
             {tier.features.map((feature, index) => (
               <motion.div
                 key={index}
-                className="flex items-start gap-3"
+                className='flex items-start gap-3'
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <div className={cn(
-                  'mt-0.5 rounded-full p-0.5',
-                  tier.popular ? 'bg-cyan-500/20' : 'bg-gray-100 dark:bg-gray-800'
-                )}>
-                  <Check className={cn(
-                    'w-4 h-4',
-                    tier.popular ? 'text-cyan-400' : 'text-gray-600 dark:text-gray-400'
-                  )} />
+                <div
+                  className={cn(
+                    'mt-0.5 rounded-full p-0.5',
+                    tier.popular
+                      ? 'bg-cyan-500/20'
+                      : 'bg-gray-100 dark:bg-gray-800'
+                  )}
+                >
+                  <Check
+                    className={cn(
+                      'h-4 w-4',
+                      tier.popular
+                        ? 'text-cyan-400'
+                        : 'text-gray-600 dark:text-gray-400'
+                    )}
+                  />
                 </div>
-                <span className="text-gray-700 dark:text-gray-300 text-sm flex-1">{feature}</span>
+                <span className='flex-1 text-sm text-gray-700 dark:text-gray-300'>
+                  {feature}
+                </span>
               </motion.div>
             ))}
           </div>
@@ -190,10 +202,10 @@ const PricingTierCard: FC<PricingTierCardProps> = ({ tier }) => {
           {/* CTA Button */}
           <motion.button
             className={cn(
-              'w-full py-3 px-6 mt-auto rounded-xl font-semibold transition-all relative overflow-hidden',
+              'relative mt-auto w-full overflow-hidden rounded-xl px-6 py-3 font-semibold transition-all',
               tier.popular
                 ? 'bg-linear-to-r from-cyan-500 to-blue-500 text-white'
-                : 'bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700',
+                : 'bg-gray-200 text-gray-900 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700',
               'group/button'
             )}
             whileHover={{ scale: 1.02 }}
@@ -202,7 +214,7 @@ const PricingTierCard: FC<PricingTierCardProps> = ({ tier }) => {
             {/* Button glow effect */}
             {tier.popular && (
               <motion.div
-                className="absolute inset-0 bg-linear-to-r from-cyan-400 to-blue-400 opacity-0 group-hover/button:opacity-30 blur-xl transition-opacity"
+                className='absolute inset-0 bg-linear-to-r from-cyan-400 to-blue-400 opacity-0 blur-xl transition-opacity group-hover/button:opacity-30'
                 animate={{
                   opacity: [0.2, 0.4, 0.2],
                 }}
@@ -212,13 +224,13 @@ const PricingTierCard: FC<PricingTierCardProps> = ({ tier }) => {
                 }}
               />
             )}
-            <span className="relative z-10 flex items-center justify-center gap-2">
+            <span className='relative z-10 flex items-center justify-center gap-2'>
               {tier.cta}
-              {tier.popular && <Zap className="w-4 h-4" />}
+              {tier.popular && <Zap className='h-4 w-4' />}
             </span>
           </motion.button>
         </div>
-  </div>
+      </div>
     </motion.div>
   )
 }
@@ -231,13 +243,12 @@ export default function HolographicPricingTable({
   tiers = defaultTiers,
   className,
 }: HolographicPricingTableProps) {
-
   return (
-    <div className={cn('w-full py-12 px-4', className)}>
+    <div className={cn('w-full px-4 py-12', className)}>
       {/* Header */}
-      <div className="text-center mb-12">
+      <div className='mb-12 text-center'>
         <motion.h2
-          className="text-4xl md:text-5xl font-bold mb-4 bg-linear-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent"
+          className='mb-4 bg-linear-to-r from-cyan-400 to-cyan-600 bg-clip-text text-4xl font-bold text-transparent md:text-5xl'
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -245,7 +256,7 @@ export default function HolographicPricingTable({
           Choose Your Plan
         </motion.h2>
         <motion.p
-          className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto"
+          className='mx-auto max-w-2xl text-lg text-gray-600 dark:text-gray-400'
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -255,16 +266,16 @@ export default function HolographicPricingTable({
       </div>
 
       {/* Pricing Tiers Grid */}
-      <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+      <div className='mx-auto grid max-w-7xl gap-8 md:grid-cols-1 lg:grid-cols-2'>
         {tiers.map((tier, index) => (
           <motion.div
             key={tier.id}
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className='h-full '
+            className='h-full'
           >
-            <PricingTierCard tier={tier}/>
+            <PricingTierCard tier={tier} />
           </motion.div>
         ))}
       </div>

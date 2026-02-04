@@ -1,6 +1,6 @@
 import { createElement } from 'react'
-import { plainDocs, gsapDocs } from '@/.source';
-import { loader } from 'fumadocs-core/source';
+import { plainDocs, gsapDocs } from '@/.source'
+import { loader } from 'fumadocs-core/source'
 import { icons } from 'lucide-react'
 
 // Create separate sources for each component type

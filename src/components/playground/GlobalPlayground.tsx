@@ -119,18 +119,20 @@ export default function GlobalPlayground() {
                         {MOCK_CHAT_HISTORY.map((message) => (
                           <div
                             key={message.id}
-                            className={`flex ${message.role === 'user'
+                            className={`flex ${
+                              message.role === 'user'
                                 ? 'justify-end'
                                 : 'justify-start'
-                              }`}
+                            }`}
                           >
                             <div
-                              className={`max-w-[80%] rounded-lg px-4 py-2 ${message.role === 'user'
+                              className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                                message.role === 'user'
                                   ? 'bg-primary text-primary-foreground'
                                   : 'bg-muted text-foreground'
-                                }`}
+                              }`}
                             >
-                              <div className='flex items-center gap-2 mb-1'>
+                              <div className='mb-1 flex items-center gap-2'>
                                 <span className='text-xs font-semibold'>
                                   {message.role === 'user' ? 'You' : 'Agent'}
                                 </span>

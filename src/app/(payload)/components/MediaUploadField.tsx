@@ -4,7 +4,9 @@ import { useState } from 'react'
 import { useField } from '@payloadcms/ui'
 
 export const MediaUploadField = () => {
-  const { value: mediaUrl, setValue: setMediaUrl } = useField<string>({ path: 'mediaUrl' })
+  const { value: mediaUrl, setValue: setMediaUrl } = useField<string>({
+    path: 'mediaUrl',
+  })
   const { setValue: setType } = useField<string>({ path: 'type' })
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -65,7 +67,6 @@ export const MediaUploadField = () => {
       const data = await response.json()
       setMediaUrl(data.url)
       setType(data.mediaType)
-
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload failed')
       console.error('Upload error:', err)
@@ -74,7 +75,6 @@ export const MediaUploadField = () => {
       setUploadProgress(0)
     }
   }
-
 
   const isVideo = mediaUrl?.match(/\.(mp4|webm|mov|avi|mpeg)$/i)
   const isImage = mediaUrl && !isVideo
@@ -248,11 +248,21 @@ export const MediaUploadField = () => {
               fontSize: '1.25rem',
               marginTop: '0.5rem',
               wordBreak: 'break-all',
-              paddingBlock: "1rem",
-              lineHeight: '2rem'
+              paddingBlock: '1rem',
+              lineHeight: '2rem',
             }}
           >
-            <span style={{ userSelect: 'none', color: 'var(--theme-elevation-600)' }}>URL:</span> {" "} <span style={{ color: 'var(--theme-elevation-750)' }}>{mediaUrl}</span>
+            <span
+              style={{
+                userSelect: 'none',
+                color: 'var(--theme-elevation-600)',
+              }}
+            >
+              URL:
+            </span>{' '}
+            <span style={{ color: 'var(--theme-elevation-750)' }}>
+              {mediaUrl}
+            </span>
           </div>
         </div>
       )}

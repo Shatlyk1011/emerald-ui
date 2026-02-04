@@ -1,9 +1,9 @@
 'use client'
 
-import { cn } from '@/lib/utils'
 import { InspirationWebsite } from '@/payload-types'
 import { useAppStore } from '@/store/useAppStore'
 import { BotIcon, Sticker } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 interface SiteCardProps {
   item: InspirationWebsite
@@ -16,7 +16,9 @@ function SiteCard({ item, index }: SiteCardProps) {
 
   // Determine which media to display (prioritize additionalMedia)
   const displayMedia =
-    item.additionalMedia && typeof item.additionalMedia === 'object' && item.additionalMedia.mediaUrl
+    item.additionalMedia &&
+    typeof item.additionalMedia === 'object' &&
+    item.additionalMedia.mediaUrl
       ? item.additionalMedia
       : null
   const displayUrl = displayMedia?.mediaUrl || item.imgUrl
@@ -35,10 +37,15 @@ function SiteCard({ item, index }: SiteCardProps) {
 
   return (
     <div className='relative flex flex-col gap-3'>
-      <div 
+      <div
         role='button'
-        onClick={handleClick} 
-        className={cn('relative rounded-xl border px-8 py-16 shadow-lg transition-all bg-transparent duration-300', displayUrl ? 'hover:border-foreground/15 hover:shadow-xl' : "hover:border-destructive/15")}
+        onClick={handleClick}
+        className={cn(
+          'relative rounded-xl border bg-transparent px-8 py-16 shadow-lg transition-all duration-300',
+          displayUrl
+            ? 'hover:border-foreground/15 hover:shadow-xl'
+            : 'hover:border-destructive/15'
+        )}
         style={{ background: bgColor }}
       >
         <div className='relative aspect-4/3 w-full overflow-hidden'>
@@ -57,28 +64,30 @@ function SiteCard({ item, index }: SiteCardProps) {
                 />
               ) : (
                 <img
-                    src={displayUrl}
-                    className='h-full w-full object-cover'
-                    alt={item.title + ' image'}
-                    crossOrigin='anonymous'
-                    loading={loadingStrategy}
-                    draggable={false}
-                    onContextMenu={(e) => e.preventDefault()}
-                  />
-                )
+                  src={displayUrl}
+                  className='h-full w-full object-cover'
+                  alt={item.title + ' image'}
+                  crossOrigin='anonymous'
+                  loading={loadingStrategy}
+                  draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
+                />
+              )
             ) : (
-                <div className='flex flex-col items-center justify-center h-full w-full opacity-80 border-border border rounded-lg'>
-                  <p className='text-xl -tracking-two font-medium font-mono '>No image</p>
-                  <BotIcon className='w-8 h-8' />
-                  {/* <Button size='sm' className='mt-2 py-0 min-h-6'>Report</Button> */}
-                </div>
+              <div className='border-border flex h-full w-full flex-col items-center justify-center rounded-lg border opacity-80'>
+                <p className='-tracking-two font-mono text-xl font-medium'>
+                  No image
+                </p>
+                <BotIcon className='h-8 w-8' />
+                {/* <Button size='sm' className='mt-2 py-0 min-h-6'>Report</Button> */}
+              </div>
             )}
           </figure>
 
           {/* Badges */}
         </div>
         {isNew && (
-          <span className='bg-background font-mono text-foreground tracking-one border-border absolute top-3 left-3 rounded-md border px-2 py-2.5 text-[11px] leading-0 font-semibold uppercase'>
+          <span className='bg-background text-foreground tracking-one border-border absolute top-3 left-3 rounded-md border px-2 py-2.5 font-mono text-[11px] leading-0 font-semibold uppercase'>
             New
           </span>
         )}

@@ -1,8 +1,7 @@
-import { CollectionConfig } from 'payload';
-import { admins } from '../../utils/admins';
-import { extractGradientColor } from '../../utils/extractColor';
+import { CollectionConfig } from 'payload'
+import { admins } from '../../utils/admins'
+import { extractGradientColor } from '../../utils/extractColor'
 import { beforeDeleteHook, beforeChangeHook } from './hooks'
-
 
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',

@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from 'react'
 import { toast } from 'sonner'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -11,7 +12,6 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Button } from '@/components/ui/button'
 
 interface SubmitWebsiteDialogProps {
   open: boolean
@@ -48,10 +48,7 @@ export default function SubmitWebsiteDialog({
     }
 
     // Validate email format if provided
-    if (
-      formData.email &&
-      !formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
-    ) {
+    if (formData.email && !formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
       toast.error('Please enter a valid email address')
       return
     }
@@ -70,7 +67,7 @@ export default function SubmitWebsiteDialog({
         throw new Error(error.error || 'Submission failed')
       }
 
-      toast.success('Website submitted successfully! We\'ll review it soon.')
+      toast.success("Website submitted successfully! We'll review it soon.")
       onOpenChange(false)
       setFormData({ name: '', email: '', websiteUrl: '', message: '' })
     } catch (error) {
@@ -89,9 +86,9 @@ export default function SubmitWebsiteDialog({
           </DialogTitle>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className='space-y-4 mt-4'>
+        <form onSubmit={handleSubmit} className='mt-4 space-y-4'>
           <div className='space-y-2'>
-            <label htmlFor='name' className='text-sm font-medium inline-block'>
+            <label htmlFor='name' className='inline-block text-sm font-medium'>
               Name
             </label>
             <Input
@@ -107,7 +104,7 @@ export default function SubmitWebsiteDialog({
           </div>
 
           <div className='space-y-2'>
-            <label htmlFor='email' className='text-sm font-medium inline-block'>
+            <label htmlFor='email' className='inline-block text-sm font-medium'>
               Email
             </label>
             <Input
@@ -123,7 +120,10 @@ export default function SubmitWebsiteDialog({
           </div>
 
           <div className='space-y-2'>
-            <label htmlFor='websiteUrl' className='text-sm font-medium inline-block'>
+            <label
+              htmlFor='websiteUrl'
+              className='inline-block text-sm font-medium'
+            >
               Website URL <span className='text-destructive'>*</span>
             </label>
             <Input
@@ -140,7 +140,10 @@ export default function SubmitWebsiteDialog({
           </div>
 
           <div className='space-y-2'>
-            <label htmlFor='message' className='text-sm font-medium inline-block'>
+            <label
+              htmlFor='message'
+              className='inline-block text-sm font-medium'
+            >
               Message
             </label>
             <Textarea

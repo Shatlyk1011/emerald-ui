@@ -1,21 +1,21 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import { useState, useEffect, useMemo, Suspense } from 'react'
-import { useInView } from 'react-intersection-observer'
+import { debounce } from '@/composables/utils'
 import { Category, WebsiteStyle } from '@/payload-types'
-import { IWebsites } from '@/types/inspiration'
 import { useInfiniteInspirationSites } from '@/services/useGetInspirationSites'
+import { IWebsites } from '@/types/inspiration'
+import dynamic from 'next/dynamic'
 import { Where } from 'payload'
+import { useInView } from 'react-intersection-observer'
+import { Button } from '../ui/button'
 import FilterSection from './FilterSection'
 import SiteCards from './SiteCards'
-import SiteCardsSkeleton from './SiteCards/SiteCardsSkeleton'
-import { debounce } from '@/composables/utils'
 import EmptyResult from './SiteCards/EmptyResult'
-import { Button } from '../ui/button'
+import SiteCardsSkeleton from './SiteCards/SiteCardsSkeleton'
 
 const SubmitWebsiteDialog = dynamic(() => import('./SubmitWebsiteDialog'), {
-  ssr: false
+  ssr: false,
 })
 
 interface Props {
@@ -25,8 +25,15 @@ interface Props {
   styles: WebsiteStyle[]
 }
 
-export default function InspirationContent({ initialData, totalDocs, categories, styles }: Props) {
-  const [filterQuery, setFilterQuery] = useState<Where>({ isVisible: { equals: true } })
+export default function InspirationContent({
+  initialData,
+  totalDocs,
+  categories,
+  styles,
+}: Props) {
+  const [filterQuery, setFilterQuery] = useState<Where>({
+    isVisible: { equals: true },
+  })
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedStyles, setSelectedStyles] = useState<string[]>([])
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -37,17 +44,14 @@ export default function InspirationContent({ initialData, totalDocs, categories,
     rootMargin: '160px',
   })
 
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    isFetching,
-  } = useInfiniteInspirationSites(initialData, filterQuery,)
-
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
+    useInfiniteInspirationSites(initialData, filterQuery)
 
   // Derive loading state from query status
-  const isLoading = useMemo(() => isFetching && !isFetchingNextPage, [isFetching, isFetchingNextPage])
+  const isLoading = useMemo(
+    () => isFetching && !isFetchingNextPage,
+    [isFetching, isFetchingNextPage]
+  )
 
   // Fetch next page when the sentinel element comes into view
   useEffect(() => {
@@ -79,10 +83,10 @@ export default function InspirationContent({ initialData, totalDocs, categories,
         },
         {
           style: {
-            in: selectedStyles.map((item) => item.toLowerCase())
-          }
-        }
-      ]
+            in: selectedStyles.map((item) => item.toLowerCase()),
+          },
+        },
+      ],
     }
     return query
   }, [selectedCategories, selectedStyles])
@@ -108,19 +112,27 @@ export default function InspirationContent({ initialData, totalDocs, categories,
 
   return (
     <>
-      <section className='flex justify-between gap-10 items-center mb-10 py-20'>
-        <div className='flex flex-col items-start '>
-          <h1 className='-tracking-two text-4xl font-semibold mb-2'>
+      <section className='mb-10 flex items-center justify-between gap-10 py-20'>
+        <div className='flex flex-col items-start'>
+          <h1 className='-tracking-two mb-2 text-4xl font-semibold'>
             Node Inspiration Websites ({totalDocs})
           </h1>
           <div className='text-muted-foreground text-base'>
-            <p className='mb-2'>Explore selected websites for your  next design inspiration</p>
-            <p><Button className='p-0' variant={'link'} onClick={() => setIsDialogOpen(true)}>Submit yours</Button></p>
+            <p className='mb-2'>
+              Explore selected websites for your next design inspiration
+            </p>
+            <p>
+              <Button
+                className='p-0'
+                variant={'link'}
+                onClick={() => setIsDialogOpen(true)}
+              >
+                Submit yours
+              </Button>
+            </p>
           </div>
         </div>
-        <div>
-          3d marque component area
-        </div>
+        <div>3d marque component area</div>
       </section>
 
       <FilterSection
@@ -131,29 +143,32 @@ export default function InspirationContent({ initialData, totalDocs, categories,
         selectedStyles={selectedStyles}
         setSelectedStyles={setSelectedStyles}
       />
-      
-
 
       {isLoading ? (
         <SiteCardsSkeleton />
       ) : allWebsites.length === 0 ? (
-          <EmptyResult handleResetFilters={handleResetFilters} />
+        <EmptyResult handleResetFilters={handleResetFilters} />
       ) : (
-            <SiteCards websites={allWebsites} />
+        <SiteCards websites={allWebsites} />
       )}
 
       {/* Sentinel element for infinite scroll */}
       {!isLoading && allWebsites.length > 0 && (
-        <div ref={ref} className='flex flex-col items-center justify-center py-16'>
+        <div
+          ref={ref}
+          className='flex flex-col items-center justify-center py-16'
+        >
           {isFetchingNextPage ? (
-            <div className='flex items-center gap-3 text-muted-foreground'>
-              <div className='h-5 w-5 animate-spin rounded-full border-2 border-primary border-t-transparent' />
-              <span className='text-sm font-medium'>Loading more websites...</span>
+            <div className='text-muted-foreground flex items-center gap-3'>
+              <div className='border-primary h-5 w-5 animate-spin rounded-full border-2 border-t-transparent' />
+              <span className='text-sm font-medium'>
+                Loading more websites...
+              </span>
             </div>
           ) : !hasNextPage ? (
             <div className='flex flex-col items-center gap-4'>
-              <div className='h-0.5 w-24 bg-border' />
-              <p className='text-sm font-medium text-muted-foreground'>
+              <div className='bg-border h-0.5 w-24' />
+              <p className='text-muted-foreground text-sm font-medium'>
                 You&apos;ve reached the end of the collection
               </p>
             </div>
@@ -162,7 +177,10 @@ export default function InspirationContent({ initialData, totalDocs, categories,
       )}
       <Suspense fallback={null}>
         {isDialogOpen && (
-          <SubmitWebsiteDialog open={isDialogOpen} onOpenChange={setIsDialogOpen} />
+          <SubmitWebsiteDialog
+            open={isDialogOpen}
+            onOpenChange={setIsDialogOpen}
+          />
         )}
       </Suspense>
     </>

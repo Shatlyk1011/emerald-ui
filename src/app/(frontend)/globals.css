@@ -124,8 +124,6 @@
   --tracking-four: 0.04em;
 }
 
-
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -134,7 +132,6 @@
     @apply bg-background text-foreground overflow-x-hidden font-sans;
   }
 }
-
 
 @layer utilities {
   .scrollbar-thin {

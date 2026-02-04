@@ -25,12 +25,12 @@ Use this skill when the user asks to create a new UI component. This skill ensur
  * @website: https://nodeui.com
  */
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
-import { cn } from '@/lib/utils'
 import {
   // Import icons from lucide-react as needed
   Star,
 } from 'lucide-react'
+import { motion, AnimatePresence } from 'motion/react'
+import { cn } from '@/lib/utils'
 
 // Define interfaces
 interface MyComponentProps {
@@ -40,15 +40,12 @@ interface MyComponentProps {
 export default function MyComponent({ ...props }: MyComponentProps) {
   // implementation...
 
-  return (
-    <div className='...'>
-      {/* Component JSX */}
-    </div>
-  )
+  return <div className='...'>{/* Component JSX */}</div>
 }
 ```
 
 **Key Guidelines:**
+
 - Always use `'use client'` at the top.
 - Include the standard file header.
 - Use `motion/react` for animations.
@@ -74,10 +71,10 @@ import [ComponentName] from '@/components/node-ui-components/[kebab-case-name]'
 <Preview link='[kebab-case-name]' comment={['[additional packages if there is any]']}>
   <[ComponentName] />
 </Preview>
-
 ```
 
 **Key Guidelines:**
+
 - Frontmatter must include `title`, `description`, `icon`, and `full`.
 - Import the component from `@/components/node-ui-components/...`.
 - Wrap the component in `<Preview>`.

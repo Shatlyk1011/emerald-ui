@@ -1,10 +1,10 @@
 import { RootProvider } from 'fumadocs-ui/provider/next'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { Toaster } from 'sonner'
 import { siteConfig } from '@/lib/site-config'
 import TanstackQueryProvider from '@/components/_providers/tanstack-query'
 import ThemeProvider from '@/components/_providers/theme-provider'
-import { Toaster } from 'sonner'
 import './globals.css'
 
 const geistSans = Geist({
@@ -56,9 +56,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <TanstackQueryProvider>
-              {children}
-            </TanstackQueryProvider>
+            <TanstackQueryProvider>{children}</TanstackQueryProvider>
           </ThemeProvider>
         </RootProvider>
         <Toaster position='bottom-right' />

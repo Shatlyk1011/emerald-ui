@@ -1,12 +1,10 @@
-
-
+import { formatDate } from '@/composables/utils'
+import { CreditHistoryResponse } from '@/types/auth'
+import { CreditCard, Crown, Calendar } from 'lucide-react'
+import { headers } from 'next/headers'
+import Link from 'next/link'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { CreditCard, Crown, Calendar } from 'lucide-react'
-import Link from 'next/link'
-import { CreditHistoryResponse } from '@/types/auth'
-import { formatDate } from '@/composables/utils'
-import { headers } from 'next/headers'
 
 export const dynamic = 'force-dynamic'
 
@@ -23,9 +21,27 @@ const mockUser = {
 
 // Mock invoice history (keeping this as it's not part of credit history)
 const mockInvoices = [
-  { id: 1, date: '2026-01-15', amount: 0, status: 'Paid', description: 'Free Plan - January 2026' },
-  { id: 2, date: '2025-12-15', amount: 0, status: 'Paid', description: 'Free Plan - December 2025' },
-  { id: 3, date: '2025-11-15', amount: 0, status: 'Paid', description: 'Free Plan - November 2025' },
+  {
+    id: 1,
+    date: '2026-01-15',
+    amount: 0,
+    status: 'Paid',
+    description: 'Free Plan - January 2026',
+  },
+  {
+    id: 2,
+    date: '2025-12-15',
+    amount: 0,
+    status: 'Paid',
+    description: 'Free Plan - December 2025',
+  },
+  {
+    id: 3,
+    date: '2025-11-15',
+    amount: 0,
+    status: 'Paid',
+    description: 'Free Plan - November 2025',
+  },
 ]
 
 export default async function ProfilePage() {
@@ -40,7 +56,7 @@ export default async function ProfilePage() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Cookie': cookie,
+        Cookie: cookie,
       },
       cache: 'no-store',
     })
@@ -48,7 +64,11 @@ export default async function ProfilePage() {
     if (response.ok) {
       userData = await response.json()
     } else {
-      console.error('Failed to fetch credit history:', response.status, response.statusText)
+      console.error(
+        'Failed to fetch credit history:',
+        response.status,
+        response.statusText
+      )
     }
   } catch (err) {
     console.error('Failed to fetch credit history:', err)
@@ -84,57 +104,64 @@ export default async function ProfilePage() {
       <div className='mb-8'>
         <h1 className='mb-2 text-4xl font-bold'>Profile</h1>
         <p className='text-muted-foreground'>
-          Manage your profile, preferences, view credit history, download invoices, and manage API keys.
+          Manage your profile, preferences, view credit history, download
+          invoices, and manage API keys.
         </p>
       </div>
 
       {/* Profile Settings Card */}
-      <div className='mb-6 rounded-xl border bg-card/20 p-8'>
+      <div className='bg-card/20 mb-6 rounded-xl border p-8'>
         <div className='mb-6 flex items-center gap-4'>
           <Avatar className='size-16'>
             <AvatarImage src={''} alt={getDisplayName()} />
-            <AvatarFallback className='text-xl'>{getUserInitials()}</AvatarFallback>
+            <AvatarFallback className='text-xl'>
+              {getUserInitials()}
+            </AvatarFallback>
           </Avatar>
           <h2 className='text-2xl font-semibold'>Profile Settings</h2>
         </div>
 
-        <div className='flex gap-4 text-sm font-medium mb-10'>
+        <div className='mb-10 flex gap-4 text-sm font-medium'>
           <div className='flex-1'>
             <label className='mb-2 block'>Name</label>
-            <div className='rounded-md border bg-muted/50 px-3 py-2 text-foreground'>
+            <div className='bg-muted/50 text-foreground rounded-md border px-3 py-2'>
               {getDisplayName()}
             </div>
           </div>
 
           <div className='flex-1'>
             <label className='mb-2 block'>Email</label>
-            <div className='rounded-md border bg-muted/50 px-3 py-2 text-foreground'>
+            <div className='bg-muted/50 text-foreground rounded-md border px-3 py-2'>
               {'test@mail.ru'}
             </div>
           </div>
         </div>
 
-        <div className='mb-3 flex items-center gap-4 justify-between'>
+        <div className='mb-3 flex items-center justify-between gap-4'>
           <h2 className='text-xl font-medium'>
-            <span className='opacity-80'>Your Current Plan:</span> <span className='font-bold'>Free(mock)</span>
+            <span className='opacity-80'>Your Current Plan:</span>{' '}
+            <span className='font-bold'>Free(mock)</span>
           </h2>
-          <Button className='bg-blue-600 hover:bg-blue-700 text-foreground' asChild>
-            <Link href="/pricing">
+          <Button
+            className='text-foreground bg-blue-600 hover:bg-blue-700'
+            asChild
+          >
+            <Link href='/pricing'>
               <Crown className='size-4' />
               Upgrade
             </Link>
           </Button>
         </div>
 
-        <div className='rounded-lg bg-muted/30 p-6'>
+        <div className='bg-muted/30 rounded-lg p-6'>
           <div className='mb-2 flex items-center justify-between'>
             {/* add user's current plan */}
             <h3 className='text-lg font-semibold'>Free Plan</h3>
-            <span className='text-sm text-muted-foreground'>
+            <span className='text-muted-foreground text-sm'>
               `${mockUser?.creditsRemaining || 0} credits remaining`
             </span>
           </div>
-          <p className='text-sm text-muted-foreground'>
+          <p className='text-muted-foreground text-sm'>
             For exploring and trialing our platform.
           </p>
 
@@ -144,10 +171,11 @@ export default async function ProfilePage() {
               <span className='font-medium'>Credits Used</span>
               <span className='text-muted-foreground'>
                 {/* ??? */}
-                `${mockUser?.creditsRemaining || 0} / ${mockUser?.totalCredits || 0}`
+                `${mockUser?.creditsRemaining || 0} / $
+                {mockUser?.totalCredits || 0}`
               </span>
             </div>
-            <div className='h-2 w-full overflow-hidden rounded-full bg-muted'>
+            <div className='bg-muted h-2 w-full overflow-hidden rounded-full'>
               <div
                 className='h-full bg-blue-600 transition-all'
                 style={{
@@ -161,29 +189,40 @@ export default async function ProfilePage() {
         </div>
       </div>
 
-      <div className='mb-6 rounded-xl border  bg-card/20 p-8 shadow-sm'>
+      <div className='bg-card/20 mb-6 rounded-xl border p-8 shadow-sm'>
         <h2 className='mb-6 text-xl font-semibold'>Credit History</h2>
 
         <div className='overflow-hidden rounded-lg border'>
           <table className='w-full text-nowrap'>
             <thead className='bg-muted/50'>
               <tr>
-                <th className='px-6 py-3 text-left text-sm font-medium'>Type</th>
-                <th className='px-6 py-3 text-left text-sm font-medium'>Date</th>
-                <th className='px-6 py-3 text-left text-sm font-medium'>Granted on</th>
-                <th className='px-6 py-3 text-right text-sm font-medium'>Credits</th>
+                <th className='px-6 py-3 text-left text-sm font-medium'>
+                  Type
+                </th>
+                <th className='px-6 py-3 text-left text-sm font-medium'>
+                  Date
+                </th>
+                <th className='px-6 py-3 text-left text-sm font-medium'>
+                  Granted on
+                </th>
+                <th className='px-6 py-3 text-right text-sm font-medium'>
+                  Credits
+                </th>
               </tr>
             </thead>
             <tbody className='divide-y'>
               {userData?.history && userData.history.length > 0 ? (
                 userData.history.map((credit) => (
-                  <tr key={credit.id} className='transition-colors hover:bg-muted/30'>
+                  <tr
+                    key={credit.id}
+                    className='hover:bg-muted/30 transition-colors'
+                  >
                     <td className='px-6 py-4 text-sm font-medium'>
                       {getCreditTypeLabel(credit.type)}
                     </td>
                     <td className='px-6 py-4 text-sm'>
                       <div className='flex items-center gap-2'>
-                        <Calendar className='size-4 text-muted-foreground' />
+                        <Calendar className='text-muted-foreground size-4' />
                         {formatDate(credit.createdDate)}
                       </div>
                     </td>
@@ -194,7 +233,10 @@ export default async function ProfilePage() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={4} className='px-6 py-8 text-center text-muted-foreground'>
+                  <td
+                    colSpan={4}
+                    className='text-muted-foreground px-6 py-8 text-center'
+                  >
                     No credit history available
                   </td>
                 </tr>
@@ -205,26 +247,39 @@ export default async function ProfilePage() {
       </div>
 
       {/* Invoice History */}
-      <div className='mb-6 rounded-xl border  bg-card/20 p-8 shadow-sm'>
+      <div className='bg-card/20 mb-6 rounded-xl border p-8 shadow-sm'>
         <h2 className='mb-6 text-xl font-semibold'>Invoice History</h2>
 
         <div className='overflow-hidden rounded-lg border'>
           <table className='w-full'>
             <thead className='bg-muted/50'>
               <tr>
-                <th className='px-6 py-3 text-left text-sm font-medium'>Date</th>
-                <th className='px-6 py-3 text-left text-sm font-medium'>Description</th>
-                <th className='px-6 py-3 text-left text-sm font-medium'>Status</th>
-                <th className='px-6 py-3 text-right text-sm font-medium'>Amount</th>
-                <th className='px-6 py-3 text-right text-sm font-medium'>Action</th>
+                <th className='px-6 py-3 text-left text-sm font-medium'>
+                  Date
+                </th>
+                <th className='px-6 py-3 text-left text-sm font-medium'>
+                  Description
+                </th>
+                <th className='px-6 py-3 text-left text-sm font-medium'>
+                  Status
+                </th>
+                <th className='px-6 py-3 text-right text-sm font-medium'>
+                  Amount
+                </th>
+                <th className='px-6 py-3 text-right text-sm font-medium'>
+                  Action
+                </th>
               </tr>
             </thead>
             <tbody className='divide-y'>
               {mockInvoices?.map((invoice) => (
-                <tr key={invoice.id} className='transition-colors hover:bg-muted/30'>
+                <tr
+                  key={invoice.id}
+                  className='hover:bg-muted/30 transition-colors'
+                >
                   <td className='px-6 py-4 text-sm'>
                     <div className='flex items-center gap-2'>
-                      <Calendar className='size-4 text-muted-foreground' />
+                      <Calendar className='text-muted-foreground size-4' />
                       {formatDate(invoice.date)}
                     </div>
                   </td>
@@ -238,7 +293,11 @@ export default async function ProfilePage() {
                     ${invoice.amount.toFixed(2)}
                   </td>
                   <td className='px-6 py-4 text-right'>
-                    <Button variant='ghost' size='sm' className='text-blue-600 hover:text-blue-700'>
+                    <Button
+                      variant='ghost'
+                      size='sm'
+                      className='text-blue-600 hover:text-blue-700'
+                    >
                       <CreditCard className='mr-2 size-4' />
                       Download
                     </Button>
@@ -247,13 +306,20 @@ export default async function ProfilePage() {
               ))}
             </tbody>
           </table>
-            {!mockInvoices.length && (
+          {!mockInvoices.length && (
             <div className='py-2 text-center'>
-                  <Button variant='link' size="sm" asChild className='text-blue-500 hover:text-blue-600'>
-                    <Link href="/pricing">Upgrade your plan to receive invoices.</Link>
-                  </Button>
-                </div>
-              )}
+              <Button
+                variant='link'
+                size='sm'
+                asChild
+                className='text-blue-500 hover:text-blue-600'
+              >
+                <Link href='/pricing'>
+                  Upgrade your plan to receive invoices.
+                </Link>
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </main>
@@ -282,7 +348,6 @@ export default async function ProfilePage() {
 //   creditsRemaining: 3,
 //   totalCredits: 5,
 // }
-
 
 // // Mock invoice history (keeping this as it's not part of credit history)
 // const mockInvoices = [

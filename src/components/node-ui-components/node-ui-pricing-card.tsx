@@ -2,8 +2,8 @@
 import { useState } from 'react'
 import { CheckCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { Switch } from '@/components/ui/switch'
 import { Button } from '@/components/ui/button'
+import { Switch } from '@/components/ui/switch'
 
 export interface PricingTier {
   name: string
@@ -118,8 +118,7 @@ function PricingCard({ item }: PricingCardProps) {
   )
 }
 
-
-export default function PricingSection () {
+export default function PricingSection() {
   const [isAnnual, setAnnual] = useState(false)
 
   return (

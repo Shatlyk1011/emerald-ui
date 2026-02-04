@@ -2,7 +2,6 @@
 
 import { useAppStore } from '@/store/useAppStore'
 import { ExternalLink, Sparkles } from 'lucide-react'
-
 import {
   Dialog,
   DialogContent,
@@ -11,15 +10,23 @@ import {
 } from '@/components/ui/dialog'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Button } from '../ui/button'
-import { Switch } from '../ui/switch'
 import Lens from '../ui/lens'
+import { Switch } from '../ui/switch'
 
 interface SitePreviewDialogProps {
   onCategoryClick: (category: string) => void
 }
 
-export default function SitePreviewDialog({ onCategoryClick }: SitePreviewDialogProps) {
-  const { selectedSite, isDialogOpen, closeSiteDialog, isZoomEnabled, toggleZoom } = useAppStore()
+export default function SitePreviewDialog({
+  onCategoryClick,
+}: SitePreviewDialogProps) {
+  const {
+    selectedSite,
+    isDialogOpen,
+    closeSiteDialog,
+    isZoomEnabled,
+    toggleZoom,
+  } = useAppStore()
 
   if (!selectedSite) return null
 
@@ -39,17 +46,23 @@ export default function SitePreviewDialog({ onCategoryClick }: SitePreviewDialog
           closeSiteDialog()
         }
       }}
-
     >
-      <DialogContent className='scrollbar-thin max-h-[90vh]  overflow-hidden p-0 max-lg:overflow-auto '>
+      <DialogContent className='scrollbar-thin max-h-[90vh] overflow-hidden p-0 max-lg:overflow-auto'>
         {/* Two-column layout */}
-        <div className='grid h-full max-lg:grid-cols-1 grid-cols-[1fr_320px] '>
+        <div className='grid h-full grid-cols-[1fr_320px] max-lg:grid-cols-1'>
           {/* Left: Image Preview Area */}
-          <div className='flex flex-col overflow-y-auto px-4 py-4 max-lg:py-6 ' style={{ background: selectedSite.gradientColor! }}>
+          <div
+            className='flex flex-col overflow-y-auto px-4 py-4 max-lg:py-6'
+            style={{ background: selectedSite.gradientColor! }}
+          >
             {/* Media Gallery with Tabs */}
             <div className='flex-1'>
               {showTabs ? (
-                <Tabs defaultValue='screenshot' className='h-full w-full' autoFocus={false}>
+                <Tabs
+                  defaultValue='screenshot'
+                  className='h-full w-full'
+                  autoFocus={false}
+                >
                   <TabsList className='mb-4 w-full justify-start bg-transparent'>
                     <TabsTrigger
                       className='data-[state=active]:bg-background rounded-md px-4 py-2 transition-all'
@@ -64,71 +77,93 @@ export default function SitePreviewDialog({ onCategoryClick }: SitePreviewDialog
                       Media
                     </TabsTrigger>
                   </TabsList>
-                  <TabsContent value='screenshot' className='mt-0 h-[calc(100%-3rem)]'>
-                    <div className='bg-background relative h-full w-full overflow-hidden rounded-md border shadow-lg flex items-center'>
-                      <Lens disableZoom={!isZoomEnabled} background={selectedSite.gradientColor!}>
+                  <TabsContent
+                    value='screenshot'
+                    className='mt-0 h-[calc(100%-3rem)]'
+                  >
+                    <div className='bg-background relative flex h-full w-full items-center overflow-hidden rounded-md border shadow-lg'>
+                      <Lens
+                        disableZoom={!isZoomEnabled}
+                        background={selectedSite.gradientColor!}
+                      >
                         <img
                           src={selectedSite.imgUrl!}
                           alt={`${selectedSite.title} screenshot`}
-                          className='h-full w-full object-contain aspect-4/3'
+                          className='aspect-4/3 h-full w-full object-contain'
                         />
                       </Lens>
                     </div>
                   </TabsContent>
-                  <TabsContent value='media' className='mt-0 h-[calc(100%-3rem)]'>
-                    {hasAdditionalMedia && typeof selectedSite.additionalMedia === 'object' && (
-                      <div className='bg-background relative h-full w-full overflow-hidden rounded-xm border shadow-lg'>
-                        {selectedSite.additionalMedia?.type === 'video' ? (
-                          <video
-                            src={selectedSite.additionalMedia.mediaUrl!}
-                            className='h-full w-full object-contain aspect-4/3'
-                            autoPlay
-                            muted
-                            playsInline
-                            loop
-                            aria-label={selectedSite.additionalMedia.altText || `${selectedSite.title} video`}
-                          />
-                        ) : (
-                            <Lens disableZoom={!isZoomEnabled} background={selectedSite.gradientColor!}>
+                  <TabsContent
+                    value='media'
+                    className='mt-0 h-[calc(100%-3rem)]'
+                  >
+                    {hasAdditionalMedia &&
+                      typeof selectedSite.additionalMedia === 'object' && (
+                        <div className='bg-background rounded-xm relative h-full w-full overflow-hidden border shadow-lg'>
+                          {selectedSite.additionalMedia?.type === 'video' ? (
+                            <video
+                              src={selectedSite.additionalMedia.mediaUrl!}
+                              className='aspect-4/3 h-full w-full object-contain'
+                              autoPlay
+                              muted
+                              playsInline
+                              loop
+                              aria-label={
+                                selectedSite.additionalMedia.altText ||
+                                `${selectedSite.title} video`
+                              }
+                            />
+                          ) : (
+                            <Lens
+                              disableZoom={!isZoomEnabled}
+                              background={selectedSite.gradientColor!}
+                            >
                               <img
                                 src={selectedSite.additionalMedia!.mediaUrl!}
-                                alt={selectedSite.additionalMedia!.altText || `${selectedSite.title} additional media`}
-                                className='h-full w-full object-contain aspect-4/3'
+                                alt={
+                                  selectedSite.additionalMedia!.altText ||
+                                  `${selectedSite.title} additional media`
+                                }
+                                className='aspect-4/3 h-full w-full object-contain'
                               />
                             </Lens>
-                        )}
-                      </div>
-                    )}
+                          )}
+                        </div>
+                      )}
                   </TabsContent>
                 </Tabs>
               ) : (
                 // Single media view (no tabs)
-                  <div className='h-full'>
-                    <div className='bg-background relative h-full overflow-hidden rounded-md border shadow-lg'>
-                      <Lens disableZoom={!isZoomEnabled} background={selectedSite.gradientColor!}>
-                        <img
-                          src={selectedSite.imgUrl!}
-                          alt={`${selectedSite.title} screenshot`}
-                          className='h-full w-full object-contain'
-                        />
-                      </Lens>
-                    </div>
+                <div className='h-full'>
+                  <div className='bg-background relative h-full overflow-hidden rounded-md border shadow-lg'>
+                    <Lens
+                      disableZoom={!isZoomEnabled}
+                      background={selectedSite.gradientColor!}
+                    >
+                      <img
+                        src={selectedSite.imgUrl!}
+                        alt={`${selectedSite.title} screenshot`}
+                        className='h-full w-full object-contain'
+                      />
+                    </Lens>
+                  </div>
                 </div>
               )}
             </div>
           </div>
 
           {/* Right: Sidebar with Details */}
-          <div className='border-l  bg-background flex flex-col overflow-y-auto'>
+          <div className='bg-background flex flex-col overflow-y-auto border-l'>
             {/* Content Section */}
-            <div className='flex-1 flex flex-col gap-6 p-6 pt-8 pb-4 min-h-100 max-lg:min-h-auto'>
-              <DialogHeader >
-                <DialogTitle className='text-3xl text-start font-bold tracking-tight'>
+            <div className='flex min-h-100 flex-1 flex-col gap-6 p-6 pt-8 pb-4 max-lg:min-h-auto'>
+              <DialogHeader>
+                <DialogTitle className='text-start text-3xl font-bold tracking-tight'>
                   {selectedSite.title}
                 </DialogTitle>
               </DialogHeader>
               <div>
-                <h3 className='text-muted-foreground font-mono mb-1 text-xs font-semibold uppercase tracking-one'>
+                <h3 className='text-muted-foreground tracking-one mb-1 font-mono text-xs font-semibold uppercase'>
                   Description
                 </h3>
                 <p className='text-foreground/90 leading-[1.4]'>
@@ -139,32 +174,33 @@ export default function SitePreviewDialog({ onCategoryClick }: SitePreviewDialog
               <div className='space-y-4'>
                 {selectedSite.category && (
                   <div>
-                    <h3 className='text-muted-foreground mb-1 font-mono text-xs font-semibold uppercase tracking-one'>
+                    <h3 className='text-muted-foreground tracking-one mb-1 font-mono text-xs font-semibold uppercase'>
                       Category
                     </h3>
                     <button
                       // @ts-expect-error this is string
                       onClick={() => onCategoryClick(selectedSite.category)}
-                      className='text-foreground hover:text-primary font-medium capitalize transition-colors underline-offset-2 hover:underline'
+                      className='text-foreground hover:text-primary font-medium capitalize underline-offset-2 transition-colors hover:underline'
                     >
-                      {Array.isArray(selectedSite.category) ? selectedSite.category[0] : selectedSite.category}
+                      {Array.isArray(selectedSite.category)
+                        ? selectedSite.category[0]
+                        : selectedSite.category}
                     </button>
                   </div>
                 )}
-
               </div>
 
               {/* Styles */}
               {selectedSite.style && selectedSite.style.length > 0 && (
                 <div>
-                  <h3 className='text-muted-foreground mb-1 text-xs font-mono font-semibold uppercase tracking-one'>
+                  <h3 className='text-muted-foreground tracking-one mb-1 font-mono text-xs font-semibold uppercase'>
                     Styles
                   </h3>
                   <div className='flex flex-wrap gap-2'>
                     {selectedSite.style.map((style) => (
                       <span
                         key={style}
-                        className='bg-secondary hover:bg-secondary/80 leading-[0.9] text-secondary-foreground rounded-lg px-2.25 py-1.75 capitalize text-xs font-medium transition-colors'
+                        className='bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-lg px-2.25 py-1.75 text-xs leading-[0.9] font-medium capitalize transition-colors'
                       >
                         {style}
                       </span>
@@ -174,10 +210,10 @@ export default function SitePreviewDialog({ onCategoryClick }: SitePreviewDialog
               )}
 
               {/* Image Zoom Toggle */}
-              <div className='flex mt-auto items-center gap-2.5'>
+              <div className='mt-auto flex items-center gap-2.5'>
                 <label
                   htmlFor='zoom-toggle'
-                  className='text-sm font-medium text-muted-foreground cursor-pointer select-none'
+                  className='text-muted-foreground cursor-pointer text-sm font-medium select-none'
                 >
                   Zoom on images
                 </label>
@@ -190,7 +226,7 @@ export default function SitePreviewDialog({ onCategoryClick }: SitePreviewDialog
             </div>
 
             {/* Action Buttons - Fixed at bottom */}
-            <div className='border-t  bg-muted/20 space-y-3 p-6'>
+            <div className='bg-muted/20 space-y-3 border-t p-6'>
               {/* Regenerate Website Button */}
               <Button
                 className='w-full'

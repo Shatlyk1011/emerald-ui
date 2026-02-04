@@ -1,17 +1,17 @@
-import path from 'path';
-import { mongooseAdapter } from '@payloadcms/db-mongodb';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
-import { fileURLToPath } from 'node:url';
-import { buildConfig } from 'payload';
-import sharp from 'sharp';
-import AdminUsers from './app/(payload)/collections/AdminUsers';
+import path from 'path'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { fileURLToPath } from 'node:url'
+import { buildConfig } from 'payload'
+import sharp from 'sharp'
+import AdminUsers from './app/(payload)/collections/AdminUsers'
 // collections
-import Categories from './app/(payload)/collections/Categories';
-import Clients from './app/(payload)/collections/Clients';
-import CreditHistory from './app/(payload)/collections/CreditHistory';
-import InspirationWebsites from './app/(payload)/collections/InspirationWebsites';
-import Media from './app/(payload)/collections/Media';
-import WebsiteStyle from './app/(payload)/collections/WebsiteStyle';
+import Categories from './app/(payload)/collections/Categories'
+import Clients from './app/(payload)/collections/Clients'
+import CreditHistory from './app/(payload)/collections/CreditHistory'
+import InspirationWebsites from './app/(payload)/collections/InspirationWebsites'
+import Media from './app/(payload)/collections/Media'
+import WebsiteStyle from './app/(payload)/collections/WebsiteStyle'
 import WebsiteSubmissions from './app/(payload)/collections/WebsiteSubmissions'
 
 const filename = fileURLToPath(import.meta.url)

@@ -1,7 +1,4 @@
-import { getAverageColor } from 'fast-average-color-node';
-
-
-
+import { getAverageColor } from 'fast-average-color-node'
 
 /**
  * Extracts the dominant color from an image buffer and returns a gradient string

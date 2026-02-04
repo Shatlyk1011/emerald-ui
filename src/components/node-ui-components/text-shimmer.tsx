@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils'
 
 export type TextShimmerProps = {
   as?: string
@@ -10,7 +10,7 @@ export type TextShimmerProps = {
 } & React.HTMLAttributes<HTMLElement>
 
 export default function TextShimmer({
-  as = "span",
+  as = 'span',
   className,
   duration = 4,
   spread = 20,
@@ -23,8 +23,8 @@ export default function TextShimmer({
   return (
     <Component
       className={cn(
-        "bg-size-[200%_auto] bg-clip-text font-medium text-transparent",
-        "animate-[shimmer_4s_infinite_linear]",
+        'bg-size-[200%_auto] bg-clip-text font-medium text-transparent',
+        'animate-[shimmer_4s_infinite_linear]',
         className
       )}
       style={{
@@ -37,7 +37,6 @@ export default function TextShimmer({
     </Component>
   )
 }
-
 
 // add this animation to your tailwind.css file
 // @theme {

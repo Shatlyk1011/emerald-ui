@@ -1,4 +1,4 @@
-import { CreditHistory } from "@/payload-types"
+import { CreditHistory } from '@/payload-types'
 
 export interface CreditHistoryResponse {
   client: {
@@ -11,4 +11,3 @@ export interface CreditHistoryResponse {
   }
   history: CreditHistory[]
 }
-

@@ -1,13 +1,5 @@
-import config from '@payload-config';
-import { getPayload } from 'payload';
-
-
-
-
-
-
-
-
+import config from '@payload-config'
+import { getPayload } from 'payload'
 
 /**
  * Create a new client record (called when user signs up via Supabase)
@@ -15,7 +7,7 @@ import { getPayload } from 'payload';
 export async function createClientRecord(
   userId: string,
   email?: string,
-  provider?: "email" | "google" | "github" | null | undefined,
+  provider?: 'email' | 'google' | 'github' | null | undefined,
   isVerified?: boolean
 ): Promise<void> {
   const payload = await getPayload({ config })

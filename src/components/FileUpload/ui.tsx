@@ -206,7 +206,7 @@ type PromptInputContextType = {
 const PromptInputContext = createContext<PromptInputContextType>({
   isLoading: false,
   value: '',
-  setValue: () => { },
+  setValue: () => {},
   onSubmit: undefined,
   disabled: false,
   textareaRef: createRef<HTMLTextAreaElement>(),
@@ -265,7 +265,7 @@ function PromptInput({
         <div
           onClick={handleClick}
           className={cn(
-            'border-input bg-background cursor-text rounded-3xl flex flex-col border p-2.5 shadow-xs h-full',
+            'border-input bg-background flex h-full cursor-text flex-col rounded-3xl border p-2.5 shadow-xs',
             disabled && 'cursor-not-allowed opacity-60',
             className
           )}
@@ -278,17 +278,16 @@ function PromptInput({
   )
 }
 
-export type PromptInputTextareaProps = {
-} & React.ComponentProps<typeof Textarea>
+export type PromptInputTextareaProps = {} & React.ComponentProps<
+  typeof Textarea
+>
 
 function PromptInputTextarea({
   className,
   onKeyDown,
   ...props
 }: PromptInputTextareaProps) {
-  const { value, setValue, disabled } =
-    usePromptInput()
-
+  const { value, setValue, disabled } = usePromptInput()
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value)
