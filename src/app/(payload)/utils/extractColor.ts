@@ -17,7 +17,7 @@ export async function extractGradientColor(imgUrl: string): Promise<string> {
     })
 
     // Return the same gradient format used in SiteCard component
-    const gradient = `linear-gradient(to right, ${rgb.replace(')', ', 0.18)')}, ${rgb.replace(')', ', 0.10)')})`
+    const gradient = `linear-gradient(to right, ${rgb.replace(')', ', 0.12)')}, ${rgb.replace(')', ', 0.10)')})`
 
     return gradient
   } catch (error) {
