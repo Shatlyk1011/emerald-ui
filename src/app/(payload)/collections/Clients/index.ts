@@ -1,10 +1,6 @@
 import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins';
 
-
-
-
-
 const Clients: CollectionConfig = {
   slug: 'clients',
   access: {
@@ -43,6 +39,7 @@ const Clients: CollectionConfig = {
       unique: true,
       index: true,
       admin: {
+        readOnly: true,
         description: 'Supabase user ID (unique identifier)',
       },
     },
@@ -52,6 +49,7 @@ const Clients: CollectionConfig = {
       type: 'email',
       required: false,
       admin: {
+        readOnly: true,
         description: 'User email address (optional, can be provided by user)',
       },
     },
