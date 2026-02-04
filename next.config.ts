@@ -38,7 +38,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/components',
-        destination: '/docs/components/test',
+        destination: '/docs',
         permanent: true,
       },
       {
@@ -49,6 +49,17 @@ const nextConfig: NextConfig = {
       {
         source: '/components/:path*',
         destination: '/docs/components/:path*',
+        permanent: true,
+      },
+
+      {
+        source: '/gsap',
+        destination: '/docs/gsap',
+        permanent: true,
+      },
+      {
+        source: '/docs/gsap/components',
+        destination: '/docs/gsap',
         permanent: true,
       },
       {
