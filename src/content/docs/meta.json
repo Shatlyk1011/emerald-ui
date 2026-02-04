@@ -1,6 +1,6 @@
 {
-  "title": "Components",
-  "description": "The headless library",
+  "title": "Plain Components",
+  "description": "Framer Motion & CSS animations",
   "root": true,
   "pages": [
     "---Get Started---",
@@ -22,6 +22,7 @@
     "---Text---",
     "components/text-shimmer",
     "---Demo---",
-    "components/demo"
+    "components/demo",
+    "components/sidebar-tabs-demo"
   ]
 }

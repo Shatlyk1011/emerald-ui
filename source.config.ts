@@ -5,6 +5,10 @@ import { defineConfig, defineDocs, frontmatterSchema } from 'fumadocs-mdx/config
 
 
 
+
+
+
+
 const extendedSchema = frontmatterSchema.extend({
   docsBodyClasses: z.string().optional(),
 })
@@ -19,7 +23,7 @@ export const plainDocs = defineDocs({
 
 // GSAP components
 export const gsapDocs = defineDocs({
-  dir: './src/content/docs/gsap-components',
+  dir: './src/content/docs/gsap',
   docs: {
     schema: extendedSchema,
   },

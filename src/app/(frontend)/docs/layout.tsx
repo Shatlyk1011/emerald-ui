@@ -27,7 +27,7 @@ export default function Layout({ children }: LayoutProps<'/docs'>) {
           {
             title: 'GSAP Components',
             description: 'GSAP, JSX, Tailwind',
-            url: '/docs/gsap-components',
+            url: '/docs/gsap',
             root: gsapSource.pageTree,
           },
           // eslint-disable-next-line @typescript-eslint/no-explicit-any

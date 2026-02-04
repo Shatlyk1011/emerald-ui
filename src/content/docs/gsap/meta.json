@@ -1,0 +1,11 @@
+{
+  "title": "GSAP Components",
+  "description": "GSAP-powered animations",
+  "root": true,
+  "pages": [
+    "---Get Started---",
+    "index",
+    "---GSAP Components---",
+    "components/gsap-animated-card"
+  ]
+}
