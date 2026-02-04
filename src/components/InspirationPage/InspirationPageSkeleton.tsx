@@ -9,12 +9,6 @@ export default function InspirationPageSkeleton() {
       {/* Filter Section Skeleton */}
       <div className='mb-12'>
         <div className='flex justify-between gap-12'>
-          {/* Search Column */}
-          <div className='group flex flex-1 flex-col'>
-            <Skeleton className='h-5 w-20 mb-3' />
-            <Skeleton className='h-9 w-full' />
-          </div>
-
           {/* Categories Column */}
           <div className='group flex flex-1 flex-col'>
             <Skeleton className='h-5 w-24 mb-3' />
@@ -30,7 +24,7 @@ export default function InspirationPageSkeleton() {
             <Skeleton className='h-5 w-24 mb-3' />
             <div className='flex flex-wrap gap-2 '>
               {Array.from({ length: 6 }).map((_, i) => (
-                <Skeleton key={`cat-${i}`} className='h-6 w-25 rounded-lg' />
+                <Skeleton key={`style-${i}`} className='h-6 w-25 rounded-lg' />
               ))}
             </div>
           </div>

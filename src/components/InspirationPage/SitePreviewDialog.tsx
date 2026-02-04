@@ -121,7 +121,7 @@ export default function SitePreviewDialog({ onCategoryClick }: SitePreviewDialog
           {/* Right: Sidebar with Details */}
           <div className='border-l  bg-background flex flex-col overflow-y-auto'>
             {/* Content Section */}
-            <div className='flex-1 flex flex-col gap-6 p-6 pt-10 min-h-100 max-lg:min-h-auto'>
+            <div className='flex-1 flex flex-col gap-6 p-6 pt-8 pb-4 min-h-100 max-lg:min-h-auto'>
               <DialogHeader >
                 <DialogTitle className='text-3xl text-start font-bold tracking-tight'>
                   {selectedSite.title}
@@ -179,7 +179,7 @@ export default function SitePreviewDialog({ onCategoryClick }: SitePreviewDialog
                   htmlFor='zoom-toggle'
                   className='text-sm font-medium text-muted-foreground cursor-pointer select-none'
                 >
-                  Enable zoom on images
+                  Zoom on images
                 </label>
                 <Switch
                   id='zoom-toggle'

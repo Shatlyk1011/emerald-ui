@@ -38,7 +38,7 @@ function SiteCard({ item, index }: SiteCardProps) {
       <div 
         role='button'
         onClick={handleClick} 
-        className={cn('relative rounded-xl border px-8 py-16 shadow-lg transition-all bg-transparent duration-300', displayUrl ? 'hover:border-foreground/20 hover:shadow-xl' : "hover:border-destructive/20")}
+        className={cn('relative rounded-xl border px-8 py-16 shadow-lg transition-all bg-transparent duration-300', displayUrl ? 'hover:border-foreground/15 hover:shadow-xl' : "hover:border-destructive/15")}
         style={{ background: bgColor }}
       >
         <div className='relative aspect-4/3 w-full overflow-hidden'>
@@ -84,8 +84,7 @@ function SiteCard({ item, index }: SiteCardProps) {
         )}
       </div>
 
-      {/* Card Footer */}
-      <div className='flex items-start gap-3 px-1'>
+      <div className='flex items-center gap-3 px-1'>
         <div className='bg-card mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-md'>
           {item.favicon ? (
             <img
@@ -99,14 +98,9 @@ function SiteCard({ item, index }: SiteCardProps) {
           )}
         </div>
 
-        <div className='flex flex-col'>
-          <h3 className='text-sm leading-tight font-semibold transition-colors'>
-            {item.title}
-          </h3>
-          <p className='mt-0.5 text-xs leading-snug text-gray-500'>
-            {item.description}
-          </p>
-        </div>
+        <h3 className='text-lg leading-tight font-semibold transition-colors'>
+          {item.title}
+        </h3>
       </div>
     </div>
   )
