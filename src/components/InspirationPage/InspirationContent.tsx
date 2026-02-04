@@ -20,6 +20,9 @@ interface Props {
 
 export default function InspirationContent({ initialData, categories, styles }: Props) {
   const [filterQuery, setFilterQuery] = useState<Where>({ isVisible: { equals: true } })
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+  const [selectedStyles, setSelectedStyles] = useState<string[]>([])
+  const [mounted, setMounted] = useState(false)
   
   const {
     data,
@@ -42,15 +45,57 @@ export default function InspirationContent({ initialData, categories, styles }: 
     if (inView && hasNextPage && !isLoading) {
       fetchNextPage()
     }
-  }, [inView, hasNextPage, fetchNextPage])
+  }, [inView, hasNextPage, fetchNextPage, isLoading])
 
   // Flatten all pages into a single array
   const allWebsites = data?.pages.flatMap((page) => page.docs) ?? []
 
-  const handleFilterRequest = debounce((query: Where) => setFilterQuery(query), 1000)
+  // Build filter query from selected categories and styles
+  const filterQueryFromSelections = useMemo(() => {
+    if (!mounted) {
+      // eslint-disable-next-line react-hooks/set-state-in-render
+      setMounted(true)
+      return
+    }
+    const query: Where = {
+      and: [
+        {
+          isVisible: {
+            equals: true,
+          },
+        },
+        {
+          category: {
+            in: selectedCategories.map((item) => item.toLowerCase()),
+          },
+        },
+        {
+          style: {
+            in: selectedStyles.map((item) => item.toLowerCase())
+          }
+        }
+      ]
+    }
+    return query
+  }, [selectedCategories, selectedStyles])
+
+  // Create debounced setFilterQuery function (memoized to maintain stable reference)
+  const debouncedSetFilterQuery = useMemo(
+    () => debounce((query: Where) => setFilterQuery(query), 1000),
+    []
+  )
+
+  // Update filter query when selections change (with debounce)
+  useEffect(() => {
+    if (filterQueryFromSelections) {
+      debouncedSetFilterQuery(filterQueryFromSelections)
+    }
+  }, [filterQueryFromSelections, debouncedSetFilterQuery])
 
   const handleResetFilters = () => {
     setFilterQuery({ isVisible: { equals: true } })
+    setSelectedCategories([])
+    setSelectedStyles([])
   }
 
   return (
@@ -58,7 +103,10 @@ export default function InspirationContent({ initialData, categories, styles }: 
       <FilterSection
         categories={categories}
         styles={styles}
-        handleFilterRequest={handleFilterRequest}
+        selectedCategories={selectedCategories}
+        setSelectedCategories={setSelectedCategories}
+        selectedStyles={selectedStyles}
+        setSelectedStyles={setSelectedStyles}
       />
       
       <h1 className='-tracking-two text-3xl font-semibold mb-6'>

@@ -1,10 +1,9 @@
 'use client'
 import dynamic from 'next/dynamic'
-import { useEffect, useState, Suspense } from 'react'
+import { Suspense } from 'react'
 
 import { cn } from '@/lib/utils'
 import { Category, WebsiteStyle } from '@/payload-types'
-import { Where } from 'payload'
 import { useAppStore } from '@/store/useAppStore'
 
 // Lazy load the dialog for better performance
@@ -15,81 +14,55 @@ const SitePreviewDialog = dynamic(() => import('./SitePreviewDialog'), {
 interface FilterSectionProps {
   categories: Category[]
   styles: WebsiteStyle[]
-  handleFilterRequest: (query: Where) => void;
+  selectedCategories: string[]
+  setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>
+  selectedStyles: string[]
+  setSelectedStyles: React.Dispatch<React.SetStateAction<string[]>>
 }
 
-function FilterSection({ categories, styles, handleFilterRequest }: FilterSectionProps) {
+function FilterSection({
+  categories,
+  styles,
+  selectedCategories,
+  setSelectedCategories,
+  selectedStyles,
+  setSelectedStyles
+}: FilterSectionProps) {
   const { closeSiteDialog } = useAppStore()
-
-  const [mounted, setMounted] = useState(false)
-  const [selectedCategories, setCategories] = useState<string[]>([])
-  const [selectedStyles, setStyles] = useState<string[]>([])
 
   const isCategorySelected = selectedCategories.length > 0
   const isStyleSelected = selectedStyles.length > 0
 
   const toggleCategory = (c: string) => {
     if (selectedCategories.includes(c)) {
-      setCategories((prev) => prev.filter((item) => item !== c))
+      setSelectedCategories((prev) => prev.filter((item) => item !== c))
     } else {
-      setCategories((prev) => ([...prev, c]))
+      setSelectedCategories((prev) => ([...prev, c]))
     }
   }
 
   const toggleStyle = (s: string) => {
     if (selectedStyles.includes(s)) {
-      setStyles((prev) => prev.filter((item) => item !== s))
+      setSelectedStyles((prev) => prev.filter((item) => item !== s))
     } else {
-      setStyles((prev) => ([...prev, s]))
+      setSelectedStyles((prev) => ([...prev, s]))
     }
   }
 
   // Handlers for dialog filter clicks
   const handleDialogCategoryClick = (category: string) => {
     closeSiteDialog()
-    setCategories([category])
+    setSelectedCategories([category])
   }
 
-  useEffect(() => {
-    // Skip the filter request on initial mount
-
-    const query: Where = {
-      and: [
-        {
-          isVisible: {
-            equals: true,
-          },
-        },
-        {
-          category: {
-            in: selectedCategories.map((item) => item.toLowerCase()),
-          },
-        },
-        {
-          style: {
-            in: selectedStyles.map((item) => item.toLowerCase())
-          }
-        }
-      ]
-    };
-    if (!mounted) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setMounted(true)
-      return
-    }
-    handleFilterRequest(query);
-  }, [selectedCategories, selectedStyles])
-
   return (
-    <div className='mb-12'>
-      {/* Category and Style Filters - Side by Side */}
-      <div className='flex justify-between gap-12'>
-        {/* Categories Column */}
-        <div className='group flex flex-1 flex-col'>
+    <section className='mb-12'>
+      <div className='flex gap-12'>
+        <div className='group flex flex-1 flex-col max-w-lg'>
           <h3 className={cn('tracking-three text-muted-foreground mb-3 text-sm font-medium uppercase transition-colors ease-in-out', isCategorySelected ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground')}>
             Categories
           </h3>
-          <ul className='-ml-1 flex h-max flex-1 flex-wrap place-content-start gap-x-2 gap-y-1 text-base font-normal '>
+          <ul className='-ml-1 flex h-max flex-1 flex-wrap place-content-start gap-x-1.5 gap-y-1 text-base font-normal '>
             {categories.map(({ value, category }) => {
               const isActive = selectedCategories.some(c => c == value)
               return (
@@ -111,11 +84,11 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
         </div>
 
         {/* Styles Column */}
-        <div className='group flex flex-1 flex-col'>
+        <div className='group flex flex-1 flex-col max-w-lg'>
           <h3 className={cn('tracking-three mb-3 text-sm font-medium uppercase transition-colors ease-in-out', isStyleSelected ? 'text-foreground' : 'text-muted-foreground group-hover:text-foreground')}>
             Styles
           </h3>
-          <ul className='-ml-1 flex h-max flex-1 flex-wrap place-content-start gap-x-2 gap-y-1 text-base font-normal capitalize'>
+          <ul className='-ml-1 flex h-max flex-1 flex-wrap place-content-start gap-x-1.5 gap-y-1 text-base font-normal capitalize'>
             {styles.map((item) => {
               const isActive = selectedStyles.some(s => s == item.style)
 
@@ -142,7 +115,7 @@ function FilterSection({ categories, styles, handleFilterRequest }: FilterSectio
       <Suspense fallback={null}>
         <SitePreviewDialog onCategoryClick={handleDialogCategoryClick} />
       </Suspense>
-    </div>
+    </section>
   )
 }
 

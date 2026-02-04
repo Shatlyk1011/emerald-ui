@@ -5,7 +5,7 @@ interface Props {
   handleResetFilters: () => void
 };
 
-const EmptyResult:FC<Props> = ({handleResetFilters}) => {
+const EmptyResult: FC<Props> = ({ handleResetFilters }) => {
   return (
     <div className='flex flex-col items-center justify-center py-24 gap-6'>
       <div className='flex flex-col items-center gap-3 text-center'>
