@@ -80,8 +80,8 @@ export default function SubmitWebsiteDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className='max-w-md'>
         <DialogHeader>
-          <DialogTitle className='text-2xl font-semibold'>
-            Submit a Website
+          <DialogTitle className='font-semibold'>
+            Submit your website
           </DialogTitle>
         </DialogHeader>
 
