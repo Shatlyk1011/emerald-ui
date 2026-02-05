@@ -8,12 +8,12 @@ import { IWebsites } from '@/types/inspiration'
 import dynamic from 'next/dynamic'
 import { Where } from 'payload'
 import { useInView } from 'react-intersection-observer'
+import ThreeDMarquee from '../ui/3d-marquee'
 import { Button } from '../ui/button'
 import FilterSection from './FilterSection'
 import SiteCards from './SiteCards'
 import EmptyResult from './SiteCards/EmptyResult'
 import SiteCardsSkeleton from './SiteCards/SiteCardsSkeleton'
-import ThreeDMarquee from '../ui/3d-marquee'
 
 const SubmitWebsiteDialog = dynamic(() => import('./SubmitWebsiteDialog'), {
   ssr: false,
@@ -32,7 +32,7 @@ export default function InspirationContent({
   totalDocs,
   categories,
   styles,
-  images
+  images,
 }: Props) {
   const [filterQuery, setFilterQuery] = useState<Where>({
     isVisible: { equals: true },
@@ -43,7 +43,6 @@ export default function InspirationContent({
   const [selectedStyles, setSelectedStyles] = useState<string[]>([])
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -118,11 +117,13 @@ export default function InspirationContent({
 
   return (
     <>
-      <section className='mb-10 flex max-xl:flex-col max-xl:items-start items-center justify-between gap-10 py-10 px-20 max-2xl:px-6 max-xl:px-0 max-lg:py-6'>
-        <div className='flex bg-cyan-50/0 flex-col flex-3 w-full items-start relative'>
-          <span className='absolute -top-8 left-0 opacity-50 -tracking-one font-mono text-sm'>{totalDocs} websites available</span>
+      <section className='mb-10 flex items-center justify-between gap-10 px-20 py-10 max-2xl:px-6 max-xl:flex-col max-xl:items-start max-xl:px-0 max-lg:py-6'>
+        <div className='relative flex w-full flex-3 flex-col items-start bg-cyan-50/0'>
+          <span className='-tracking-one absolute -top-8 left-0 font-mono text-sm opacity-50'>
+            {totalDocs} websites available
+          </span>
           <h1 className='-tracking-two mb-2 text-5xl font-semibold'>
-            Node Inspiration <br className='max-lg:block hidden' /> Websites 
+            Node Inspiration <br className='hidden max-lg:block' /> Websites
           </h1>
           <div className='text-muted-foreground text-lg'>
             <p className='mb-2'>
@@ -139,7 +140,7 @@ export default function InspirationContent({
             </p>
           </div>
         </div>
-        <div className='flex-5 max-xl:flex-auto max-xl:w-full'>
+        <div className='flex-5 max-xl:w-full max-xl:flex-auto'>
           <ThreeDMarquee images={images} />
         </div>
       </section>

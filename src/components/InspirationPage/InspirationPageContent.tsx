@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios'
+import { InspirationWebsite } from '@/payload-types'
 import { IWebsites, ICategories, IWebsiteStyles } from '@/types/inspiration'
 import { stringify } from 'qs-esm'
 import { axios } from '@/lib/axios'
 import InspirationContent from './InspirationContent'
-import { InspirationWebsite } from '@/payload-types'
 
 const stringifiedQuery = stringify(
   {
@@ -42,7 +42,9 @@ export default async function InspirationPageContent() {
   ] = await Promise.all([initialData, categories, websiteStyles])
 
   const totalDocs = initialData.data.totalDocs as number
-  const images = initialData.data.docs.map((i: InspirationWebsite) => i.imgUrl).filter(Boolean)
+  const images = initialData.data.docs
+    .map((i: InspirationWebsite) => i.imgUrl)
+    .filter(Boolean)
 
   return (
     <InspirationContent
