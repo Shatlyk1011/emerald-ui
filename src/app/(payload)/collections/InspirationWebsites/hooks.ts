@@ -1,15 +1,13 @@
-import type {
-  CollectionBeforeDeleteHook,
-  CollectionBeforeChangeHook,
-  CollectionAfterReadHook,
-} from 'payload'
-import { extractGradientColor } from '../../utils/extractColor'
-import {
-  deleteMediaFromUrl,
-  uploadScreenshot,
-  uploadFavicon,
-} from '../../utils/supabase'
-import { createUrlSlug, getFaviconExtension } from './utils'
+import type { CollectionBeforeDeleteHook, CollectionBeforeChangeHook, CollectionAfterReadHook } from 'payload';
+import { extractGradientColor } from '../../utils/extractColor';
+import { deleteMediaFromUrl, uploadScreenshot, uploadFavicon } from '../../utils/supabase';
+import { createUrlSlug, getFaviconExtension } from './utils';
+
+
+
+
+
+
 
 export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({
   id,
@@ -33,6 +31,21 @@ export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({
         doc.favicon,
         process.env.SUPABASE_FAVICONS_BUCKET || 'favicons'
       )
+    }
+
+    // Delete related media document if it exists
+    if (doc.additionalMedia) {
+      const mediaId =
+        typeof doc.additionalMedia === 'string'
+          ? doc.additionalMedia
+          : doc.additionalMedia.id
+
+      await req.payload.delete({
+        collection: 'media',
+        id: mediaId,
+      })
+
+      console.log(`Deleted related media document: ${mediaId}`)
     }
 
     console.log(`Deleted images for inspiration website: ${id}`)
