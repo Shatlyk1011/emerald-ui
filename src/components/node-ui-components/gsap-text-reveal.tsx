@@ -1,5 +1,14 @@
 'use client'
 
+/**
+ * @author: @codegrid
+ * @description: Text Reveal with GSAP
+ * @version: 1.0.0
+ * @date: 2026-02-04
+ * @license: MIT
+ * @website: https://nodeui.com
+ */
+
 import React, { useRef, ReactElement, ReactNode } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'

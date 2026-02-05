@@ -1,8 +1,19 @@
+'use client'
+
+/**
+ * @author: @nodeui
+ * @description: Simple Pricing Card Component
+ * @version: 1.0.0
+ * @date: 2026-02-01
+ * @license: MIT
+ * @website: https://nodeui.com
+ */
+
 import { CircleCheckIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
-const DEMO = [
+const DEMO_DATA = [
   {
     plan: 'Starter',
     role: 'For Individuals',
@@ -145,7 +156,7 @@ export default function SimplePricingCardSection() {
         </p>
       </div>
       <section className='flex w-full justify-center gap-3 max-lg:gap-2 max-md:flex-col max-md:gap-3'>
-        {DEMO.map((item) => (
+        {DEMO_DATA.map((item) => (
           <PricingCard key={item.plan} item={item} />
         ))}
       </section>

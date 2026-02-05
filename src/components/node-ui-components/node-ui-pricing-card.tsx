@@ -1,4 +1,14 @@
 'use client'
+
+/**
+ * @author: @nodeui
+ * @description: Pricing Card From Nodeui Website 
+ * @version: 1.0.0
+ * @date: 2026-02-03
+ * @license: MIT
+ * @website: https://nodeui.com
+ */
+
 import { useState } from 'react'
 import { CheckCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
