@@ -8,7 +8,6 @@
  * @license: MIT
  * @website: https://nodeui.com
  */
-
 import { cn } from '@/lib/utils'
 
 export type TextShimmerProps = {

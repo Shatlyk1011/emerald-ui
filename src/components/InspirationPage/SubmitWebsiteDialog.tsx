@@ -87,7 +87,6 @@ export default function SubmitWebsiteDialog({
 
         <form onSubmit={handleSubmit} className='mt-4 space-y-4'>
           <div className='space-y-2'>
-
             <Input
               id='name'
               type='text'
@@ -102,7 +101,6 @@ export default function SubmitWebsiteDialog({
           </div>
 
           <div className='space-y-2'>
-
             <Input
               id='email'
               type='email'
@@ -117,7 +115,6 @@ export default function SubmitWebsiteDialog({
           </div>
 
           <div className='space-y-2'>
-
             <Input
               id='websiteUrl'
               type='url'
@@ -134,10 +131,9 @@ export default function SubmitWebsiteDialog({
           </div>
 
           <div className='space-y-2'>
-
             <Textarea
               id='message'
-              className='min-h-20 max-h-40 text-sm placeholder:font-sans placeholder:text-sm'
+              className='max-h-40 min-h-20 text-sm placeholder:font-sans placeholder:text-sm'
               placeholder='What this website about'
               autoComplete='off'
               value={formData.message}
@@ -149,7 +145,12 @@ export default function SubmitWebsiteDialog({
             />
           </div>
 
-          <Button type='submit' disabled={isSubmitting} className='mt-1 w-full' size="sm">
+          <Button
+            type='submit'
+            disabled={isSubmitting}
+            className='mt-1 w-full'
+            size='sm'
+          >
             {isSubmitting ? 'Submitting...' : 'Submit'}
           </Button>
         </form>

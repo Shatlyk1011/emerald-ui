@@ -5,10 +5,6 @@ import {
   frontmatterSchema,
 } from 'fumadocs-mdx/config'
 
-
-
-
-
 const extendedSchema = frontmatterSchema.extend({
   credits: z.string().optional(),
 })

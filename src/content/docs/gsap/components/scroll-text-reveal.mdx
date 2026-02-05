@@ -12,7 +12,6 @@ import ScrollTextReveal from '@/components/node-ui-components/gsap-scroll-text-r
   <ScrollTextReveal />
 </Preview>
 
-
 ## How it Works
 
 ### Required Structure
@@ -22,8 +21,8 @@ The component uses a **dual-class structure** to create the animation effect.
 When copying component, there are additional utility classes which should be added to your tailwind.css file.
 
 ```tsx
-<div className="anime-text-container">
-  <div className="anime-text">
+<div className='anime-text-container'>
+  <div className='anime-text'>
     <p>Your paragraph text here with keywords like vibrant and interactive.</p>
   </div>
 </div>
@@ -37,8 +36,17 @@ When copying component, there are additional utility classes which should be add
 The component highlights specific keywords defined in the `KEYWORDS` array:
 
 ```tsx
-const KEYWORDS = ['vibrant', 'living', 'clarity', 'expression', 'shape', 
-                  'intuitive', 'storytelling', 'interactive', 'vision']
+const KEYWORDS = [
+  'vibrant',
+  'living',
+  'clarity',
+  'expression',
+  'shape',
+  'intuitive',
+  'storytelling',
+  'interactive',
+  'vision',
+]
 ```
 
 These keywords receive enhanced styling with background highlights during the reveal animation.

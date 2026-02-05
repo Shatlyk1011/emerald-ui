@@ -2,13 +2,12 @@
 
 /**
  * @author: @nodeui
- * @description: Pricing Card From Nodeui Website 
+ * @description: Pricing Card From Nodeui Website
  * @version: 1.0.0
  * @date: 2026-02-03
  * @license: MIT
  * @website: https://nodeui.com
  */
-
 import { useState } from 'react'
 import { CheckCircle } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -133,7 +132,7 @@ export default function PricingSection() {
 
   return (
     <section className=''>
-      <div className='mb-8 text-center p-5 max-sm:mb-4'>
+      <div className='mb-8 p-5 text-center max-sm:mb-4'>
         <h1 className='mb-2 text-4xl font-bold tracking-tight max-sm:text-2xl'>
           Simple, Transparent Pricing
         </h1>
@@ -170,7 +169,7 @@ export default function PricingSection() {
           </span>
         </p>
       </div>
-      <div className='mx-auto grid h-full max-w-full grid-cols-2 max-sm:grid-cols-1 justify-center gap-3 px-10 max-lg:px-0'>
+      <div className='mx-auto grid h-full max-w-full grid-cols-2 justify-center gap-3 px-10 max-lg:px-0 max-sm:grid-cols-1'>
         {pricingPlans.map((plan) => (
           <PricingCard key={plan.name} item={plan} />
         ))}

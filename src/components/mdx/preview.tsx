@@ -39,7 +39,11 @@ function Preview({
 
   return (
     <div className={cn('w-full overflow-hidden', className)}>
-      <PreviewContent isBlock={isBlock} link={link} onReload={isReload ? handleReload : undefined} />
+      <PreviewContent
+        isBlock={isBlock}
+        link={link}
+        onReload={isReload ? handleReload : undefined}
+      />
 
       {useIframe ? (
         <div className='my-4 w-full rounded-md border border-zinc-400 dark:border-zinc-700'>
@@ -57,7 +61,7 @@ function Preview({
         </div>
       ) : (
         <div
-            key={componentKey}
+          key={componentKey}
           className={cn(
             'not-prose relative my-4 flex items-center justify-center rounded-md border border-zinc-400 p-2 md:p-8 dark:border-zinc-800',
             compact ? 'min-h-[100px]' : 'min-h-[400px]',

@@ -60,7 +60,7 @@ const Header = () => {
               <Link
                 href={home}
                 className={cn(
-                  'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 transition ease-out max-sm:px-2',
+                  'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2',
                   pathname === home && 'text-foreground font-medium opacity-100'
                 )}
               >
@@ -71,7 +71,7 @@ const Header = () => {
               <Link
                 href={inspiration}
                 className={cn(
-                  'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 transition ease-out max-sm:px-2',
+                  'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2',
                   pathname === inspiration &&
                     'text-foreground font-medium opacity-100'
                 )}
@@ -83,7 +83,7 @@ const Header = () => {
               <Link
                 href={components}
                 className={cn(
-                  'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 transition ease-out max-sm:px-2',
+                  'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2',
                   pathname === components &&
                     'text-foreground font-medium opacity-100'
                 )}
@@ -95,7 +95,7 @@ const Header = () => {
               <Link
                 href={pricing}
                 className={cn(
-                  'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 transition ease-out max-sm:px-2',
+                  'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2',
                   pathname === pricing &&
                     'text-foreground font-medium opacity-100'
                 )}

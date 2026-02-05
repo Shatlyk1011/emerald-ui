@@ -10,9 +10,9 @@ import {
 } from 'react'
 import { CheckCheck, Copy, RefreshCw } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
+import { useTheme } from 'next-themes'
 import { copyComponent } from '@/lib/action'
 import { cn } from '@/lib/utils'
-import { useTheme } from 'next-themes'
 
 function SuccessParticles({
   buttonRef,
@@ -67,9 +67,9 @@ export default function PreviewContent({
   isBlock = false,
   onReload,
 }: {
-    link: string
-    isBlock?: boolean
-    onReload?: () => void
+  link: string
+  isBlock?: boolean
+  onReload?: () => void
 }) {
   const { theme } = useTheme()
   const [isPending, startTransition] = useTransition()
@@ -119,7 +119,7 @@ export default function PreviewContent({
           buttonRef={copyButtonRef as RefObject<HTMLButtonElement>}
         />
       ) : null}
-      <div className='mt-1 flex justify-between w-full items-center gap-2 sm:mt-0 sm:w-auto'>
+      <div className='mt-1 flex w-full items-center justify-between gap-2 sm:mt-0 sm:w-auto'>
         {!isBlock && (
           <>
             <form
