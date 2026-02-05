@@ -76,7 +76,7 @@ const Header = () => {
                     'text-foreground font-medium opacity-100'
                 )}
               >
-                Node Inspiration
+                Node Inspirations
               </Link>
             </li>
             <li>
