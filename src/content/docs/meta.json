@@ -16,9 +16,7 @@
     "components/social-button",
     "components/interactive-hover-button",
     "---Blocks & Sections---",
-    "components/holographic-pricing-table",
-    "components/node-ui-pricing-card",
-    "components/simple-pricing-card",
+    "components/pricing",
 
     "---Text---",
     "components/text-shimmer",
