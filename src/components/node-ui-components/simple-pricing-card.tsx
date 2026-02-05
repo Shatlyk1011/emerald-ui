@@ -136,7 +136,7 @@ function PricingCard({ item }: Props) {
 export default function SimplePricingCardSection() {
   return (
     <div className='flex w-full flex-col justify-center gap-3 max-lg:gap-2 max-md:flex-col max-md:gap-3'>
-      <div className='mb-8 text-center'>
+      <div className='mb-8 text-center p-5 max-sm:mb-6'>
         <h1 className='mb-2 text-4xl font-bold tracking-tight max-sm:text-3xl'>
           Simple, Pricing Card
         </h1>

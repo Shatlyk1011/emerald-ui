@@ -5,8 +5,12 @@ import {
   frontmatterSchema,
 } from 'fumadocs-mdx/config'
 
+
+
+
+
 const extendedSchema = frontmatterSchema.extend({
-  docsBodyClasses: z.string().optional(),
+  credits: z.string().optional(),
 })
 
 // Plain components (Framer Motion, CSS animations, etc.)

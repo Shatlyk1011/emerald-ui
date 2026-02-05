@@ -1,5 +1,14 @@
 'use client'
 
+/**
+ * @author: @nodeui
+ * @description: Text Shimmer Component
+ * @version: 1.0.0
+ * @date: 2026-02-04
+ * @license: MIT
+ * @website: https://nodeui.com
+ */
+
 import { cn } from '@/lib/utils'
 
 export type TextShimmerProps = {
@@ -9,7 +18,7 @@ export type TextShimmerProps = {
   children: React.ReactNode | string
 } & React.HTMLAttributes<HTMLElement>
 
-export default function TextShimmer({
+function TextShimmer({
   as = 'span',
   className,
   duration = 4,
@@ -38,14 +47,13 @@ export default function TextShimmer({
   )
 }
 
-// add this animation to your tailwind.css file
-// @theme {
-//   @keyframes shimmer {
-//     0% {
-//       background-position: 200% 50%;
-//     }
-//     100% {
-//       background-position: -200% 50%;
-//     }
-//   }
-// }
+const TextShimmerDemo = () => {
+  return (
+    <div className='flex flex-col items-center gap-6'>
+      <TextShimmer>Node UI Components</TextShimmer>
+      <TextShimmer duration={2}>Fast Shimmer</TextShimmer>
+    </div>
+  )
+}
+
+export default TextShimmerDemo

@@ -109,17 +109,17 @@ function TextReveal({ children, animateOnScroll = true, delay = 0 }: Props) {
 
 export const TextRevealDemo = () => {
   return (
-    <div className='space-y-12 p-20'>
+    <div className='space-y-12 p-20 max-md:p-8 max-sm:px-4'>
       <TextReveal>
-        <h2 className='text-6xl font-bold'>Text Reveal with GSAP </h2>
-        <h2 className='mt-8 text-4xl font-bold'>Scroll bottom to see more</h2>
+        <h2 className='text-6xl font-bold max-sm:text-4xl'>Text Reveal with GSAP </h2>
+        <h2 className='mt-8 text-4xl font-bold max-sm:text-2xl'>Scroll bottom to see more</h2>
       </TextReveal>
-      <TextReveal delay={0.5}>
-        <p className='text-2xl'>With Delay 0.5</p>
+      <TextReveal delay={1}>
+        <p className='text-2xl'>With Delay 1s</p>
       </TextReveal>
 
       <TextReveal>
-        <p className='mt-100 text-2xl'>
+        <p className='mt-60 max-sm:mt-30 text-2xl max-sm:text-xl'>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
           reprehenderit molestiae velit facere nulla beatae aspernatur
           voluptatum voluptate libero expedita minima, possimus vero, enim
@@ -129,7 +129,7 @@ export const TextRevealDemo = () => {
       </TextReveal>
 
       <TextReveal>
-        <p className='mt-100 text-2xl'>
+        <p className='mt-60 max-sm:mt-30 text-2xl max-sm:text-xl'>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
           reprehenderit molestiae velit facere nulla beatae aspernatur
           voluptatum voluptate libero expedita minima, possimus vero, enim
@@ -139,7 +139,7 @@ export const TextRevealDemo = () => {
       </TextReveal>
 
       <TextReveal>
-        <p className='mt-100 text-2xl'>
+        <p className='mt-60 max-sm:mt-30 text-2xl max-sm:text-xl'>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
           reprehenderit molestiae velit facere nulla beatae aspernatur
           voluptatum voluptate libero expedita minima, possimus vero, enim

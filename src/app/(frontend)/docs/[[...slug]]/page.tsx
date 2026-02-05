@@ -23,13 +23,13 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
 
   return (
     <DocsPage footer={{ enabled: false }}>
-      <DocsTitle className='ml-8 text-4xl font-semibold tracking-tighter'>
+      <DocsTitle className='text-4xl font-semibold tracking-tighter'>
         {page.data.title}
       </DocsTitle>
-      <DocsDescription className='ml-8 text-xl tracking-tighter'>
+      <DocsDescription className='text-xl tracking-tighter'>
         {page.data.description}
       </DocsDescription>
-      <DocsBody className={cn('ml-8', page.data.docsBodyClasses)}>
+      <DocsBody className={cn(page.data.full && 'min-w-full')}>
         <MDX
           components={{
             ...defaultMdxComponents,

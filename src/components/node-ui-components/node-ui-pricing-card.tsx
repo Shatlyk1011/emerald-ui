@@ -123,11 +123,11 @@ export default function PricingSection() {
 
   return (
     <section className=''>
-      <div className='mb-8 text-center'>
-        <h1 className='mb-2 text-4xl font-bold tracking-tight max-sm:text-3xl'>
+      <div className='mb-8 text-center p-5 max-sm:mb-4'>
+        <h1 className='mb-2 text-4xl font-bold tracking-tight max-sm:text-2xl'>
           Simple, Transparent Pricing
         </h1>
-        <p className='text-muted-foreground mx-auto max-w-2xl text-lg max-sm:text-base'>
+        <p className='text-muted-foreground mx-auto max-w-2xl text-lg max-sm:text-sm'>
           Choose the perfect plan for your needs. All plans include a 14-day
           free trial.
         </p>
@@ -160,7 +160,7 @@ export default function PricingSection() {
           </span>
         </p>
       </div>
-      <div className='mx-auto grid h-full max-w-full grid-cols-2 justify-center gap-3 px-10 max-lg:px-0'>
+      <div className='mx-auto grid h-full max-w-full grid-cols-2 max-sm:grid-cols-1 justify-center gap-3 px-10 max-lg:px-0'>
         {pricingPlans.map((plan) => (
           <PricingCard key={plan.name} item={plan} />
         ))}

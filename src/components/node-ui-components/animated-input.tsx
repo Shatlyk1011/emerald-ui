@@ -37,7 +37,7 @@ export default function AnimatedInput() {
       >
         <Input
           autoComplete='off'
-          className='peer border-foreground/10 bg-neutral-2 placeholder:text-ring h-full w-full rounded-full border pl-10 text-base placeholder:font-[inherit] placeholder:text-base placeholder:leading-12 max-sm:placeholder:text-sm'
+          className='peer border-foreground/10 bg-transparent! placeholder:text-ring h-full w-full rounded-full border pl-10 text-base placeholder:font-[inherit] placeholder:text-base placeholder:leading-12 '
           placeholder={inputFocus ? `Search` : 'Search'}
           onFocus={() => setInputFocus(true)}
           onBlur={() => setInputFocus(false)}
@@ -61,7 +61,7 @@ export default function AnimatedInput() {
                 isInView={!inputFocus}
                 classes={cn(
                   // IMPORTANT: if you change placeholder, make sure to adjust "left" className
-                  'leading-inherit left-[52px] max-sm:left-[66px] inline-block text-base max-sm:text-sm peer-focus:hidden transition'
+                  'leading-inherit left-[52px]  inline-block text-base peer-focus:hidden transition'
                 )}
               />
             </div>
