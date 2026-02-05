@@ -27,8 +27,15 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
         {page.data.title}
       </DocsTitle>
       <DocsDescription className='text-xl tracking-tighter'>
-        {page.data.description}
+        {page.data.description} <br />
+
+        {page.data.credits && (
+          <div className='mt-4'>
+            <h2 className='text-base font-normal tracking-one'>Credits: <span className='text-primary tracking-[initial]'>{page.data.credits}</span></h2>
+          </div>
+        )}
       </DocsDescription>
+
       <DocsBody className={cn(page.data.full && 'min-w-full')}>
         <MDX
           components={{
@@ -41,6 +48,8 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
             WhatIncluded,
           }}
         />
+
+
       </DocsBody>
     </DocsPage>
   )
