@@ -6,10 +6,22 @@ import SiteCardsSkeleton from './SiteCards/SiteCardsSkeleton'
 export default function InspirationPageSkeleton() {
   return (
     <>
-      {/* Filter Section Skeleton */}
+      <section className='mb-10 flex items-center justify-between gap-10 px-20 py-10 max-2xl:px-6 max-xl:flex-col max-xl:items-start max-xl:px-0 max-lg:py-6'>
+        <div className='relative flex w-full flex-3 flex-col items-start'>
+          <Skeleton className='absolute -top-8 left-0 mb-2 h-4 w-40' />
+          <Skeleton className='mb-2 h-12 w-96 max-lg:w-full' />
+          <div className='space-y-2'>
+            <Skeleton className='h-5 w-80 max-lg:w-full' />
+            <Skeleton className='h-5 w-40' />
+          </div>
+        </div>
+        <div className='flex-5 max-xl:w-full max-xl:flex-auto'>
+          <Skeleton className='h-60 w-full rounded-lg' />
+        </div>
+      </section>
+
       <div className='mb-12'>
         <div className='flex justify-between gap-12'>
-          {/* Categories Column */}
           <div className='group flex flex-1 flex-col'>
             <Skeleton className='mb-3 h-5 w-24' />
             <div className='flex flex-wrap gap-2'>
@@ -19,7 +31,6 @@ export default function InspirationPageSkeleton() {
             </div>
           </div>
 
-          {/* Styles Column */}
           <div className='group flex flex-1 flex-col'>
             <Skeleton className='mb-3 h-5 w-24' />
             <div className='flex flex-wrap gap-2'>
@@ -31,10 +42,6 @@ export default function InspirationPageSkeleton() {
         </div>
       </div>
 
-      {/* Page Title Skeleton */}
-      <Skeleton className='mb-6 h-9 w-80' />
-
-      {/* Site Cards Skeleton */}
       <SiteCardsSkeleton />
     </>
   )
