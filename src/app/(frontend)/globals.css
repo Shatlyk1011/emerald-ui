@@ -137,6 +137,31 @@
   .scrollbar-thin {
     scrollbar-width: thin;
   }
+
+  .anime-text p {
+    @apply text-foreground dark:text-foreground text-center text-3xl font-black leading-tight mb-8;
+  }
+
+  .anime-text .word {
+    @apply inline-block relative will-change-[background-color,opacity] mr-0.5 mb-0.5 px-0.5 py-0.5 rounded-full;
+  }
+
+  .anime-text .word.keyword-wrapper {
+    @apply ml-0.5 mr-1.5 mt-0 mb-0.5;
+  }
+
+  .anime-text .word span {
+    @apply relative;
+  }
+
+  .anime-text .word span.keyword {
+    @apply inline-block w-full h-full text-background dark:text-background px-0 py-0.5 rounded-full before:content-[""] before:absolute before:-translate-x-1/2 before:-translate-y-1/2 before:w-[calc(100%_+_1rem)] before:h-[calc(100%_+_0.5rem)] before:bg-foreground dark:before:bg-foreground before:z-[-1] before:rounded-full before:left-1/2 before:top-1/2;
+  }
+
+  .anime-text .word,
+  .anime-text .word span {
+    @apply opacity-0;
+  }
 }
 
 @theme {
@@ -149,3 +174,5 @@
     }
   }
 }
+
+
