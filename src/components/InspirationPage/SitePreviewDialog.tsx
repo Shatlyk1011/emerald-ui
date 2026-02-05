@@ -49,7 +49,7 @@ export default function SitePreviewDialog({
     >
       <DialogContent className='scrollbar-thin max-h-[90vh] overflow-hidden p-0 max-lg:overflow-auto'>
         {/* Two-column layout */}
-        <div className='grid  grid-cols-[1fr_320px] max-lg:grid-cols-1'>
+        <div className='grid grid-cols-[1fr_320px] max-lg:grid-cols-1'>
           {/* Left: Image Preview Area */}
           <div
             className='flex flex-col overflow-y-auto px-4 py-4 max-lg:py-6'
