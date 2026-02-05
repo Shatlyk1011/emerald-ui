@@ -5,7 +5,9 @@
   "pages": [
     "---Get Started---",
     "index",
-    "---GSAP Components---",
-    "components/text-reveal"
+    "---Text---",
+    "components/text-reveal",
+    "components/color-text-reveal",
+    "components/scroll-text-reveal"
   ]
 }
