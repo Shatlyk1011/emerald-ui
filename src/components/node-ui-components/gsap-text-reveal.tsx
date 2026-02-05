@@ -104,9 +104,8 @@ function TextReveal({ children, animateOnScroll = true, delay = 0 }: Props) {
   )
 
   if (React.Children.count(children) === 1 && React.isValidElement(children)) {
-    // @ts-expect-error ___
     // eslint-disable-next-line react-hooks/refs
-    return React.cloneElement(children as ReactElement, { ref: containerRef })
+    return React.cloneElement(children as ReactElement<Record<string, unknown>>, { ref: containerRef })
   }
 
   return (

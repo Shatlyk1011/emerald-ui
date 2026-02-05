@@ -6,12 +6,45 @@ icon: ListStart
 
 This component library does not require a package manager or build step (yet).
 
-Simply copy the components you need and use them in your React + Tailwind CSS v4 application
+Simply copy the components you need and use them in your React + Tailwind CSS v4 application.
 
 ## Requirements
 
 - React 18+
 - Tailwind CSS v4 configured in your project
-- Components that require Motion or other dependencies will be indicated.
+- Animation library (Motion or GSAP ) depending on the component
 
-**That’s it. Copy, import, and ship.**
+**That's it. Copy, Paste, and Ship.**
+
+---
+
+## Animation Libraries: Motion vs GSAP
+
+This library offers components powered by two industry-leading animation libraries. Understanding their differences will help you choose the right tool for your project.
+
+### Motion
+
+**Motion** is a declarative, React-first animation library that makes creating smooth animations incredibly intuitive.
+
+#### Why Use Motion?
+
+- **React-Native Syntax**: Uses familiar JSX components like `<motion.div>` for seamless integration
+- **Declarative API**: Define animations directly in your component props
+- **Gesture Support**: Built-in drag, hover, tap, and pan gesture handlers
+- **Layout Animations**: Automatic layout animations with `layoutId`
+- **Variants System**: Reusable animation states for complex orchestrations
+- **Smaller Learning Curve**: Easier to pick up for React developers
+
+#### Best For:
+
+- UI micro-interactions (buttons, dropdowns, modals)
+- Component-level animations
+- Gesture-based interactions
+- Projects already using React ecosystem
+- Rapid prototyping
+
+#### Installation:
+
+```bash
+pnpm install motion
+```
