@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
@@ -88,13 +87,12 @@ export default function SubmitWebsiteDialog({
 
         <form onSubmit={handleSubmit} className='mt-4 space-y-4'>
           <div className='space-y-2'>
-            <label htmlFor='name' className='inline-block text-sm font-medium'>
-              Name
-            </label>
+
             <Input
               id='name'
               type='text'
-              placeholder='Your name'
+              placeholder='Name'
+              autoComplete='off'
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
@@ -104,13 +102,12 @@ export default function SubmitWebsiteDialog({
           </div>
 
           <div className='space-y-2'>
-            <label htmlFor='email' className='inline-block text-sm font-medium'>
-              Email
-            </label>
+
             <Input
               id='email'
               type='email'
-              placeholder='your@email.com'
+              autoComplete='off'
+              placeholder='Email'
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
@@ -120,16 +117,13 @@ export default function SubmitWebsiteDialog({
           </div>
 
           <div className='space-y-2'>
-            <label
-              htmlFor='websiteUrl'
-              className='inline-block text-sm font-medium'
-            >
-              Website URL <span className='text-destructive'>*</span>
-            </label>
+
             <Input
               id='websiteUrl'
               type='url'
-              placeholder='https://example.com'
+              className='text-sm'
+              autoComplete='off'
+              placeholder='Website URL'
               value={formData.websiteUrl}
               onChange={(e) =>
                 setFormData({ ...formData, websiteUrl: e.target.value })
@@ -140,15 +134,12 @@ export default function SubmitWebsiteDialog({
           </div>
 
           <div className='space-y-2'>
-            <label
-              htmlFor='message'
-              className='inline-block text-sm font-medium'
-            >
-              Message
-            </label>
+
             <Textarea
               id='message'
-              placeholder='Tell us why this website is inspiring...'
+              className='min-h-20 max-h-40 text-sm placeholder:font-sans placeholder:text-sm'
+              placeholder='What this website about'
+              autoComplete='off'
               value={formData.message}
               onChange={(e) =>
                 setFormData({ ...formData, message: e.target.value })
@@ -158,20 +149,9 @@ export default function SubmitWebsiteDialog({
             />
           </div>
 
-          <div className='flex gap-3 pt-4'>
-            <Button
-              type='button'
-              variant='secondary'
-              onClick={() => onOpenChange(false)}
-              disabled={isSubmitting}
-              className='flex-1'
-            >
-              Cancel
-            </Button>
-            <Button type='submit' disabled={isSubmitting} className='flex-1'>
-              {isSubmitting ? 'Submitting...' : 'Submit'}
-            </Button>
-          </div>
+          <Button type='submit' disabled={isSubmitting} className='mt-1 w-full' size="sm">
+            {isSubmitting ? 'Submitting...' : 'Submit'}
+          </Button>
         </form>
       </DialogContent>
     </Dialog>
