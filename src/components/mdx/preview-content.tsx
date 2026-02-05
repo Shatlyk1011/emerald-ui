@@ -8,10 +8,11 @@ import {
   useState,
   useTransition,
 } from 'react'
-import { CheckCheck, Copy } from 'lucide-react'
+import { CheckCheck, Copy, RefreshCw } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { copyComponent } from '@/lib/action'
 import { cn } from '@/lib/utils'
+import { useTheme } from 'next-themes'
 
 function SuccessParticles({
   buttonRef,
@@ -64,10 +65,13 @@ function SuccessParticles({
 export default function PreviewContent({
   link,
   isBlock = false,
+  onReload,
 }: {
-  link: string
-  isBlock?: boolean
+    link: string
+    isBlock?: boolean
+    onReload?: () => void
 }) {
+  const { theme } = useTheme()
   const [isPending, startTransition] = useTransition()
   const [state, formAction] = useActionState(copyComponent, {
     error: '',
@@ -100,6 +104,12 @@ export default function PreviewContent({
     }
   }, [state])
 
+  useEffect(() => {
+    if (onReload) {
+      onReload()
+    }
+  }, [theme])
+
   const copyButtonRef = useRef<HTMLButtonElement>(null)
 
   return (
@@ -109,47 +119,73 @@ export default function PreviewContent({
           buttonRef={copyButtonRef as RefObject<HTMLButtonElement>}
         />
       ) : null}
-      <div className='mt-1 flex w-full items-center justify-start gap-2 sm:mt-0 sm:w-auto'>
+      <div className='mt-1 flex justify-between w-full items-center gap-2 sm:mt-0 sm:w-auto'>
         {!isBlock && (
-          <form
-            className='w-full sm:w-auto'
-            onSubmit={(e) => {
-              e.preventDefault()
-              handleCopyClick()
-            }}
-          >
-            <button
-              className={cn(
-                'relative overflow-hidden',
-                'h-7 px-2 text-xs font-medium',
-                'bg-foreground',
-                'text-background',
-                'hover:bg-foreground/90',
-                'hover:text-background',
-                'transition-all duration-200',
-                'group flex items-center justify-center gap-1',
-                'rounded-sm',
-                'my-0 py-0 shadow-none',
-                'w-fit md:w-full'
-              )}
-              disabled={isPending}
-              ref={copyButtonRef}
-              type='submit'
+          <>
+            <form
+              className='w-full sm:w-auto'
+              onSubmit={(e) => {
+                e.preventDefault()
+                handleCopyClick()
+              }}
             >
-              {isCopied ? (
-                <CheckCheck className='text-background h-3.5 w-3.5' />
-              ) : (
-                <Copy
-                  className={cn(
-                    'h-3.5 w-3.5',
-                    'transition-all duration-200',
-                    'group-hover:rotate-12'
-                  )}
-                />
+              <button
+                className={cn(
+                  'relative overflow-hidden',
+                  'h-7 px-2 text-xs font-medium',
+                  'bg-foreground',
+                  'text-background',
+                  'hover:bg-foreground/90',
+                  'hover:text-background',
+                  'transition-all duration-200',
+                  'group flex items-center justify-center gap-1',
+                  'rounded-sm',
+                  'my-0 py-0 shadow-none',
+                  'w-fit md:w-full'
+                )}
+                disabled={isPending}
+                ref={copyButtonRef}
+                type='submit'
+              >
+                {isCopied ? (
+                  <CheckCheck className='text-background h-3.5 w-3.5' />
+                ) : (
+                  <Copy
+                    className={cn(
+                      'h-3.5 w-3.5',
+                      'transition-all duration-200',
+                      'group-hover:rotate-12'
+                    )}
+                  />
+                )}
+                <span>Copy</span>
+              </button>
+            </form>
+          </>
+        )}
+        {onReload && (
+          <button
+            onClick={onReload}
+            className={cn(
+              'relative overflow-hidden',
+              'h-7 px-2 text-xs font-medium',
+              'transition-all duration-200',
+              'group flex items-center justify-center gap-1',
+              'rounded-sm',
+              'my-0 py-0 shadow-none',
+              'w-fit'
+            )}
+            type='button'
+            aria-label='Reload component'
+          >
+            <RefreshCw
+              className={cn(
+                'h-3.5 w-3.5',
+                'transition-all duration-300',
+                'group-hover:rotate-180'
               )}
-              <span>Copy</span>
-            </button>
-          </form>
+            />
+          </button>
         )}
       </div>
     </>

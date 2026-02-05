@@ -1,4 +1,6 @@
-import { Suspense } from 'react'
+'use client'
+
+import { Suspense, useState } from 'react'
 import { cn } from '@/lib/utils'
 import PreviewContent from './preview-content'
 
@@ -12,6 +14,7 @@ type PreviewProps = {
   compact?: boolean
   comment?: string[]
   isBlock?: boolean
+  isReload?: boolean
 }
 
 const PRE_PATH = '@nodeUI'
@@ -24,10 +27,19 @@ function Preview({
   compact = false,
   comment = [],
   isBlock = false,
+  isReload = false,
 }: PreviewProps) {
+  const [componentKey, setComponentKey] = useState(0)
+
+  const handleReload = () => {
+    if (isReload) {
+      setComponentKey((prev) => prev + 1)
+    }
+  }
+
   return (
     <div className={cn('w-full overflow-hidden', className)}>
-      <PreviewContent isBlock={isBlock} link={link} />
+      <PreviewContent isBlock={isBlock} link={link} onReload={isReload ? handleReload : undefined} />
 
       {useIframe ? (
         <div className='my-4 w-full rounded-md border border-zinc-400 dark:border-zinc-700'>
@@ -45,6 +57,7 @@ function Preview({
         </div>
       ) : (
         <div
+            key={componentKey}
           className={cn(
             'not-prose relative my-4 flex items-center justify-center rounded-md border border-zinc-400 p-2 md:p-8 dark:border-zinc-800',
             compact ? 'min-h-[100px]' : 'min-h-[400px]',
