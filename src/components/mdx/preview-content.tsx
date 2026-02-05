@@ -8,7 +8,7 @@ import {
   useState,
   useTransition,
 } from 'react'
-import { CheckCheck, Copy, RefreshCw } from 'lucide-react'
+import { CheckCheck, Copy, Lock, RefreshCw } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useTheme } from 'next-themes'
 import { copyComponent } from '@/lib/action'
@@ -120,49 +120,51 @@ export default function PreviewContent({
         />
       ) : null}
       <div className='mt-1 flex w-full items-center justify-between gap-2 sm:mt-0 sm:w-auto'>
-        {!isBlock && (
-          <>
-            <form
-              className='w-full sm:w-auto'
-              onSubmit={(e) => {
-                e.preventDefault()
-                handleCopyClick()
-              }}
-            >
-              <button
-                className={cn(
-                  'relative overflow-hidden',
-                  'h-7 px-2 text-xs font-medium',
-                  'bg-foreground',
-                  'text-background',
-                  'hover:bg-foreground/90',
-                  'hover:text-background',
-                  'transition-all duration-200',
-                  'group flex items-center justify-center gap-1',
-                  'rounded-sm',
-                  'my-0 py-0 shadow-none',
-                  'w-fit md:w-full'
-                )}
-                disabled={isPending}
-                ref={copyButtonRef}
-                type='submit'
-              >
-                {isCopied ? (
-                  <CheckCheck className='text-background h-3.5 w-3.5' />
-                ) : (
-                  <Copy
-                    className={cn(
-                      'h-3.5 w-3.5',
-                      'transition-all duration-200',
-                      'group-hover:rotate-12'
-                    )}
-                  />
-                )}
-                <span>Copy</span>
-              </button>
-            </form>
-          </>
-        )}
+        <form
+          className='w-full sm:w-auto'
+          onSubmit={(e) => {
+            e.preventDefault()
+            if (isBlock) {
+              // handle modal to sub
+              return
+            }
+            handleCopyClick()
+          }}
+        >
+          <button
+            className={cn(
+              'relative overflow-hidden',
+              'h-7 px-2 text-xs font-medium',
+              'bg-foreground',
+              'text-background',
+              'hover:bg-foreground/90',
+              'hover:text-background',
+              'transition-all duration-200',
+              'group flex items-center justify-center gap-1',
+              'rounded-sm',
+              'my-0 py-0 shadow-none',
+              'w-fit md:w-full',
+              isBlock && 'opacity-40'
+            )}
+            disabled={isPending}
+            ref={copyButtonRef}
+            type='submit'
+          >
+            {isCopied ? (
+              <CheckCheck className='text-background h-3.5 w-3.5' />
+            ) : (
+                <>
+                  {isBlock ? (
+                    <Lock className={cn("h-3.5 w-3.5 transition-all duration-200group-hover:rotate-12")} />
+                  ) : (
+                    <Copy className="h-3.5 w-3.5 transition-all duration-200group-hover:rotate-12" />
+                  )}
+              </>
+
+            )}
+            <span>Copy</span>
+          </button>
+        </form>
         {onReload && (
           <button
             onClick={onReload}

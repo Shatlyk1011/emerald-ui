@@ -56,8 +56,8 @@ export default function TwoWayParallax({ images = DEMO }: Props) {
   if (!images?.length) return null
 
   return (
-    <section className='w-full pb-[10vh]'>
-      <div className='pb-[10vh] text-center text-2xl font-medium'>
+    <section className='w-full py-20'>
+      <div className='pb-10 text-4xl text-center opacity-50 max-sm:text-xl'>
         Scroll Down
       </div>
 
