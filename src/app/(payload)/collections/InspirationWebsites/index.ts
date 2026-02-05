@@ -1,7 +1,13 @@
-import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
-import { extractGradientColor } from '../../utils/extractColor'
-import { beforeDeleteHook, beforeChangeHook } from './hooks'
+import { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
+import { extractGradientColor } from '../../utils/extractColor';
+import { beforeDeleteHook, beforeChangeHook } from './hooks';
+
+
+
+
+
+
 
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
@@ -12,7 +18,7 @@ const InspirationWebsites: CollectionConfig = {
     delete: admins,
   },
   admin: {
-    defaultColumns: ['pageUrl', 'title', 'imgUrl'],
+    defaultColumns: ['pageUrl', 'title', 'imgUrl', 'createdAt'],
     useAsTitle: 'pageUrl',
     description:
       'Main collection for storing website inspiration entries. Automatically captures screenshots and favicons from provided URLs. Supports categorization, styling tags, and additional media attachments.',
