@@ -1,0 +1,44 @@
+---
+title: Scroll Text Reveal
+description: Word-by-word scroll reveal animation with keyword highlighting and pinned sections
+icon: ScrollText
+credits: YB CodeGrid
+full: true
+---
+
+import ScrollTextReveal from '@/components/node-ui-components/gsap-scroll-text-reveal'
+
+<Preview link='gsap-text-reveal' comment={['gsap']} isReload>
+  <ScrollTextReveal />
+</Preview>
+
+
+## How it Works
+
+### Required Structure
+
+The component uses a **dual-class structure** to create the animation effect.
+
+When copying component, there are additional utility classes which should be added to your tailwind.css file.
+
+```tsx
+<div className="anime-text-container">
+  <div className="anime-text">
+    <p>Your paragraph text here with keywords like vibrant and interactive.</p>
+  </div>
+</div>
+```
+
+- **`anime-text-container`**: The outer wrapper that gets **pinned** during scroll. This creates the "sticky" effect where the section stays in place while you scroll.
+- **`anime-text`**: The inner wrapper containing the `<p>` tag(s) with your text content.
+
+### Customizable Keywords
+
+The component highlights specific keywords defined in the `KEYWORDS` array:
+
+```tsx
+const KEYWORDS = ['vibrant', 'living', 'clarity', 'expression', 'shape', 
+                  'intuitive', 'storytelling', 'interactive', 'vision']
+```
+
+These keywords receive enhanced styling with background highlights during the reveal animation.
