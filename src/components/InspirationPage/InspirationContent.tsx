@@ -13,6 +13,7 @@ import FilterSection from './FilterSection'
 import SiteCards from './SiteCards'
 import EmptyResult from './SiteCards/EmptyResult'
 import SiteCardsSkeleton from './SiteCards/SiteCardsSkeleton'
+import ThreeDMarquee from '../ui/3d-marquee'
 
 const SubmitWebsiteDialog = dynamic(() => import('./SubmitWebsiteDialog'), {
   ssr: false,
@@ -23,6 +24,7 @@ interface Props {
   totalDocs: number
   categories: Category[]
   styles: WebsiteStyle[]
+  images: string[]
 }
 
 export default function InspirationContent({
@@ -30,14 +32,18 @@ export default function InspirationContent({
   totalDocs,
   categories,
   styles,
+  images
 }: Props) {
   const [filterQuery, setFilterQuery] = useState<Where>({
     isVisible: { equals: true },
   })
+
+  console.log('initialData', initialData)
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedStyles, setSelectedStyles] = useState<string[]>([])
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -112,14 +118,15 @@ export default function InspirationContent({
 
   return (
     <>
-      <section className='mb-10 flex items-center justify-between gap-10 py-20'>
-        <div className='flex flex-col items-start'>
-          <h1 className='-tracking-two mb-2 text-4xl font-semibold'>
-            Node Inspiration Websites ({totalDocs})
+      <section className='mb-10 flex max-xl:flex-col max-xl:items-start items-center justify-between gap-10 py-10 px-20 max-2xl:px-6 max-xl:px-0 max-lg:py-6'>
+        <div className='flex bg-cyan-50/0 flex-col flex-3 w-full items-start relative'>
+          <span className='absolute -top-8 left-0 opacity-50 -tracking-one font-mono text-sm'>{totalDocs} websites available</span>
+          <h1 className='-tracking-two mb-2 text-5xl font-semibold'>
+            Node Inspiration <br className='max-lg:block hidden' /> Websites 
           </h1>
-          <div className='text-muted-foreground text-base'>
+          <div className='text-muted-foreground text-lg'>
             <p className='mb-2'>
-              Explore selected websites for your next design inspiration
+              Explore selected websites for your next design.
             </p>
             <p>
               <Button
@@ -127,12 +134,14 @@ export default function InspirationContent({
                 variant={'link'}
                 onClick={() => setIsDialogOpen(true)}
               >
-                Submit yours
+                Submit your website
               </Button>
             </p>
           </div>
         </div>
-        <div>3d marque component area</div>
+        <div className='flex-5 max-xl:flex-auto max-xl:w-full'>
+          <ThreeDMarquee images={images} />
+        </div>
       </section>
 
       <FilterSection
