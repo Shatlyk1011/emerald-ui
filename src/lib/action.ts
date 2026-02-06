@@ -14,7 +14,6 @@ export const getComponent = async (fileName: string | null, folder: string) => {
   const baseDir = path.join(process.cwd(), 'src/components/node-ui-components')
   if (!fileName || fileName === 'undefined') {
     const fullPath = path.join(baseDir, `${folder}.tsx`)
-    // console.log("fullPath", fullPath);
     return await readFileCache(fullPath)
   }
 

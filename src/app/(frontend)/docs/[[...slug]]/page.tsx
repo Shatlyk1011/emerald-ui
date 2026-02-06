@@ -9,6 +9,7 @@ import { notFound } from 'next/navigation'
 import { source } from '@/lib/source'
 import { cn } from '@/lib/utils'
 import Preview from '@/components/mdx/preview'
+import Separator from '@/components/ui/separator'
 import PreviewClient from '@/components/mdx/preview-client'
 import WhatIncluded from '@/components/mdx/what-included'
 
@@ -49,6 +50,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             a: createRelativeLink(source as any, page as any),
             Preview,
+            Separator,
             PreviewClient,
             WhatIncluded,
           }}

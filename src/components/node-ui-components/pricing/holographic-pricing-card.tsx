@@ -2,7 +2,7 @@
 
 /**
  * @author: @nodeui
- * @description: Holographic Pricing Table with RGB chromatic aberration
+ * @description: Holographic Pricing Card with RGB chromatic aberration
  * @version: 1.0.0
  * @date: 2026-01-30
  * @license: MIT
@@ -13,9 +13,7 @@ import { Check, Zap } from 'lucide-react'
 import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 
-// ============================================================================
 // Types
-// ============================================================================
 
 export interface PricingTier {
   id: string
@@ -28,18 +26,13 @@ export interface PricingTier {
   cta: string
 }
 
-export interface HolographicPricingTableProps {
-  /** Array of pricing tiers */
+export interface HolographicPricingCardProps {
   tiers?: PricingTier[]
-  /** Additional CSS classes */
   className?: string
-  /** Callback when a tier is selected */
   onSelectTier?: (tierId: string) => void
 }
 
-// ============================================================================
 // Default Data
-// ============================================================================
 
 const defaultTiers: PricingTier[] = [
   {
@@ -77,9 +70,7 @@ const defaultTiers: PricingTier[] = [
   },
 ]
 
-// ============================================================================
 // Pricing Tier Card Component
-// ============================================================================
 
 interface PricingTierCardProps {
   tier: PricingTier
@@ -235,14 +226,12 @@ const PricingTierCard: FC<PricingTierCardProps> = ({ tier }) => {
   )
 }
 
-// ============================================================================
 // Main Component
-// ============================================================================
 
-export default function HolographicPricingTable({
+export default function HolographicPricingCard({
   tiers = defaultTiers,
   className,
-}: HolographicPricingTableProps) {
+}: HolographicPricingCardProps) {
   return (
     <div className={cn('w-full px-4 py-12', className)}>
       {/* Header */}
