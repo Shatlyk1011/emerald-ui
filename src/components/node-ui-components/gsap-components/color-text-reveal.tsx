@@ -155,9 +155,9 @@ function ColorTextReveal({ children }: Props) {
   )
 
   if (React.Children.count(children) === 1 && React.isValidElement(children)) {
-    // eslint-disable-next-line react-hooks/refs
     return React.cloneElement(
       children as React.ReactElement<Record<string, unknown>>,
+      // eslint-disable-next-line react-hooks/refs
       { ref: containerRef }
     )
   }
