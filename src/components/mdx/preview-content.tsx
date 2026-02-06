@@ -8,11 +8,13 @@ import {
   useState,
   useTransition,
 } from 'react'
-import { CheckCheck, Copy, Lock, RefreshCw } from 'lucide-react'
+import { CheckCheck, Copy, ShieldAlert, RefreshCw } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useTheme } from 'next-themes'
+import { useRouter } from 'next/navigation'
 import { copyComponent } from '@/lib/action'
 import { cn } from '@/lib/utils'
+import { toast } from 'sonner'
 
 function SuccessParticles({
   buttonRef,
@@ -71,6 +73,7 @@ export default function PreviewContent({
   isBlock?: boolean
   onReload?: () => void
 }) {
+  const router = useRouter()
   const { theme } = useTheme()
   const [isPending, startTransition] = useTransition()
   const [state, formAction] = useActionState(copyComponent, {
@@ -81,6 +84,12 @@ export default function PreviewContent({
   const [isCopied, setIsCopied] = useState(false)
 
   const handleCopyClick = async () => {
+    if (isBlock) {
+      router.push('/sign-in')
+      toast.info("Please sign in to copy component", { position: 'top-center' })
+      return
+    }
+
     const [folder, filename] = link.split('/')
 
     startTransition(async () => {
@@ -124,10 +133,6 @@ export default function PreviewContent({
           className='w-full sm:w-auto'
           onSubmit={(e) => {
             e.preventDefault()
-            if (isBlock) {
-              // handle modal to sub
-              return
-            }
             handleCopyClick()
           }}
         >
@@ -144,7 +149,7 @@ export default function PreviewContent({
               'rounded-sm',
               'my-0 py-0 shadow-none',
               'w-fit md:w-full',
-              isBlock && 'opacity-40'
+              isBlock && 'opacity-80'
             )}
             disabled={isPending}
             ref={copyButtonRef}
@@ -154,10 +159,11 @@ export default function PreviewContent({
               <CheckCheck className='text-background h-3.5 w-3.5' />
             ) : (
                 <>
+                {/* if is block and not auth */}
                   {isBlock ? (
-                    <Lock className={cn("h-3.5 w-3.5 transition-all duration-200group-hover:rotate-12")} />
+                    <ShieldAlert className={cn("h-3.5 w-3.5 transition-all duration-200 group-hover:scale-110")} />
                   ) : (
-                    <Copy className="h-3.5 w-3.5 transition-all duration-200group-hover:rotate-12" />
+                      <Copy className="h-3.5 w-3.5 transition-all duration-200 group-hover:rotate-12" />
                   )}
               </>
 

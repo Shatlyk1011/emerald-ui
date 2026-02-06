@@ -10,7 +10,10 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Layout({ children }: LayoutProps<'/docs'>) {
+export default function Layout({
+  children,
+  modal,
+}: LayoutProps<'/docs'> & { modal: React.ReactNode }) {
   return (
     <DocsLayout
       tree={plainSource.pageTree}
@@ -35,6 +38,7 @@ export default function Layout({ children }: LayoutProps<'/docs'>) {
       }}
     >
       {children}
+      {modal}
     </DocsLayout>
   )
 }

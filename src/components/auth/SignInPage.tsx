@@ -9,8 +9,14 @@ import { loginSchema } from '@/lib/login-schema'
 import { createClient } from '@/lib/supabase-client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { cn } from '@/lib/utils'
 
-export default function SignInPage() {
+interface Props {
+  handleSwitch?: () => void
+  isModal?: boolean
+}
+
+export default function SignInPage({ handleSwitch, isModal }: Props) {
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -82,7 +88,7 @@ export default function SignInPage() {
   }
 
   return (
-    <div className='relative flex min-h-screen items-center justify-center overflow-hidden max-sm:items-start max-sm:pt-16'>
+    <div className={cn('relative flex min-h-screen items-center justify-center overflow-hidden max-sm:items-start max-sm:pt-16', isModal && "min-h-auto max-h-max py-10")}>
       {/* left */}
       <div className='flex flex-1 justify-center'>
         <div className='relative z-10 w-full max-w-lg space-y-8 rounded-2xl p-8 shadow-2xl backdrop-blur-xl max-md:space-y-5 max-sm:p-5'>
@@ -97,12 +103,17 @@ export default function SignInPage() {
             </h2>
             <p className='text-foreground/70 text-sm'>
               Don&apos;t have an account?{' '}
-              <Link
-                href='/sign-up'
-                className='text-blue-600 transition-colors hover:text-blue-500/80 dark:text-blue-400'
-              >
-                Sign up
-              </Link>
+              {isModal ? (
+                <button className='text-blue-600 transition-colors hover:text-blue-500/80 dark:text-blue-400' onClick={handleSwitch}>Sign up</button>
+              ) : (
+
+                  <Link
+                    href='/sign-up'
+                    className='text-blue-600 transition-colors hover:text-blue-500/80 dark:text-blue-400'
+                  >
+                    Sign up
+                  </Link>
+              )}
             </p>
           </div>
 
@@ -219,7 +230,7 @@ export default function SignInPage() {
       </div>
 
       {/* right */}
-      <div className='flex h-screen flex-1 items-center justify-center bg-slate-900 max-lg:hidden'>
+      <div className={cn('flex h-screen flex-1 items-center justify-center bg-slate-900 max-lg:hidden', isModal && "hidden")}>
         hello world
       </div>
     </div>
