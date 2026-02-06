@@ -49,7 +49,7 @@ const Lens: React.FC<LensProps> = ({
         if (disableZoom) return
         // min-max 1.1 - 3
         setZoomFactor((prev) =>
-          Math.min(Math.max(prev - e.deltaY * 0.001, 1.1), 3)
+          Math.min(Math.max(prev - e.deltaY * 0.001, 1), 3)
         )
       }}
       onMouseLeave={() => {

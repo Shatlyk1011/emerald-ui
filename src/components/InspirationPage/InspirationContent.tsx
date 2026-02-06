@@ -129,15 +129,13 @@ export default function InspirationContent({
             <p className='mb-2'>
               Explore selected websites for your next design.
             </p>
-            <p>
-              <Button
-                className='p-0'
-                variant={'link'}
-                onClick={() => setIsDialogOpen(true)}
-              >
-                Submit your website
-              </Button>
-            </p>
+            <Button
+              className='p-0 mt-16'
+              variant={'link'}
+              onClick={() => setIsDialogOpen(true)}
+            >
+              Submit your website
+            </Button>
           </div>
         </div>
         <div className='flex-5 max-xl:w-full max-xl:flex-auto'>
