@@ -1,10 +1,10 @@
 import { formatDate } from '@/composables/utils'
 import { CreditHistoryResponse } from '@/types/auth'
 import { CreditCard, Crown, Calendar } from 'lucide-react'
-import { headers } from 'next/headers'
 import Link from 'next/link'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
+import { axios } from '@/lib/axios'
 
 export const dynamic = 'force-dynamic'
 
@@ -48,21 +48,11 @@ export default async function ProfilePage() {
   let userData: CreditHistoryResponse | null = null
 
   try {
-    // Get cookies to forward to API route
-    const headersList = await headers()
-    const cookie = headersList.get('cookie') || ''
 
-    const response = await fetch('http://localhost:3000/api/credit-history', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Cookie: cookie,
-      },
-      cache: 'no-store',
-    })
-
-    if (response.ok) {
-      userData = await response.json()
+    const response = await axios.get('/credit-history')
+    console.log('response', response)
+    if (response.status === 200) {
+      userData = response.data
     } else {
       console.error(
         'Failed to fetch credit history:',

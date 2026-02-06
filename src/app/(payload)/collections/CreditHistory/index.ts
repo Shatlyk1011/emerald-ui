@@ -5,7 +5,7 @@ const CreditHistory: CollectionConfig = {
   slug: 'credit-history',
   access: {
     // Only admins can create via admin panel
-    // Users get credits via cron job or Stripe webhook
+    // INVESTIGATE
     create: ({ req }) => {
       // Allow if user is authenticated through Supabase and has userId
       if (req.user && req.context?.userId) {
@@ -35,36 +35,15 @@ const CreditHistory: CollectionConfig = {
   admin: {
     defaultColumns: [
       'userId',
+      'createdAt',
       'creditAmount',
       'type',
-      'createdDate',
-      'expiredDate',
     ],
     useAsTitle: 'userId',
     description:
       'Track user credit history including monthly free credits and purchased credits. Credits expire after 1 month.',
   },
-  hooks: {
-    beforeChange: [
-      async ({ data, operation }) => {
-        if (operation === 'create') {
-          // Auto-set createdDate if not provided
-          if (!data.createdDate) {
-            data.createdDate = new Date().toISOString()
-          }
 
-          // Auto-calculate expiration date (1 month from creation)
-          if (!data.expiredDate) {
-            const createdDate = new Date(data.createdDate)
-            const expiredDate = new Date(createdDate)
-            expiredDate.setMonth(expiredDate.getMonth() + 1)
-            data.expiredDate = expiredDate.toISOString()
-          }
-        }
-        return data
-      },
-    ],
-  },
   fields: [
     {
       name: 'userId',
@@ -102,30 +81,7 @@ const CreditHistory: CollectionConfig = {
         description: 'Type of credit allocation',
       },
     },
-    {
-      name: 'createdDate',
-      label: 'Created Date',
-      type: 'date',
-      required: true,
-      admin: {
-        date: {
-          pickerAppearance: 'dayAndTime',
-        },
-        description: 'Date when credits were allocated',
-      },
-    },
-    {
-      name: 'expiredDate',
-      label: 'Expiration Date',
-      type: 'date',
-      required: true,
-      admin: {
-        date: {
-          pickerAppearance: 'dayAndTime',
-        },
-        description: 'Date when credits expire (1 month from creation)',
-      },
-    },
+  
   ],
   timestamps: true,
 }

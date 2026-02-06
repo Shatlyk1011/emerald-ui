@@ -25,7 +25,15 @@ const Clients: CollectionConfig = {
     },
   },
   admin: {
-    defaultColumns: ['userId', 'email', 'currentPlan', 'isBlocked'],
+    defaultColumns: [
+      'userId',
+      'createdAt',
+      'email',
+      'currentPlan',
+      'provider',
+      'isVerified',
+      'isBlocked',
+    ],
     useAsTitle: 'userId',
     description:
       'Manage client accounts and their subscription plans. Each client is linked to their credit history.',
@@ -39,8 +47,8 @@ const Clients: CollectionConfig = {
       unique: true,
       index: true,
       admin: {
-        readOnly: true,
         description: 'Supabase user ID (unique identifier)',
+        readOnly: true,
       },
     },
     {
@@ -49,8 +57,8 @@ const Clients: CollectionConfig = {
       type: 'email',
       required: false,
       admin: {
-        readOnly: true,
         description: 'User email address (optional, can be provided by user)',
+        readOnly: true,
       },
     },
     {
@@ -84,7 +92,9 @@ const Clients: CollectionConfig = {
       label: 'Auth Provider',
       type: 'select',
       required: false,
+      defaultValue: 'n/a',
       options: [
+        { label: 'N/A', value: 'n/a' },
         { label: 'Email (Magic Link)', value: 'email' },
         { label: 'Google', value: 'google' },
         { label: 'GitHub', value: 'github' },
@@ -92,6 +102,7 @@ const Clients: CollectionConfig = {
       admin: {
         description: 'Authentication provider used during registration',
         position: 'sidebar',
+        readOnly: true,
       },
     },
     {
