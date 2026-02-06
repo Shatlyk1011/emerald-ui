@@ -24,7 +24,7 @@ interface ProfileCardProps {
  * Features smooth animations and hover effects.
  */
 export default function ProfileCard({
-  name = 'John Doe',
+  name = 'Johnita Doe',
   title = 'Fullstack developer, previously Google and Meta',
   imageUrl = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
   verified = true,

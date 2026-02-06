@@ -15,6 +15,7 @@
     "components/button-colorful",
     "components/social-button",
     "components/interactive-hover-button",
+    "components/hover-border-gradient",
     "---Blocks & Sections---",
     "components/pricing",
 

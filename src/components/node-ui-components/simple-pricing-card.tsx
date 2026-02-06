@@ -16,7 +16,7 @@ const DEMO_DATA = [
   {
     plan: 'Starter',
     role: 'For Individuals',
-    tier: { title: '$9', subtitle: '/month' },
+    tier: { title: 'Free' },
     list_1: [
       'Up to 5 projects',
       '10 GB storage',
@@ -148,7 +148,7 @@ export default function SimplePricingCardSection() {
     <div className='flex w-full flex-col justify-center gap-3 max-lg:gap-2 max-md:flex-col max-md:gap-3'>
       <div className='mb-8 p-5 text-center max-sm:mb-6'>
         <h1 className='mb-2 text-4xl font-bold tracking-tight max-sm:text-3xl'>
-          Simple, Pricing Card
+          Pay Once - Use Forever
         </h1>
         <p className='text-muted-foreground mx-auto max-w-2xl text-lg max-sm:text-base'>
           Explore our free resources, or get started with a paid plan.
