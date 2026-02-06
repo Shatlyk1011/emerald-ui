@@ -63,13 +63,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/docs/components/pricing',
-        destination: '/docs/components/pricing/simple-pricing-card',
-        permanent: true,
-      },
-      // fumadocs redirects
-
-      {
         source: '/r/:path([^.]*)',
         destination: '/r/:path.json',
         permanent: true,
