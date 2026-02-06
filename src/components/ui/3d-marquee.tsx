@@ -29,7 +29,7 @@ const ThreeDMarquee = ({
             className='relative top-0 right-[-55%] grid size-full origin-top-left grid-cols-3 gap-5 transform-3d max-xl:-top-30 max-xl:right-[-45%] max-sm:top-0'
           >
             {chunks.map((subarray, colIndex) => (
-              <motion.div
+              <motion.figure
                 animate={{ y: colIndex % 2 === 0 ? 60 : -60 }}
                 transition={{
                   duration: colIndex % 2 === 0 ? 10 : 15,
@@ -40,9 +40,9 @@ const ThreeDMarquee = ({
                 className='flex flex-col items-start gap-6'
               >
                 {subarray.map((src, imageIndex) => (
-                  <div className='relative' key={imageIndex + src}>
+                  <div className='relative ' key={imageIndex + src}>
                     <motion.img
-                      className='aspect-4/3 h-full w-full rounded-lg object-cover select-none'
+                      className='aspect-4/3 bg-neutral-100 dark:bg-neutral-900 h-full w-full rounded-lg object-cover select-none'
                       key={imageIndex}
                       src={src}
                       draggable={false}
@@ -50,7 +50,7 @@ const ThreeDMarquee = ({
                     />
                   </div>
                 ))}
-              </motion.div>
+              </motion.figure>
             ))}
           </div>
         </div>
