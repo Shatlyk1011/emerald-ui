@@ -1,10 +1,12 @@
 import { formatDate } from '@/composables/utils'
 import { CreditHistoryResponse } from '@/types/auth'
 import { CreditCard, Crown, Calendar } from 'lucide-react'
+import { createClient } from '@/lib/supabase-server'
+import { getClientByUserId, getUserCreditHistory } from '@/lib/credit-helpers'
+import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { axios } from '@/lib/axios'
 
 export const dynamic = 'force-dynamic'
 
@@ -48,17 +50,33 @@ export default async function ProfilePage() {
   let userData: CreditHistoryResponse | null = null
 
   try {
+    const supabase = await createClient()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
 
-    const response = await axios.get('/credit-history')
-    console.log('response', response)
-    if (response.status === 200) {
-      userData = response.data
-    } else {
-      console.error(
-        'Failed to fetch credit history:',
-        response.status,
-        response.statusText
-      )
+    if (!user) {
+      redirect('/sign-in')
+    }
+
+    // Fetch client data and credit history directly
+    const [client, history] = await Promise.all([
+      getClientByUserId(user.id),
+      getUserCreditHistory(user.id),
+    ])
+
+    if (client && history) {
+      userData = {
+        client: {
+          userId: client.userId,
+          email: client.email || undefined,
+          currentPlan: client.currentPlan || 'free',
+          isBlocked: client.isBlocked || false,
+          provider: client.provider || undefined,
+          isVerified: client.isVerified || false,
+        },
+        history: history || [],
+      }
     }
   } catch (err) {
     console.error('Failed to fetch credit history:', err)
