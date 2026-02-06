@@ -16,17 +16,7 @@ Node ui:
 
 <!-- !!! ISSUE WHEN APPLYING FILTER IN dialog - remove this logic?? -->
 
-Inspiration page:
-- add suggest website button and collection (with rate limit of 2-3) (later)
-
-- filters to be apply in... sekundomer (later)
-
-- viewed checkbox (later)
-
-
 Result page:
-
-- Find money for claude api
 
 - Remove links from responses
 
@@ -36,15 +26,19 @@ Result page:
 
 Global:
 
+- add seo (blog)
+
 - add what's new section in main layout
 
 - add user form for "what i want to see in this page (or bugs)"
 
+<!-- footer as in aceternity ui -->
+
 - add loading states
 
-- add seo (blog)
-
 - change colors (dark slate as primary?)?
+
+- update main page ? 
 
 
 <!-- 
@@ -52,6 +46,9 @@ Global:
 
 <!-- 
   weekly newsletter (n8n) 
+  
 -->
 
-<!-- manually clear db user-history -->
+<!-- make sign in obligatory? for usa ip give 5 credits, or no free credits (is free credits allowed flag) -->
+
+<!-- add screen sizing -->

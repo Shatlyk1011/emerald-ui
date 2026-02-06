@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { siteConfig } from '@/lib/site-config'
 import BackgroundThreads from '@/components/ui/background-threads'
 import FileUploadInput from '@/components/FileUpload'
-import DesignGenerationApp from '@/components/claude-test'
 
 export const metadata: Metadata = {
   title: 'Home',
