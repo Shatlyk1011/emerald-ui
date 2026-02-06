@@ -9,6 +9,7 @@
     "components/animated-dropdown",
     "components/animated-input",
     "components/interactive-data-table",
+    "components/job-listing-card",
     "components/parallax-gallery",
     "components/profile-card",
     "---Buttons---",
@@ -16,8 +17,10 @@
     "components/social-button",
     "components/interactive-hover-button",
     "components/hover-border-gradient",
+
     "---Blocks & Sections---",
     "components/pricing",
+    "components/cards",
 
     "---Text---",
     "components/text-shimmer",
