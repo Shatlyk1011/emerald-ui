@@ -219,7 +219,7 @@ export interface Client {
   /**
    * Authentication provider used during registration
    */
-  provider?: ('email' | 'google' | 'github') | null;
+  provider?: ('n/a' | 'email' | 'google' | 'github') | null;
   /**
    * Whether the user has verified their email address
    */
@@ -251,14 +251,6 @@ export interface CreditHistory {
    * Type of credit allocation
    */
   type: 'monthly_free' | 'purchased';
-  /**
-   * Date when credits were allocated
-   */
-  createdDate: string;
-  /**
-   * Date when credits expire (1 month from creation)
-   */
-  expiredDate: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -482,8 +474,6 @@ export interface CreditHistorySelect<T extends boolean = true> {
   userId?: T;
   creditAmount?: T;
   type?: T;
-  createdDate?: T;
-  expiredDate?: T;
   updatedAt?: T;
   createdAt?: T;
 }

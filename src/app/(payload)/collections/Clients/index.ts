@@ -1,6 +1,10 @@
 import { CollectionConfig } from 'payload'
 import { admins } from '../../utils/admins'
 
+
+
+
+
 const Clients: CollectionConfig = {
   slug: 'clients',
   access: {
@@ -18,10 +22,7 @@ const Clients: CollectionConfig = {
         }
       }
       // Admins can read all
-      if (req.user) {
-        return true
-      }
-      return false
+      return admins({ req })
     },
   },
   admin: {
