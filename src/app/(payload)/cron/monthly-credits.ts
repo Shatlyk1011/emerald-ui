@@ -23,12 +23,35 @@ export async function addMonthlyCredits() {
 
     // Add 5 free credits for each active user
     for (const client of clients.docs as Client[]) {
+      // Expire old monthly free credits
+      await payload.update({
+        collection: 'credit-history',
+        where: {
+          and: [
+            { userId: { equals: client.userId } },
+            { source: { equals: 'monthly_free' } },
+            { status: { equals: 'active' } },
+          ],
+        },
+        data: {
+          status: 'expired',
+        },
+      })
+
+      // Calculate expiration date (1 month from now)
+      const expirationDate = new Date()
+      expirationDate.setMonth(expirationDate.getMonth() + 1)
+
+      // Add new monthly credits
       await payload.create({
         collection: 'credit-history',
         data: {
           userId: client.userId,
           creditAmount: 5,
+          creditsSpent: 0,
           source: 'monthly_free',
+          status: 'active',
+          expirationDate: expirationDate.toISOString(),
         },
       })
     }

@@ -10,7 +10,6 @@ export interface UserDataResponse {
     creditAmount: number
     createdAt: string
   }[]
-  overall?: any
 }
 
 export async function GET(req: Request) {
@@ -48,7 +47,6 @@ export async function GET(req: Request) {
         creditAmount: h.creditAmount,
         createdAt: h.createdAt,
       })),
-      overall: client
     })
   } catch (error) {
     console.error('Error fetching credit history:', error)

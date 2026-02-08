@@ -1,6 +1,5 @@
-import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
-
+import { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
 
 const CreditHistory: CollectionConfig = {
   slug: 'credit-history',
@@ -87,11 +86,11 @@ const CreditHistory: CollectionConfig = {
       label: 'Credit Amount',
       type: 'number',
       required: true,
-      defaultValue: 5,
+      defaultValue: 3,
       min: 0,
       admin: {
         description:
-          'Number of credits (5 for monthly free, variable for purchased)',
+          'Number of credits (3 for monthly free, variable for purchased)',
       },
     },
     {
@@ -107,6 +106,37 @@ const CreditHistory: CollectionConfig = {
       ],
       admin: {
         description: 'Type of credit allocation',
+      },
+    },
+    {
+      name: 'status',
+      label: 'Status',
+      type: 'select',
+      defaultValue: 'active',
+      options: [
+        { label: 'Active', value: 'active' },
+        { label: 'Expired', value: 'expired' },
+      ],
+      admin: {
+        description: 'Status of the credit',
+      },
+    },
+    {
+      name: 'creditsSpent',
+      label: 'Credits Spent',
+      type: 'number',
+      defaultValue: 0,
+      min: 0,
+      admin: {
+        description: 'Amount of credits spent from this allocation',
+      },
+    },
+    {
+      name: 'expirationDate',
+      label: 'Expiration Date',
+      type: 'date',
+      admin: {
+        description: 'Date when these credits expire',
       },
     },
   ],

@@ -253,13 +253,25 @@ export interface CreditHistory {
    */
   userId: string;
   /**
-   * Number of credits (5 for monthly free, variable for purchased)
+   * Number of credits (3 for monthly free, variable for purchased)
    */
   creditAmount: number;
   /**
    * Type of credit allocation
    */
   source: 'monthly_free' | 'purchased' | 'signup_bonus';
+  /**
+   * Status of the credit
+   */
+  status?: ('active' | 'expired') | null;
+  /**
+   * Amount of credits spent from this allocation
+   */
+  creditsSpent?: number | null;
+  /**
+   * Date when these credits expire
+   */
+  expirationDate?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -484,6 +496,9 @@ export interface CreditHistorySelect<T extends boolean = true> {
   userId?: T;
   creditAmount?: T;
   source?: T;
+  status?: T;
+  creditsSpent?: T;
+  expirationDate?: T;
   updatedAt?: T;
   createdAt?: T;
 }
