@@ -263,7 +263,7 @@ export interface CreditHistory {
   /**
    * Status of the credit
    */
-  status?: ('active' | 'expired') | null;
+  status: 'active' | 'expired' | 'used';
   /**
    * Amount of credits spent from this allocation
    */
@@ -271,7 +271,7 @@ export interface CreditHistory {
   /**
    * Date when these credits expire
    */
-  expirationDate?: string | null;
+  expirationDate: string;
   updatedAt: string;
   createdAt: string;
 }

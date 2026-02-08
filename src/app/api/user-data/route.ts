@@ -9,6 +9,9 @@ export interface UserDataResponse {
     source: CreditHistory['source']
     creditAmount: number
     createdAt: string
+    expirationDate: string
+    status: CreditHistory['status']
+    creditsSpent: CreditHistory['creditsSpent']
   }[]
 }
 
@@ -30,9 +33,6 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: 'User is blocked' }, { status: 403 })
     }
 
-    console.log('222222222222', client)
-
-    // Safely cast the join field result to CreditHistory array
     // When depth is sufficient, join field returns { docs: [...] } structure
     const joinedData = client.creditHistory as unknown as
       | { docs: CreditHistory[] }
@@ -46,6 +46,9 @@ export async function GET(req: Request) {
         source: h.source,
         creditAmount: h.creditAmount,
         createdAt: h.createdAt,
+        expirationDate: h.expirationDate,
+        creditsSpent: h.creditsSpent,
+        status: h.status
       })),
     })
   } catch (error) {

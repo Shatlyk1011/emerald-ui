@@ -16,6 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { cn } from '@/lib/utils'
 
 export const dynamic = 'force-dynamic'
 
@@ -166,30 +167,33 @@ export default function ProfilePage() {
 
         <div className='overflow-hidden rounded-lg border'>
           <Table className='w-full overflow-y-auto text-nowrap'>
-            <TableHeader className='bg-muted/50'>
+            <TableHeader className='bg-muted/50 text-left text-sm font-medium'>
               <TableRow>
-                <TableHead className='px-6 py-3 text-left text-sm font-medium'>
-                  Type
+                <TableHead className='px-6 py-3 w-[40%]'>
+                  Source
                 </TableHead>
-                <TableHead className='px-6 py-3 text-left text-sm font-medium'>
-                  Date
+                <TableHead className='px-6 py-3 '>
+                  Added Date
                 </TableHead>
-                <TableHead className='w-1/5 px-6 py-3 text-right text-sm font-medium'>
+                <TableHead className='px-6 py-3'>
+                  Expiration Date
+                </TableHead>
+                <TableHead className='px-6 py-3 text-right w-[10%]'>
                   Credits
                 </TableHead>
-                <TableHead className='px-6 py-3 text-left text-sm font-medium'>
-                  Granted
+                <TableHead className='px-6 py-3'>
+                  Status
                 </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody className='divide-y'>
               {isLoading ? (
                 <TableRow>
-                  <TableCell colSpan={4} className='p-4'>
+                  <TableCell colSpan={5} className='p-4'>
                     <div className='space-y-2'>
-                      <Skeleton className='h-8 w-full' />
-                      <Skeleton className='h-8 w-full' />
-                      <Skeleton className='h-8 w-full' />
+                      <Skeleton className='h-10 w-full' />
+                      <Skeleton className='h-10 w-full' />
+                      <Skeleton className='h-10 w-full' />
                     </div>
                   </TableCell>
                 </TableRow>
@@ -205,28 +209,38 @@ export default function ProfilePage() {
               ) : (
                 userData?.history &&
                 userData.history.length > 0 &&
-                userData.history.map((credit) => (
-                  <TableRow
-                    key={credit.id}
-                    className='hover:bg-muted/30 transition-colors'
-                  >
-                    <TableCell className='px-6 py-4 text-sm font-medium'>
-                      {getCreditTypeLabel(credit.source)}
-                    </TableCell>
-                    <TableCell className='px-6 py-4 text-sm'>
-                      <div className='flex items-center gap-2'>
-                        <Calendar className='text-muted-foreground size-4' />
-                        {formatDate(credit.createdAt)}
-                      </div>
-                    </TableCell>
-                    <TableCell className='px-6 py-4 text-right text-sm font-semibold text-green-600'>
-                      +{credit.creditAmount}
-                    </TableCell>
-                    <TableCell className='text-muted-foreground px-6 py-4 text-sm'>
-                      {getCreditTypeLabel(credit.source)}
-                    </TableCell>
-                  </TableRow>
-                ))
+                    userData.history.map((h) => {
+                      // consider "used" status as well
+                      const isActive = h.status === 'active'
+                      return (
+                        <TableRow
+                          key={h.id}
+                          className='hover:bg-muted/30 transition-colors'
+                        >
+                          <TableCell className='px-6 py-4 text-sm font-medium'>
+                            {getCreditTypeLabel(h.source)}
+                          </TableCell>
+                          <TableCell className='px-6 py-4 text-sm'>
+                            <div className='flex items-center gap-2'>
+                              <Calendar className='text-muted-foreground size-4' />
+                              {formatDate(h.createdAt)}
+                            </div>
+                          </TableCell>
+                          <TableCell className='px-6 py-4 text-sm'>
+                            <div className='flex items-center gap-2'>
+                              <Calendar className='text-muted-foreground size-4' />
+                              {formatDate(h.expirationDate || '20.10.20')}
+                            </div>
+                          </TableCell>
+                          <TableCell className={cn('px-6 py-4 text-right text-sm font-semibold ', isActive ? "text-green-600" : "opacity-80")}>
+                            +{h.creditAmount}
+                          </TableCell>
+                          <TableCell className={cn('capitalize text-muted-foreground px-6 py-4 text-sm', isActive ? 'text-green-600' : 'opacity-80')}>
+                            {h.status}
+                          </TableCell>
+                        </TableRow>
+                      )
+                    })
               )}
             </TableBody>
           </Table>

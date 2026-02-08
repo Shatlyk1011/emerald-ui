@@ -113,9 +113,11 @@ const CreditHistory: CollectionConfig = {
       label: 'Status',
       type: 'select',
       defaultValue: 'active',
+      required: true,
       options: [
         { label: 'Active', value: 'active' },
         { label: 'Expired', value: 'expired' },
+        { label: 'Used', value: 'used' },
       ],
       admin: {
         description: 'Status of the credit',
@@ -135,6 +137,7 @@ const CreditHistory: CollectionConfig = {
       name: 'expirationDate',
       label: 'Expiration Date',
       type: 'date',
+      required: true,
       admin: {
         description: 'Date when these credits expire',
       },
