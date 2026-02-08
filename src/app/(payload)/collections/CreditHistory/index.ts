@@ -1,5 +1,5 @@
-import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
+import { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
 
 const CreditHistory: CollectionConfig = {
   slug: 'credit-history',
@@ -33,12 +33,7 @@ const CreditHistory: CollectionConfig = {
     },
   },
   admin: {
-    defaultColumns: [
-      'userId',
-      'createdAt',
-      'creditAmount',
-      'type',
-    ],
+    defaultColumns: ['userId', 'createdAt', 'creditAmount', 'type'],
     useAsTitle: 'userId',
     description:
       'Track user credit history including monthly free credits and purchased credits. Credits expire after 1 month.',
@@ -81,7 +76,22 @@ const CreditHistory: CollectionConfig = {
         description: 'Type of credit allocation',
       },
     },
-  
+    {
+      name: 'source',
+      label: 'Source',
+      type: 'select',
+      required: true,
+      defaultValue: 'manual',
+      options: [
+        { label: 'Monthly Cron Job', value: 'monthly_cron' },
+        { label: 'Manual', value: 'manual' },
+        { label: 'Purchase', value: 'purchase' },
+        { label: 'Signup Bonus', value: 'signup_bonus' },
+      ],
+      admin: {
+        description: 'How the credits were added',
+      },
+    },
   ],
   timestamps: true,
 }
