@@ -26,7 +26,7 @@ const ThreeDMarquee = ({
         <div className='aspect-square size-180 shrink-0 scale-135 max-xl:size-full max-xl:scale-110 max-sm:scale-130'>
           <div
             style={{ transform: 'rotateX(45deg) rotateY(0deg) rotateZ(45deg)' }}
-            className='relative top-0 right-[-55%] grid size-full origin-top-left grid-cols-3 gap-5 max-sm:gap-2 transform-3d max-xl:-top-30 max-xl:right-[-45%] max-sm:top-0'
+            className='relative top-0 right-[-55%] grid size-full origin-top-left grid-cols-3 gap-5 transform-3d max-xl:-top-30 max-xl:right-[-45%] max-sm:top-0 max-sm:gap-2'
           >
             {chunks.map((subarray, colIndex) => (
               <motion.figure
@@ -40,9 +40,9 @@ const ThreeDMarquee = ({
                 className='flex flex-col items-start gap-6 max-sm:gap-3'
               >
                 {subarray.map((src, imageIndex) => (
-                  <div className='relative ' key={imageIndex + src}>
+                  <div className='relative' key={imageIndex + src}>
                     <motion.img
-                      className='aspect-4/3 bg-neutral-100 dark:bg-neutral-900 h-full w-full rounded-lg object-cover select-none'
+                      className='aspect-4/3 h-full w-full rounded-lg bg-neutral-100 object-cover select-none dark:bg-neutral-900'
                       key={imageIndex}
                       src={src}
                       draggable={false}

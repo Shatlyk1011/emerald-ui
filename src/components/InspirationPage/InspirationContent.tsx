@@ -130,7 +130,7 @@ export default function InspirationContent({
               Explore selected websites for your next design.
             </p>
             <Button
-              className='p-0 mt-16'
+              className='mt-16 p-0'
               variant={'link'}
               onClick={() => setIsDialogOpen(true)}
             >

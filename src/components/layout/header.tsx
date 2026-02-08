@@ -1,5 +1,6 @@
 'use client'
 
+import { getUserInitials } from '@/composables/utils'
 import { LogOut, User as UserIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
@@ -16,7 +17,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import ThemeToggle from '@/components/ui/theme-toggle'
-import { getUserInitials } from '@/composables/utils'
 
 const { components, inspiration, home, pricing } = {
   home: '/',

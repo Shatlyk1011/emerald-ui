@@ -255,7 +255,7 @@ export default function HolographicPricingCard({
       </div>
 
       {/* Pricing Tiers Grid */}
-      <div className='mx-auto grid max-w-7xl gap-8 grid-cols-2 max-sm:grid-cols-1 '>
+      <div className='mx-auto grid max-w-7xl grid-cols-2 gap-8 max-sm:grid-cols-1'>
         {tiers.map((tier, index) => (
           <motion.div
             key={tier.id}

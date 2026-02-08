@@ -8,8 +8,8 @@
  * @license: MIT
  * @website: https://nodeui.com
  */
-import { motion } from 'motion/react'
 import { MapPin, Briefcase, DollarSign, ArrowUpRight } from 'lucide-react'
+import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
@@ -56,67 +56,75 @@ export default function JobListingCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
       className={cn(
-        'group relative overflow-hidden w-full max-w-sm bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:shadow-md',
+        'group relative w-full max-w-sm overflow-hidden rounded-2xl border border-zinc-200 bg-white transition-all duration-300 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900',
         className
       )}
     >
-      <div className="p-5">
+      <div className='p-5'>
         {/* Company Header */}
-        <div className="flex items-center gap-4">
+        <div className='flex items-center gap-4'>
           <motion.div
             whileHover={{ scale: 1.05 }}
             className={cn(
-              'w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl font-semibold shrink-0',
+              'flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-xl font-semibold text-white',
               companyColor
             )}
           >
             {companyInitial}
           </motion.div>
           <div>
-            <h4 className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+            <h4 className='text-sm font-medium text-zinc-900 dark:text-zinc-100'>
               {companyName}
             </h4>
-            <div className="flex items-center gap-2 mt-1">
-              <MapPin className="w-3.5 h-3.5 text-zinc-400" aria-hidden="true" />
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">{location}</p>
+            <div className='mt-1 flex items-center gap-2'>
+              <MapPin
+                className='h-3.5 w-3.5 text-zinc-400'
+                aria-hidden='true'
+              />
+              <p className='text-sm text-zinc-500 dark:text-zinc-400'>
+                {location}
+              </p>
             </div>
           </div>
         </div>
 
         {/* Job Details */}
-        <div className="mt-4">
-          <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+        <div className='mt-4'>
+          <h3 className='text-xl font-semibold text-zinc-900 dark:text-zinc-100'>
             {position}
           </h3>
 
           {/* Job Meta */}
-          <div className="mt-4 flex items-center gap-4">
-            <div className="flex items-center gap-1.5">
-              <Briefcase className="w-4 h-4 text-zinc-400" aria-hidden="true" />
-              <span className="text-sm text-zinc-600 dark:text-zinc-400">
+          <div className='mt-4 flex items-center gap-4'>
+            <div className='flex items-center gap-1.5'>
+              <Briefcase className='h-4 w-4 text-zinc-400' aria-hidden='true' />
+              <span className='text-sm text-zinc-600 dark:text-zinc-400'>
                 {employmentType}
               </span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <DollarSign className="w-4 h-4 text-zinc-400" aria-hidden="true" />
-              <span className="text-sm text-zinc-600 dark:text-zinc-400">
+            <div className='flex items-center gap-1.5'>
+              <DollarSign
+                className='h-4 w-4 text-zinc-400'
+                aria-hidden='true'
+              />
+              <span className='text-sm text-zinc-600 dark:text-zinc-400'>
                 {salaryRange}
               </span>
             </div>
           </div>
 
           {/* Requirements */}
-          <div className="mt-4 space-y-2">
+          <div className='mt-4 space-y-2'>
             {requirements.map((req, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="flex items-center gap-2"
+                className='flex items-center gap-2'
               >
-                <div className={cn('w-1.5 h-1.5 rounded-full', companyColor)} />
-                <span className="text-sm text-zinc-600 dark:text-zinc-400">
+                <div className={cn('h-1.5 w-1.5 rounded-full', companyColor)} />
+                <span className='text-sm text-zinc-600 dark:text-zinc-400'>
                   {req.text}
                 </span>
               </motion.div>
@@ -126,19 +134,19 @@ export default function JobListingCard({
       </div>
 
       {/* Footer */}
-      <div className="px-5 py-4 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between mt-2">
-        <div className="text-sm text-zinc-500 dark:text-zinc-400 flex flex-col gap-1">
+      <div className='mt-2 flex items-center justify-between border-t border-zinc-200 px-5 py-4 dark:border-zinc-800'>
+        <div className='flex flex-col gap-1 text-sm text-zinc-500 dark:text-zinc-400'>
           <div>
-            <span className="font-medium text-zinc-900 dark:text-zinc-100">
+            <span className='font-medium text-zinc-900 dark:text-zinc-100'>
               {applicantCount}
             </span>
-            <span className="font-medium text-zinc-500 dark:text-zinc-400">
+            <span className='font-medium text-zinc-500 dark:text-zinc-400'>
               {' '}
               applicants
             </span>
           </div>
           <div>
-            <span className="text-zinc-500 dark:text-zinc-400">
+            <span className='text-zinc-500 dark:text-zinc-400'>
               Posted {postedDaysAgo} days ago
             </span>
           </div>
@@ -146,11 +154,11 @@ export default function JobListingCard({
 
         <Button
           onClick={onApply}
-          className="group/btn relative flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 h-9 px-4 rounded-xl text-sm font-medium transition-all duration-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+          className='group/btn relative flex h-9 items-center justify-center rounded-xl bg-zinc-100 px-4 text-sm font-medium text-zinc-900 transition-all duration-300 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-zinc-700'
         >
-          <span className="flex items-center gap-2">
+          <span className='flex items-center gap-2'>
             Apply Now
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5" />
+            <ArrowUpRight className='h-4 w-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5' />
           </span>
         </Button>
       </div>

@@ -12,9 +12,9 @@ import { CheckCheck, Copy, ShieldAlert, RefreshCw } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { useTheme } from 'next-themes'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 import { copyComponent } from '@/lib/action'
 import { cn } from '@/lib/utils'
-import { toast } from 'sonner'
 
 function SuccessParticles({
   buttonRef,
@@ -86,7 +86,7 @@ export default function PreviewContent({
   const handleCopyClick = async () => {
     if (isBlock) {
       router.push('/sign-in')
-      toast.info("Please sign in to copy component", { position: 'top-center' })
+      toast.info('Please sign in to copy component', { position: 'top-center' })
       return
     }
 
@@ -158,15 +158,18 @@ export default function PreviewContent({
             {isCopied ? (
               <CheckCheck className='text-background h-3.5 w-3.5' />
             ) : (
-                <>
+              <>
                 {/* if is block and not auth */}
-                  {isBlock ? (
-                    <ShieldAlert className={cn("h-3.5 w-3.5 transition-all duration-200 group-hover:scale-110")} />
-                  ) : (
-                      <Copy className="h-3.5 w-3.5 transition-all duration-200 group-hover:rotate-12" />
-                  )}
+                {isBlock ? (
+                  <ShieldAlert
+                    className={cn(
+                      'h-3.5 w-3.5 transition-all duration-200 group-hover:scale-110'
+                    )}
+                  />
+                ) : (
+                  <Copy className='h-3.5 w-3.5 transition-all duration-200 group-hover:rotate-12' />
+                )}
               </>
-
             )}
             <span>Copy</span>
           </button>

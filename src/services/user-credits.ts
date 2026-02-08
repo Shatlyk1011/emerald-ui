@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import { axios } from '@/lib/axios'
 import { UserDataResponse } from '@/app/api/user-data/route'
+import { axios } from '@/lib/axios'
 
 export const useUserCreditsQuery = (userId: string | undefined) => {
   return useQuery({

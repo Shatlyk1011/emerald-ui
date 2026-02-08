@@ -1,16 +1,6 @@
-import { Client } from '@/payload-types';
-import config from '@payload-config';
-import { getPayload } from 'payload';
-
-
-
-
-
-
-
-
-
-
+import { Client } from '@/payload-types'
+import config from '@payload-config'
+import { getPayload } from 'payload'
 
 /**
  * Cron job to add monthly free credits to all users

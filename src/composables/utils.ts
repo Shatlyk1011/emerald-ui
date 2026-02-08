@@ -1,7 +1,4 @@
-import { User } from '@supabase/supabase-js';
-
-
-
+import { User } from '@supabase/supabase-js'
 
 export function debounce<T>(func: (...args: T[]) => void, delay: number) {
   let timeoutId: undefined | ReturnType<typeof setTimeout>

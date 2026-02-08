@@ -1,5 +1,5 @@
-import { Client } from '@/payload-types';
-import config from '@payload-config';
+import { Client } from '@/payload-types'
+import config from '@payload-config'
 import { getPayload } from 'payload'
 
 // Create a new client record (called when user signs up via Supabase)

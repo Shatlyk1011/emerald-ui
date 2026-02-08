@@ -1,14 +1,13 @@
 'use client'
 import { formatDate, getUserInitials } from '@/composables/utils'
+import { CreditHistory } from '@/payload-types'
+import { useUserCreditsQuery } from '@/services/user-credits'
 import { CreditCard, Crown, Calendar } from 'lucide-react'
 import Link from 'next/link'
+import { useUser } from '@/hooks/use-user'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
-import { useUser } from '@/hooks/use-user'
-import { useUserCreditsQuery } from '@/services/user-credits'
-import { CreditHistory } from '@/payload-types'
 import { Skeleton } from '@/components/ui/skeleton'
-
 import {
   Table,
   TableBody,
@@ -57,13 +56,10 @@ const mockInvoices = [
 ]
 export default function ProfilePage() {
   const { user: SBUser, isLoading: isSBLoading } = useUser()
-  const {
-    data: userData,
-    isLoading,
-    isError,
-  } = useUserCreditsQuery(SBUser?.id)
+  const { data: userData, isLoading, isError } = useUserCreditsQuery(SBUser?.id)
 
-  const totalCredits = userData?.history.reduce((prev, curr) => prev + +curr.creditAmount, 0) || 0
+  const totalCredits =
+    userData?.history.reduce((prev, curr) => prev + +curr.creditAmount, 0) || 0
   console.log('totalCredits', totalCredits)
 
   const getCreditTypeLabel = (type: CreditHistory['source']) => {
@@ -74,7 +70,7 @@ export default function ProfilePage() {
     <main className='mx-auto mb-16 w-full max-w-6xl px-8 pt-24 max-lg:px-6 max-sm:px-4'>
       {/* Header */}
       <div className='mb-8'>
-        <h1 className='text-4xl font-bold mb-2'>Profile</h1>
+        <h1 className='mb-2 text-4xl font-bold'>Profile</h1>
         <p className='text-muted-foreground'>
           View credit history, download invoices.
         </p>
@@ -82,10 +78,12 @@ export default function ProfilePage() {
 
       {/* Profile Settings Card */}
       <div className='bg-card/20 mb-6 rounded-xl border p-8'>
-
         <div className='mb-6 flex items-center gap-4'>
           <Avatar className='size-12'>
-            <AvatarImage src={SBUser?.user_metadata?.avatar_url} alt={SBUser?.user_metadata?.full_name || 'avatar image'} />
+            <AvatarImage
+              src={SBUser?.user_metadata?.avatar_url}
+              alt={SBUser?.user_metadata?.full_name || 'avatar image'}
+            />
             <AvatarFallback className='text-xl'>
               {getUserInitials(SBUser)}
             </AvatarFallback>
@@ -112,7 +110,9 @@ export default function ProfilePage() {
         <div className='mb-3 flex items-center justify-between gap-4'>
           <h2 className='text-xl font-medium'>
             <span className='opacity-80'>Your Current Plan:</span>{' '}
-            <span className='font-bold'>{userData?.currentPlan === 'free' ? 'Free Plan' : 'Pro Plan'}</span>
+            <span className='font-bold'>
+              {userData?.currentPlan === 'free' ? 'Free Plan' : 'Pro Plan'}
+            </span>
           </h2>
           <Button
             className='text-foreground bg-blue-600 hover:bg-blue-700'
@@ -127,8 +127,9 @@ export default function ProfilePage() {
 
         <div className='bg-muted/30 rounded-lg p-6'>
           <div className='mb-2 flex items-center justify-between'>
-
-            <h3 className='text-lg font-semibold'>{userData?.currentPlan === 'free' ? 'Free Plan' : 'Pro Plan'}</h3>
+            <h3 className='text-lg font-semibold'>
+              {userData?.currentPlan === 'free' ? 'Free Plan' : 'Pro Plan'}
+            </h3>
             <span className='text-muted-foreground text-sm'>
               {mockUser?.creditsRemaining || 0} credits remaining
             </span>
@@ -142,7 +143,8 @@ export default function ProfilePage() {
             <div className='mb-2 flex items-center justify-between text-sm'>
               <span className='font-medium'>Credits Used</span>
               <span className='text-muted-foreground'>
-                {mockUser?.creditsRemaining || 0} / {mockUser?.totalCredits || 0}
+                {mockUser?.creditsRemaining || 0} /{' '}
+                {mockUser?.totalCredits || 0}
               </span>
             </div>
             <div className='bg-muted h-2 w-full overflow-hidden rounded-full'>
@@ -162,9 +164,9 @@ export default function ProfilePage() {
       <div className='bg-card/20 mb-6 rounded-xl border p-8 shadow-sm'>
         <h2 className='mb-6 text-xl font-semibold'>Credit History</h2>
 
-        <div className='rounded-lg border overflow-hidden'>
-          <Table className='w-full text-nowrap overflow-y-auto'>
-            <TableHeader className='bg-muted/50 '>
+        <div className='overflow-hidden rounded-lg border'>
+          <Table className='w-full overflow-y-auto text-nowrap'>
+            <TableHeader className='bg-muted/50'>
               <TableRow>
                 <TableHead className='px-6 py-3 text-left text-sm font-medium'>
                   Type
@@ -172,7 +174,7 @@ export default function ProfilePage() {
                 <TableHead className='px-6 py-3 text-left text-sm font-medium'>
                   Date
                 </TableHead>
-                <TableHead className='px-6 py-3 text-right text-sm w-1/5 font-medium'>
+                <TableHead className='w-1/5 px-6 py-3 text-right text-sm font-medium'>
                   Credits
                 </TableHead>
                 <TableHead className='px-6 py-3 text-left text-sm font-medium'>
@@ -183,21 +185,26 @@ export default function ProfilePage() {
             <TableBody className='divide-y'>
               {isLoading ? (
                 <TableRow>
-                  <TableCell colSpan={4} className="p-4">
-                    <div className="space-y-2">
-                      <Skeleton className="h-8 w-full" />
-                      <Skeleton className="h-8 w-full" />
-                      <Skeleton className="h-8 w-full" />
+                  <TableCell colSpan={4} className='p-4'>
+                    <div className='space-y-2'>
+                      <Skeleton className='h-8 w-full' />
+                      <Skeleton className='h-8 w-full' />
+                      <Skeleton className='h-8 w-full' />
                     </div>
                   </TableCell>
                 </TableRow>
               ) : isError ? (
                 <TableRow>
-                  <TableCell colSpan={4} className='text-destructive px-6 py-8 text-center'>
+                  <TableCell
+                    colSpan={4}
+                    className='text-destructive px-6 py-8 text-center'
+                  >
                     Failed to load credit history. Please try again.
                   </TableCell>
                 </TableRow>
-              ) : userData?.history && userData.history.length > 0 && (
+              ) : (
+                userData?.history &&
+                userData.history.length > 0 &&
                 userData.history.map((credit) => (
                   <TableRow
                     key={credit.id}
@@ -215,7 +222,7 @@ export default function ProfilePage() {
                     <TableCell className='px-6 py-4 text-right text-sm font-semibold text-green-600'>
                       +{credit.creditAmount}
                     </TableCell>
-                    <TableCell className='px-6 py-4 text-sm text-muted-foreground'>
+                    <TableCell className='text-muted-foreground px-6 py-4 text-sm'>
                       {getCreditTypeLabel(credit.source)}
                     </TableCell>
                   </TableRow>
@@ -263,7 +270,9 @@ export default function ProfilePage() {
                       {formatDate(invoice.date)}
                     </div>
                   </TableCell>
-                  <TableCell className='px-6 py-4 text-sm'>{invoice.description}</TableCell>
+                  <TableCell className='px-6 py-4 text-sm'>
+                    {invoice.description}
+                  </TableCell>
                   <TableCell className='px-6 py-4 text-sm'>
                     <span className='inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900/30 dark:text-green-400'>
                       {invoice.status}

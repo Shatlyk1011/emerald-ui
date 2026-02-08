@@ -8,8 +8,8 @@ import {
 import { notFound } from 'next/navigation'
 import { source } from '@/lib/source'
 import { cn } from '@/lib/utils'
-import Preview from '@/components/mdx/preview'
 import Separator from '@/components/ui/separator'
+import Preview from '@/components/mdx/preview'
 import PreviewClient from '@/components/mdx/preview-client'
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {

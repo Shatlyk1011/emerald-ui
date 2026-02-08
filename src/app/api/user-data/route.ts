@@ -1,15 +1,15 @@
-import { NextResponse } from 'next/server';
+import { Client, CreditHistory } from '@/payload-types'
+import { NextResponse } from 'next/server'
 import { getClientByUserId, getUserCreditHistory } from '@/lib/credit-helpers'
-import { Client, CreditHistory } from '@/payload-types';
 
 export interface UserDataResponse {
-  currentPlan: Client['currentPlan'],
-  history :{
-    id: string;
-    source: CreditHistory['source'];
-    creditAmount: number;
-    createdAt: string;
-  }[];
+  currentPlan: Client['currentPlan']
+  history: {
+    id: string
+    source: CreditHistory['source']
+    creditAmount: number
+    createdAt: string
+  }[]
 }
 
 export async function GET(req: Request) {
@@ -19,9 +19,9 @@ export async function GET(req: Request) {
     const userId = searchParams.get('userId')!
 
     // Fetch client data and credit history
-    const [client,history] = await Promise.all([
+    const [client, history] = await Promise.all([
       getClientByUserId(userId),
-      getUserCreditHistory(userId)
+      getUserCreditHistory(userId),
     ])
 
     if (!client) {
@@ -33,10 +33,9 @@ export async function GET(req: Request) {
     }
     console.log('ROUTE', client)
 
-
     return NextResponse.json<UserDataResponse>({
       currentPlan: client.currentPlan,
-      history: history.map(h => ({
+      history: history.map((h) => ({
         id: h.id,
         source: h.source,
         creditAmount: h.creditAmount,
