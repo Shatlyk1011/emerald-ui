@@ -66,7 +66,7 @@ export default function ProfilePage() {
   const totalCredits = userData?.history.reduce((prev, curr) => prev + +curr.creditAmount, 0) || 0
   console.log('totalCredits', totalCredits)
 
-  const getCreditTypeLabel = (type: CreditHistory['type']) => {
+  const getCreditTypeLabel = (type: CreditHistory['source']) => {
     return type === 'monthly_free' ? 'Monthly Credits' : 'Purchased Credits'
   }
 
@@ -204,7 +204,7 @@ export default function ProfilePage() {
                     className='hover:bg-muted/30 transition-colors'
                   >
                     <TableCell className='px-6 py-4 text-sm font-medium'>
-                      {getCreditTypeLabel(credit.type)}
+                      {getCreditTypeLabel(credit.source)}
                     </TableCell>
                     <TableCell className='px-6 py-4 text-sm'>
                       <div className='flex items-center gap-2'>
@@ -216,7 +216,7 @@ export default function ProfilePage() {
                       +{credit.creditAmount}
                     </TableCell>
                     <TableCell className='px-6 py-4 text-sm text-muted-foreground'>
-                      {getCreditTypeLabel(credit.type)}
+                      {getCreditTypeLabel(credit.source)}
                     </TableCell>
                   </TableRow>
                 ))

@@ -7,6 +7,11 @@ import { getPayload } from 'payload';
 
 
 
+
+
+
+
+
 /**
  * Cron job to add monthly free credits to all users
  * Runs every hour for demo purposes
@@ -33,7 +38,7 @@ export async function addMonthlyCredits() {
         data: {
           userId: client.userId,
           creditAmount: 5,
-          type: 'monthly_free',
+          source: 'monthly_free',
         },
       })
     }

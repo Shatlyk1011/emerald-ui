@@ -1,6 +1,10 @@
 import { CollectionConfig } from 'payload';
 import { admins } from '../../utils/admins';
 
+
+
+
+
 const CreditHistory: CollectionConfig = {
   slug: 'credit-history',
   access: {
@@ -63,33 +67,18 @@ const CreditHistory: CollectionConfig = {
       },
     },
     {
-      name: 'type',
-      label: 'Credit Type',
+      name: 'source',
+      label: 'Credit Source',
       type: 'select',
       required: true,
       defaultValue: 'monthly_free',
       options: [
         { label: 'Monthly Free Credits', value: 'monthly_free' },
         { label: 'Purchased Credits', value: 'purchased' },
-      ],
-      admin: {
-        description: 'Type of credit allocation',
-      },
-    },
-    {
-      name: 'source',
-      label: 'Source',
-      type: 'select',
-      required: true,
-      defaultValue: 'manual',
-      options: [
-        { label: 'Monthly Cron Job', value: 'monthly_cron' },
-        { label: 'Manual', value: 'manual' },
-        { label: 'Purchase', value: 'purchase' },
         { label: 'Signup Bonus', value: 'signup_bonus' },
       ],
       admin: {
-        description: 'How the credits were added',
+        description: 'Type of credit allocation',
       },
     },
   ],

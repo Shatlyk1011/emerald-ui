@@ -250,11 +250,7 @@ export interface CreditHistory {
   /**
    * Type of credit allocation
    */
-  type: 'monthly_free' | 'purchased';
-  /**
-   * How the credits were added
-   */
-  source: 'monthly_cron' | 'manual' | 'purchase' | 'signup_bonus';
+  source: 'monthly_free' | 'purchased' | 'signup_bonus';
   updatedAt: string;
   createdAt: string;
 }
@@ -477,7 +473,6 @@ export interface ClientsSelect<T extends boolean = true> {
 export interface CreditHistorySelect<T extends boolean = true> {
   userId?: T;
   creditAmount?: T;
-  type?: T;
   source?: T;
   updatedAt?: T;
   createdAt?: T;
