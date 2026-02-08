@@ -1,17 +1,12 @@
+import { Client } from '@/payload-types';
 import config from '@payload-config';
-import { getPayload } from 'payload';
+import { getPayload } from 'payload'
 
-
-
-
-
-/**
- * Create a new client record (called when user signs up via Supabase)
- */
+// Create a new client record (called when user signs up via Supabase)
 export async function createClientRecord(
   userId: string,
   email?: string,
-  provider?: 'email' | 'google' | 'github' | null | undefined,
+  provider?: Client['provider'],
   isVerified?: boolean
 ): Promise<void> {
   const payload = await getPayload({ config })
@@ -29,12 +24,25 @@ export async function createClientRecord(
   console.log(`✓ Created client record for user: ${userId}`)
 }
 
-/**
- * Get client record by userId
- */
-export async function getClientByUserId(userId: string) {
+//  * Create initial credits for a new user (called when user signs up via Supabase)
+export async function createInitialCredits(userId: string): Promise<void> {
   const payload = await getPayload({ config })
 
+  await payload.create({
+    collection: 'credit-history',
+    data: {
+      userId,
+      creditAmount: 5,
+      source: 'monthly_free',
+    },
+  })
+
+  console.log(`✓ Created initial 5 credits for new user: ${userId}`)
+}
+
+// Get client record by userId
+export async function getClientByUserId(userId: string) {
+  const payload = await getPayload({ config })
   const clients = await payload.find({
     collection: 'clients',
     where: {
@@ -46,40 +54,9 @@ export async function getClientByUserId(userId: string) {
   return clients.docs[0] || null
 }
 
-/**
- * Create initial credits for a new user (called when user signs up via Supabase)
- */
-export async function createInitialCredits(userId: string): Promise<void> {
-  const payload = await getPayload({ config })
-
-  await payload.create({
-    collection: 'credit-history',
-    data: {
-      userId,
-      creditAmount: 5,
-      type: 'monthly_free',
-    },
-  })
-
-  console.log(`✓ Created initial 5 credits for new user: ${userId}`)
-}
-
-/**
- * Get credit history for a specific user
- */
+// Get credit history for a specific user
 export async function getUserCreditHistory(userId: string) {
   const payload = await getPayload({ config })
-
-  // First check if client exists and is not blocked
-  const client = await getClientByUserId(userId)
-
-  if (!client) {
-    throw new Error('Client not found')
-  }
-
-  if (client.isBlocked) {
-    throw new Error('User is blocked')
-  }
 
   const credits = await payload.find({
     collection: 'credit-history',

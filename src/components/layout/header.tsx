@@ -16,6 +16,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import ThemeToggle from '@/components/ui/theme-toggle'
+import { getUserInitials } from '@/composables/utils'
 
 const { components, inspiration, home, pricing } = {
   home: '/',
@@ -28,20 +29,6 @@ const Header = () => {
   const pathname = usePathname()
   const router = useRouter()
   const { user, isLoading, signOut } = useUser()
-
-  // Get user initials for avatar fallback
-  const getUserInitials = () => {
-    if (user?.user_metadata?.full_name) {
-      const names = user.user_metadata.full_name.split(' ')
-      return names.length > 1
-        ? `${names[0][0]}${names[names.length - 1][0]}`.toUpperCase()
-        : names[0][0].toUpperCase()
-    }
-    if (user?.email) {
-      return user.email[0].toUpperCase()
-    }
-    return 'U'
-  }
 
   const handleSignOut = async () => {
     await signOut()
@@ -124,7 +111,7 @@ const Header = () => {
                             'User'
                           }
                         />
-                        <AvatarFallback>{getUserInitials()}</AvatarFallback>
+                        <AvatarFallback>{getUserInitials(user)}</AvatarFallback>
                       </Avatar>
                     </button>
                   </DropdownMenuTrigger>
