@@ -1,13 +1,9 @@
-import { CreditHistory } from '@/payload-types'
+import { Client, CreditHistory } from '@/payload-types'
+
+
+
 
 export interface CreditHistoryResponse {
-  client: {
-    userId: string
-    email?: string
-    currentPlan: string
-    isBlocked: boolean
-    provider?: string
-    isVerified?: boolean
-  }
+  client: Client
   history: CreditHistory[]
 }
