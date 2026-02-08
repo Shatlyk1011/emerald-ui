@@ -1,6 +1,7 @@
 import { CollectionConfig } from 'payload'
 import { admins } from '../../utils/admins'
 
+
 const CreditHistory: CollectionConfig = {
   slug: 'credit-history',
   access: {
@@ -26,10 +27,7 @@ const CreditHistory: CollectionConfig = {
         }
       }
       // Admins can read all
-      if (req.user) {
-        return true
-      }
-      return false
+      return !!req.user
     },
   },
   admin: {
@@ -39,7 +37,41 @@ const CreditHistory: CollectionConfig = {
       'Track user credit history including monthly free credits and purchased credits. Credits expire after 1 month.',
   },
 
+  hooks: {
+    beforeChange: [
+      async ({ data, req, operation }) => {
+        if (operation === 'create' && data.userId) {
+          try {
+            const client = await req.payload.find({
+              collection: 'clients',
+              where: {
+                userId: {
+                  equals: data.userId,
+                },
+              },
+            })
+
+            if (client.docs.length > 0) {
+              data.client = client.docs[0].id
+            }
+          } catch (error) {
+            console.error('Error linking credit history to client:', error)
+          }
+        }
+        return data
+      },
+    ],
+  },
   fields: [
+    {
+      name: 'client',
+      type: 'relationship',
+      relationTo: 'clients',
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+      },
+    },
     {
       name: 'userId',
       label: 'User ID',

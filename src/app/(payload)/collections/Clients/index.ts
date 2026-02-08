@@ -1,6 +1,10 @@
 import { CollectionConfig } from 'payload'
 import { admins } from '../../utils/admins'
 
+
+
+
+
 const Clients: CollectionConfig = {
   slug: 'clients',
   access: {
@@ -116,9 +120,9 @@ const Clients: CollectionConfig = {
     {
       name: 'creditHistory',
       label: 'Credit History',
-      type: 'relationship',
-      relationTo: 'credit-history',
-      hasMany: true,
+      type: 'join',
+      collection: 'credit-history',
+      on: 'client',
       admin: {
         description: 'All credit transactions for this user',
       },

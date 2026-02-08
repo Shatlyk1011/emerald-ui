@@ -1,6 +1,11 @@
 import { Client } from '@/payload-types'
-import config from '@payload-config'
-import { getPayload } from 'payload'
+import config from '@payload-config';
+import { getPayload } from 'payload';
+
+
+
+
+
 
 // Create a new client record (called when user signs up via Supabase)
 export async function createClientRecord(
@@ -46,11 +51,12 @@ export async function getClientByUserId(userId: string) {
   const clients = await payload.find({
     collection: 'clients',
     where: {
-      userId: { equals: userId },
+      userId: {
+        equals: userId,
+      },
     },
-    limit: 1,
+    depth: 1,
   })
-
   return clients.docs[0] || null
 }
 

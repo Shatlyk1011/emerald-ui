@@ -1,6 +1,6 @@
-import { Client, CreditHistory } from '@/payload-types'
+import { Client, CreditHistory } from '@/payload-types';
 import { NextResponse } from 'next/server'
-import { getClientByUserId, getUserCreditHistory } from '@/lib/credit-helpers'
+import { getClientByUserId } from '@/lib/credit-helpers'
 
 export interface UserDataResponse {
   currentPlan: Client['currentPlan']
@@ -10,6 +10,7 @@ export interface UserDataResponse {
     creditAmount: number
     createdAt: string
   }[]
+  overall?: any
 }
 
 export async function GET(req: Request) {
@@ -19,10 +20,8 @@ export async function GET(req: Request) {
     const userId = searchParams.get('userId')!
 
     // Fetch client data and credit history
-    const [client, history] = await Promise.all([
-      getClientByUserId(userId),
-      getUserCreditHistory(userId),
-    ])
+    // Fetch client data which now includes credit history via join field
+    const client = await getClientByUserId(userId)
 
     if (!client) {
       return NextResponse.json({ error: 'Client not found' }, { status: 404 })
@@ -31,16 +30,25 @@ export async function GET(req: Request) {
     if (client.isBlocked) {
       return NextResponse.json({ error: 'User is blocked' }, { status: 403 })
     }
-    console.log('ROUTE', client)
+
+    console.log('222222222222', client)
+
+    // Safely cast the join field result to CreditHistory array
+    // When depth is sufficient, join field returns { docs: [...] } structure
+    const joinedData = client.creditHistory as unknown as
+      | { docs: CreditHistory[] }
+      | undefined
+    const creditHistory = joinedData?.docs || []
 
     return NextResponse.json<UserDataResponse>({
       currentPlan: client.currentPlan,
-      history: history.map((h) => ({
+      history: creditHistory.map((h) => ({
         id: h.id,
         source: h.source,
         creditAmount: h.creditAmount,
         createdAt: h.createdAt,
       })),
+      overall: client
     })
   } catch (error) {
     console.error('Error fetching credit history:', error)
