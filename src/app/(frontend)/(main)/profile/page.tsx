@@ -1,12 +1,22 @@
-import { formatDate } from '@/composables/utils'
-import { CreditHistoryResponse } from '@/types/auth'
+'use client'
+import { formatDate, getUserInitials } from '@/composables/utils'
 import { CreditCard, Crown, Calendar } from 'lucide-react'
-import { createClient } from '@/lib/supabase-server'
-import { getClientByUserId, getUserCreditHistory } from '@/lib/credit-helpers'
-import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
+import { useUser } from '@/hooks/use-user'
+import { useUserCreditsQuery } from '@/services/user-credits'
+import { CreditHistory } from '@/payload-types'
+import { Skeleton } from '@/components/ui/skeleton'
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 
 export const dynamic = 'force-dynamic'
 
@@ -45,64 +55,18 @@ const mockInvoices = [
     description: 'Free Plan - November 2025',
   },
 ]
+export default function ProfilePage() {
+  const { user: SBUser, isLoading: isSBLoading } = useUser()
+  const {
+    data: userData,
+    isLoading,
+    isError,
+  } = useUserCreditsQuery(SBUser?.id)
 
-export default async function ProfilePage() {
-  let userData: CreditHistoryResponse | null = null
+  const totalCredits = userData?.history.reduce((prev, curr) => prev + +curr.creditAmount, 0) || 0
+  console.log('totalCredits', totalCredits)
 
-  try {
-    const supabase = await createClient()
-    const {
-      data: { user },
-    } = await supabase.auth.getUser()
-
-    if (!user) {
-      redirect('/sign-in')
-    }
-
-    // Fetch client data and credit history directly
-    const [client, history] = await Promise.all([
-      getClientByUserId(user.id),
-      getUserCreditHistory(user.id),
-    ])
-
-    if (client && history) {
-      userData = {
-        client: {
-          userId: client.userId,
-          email: client.email || undefined,
-          currentPlan: client.currentPlan || 'free',
-          isBlocked: client.isBlocked || false,
-          provider: client.provider || undefined,
-          isVerified: client.isVerified || false,
-        },
-        history: history || [],
-      }
-    }
-  } catch (err) {
-    console.error('Failed to fetch credit history:', err)
-  }
-
-  console.log('userData', userData)
-
-  const getUserInitials = () => {
-    // if (data?.user_metadata?.full_name) {
-    //   const names = data.user_metadata.full_name.split(' ')
-    //   return names.length > 1
-    //     ? `${names[0][0]}${names[names.length - 1][0]}`.toUpperCase()
-    //     : names[0][0].toUpperCase()
-    // }
-    // if (user?.email) {
-    //   return user.email[0].toUpperCase()
-    // }
-    return 'U'
-  }
-
-  const getDisplayName = () => {
-    // return user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User'
-    return 'User'
-  }
-
-  const getCreditTypeLabel = (type: 'monthly_free' | 'purchased') => {
+  const getCreditTypeLabel = (type: CreditHistory['type']) => {
     return type === 'monthly_free' ? 'Monthly Credits' : 'Purchased Credits'
   }
 
@@ -110,20 +74,20 @@ export default async function ProfilePage() {
     <main className='mx-auto mb-16 w-full max-w-6xl px-8 pt-24 max-lg:px-6 max-sm:px-4'>
       {/* Header */}
       <div className='mb-8'>
-        <h1 className='mb-2 text-4xl font-bold'>Profile</h1>
+        <h1 className='text-4xl font-bold mb-2'>Profile</h1>
         <p className='text-muted-foreground'>
-          Manage your profile, preferences, view credit history, download
-          invoices, and manage API keys.
+          View credit history, download invoices.
         </p>
       </div>
 
       {/* Profile Settings Card */}
       <div className='bg-card/20 mb-6 rounded-xl border p-8'>
+
         <div className='mb-6 flex items-center gap-4'>
-          <Avatar className='size-16'>
-            <AvatarImage src={''} alt={getDisplayName()} />
+          <Avatar className='size-12'>
+            <AvatarImage src={SBUser?.user_metadata?.avatar_url} alt={SBUser?.user_metadata?.full_name || 'avatar image'} />
             <AvatarFallback className='text-xl'>
-              {getUserInitials()}
+              {getUserInitials(SBUser)}
             </AvatarFallback>
           </Avatar>
           <h2 className='text-2xl font-semibold'>Profile Settings</h2>
@@ -133,14 +97,14 @@ export default async function ProfilePage() {
           <div className='flex-1'>
             <label className='mb-2 block'>Name</label>
             <div className='bg-muted/50 text-foreground rounded-md border px-3 py-2'>
-              {getDisplayName()}
+              {SBUser?.user_metadata.full_name}
             </div>
           </div>
 
           <div className='flex-1'>
             <label className='mb-2 block'>Email</label>
             <div className='bg-muted/50 text-foreground rounded-md border px-3 py-2'>
-              {'test@mail.ru'}
+              {SBUser?.email}
             </div>
           </div>
         </div>
@@ -148,7 +112,7 @@ export default async function ProfilePage() {
         <div className='mb-3 flex items-center justify-between gap-4'>
           <h2 className='text-xl font-medium'>
             <span className='opacity-80'>Your Current Plan:</span>{' '}
-            <span className='font-bold'>Free(mock)</span>
+            <span className='font-bold'>{userData?.currentPlan === 'free' ? 'Free Plan' : 'Pro Plan'}</span>
           </h2>
           <Button
             className='text-foreground bg-blue-600 hover:bg-blue-700'
@@ -163,14 +127,14 @@ export default async function ProfilePage() {
 
         <div className='bg-muted/30 rounded-lg p-6'>
           <div className='mb-2 flex items-center justify-between'>
-            {/* add user's current plan */}
-            <h3 className='text-lg font-semibold'>Free Plan</h3>
+
+            <h3 className='text-lg font-semibold'>{userData?.currentPlan === 'free' ? 'Free Plan' : 'Pro Plan'}</h3>
             <span className='text-muted-foreground text-sm'>
-              `${mockUser?.creditsRemaining || 0} credits remaining`
+              {mockUser?.creditsRemaining || 0} credits remaining
             </span>
           </div>
           <p className='text-muted-foreground text-sm'>
-            For exploring and trialing our platform.
+            For exploring the platform.
           </p>
 
           {/* Credits Progress Bar */}
@@ -178,9 +142,7 @@ export default async function ProfilePage() {
             <div className='mb-2 flex items-center justify-between text-sm'>
               <span className='font-medium'>Credits Used</span>
               <span className='text-muted-foreground'>
-                {/* ??? */}
-                `${mockUser?.creditsRemaining || 0} / $
-                {mockUser?.totalCredits || 0}`
+                {mockUser?.creditsRemaining || 0} / {mockUser?.totalCredits || 0}
               </span>
             </div>
             <div className='bg-muted h-2 w-full overflow-hidden rounded-full'>
@@ -200,57 +162,67 @@ export default async function ProfilePage() {
       <div className='bg-card/20 mb-6 rounded-xl border p-8 shadow-sm'>
         <h2 className='mb-6 text-xl font-semibold'>Credit History</h2>
 
-        <div className='overflow-hidden rounded-lg border'>
-          <table className='w-full text-nowrap'>
-            <thead className='bg-muted/50'>
-              <tr>
-                <th className='px-6 py-3 text-left text-sm font-medium'>
+        <div className='rounded-lg border overflow-hidden'>
+          <Table className='w-full text-nowrap overflow-y-auto'>
+            <TableHeader className='bg-muted/50 '>
+              <TableRow>
+                <TableHead className='px-6 py-3 text-left text-sm font-medium'>
                   Type
-                </th>
-                <th className='px-6 py-3 text-left text-sm font-medium'>
+                </TableHead>
+                <TableHead className='px-6 py-3 text-left text-sm font-medium'>
                   Date
-                </th>
-                <th className='px-6 py-3 text-left text-sm font-medium'>
-                  Granted on
-                </th>
-                <th className='px-6 py-3 text-right text-sm font-medium'>
+                </TableHead>
+                <TableHead className='px-6 py-3 text-right text-sm w-1/5 font-medium'>
                   Credits
-                </th>
-              </tr>
-            </thead>
-            <tbody className='divide-y'>
-              {userData?.history && userData.history.length > 0 ? (
+                </TableHead>
+                <TableHead className='px-6 py-3 text-left text-sm font-medium'>
+                  Granted
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody className='divide-y'>
+              {isLoading ? (
+                <TableRow>
+                  <TableCell colSpan={4} className="p-4">
+                    <div className="space-y-2">
+                      <Skeleton className="h-8 w-full" />
+                      <Skeleton className="h-8 w-full" />
+                      <Skeleton className="h-8 w-full" />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ) : isError ? (
+                <TableRow>
+                  <TableCell colSpan={4} className='text-destructive px-6 py-8 text-center'>
+                    Failed to load credit history. Please try again.
+                  </TableCell>
+                </TableRow>
+              ) : userData?.history && userData.history.length > 0 && (
                 userData.history.map((credit) => (
-                  <tr
+                  <TableRow
                     key={credit.id}
                     className='hover:bg-muted/30 transition-colors'
                   >
-                    <td className='px-6 py-4 text-sm font-medium'>
+                    <TableCell className='px-6 py-4 text-sm font-medium'>
                       {getCreditTypeLabel(credit.type)}
-                    </td>
-                    <td className='px-6 py-4 text-sm'>
+                    </TableCell>
+                    <TableCell className='px-6 py-4 text-sm'>
                       <div className='flex items-center gap-2'>
                         <Calendar className='text-muted-foreground size-4' />
-                        {formatDate(credit.createdDate)}
+                        {formatDate(credit.createdAt)}
                       </div>
-                    </td>
-                    <td className='px-6 py-4 text-right text-sm font-semibold text-green-600'>
+                    </TableCell>
+                    <TableCell className='px-6 py-4 text-right text-sm font-semibold text-green-600'>
                       +{credit.creditAmount}
-                    </td>
-                  </tr>
+                    </TableCell>
+                    <TableCell className='px-6 py-4 text-sm text-muted-foreground'>
+                      {getCreditTypeLabel(credit.type)}
+                    </TableCell>
+                  </TableRow>
                 ))
-              ) : (
-                <tr>
-                  <td
-                    colSpan={4}
-                    className='text-muted-foreground px-6 py-8 text-center'
-                  >
-                    No credit history available
-                  </td>
-                </tr>
               )}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
         </div>
       </div>
 
@@ -259,48 +231,48 @@ export default async function ProfilePage() {
         <h2 className='mb-6 text-xl font-semibold'>Invoice History</h2>
 
         <div className='overflow-hidden rounded-lg border'>
-          <table className='w-full'>
-            <thead className='bg-muted/50'>
-              <tr>
-                <th className='px-6 py-3 text-left text-sm font-medium'>
+          <Table className='w-full'>
+            <TableHeader className='bg-muted/50'>
+              <TableRow>
+                <TableHead className='px-6 py-3 text-left text-sm font-medium'>
                   Date
-                </th>
-                <th className='px-6 py-3 text-left text-sm font-medium'>
+                </TableHead>
+                <TableHead className='px-6 py-3 text-left text-sm font-medium'>
                   Description
-                </th>
-                <th className='px-6 py-3 text-left text-sm font-medium'>
+                </TableHead>
+                <TableHead className='px-6 py-3 text-left text-sm font-medium'>
                   Status
-                </th>
-                <th className='px-6 py-3 text-right text-sm font-medium'>
+                </TableHead>
+                <TableHead className='px-6 py-3 text-right text-sm font-medium'>
                   Amount
-                </th>
-                <th className='px-6 py-3 text-right text-sm font-medium'>
+                </TableHead>
+                <TableHead className='px-6 py-3 text-right text-sm font-medium'>
                   Action
-                </th>
-              </tr>
-            </thead>
-            <tbody className='divide-y'>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody className='divide-y'>
               {mockInvoices?.map((invoice) => (
-                <tr
+                <TableRow
                   key={invoice.id}
                   className='hover:bg-muted/30 transition-colors'
                 >
-                  <td className='px-6 py-4 text-sm'>
+                  <TableCell className='px-6 py-4 text-sm'>
                     <div className='flex items-center gap-2'>
                       <Calendar className='text-muted-foreground size-4' />
                       {formatDate(invoice.date)}
                     </div>
-                  </td>
-                  <td className='px-6 py-4 text-sm'>{invoice.description}</td>
-                  <td className='px-6 py-4 text-sm'>
+                  </TableCell>
+                  <TableCell className='px-6 py-4 text-sm'>{invoice.description}</TableCell>
+                  <TableCell className='px-6 py-4 text-sm'>
                     <span className='inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900/30 dark:text-green-400'>
                       {invoice.status}
                     </span>
-                  </td>
-                  <td className='px-6 py-4 text-right text-sm font-semibold'>
+                  </TableCell>
+                  <TableCell className='px-6 py-4 text-right text-sm font-semibold'>
                     ${invoice.amount.toFixed(2)}
-                  </td>
-                  <td className='px-6 py-4 text-right'>
+                  </TableCell>
+                  <TableCell className='px-6 py-4 text-right'>
                     <Button
                       variant='ghost'
                       size='sm'
@@ -309,11 +281,11 @@ export default async function ProfilePage() {
                       <CreditCard className='mr-2 size-4' />
                       Download
                     </Button>
-                  </td>
-                </tr>
+                  </TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
+            </TableBody>
+          </Table>
           {!mockInvoices.length && (
             <div className='py-2 text-center'>
               <Button

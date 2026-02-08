@@ -11,7 +11,6 @@ import { cn } from '@/lib/utils'
 import Preview from '@/components/mdx/preview'
 import Separator from '@/components/ui/separator'
 import PreviewClient from '@/components/mdx/preview-client'
-import WhatIncluded from '@/components/mdx/what-included'
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params
@@ -52,7 +51,6 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
             Preview,
             Separator,
             PreviewClient,
-            WhatIncluded,
           }}
         />
       </DocsBody>
