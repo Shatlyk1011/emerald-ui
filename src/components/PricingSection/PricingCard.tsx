@@ -1,9 +1,10 @@
-import { CheckCircle, Construction, Hammer, LucideConstruction } from 'lucide-react'
+import { CheckCircle, Hammer } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '../ui/button'
+import Link from 'next/link'
 
 export interface PricingTier {
-  name: 'Starter' | 'Pro' | 'Enterprise'
+  name: 'Hobby' | 'Pro' | 'Enterprise'
   description: string
   price: string
   priceYearly: string
@@ -16,13 +17,14 @@ export interface PricingTier {
 interface PricingCardProps {
   item: PricingTier
   isAnnual: boolean
+  isAuth: boolean
   classes?: string
 }
 const getPricingLabel = (s: string) => {
   return s.toLowerCase() === 'custom' ? s : `$${s}`
 
 }
-export function PricingCard({ item, isAnnual, classes }: PricingCardProps) {
+export function PricingCard({ item, isAnnual, isAuth, classes }: PricingCardProps) {
   const isEnterprice = item.name === 'Enterprise'
 
   return (
@@ -58,8 +60,11 @@ export function PricingCard({ item, isAnnual, classes }: PricingCardProps) {
           'w-full text-sm font-semibold text-white shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2',
           'bg-foreground text-background hover:bg-foreground/80'
         )}
+        asChild
       >
-        {item.ctaText}
+        <Link href={isAuth ? "#" : "/sign-in"}>
+          {isAuth ? item.ctaText : isEnterprice ? item.ctaText : 'Get Started'}
+        </Link>
       </Button>
 
       <div className='mt-8 flex flex-1 flex-col'>
@@ -82,7 +87,7 @@ export function PricingCard({ item, isAnnual, classes }: PricingCardProps) {
       </div>
       {isEnterprice && (
         // overlay
-        <div className='absolute flex items-center justify-center top-0 left-0 w-full h-full bg-background/70 z-[10200]'>
+        <div className='absolute flex items-center justify-center top-0 left-0 w-full h-full bg-background/70 z-2'>
           <div className='-bottom-16 relative flex flex-col items-center text-neutral-500'>
             <Hammer size={28} className='mb-2' />
             <span className='text-sm text-center gap-1 font-medium tracking-one'>Enterprice API <br /> Under Development <br /> </span>

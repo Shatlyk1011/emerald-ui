@@ -3,10 +3,11 @@ import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { Switch } from '../ui/switch'
 import { PricingCard, PricingTier } from './PricingCard'
+import { useUser } from '@/hooks/use-user'
 
 const pricingPlans: PricingTier[] = [
   {
-    name: 'Starter',
+    name: 'Hobby',
     price: '20',
     priceYearly: '15',
     description: 'Perfect for individuals and small projects',
@@ -16,8 +17,9 @@ const pricingPlans: PricingTier[] = [
       'Private generations',
       'Custom design system',
       'No watermark on previews',
+      "Customer Support",
     ],
-    ctaText: 'Get Started',
+    ctaText: 'Upgrade to Hobby',
     ctaVariant: 'blue',
     featuresIntro: 'Everything in Free, plus:',
     priceDetail: 'per seat/mo',
@@ -33,7 +35,7 @@ const pricingPlans: PricingTier[] = [
       'Faster AI Model',
       'Node UI Component Generations',
     ],
-    ctaText: 'Start Free Trial',
+    ctaText: 'Upgrade to Pro',
     ctaVariant: 'blue',
     featuresIntro: 'Everything in Hobby, plus:',
     priceDetail: 'per seat/mo',
@@ -52,6 +54,10 @@ const pricingPlans: PricingTier[] = [
 
 const PricingSection = () => {
   const [isAnnual, setAnnual] = useState(true)
+
+  const { user, isLoading } = useUser()
+
+  const isAuth = !!user
 
   return (
     <>
@@ -94,7 +100,7 @@ const PricingSection = () => {
 
       <section className='mx-auto grid h-full max-w-full grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 justify-center gap-3 px-10 max-lg:px-0'>
         {pricingPlans.map((plan) => (
-          <PricingCard key={plan.name} item={plan} isAnnual={isAnnual} />
+          <PricingCard key={plan.name} item={plan} isAnnual={isAnnual} isAuth={isAuth} />
         ))}
       </section>
     </>
