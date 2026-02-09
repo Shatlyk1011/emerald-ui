@@ -7,57 +7,46 @@ import { PricingCard, PricingTier } from './PricingCard'
 const pricingPlans: PricingTier[] = [
   {
     name: 'Starter',
-    price: '$9',
+    price: '19',
+    priceYearly: '15',
     description: 'Perfect for individuals and small projects',
     features: [
-      'Up to 5 projects',
-      '10 GB storage',
-      'Basic analytics',
-      'Email support',
-      'Community access',
+      '100 monthly credits',
+      'Credit rollovers',
+      'Private generations',
+      'Custom design system',
+      'No watermark on previews',
     ],
     ctaText: 'Get Started',
     ctaVariant: 'blue',
     featuresIntro: 'Everything in Free, plus:',
     priceDetail: 'per seat/mo',
-    isAnnual: true,
   },
   {
     name: 'Pro',
-    price: '$29',
+    price: '59',
+    priceYearly: '49',
     description: 'Ideal for growing teams and businesses',
     features: [
-      'Unlimited projects',
-      '100 GB storage',
-      'Advanced analytics',
-      'Priority email support',
-      'Team collaboration',
-      'Custom integrations',
-      'API access',
+      '300 monthly credits',
+      'Credit rollovers',
+      'Faster AI Model',
+      'Node UI Component Generations',
     ],
     ctaText: 'Start Free Trial',
     ctaVariant: 'blue',
     featuresIntro: 'Everything in Hobby, plus:',
     priceDetail: 'per seat/mo',
-    isAnnual: false,
   },
   {
     name: 'Enterprise',
     price: 'Custom',
+    priceYearly: 'Custom',
     description: 'For large organizations with specific needs',
-    features: [
-      'Everything in Pro',
-      'Unlimited storage',
-      'Dedicated account manager',
-      '24/7 phone support',
-      'Custom SLA',
-      'Advanced security',
-      'On-premise deployment',
-    ],
+    features: ['API Under Development'],
     ctaText: 'Contact Sales',
     ctaVariant: 'black',
-    featuresIntro: 'Everything in Pro, plus:',
-    isAnnual: true,
+    // featuresIntro: 'Everything in Pro, plus:',
   },
 ]
 
@@ -99,7 +88,7 @@ const PricingSection = () => {
 
       <section className='mx-auto grid h-full max-w-full grid-cols-3 justify-center gap-3 px-10 max-lg:px-0'>
         {pricingPlans.map((plan) => (
-          <PricingCard key={plan.name} item={plan} />
+          <PricingCard key={plan.name} item={plan} isAnnual={isAnnual} />
         ))}
       </section>
     </>

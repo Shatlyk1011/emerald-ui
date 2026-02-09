@@ -1,24 +1,32 @@
-import { CheckCircle } from 'lucide-react'
+import { CheckCircle, Construction, LucideConstruction } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '../ui/button'
 
 export interface PricingTier {
-  name: string
+  name: 'Starter' | 'Pro' | 'Enterprise'
   description: string
   price: string
+  priceYearly: string
   priceDetail?: string
   ctaText: string
   ctaVariant: 'blue' | 'black'
-  featuresIntro: string
+  featuresIntro?: string
   features: string[]
-  isAnnual?: boolean
 }
 interface PricingCardProps {
   item: PricingTier
+  isAnnual: boolean
+  classes?: string
 }
-export function PricingCard({ item }: PricingCardProps) {
+const getPricingLabel = (s: string) => {
+  return s.toLowerCase() === 'custom' ? s : `$${s}`
+
+}
+export function PricingCard({ item, isAnnual, classes }: PricingCardProps) {
+  const isEnterprice = item.name === 'Enterprise'
+
   return (
-    <div className='border-border bg-background flex w-full flex-col rounded-xl border p-7 shadow-sm transition-shadow hover:shadow-md'>
+    <div className={cn('relative overflow-hidden border-border bg-background flex w-full flex-col rounded-xl border p-7 shadow-sm transition-shadow hover:shadow-md', classes)}>
       <div className='mb-4 min-h-22'>
         <h3 className='text-foreground text-2xl font-semibold'>{item.name}</h3>
         <p className='text-foreground/70 mt-2 line-clamp-2 text-base'>
@@ -29,12 +37,12 @@ export function PricingCard({ item }: PricingCardProps) {
       <div className='mb-6'>
         <div className='flex items-end'>
           <span className='-tracking-two font-mono text-3xl leading-8 font-medium'>
-            {item.price}
+            {isAnnual ? getPricingLabel(item.priceYearly) : getPricingLabel(item.price)}
           </span>
 
           {item.priceDetail && (
-            <span className='text-muted-foreground ml-2 max-w-[80px] text-xs leading-tight'>
-              {item.isAnnual && (
+            <span className='text-muted-foreground ml-2 max-w-20 text-xs leading-tight'>
+              {isAnnual && (
                 <span>
                   billed annually <br />
                 </span>
@@ -61,15 +69,23 @@ export function PricingCard({ item }: PricingCardProps) {
         <ul className='space-y-3'>
           {item.features.map((feature) => (
             <li key={feature} className='flex items-start gap-2'>
-              <CheckCircle
-                className='text-muted-foreground h-4 w-4'
-                aria-hidden='true'
-              />
+              {!isEnterprice && (
+                <CheckCircle
+                  className='text-muted-foreground h-4 w-4'
+                  aria-hidden='true'
+                />
+              )}
               <span className='text-foreground/70 text-sm'>{feature}</span>
             </li>
           ))}
         </ul>
       </div>
+      {isEnterprice && (
+        // overlay
+        <div className='absolute flex items-center justify-center top-0 left-0 w-full h-full bg-background/70 z-[10200]'>
+          <Construction className='w-14 h-14 text-neutral-500 -bottom-32 relative' />
+        </div>
+      )}
     </div>
   )
 }
