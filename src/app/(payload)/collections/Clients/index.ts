@@ -1,10 +1,6 @@
 import { CollectionConfig } from 'payload'
 import { admins } from '../../utils/admins'
 
-
-
-
-
 const Clients: CollectionConfig = {
   slug: 'clients',
   access: {
@@ -70,6 +66,7 @@ const Clients: CollectionConfig = {
       defaultValue: 'free',
       options: [
         { label: 'Free Plan', value: 'free' },
+        { label: 'Hobby Plan', value: 'hobby' },
         { label: 'Pro Plan', value: 'pro' },
         { label: 'Enterprise Plan', value: 'enterprise' },
       ],

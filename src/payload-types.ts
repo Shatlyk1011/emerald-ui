@@ -215,7 +215,7 @@ export interface Client {
   /**
    * User subscription plan
    */
-  currentPlan?: ('free' | 'pro' | 'enterprise') | null;
+  currentPlan?: ('free' | 'hobby' | 'pro' | 'enterprise') | null;
   /**
    * Block this user from using credits and accessing services
    */
@@ -271,7 +271,7 @@ export interface CreditHistory {
   /**
    * Date when these credits expire
    */
-  expirationDate: string;
+  expirationDate?: string | null;
   updatedAt: string;
   createdAt: string;
 }

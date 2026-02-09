@@ -96,7 +96,9 @@ const Header = () => {
         <div className='flex min-w-20 items-center justify-end gap-2 max-sm:gap-1'>
           <ThemeToggle />
 
-          {!isLoading && (
+          {isLoading ? (
+            <div className='border-primary h-5 w-5 animate-spin rounded-full border-2 border-t-transparent' />
+          ) : (
             <>
               {user ? (
                 <DropdownMenu>

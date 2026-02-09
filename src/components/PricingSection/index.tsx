@@ -1,9 +1,10 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import { Switch } from '../ui/switch'
 import { PricingCard, PricingTier } from './PricingCard'
 import { useUser } from '@/hooks/use-user'
+import { toast } from 'sonner'
 
 const pricingPlans: PricingTier[] = [
   {
@@ -55,9 +56,27 @@ const pricingPlans: PricingTier[] = [
 const PricingSection = () => {
   const [isAnnual, setAnnual] = useState(true)
 
-  const { user, isLoading } = useUser()
+  const { user } = useUser()
 
   const isAuth = !!user
+
+  // Handle success/cancel redirects from Stripe
+  // ????
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('success')) {
+      toast.success('Payment successful! Your plan has been upgraded.', {
+        duration: 5000,
+      })
+      window.history.replaceState({}, '', window.location.pathname)
+    }
+    if (params.get('canceled')) {
+      toast.info('Payment canceled. You can try again anytime.', {
+        duration: 4000,
+      })
+      window.history.replaceState({}, '', window.location.pathname)
+    }
+  }, [])
 
   return (
     <>
