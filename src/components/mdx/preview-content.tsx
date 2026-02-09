@@ -86,7 +86,7 @@ export default function PreviewContent({
   const handleCopyClick = async () => {
     if (isBlock) {
       router.push('/sign-in')
-      toast.info('Please sign in to copy component', { position: 'top-center' })
+      toast.info('Please sign in to copy the component', { position: 'top-center' })
       return
     }
 

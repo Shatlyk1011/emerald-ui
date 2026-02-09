@@ -91,7 +91,7 @@ export default function SignInPage({ handleSwitch, isModal }: Props) {
     <div
       className={cn(
         'relative flex min-h-screen items-center justify-center overflow-hidden max-sm:items-start max-sm:pt-16',
-        isModal && 'max-h-max min-h-auto py-10'
+        isModal && 'max-h-max min-h-auto py-6'
       )}
     >
       {/* left */}
