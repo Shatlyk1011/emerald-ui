@@ -1,4 +1,4 @@
-import { CheckCircle, Construction, LucideConstruction } from 'lucide-react'
+import { CheckCircle, Construction, Hammer, LucideConstruction } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '../ui/button'
 
@@ -26,7 +26,7 @@ export function PricingCard({ item, isAnnual, classes }: PricingCardProps) {
   const isEnterprice = item.name === 'Enterprise'
 
   return (
-    <div className={cn('relative overflow-hidden border-border bg-background flex w-full flex-col rounded-xl border p-7 shadow-sm transition-shadow hover:shadow-md', classes)}>
+    <div className={cn('relative overflow-hidden border-border bg-background flex w-full flex-col rounded-xl border p-7 shadow-sm transition-shadow hover:shadow-md', classes, isEnterprice && "max-md:hidden")}>
       <div className='mb-4 min-h-22'>
         <h3 className='text-foreground text-2xl font-semibold'>{item.name}</h3>
         <p className='text-foreground/70 mt-2 line-clamp-2 text-base'>
@@ -83,7 +83,10 @@ export function PricingCard({ item, isAnnual, classes }: PricingCardProps) {
       {isEnterprice && (
         // overlay
         <div className='absolute flex items-center justify-center top-0 left-0 w-full h-full bg-background/70 z-[10200]'>
-          <Construction className='w-14 h-14 text-neutral-500 -bottom-32 relative' />
+          <div className='-bottom-16 relative flex flex-col items-center text-neutral-500'>
+            <Hammer size={28} className='mb-2' />
+            <span className='text-sm text-center gap-1 font-medium tracking-one'>Enterprice API <br /> Under Development <br /> </span>
+          </div>
         </div>
       )}
     </div>

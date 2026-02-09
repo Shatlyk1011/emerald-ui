@@ -7,7 +7,7 @@ import { PricingCard, PricingTier } from './PricingCard'
 const pricingPlans: PricingTier[] = [
   {
     name: 'Starter',
-    price: '19',
+    price: '20',
     priceYearly: '15',
     description: 'Perfect for individuals and small projects',
     features: [
@@ -24,8 +24,8 @@ const pricingPlans: PricingTier[] = [
   },
   {
     name: 'Pro',
-    price: '59',
-    priceYearly: '49',
+    price: '60',
+    priceYearly: '48',
     description: 'Ideal for growing teams and businesses',
     features: [
       '300 monthly credits',
@@ -43,20 +43,26 @@ const pricingPlans: PricingTier[] = [
     price: 'Custom',
     priceYearly: 'Custom',
     description: 'For large organizations with specific needs',
-    features: ['API Under Development'],
-    ctaText: 'Contact Sales',
+    features: [''],
+    ctaText: "Let's talk",
     ctaVariant: 'black',
     // featuresIntro: 'Everything in Pro, plus:',
   },
 ]
-
-// interface Props {};
 
 const PricingSection = () => {
   const [isAnnual, setAnnual] = useState(true)
 
   return (
     <>
+      <section className='mb-8 text-center'>
+        <h1 className='mb-2 text-4xl font-bold tracking-tight max-sm:text-3xl'>
+          Simple, Transparent Pricing
+        </h1>
+        <p className='text-muted-foreground mx-auto max-w-2xl text-lg max-sm:text-base'>
+          Deliver new products faster with Node UI
+        </p>
+      </section>
       <div className='mb-4 flex items-center justify-center gap-1.5 text-sm font-normal'>
         <span
           className={cn(
@@ -86,7 +92,7 @@ const PricingSection = () => {
         </p>
       </div>
 
-      <section className='mx-auto grid h-full max-w-full grid-cols-3 justify-center gap-3 px-10 max-lg:px-0'>
+      <section className='mx-auto grid h-full max-w-full grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 justify-center gap-3 px-10 max-lg:px-0'>
         {pricingPlans.map((plan) => (
           <PricingCard key={plan.name} item={plan} isAnnual={isAnnual} />
         ))}
