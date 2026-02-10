@@ -9,7 +9,7 @@ export interface UserDataResponse {
     source: CreditHistory['source']
     creditAmount: number
     createdAt: string
-    expirationDate: string
+    expirationDate: string | null | undefined
     status: CreditHistory['status']
     creditsSpent: CreditHistory['creditsSpent']
   }[]
