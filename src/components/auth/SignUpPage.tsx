@@ -90,7 +90,7 @@ export default function SignUpPage({ isModal, handleSwitch }: Props) {
   return (
     <div
       className={cn(
-        'relative flex min-h-screen items-center justify-center overflow-hidden max-sm:items-start max-sm:pt-16',
+        'relative flex min-h-screen items-center justify-center overflow-hidden max-sm:items-start max-sm:pt-12',
         isModal && 'max-h-max min-h-auto py-6'
       )}
     >

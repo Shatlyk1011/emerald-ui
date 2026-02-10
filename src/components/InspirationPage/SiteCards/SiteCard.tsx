@@ -4,6 +4,7 @@ import { InspirationWebsite } from '@/payload-types'
 import { useAppStore } from '@/store/useAppStore'
 import { BotIcon, Sticker } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { formatDateFull } from '@/composables/utils'
 
 interface SiteCardProps {
   item: InspirationWebsite
@@ -11,7 +12,6 @@ interface SiteCardProps {
 }
 
 function SiteCard({ item, index }: SiteCardProps) {
-  const isNew = true
   const openSiteDialog = useAppStore((state) => state.openSiteDialog)
 
   // Determine which media to display (prioritize additionalMedia)
@@ -41,7 +41,7 @@ function SiteCard({ item, index }: SiteCardProps) {
         role='button'
         onClick={handleClick}
         className={cn(
-          'relative rounded-xl border bg-transparent px-8 py-16 shadow-lg transition-all duration-300',
+          'relative rounded-xl border bg-transparent px-8 py-16 max-sm:px-8 max-sm:py-16 shadow-lg transition-all duration-300',
           displayUrl
             ? 'hover:border-foreground/15 hover:shadow-xl'
             : 'hover:border-destructive/15'
@@ -84,13 +84,7 @@ function SiteCard({ item, index }: SiteCardProps) {
             )}
           </figure>
 
-          {/* Badges */}
         </div>
-        {isNew && (
-          <span className='bg-background text-foreground tracking-one border-border absolute top-3 left-3 rounded-md border px-2 py-2.5 font-mono text-[11px] leading-0 font-semibold uppercase'>
-            New
-          </span>
-        )}
       </div>
 
       <div className='flex items-center gap-3 px-1'>
@@ -106,10 +100,12 @@ function SiteCard({ item, index }: SiteCardProps) {
             <Sticker />
           )}
         </div>
-
-        <h3 className='text-lg leading-tight font-semibold transition-colors'>
-          {item.title}
-        </h3>
+        <div className='flex flex-col'>
+          <h3 className='text-lg leading-tight font-semibold transition-colors'>
+            {item.title}
+          </h3>
+          <time className='text-xs text-muted-foreground' dateTime={item.createdAt}>{formatDateFull(item.createdAt)}</time>
+        </div>
       </div>
     </div>
   )

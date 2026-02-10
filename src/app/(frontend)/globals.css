@@ -131,6 +131,10 @@
   body {
     @apply bg-background text-foreground overflow-x-hidden font-sans;
   }
+
+  .header_active {
+    @apply backdrop-blur-sm bg-background/90;
+  }
 }
 
 @layer utilities {

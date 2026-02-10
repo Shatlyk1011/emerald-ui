@@ -38,7 +38,6 @@ export default function InspirationContent({
     isVisible: { equals: true },
   })
 
-  console.log('initialData', initialData)
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedStyles, setSelectedStyles] = useState<string[]>([])
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -117,21 +116,21 @@ export default function InspirationContent({
 
   return (
     <>
-      <section className='mb-10 flex items-center justify-between gap-10 px-20 py-10 max-2xl:px-6 max-xl:flex-col max-xl:items-start max-xl:px-0 max-lg:py-6'>
+      <section className='mb-10 flex items-center justify-between gap-10 px-20 py-10 max-2xl:px-6 max-xl:flex-col max-xl:items-start max-xl:px-0 max-lg:py-6 max-sm:mb-6'>
         <div className='relative flex w-full flex-3 flex-col items-start bg-cyan-50/0'>
           <span className='-tracking-one absolute -top-8 left-0 font-mono text-sm opacity-50'>
-            {totalDocs} websites available
+            {/* {totalDocs} websites available */}
           </span>
           <h1 className='-tracking-two mb-2 text-5xl font-semibold'>
-            Node Inspiration <br className='hidden max-lg:block' /> Websites
+            Node Inspiration <br className='hidden max-lg:block' /> Websites ({totalDocs})
           </h1>
           <div className='text-muted-foreground text-lg'>
             <p className='mb-2'>
               Explore selected websites for your next design.
             </p>
             <Button
-              className='mt-16 p-0'
-              variant={'link'}
+              className='mt-1 text-sm'
+              // size="sm"
               onClick={() => setIsDialogOpen(true)}
             >
               Submit your website

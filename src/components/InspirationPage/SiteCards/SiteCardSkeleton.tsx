@@ -10,12 +10,9 @@ export default function SiteCardSkeleton() {
       </div>
 
       {/* Card Footer */}
-      <div className='flex items-start gap-3 px-1'>
+      <div className='flex items-center gap-3 px-1'>
         <Skeleton className='h-8 w-8 shrink-0 rounded-md' />
-        <div className='flex flex-1 flex-col gap-2'>
-          <Skeleton className='h-4 w-3/4' />
-          <Skeleton className='h-3 w-full' />
-        </div>
+        <Skeleton className='h-6 w-3/4' />
       </div>
     </div>
   )

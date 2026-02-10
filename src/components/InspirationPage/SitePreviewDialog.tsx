@@ -227,19 +227,6 @@ export default function SitePreviewDialog({
 
             {/* Action Buttons - Fixed at bottom */}
             <div className='bg-muted/20 space-y-3 border-t p-6'>
-              {/* Regenerate Website Button */}
-              <Button
-                className='w-full'
-                onClick={() => {
-                  // TODO: Implement regenerate functionality
-                  console.log('Regenerate website:', selectedSite.title)
-                }}
-              >
-                <span className='relative z-10 flex items-center justify-center gap-2'>
-                  <Sparkles className='h-4 w-4' />
-                  Regenerate This Template
-                </span>
-              </Button>
 
               {/* Visit Website Button */}
               {selectedSite.pageUrl && (

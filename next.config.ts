@@ -72,6 +72,19 @@ const nextConfig: NextConfig = {
         destination: '/sign-in',
         permanent: true,
       },
+
+      // temporary
+      {
+        source: '/pricing',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/node-inspiration',
+        destination: '/',
+        permanent: true,
+      },
+      
     ]
   },
 

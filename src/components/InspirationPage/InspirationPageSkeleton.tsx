@@ -16,7 +16,7 @@ export default function InspirationPageSkeleton() {
           </div>
         </div>
         <div className='flex-5 max-xl:w-full max-xl:flex-auto'>
-          <Skeleton className='h-60 w-full rounded-lg' />
+          <Skeleton className='h-80 w-full rounded-lg' />
         </div>
       </section>
 

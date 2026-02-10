@@ -56,7 +56,7 @@ function FilterSection({
 
   return (
     <section className='mb-12'>
-      <div className='flex gap-12'>
+      <div className='flex gap-12 max-md:flex-col max-md:gap-8'>
         <div className='group flex max-w-md flex-1 flex-col'>
           <h3
             className={cn(
