@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "eslint",
     "format": "npx prettier --write .",
-    "generate:types": "payload generate:types"
+    "generate:types": "payload generate:types",
+    "generate:importmap": "payload generate:importmap"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",
@@ -33,6 +34,7 @@
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.90.1",
     "@tanstack/react-query": "^5.90.17",
+    "@types/nodemailer": "^7.0.9",
     "axios": "^1.13.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -46,6 +48,7 @@
     "motion": "^12.23.26",
     "next": "16.1.1",
     "next-themes": "^0.4.6",
+    "nodemailer": "^8.0.1",
     "ogl": "^1.0.11",
     "openai": "^6.15.0",
     "payload": "3.62.0",

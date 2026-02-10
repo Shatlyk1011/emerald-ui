@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 import { siteConfig } from '@/lib/site-config'
-import BackgroundThreads from '@/components/ui/background-threads'
-import FileUploadInput from '@/components/FileUpload'
 import InspirationPageSkeleton from '@/components/InspirationPage/InspirationPageSkeleton'
 import { Suspense } from 'react'
 import InspirationPageContent from '@/components/InspirationPage/InspirationPageContent'

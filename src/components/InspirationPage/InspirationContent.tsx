@@ -14,6 +14,7 @@ import FilterSection from './FilterSection'
 import SiteCards from './SiteCards'
 import EmptyResult from './SiteCards/EmptyResult'
 import SiteCardsSkeleton from './SiteCards/SiteCardsSkeleton'
+import NewsletterSubscribe from '@/components/NewsletterSubscribe'
 
 const SubmitWebsiteDialog = dynamic(() => import('./SubmitWebsiteDialog'), {
   ssr: false,
@@ -118,9 +119,7 @@ export default function InspirationContent({
     <>
       <section className='mb-10 flex items-center justify-between gap-10 px-20 py-10 max-2xl:px-6 max-xl:flex-col max-xl:items-start max-xl:px-0 max-lg:py-6 max-sm:mb-6'>
         <div className='relative flex w-full flex-3 flex-col items-start bg-cyan-50/0'>
-          <span className='-tracking-one absolute -top-8 left-0 font-mono text-sm opacity-50'>
-            {/* {totalDocs} websites available */}
-          </span>
+          <NewsletterSubscribe />
           <h1 className='-tracking-two mb-2 text-5xl font-semibold'>
             Node Inspiration <br className='hidden max-lg:block' /> Websites ({totalDocs})
           </h1>

@@ -11,6 +11,8 @@ import Clients from './app/(payload)/collections/Clients'
 import CreditHistory from './app/(payload)/collections/CreditHistory'
 import InspirationWebsites from './app/(payload)/collections/InspirationWebsites'
 import Media from './app/(payload)/collections/Media'
+import Newsletters from './app/(payload)/collections/Newsletters'
+import Subscribers from './app/(payload)/collections/Subscribers'
 import WebsiteStyle from './app/(payload)/collections/WebsiteStyle'
 import WebsiteSubmissions from './app/(payload)/collections/WebsiteSubmissions'
 
@@ -37,6 +39,8 @@ export default buildConfig({
     Clients,
     CreditHistory,
     WebsiteSubmissions,
+    Subscribers,
+    Newsletters,
     Media,
     Categories,
     WebsiteStyle,

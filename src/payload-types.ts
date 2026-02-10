@@ -71,6 +71,8 @@ export interface Config {
     clients: Client;
     'credit-history': CreditHistory;
     'website-submissions': WebsiteSubmission;
+    subscribers: Subscriber;
+    newsletters: Newsletter;
     media: Media;
     categories: Category;
     'website-style': WebsiteStyle;
@@ -90,6 +92,8 @@ export interface Config {
     clients: ClientsSelect<false> | ClientsSelect<true>;
     'credit-history': CreditHistorySelect<false> | CreditHistorySelect<true>;
     'website-submissions': WebsiteSubmissionsSelect<false> | WebsiteSubmissionsSelect<true>;
+    subscribers: SubscribersSelect<false> | SubscribersSelect<true>;
+    newsletters: NewslettersSelect<false> | NewslettersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'website-style': WebsiteStyleSelect<false> | WebsiteStyleSelect<true>;
@@ -298,6 +302,78 @@ export interface WebsiteSubmission {
   createdAt: string;
 }
 /**
+ * Manage newsletter subscribers. Users can subscribe publicly, but only admins can view and manage subscriptions.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscribers".
+ */
+export interface Subscriber {
+  id: string;
+  /**
+   * Subscriber email address (must be unique)
+   */
+  email: string;
+  /**
+   * Current subscription status
+   */
+  status: 'active' | 'unsubscribed';
+  /**
+   * Where the subscriber signed up (e.g., homepage, footer)
+   */
+  source?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Create and send newsletters to subscribers. Use the rich text editor to compose your newsletter content.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletters".
+ */
+export interface Newsletter {
+  id: string;
+  /**
+   * Email subject line
+   */
+  subject: string;
+  /**
+   * Short preview text shown in email clients (optional)
+   */
+  previewText?: string | null;
+  /**
+   * Main newsletter content (supports rich formatting)
+   */
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Newsletter status
+   */
+  status: 'draft' | 'sent';
+  /**
+   * Date and time when newsletter was sent
+   */
+  sentDate?: string | null;
+  /**
+   * Number of subscribers who received this newsletter
+   */
+  recipientCount?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Manage website categories for organizing inspiration entries. Categories provide taxonomical classification to help filter and group websites by type or purpose.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -390,6 +466,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'website-submissions';
         value: string | WebsiteSubmission;
+      } | null)
+    | ({
+        relationTo: 'subscribers';
+        value: string | Subscriber;
+      } | null)
+    | ({
+        relationTo: 'newsletters';
+        value: string | Newsletter;
       } | null)
     | ({
         relationTo: 'media';
@@ -512,6 +596,31 @@ export interface WebsiteSubmissionsSelect<T extends boolean = true> {
   websiteUrl?: T;
   message?: T;
   status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscribers_select".
+ */
+export interface SubscribersSelect<T extends boolean = true> {
+  email?: T;
+  status?: T;
+  source?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletters_select".
+ */
+export interface NewslettersSelect<T extends boolean = true> {
+  subject?: T;
+  previewText?: T;
+  content?: T;
+  status?: T;
+  sentDate?: T;
+  recipientCount?: T;
   updatedAt?: T;
   createdAt?: T;
 }
