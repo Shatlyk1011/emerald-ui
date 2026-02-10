@@ -5,6 +5,10 @@ import { admins } from '../../utils/admins';
 
 
 
+
+
+
+
 const CreditHistory: CollectionConfig = {
   slug: 'credit-history',
   access: {
@@ -117,7 +121,7 @@ const CreditHistory: CollectionConfig = {
       label: 'Status',
       type: 'select',
       defaultValue: 'active',
-      required: true,
+      required: false,
       options: [
         { label: 'Active', value: 'active' },
         { label: 'Expired', value: 'expired' },

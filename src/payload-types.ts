@@ -267,7 +267,7 @@ export interface CreditHistory {
   /**
    * Status of the credit
    */
-  status: 'active' | 'expired' | 'used';
+  status?: ('active' | 'expired' | 'used') | null;
   /**
    * Amount of credits spent from this allocation
    */

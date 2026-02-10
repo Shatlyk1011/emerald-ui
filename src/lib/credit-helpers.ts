@@ -1,6 +1,11 @@
-import { Client } from '@/payload-types'
+import { Client } from '@/payload-types';
 import config from '@payload-config';
 import { getPayload } from 'payload';
+
+
+
+
+
 
 
 
