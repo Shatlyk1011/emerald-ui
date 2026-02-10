@@ -1,10 +1,13 @@
-import nodemailer from 'nodemailer'
+import nodemailer from 'nodemailer';
+
+
+
 
 export const createEmailTransporter = () => {
   const transporter = nodemailer.createTransport({
     host: 'smtp.useplunk.com',
-    port: 587,
-    secure: false,
+    secure: true,
+    port: 465,
     auth: {
       user: 'plunk',
       pass: process.env.PLUNK_KEY,
