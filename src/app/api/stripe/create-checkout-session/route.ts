@@ -1,6 +1,11 @@
-import { NextResponse } from 'next/server'
-import { stripe, STRIPE_PRICE_IDS, type PlanType, type BillingPeriod } from '@/lib/stripe'
-import { createClient } from '@/lib/supabase-server'
+import { NextResponse } from 'next/server';
+import { stripe, STRIPE_PRICE_IDS, type PlanType, type BillingPeriod } from '@/lib/stripe';
+import { createClient } from '@/lib/supabase-server';
+
+
+
+
+
 
 export async function POST(req: Request) {
   try {
@@ -64,8 +69,8 @@ export async function POST(req: Request) {
           quantity: 1,
         },
       ],
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/?success=true`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/pricing?canceled=true`,
+      success_url: `${process.env.NEXT_PUBLIC_API_URL}/?success=true`,
+      cancel_url: `${process.env.NEXT_PUBLIC_API_URL}/pricing?canceled=true`,
       customer_email: user.email,
       metadata: {
         userId: user.id,
