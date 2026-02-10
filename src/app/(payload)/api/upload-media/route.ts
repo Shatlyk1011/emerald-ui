@@ -99,8 +99,8 @@ export async function POST(request: NextRequest) {
       url: publicUrl,
       mediaType,
       filename,
-      contentType: file.type,
-      size: file.size,
+      contentType,
+      size: buffer.length,
     })
   } catch (error) {
     console.error('Upload error:', error)

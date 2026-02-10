@@ -1,6 +1,11 @@
-import { downloadMediaFromUrl, uploadMedia } from '@/app/(payload)/utils/supabase'
-import { NextRequest, NextResponse } from 'next/server'
-import sharp from 'sharp'
+import { downloadMediaFromUrl, uploadMedia } from '@/app/(payload)/utils/supabase';
+import { NextRequest, NextResponse } from 'next/server';
+import sharp from 'sharp';
+
+
+
+
+
 
 // Allowed file types
 const ALLOWED_IMAGE_TYPES = [
@@ -28,7 +33,7 @@ const MAX_FILE_SIZE = 50 * 1024 * 1024
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { url, pageUrl, altText, description } = body
+    const { url } = body
 
     if (!url) {
       return NextResponse.json({ error: 'No URL provided' }, { status: 400 })
@@ -65,14 +70,6 @@ export async function POST(request: NextRequest) {
         {
           error: `Invalid file type: ${contentType}. Allowed types: images (jpeg, png, gif, webp, svg) and videos (mp4, webm, mov, avi, mpeg)`,
         },
-        { status: 400 }
-      )
-    }
-
-    // Validate file size
-    if (buffer.length > MAX_FILE_SIZE) {
-      return NextResponse.json(
-        { error: 'File size exceeds 50MB limit' },
         { status: 400 }
       )
     }
@@ -117,11 +114,6 @@ export async function POST(request: NextRequest) {
       filename,
       contentType,
       size: buffer.length,
-      metadata: {
-        pageUrl,
-        altText,
-        description,
-      },
     })
   } catch (error) {
     console.error('Upload from URL error:', error)

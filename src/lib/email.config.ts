@@ -1,4 +1,7 @@
-import nodemailer from 'nodemailer'
+import nodemailer from 'nodemailer';
+
+
+
 
 export const createEmailTransporter = () => {
   const transporter = nodemailer.createTransport({
@@ -7,7 +10,7 @@ export const createEmailTransporter = () => {
     port: 465,
     auth: {
       user: 'plunk',
-      pass: process.env.PLUNK_KEY,
+      pass: String(process.env.PLUNK_KEY),
     },
   })
 

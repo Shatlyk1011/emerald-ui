@@ -1,5 +1,8 @@
 import { createClient } from '@supabase/supabase-js'
 
+
+
+
 // Initialize Supabase client
 const supabaseUrl = process.env.SUPABASE_URL || ''
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY || ''
@@ -160,6 +163,127 @@ export async function uploadMedia(
   } catch (error) {
     console.error('Error uploading media:', error)
     throw error
+  }
+}
+
+/**
+ * Download media from URL and return buffer
+ * @param url - URL of the media to download
+ * @param maxSize - Maximum file size in bytes (default: 50MB)
+ * @returns Buffer containing the downloaded media with content type and filename
+ */
+export async function downloadMediaFromUrl(
+  url: string,
+  maxSize: number = 50 * 1024 * 1024
+): Promise<{ buffer: Buffer; contentType: string; filename: string }> {
+  try {
+    // Validate URL format
+    let parsedUrl: URL
+    try {
+      parsedUrl = new URL(url)
+    } catch {
+      throw new Error('Invalid URL format')
+    }
+
+    // Only allow http and https protocols
+    if (!['http:', 'https:'].includes(parsedUrl.protocol)) {
+      throw new Error('Only HTTP and HTTPS protocols are supported')
+    }
+
+    // Download the file with timeout
+    const controller = new AbortController()
+    const timeout = setTimeout(() => controller.abort(), 60000) // 60 second timeout
+
+    const response = await fetch(url, {
+      signal: controller.signal,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; MediaUploader/1.0)',
+      },
+    })
+
+    clearTimeout(timeout)
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to download media: ${response.status} ${response.statusText}`
+      )
+    }
+
+    // Check content type
+    const contentType = response.headers.get('content-type') || ''
+    if (
+      !contentType.startsWith('image/') &&
+      !contentType.startsWith('video/')
+    ) {
+      throw new Error(
+        `Unsupported content type: ${contentType}. Only images and videos are allowed.`
+      )
+    }
+
+    // Check content length if available
+    const contentLength = response.headers.get('content-length')
+    if (contentLength && parseInt(contentLength) > maxSize) {
+      throw new Error(
+        `File size (${parseInt(contentLength)} bytes) exceeds maximum allowed size (${maxSize} bytes)`
+      )
+    }
+
+    // Download with size limit
+    const reader = response.body?.getReader()
+    if (!reader) {
+      throw new Error('Failed to read response body')
+    }
+
+    const chunks: Uint8Array[] = []
+    let downloadedSize = 0
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+
+      downloadedSize += value.length
+      if (downloadedSize > maxSize) {
+        reader.cancel()
+        throw new Error(
+          `File size exceeds maximum allowed size (${maxSize} bytes)`
+        )
+      }
+
+      chunks.push(value)
+    }
+
+    // Combine chunks into buffer
+    const buffer = Buffer.concat(chunks)
+
+    // Extract filename from URL
+    const pathParts = parsedUrl.pathname.split('/')
+    let filename = pathParts[pathParts.length - 1] || 'download'
+
+    // Remove query parameters from filename
+    filename = filename.split('?')[0]
+
+    // Sanitize filename
+    filename = filename.replace(/[^a-z0-9.-]/gi, '-').toLowerCase()
+
+    // Ensure filename has an extension
+    if (!filename.includes('.')) {
+      const ext = contentType.split('/')[1]?.split(';')[0] || 'bin'
+      filename = `${filename}.${ext}`
+    }
+
+    return {
+      buffer,
+      contentType,
+      filename,
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.name === 'AbortError') {
+        throw new Error('Download timeout: Request took too long')
+      }
+      throw error
+    }
+    throw new Error('Failed to download media from URL')
   }
 }
 
