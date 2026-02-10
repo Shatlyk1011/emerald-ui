@@ -227,7 +227,6 @@ export default function SitePreviewDialog({
 
             {/* Action Buttons - Fixed at bottom */}
             <div className='bg-muted/20 space-y-3 border-t p-6'>
-
               {/* Visit Website Button */}
               {selectedSite.pageUrl && (
                 <Button asChild variant={'secondary'}>

@@ -1,17 +1,20 @@
-import { NextResponse } from 'next/server';
-import { stripe, STRIPE_PRICE_IDS, type PlanType, type BillingPeriod } from '@/lib/stripe';
-import { createClient } from '@/lib/supabase-server';
-
-
-
-
-
+import { NextResponse } from 'next/server'
+import {
+  stripe,
+  STRIPE_PRICE_IDS,
+  type PlanType,
+  type BillingPeriod,
+} from '@/lib/stripe'
+import { createClient } from '@/lib/supabase-server'
 
 export async function POST(req: Request) {
   try {
     // 1. Validate user authentication
     const supabase = await createClient()
-    const { data: { user }, error: authError } = await supabase.auth.getUser()
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser()
 
     if (authError || !user) {
       return NextResponse.json(

@@ -1,6 +1,6 @@
-1) pages pricing, inspiration-page
-2) remove redirects
-3) main page content 
+1. pages pricing, inspiration-page
+2. remove redirects
+3. main page content
 <!-- <main className='items-top mx-auto mb-16 flex h-full min-h-[200vh] w-full max-w-5xl justify-center overflow-x-hidden px-12 pt-30 max-lg:px-8 max-sm:px-4 max-sm:pt-2'>
   <section className='flex w-full flex-col items-center gap-8'>
     <div className='text-center'>
@@ -19,7 +19,7 @@
   </div>
 </main> -->
 
-4) regenerate dialog button 
+4. regenerate dialog button
 <!-- <Button
   className='w-full'
   onClick={() => {
@@ -33,9 +33,9 @@
   </span>
 </Button> -->
 
-5) layout header links
+5. layout header links
 
-6) profile page - invoices
+6. profile page - invoices
 <!--const mockInvoices = [
   {
     id: 1,

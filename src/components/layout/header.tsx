@@ -1,7 +1,9 @@
 'use client'
 
+import { useRef, useState } from 'react'
 import { getUserInitials } from '@/composables/utils'
 import { LogOut, User as UserIcon } from 'lucide-react'
+import { useScroll, useMotionValueEvent } from 'motion/react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
@@ -18,8 +20,6 @@ import {
 } from '@/components/ui/dropdown-menu'
 import ThemeToggle from '@/components/ui/theme-toggle'
 import TextShimmer from '../ui/text-shimmer'
-import { useRef, useState } from 'react'
-import { useScroll, useMotionValueEvent } from 'motion/react'
 
 const { components, home } = {
   home: '/',
@@ -36,7 +36,7 @@ const Header = () => {
 
   const { scrollY } = useScroll()
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
+  useMotionValueEvent(scrollY, 'change', (latest) => {
     setIsScrolled(latest > 0)
   })
 
@@ -45,15 +45,24 @@ const Header = () => {
   }
 
   return (
-    <header ref={headerRef} className={cn('mx-auto flex w-full h-14 items-center justify-between px-8 max-sm:px-5 py-2 font-sans fixed top-0 z-50 border', isScrolled && 'backdrop-blur-sm bg-background/90')}>
-      <Link href='/' className='w-20 max-sm:max-w-max max-sm:mr-4 max-sm:min-w-8'>
+    <header
+      ref={headerRef}
+      className={cn(
+        'fixed top-0 z-50 mx-auto flex h-14 w-full items-center justify-between border px-8 py-2 font-sans max-sm:px-5',
+        isScrolled && 'bg-background/90 backdrop-blur-sm'
+      )}
+    >
+      <Link
+        href='/'
+        className='w-20 max-sm:mr-4 max-sm:max-w-max max-sm:min-w-8'
+      >
         <span className=''>Logo</span>
       </Link>
 
       <nav className='text-muted-foreground flex flex-1 justify-start'>
         <ul className='tracking-one flex items-center text-sm font-medium max-sm:text-sm'>
           <li>
-            <Link 
+            <Link
               href={home}
               className={cn(
                 'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2',
@@ -69,7 +78,7 @@ const Header = () => {
               className={cn(
                 'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2',
                 pathname === components &&
-                'text-foreground font-medium opacity-100'
+                  'text-foreground font-medium opacity-100'
               )}
             >
               <TextShimmer duration={7} spread={15}>
@@ -95,9 +104,7 @@ const Header = () => {
                       <AvatarImage
                         src={user.user_metadata?.avatar_url}
                         alt={
-                          user.user_metadata?.full_name ||
-                          user.email ||
-                          'User'
+                          user.user_metadata?.full_name || user.email || 'User'
                         }
                       />
                       <AvatarFallback>{getUserInitials(user)}</AvatarFallback>

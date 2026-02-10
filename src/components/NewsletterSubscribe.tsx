@@ -1,16 +1,15 @@
 'use client'
 
-import { axios } from '@/lib/axios'
 import { useState } from 'react'
+import { axios } from '@/lib/axios'
 
 function NewsletterSubscribe() {
   /**
- * Send a test email to verify SMTP configuration
- */
-const sendTestEmail = async (to: string) => {
-  await axios.post('/send-test-newsletter', {body: to})
-
-}
+   * Send a test email to verify SMTP configuration
+   */
+  const sendTestEmail = async (to: string) => {
+    await axios.post('/send-test-newsletter', { body: to })
+  }
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<{
@@ -66,33 +65,34 @@ const sendTestEmail = async (to: string) => {
   }
 
   return (
-    <div className="w-full max-w-md">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <div className="flex gap-2">
+    <div className='w-full max-w-md'>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
+        <div className='flex gap-2'>
           <input
-            type="email"
+            type='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
+            placeholder='Enter your email'
             disabled={loading}
-            className="flex-1 rounded-md border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+            className='flex-1 rounded-md border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white'
           />
           <button
-            type="submit"
+            type='submit'
             disabled={loading}
-            className="rounded-md bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className='rounded-md bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50'
           >
             {loading ? 'Subscribing...' : 'Subscribe'}
           </button>
           <button
-            type="button"
+            type='button'
             disabled={loading}
-            onClick={() => sendTestEmail("penguin-99.99@mail.ru, gj_wp@mail.ru")}
-            className="rounded-md bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+            onClick={() =>
+              sendTestEmail('penguin-99.99@mail.ru, gj_wp@mail.ru')
+            }
+            className='rounded-md bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50'
           >
             send test email
           </button>
-          
         </div>
 
         {message && (
@@ -108,7 +108,7 @@ const sendTestEmail = async (to: string) => {
         )}
       </form>
 
-      <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+      <p className='mt-2 text-xs text-gray-500 dark:text-gray-400'>
         Subscribe to receive our latest updates and news.
       </p>
     </div>

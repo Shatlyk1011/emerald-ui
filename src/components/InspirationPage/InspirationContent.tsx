@@ -8,13 +8,13 @@ import { IWebsites } from '@/types/inspiration'
 import dynamic from 'next/dynamic'
 import { Where } from 'payload'
 import { useInView } from 'react-intersection-observer'
+import NewsletterSubscribe from '@/components/NewsletterSubscribe'
 import ThreeDMarquee from '../ui/3d-marquee'
 import { Button } from '../ui/button'
 import FilterSection from './FilterSection'
 import SiteCards from './SiteCards'
 import EmptyResult from './SiteCards/EmptyResult'
 import SiteCardsSkeleton from './SiteCards/SiteCardsSkeleton'
-import NewsletterSubscribe from '@/components/NewsletterSubscribe'
 
 const SubmitWebsiteDialog = dynamic(() => import('./SubmitWebsiteDialog'), {
   ssr: false,
@@ -121,7 +121,8 @@ export default function InspirationContent({
         <div className='relative flex w-full flex-3 flex-col items-start bg-cyan-50/0'>
           <NewsletterSubscribe />
           <h1 className='-tracking-two mb-2 text-5xl font-semibold'>
-            Node Inspiration <br className='hidden max-lg:block' /> Websites ({totalDocs})
+            Node Inspiration <br className='hidden max-lg:block' /> Websites (
+            {totalDocs})
           </h1>
           <div className='text-muted-foreground text-lg'>
             <p className='mb-2'>

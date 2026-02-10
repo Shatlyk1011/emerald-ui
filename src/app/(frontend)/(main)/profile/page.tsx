@@ -1,10 +1,8 @@
 'use client'
 import { getUserInitials } from '@/composables/utils'
-
+import { cn } from '@/lib/utils'
 import { useUser } from '@/hooks/use-user'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { cn } from '@/lib/utils'
-
 
 export const dynamic = 'force-dynamic'
 
@@ -38,21 +36,36 @@ export default function ProfilePage() {
 
         <div className='mb-10 flex gap-4 text-sm font-medium'>
           <div className='flex-1'>
-            <label className='mb-2 block text-muted-foreground'>Name</label>
-            <div className={cn('bg-muted/50 min-h-9 text-foreground rounded-md border px-3 py-2', isSBLoading && 'text-muted-foreground')}>
-              {isSBLoading ? 'Loading...' : SBUser?.user_metadata.full_name || !isSBLoading && 'No provided'}
+            <label className='text-muted-foreground mb-2 block'>Name</label>
+            <div
+              className={cn(
+                'bg-muted/50 text-foreground min-h-9 rounded-md border px-3 py-2',
+                isSBLoading && 'text-muted-foreground'
+              )}
+            >
+              {isSBLoading
+                ? 'Loading...'
+                : SBUser?.user_metadata.full_name ||
+                  (!isSBLoading && 'No provided')}
             </div>
           </div>
 
           <div className='flex-1'>
-            <label className='mb-2 block text-muted-foreground'>Email</label>
-            <div className={cn('bg-muted/50 min-h-9 text-foreground rounded-md border px-3 py-2', isSBLoading && 'text-muted-foreground')}>
-              {isSBLoading ? 'Loading...' : SBUser?.email || !isSBLoading && 'No email'}
+            <label className='text-muted-foreground mb-2 block'>Email</label>
+            <div
+              className={cn(
+                'bg-muted/50 text-foreground min-h-9 rounded-md border px-3 py-2',
+                isSBLoading && 'text-muted-foreground'
+              )}
+            >
+              {isSBLoading
+                ? 'Loading...'
+                : SBUser?.email || (!isSBLoading && 'No email')}
             </div>
           </div>
         </div>
 
-        <span className='text-secondary-foreground font-mono -tracking-two text-sm py-5 inline-block'>
+        <span className='text-secondary-foreground -tracking-two inline-block py-5 font-mono text-sm'>
           more coming soon...
         </span>
       </div>

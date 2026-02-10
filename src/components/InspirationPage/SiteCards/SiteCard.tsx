@@ -1,10 +1,10 @@
 'use client'
 
+import { formatDateFull } from '@/composables/utils'
 import { InspirationWebsite } from '@/payload-types'
 import { useAppStore } from '@/store/useAppStore'
 import { BotIcon, Sticker } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { formatDateFull } from '@/composables/utils'
 
 interface SiteCardProps {
   item: InspirationWebsite
@@ -41,7 +41,7 @@ function SiteCard({ item, index }: SiteCardProps) {
         role='button'
         onClick={handleClick}
         className={cn(
-          'relative rounded-xl border bg-transparent px-8 py-16 max-sm:px-8 max-sm:py-16 shadow-lg transition-all duration-300',
+          'relative rounded-xl border bg-transparent px-8 py-16 shadow-lg transition-all duration-300 max-sm:px-8 max-sm:py-16',
           displayUrl
             ? 'hover:border-foreground/15 hover:shadow-xl'
             : 'hover:border-destructive/15'
@@ -83,7 +83,6 @@ function SiteCard({ item, index }: SiteCardProps) {
               </div>
             )}
           </figure>
-
         </div>
       </div>
 
@@ -104,7 +103,12 @@ function SiteCard({ item, index }: SiteCardProps) {
           <h3 className='text-lg leading-tight font-semibold transition-colors'>
             {item.title}
           </h3>
-          <time className='text-xs text-muted-foreground' dateTime={item.createdAt}>{formatDateFull(item.createdAt)}</time>
+          <time
+            className='text-muted-foreground text-xs'
+            dateTime={item.createdAt}
+          >
+            {formatDateFull(item.createdAt)}
+          </time>
         </div>
       </div>
     </div>

@@ -84,7 +84,6 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: true,
       },
-      
     ]
   },
 

@@ -1,13 +1,16 @@
-import { createEmailTransporter, generateNewsletterHTML } from '@/lib/email.config'
 import { NextRequest, NextResponse } from 'next/server'
+import {
+  createEmailTransporter,
+  generateNewsletterHTML,
+} from '@/lib/email.config'
 
 export async function POST(request: NextRequest) {
   try {
     const transporter = createEmailTransporter()
     const { to } = await request.json()
-    
+
     await transporter.sendMail({
-      from: process.env.EMAIL_FROM || "Node Ui Newsletter",
+      from: process.env.EMAIL_FROM || 'Node Ui Newsletter',
       to,
       subject: 'Test Email - Newsletter System',
       html: generateNewsletterHTML(
@@ -20,6 +23,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Test email failed:', error)
-    return NextResponse.json({ success: false, error: 'Failed to send test email' }, { status: 500 })
+    return NextResponse.json(
+      { success: false, error: 'Failed to send test email' },
+      { status: 500 }
+    )
   }
 }

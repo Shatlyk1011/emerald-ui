@@ -1,8 +1,8 @@
-import { NextResponse } from 'next/server'
-import { stripe } from '@/lib/stripe'
-import { getPayload } from 'payload'
 import config from '@payload-config'
+import { NextResponse } from 'next/server'
+import { getPayload } from 'payload'
 import Stripe from 'stripe'
+import { stripe } from '@/lib/stripe'
 
 export async function POST(req: Request) {
   const body = await req.text()
@@ -26,10 +26,7 @@ export async function POST(req: Request) {
     )
   } catch (error) {
     console.error('Webhook signature verification failed:', error)
-    return NextResponse.json(
-      { error: 'Invalid signature' },
-      { status: 400 }
-    )
+    return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
   }
 
   // 2. Handle the event
@@ -64,10 +61,7 @@ export async function POST(req: Request) {
 
       if (clients.docs.length === 0) {
         console.error(`No client found for userId: ${userId}`)
-        return NextResponse.json(
-          { error: 'Client not found' },
-          { status: 404 }
-        )
+        return NextResponse.json({ error: 'Client not found' }, { status: 404 })
       }
 
       const client = clients.docs[0]

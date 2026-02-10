@@ -1,7 +1,7 @@
 'use client'
 
-import { useDocumentInfo } from '@payloadcms/ui'
 import { useState } from 'react'
+import { useDocumentInfo } from '@payloadcms/ui'
 
 export const SendNewsletterButton = () => {
   const { data } = useDocumentInfo()
@@ -42,7 +42,7 @@ export const SendNewsletterButton = () => {
       }
 
       setMessage(result.message || 'Newsletter sent successfully!')
-      
+
       // Reload the page to show updated status
       setTimeout(() => {
         window.location.reload()
@@ -93,7 +93,8 @@ export const SendNewsletterButton = () => {
                 color: 'var(--theme-success-500)',
               }}
             >
-              ✓ Sent to {recipientCount} subscriber{recipientCount !== 1 ? 's' : ''} on{' '}
+              ✓ Sent to {recipientCount} subscriber
+              {recipientCount !== 1 ? 's' : ''} on{' '}
               {data?.sentDate
                 ? new Date(data.sentDate).toLocaleString()
                 : 'unknown date'}

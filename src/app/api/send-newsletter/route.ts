@@ -1,5 +1,5 @@
-import { sendNewsletter } from '@/lib/helpers/send-newsletter'
 import { NextRequest, NextResponse } from 'next/server'
+import { sendNewsletter } from '@/lib/helpers/send-newsletter'
 
 export async function POST(request: NextRequest) {
   try {

@@ -1,13 +1,5 @@
-import { CollectionConfig } from 'payload';
-import { admins } from '../../utils/admins';
-
-
-
-
-
-
-
-
+import { CollectionConfig } from 'payload'
+import { admins } from '../../utils/admins'
 
 const CreditHistory: CollectionConfig = {
   slug: 'credit-history',

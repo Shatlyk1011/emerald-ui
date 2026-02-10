@@ -1,10 +1,10 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
+import { useUser } from '@/hooks/use-user'
 import { Switch } from '../ui/switch'
 import { PricingCard, PricingTier } from './PricingCard'
-import { useUser } from '@/hooks/use-user'
-import { toast } from 'sonner'
 
 const pricingPlans: PricingTier[] = [
   {
@@ -18,7 +18,7 @@ const pricingPlans: PricingTier[] = [
       'Private generations',
       'Custom design system',
       'No watermark on previews',
-      "Customer Support",
+      'Customer Support',
     ],
     ctaText: 'Upgrade to Hobby',
     ctaVariant: 'blue',
@@ -117,9 +117,14 @@ const PricingSection = () => {
         </p>
       </div>
 
-      <section className='mx-auto grid h-full max-w-full grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1 justify-center gap-3 px-10 max-lg:px-0'>
+      <section className='mx-auto grid h-full max-w-full grid-cols-3 justify-center gap-3 px-10 max-lg:px-0 max-md:grid-cols-2 max-sm:grid-cols-1'>
         {pricingPlans.map((plan) => (
-          <PricingCard key={plan.name} item={plan} isAnnual={isAnnual} isAuth={isAuth} />
+          <PricingCard
+            key={plan.name}
+            item={plan}
+            isAnnual={isAnnual}
+            isAuth={isAuth}
+          />
         ))}
       </section>
     </>

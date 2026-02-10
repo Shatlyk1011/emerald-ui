@@ -1,10 +1,10 @@
 'use client'
+import { useState } from 'react'
 import { CheckCircle, Hammer } from 'lucide-react'
+import Link from 'next/link'
+import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { Button } from '../ui/button'
-import Link from 'next/link'
-import { useState } from 'react'
-import { toast } from 'sonner'
 
 export interface PricingTier {
   name: 'Hobby' | 'Pro' | 'Enterprise'
@@ -25,9 +25,13 @@ interface PricingCardProps {
 }
 const getPricingLabel = (s: string) => {
   return s.toLowerCase() === 'custom' ? s : `$${s}`
-
 }
-export function PricingCard({ item, isAnnual, isAuth, classes }: PricingCardProps) {
+export function PricingCard({
+  item,
+  isAnnual,
+  isAuth,
+  classes,
+}: PricingCardProps) {
   const isEnterprice = item.name === 'Enterprise'
   const [isLoading, setIsLoading] = useState(false)
 
@@ -62,7 +66,9 @@ export function PricingCard({ item, isAnnual, isAuth, classes }: PricingCardProp
     } catch (error) {
       console.error('Checkout error:', error)
       toast.error(
-        error instanceof Error ? error.message : 'Failed to start checkout. Please try again.'
+        error instanceof Error
+          ? error.message
+          : 'Failed to start checkout. Please try again.'
       )
     } finally {
       setIsLoading(false)
@@ -70,7 +76,13 @@ export function PricingCard({ item, isAnnual, isAuth, classes }: PricingCardProp
   }
 
   return (
-    <div className={cn('relative overflow-hidden border-border bg-background flex w-full flex-col rounded-xl border p-7 shadow-sm transition-shadow hover:shadow-md', classes, isEnterprice && "max-md:hidden")}>
+    <div
+      className={cn(
+        'border-border bg-background relative flex w-full flex-col overflow-hidden rounded-xl border p-7 shadow-sm transition-shadow hover:shadow-md',
+        classes,
+        isEnterprice && 'max-md:hidden'
+      )}
+    >
       <div className='mb-4 min-h-22'>
         <h3 className='text-foreground text-2xl font-semibold'>{item.name}</h3>
         <p className='text-foreground/70 mt-2 line-clamp-2 text-base'>
@@ -81,7 +93,9 @@ export function PricingCard({ item, isAnnual, isAuth, classes }: PricingCardProp
       <div className='mb-6'>
         <div className='flex items-end'>
           <span className='-tracking-two font-mono text-3xl leading-8 font-medium'>
-            {isAnnual ? getPricingLabel(item.priceYearly) : getPricingLabel(item.price)}
+            {isAnnual
+              ? getPricingLabel(item.priceYearly)
+              : getPricingLabel(item.price)}
           </span>
 
           {item.priceDetail && (
@@ -109,17 +123,17 @@ export function PricingCard({ item, isAnnual, isAuth, classes }: PricingCardProp
           {item.ctaText}
         </Button>
       ) : (
-          <Button
-            className={cn(
-              'w-full text-sm font-semibold text-white shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2',
-              'bg-foreground text-background hover:bg-foreground/80'
-            )}
-            asChild
-          >
-            <Link href="/sign-in">
-              {isEnterprice ? item.ctaText : 'Get Started'}
-            </Link>
-          </Button>
+        <Button
+          className={cn(
+            'w-full text-sm font-semibold text-white shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2',
+            'bg-foreground text-background hover:bg-foreground/80'
+          )}
+          asChild
+        >
+          <Link href='/sign-in'>
+            {isEnterprice ? item.ctaText : 'Get Started'}
+          </Link>
+        </Button>
       )}
 
       <div className='mt-8 flex flex-1 flex-col'>
@@ -142,10 +156,12 @@ export function PricingCard({ item, isAnnual, isAuth, classes }: PricingCardProp
       </div>
       {isEnterprice && (
         // overlay
-        <div className='absolute flex items-center justify-center top-0 left-0 w-full h-full bg-background/70 z-2'>
-          <div className='-bottom-16 relative flex flex-col items-center text-neutral-500'>
+        <div className='bg-background/70 absolute top-0 left-0 z-2 flex h-full w-full items-center justify-center'>
+          <div className='relative -bottom-16 flex flex-col items-center text-neutral-500'>
             <Hammer size={28} className='mb-2' />
-            <span className='text-sm text-center gap-1 font-medium tracking-one'>Enterprice API <br /> Under Development <br /> </span>
+            <span className='tracking-one gap-1 text-center text-sm font-medium'>
+              Enterprice API <br /> Under Development <br />{' '}
+            </span>
           </div>
         </div>
       )}
