@@ -66,10 +66,10 @@ const Header = () => {
               href={home}
               className={cn(
                 'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2',
-                pathname === home && 'text-foreground font-medium opacity-100'
+                pathname === home && 'text-primary! font-medium opacity-100'
               )}
             >
-              Websites
+              Website Inspiration
             </Link>
           </li>
           <li>

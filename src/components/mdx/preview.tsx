@@ -9,7 +9,6 @@ type PreviewProps = {
   className?: string
   isPremium?: boolean
   link: string
-  useIframe?: boolean
   height?: string
   compact?: boolean
   comment?: string[]
@@ -17,13 +16,10 @@ type PreviewProps = {
   isReload?: boolean
 }
 
-const PRE_PATH = '@nodeUI'
-
 function Preview({
   children,
   className = '',
   link,
-  useIframe = false,
   compact = false,
   comment = [],
   isBlock = false,
@@ -45,32 +41,17 @@ function Preview({
         onReload={isReload ? handleReload : undefined}
       />
 
-      {useIframe ? (
-        <div className='my-4 w-full rounded-md border border-zinc-400 dark:border-zinc-700'>
-          <div className='relative h-[100dvh] w-full overflow-hidden'>
-            <iframe
-              className='h-full w-full list-none overflow-y-auto'
-              src={`${PRE_PATH}/preview/${link}`}
-              style={{
-                border: 'none',
-                transform: 'scale(0.95)',
-              }}
-              title={link}
-            />
-          </div>
-        </div>
-      ) : (
+
         <div
           key={componentKey}
           className={cn(
             'not-prose relative my-4 flex items-center justify-center rounded-md border border-zinc-400 p-2 md:p-8 dark:border-zinc-800',
-            compact ? 'min-h-[100px]' : 'min-h-[400px]',
+            compact ? 'min-h-25' : 'min-h-100',
             isBlock ? 'md:p-0' : ''
           )}
         >
           <Suspense fallback={'Loading...'}>{children}</Suspense>
-        </div>
-      )}
+      </div>
       {comment.length > 0 && (
         <div className='mt-6 mb-4 flex flex-wrap gap-3'>
           {comment.map((text) => (

@@ -9,7 +9,6 @@ interface PreviewClientProps {
   className?: string
   isPremium?: boolean
   link: string
-  useIframe?: boolean
   height?: string
   compact?: boolean
   comment?: string[]
