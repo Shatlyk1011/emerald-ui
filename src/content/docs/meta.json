@@ -8,11 +8,12 @@
     "---Components---",
     "components/animated-dropdown",
     "components/animated-input",
-    "components/buttons",
     "components/interactive-data-table",
-    "components/job-listing-card",
     "components/parallax-gallery",
-    "components/profile-card",
+
+    "---UI Elements---",
+    "components/buttons",
+    "components/cards",
 
     "---Blocks & Sections---",
     "components/pricing",

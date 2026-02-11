@@ -13,10 +13,6 @@ import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
-interface JobRequirement {
-  text: string
-}
-
 interface JobListingCardProps {
   companyName?: string
   companyInitial?: string
@@ -25,7 +21,7 @@ interface JobListingCardProps {
   position?: string
   employmentType?: string
   salaryRange?: string
-  requirements?: JobRequirement[]
+  requirements?: string[]
   applicantCount?: number
   postedDaysAgo?: number
   onApply?: () => void
@@ -41,9 +37,9 @@ export default function JobListingCard({
   employmentType = 'Full-time',
   salaryRange = '$130k - $170k',
   requirements = [
-    { text: '6+ years full-stack experience' },
-    { text: 'Node.js & React mastery' },
-    { text: 'System design expertise' },
+    '6+ years full-stack experience',
+    'Node.js & React mastery',
+    'System design expertise',
   ],
   applicantCount = 92,
   postedDaysAgo = 3,
@@ -115,9 +111,9 @@ export default function JobListingCard({
 
           {/* Requirements */}
           <div className='mt-4 space-y-2'>
-            {requirements.map((req, index) => (
+            {requirements.map((text, index) => (
               <motion.div
-                key={index}
+                key={text}
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
@@ -125,7 +121,7 @@ export default function JobListingCard({
               >
                 <div className={cn('h-1.5 w-1.5 rounded-full', companyColor)} />
                 <span className='text-sm text-zinc-600 dark:text-zinc-400'>
-                  {req.text}
+                  {text}
                 </span>
               </motion.div>
             ))}

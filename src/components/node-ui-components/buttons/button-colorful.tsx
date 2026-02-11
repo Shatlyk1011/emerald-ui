@@ -30,7 +30,7 @@ export default function ButtonColorful({
   return (
     <button
       className={cn(
-        'group relative h-10 overflow-hidden rounded-lg px-4 text-sm tracking-[-0.02em] text-white transition-all duration-200',
+        'group relative h-10 overflow-hidden rounded-sm px-4 text-sm tracking-[-0.02em] text-white transition-all duration-200',
         'bg-neutral-400 dark:bg-neutral-300',
         className
       )}
