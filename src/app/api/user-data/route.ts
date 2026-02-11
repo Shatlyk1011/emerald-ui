@@ -1,6 +1,6 @@
 import { Client, CreditHistory } from '@/payload-types'
 import { NextResponse } from 'next/server'
-import { getClientByUserId } from '@/lib/credit-helpers'
+import { getClientByUserId } from '@/lib/helpers/credit-helpers'
 
 export interface UserDataResponse {
   currentPlan: Client['currentPlan']

@@ -100,7 +100,7 @@ export async function sendNewsletter(
     for (const batch of batches) {
       const emailPromises = batch.map((subscriber) =>
         transporter.sendMail({
-          from: fromName,
+          from: `${fromName} <https://ui-application-lac.vercel.app/>`,
           to: subscriber.email,
           subject: newsletterData.subject,
           html: emailHTML,

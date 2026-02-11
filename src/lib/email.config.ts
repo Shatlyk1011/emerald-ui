@@ -1,14 +1,5 @@
 import nodemailer from 'nodemailer';
 
-
-
-
-
-
-
-
-
-
 export const createEmailTransporter = () => {
   const transporter = nodemailer.createTransport({
     host: 'smtp.useplunk.com',

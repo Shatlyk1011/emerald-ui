@@ -1,7 +1,11 @@
 'use server'
 
-import { redirect } from 'next/navigation'
-import { signOut } from '@/lib/auth-helpers'
+import { redirect } from 'next/navigation';
+import { signOut } from '@/lib/helpers/auth-helpers'
+
+
+
+
 
 /**
  * Server action to handle user sign out

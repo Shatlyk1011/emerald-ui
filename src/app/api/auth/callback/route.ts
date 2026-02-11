@@ -1,7 +1,7 @@
 import config from '@payload-config'
 import { NextResponse } from 'next/server'
 import { getPayload } from 'payload'
-import { createClientRecord, createInitialCredits } from '@/lib/credit-helpers'
+import { createClientRecord, createInitialCredits } from '@/lib/helpers/credit-helpers'
 import { createClient } from '@/lib/supabase-server'
 
 /**

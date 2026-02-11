@@ -5,13 +5,17 @@ import { createEmailTransporter, generateNewsletterHTML } from '@/lib/email.conf
 
 
 
+
+
+
+
 export async function POST(request: NextRequest) {
   try {
     const transporter = createEmailTransporter()
     const { to } = await request.json()
 
     await transporter.sendMail({
-      from: process.env.EMAIL_FROM || 'Node Ui Newsletter',
+      from: `${process.env.EMAIL_FROM || 'Node Ui Newsletter'} <https://ui-application-lac.vercel.app>`,
       to: 'gj_wp@mail.ru',
       subject: 'Test Email - Newsletter System',
       html: generateNewsletterHTML(
