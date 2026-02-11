@@ -13,14 +13,12 @@
 
     "---UI Elements---",
     "components/buttons",
-    "components/cards",
+    "components/text",
 
     "---Blocks & Sections---",
     "components/pricing",
     "components/cards",
 
-    "---Text---",
-    "components/text-shimmer",
     "---Demo---",
     "components/demo"
   ]
