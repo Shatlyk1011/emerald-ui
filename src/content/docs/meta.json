@@ -17,6 +17,7 @@
     "components/social-button",
     "components/interactive-hover-button",
     "components/hover-border-gradient",
+    "components/shimmer-button",
 
     "---Blocks & Sections---",
     "components/pricing",

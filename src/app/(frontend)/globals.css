@@ -162,15 +162,22 @@
   .anime-text .word span {
     @apply opacity-0;
   }
-}
 
-@theme {
   @keyframes shimmer {
     0% {
       background-position: 200% 50%;
     }
     100% {
       background-position: -200% 50%;
+    }
+  }
+
+  @keyframes shimmer2 {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: -200% 0%;
     }
   }
 }
