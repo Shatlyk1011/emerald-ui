@@ -31,7 +31,11 @@ export const MediaUploadField = () => {
   const handleDelete = async () => {
     if (!mediaUrl) return
 
-    if (!confirm('Are you sure you want to delete this media? This cannot be undone.')) {
+    if (
+      !confirm(
+        'Are you sure you want to delete this media? This cannot be undone.'
+      )
+    ) {
       return
     }
 
@@ -222,7 +226,7 @@ export const MediaUploadField = () => {
         }}
       >
         <button
-          type="button"
+          type='button'
           onClick={() => setUploadMode('file')}
           style={{
             padding: '0.5rem 1rem',
@@ -245,7 +249,7 @@ export const MediaUploadField = () => {
           Upload File
         </button>
         <button
-          type="button"
+          type='button'
           onClick={() => setUploadMode('url')}
           style={{
             padding: '0.5rem 1rem',
@@ -277,7 +281,7 @@ export const MediaUploadField = () => {
           }}
         >
           <label
-            htmlFor="media-upload"
+            htmlFor='media-upload'
             style={{
               display: 'inline-block',
               padding: '0.5rem 1rem',
@@ -297,15 +301,16 @@ export const MediaUploadField = () => {
               }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--theme-elevation-100)'
+              e.currentTarget.style.backgroundColor =
+                'var(--theme-elevation-100)'
             }}
           >
             {uploading ? 'Uploading...' : 'Choose Image or Video'}
           </label>
           <input
-            id="media-upload"
-            type="file"
-            accept="image/*,video/*"
+            id='media-upload'
+            type='file'
+            accept='image/*,video/*'
             onChange={handleFileChange}
             disabled={uploading}
             style={{ display: 'none' }}
@@ -318,8 +323,8 @@ export const MediaUploadField = () => {
         <div style={{ marginBottom: '1rem' }}>
           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
             <input
-              type="text"
-              placeholder="Enter media URL (image or video)"
+              type='text'
+              placeholder='Enter media URL (image or video)'
               value={urlInput}
               onChange={(e) => setUrlInput(e.target.value)}
               disabled={uploading}
@@ -340,7 +345,7 @@ export const MediaUploadField = () => {
               }}
             />
             <button
-              type="button"
+              type='button'
               onClick={handleUrlUpload}
               disabled={uploading || !urlInput.trim()}
               style={{
@@ -433,7 +438,7 @@ export const MediaUploadField = () => {
               Preview:
             </div>
             <button
-              type="button"
+              type='button'
               onClick={handleDelete}
               disabled={deleting}
               style={{
@@ -537,8 +542,8 @@ export const MediaUploadField = () => {
               </span>{' '}
               <a
                 href={mediaUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                target='_blank'
+                rel='noopener noreferrer'
                 style={{
                   color: 'var(--theme-primary-500)',
                   textDecoration: 'none',
@@ -569,4 +574,3 @@ export const MediaUploadField = () => {
     </div>
   )
 }
-

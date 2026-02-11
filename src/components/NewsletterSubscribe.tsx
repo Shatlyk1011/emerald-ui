@@ -8,7 +8,9 @@ function NewsletterSubscribe() {
    * Send a test email to verify SMTP configuration
    */
   const sendTestEmail = async () => {
-    await axios.post('/send-test-newsletter', { body: JSON.stringify({ to: ["penguin-99.99@Mail.ru"] }) })
+    await axios.post('/send-test-newsletter', {
+      body: JSON.stringify({ to: ['penguin-99.99@Mail.ru'] }),
+    })
   }
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)

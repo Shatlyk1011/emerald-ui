@@ -8,7 +8,6 @@
  * @license: MIT
  * @website: https://nodeui.com
  */
-
 // add this utility class to your tailwind config
 // @layer utilities {
 //  @keyframes shimmer {
@@ -20,7 +19,6 @@
 //    }
 //  }
 // }
-
 import { cn } from '@/lib/utils'
 
 export type TextShimmerProps = {

@@ -41,16 +41,15 @@ function Preview({
         onReload={isReload ? handleReload : undefined}
       />
 
-
-        <div
-          key={componentKey}
-          className={cn(
-            'not-prose relative my-4 flex items-center justify-center rounded-md border border-zinc-400 p-2 md:p-8 dark:border-zinc-800',
-            compact ? 'min-h-25' : 'min-h-100',
-            isBlock ? 'md:p-0' : ''
-          )}
-        >
-          <Suspense fallback={'Loading...'}>{children}</Suspense>
+      <div
+        key={componentKey}
+        className={cn(
+          'not-prose relative my-4 flex items-center justify-center rounded-md border border-zinc-400 p-2 md:p-8 dark:border-zinc-800',
+          compact ? 'min-h-25' : 'min-h-100',
+          isBlock ? 'md:p-0' : ''
+        )}
+      >
+        <Suspense fallback={'Loading...'}>{children}</Suspense>
       </div>
       {comment.length > 0 && (
         <div className='mt-6 mb-4 flex flex-wrap gap-3'>

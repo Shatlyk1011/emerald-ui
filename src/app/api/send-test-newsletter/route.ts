@@ -4,10 +4,6 @@ import {
   generateNewsletterHTML,
 } from '@/lib/email.config'
 
-
-
-
-
 export async function POST() {
   try {
     const transporter = createEmailTransporter()
