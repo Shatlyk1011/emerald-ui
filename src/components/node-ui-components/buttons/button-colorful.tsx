@@ -1,12 +1,12 @@
 'use client'
 
 /**
- * @author: @nodeui
+ * @author: @emerald-ui
  * @description: Colorful Gradient Button Component - A button with animated gradient background effects
  * @version: 1.0.0
  * @date: 2026-01-30
  * @license: MIT
- * @website: https://nodeui.com
+ * @website: https://emerald-ui.com
  */
 import React from 'react'
 import { cn } from '@/lib/utils'

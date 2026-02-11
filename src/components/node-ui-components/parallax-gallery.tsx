@@ -1,12 +1,12 @@
 'use client'
 
 /**
- * @author: @nodeui
+ * @author: @emerald-ui
  * @description: Parallax Gallery Component with Multi-Speed Scrolling Columns
  * @version: 1.0.0
  * @date: 2026-02-03
  * @license: MIT
- * @website: https://nodeui.com
+ * @website: https://emerald-ui.com
  */
 import { useEffect, useState, useRef } from 'react'
 import { useScroll, useTransform, motion, MotionValue } from 'motion/react'

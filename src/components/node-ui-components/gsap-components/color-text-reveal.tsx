@@ -6,7 +6,7 @@
  * @version: 1.0.0
  * @date: 2026-02-05
  * @license: MIT
- * @website: https://nodeui.com
+ * @website: https://emerald-ui.com
  */
 import React, { ReactNode, useRef } from 'react'
 import { useGSAP } from '@gsap/react'

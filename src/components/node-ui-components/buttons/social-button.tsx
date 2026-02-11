@@ -1,12 +1,12 @@
 'use client'
 
 /**
- * @author: @nodeui
+ * @author: @emerald-ui
  * @description: Social Button Component
  * @version: 1.0.0
  * @date: 2026-01-27
  * @license: MIT
- * @website: https://nodeui.com
+ * @website: https://emerald-ui.com
  */
 import { useState } from 'react'
 // helper functions (suggestion: move them to seperate component file)

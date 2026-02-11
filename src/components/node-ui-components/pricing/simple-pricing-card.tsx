@@ -1,12 +1,12 @@
 'use client'
 
 /**
- * @author: @nodeui
+ * @author: @emerald-ui
  * @description: Simple Pricing Card Component
  * @version: 1.0.0
  * @date: 2026-02-01
  * @license: MIT
- * @website: https://nodeui.com
+ * @website: https://emerald-ui.com
  */
 import { CircleCheckIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'

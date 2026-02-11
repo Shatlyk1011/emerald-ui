@@ -1,12 +1,12 @@
 'use client'
 
 /**
- * @author: @nodeui
+ * @author: @emerald-ui
  * @description: Diagonal Swipe Button Component - A button with a diagonal swipe hover effect
  * @version: 1.0.0
  * @date: 2026-02-11
  * @license: MIT
- * @website: https://nodeui.com
+ * @website: https://emerald-ui.com
  */
 import React from 'react'
 import { cn } from '@/lib/utils'

@@ -1,12 +1,12 @@
 'use client'
 
 /**
- * @author: @nodeui
+ * @author: @emerald-ui
  * @description: Text Shimmer Component
  * @version: 1.0.0
  * @date: 2026-02-04
  * @license: MIT
- * @website: https://nodeui.com
+ * @website: https://emerald-ui.com
  */
 // add this utility class to your tailwind config
 // @layer utilities {

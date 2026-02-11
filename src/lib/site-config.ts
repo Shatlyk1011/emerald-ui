@@ -3,11 +3,7 @@ export const siteConfig = {
   description: 'A modern UI design application with AI capabilities.',
   revalidateTime: 3600,
   url: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
-  ogImage: 'https://ui-design-app.com/og.jpg',
-  links: {
-    twitter: 'https://twitter.com/ui_design_app',
-    github: 'https://github.com/ui-design-app',
-  },
+  ogImage: 'https://emerald-ui.com/og.jpg',
 }
 
 export type SiteConfig = typeof siteConfig

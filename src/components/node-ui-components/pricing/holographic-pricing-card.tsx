@@ -1,12 +1,12 @@
 'use client'
 
 /**
- * @author: @nodeui
+ * @author: @emerald-ui
  * @description: Holographic Pricing Card with RGB chromatic aberration
  * @version: 1.0.0
  * @date: 2026-01-30
  * @license: MIT
- * @website: https://nodeui.com
+ * @website: https://emerald-ui.com
  */
 import { FC } from 'react'
 import { Check, Zap } from 'lucide-react'

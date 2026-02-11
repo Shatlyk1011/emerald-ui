@@ -1,12 +1,12 @@
 'use client'
 
 /**
- * @author: @nodeui
+ * @author: @emerald-ui
  * @description: Interactive Data Table with micro-interactions, animated sorting, and expandable rows
  * @version: 1.0.0
  * @date: 2026-02-03
  * @license: MIT
- * @website: https://nodeui.com
+ * @website: https://emerald-ui.com
  */
 import { useState, useMemo, Fragment } from 'react'
 import { ChevronDown, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react'

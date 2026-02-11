@@ -17,12 +17,12 @@ Use this skill when the user asks to create a new UI component. This skill ensur
 'use client'
 
 /**
- * @author: @nodeui
+ * @author: @emerald-ui
  * @description: [Brief description of component]
  * @version: 1.0.0
  * @date: [Current Date YYYY-MM-DD]
  * @license: MIT
- * @website: https://nodeui.com
+ * @website: https://emerald-ui.com
  */
 import { useState } from 'react'
 import {

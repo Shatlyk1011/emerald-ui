@@ -1,12 +1,12 @@
 'use client'
 
 /**
- * @author: @nodeui
+ * @author: @emerald-ui
  * @description: A modern job listing card with company info, position details, requirements, and application stats
  * @version: 1.0.0
  * @date: 2026-02-06
  * @license: MIT
- * @website: https://nodeui.com
+ * @website: https://emerald-ui.com
  */
 import { MapPin, Briefcase, DollarSign, ArrowUpRight } from 'lucide-react'
 import { motion } from 'motion/react'

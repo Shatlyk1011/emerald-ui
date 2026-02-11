@@ -1,12 +1,12 @@
 'use client'
 
 /**
- * @author: @nodeui
+ * @author: @emerald-ui
  * @description: Interactive Hover Button Component
  * @version: 1.0.0
  * @date: 2026-01-28
  * @license: MIT
- * @website: https://nodeui.com
+ * @website: https://emerald-ui.com
  */
 import React, { useState } from 'react'
 import { ArrowRight, Check } from 'lucide-react'
