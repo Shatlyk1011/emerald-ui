@@ -3,6 +3,12 @@ import nodemailer from 'nodemailer';
 
 
 
+
+
+
+
+
+
 export const createEmailTransporter = () => {
   const transporter = nodemailer.createTransport({
     host: 'smtp.useplunk.com',
@@ -10,7 +16,7 @@ export const createEmailTransporter = () => {
     port: 465,
     auth: {
       user: 'plunk',
-      pass: String(process.env.PLUNK_KEY),
+      pass: process.env.PLUNK_KEY,
     },
   })
 
