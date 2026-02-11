@@ -16,6 +16,7 @@
     "components/text",
 
     "---Blocks & Sections---",
+    "components/hero",
     "components/pricing",
     "components/cards",
 

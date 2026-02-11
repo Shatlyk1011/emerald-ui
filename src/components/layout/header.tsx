@@ -69,7 +69,7 @@ const Header = () => {
                 pathname === home && 'text-foreground font-medium opacity-100'
               )}
             >
-              Inspiration
+              Websites
             </Link>
           </li>
           <li>
@@ -82,7 +82,7 @@ const Header = () => {
               )}
             >
               <TextShimmer duration={7} spread={15}>
-                Node UI
+                Components
               </TextShimmer>
             </Link>
           </li>
