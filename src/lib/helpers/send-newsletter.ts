@@ -2,6 +2,11 @@ import config from '@payload-config'
 import { getPayload } from 'payload'
 import { createEmailTransporter, generateNewsletterHTML } from '../email.config'
 
+
+
+
+
+
 interface SendNewsletterResult {
   success: boolean
   recipientCount: number
@@ -100,7 +105,7 @@ export async function sendNewsletter(
     for (const batch of batches) {
       const emailPromises = batch.map((subscriber) =>
         transporter.sendMail({
-          from: `${fromName} <https://ui-application-lac.vercel.app/>`,
+          from: `${fromName} <${process.env.EMAIL_FROM}>`,
           to: subscriber.email,
           subject: newsletterData.subject,
           html: emailHTML,

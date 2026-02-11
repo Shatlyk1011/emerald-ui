@@ -1,21 +1,19 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { createEmailTransporter, generateNewsletterHTML } from '@/lib/email.config';
+import { NextResponse } from 'next/server'
+import {
+  createEmailTransporter,
+  generateNewsletterHTML,
+} from '@/lib/email.config'
 
 
 
 
 
-
-
-
-
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
     const transporter = createEmailTransporter()
-    const { to } = await request.json()
 
     await transporter.sendMail({
-      from: `${process.env.EMAIL_FROM || 'Node Ui Newsletter'} <https://ui-application-lac.vercel.app>`,
+      from: `Node Ui Newsletter <${process.env.EMAIL_FROM}>`,
       to: 'gj_wp@mail.ru',
       subject: 'Test Email - Newsletter System',
       html: generateNewsletterHTML(
