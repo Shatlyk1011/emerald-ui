@@ -3,16 +3,72 @@
 import { useState } from 'react'
 import { useField } from '@payloadcms/ui'
 
+const formatBytes = (bytes: number, decimals = 2) => {
+  if (!+bytes) return '0 Bytes'
+
+  const k = 1024
+  const dm = decimals < 0 ? 0 : decimals
+  const sizes = ['Bytes', 'KB', 'MB', 'GB']
+
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+
+  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
+}
+
 export const MediaUploadField = () => {
   const { value: mediaUrl, setValue: setMediaUrl } = useField<string>({
     path: 'mediaUrl',
   })
   const { setValue: setType } = useField<string>({ path: 'type' })
+  const { value: size, setValue: setSize } = useField<number>({ path: 'size' }) // Track size field
   const [uploading, setUploading] = useState(false)
+  const [deleting, setDeleting] = useState(false) // Track deletion state
   const [error, setError] = useState<string | null>(null)
   const [uploadProgress, setUploadProgress] = useState(0)
   const [uploadMode, setUploadMode] = useState<'file' | 'url'>('file')
   const [urlInput, setUrlInput] = useState('')
+
+  const handleDelete = async () => {
+    if (!mediaUrl) return
+
+    if (!confirm('Are you sure you want to delete this media? This cannot be undone.')) {
+      return
+    }
+
+    setDeleting(true)
+    setError(null)
+
+    try {
+      // Determine bucket based on file extension
+      const isVideo = mediaUrl.match(/\.(mp4|webm|mov|avi|mpeg)$/i)
+      const bucket = isVideo ? 'videos' : 'images'
+
+      const response = await fetch('/api/delete-media', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url: mediaUrl, bucket }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Delete failed')
+      }
+
+      console.log('Media deleted successfully')
+
+      // Clear fields
+      setMediaUrl('')
+      setType('')
+      setSize(0) // Reset size
+    } catch (err) {
+      console.error('Delete error:', err)
+      setError(err instanceof Error ? err.message : 'Delete failed')
+    } finally {
+      setDeleting(false)
+    }
+  }
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -69,6 +125,9 @@ export const MediaUploadField = () => {
       const data = await response.json()
       setMediaUrl(data.url)
       setType(data.mediaType)
+      if (data.size) {
+        setSize(data.size) // Set size from response
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload failed')
       console.error('Upload error:', err)
@@ -135,6 +194,9 @@ export const MediaUploadField = () => {
       const data = await response.json()
       setMediaUrl(data.url)
       setType(data.mediaType)
+      if (data.size) {
+        setSize(data.size) // Set size from response
+      }
       setUrlInput('') // Clear input after successful upload
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload failed')
@@ -355,14 +417,42 @@ export const MediaUploadField = () => {
         <div>
           <div
             style={{
-              fontSize: '1rem',
-              fontWeight: '600',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
               marginBottom: '0.5rem',
-              color: 'var(--theme-elevation-800)',
             }}
           >
-            Preview:
+            <div
+              style={{
+                fontSize: '1rem',
+                fontWeight: '600',
+                color: 'var(--theme-elevation-800)',
+              }}
+            >
+              Preview:
+            </div>
+            <button
+              type="button"
+              onClick={handleDelete}
+              disabled={deleting}
+              style={{
+                padding: '0.25rem 0.75rem',
+                backgroundColor: 'var(--theme-error-500)',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                fontSize: '0.75rem',
+                fontWeight: '500',
+                cursor: deleting ? 'not-allowed' : 'pointer',
+                opacity: deleting ? 0.6 : 1,
+                transition: 'all 0.2s',
+              }}
+            >
+              {deleting ? 'Deleting...' : 'Remove Media'}
+            </button>
           </div>
+
           <div
             style={{
               border: '1px solid var(--theme-elevation-200)',
@@ -426,27 +516,57 @@ export const MediaUploadField = () => {
           </div>
           <div
             style={{
-              fontSize: '1.25rem',
+              fontSize: '0.875rem',
               marginTop: '0.5rem',
               wordBreak: 'break-all',
-              paddingBlock: '1rem',
-              lineHeight: '2rem',
+              paddingBlock: '0.5rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.25rem',
             }}
           >
-            <span
-              style={{
-                userSelect: 'none',
-                color: 'var(--theme-elevation-600)',
-              }}
-            >
-              URL:
-            </span>{' '}
-            <span style={{ color: 'var(--theme-elevation-750)' }}>
-              {mediaUrl}
-            </span>
+            <div>
+              <span
+                style={{
+                  userSelect: 'none',
+                  color: 'var(--theme-elevation-600)',
+                  fontWeight: '500',
+                }}
+              >
+                URL:
+              </span>{' '}
+              <a
+                href={mediaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  color: 'var(--theme-primary-500)',
+                  textDecoration: 'none',
+                }}
+              >
+                {mediaUrl}
+              </a>
+            </div>
+            {size ? (
+              <div>
+                <span
+                  style={{
+                    userSelect: 'none',
+                    color: 'var(--theme-elevation-600)',
+                    fontWeight: '500',
+                  }}
+                >
+                  Size:
+                </span>{' '}
+                <span style={{ color: 'var(--theme-elevation-750)' }}>
+                  {formatBytes(size)}
+                </span>
+              </div>
+            ) : null}
           </div>
         </div>
       )}
     </div>
   )
 }
+

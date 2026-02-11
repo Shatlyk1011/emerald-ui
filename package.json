@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "format": "npx prettier --write .",
-    "type-check": "tsc --noEmit",
+    "tc": "tsc --noEmit",
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap"
   },

@@ -1,6 +1,6 @@
-import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
-import { beforeDeleteHook, afterChangeHook } from './hooks'
+import { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
+import { beforeDeleteHook, afterChangeHook } from './hooks';
 
 const Media: CollectionConfig = {
   slug: 'media',
@@ -80,6 +80,17 @@ const Media: CollectionConfig = {
       label: 'Description',
       required: false,
       type: 'textarea',
+    },
+    {
+      name: 'size',
+      label: 'Size (bytes)',
+      type: 'number',
+      required: false,
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+        description: 'File size in bytes',
+      },
     },
   ],
   labels: { plural: 'Media', singular: 'Media' },

@@ -197,6 +197,10 @@ export interface Media {
   mediaUrl?: string | null;
   altText?: string | null;
   description?: string | null;
+  /**
+   * File size in bytes
+   */
+  size?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -634,6 +638,7 @@ export interface MediaSelect<T extends boolean = true> {
   mediaUrl?: T;
   altText?: T;
   description?: T;
+  size?: T;
   updatedAt?: T;
   createdAt?: T;
 }
