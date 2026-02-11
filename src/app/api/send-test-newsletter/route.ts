@@ -1,8 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server'
-import {
-  createEmailTransporter,
-  generateNewsletterHTML,
-} from '@/lib/email.config'
+import { NextRequest, NextResponse } from 'next/server';
+import { createEmailTransporter, generateNewsletterHTML } from '@/lib/email.config';
+
+
+
+
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,7 +12,7 @@ export async function POST(request: NextRequest) {
 
     await transporter.sendMail({
       from: process.env.EMAIL_FROM || 'Node Ui Newsletter',
-      to,
+      to: 'gj_wp@mail.ru',
       subject: 'Test Email - Newsletter System',
       html: generateNewsletterHTML(
         'Test Email',
