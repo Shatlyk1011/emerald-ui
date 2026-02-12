@@ -6,6 +6,7 @@
     "---Get Started---",
     "index",
     "---Components---",
+    "components/3d-marquee",
     "components/animated-dropdown",
     "components/animated-input",
     "components/interactive-data-table",
