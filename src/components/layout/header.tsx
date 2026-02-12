@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { FC, useRef, useState } from 'react'
 import { getUserInitials } from '@/composables/utils'
 import { LogOut, User as UserIcon } from 'lucide-react'
 import { useScroll, useMotionValueEvent } from 'motion/react'
@@ -26,7 +26,11 @@ const { components, home } = {
   components: '/docs',
 }
 
-const Header = () => {
+interface Props {
+  isFumadocs?: boolean
+}
+
+const Header: FC<Props> = ({ isFumadocs }) => {
   const pathname = usePathname()
   const router = useRouter()
   const headerRef = useRef<HTMLElement>(null)
@@ -49,24 +53,25 @@ const Header = () => {
       ref={headerRef}
       className={cn(
         'fixed top-0 z-50 mx-auto flex h-14 w-full items-center justify-between border px-8 py-2 font-sans max-sm:px-5',
-        isScrolled && 'bg-background/90 backdrop-blur-sm'
+        isScrolled && 'bg-background/90 backdrop-blur-sm',
+        isFumadocs && 'static w-full flex-1 px-0 border-none'
       )}
     >
       <Link
         href='/'
-        className='w-20 max-sm:mr-4 max-sm:max-w-max max-sm:min-w-8'
+        className={cn('w-20 max-sm:mr-4 max-sm:max-w-max max-sm:min-w-8', isFumadocs && 'hidden')}
       >
         <span className=''>Logo</span>
       </Link>
 
-      <nav className='text-muted-foreground flex flex-1 justify-start'>
+      <nav className='text-muted-foreground flex flex-1 justify-end'>
         <ul className='tracking-one flex items-center text-sm font-medium max-sm:text-sm'>
           <li>
             <Link
               href={home}
               className={cn(
-                'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2',
-                pathname === home && 'text-primary! font-medium opacity-100'
+                'hover:bg-primary/5 rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2',
+                pathname === home ? 'text-primary ' : 'hover:text-foreground hover:bg-foreground/5'
               )}
             >
               Website Inspiration
@@ -75,13 +80,9 @@ const Header = () => {
           <li>
             <Link
               href={components}
-              className={cn(
-                'hover:bg-primary/5 hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2',
-                pathname === components &&
-                  'text-foreground font-medium opacity-100'
-              )}
+              className={cn('group hover:bg-primary/5 rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2', pathname === components ? 'text-primary ' : 'hover:text-foreground hover:bg-foreground/5')}
             >
-              <TextShimmer duration={7} spread={15}>
+              <TextShimmer duration={7} spread={15} className={cn("transition", pathname === components && 'text-primary')}>
                 Components
               </TextShimmer>
             </Link>
