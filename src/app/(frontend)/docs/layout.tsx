@@ -5,7 +5,7 @@ import { baseOptions } from '../layout.config'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Node UI',
+    template: '%s | Emerald UI',
     default: 'components',
   },
 }

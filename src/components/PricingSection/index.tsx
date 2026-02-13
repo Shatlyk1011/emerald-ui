@@ -34,7 +34,7 @@ const pricingPlans: PricingTier[] = [
       '300 monthly credits',
       'Credit rollovers',
       'Faster AI Model',
-      'Node UI Component Generations',
+      'Emerald UI Component Generations',
     ],
     ctaText: 'Upgrade to Pro',
     ctaVariant: 'blue',
@@ -85,7 +85,7 @@ const PricingSection = () => {
           Simple, Transparent Pricing
         </h1>
         <p className='text-muted-foreground mx-auto max-w-2xl text-lg max-sm:text-base'>
-          Deliver new products faster with Node UI
+          Deliver new products faster with Emerald UI
         </p>
       </section>
       <div className='mb-4 flex items-center justify-center gap-1.5 text-sm font-normal'>

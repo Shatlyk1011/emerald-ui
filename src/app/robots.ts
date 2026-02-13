@@ -52,6 +52,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin', '/(payload)'],
       },
     ],
-    sitemap: `${siteConfig.url}/sitemap.xml`,
+    sitemap: `${siteConfig.siteUrl}/sitemap.xml`,
   }
 }

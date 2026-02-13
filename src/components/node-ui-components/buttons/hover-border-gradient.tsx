@@ -98,7 +98,7 @@ function HoverBorderGradient({
 export default function HoverBorderDemo() {
   return (
     <HoverBorderGradient>
-      <span>Node UI Components</span>
+      <span>Emerald UI Components</span>
     </HoverBorderGradient>
   )
 }

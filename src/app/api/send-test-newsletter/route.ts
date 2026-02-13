@@ -1,15 +1,16 @@
-import { NextResponse } from 'next/server'
-import {
-  createEmailTransporter,
-  generateNewsletterHTML,
-} from '@/lib/email.config'
+import { NextResponse } from 'next/server';
+import { createEmailTransporter, generateNewsletterHTML } from '@/lib/email.config';
+
+
+
+
 
 export async function POST() {
   try {
     const transporter = createEmailTransporter()
 
     await transporter.sendMail({
-      from: `Node Ui Newsletter <${process.env.EMAIL_FROM}>`,
+      from: `Emerald UI Newsletter <${process.env.EMAIL_FROM}>`,
       to: 'gj_wp@mail.ru',
       subject: 'Test Email - Newsletter System',
       html: generateNewsletterHTML(

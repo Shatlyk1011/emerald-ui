@@ -1,5 +1,5 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared'
-import ThemeToggle from '@/components/ui/theme-toggle'
+import Header from '@/components/layout/header'
 
 export const baseOptions = (): BaseLayoutProps => ({
   nav: {
@@ -13,10 +13,16 @@ export const baseOptions = (): BaseLayoutProps => ({
           width={24}
         /> */}
         <span className='hidden items-center text-lg font-bold tracking-tight text-black md:inline-flex dark:text-white'>
-          Node UI
+          Emerald UI
         </span>
       </div>
     ),
   },
-  themeSwitch: { component: <ThemeToggle /> },
+  links: [
+    {
+      type: "custom",
+      children:<Header isFumadocs />,
+    },
+  ],
+  themeSwitch: { enabled: false },
 })

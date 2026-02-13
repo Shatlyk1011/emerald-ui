@@ -60,7 +60,7 @@ function TextShimmer({
 const TextShimmerDemo = () => {
   return (
     <div className='flex flex-col items-center gap-6'>
-      <TextShimmer>Node UI Components</TextShimmer>
+      <TextShimmer>Emerald UI Components</TextShimmer>
       <TextShimmer duration={2}>Fast Shimmer</TextShimmer>
     </div>
   )

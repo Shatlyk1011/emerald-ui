@@ -1,6 +1,11 @@
-import config from '@payload-config'
-import { getPayload } from 'payload'
-import { createEmailTransporter, generateNewsletterHTML } from '../email.config'
+import config from '@payload-config';
+import { getPayload } from 'payload';
+import { createEmailTransporter, generateNewsletterHTML } from '../email.config';
+
+
+
+
+
 
 interface SendNewsletterResult {
   success: boolean
@@ -95,7 +100,7 @@ export async function sendNewsletter(
     }
 
     let sentCount = 0
-    const fromName = 'Node Ui Newsletter'
+    const fromName = 'Emerald UI Newsletter'
 
     for (const batch of batches) {
       const emailPromises = batch.map((subscriber) =>

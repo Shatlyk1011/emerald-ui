@@ -17,26 +17,31 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
+const GOOGLE_SITE_VERIFICATION =
+  process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+
 export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
+  metadataBase: new URL(siteConfig.siteUrl),
+  robots: 'index follow',
+  verification: {
+    google: GOOGLE_SITE_VERIFICATION,
   },
-  description: siteConfig.description,
-  metadataBase: new URL(siteConfig.url),
-  openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
+
+  alternates: {
+    types: {
+      'application/rss+xml': [
+        { url: `${siteConfig.siteUrl}/rss.xml`, title: 'RSS Feed - English' },
+      ],
+    },
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: siteConfig.name,
-    description: siteConfig.description,
+  icons: {
+    icon: [
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
   },
+  manifest: '/site.webmanifest',
 }
 
 export default function RootLayout({

@@ -7,7 +7,7 @@ import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 
 const DYNAMIC_LABELS = [
-  'node ui',
+  'emerald ui',
   'website inspirations',
   'component generation',
   'ui design',
