@@ -46,3 +46,5 @@ next-env.d.ts
 
 src/content/docs/components/demo.mdx
 src/components/node-ui-components/demo.tsx
+
+public/rss.xml
