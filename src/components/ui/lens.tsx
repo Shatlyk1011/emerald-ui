@@ -10,9 +10,9 @@ interface LensProps {
     x: number
     y: number
   }
-  isFocusing?: () => void
   disableZoom?: boolean
   background?: string
+  classes?: string
 }
 
 const Lens: React.FC<LensProps> = ({
@@ -20,6 +20,7 @@ const Lens: React.FC<LensProps> = ({
   lensSize = 400,
   disableZoom = false,
   background,
+  classes,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
 
