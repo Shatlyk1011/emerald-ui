@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { copyComponent } from '@/lib/action'
 import { cn } from '@/lib/utils'
+import { useAuth } from '@payloadcms/ui'
 
 function SuccessParticles({
   buttonRef,
@@ -83,8 +84,14 @@ export default function PreviewContent({
   })
   const [isCopied, setIsCopied] = useState(false)
 
+  const { user } = useAuth()
+
+  const isLogin = !!user
+
+  const isAuthRequired = isBlock && !isLogin
+
   const handleCopyClick = async () => {
-    if (isBlock) {
+    if (isAuthRequired) {
       router.push('/sign-in')
       toast.info('Please sign in to copy the component', {
         position: 'top-center',
@@ -151,7 +158,7 @@ export default function PreviewContent({
               'rounded-sm',
               'my-0 py-0 shadow-none',
               'w-fit md:w-full',
-              isBlock && 'opacity-80'
+              isAuthRequired && 'opacity-80'
             )}
             disabled={isPending}
             ref={copyButtonRef}
@@ -162,7 +169,7 @@ export default function PreviewContent({
             ) : (
               <>
                 {/* if is block and not auth */}
-                {isBlock ? (
+                  {isAuthRequired ? (
                   <ShieldAlert
                     className={cn(
                       'h-3.5 w-3.5 transition-all duration-200 group-hover:scale-110'
