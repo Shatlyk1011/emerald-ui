@@ -63,33 +63,36 @@ export default function SitePreviewDialog({
                   className='h-full w-full'
                   autoFocus={false}
                 >
-                  <TabsList className='mb-4 w-full justify-start bg-transparent'>
+                  <TabsList className='mb-4 w-full flex gap-2 justify-start bg-transparent border-b rounded-none pb-4' >
                     <TabsTrigger
-                      className='data-[state=active]:bg-background rounded-md px-4 py-2 transition-all'
+                      autoFocus={false}
+                      className='data-[state=active]:bg-background rounded-px px-4 py-2 transition-all'
                       value='screenshot'
                     >
                       Screenshot
                     </TabsTrigger>
                     <TabsTrigger
-                      className='data-[state=active]:bg-background rounded-md px-4 py-2 transition-all'
+                      autoFocus={false}
+                      className='data-[state=active]:bg-background rounded-px px-4 py-2 transition-all'
                       value='media'
                     >
-                      Media
+                      Video
                     </TabsTrigger>
                   </TabsList>
                   <TabsContent
                     value='screenshot'
                     className='mt-0 h-[calc(100%-3rem)]'
                   >
-                    <div className='bg-background relative flex h-full w-full items-center overflow-hidden rounded-md border shadow-lg'>
+                    <div className='bg-background relative flex h-full w-full items-center overflow-hidden rounded-lg border shadow-lg'>
                       <Lens
                         disableZoom={!isZoomEnabled}
+                        classes='rounded-xl overflow-hidden'
                         background={selectedSite.gradientColor!}
                       >
                         <img
                           src={selectedSite.imgUrl!}
                           alt={`${selectedSite.title} screenshot`}
-                          className='aspect-4/3 h-full w-full object-contain'
+                          className='aspect-4/3 h-full w-full object-contain object-top'
                         />
                       </Lens>
                     </div>
@@ -100,11 +103,11 @@ export default function SitePreviewDialog({
                   >
                     {hasAdditionalMedia &&
                       typeof selectedSite.additionalMedia === 'object' && (
-                        <div className='bg-background rounded-xm relative h-full w-full overflow-hidden border shadow-lg'>
+                      <div className='bg-background rounded-lg relative h-full w-full overflow-hidden border shadow-lg'>
                           {selectedSite.additionalMedia?.type === 'video' ? (
                             <video
                               src={selectedSite.additionalMedia.mediaUrl!}
-                              className='aspect-4/3 h-full w-full object-contain'
+                            className='aspect-4/3 h-full w-full object-contain object-top'
                               autoPlay
                               muted
                               playsInline
@@ -125,7 +128,7 @@ export default function SitePreviewDialog({
                                   selectedSite.additionalMedia!.altText ||
                                   `${selectedSite.title} additional media`
                                 }
-                                className='aspect-4/3 h-full w-full object-contain'
+                                className='aspect-4/3 h-full w-full object-contain object-top'
                               />
                             </Lens>
                           )}
@@ -136,7 +139,7 @@ export default function SitePreviewDialog({
               ) : (
                 // Single media view (no tabs)
                 <div className='h-full'>
-                  <div className='bg-background relative h-full overflow-hidden rounded-md border shadow-lg'>
+                    <div className='bg-background relative h-full overflow-hidden rounded-lg border shadow-lg'>
                     <Lens
                       disableZoom={!isZoomEnabled}
                       background={selectedSite.gradientColor!}
@@ -144,7 +147,7 @@ export default function SitePreviewDialog({
                       <img
                         src={selectedSite.imgUrl!}
                         alt={`${selectedSite.title} screenshot`}
-                        className='h-full w-full object-contain'
+                          className='h-full w-full object-contain object-top'
                       />
                     </Lens>
                   </div>
