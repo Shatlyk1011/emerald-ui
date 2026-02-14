@@ -21,7 +21,7 @@ function HoverBorderGradient({
   children,
   containerClassName,
   className,
-  as: Tag = 'button',
+  as: Element = 'button',
   duration = 1,
   clockwise = true,
   ...props
@@ -55,7 +55,7 @@ function HoverBorderGradient({
     }
   }, [hovered])
   return (
-    <Tag
+    <Element
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className={cn(
@@ -91,7 +91,7 @@ function HoverBorderGradient({
         transition={{ ease: 'linear', duration: duration ?? 1 }}
       />
       <div className='absolute inset-0.5 z-1 flex-none rounded-[100px] bg-black' />
-    </Tag>
+    </Element>
   )
 }
 
