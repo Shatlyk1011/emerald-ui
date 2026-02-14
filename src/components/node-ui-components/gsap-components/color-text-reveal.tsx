@@ -21,7 +21,7 @@ interface Props {
   children: ReactNode
 }
 
-function ColorTextReveal({ children }: Props) {
+export default function ColorTextReveal({ children }: Props) {
   const { theme } = useTheme()
 
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -169,77 +169,4 @@ function ColorTextReveal({ children }: Props) {
   )
 }
 
-export default function ColorTextRevealDemo() {
-  return (
-    <section className='bg-background relative'>
-      {/* Hero Section */}
-      <div className='relative h-[50vh] w-full overflow-hidden py-20'>
-        <div className='flex h-full w-full flex-col items-center justify-center px-8 text-center'>
-          <h1 className='mb-6 text-5xl font-black md:text-7xl'>
-            GSAP Color Text Reveal
-          </h1>
-          <p className='max-w-2xl text-xl opacity-80'>
-            Experience smooth character-by-character color transitions with
-            scroll-triggered animations
-          </p>
-        </div>
-      </div>
 
-      {/* First Fact Section */}
-      <div className='bg-background relative flex min-h-svh w-full items-center overflow-hidden py-20'>
-        <div className='flex w-full items-center justify-center px-8 text-center'>
-          <div className='w-[70%] max-md:w-[85%] max-sm:w-[95%]'>
-            <ColorTextReveal>
-              <p className='text-foreground mb-8 text-center text-3xl leading-tight font-black'>
-                In an era defined by precision and speed, innovation reshapes
-                the foundation of modern industry. Every component is built with
-                intent, every system designed to perform at scale. This is more
-                than machinery— it is the architecture of progress, setting new
-                benchmarks for how we build, move, and connect.
-              </p>
-            </ColorTextReveal>
-          </div>
-        </div>
-      </div>
-
-      {/* Second Fact Section */}
-      <div className='bg-background relative flex min-h-svh w-full items-center overflow-hidden py-20'>
-        <div className='flex w-full items-center justify-center px-8 text-center'>
-          <div className='w-[70%] max-md:w-[85%] max-sm:w-[95%]'>
-            <ColorTextReveal>
-              <p className='text-foreground mb-8 text-center text-3xl leading-tight font-black'>
-                The average human attention span has decreased from 12 seconds
-                in 2000 to just 8 seconds today. This makes vibrant and
-                interactive storytelling more crucial than ever for capturing
-                user engagement and delivering clarity in digital experiences.
-              </p>
-            </ColorTextReveal>
-          </div>
-        </div>
-      </div>
-
-      {/* Third Fact Section */}
-      <div className='bg-background relative flex min-h-svh w-full items-center overflow-hidden py-20'>
-        <div className='flex w-full items-center justify-center px-8 text-center'>
-          <div className='w-[70%] max-md:w-[85%] max-sm:w-[95%]'>
-            <ColorTextReveal>
-              <p className='text-foreground mb-8 text-center text-3xl leading-tight font-black'>
-                Studies show that users form an opinion about a website in just
-                50 milliseconds. The shape and expression of your interface can
-                make or break user trust, making intuitive design and living
-                animations essential for modern web experiences.
-              </p>
-            </ColorTextReveal>
-          </div>
-        </div>
-      </div>
-
-      {/* Ending Section */}
-      <div className='relative flex h-[20vh] w-full flex-col items-center justify-center overflow-hidden'>
-        <h2 className='mb-4 text-4xl font-black md:text-4xl'>
-          The End of the Beginning
-        </h2>
-      </div>
-    </section>
-  )
-}
