@@ -6,7 +6,7 @@ credits: YB CodeGrid
 full: true
 ---
 
-import ScrollTextRevealV2 from '@/components/node-ui-components/gsap-components/scroll-text-reveal-v2'
+import TextRevealV2 from '@/components/node-ui-components/gsap-components/scroll-text-reveal-v2'
 
 <Preview
   link='gsap-components/scroll-text-reveal'
@@ -14,5 +14,39 @@ import ScrollTextRevealV2 from '@/components/node-ui-components/gsap-components/
   isReload
   isBlock
 >
-  <ScrollTextRevealV2 />
+  <div className='flex h-full w-full flex-col items-center justify-start py-24'>
+    <div className='flex h-[20vh] items-center justify-center'>
+      <p className='text-muted-foreground text-lg'>Scroll down...</p>
+    </div>
+
+    <TextRevealV2
+      asElement='h1'
+      classes='text-xl text-center font-bold tracking-tight my-[20vh]'
+    >
+      Modern web performance is about more than just speed; it's about user perception. Optimizing for Core Web Vitals ensures that your site remains stable, responsive, and engaging for users on any device or network condition.
+    </TextRevealV2>
+
+    <Separator />
+
+    <TextRevealV2
+      asElement='h2'
+      classes='text-xl text-center font-semibold tracking-tight my-[20vh]'
+    >
+      A well-documented design system is the backbone of a scalable product. It bridges the gap between design and engineering, allowing teams to build consistent interfaces faster while maintaining a high standard of visual quality.
+    </TextRevealV2>
+
+    <Separator />
+
+    <TextRevealV2
+      asElement='h2'
+      classes='text-xl text-center font-semibold tracking-tight my-[20vh] mb-[40vh]'
+    >
+      Accessibility is the foundation of inclusive design. By following WCAG guidelines, we ensure that digital experiences are perceivable, operable, and understandable for everyone, regardless of their physical or cognitive abilities.
+    </TextRevealV2>
+
+    <h3 className='mb-4 text-4xl font-black pt-[20rem]'>
+      The End of the Beginning
+    </h3>
+
+  </div>
 </Preview>

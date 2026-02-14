@@ -19,9 +19,10 @@ gsap.registerPlugin(ScrollTrigger, SplitText)
 
 interface Props {
   children: ReactNode
+  classes?: string
 }
 
-export default function ColorTextReveal({ children }: Props) {
+export default function ColorTextReveal({ children, classes }: Props) {
   const { theme } = useTheme()
 
   const containerRef = useRef<HTMLDivElement | null>(null)
@@ -153,10 +154,9 @@ export default function ColorTextReveal({ children }: Props) {
       dependencies: [theme],
     }
   )
-
   if (React.Children.count(children) === 1 && React.isValidElement(children)) {
     return React.cloneElement(
-      children as React.ReactElement<Record<string, unknown>>,
+      { ...children, type: 'span' } as React.ReactElement<Record<string, unknown>>,
       // eslint-disable-next-line react-hooks/refs
       { ref: containerRef }
     )

@@ -22,7 +22,7 @@ interface Props {
   delay?: number
 }
 
-function TextReveal({ children, animateOnScroll = true, delay = 0 }: Props) {
+export default function TextReveal({ children, animateOnScroll = true, delay = 0 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
   const elementRefs = useRef<HTMLElement[]>([])
   const splitRefs = useRef<SplitText[]>([])
@@ -104,65 +104,17 @@ function TextReveal({ children, animateOnScroll = true, delay = 0 }: Props) {
 
   if (React.Children.count(children) === 1 && React.isValidElement(children)) {
     return React.cloneElement(
-      children as ReactElement<Record<string, unknown>>,
+      { ...children, type: 'span' } as ReactElement<Record<string, unknown>>,
       // eslint-disable-next-line react-hooks/refs
       { ref: containerRef }
     )
   }
 
   return (
-    <div ref={containerRef} data-copy-wrapper='true' className='overflow-h'>
+    <div ref={containerRef} data-copy-wrapper='true' className='overflow-hidden'>
       {children}
     </div>
   )
 }
 
-export const TextRevealDemo = () => {
-  return (
-    <div className='space-y-12 p-20 max-md:p-8 max-sm:px-4'>
-      <TextReveal>
-        <h2 className='text-6xl font-bold max-sm:text-4xl'>
-          Text Reveal with GSAP{' '}
-        </h2>
-        <h2 className='mt-8 text-4xl font-bold max-sm:text-2xl'>
-          Scroll bottom to see more
-        </h2>
-      </TextReveal>
-      <TextReveal delay={1}>
-        <p className='text-2xl'>With Delay 1s</p>
-      </TextReveal>
 
-      <TextReveal>
-        <p className='mt-60 text-2xl max-sm:mt-30 max-sm:text-xl'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-          reprehenderit molestiae velit facere nulla beatae aspernatur
-          voluptatum voluptate libero expedita minima, possimus vero, enim
-          ratione ab fugit accusantium repellendus et. Blanditiis animi expedita
-          necessitatibus consequuntur quasi odio repellat deleniti ipsa.
-        </p>
-      </TextReveal>
-
-      <TextReveal>
-        <p className='mt-60 text-2xl max-sm:mt-30 max-sm:text-xl'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-          reprehenderit molestiae velit facere nulla beatae aspernatur
-          voluptatum voluptate libero expedita minima, possimus vero, enim
-          ratione ab fugit accusantium repellendus et. Blanditiis animi expedita
-          necessitatibus consequuntur quasi odio repellat deleniti ipsa.
-        </p>
-      </TextReveal>
-
-      <TextReveal>
-        <p className='mt-60 text-2xl max-sm:mt-30 max-sm:text-xl'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-          reprehenderit molestiae velit facere nulla beatae aspernatur
-          voluptatum voluptate libero expedita minima, possimus vero, enim
-          ratione ab fugit accusantium repellendus et. Blanditiis animi expedita
-          necessitatibus consequuntur quasi odio repellat deleniti ipsa.
-        </p>
-      </TextReveal>
-    </div>
-  )
-}
-
-export default TextRevealDemo

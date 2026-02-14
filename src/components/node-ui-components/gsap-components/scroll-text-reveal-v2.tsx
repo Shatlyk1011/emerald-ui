@@ -22,7 +22,7 @@ interface Props {
   classes?: string
 }
 
-function TextReveal2({ children, asElement, classes }: Props) {
+export default function TextReveal2({ children, asElement, classes }: Props) {
   const textRef = useRef<HTMLElement>(null)
   const Component = asElement || 'div'
 
@@ -65,38 +65,3 @@ function TextReveal2({ children, asElement, classes }: Props) {
     </Component>
   )
 }
-
-export const ScrollTextReveal2Demo = () => {
-  return (
-    <div className='flex min-h-[200vh] w-full flex-col items-center justify-center space-y-[20vh] py-24'>
-      <div className='flex h-[50vh] items-center justify-center'>
-        <p className='text-muted-foreground'>Scroll down...</p>
-      </div>
-
-      <TextReveal2
-        asElement='h1'
-        classes='text-4xl md:text-6xl font-bold tracking-tighter h-14'
-      >
-        DARLING, HOLD MY HAND
-      </TextReveal2>
-
-      <TextReveal2
-        asElement='h2'
-        classes='text-4xl md:text-6xl font-bold tracking-tighter h-14'
-      >
-        OH, WON&apos;T YOU HOLD MY HAND?
-      </TextReveal2>
-
-      <TextReveal2
-        asElement='h2'
-        classes='text-4xl md:text-6xl font-bold tracking-tighter h-14 text-blue-500'
-      >
-        CAUSE NOTHING BEATS A JET2HOLIDAY
-      </TextReveal2>
-
-      <div className='h-[50vh]'></div>
-    </div>
-  )
-}
-
-export default ScrollTextReveal2Demo

@@ -253,28 +253,24 @@ export default function GsapScrollTextReveal() {
       {/* First Fact Section */}
       <div className='anime-text-container relative flex h-svh w-full items-center overflow-hidden'>
         <div className='flex h-full w-full items-center justify-center px-8 text-center'>
-          <div className='anime-text w-[70%] max-md:w-[85%] max-sm:w-[95%]'>
-            <p>
-              The average human attention span has decreased from 12 seconds in
-              2000 to just 8 seconds today. This makes vibrant and interactive
-              storytelling more crucial than ever for capturing user engagement
-              and delivering clarity in digital experiences.
-            </p>
-          </div>
+          <p className='anime-text w-[70%] max-md:w-[85%] max-sm:w-[95%]'>
+            The average human attention span has decreased from 12 seconds in
+            2000 to just 8 seconds today. This makes vibrant and interactive
+            storytelling more crucial than ever for capturing user engagement
+            and delivering clarity in digital experiences.
+          </p>
         </div>
       </div>
 
       {/* Second Fact Section */}
       <div className='anime-text-container relative flex h-svh w-full items-center overflow-hidden'>
         <div className='flex h-full w-full items-center justify-center px-8 text-center'>
-          <div className='anime-text w-[70%] max-md:w-[85%] max-sm:w-[95%]'>
-            <p>
-              Studies show that users form an opinion about a website in just 50
-              milliseconds. The shape and expression of your interface can make
-              or break user trust, making intuitive design and living animations
-              essential for modern web experiences.
-            </p>
-          </div>
+          <p className='anime-text w-[70%] max-md:w-[85%] max-sm:w-[95%]'>
+            Studies show that users form an opinion about a website in just 50
+            milliseconds. The shape and expression of your interface can make
+            or break user trust, making intuitive design and living animations
+            essential for modern web experiences.
+          </p>
         </div>
       </div>
 

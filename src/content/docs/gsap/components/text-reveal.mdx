@@ -1,12 +1,58 @@
 ---
-title: Text Reveal Animation
+title: Text Reveal
 description: Line-by-line text reveal animation with smooth transitions on scroll
 icon: Sparkles
 credits: YB CodeGrid
 ---
 
-import TextRevealDemo from '@/components/node-ui-components/gsap-components/text-reveal'
+import TextReveal from '@/components/node-ui-components/gsap-components/text-reveal'
 
-<Preview link='gsap-components/text-reveal' comment={['gsap']} isReload isBlock>
-  <TextRevealDemo />
+## Text Reveal
+
+A text reveal animation that splits text into lines and reveals them on scroll.
+
+<Preview link='text-reveal' isReload>
+  <div className='flex flex-col gap-12 p-20 max-md:p-8 max-sm:px-4'>
+    <TextReveal>
+      <h2 className='text-6xl font-bold max-sm:text-4xl'>
+        Text Reveal with GSAP{' '}
+      </h2>
+      <h2 className='mt-8 text-4xl font-bold max-sm:text-2xl'>
+        Scroll bottom to see more
+      </h2>
+    </TextReveal>
+    <TextReveal delay={1}>
+      <p className='text-2xl'>With Delay 1s</p>
+    </TextReveal>
+
+    <TextReveal>
+      <p className='mt-60 text-2xl max-sm:mt-30 max-sm:text-xl'>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
+        reprehenderit molestiae velit facere nulla beatae aspernatur
+        voluptatum voluptate libero expedita minima, possimus vero, enim
+        ratione ab fugit accusantium repellendus et. Blanditiis animi expedita
+        necessitatibus consequuntur quasi odio repellat deleniti ipsa.
+      </p>
+    </TextReveal>
+
+    <TextReveal>
+      <p className='mt-60 text-2xl max-sm:mt-30 max-sm:text-xl'>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
+        reprehenderit molestiae velit facere nulla beatae aspernatur
+        voluptatum voluptate libero expedita minima, possimus vero, enim
+        ratione ab fugit accusantium repellendus et. Blanditiis animi expedita
+        necessitatibus consequuntur quasi odio repellat deleniti ipsa.
+      </p>
+    </TextReveal>
+
+    <TextReveal>
+      <p className='mt-60 text-2xl max-sm:mt-30 max-sm:text-xl'>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
+        reprehenderit molestiae velit facere nulla beatae aspernatur
+        voluptatum voluptate libero expedita minima, possimus vero, enim
+        ratione ab fugit accusantium repellendus et. Blanditiis animi expedita
+        necessitatibus consequuntur quasi odio repellat deleniti ipsa.
+      </p>
+    </TextReveal>
+  </div>
 </Preview>

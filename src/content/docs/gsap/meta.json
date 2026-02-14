@@ -5,6 +5,8 @@
   "pages": [
     "---Get Started---",
     "index",
+    "---Components---",
+    "components/interactive-team",
     "---Text---",
     "components/text-reveal",
     "components/color-text-reveal",
