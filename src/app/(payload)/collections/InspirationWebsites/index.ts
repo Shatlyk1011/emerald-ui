@@ -1,7 +1,13 @@
-import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
-import { extractGradientColor } from '../../utils/extractColor'
-import { beforeDeleteHook, beforeChangeHook } from './hooks'
+import { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
+import { extractGradientColor } from '../../utils/extractColor';
+import { beforeDeleteHook, beforeChangeHook } from './hooks';
+
+
+
+
+
+
 
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
@@ -131,6 +137,17 @@ const InspirationWebsites: CollectionConfig = {
             },
           ],
         },
+      },
+    },
+    {
+      name: 'imgPlaceholder',
+      type: 'text',
+      required: false,
+      admin: {
+        description:
+          'Base64-encoded blurred placeholder (auto-generated from imgUrl)',
+        position: 'sidebar',
+        hidden: true,
       },
     },
     {

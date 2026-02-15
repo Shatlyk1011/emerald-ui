@@ -86,6 +86,13 @@ function SiteCard({ item, index }: SiteCardProps) {
                     loading={loadingStrategy}
                     draggable={false}
                     onContextMenu={(e) => e.preventDefault()}
+                    style={{
+                      backgroundImage: item.imgPlaceholder
+                        ? `url(${item.imgPlaceholder})`
+                        : undefined,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }}
                   />
                 )}
                 {/* Show video on hover if available */}

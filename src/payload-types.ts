@@ -156,6 +156,10 @@ export interface InspirationWebsite {
    */
   imgUrl?: string | null;
   /**
+   * Base64-encoded blurred placeholder (auto-generated from imgUrl)
+   */
+  imgPlaceholder?: string | null;
+  /**
    * Original favicon URL
    */
   faviconUrl?: string | null;
@@ -552,6 +556,7 @@ export interface InspirationWebsitesSelect<T extends boolean = true> {
   style?: T;
   pageUrl?: T;
   imgUrl?: T;
+  imgPlaceholder?: T;
   faviconUrl?: T;
   favicon?: T;
   additionalMedia?: T;

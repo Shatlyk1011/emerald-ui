@@ -1,9 +1,9 @@
 import type {
   CollectionBeforeDeleteHook,
   CollectionBeforeChangeHook,
-  CollectionAfterReadHook,
-} from 'payload'
+} from 'payload';
 import { extractGradientColor } from '../../utils/extractColor'
+import { generatePlaceholder } from '../../utils/generatePlaceholder'
 import {
   deleteMediaFromUrl,
   uploadScreenshot,
@@ -106,6 +106,15 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({
         } catch (error) {
           console.error('Error extracting gradient color:', error)
         }
+
+        // Generate blurred placeholder
+        try {
+          const placeholder = await generatePlaceholder(publicUrl)
+          data.imgPlaceholder = placeholder
+          console.log('Placeholder generated')
+        } catch (error) {
+          console.error('Error generating placeholder:', error)
+        }
       } else {
         console.error('Scrnify API error:', res.status, res.statusText)
       }
@@ -154,6 +163,11 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({
       const gradientColor = await extractGradientColor(data.imgUrl)
       data.gradientColor = gradientColor
       console.log('Gradient color extracted from manual URL:', gradientColor)
+
+      // Generate new placeholder for the new image
+      const placeholder = await generatePlaceholder(data.imgUrl)
+      data.imgPlaceholder = placeholder
+      console.log('Placeholder generated from manual URL')
     } catch (error) {
       console.error('Error extracting gradient color from URL:', error)
     }

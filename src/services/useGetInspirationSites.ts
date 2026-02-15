@@ -4,13 +4,6 @@ import { Where } from 'payload'
 import { stringify } from 'qs-esm';
 import { axios } from '@/lib/axios';
 
-
-
-
-
-
-
-
 // Infinite Query for Inspiration Sites
 export const useInfiniteInspirationSites = (query?: Where) => {
   return useInfiniteQuery<IWebsites>({
