@@ -2,9 +2,8 @@
 
 import { useState, useEffect, useMemo, Suspense } from 'react'
 import { debounce } from '@/composables/utils'
-import { Category, WebsiteStyle } from '@/payload-types'
+import { Category, WebsiteStyle, InspirationWebsite } from '@/payload-types'
 import { useInfiniteInspirationSites } from '@/services/useGetInspirationSites'
-import { IWebsites } from '@/types/inspiration'
 import dynamic from 'next/dynamic'
 import { Where } from 'payload'
 import { useInView } from 'react-intersection-observer'
@@ -21,23 +20,20 @@ const SubmitWebsiteDialog = dynamic(() => import('./SubmitWebsiteDialog'), {
 })
 
 interface Props {
-  initialData: IWebsites
-  totalDocs: number
   categories: Category[]
   styles: WebsiteStyle[]
-  images: string[]
 }
+// USE IDB AS DEFAULT BUT FETCH ANYWAY
 
 export default function InspirationContent({
-  initialData,
-  totalDocs,
   categories,
   styles,
-  images,
 }: Props) {
   const [filterQuery, setFilterQuery] = useState<Where>({
     isVisible: { equals: true },
   })
+
+  // ... (existing state)
 
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedStyles, setSelectedStyles] = useState<string[]>([])
@@ -49,14 +45,11 @@ export default function InspirationContent({
     rootMargin: '160px',
   })
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
-    useInfiniteInspirationSites(initialData, filterQuery)
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
+    useInfiniteInspirationSites(undefined, filterQuery)
 
-  // Derive loading state from query status
-  const isLoading = useMemo(
-    () => isFetching && !isFetchingNextPage,
-    [isFetching, isFetchingNextPage]
-  )
+
+  console.log('data', data)
 
   // Fetch next page when the sentinel element comes into view
   useEffect(() => {
@@ -67,6 +60,11 @@ export default function InspirationContent({
 
   // Flatten all pages into a single array
   const allWebsites = data?.pages.flatMap((page) => page.docs) ?? []
+
+  // Calculate totalDocs and images if not provided (from client data)
+  const currentTotalDocs = data?.pages[0]?.totalDocs || 0
+  const currentImages = allWebsites.map((i: InspirationWebsite) => i.imgUrl).filter(Boolean) as string[]
+
   // Build filter query from selected categories and styles
   const filterQueryFromSelections = useMemo(() => {
     if (!mounted) {
@@ -94,7 +92,7 @@ export default function InspirationContent({
       ],
     }
     return query
-  }, [selectedCategories, selectedStyles])
+  }, [selectedCategories, selectedStyles, mounted])
 
   // Create debounced setFilterQuery function (memoized to maintain stable reference)
   const debouncedSetFilterQuery = useMemo(
@@ -107,7 +105,7 @@ export default function InspirationContent({
     if (filterQueryFromSelections && mounted) {
       debouncedSetFilterQuery(filterQueryFromSelections)
     }
-  }, [filterQueryFromSelections, debouncedSetFilterQuery])
+  }, [filterQueryFromSelections, debouncedSetFilterQuery, mounted])
 
   const handleResetFilters = () => {
     setFilterQuery({ isVisible: { equals: true } })
@@ -122,7 +120,7 @@ export default function InspirationContent({
           <NewsletterSubscribe />
           <h1 className='-tracking-two mb-2 text-5xl font-semibold'>
             Node Inspiration <br className='hidden max-lg:block' /> Websites (
-            {totalDocs})
+            {currentTotalDocs})
           </h1>
           <div className='text-muted-foreground text-lg'>
             <p className='mb-2'>
@@ -138,7 +136,7 @@ export default function InspirationContent({
           </div>
         </div>
         <div className='flex-5 max-xl:w-full max-xl:flex-auto'>
-          <ThreeDMarquee images={images} />
+          <ThreeDMarquee images={currentImages} />
         </div>
       </section>
 
