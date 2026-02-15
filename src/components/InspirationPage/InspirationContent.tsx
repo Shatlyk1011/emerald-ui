@@ -45,11 +45,11 @@ export default function InspirationContent({
     rootMargin: '160px',
   })
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
     useInfiniteInspirationSites(undefined, filterQuery)
 
 
-  console.log('data', data)
+  const isLoading = isFetching || isFetchingNextPage
 
   // Fetch next page when the sentinel element comes into view
   useEffect(() => {
@@ -102,7 +102,7 @@ export default function InspirationContent({
 
   // Update filter query when selections change (with debounce)
   useEffect(() => {
-    if (filterQueryFromSelections && mounted) {
+    if (filterQueryFromSelections && mounted && selectedCategories.length) {
       debouncedSetFilterQuery(filterQueryFromSelections)
     }
   }, [filterQueryFromSelections, debouncedSetFilterQuery, mounted])
@@ -136,7 +136,7 @@ export default function InspirationContent({
           </div>
         </div>
         <div className='flex-5 max-xl:w-full max-xl:flex-auto'>
-          <ThreeDMarquee images={currentImages} />
+          <ThreeDMarquee images={currentImages.slice(0, 12)} />
         </div>
       </section>
 
@@ -149,7 +149,7 @@ export default function InspirationContent({
         setSelectedStyles={setSelectedStyles}
       />
 
-      {isLoading ? (
+      {isLoading && allWebsites.length === 0 ? (
         <SiteCardsSkeleton />
       ) : allWebsites.length === 0 ? (
         <EmptyResult handleResetFilters={handleResetFilters} />

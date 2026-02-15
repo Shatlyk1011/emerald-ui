@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useRef } from 'react'
 import { formatDateFull } from '@/composables/utils'
 import { InspirationWebsite } from '@/payload-types'
 import { useAppStore } from '@/store/useAppStore'
@@ -13,6 +14,8 @@ interface SiteCardProps {
 
 function SiteCard({ item, index }: SiteCardProps) {
   const openSiteDialog = useAppStore((state) => state.openSiteDialog)
+  const [isHovered, setIsHovered] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   // Determine which media to display (prioritize additionalMedia)
   const displayMedia =
@@ -21,8 +24,9 @@ function SiteCard({ item, index }: SiteCardProps) {
     item.additionalMedia.mediaUrl
       ? item.additionalMedia
       : null
-  const displayUrl = displayMedia?.mediaUrl || item.imgUrl
-  const isVideo = displayMedia?.type === 'video'
+  const hasVideo = displayMedia?.type === 'video'
+  const videoUrl = hasVideo ? displayMedia?.mediaUrl : null
+  const imageUrl = item.imgUrl
 
   // Use pre-computed gradient color from database
   const bgColor = item.gradientColor!
@@ -31,8 +35,23 @@ function SiteCard({ item, index }: SiteCardProps) {
   const loadingStrategy = index < 12 ? 'eager' : 'lazy'
 
   const handleClick = () => {
-    if (!displayUrl) return
+    if (!imageUrl && !videoUrl) return
     openSiteDialog(item)
+  }
+
+  const handleMouseEnter = () => {
+    if (videoRef.current && hasVideo) {
+      setIsHovered(true)
+      videoRef.current.load()
+      videoRef.current.play()
+    }
+  }
+
+  const handleMouseLeave = () => {
+    if (videoRef.current && hasVideo) {
+      setIsHovered(false)
+      videoRef.current.pause()
+    }
   }
 
   return (
@@ -40,39 +59,53 @@ function SiteCard({ item, index }: SiteCardProps) {
       <div
         role='button'
         onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         className={cn(
           'relative rounded-xl border bg-transparent px-8 py-16 shadow-md transition-all duration-300 max-sm:px-8 max-sm:py-16',
-          displayUrl
+          imageUrl || videoUrl
             ? 'hover:border-foreground/15 hover:shadow-lg'
             : 'hover:border-destructive/15'
         )}
         style={{ background: bgColor }}
       >
         <div className='relative aspect-4/3 w-full overflow-hidden'>
-          <figure className='absolute inset-0 overflow-hidden rounded-lg'>
-            {displayUrl ? (
-              isVideo ? (
-                <video
-                  src={displayUrl}
-                  className='h-full w-full object-cover'
-                  muted
-                  autoPlay
-                  loop
-                  playsInline
-                  draggable={false}
-                  onContextMenu={(e) => e.preventDefault()}
-                />
-              ) : (
-                <img
-                  src={displayUrl}
-                  className='h-full w-full object-cover'
-                  alt={item.title + ' image'}
-                  crossOrigin='anonymous'
-                  loading={loadingStrategy}
-                  draggable={false}
-                  onContextMenu={(e) => e.preventDefault()}
-                />
-              )
+          <figure className='absolute inset-0 overflow-hidden rounded-lg border bg-background'>
+            {imageUrl || videoUrl ? (
+              <>
+                {/* Always show image */}
+                {imageUrl && (
+                  <img
+                    src={imageUrl}
+                    className={cn(
+                      'h-full w-full object-cover transition-opacity duration-300',
+                      isHovered && hasVideo ? 'opacity-0' : 'opacity-100'
+                    )}
+                    alt={item.title + ' image'}
+                    crossOrigin='anonymous'
+                    loading={loadingStrategy}
+                    draggable={false}
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
+                )}
+                {/* Show video on hover if available */}
+                {hasVideo && videoUrl && (
+                  <video
+                    ref={videoRef}
+                    src={videoUrl}
+                    className={cn(
+                      'absolute inset-0 h-full w-full object-cover transition-opacity duration-300',
+                      isHovered ? 'inline-block' : 'hidden'
+                    )}
+                    muted
+                    loop
+                    playsInline
+                    preload="none"
+                    draggable={false}
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
+                )}
+              </>
             ) : (
               <div className='border-border flex h-full w-full flex-col items-center justify-center rounded-lg border opacity-80'>
                 <p className='-tracking-two font-mono text-xl font-medium'>
