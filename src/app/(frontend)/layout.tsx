@@ -7,6 +7,7 @@ import TanstackQueryProvider from '@/components/_providers/tanstack-query'
 import ThemeProvider from '@/components/_providers/theme-provider'
 import { Providers } from '@/components/_providers/post-hog'
 import './globals.css'
+import { Analytics } from '@/components/_providers/analytics'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -72,6 +73,7 @@ export default function RootLayout({
             </ThemeProvider>
           </RootProvider>
         </Providers>
+        <Analytics />
 
         <Toaster position='bottom-right' />
       </body>
