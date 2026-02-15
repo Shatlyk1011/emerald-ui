@@ -107,7 +107,7 @@ export default function SitePreviewDialog({
                           {selectedSite.additionalMedia?.type === 'video' ? (
                             <video
                               src={selectedSite.additionalMedia.mediaUrl!}
-                            className='aspect-4/3 h-full w-full object-contain object-top'
+                            className='aspect-4/3 h-full w-full object-contain object-center'
                               autoPlay
                               muted
                               playsInline

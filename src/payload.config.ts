@@ -1,5 +1,6 @@
-import path from 'path'
+import path from 'path';
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { fileURLToPath } from 'node:url'
 import { buildConfig } from 'payload'
@@ -46,6 +47,21 @@ export default buildConfig({
     WebsiteStyle,
     AdminUsers,
   ],
+
+  // Email configuration using Nodemailer adapter
+  email: nodemailerAdapter({
+    defaultFromAddress: process.env.EMAIL_FROM || 'noreply@emerald-ui.com',
+    defaultFromName: 'Emerald UI',
+    transportOptions: {
+      host: 'next-smtp.useplunk.com',
+      port: 2587,
+      secure: false,
+      auth: {
+        user: 'plunk',
+        pass: process.env.PLUNK_KEY,
+      },
+    },
+  }),
 
   // Your Payload secret - should be a complex and secure string, unguessable
   secret: process.env.PAYLOAD_SECRET || '',
