@@ -33,8 +33,6 @@ export default function InspirationContent({
     isVisible: { equals: true },
   })
 
-  // ... (existing state)
-
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedStyles, setSelectedStyles] = useState<string[]>([])
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -46,7 +44,7 @@ export default function InspirationContent({
   })
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
-    useInfiniteInspirationSites(undefined, filterQuery)
+    useInfiniteInspirationSites(filterQuery)
 
 
   const isLoading = isFetching || isFetchingNextPage

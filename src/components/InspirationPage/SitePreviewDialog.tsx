@@ -59,7 +59,7 @@ export default function SitePreviewDialog({
             <div className='flex-1'>
               {showTabs ? (
                 <Tabs
-                  defaultValue='screenshot'
+                  defaultValue='media'
                   className='h-full w-full'
                   autoFocus={false}
                 >
@@ -67,16 +67,16 @@ export default function SitePreviewDialog({
                     <TabsTrigger
                       autoFocus={false}
                       className='data-[state=active]:bg-transparent rounded-px px-4 py-2 transition-all'
-                      value='screenshot'
+                      value='media'
                     >
-                      Screenshot
+                      Video
                     </TabsTrigger>
                     <TabsTrigger
                       autoFocus={false}
                       className='data-[state=active]:bg-transparent rounded-px px-4 py-2 transition-all'
-                      value='media'
+                      value='screenshot'
                     >
-                      Video
+                      Screenshot
                     </TabsTrigger>
                   </TabsList>
                   <TabsContent

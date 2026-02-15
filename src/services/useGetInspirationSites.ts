@@ -1,14 +1,18 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { IWebsites } from '@/types/inspiration'
 import { Where } from 'payload'
-import { stringify } from 'qs-esm'
-import { axios } from '@/lib/axios'
+import { stringify } from 'qs-esm';
+import { axios } from '@/lib/axios';
+
+
+
+
+
+
+
 
 // Infinite Query for Inspiration Sites
-export const useInfiniteInspirationSites = (
-  initialData?: IWebsites,
-  query?: Where
-) => {
+export const useInfiniteInspirationSites = (query?: Where) => {
   return useInfiniteQuery<IWebsites>({
     queryKey: ['inspiration-sites', query],
     queryFn: async ({ pageParam = 1 }) => {
@@ -25,13 +29,8 @@ export const useInfiniteInspirationSites = (
       return response.data
     },
     initialPageParam: 1,
-    getNextPageParam: (lastPage) =>
-      lastPage.hasNextPage ? lastPage.nextPage : undefined,
-    initialData: initialData && {
-      pages: [initialData],
-      pageParams: [1],
-    },
-    // Limit persisted pages to 1 to prevent IndexedDB bloat
-    maxPages: 1,
+    getNextPageParam: (lastPage) => lastPage.hasNextPage && lastPage.nextPage,
+    // All pages remain in memory for infinite scroll
+    // Only page 1 is persisted to IndexedDB via custom dehydration filter in provider
   })
 }
