@@ -31,5 +31,7 @@ export const useInfiniteInspirationSites = (
       pages: [initialData],
       pageParams: [1],
     },
+    // Limit persisted pages to 1 to prevent IndexedDB bloat
+    maxPages: 1,
   })
 }
