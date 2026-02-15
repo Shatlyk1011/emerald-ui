@@ -17,6 +17,7 @@
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "@payloadcms/db-mongodb": "3.62.0",
+    "@payloadcms/email-nodemailer": "^3.76.1",
     "@payloadcms/next": "3.62.0",
     "@payloadcms/payload-cloud": "3.62.0",
     "@payloadcms/richtext-lexical": "3.62.0",
