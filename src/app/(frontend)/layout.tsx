@@ -5,6 +5,7 @@ import { Toaster } from 'sonner'
 import { siteConfig } from '@/lib/site-config'
 import TanstackQueryProvider from '@/components/_providers/tanstack-query'
 import ThemeProvider from '@/components/_providers/theme-provider'
+import { Providers } from '@/components/_providers/post-hog'
 import './globals.css'
 
 const geistSans = Geist({
@@ -56,19 +57,22 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <RootProvider search={{ enabled: false }}>
-          <ThemeProvider
-            attribute='class'
-            defaultTheme='system'
-            enableSystem
-            disableTransitionOnChange
-          >
-            <TanstackQueryProvider>
-              {children}
-              {modal}
-            </TanstackQueryProvider>
-          </ThemeProvider>
-        </RootProvider>
+        <Providers>
+          <RootProvider search={{ enabled: false }}>
+            <ThemeProvider
+              attribute='class'
+              defaultTheme='system'
+              enableSystem
+              disableTransitionOnChange
+            >
+              <TanstackQueryProvider>
+                {children}
+                {modal}
+              </TanstackQueryProvider>
+            </ThemeProvider>
+          </RootProvider>
+        </Providers>
+
         <Toaster position='bottom-right' />
       </body>
     </html>
