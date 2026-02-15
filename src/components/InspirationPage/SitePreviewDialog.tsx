@@ -66,14 +66,14 @@ export default function SitePreviewDialog({
                   <TabsList className='mb-4 w-full flex gap-2 justify-start bg-transparent border-b rounded-none pb-4' >
                     <TabsTrigger
                       autoFocus={false}
-                      className='data-[state=active]:bg-background rounded-px px-4 py-2 transition-all'
+                      className='data-[state=active]:bg-transparent rounded-px px-4 py-2 transition-all'
                       value='screenshot'
                     >
                       Screenshot
                     </TabsTrigger>
                     <TabsTrigger
                       autoFocus={false}
-                      className='data-[state=active]:bg-background rounded-px px-4 py-2 transition-all'
+                      className='data-[state=active]:bg-transparent rounded-px px-4 py-2 transition-all'
                       value='media'
                     >
                       Video
