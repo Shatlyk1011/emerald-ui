@@ -80,8 +80,8 @@ export default function TextScramble({
   }, [])
 
   return (
-    // @ts-expect-error valid props
     <MotionComponent
+      // @ts-expect-error valid props
       onMouseEnter={triggerOnHover ? scramble : undefined}
       className={cn(classes)}
       {...props}
