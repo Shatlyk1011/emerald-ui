@@ -9,17 +9,10 @@ import AnimatedNumber from '@/components/node-ui-components/animated-number';
 ## Basic Usage
 
 <Preview link='animated-number' comment={['motion']} isReload>
-  <div className='flex flex-col gap-3 text-muted-foreground'>
-    <h2 className='text-2xl mb-3 font-mono'>New subs today</h2>
-    <div className='flex flex-col gap-2 text-center '>
-      <AnimatedNumber
-        asElement='h2'
-        value={99}
-        className='text-5xl font-extrabold text-primary'
-      />
-      <div className='text-primary'>
-        <span className='font-mono text-base text-muted-foreground'>Users served:</span> +<AnimatedNumber asElement='span' value={4985} className='font-bold ' />
-      </div>
-    </div>
-  </div>
+  <AnimatedNumber
+    asElement='h2'
+    value={707}
+    className='text-5xl font-extrabold text-primary'
+  />
 </Preview>
+

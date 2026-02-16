@@ -10,7 +10,6 @@
     "components/animated-number",
     "components/animated-dropdown",
     "components/animated-input",
-    "components/interactive-data-table",
 
     "---UI Elements---",
     "components/buttons",
