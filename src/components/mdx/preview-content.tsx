@@ -1,69 +1,15 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import {
   type RefObject,
-  useActionState,
   useEffect,
   useRef,
-  useState,
-  useTransition,
 } from 'react'
 import { CheckCheck, Copy, ShieldAlert, RefreshCw } from 'lucide-react'
-import { AnimatePresence, motion } from 'motion/react'
 import { useTheme } from 'next-themes'
-import { useRouter } from 'next/navigation'
-import { toast } from 'sonner'
-import { copyComponent } from '@/lib/action'
-import { cn } from '@/lib/utils'
-import { useAuth } from '@payloadcms/ui'
-
-function SuccessParticles({
-  buttonRef,
-}: {
-  buttonRef: React.RefObject<HTMLButtonElement>
-}) {
-  const rect = buttonRef.current?.getBoundingClientRect()
-  if (!rect) return null
-
-  const centerX = rect.left + rect.width / 2
-  const centerY = rect.top + rect.height / 2
-
-  // Create a unique key for each particle to satisfy the linter
-  const particles = Array.from({ length: 6 }, (_, index) => ({
-    // eslint-disable-next-line react-hooks/purity
-    id: `particle-${index}-${Math.random().toString(36).substr(2, 9)}`,
-    index, // Pass index for staggering delay
-  }))
-
-  return (
-    <AnimatePresence>
-      {particles.map((particle) => (
-        <motion.div
-          animate={{
-            scale: [0, 1, 0],
-            // eslint-disable-next-line react-hooks/purity
-            x: [0, (particle.index % 2 ? 1 : -1) * (Math.random() * 50 + 20)],
-            // eslint-disable-next-line react-hooks/purity
-            y: [0, -Math.random() * 50 - 20],
-          }}
-          className='bg-foreground fixed h-1 w-1 rounded-full'
-          initial={{
-            scale: 0,
-            x: 0,
-            y: 0,
-          }}
-          key={particle.id}
-          style={{ left: centerX, top: centerY }}
-          transition={{
-            duration: 0.6,
-            delay: particle.index * 0.1, // Use particle.index for delay
-            ease: 'easeOut',
-          }}
-        />
-      ))}
-    </AnimatePresence>
-  )
-}
+import useCopy from '@/hooks/use-copy'
+import SuccessParticles from '../ui/success-particles'
 
 export default function PreviewContent({
   link,
@@ -73,54 +19,10 @@ export default function PreviewContent({
   link: string
   isBlock?: boolean
   onReload?: () => void
-}) {
-  const router = useRouter()
+  }) {
   const { theme } = useTheme()
-  const [isPending, startTransition] = useTransition()
-  const [state, formAction] = useActionState(copyComponent, {
-    error: '',
-    content: '',
-    success: false,
-  })
-  const [isCopied, setIsCopied] = useState(false)
 
-  const { user } = useAuth()
-
-  const isLogin = !!user
-
-  const isAuthRequired = isBlock && !isLogin
-
-  const handleCopyClick = async () => {
-    if (isAuthRequired) {
-      router.push('/sign-in')
-      toast.info('Please sign in to copy the component', {
-        position: 'top-center',
-      })
-      return
-    }
-
-    const [folder, filename] = link.split('/')
-
-    startTransition(async () => {
-      const formData = new FormData()
-      formData.append('folder', folder)
-      formData.append('fileName', filename)
-
-      formAction(formData)
-    })
-  }
-
-  useEffect(() => {
-    if (state.success && state.content) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setIsCopied(true)
-      navigator.clipboard.writeText(state.content)
-
-      setTimeout(() => {
-        setIsCopied(false)
-      }, 2000)
-    }
-  }, [state])
+  const { handleCopyClick, isCopied, isPending, isAuthRequired } = useCopy({ link, isBlock })
 
   useEffect(() => {
     if (onReload) {
