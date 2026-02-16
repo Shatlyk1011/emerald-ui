@@ -137,11 +137,6 @@
   .scrollbar-thin {
     scrollbar-width: thin;
   }
-
-  .anime-text p {
-    @apply text-foreground dark:text-foreground mb-8 text-center text-3xl leading-tight font-black;
-  }
-
   .anime-text .word {
     @apply relative mr-0.5 mb-0.5 inline-block rounded-full px-0.5 py-0.5 will-change-[background-color,opacity];
   }

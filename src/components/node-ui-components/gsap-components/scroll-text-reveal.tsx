@@ -10,27 +10,28 @@
  */
 // Add utility classes to your tailwind css file
 // These styles will be added dynamically via GSAP
-// @layer utilities {
-//   .anime-text p {
-//     @apply text-foreground dark:text-foreground text-center text-3xl font-black leading-tight mb-8;
-//   }
-//   .anime-text .word {
-//     @apply inline-block relative will-change-[background-color,opacity] mr-0.5 mb-0.5 px-0.5 py-0.5 rounded-full;
-//   }
-//   .anime-text .word.keyword-wrapper {
-//     @apply ml-0.5 mr-1.5 mt-0 mb-0.5;
-//   }
-//   .anime-text .word span {
-//     @apply relative;
-//   }
-//   .anime-text .word span.keyword {
-//     @apply inline-block w-full h-full text-background dark:text-background px-0 py-0.5 rounded-full before:content-[""] before:absolute before:-translate-x-1/2 before:-translate-y-1/2 before:w-[calc(100%_+_1rem)] before:h-[calc(100%_+_0.5rem)] before:bg-foreground dark:before:bg-foreground before:z-[-1] before:rounded-full before:left-1/2 before:top-1/2;
-//   }
-//   .anime-text .word,
-//   .anime-text .word span {
-//     @apply opacity-0;
-//   }
+//@layer utilities {
+//  .anime-text .word {
+//    @apply relative mr-0.5 mb-0.5 inline-block rounded-full px-0.5 py-0.5 will-change-[background-color,opacity];
 // }
+
+//  .anime-text .word.keyword-wrapper {
+//    @apply mt-0 mr-1.5 mb-0.5 ml-0.5;
+//   }
+
+//  .anime-text .word span {
+//    @apply relative;
+//   }
+
+//  .anime-text .word span.keyword {
+//    @apply text-background dark:text-background before:bg-foreground dark:before:bg-foreground inline-block h-full w-full rounded-full px-0 py-0.5 before:absolute before:top-1/2 before:left-1/2 before:z-[-1] before:h-[calc(100%_+_0.5rem)] before:w-[calc(100%_+_1rem)] before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full before:content-[""];
+//   }
+
+//  .anime-text .word,
+//  .anime-text .word span {
+//    @apply opacity-0;
+//  }
+//}
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
@@ -58,7 +59,7 @@ export default function GsapScrollTextReveal() {
   useGSAP(
     () => {
       const animeTextParagraphs =
-        sectionRef.current?.querySelectorAll('.anime-text p')
+        sectionRef.current?.querySelectorAll('.anime-text')
 
       if (!animeTextParagraphs) return
 
@@ -253,7 +254,7 @@ export default function GsapScrollTextReveal() {
       {/* First Fact Section */}
       <div className='anime-text-container relative flex h-svh w-full items-center overflow-hidden'>
         <div className='flex h-full w-full items-center justify-center px-8 text-center'>
-          <p className='anime-text w-[70%] max-md:w-[85%] max-sm:w-[95%]'>
+          <p className='anime-text text-foreground dark:text-foreground mb-8 text-center text-3xl leading-tight font-black w-[70%] max-md:w-[85%] max-sm:w-[95%]'>
             The average human attention span has decreased from 12 seconds in
             2000 to just 8 seconds today. This makes vibrant and interactive
             storytelling more crucial than ever for capturing user engagement
@@ -265,7 +266,7 @@ export default function GsapScrollTextReveal() {
       {/* Second Fact Section */}
       <div className='anime-text-container relative flex h-svh w-full items-center overflow-hidden'>
         <div className='flex h-full w-full items-center justify-center px-8 text-center'>
-          <p className='anime-text w-[70%] max-md:w-[85%] max-sm:w-[95%]'>
+          <p className='anime-text text-foreground dark:text-foreground mb-8 text-center text-3xl leading-tight font-black w-[70%] max-md:w-[85%] max-sm:w-[95%]'>
             Studies show that users form an opinion about a website in just 50
             milliseconds. The shape and expression of your interface can make
             or break user trust, making intuitive design and living animations
