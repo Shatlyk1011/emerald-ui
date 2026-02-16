@@ -1,0 +1,39 @@
+---
+title: Magnetic Effect
+description: Magnetic hover effect that pulls elements towards the cursor
+icon: Sparkles
+---
+
+import MagneticEffect from '@/components/node-ui-components/gsap-components/magnetic-effect'
+import { Button } from '@/components/ui/button'
+import { ArrowBigLeft, Heart, Share2 } from 'lucide-react';
+
+<Preview
+  link='gsap-components/magnetic-effect'
+  comment={['gsap']}
+  isReload
+  isBlock
+>
+  <div className="flex items-center gap-4">
+    <MagneticEffect>
+      <Button size="lg">
+        <div className="flex items-center gap-2">
+          <ArrowBigLeft />
+          <p>Submit</p>
+        </div>
+      </Button>
+    </MagneticEffect>
+
+    <MagneticEffect strength={30} >
+      <Button size="icon" variant="outline">
+        <Heart />
+      </Button>
+    </MagneticEffect>
+
+    <MagneticEffect strength={15}>
+      <Button size="icon" variant="outline">
+        <Share2 />
+      </Button>
+    </MagneticEffect>
+  </div>
+</Preview>

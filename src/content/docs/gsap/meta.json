@@ -8,6 +8,7 @@
     "---Components---",
     "components/interactive-team",
     "components/link-hover",
+    "components/magnetic-effect",
     "---Text---",
     "components/text-reveal",
     "components/color-text-reveal",

@@ -1,27 +1,24 @@
 'use client'
-import { copyComponent } from "@/lib/action"
-import { useRouter } from "next/navigation"
-import { useActionState, useEffect, useState, useTransition } from "react"
-import { toast } from "sonner"
-import { useUser } from "./use-user"
+import { useActionState, useEffect, useState, useTransition } from 'react'
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+import { copyComponent } from '@/lib/action'
+import { useUser } from './use-user'
 
 interface Props {
   link: string
-  isBlock?:boolean
+  isBlock?: boolean
 }
 
 const useCopy = ({ link, isBlock = false }: Props) => {
   const router = useRouter()
   const { user } = useUser()
-  console.log('link')
-  
   const isLogin = !!user
 
   const isAuthRequired = isBlock && !isLogin
 
   const [isPending, startTransition] = useTransition()
   const [isCopied, setIsCopied] = useState(false)
-
 
   const [state, formAction] = useActionState(copyComponent, {
     error: '',
@@ -31,7 +28,7 @@ const useCopy = ({ link, isBlock = false }: Props) => {
   const handleCopyClick = async () => {
     if (isAuthRequired) {
       router.push('/sign-in')
-      toast.info('Please sign in to copy the component', {
+      toast.info('Please sign in to copy the component.', {
         position: 'top-center',
       })
       return
@@ -48,7 +45,6 @@ const useCopy = ({ link, isBlock = false }: Props) => {
     })
   }
 
-
   useEffect(() => {
     if (state.success && state.content) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -61,8 +57,7 @@ const useCopy = ({ link, isBlock = false }: Props) => {
     }
   }, [state])
 
-  return {handleCopyClick, isCopied, isPending, isAuthRequired}
-
+  return { handleCopyClick, isCopied, isPending, isAuthRequired }
 }
 
 export default useCopy
