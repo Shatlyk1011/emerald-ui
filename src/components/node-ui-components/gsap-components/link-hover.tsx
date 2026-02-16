@@ -32,14 +32,15 @@ interface Props {
 }
 
 export default function ImageHover({ items = DefaultItems }: Props) {
-  const sectionRef = useRef(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const previewContainerRef = useRef<HTMLDivElement>(null);
   const newImgRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-    const previewContainer = previewContainerRef.current;
-    const menuLinkItems = document.querySelectorAll(".menu-link-item");
+      if (!sectionRef.current) return
+      const previewContainer = previewContainerRef.current;
+      const menuLinkItems = sectionRef.current.querySelectorAll(".menu-link-item");
 
     let lastHoveredIndex: number | null = null;
 
@@ -93,7 +94,7 @@ export default function ImageHover({ items = DefaultItems }: Props) {
       });
     };
     },
-    { scope: sectionRef }
+    { scope: sectionRef, dependencies: [sectionRef] }
   )
 
   return (
