@@ -1,11 +1,15 @@
-import config from '@payload-config'
-import { NextResponse } from 'next/server'
-import { getPayload } from 'payload'
-import {
-  createClientRecord,
-  createInitialCredits,
-} from '@/lib/helpers/credit-helpers'
-import { createClient } from '@/lib/supabase-server'
+import config from '@payload-config';
+import { NextResponse } from 'next/server';
+import { getPayload } from 'payload';
+import { createClientRecord, createInitialCredits } from '@/lib/helpers/credit-helpers';
+import { createClient } from '@/lib/supabase-server';
+
+
+
+
+
+
+
 
 /**
  * OAuth callback handler
@@ -66,5 +70,5 @@ export async function GET(request: Request) {
   }
 
   // If there's an error, redirect to login with error message
-  return NextResponse.redirect(`${origin}/login?error=auth_failed`)
+  return NextResponse.redirect(`${origin}/sign-in`)
 }

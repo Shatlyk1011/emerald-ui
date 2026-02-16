@@ -1,5 +1,5 @@
 'use client'
-import { useActionState, useEffect, useState, useTransition } from 'react'
+import { useActionState, useEffect, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { copyComponent } from '@/lib/action'
@@ -27,7 +27,7 @@ const useCopy = ({ link, isBlock = false }: Props) => {
   })
   const handleCopyClick = async () => {
     if (isAuthRequired) {
-      router.push('/sign-in')
+      router.push(`/sign-in`)
       toast.info('Please sign in to copy the component.', {
         position: 'top-center',
       })

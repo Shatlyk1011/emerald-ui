@@ -49,7 +49,7 @@ export async function updateSession(request: NextRequest) {
 
   if (isProtectedPath && !user) {
     // Store the original URL to redirect back after login
-    const redirectUrl = new URL('/login', request.url)
+    const redirectUrl = new URL('/sign-in', request.url)
     redirectUrl.searchParams.set('next', request.nextUrl.pathname)
     return NextResponse.redirect(redirectUrl)
   }

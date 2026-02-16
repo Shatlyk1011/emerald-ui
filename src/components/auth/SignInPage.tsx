@@ -14,9 +14,10 @@ import { Input } from '@/components/ui/input'
 interface Props {
   handleSwitch?: () => void
   isModal?: boolean
+  redirectTo?: string
 }
 
-export default function SignInPage({ handleSwitch, isModal }: Props) {
+export default function SignInPage({ handleSwitch, isModal, redirectTo }: Props) {
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
@@ -33,7 +34,7 @@ export default function SignInPage({ handleSwitch, isModal }: Props) {
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
-          redirectTo: `${window.location.origin}/api/auth/callback`,
+          redirectTo: redirectTo || '/',
         },
       })
 
@@ -68,7 +69,7 @@ export default function SignInPage({ handleSwitch, isModal }: Props) {
       const { error } = await supabase.auth.signInWithOtp({
         email: result.data.email,
         options: {
-          emailRedirectTo: `${window.location.origin}/api/auth/callback`,
+          emailRedirectTo: redirectTo || '/',
         },
       })
 
