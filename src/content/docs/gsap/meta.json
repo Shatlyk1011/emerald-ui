@@ -7,6 +7,7 @@
     "index",
     "---Components---",
     "components/interactive-team",
+    "components/fancy-text-hover",
     "components/link-hover",
     "components/magnetic-effect",
     "---Text---",
