@@ -2,7 +2,7 @@
 
 import { FC, useRef, useState } from 'react'
 import { getUserInitials } from '@/composables/utils'
-import { LogOut, User as UserIcon } from 'lucide-react'
+import { LogOut, User as UserIcon, ChevronDown } from 'lucide-react'
 import { useScroll, useMotionValueEvent } from 'motion/react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
@@ -21,9 +21,10 @@ import {
 import ThemeToggle from '@/components/ui/theme-toggle'
 import TextShimmer from '../ui/text-shimmer'
 
-const { components, home } = {
+const { home, motionComponents, gsapComponents } = {
   home: '/',
-  components: '/docs',
+  motionComponents: '/docs',
+  gsapComponents: '/docs/gsap',
 }
 
 interface Props {
@@ -74,18 +75,38 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                 pathname === home ? 'text-primary ' : 'hover:text-foreground hover:bg-foreground/5'
               )}
             >
-              Website Inspiration
+              Website Inspiration 
             </Link>
           </li>
           <li>
-            <Link
-              href={components}
-              className={cn('group hover:bg-primary/5 rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2', pathname === components ? 'text-primary ' : 'hover:text-foreground hover:bg-foreground/5')}
-            >
-              <TextShimmer duration={7} spread={15} className={cn("transition", pathname === components && 'text-primary')}>
-                Components
-              </TextShimmer>
-            </Link>
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                className={cn(
+                  'group flex items-center gap-1 hover:bg-primary/5 rounded-md px-3 py-2 text-nowrap transition ease-out focus:outline-none',
+                  pathname.startsWith(motionComponents)
+                    ? 'text-primary'
+                    : 'hover:text-foreground hover:bg-foreground/5'
+                )}
+              >
+                <TextShimmer duration={7} spread={15} className={cn("transition", pathname.startsWith(motionComponents || gsapComponents) && 'text-primary')}>
+                  Components
+                </TextShimmer>
+                <ChevronDown className='ml-1 size-3 text-current transition-transform duration-300 group-data-[state=open]:rotate-180' />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align='end' className='w-48'>
+                <DropdownMenuItem asChild>
+                  <Link href={motionComponents} className='cursor-pointer'>
+                    Motion Components
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href={gsapComponents} className='cursor-pointer'>
+                    GSAP Components
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </li>
         </ul>
       </nav>
