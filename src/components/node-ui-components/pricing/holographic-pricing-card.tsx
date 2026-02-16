@@ -102,7 +102,7 @@ const PricingTierCard: FC<PricingTierCardProps> = ({ tier }) => {
       >
         {/* diagonal waves */}
         <motion.div
-          className='pointer-events-none absolute inset-0 z-10 opacity-30'
+          className='pointer-events-none absolute inset-0 z-10 opacity-30 scale-110'
           style={{
             backgroundImage:
               'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(6, 182, 212, 0.1) 10px, rgba(6, 182, 212, 0.1) 20px)',

@@ -1,8 +1,9 @@
 ---
 title: Buttons
 description: Explore high quality button components with stunning animations and effects. Dark and Light modes available.
-full: false
+full: true
 ---
+
 
 import ButtonColorful from '@/components/node-ui-components/buttons/button-colorful'
 import DiagonalSwipeButton from '@/components/node-ui-components/buttons/diagonal-swipe-button'
@@ -14,93 +15,53 @@ import ShinyButton from '@/components/node-ui-components/buttons/shiny-button'
 import SocialButton from '@/components/node-ui-components/buttons/social-button'
 import MotionButton from '@/components/node-ui-components/buttons/motion-button'
 
-## Social Button
+export const items = [
+  {
+    name: 'Social Button',
+    component: <SocialButton />,
+    slug: 'buttons/social-button',
+  },
+  {
+    name: 'Motion Button',
+    component: <MotionButton label="Get Started" animate={true} />,
+    slug: 'buttons/motion-button',
+  },
+  {
+    name: 'Interactive Hover Button',
+    component: <InteractiveHoverButton />,
+    slug: 'buttons/interactive-hover-button',
+  },
+  {
+    name: 'Colorful Button',
+    component: <ButtonColorful />,
+    slug: 'buttons/button-colorful',
+  },
+  {
+    name: 'Shimmer Button',
+    component: <ShimmerButton />,
+    slug: 'buttons/shimmer-button',
+  },
+  {
+    name: 'Hover Border Gradient',
+    component: <HoverBorderGradient />,
+    slug: 'buttons/hover-border-gradient',
+  },
+  {
+    name: 'Shiny Button',
+    component: <ShinyButton />,
+    slug: 'buttons/shiny-button',
+  },
+  {
+    name: 'Gradient Borders',
+    component: <GradientBordersButton />,
+    slug: 'buttons/gradient-borders-button',
+  },
+  {
+    name: 'Diagonal Swipe',
+    component: <DiagonalSwipeButton />,
+    slug: 'buttons/diagonal-swipe-button',
+  },
+]
 
-Expandable social share button with multiple platform options
-
-<Preview link='buttons/social-button' comment={['motion']}>
-  <SocialButton />
-</Preview>
-
-<Separator />
-
-## Motion Button
-
-A button with a smooth entrance animation and hover fill effect.
-
-<Preview link='buttons/motion-button' comment={['motion']} >
-  <MotionButton label="Get Started" animate={true} />
-</Preview>
-
-<Separator />
-
-## Interactive Hover Button
-
-Interactive button with loading and success states, featuring smooth animations
-
-<Preview link='buttons/interactive-hover-button' comment={['motion']}>
-  <InteractiveHoverButton />
-</Preview>
-
-<Separator />
-
-## Colorful Button
-
-A button with animated gradient background effects
-
-<Preview link='buttons/button-colorful'>
-  <ButtonColorful />
-</Preview>
-
-<Separator />
-
-## Shimmer Button
-
-An animated button with a shimmer gradient effect that moves across the surface
-
-<Preview link='buttons/shimmer-button'>
-  <ShimmerButton />
-</Preview>
-
-<Separator />
-
-## Hover Border Gradient
-
-Button with animated gradient border that rotates around the edges
-
-<Preview link='buttons/hover-border-gradient' comment={['motion']}>
-  <HoverBorderGradient />
-</Preview>
-
-<Separator />
-
-## Shiny Button
-
-A button with a shiny gradient effect
-
-<Preview link='buttons/shiny-button'>
-  <ShinyButton />
-</Preview>
-
-<Separator />
-
-## Gradient Borders
-
-Button with animated gradient borders
-
-<Preview link='buttons/gradient-borders-button'>
-  <GradientBordersButton />
-</Preview>
-
-<Separator />
-
-## Diagonal Swipe
-
-Button with a diagonal swipe hover effect
-
-<Preview link='buttons/diagonal-swipe-button'>
-  <DiagonalSwipeButton />
-</Preview>
-
-<Separator />
+<GridComponents items={items} />
 
