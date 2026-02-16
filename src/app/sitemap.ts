@@ -2,11 +2,6 @@ import type { MetadataRoute } from 'next'
 import { siteConfig } from '@/lib/site-config'
 import { source } from '@/lib/source'
 
-
-
-
-
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const currentDate = new Date()
   const routes = ['', '/docs'].map((route) => ({

@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import { cn } from "@/lib/utils"
-import { motion, useInView } from "motion/react"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from 'react'
+import { motion, useInView } from 'motion/react'
+import { cn } from '@/lib/utils'
 
 interface TypingEffectProps {
   texts?: string[]
@@ -11,7 +11,7 @@ interface TypingEffectProps {
   typingSpeed?: number
 }
 
-const DEMO = ["Design", "Development", "Marketing"]
+const DEMO = ['Design', 'Development', 'Marketing']
 
 export const TypingEffect = ({
   texts = DEMO,
@@ -19,7 +19,7 @@ export const TypingEffect = ({
   rotationInterval = 3000,
   typingSpeed = 150,
 }: TypingEffectProps) => {
-  const [displayedText, setDisplayedText] = useState("")
+  const [displayedText, setDisplayedText] = useState('')
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
   const [charIndex, setCharIndex] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -34,28 +34,24 @@ export const TypingEffect = ({
       const typingTimeout = setTimeout(() => {
         setDisplayedText((prev) => prev + currentText.charAt(charIndex))
         setCharIndex(charIndex + 1)
-      }, typingSpeed  )
+      }, typingSpeed)
       return () => clearTimeout(typingTimeout)
     } else {
       const changeLabelTimeout = setTimeout(() => {
-        setDisplayedText("")
+        setDisplayedText('')
         setCharIndex(0)
         setCurrentTextIndex((prev) => (prev + 1) % texts.length)
       }, rotationInterval)
       return () => clearTimeout(changeLabelTimeout)
     }
-  }, [
-    charIndex,
-    currentText,
-    isInView,
-  ])
+  }, [charIndex, currentText, isInView])
 
   return (
     <div
       ref={containerRef}
       className={cn(
-        "relative inline-flex items-center justify-center text-center font-bold text-4xl",
-        className,
+        'relative inline-flex items-center justify-center text-center text-4xl font-bold',
+        className
       )}
     >
       {displayedText}
@@ -65,10 +61,10 @@ export const TypingEffect = ({
         transition={{
           duration: 0.8,
           repeat: Infinity,
-          repeatType: "reverse",
+          repeatType: 'reverse',
         }}
         className={cn(
-          "ml-1 h-[1em] w-1 rounded-sm bg-current",
+          'ml-1 h-[1em] w-1 rounded-sm bg-current'
           // Adjust cursor style as needed
         )}
       />

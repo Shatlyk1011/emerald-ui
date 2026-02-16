@@ -1,13 +1,9 @@
 'use client'
 
-import { cn } from '@/lib/utils'
-import {
-  type RefObject,
-  useEffect,
-  useRef,
-} from 'react'
+import { type RefObject, useEffect, useRef } from 'react'
 import { CheckCheck, Copy, ShieldAlert, RefreshCw } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import { cn } from '@/lib/utils'
 import useCopy from '@/hooks/use-copy'
 import SuccessParticles from '../ui/success-particles'
 
@@ -19,10 +15,13 @@ export default function PreviewContent({
   link: string
   isBlock?: boolean
   onReload?: () => void
-  }) {
+}) {
   const { theme } = useTheme()
 
-  const { handleCopyClick, isCopied, isPending, isAuthRequired } = useCopy({ link, isBlock })
+  const { handleCopyClick, isCopied, isPending, isAuthRequired } = useCopy({
+    link,
+    isBlock,
+  })
 
   useEffect(() => {
     if (onReload) {
@@ -71,7 +70,7 @@ export default function PreviewContent({
             ) : (
               <>
                 {/* if is block and not auth */}
-                  {isAuthRequired ? (
+                {isAuthRequired ? (
                   <ShieldAlert
                     className={cn(
                       'h-3.5 w-3.5 transition-all duration-200 group-hover:scale-110'

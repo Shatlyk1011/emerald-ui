@@ -63,17 +63,17 @@ export default function SitePreviewDialog({
                   className='h-full w-full'
                   autoFocus={false}
                 >
-                  <TabsList className='mb-4 w-full flex gap-2 justify-start bg-transparent border-b rounded-none pb-4' >
+                  <TabsList className='mb-4 flex w-full justify-start gap-2 rounded-none border-b bg-transparent pb-4'>
                     <TabsTrigger
                       autoFocus={false}
-                      className='data-[state=active]:bg-transparent rounded-px px-4 py-2 transition-all'
+                      className='rounded-px px-4 py-2 transition-all data-[state=active]:bg-transparent'
                       value='media'
                     >
                       Video
                     </TabsTrigger>
                     <TabsTrigger
                       autoFocus={false}
-                      className='data-[state=active]:bg-transparent rounded-px px-4 py-2 transition-all'
+                      className='rounded-px px-4 py-2 transition-all data-[state=active]:bg-transparent'
                       value='screenshot'
                     >
                       Screenshot
@@ -103,11 +103,11 @@ export default function SitePreviewDialog({
                   >
                     {hasAdditionalMedia &&
                       typeof selectedSite.additionalMedia === 'object' && (
-                      <div className='bg-background rounded-lg relative h-full w-full overflow-hidden border shadow-lg'>
+                        <div className='bg-background relative h-full w-full overflow-hidden rounded-lg border shadow-lg'>
                           {selectedSite.additionalMedia?.type === 'video' ? (
                             <video
                               src={selectedSite.additionalMedia.mediaUrl!}
-                            className='aspect-4/3 h-full w-full object-contain object-center'
+                              className='aspect-4/3 h-full w-full object-contain object-center'
                               autoPlay
                               muted
                               playsInline
@@ -139,7 +139,7 @@ export default function SitePreviewDialog({
               ) : (
                 // Single media view (no tabs)
                 <div className='h-full'>
-                    <div className='bg-background relative h-full overflow-hidden rounded-lg border shadow-lg'>
+                  <div className='bg-background relative h-full overflow-hidden rounded-lg border shadow-lg'>
                     <Lens
                       disableZoom={!isZoomEnabled}
                       background={selectedSite.gradientColor!}
@@ -147,7 +147,7 @@ export default function SitePreviewDialog({
                       <img
                         src={selectedSite.imgUrl!}
                         alt={`${selectedSite.title} screenshot`}
-                          className='h-full w-full object-contain object-top'
+                        className='h-full w-full object-contain object-top'
                       />
                     </Lens>
                   </div>

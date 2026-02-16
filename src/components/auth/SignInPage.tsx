@@ -17,7 +17,11 @@ interface Props {
   redirectTo?: string
 }
 
-export default function SignInPage({ handleSwitch, isModal, redirectTo }: Props) {
+export default function SignInPage({
+  handleSwitch,
+  isModal,
+  redirectTo,
+}: Props) {
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)

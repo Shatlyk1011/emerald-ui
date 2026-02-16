@@ -1,5 +1,5 @@
 'use client'
-import { useActionState, useEffect, useState, useTransition } from 'react';
+import { useActionState, useEffect, useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { copyComponent } from '@/lib/action'

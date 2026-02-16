@@ -156,7 +156,9 @@ export default function ColorTextReveal({ children, classes }: Props) {
   )
   if (React.Children.count(children) === 1 && React.isValidElement(children)) {
     return React.cloneElement(
-      { ...children, type: 'span' } as React.ReactElement<Record<string, unknown>>,
+      { ...children, type: 'span' } as React.ReactElement<
+        Record<string, unknown>
+      >,
       // eslint-disable-next-line react-hooks/refs
       { ref: containerRef }
     )
@@ -168,5 +170,3 @@ export default function ColorTextReveal({ children, classes }: Props) {
     </div>
   )
 }
-
-

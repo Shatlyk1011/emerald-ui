@@ -130,7 +130,7 @@ export function PricingCard({
           )}
           asChild
         >
-            <Link href='/sign-in'>
+          <Link href='/sign-in'>
             {isEnterprice ? item.ctaText : 'Get Started'}
           </Link>
         </Button>

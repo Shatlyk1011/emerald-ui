@@ -1,7 +1,7 @@
 import type {
   CollectionBeforeDeleteHook,
   CollectionBeforeChangeHook,
-} from 'payload';
+} from 'payload'
 import { extractGradientColor } from '../../utils/extractColor'
 import { generatePlaceholder } from '../../utils/generatePlaceholder'
 import {

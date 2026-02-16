@@ -1,9 +1,8 @@
-import { NextResponse } from 'next/server';
-import { createEmailTransporter, generateNewsletterHTML } from '@/lib/email.config';
-
-
-
-
+import { NextResponse } from 'next/server'
+import {
+  createEmailTransporter,
+  generateNewsletterHTML,
+} from '@/lib/email.config'
 
 export async function POST() {
   try {

@@ -1,8 +1,8 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { IWebsites } from '@/types/inspiration'
 import { Where } from 'payload'
-import { stringify } from 'qs-esm';
-import { axios } from '@/lib/axios';
+import { stringify } from 'qs-esm'
+import { axios } from '@/lib/axios'
 
 // Infinite Query for Inspiration Sites
 export const useInfiniteInspirationSites = (query?: Where) => {

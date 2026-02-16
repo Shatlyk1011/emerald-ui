@@ -59,81 +59,91 @@ export type SupportedTimezones =
   | 'Pacific/Guam'
   | 'Pacific/Noumea'
   | 'Pacific/Auckland'
-  | 'Pacific/Fiji';
+  | 'Pacific/Fiji'
 
 export interface Config {
   auth: {
-    adminUsers: AdminUserAuthOperations;
-  };
-  blocks: {};
+    adminUsers: AdminUserAuthOperations
+  }
+  blocks: {}
   collections: {
-    'inspiration-websites': InspirationWebsite;
-    clients: Client;
-    'credit-history': CreditHistory;
-    'website-submissions': WebsiteSubmission;
-    subscribers: Subscriber;
-    newsletters: Newsletter;
-    media: Media;
-    categories: Category;
-    'website-style': WebsiteStyle;
-    adminUsers: AdminUser;
-    'payload-kv': PayloadKv;
-    'payload-locked-documents': PayloadLockedDocument;
-    'payload-preferences': PayloadPreference;
-    'payload-migrations': PayloadMigration;
-  };
+    'inspiration-websites': InspirationWebsite
+    clients: Client
+    'credit-history': CreditHistory
+    'website-submissions': WebsiteSubmission
+    subscribers: Subscriber
+    newsletters: Newsletter
+    media: Media
+    categories: Category
+    'website-style': WebsiteStyle
+    adminUsers: AdminUser
+    'payload-kv': PayloadKv
+    'payload-locked-documents': PayloadLockedDocument
+    'payload-preferences': PayloadPreference
+    'payload-migrations': PayloadMigration
+  }
   collectionsJoins: {
     clients: {
-      creditHistory: 'credit-history';
-    };
-  };
+      creditHistory: 'credit-history'
+    }
+  }
   collectionsSelect: {
-    'inspiration-websites': InspirationWebsitesSelect<false> | InspirationWebsitesSelect<true>;
-    clients: ClientsSelect<false> | ClientsSelect<true>;
-    'credit-history': CreditHistorySelect<false> | CreditHistorySelect<true>;
-    'website-submissions': WebsiteSubmissionsSelect<false> | WebsiteSubmissionsSelect<true>;
-    subscribers: SubscribersSelect<false> | SubscribersSelect<true>;
-    newsletters: NewslettersSelect<false> | NewslettersSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
-    categories: CategoriesSelect<false> | CategoriesSelect<true>;
-    'website-style': WebsiteStyleSelect<false> | WebsiteStyleSelect<true>;
-    adminUsers: AdminUsersSelect<false> | AdminUsersSelect<true>;
-    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
-    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
-    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
-    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
-  };
+    'inspiration-websites':
+      | InspirationWebsitesSelect<false>
+      | InspirationWebsitesSelect<true>
+    clients: ClientsSelect<false> | ClientsSelect<true>
+    'credit-history': CreditHistorySelect<false> | CreditHistorySelect<true>
+    'website-submissions':
+      | WebsiteSubmissionsSelect<false>
+      | WebsiteSubmissionsSelect<true>
+    subscribers: SubscribersSelect<false> | SubscribersSelect<true>
+    newsletters: NewslettersSelect<false> | NewslettersSelect<true>
+    media: MediaSelect<false> | MediaSelect<true>
+    categories: CategoriesSelect<false> | CategoriesSelect<true>
+    'website-style': WebsiteStyleSelect<false> | WebsiteStyleSelect<true>
+    adminUsers: AdminUsersSelect<false> | AdminUsersSelect<true>
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>
+    'payload-locked-documents':
+      | PayloadLockedDocumentsSelect<false>
+      | PayloadLockedDocumentsSelect<true>
+    'payload-preferences':
+      | PayloadPreferencesSelect<false>
+      | PayloadPreferencesSelect<true>
+    'payload-migrations':
+      | PayloadMigrationsSelect<false>
+      | PayloadMigrationsSelect<true>
+  }
   db: {
-    defaultIDType: string;
-  };
-  globals: {};
-  globalsSelect: {};
-  locale: null;
+    defaultIDType: string
+  }
+  globals: {}
+  globalsSelect: {}
+  locale: null
   user: AdminUser & {
-    collection: 'adminUsers';
-  };
+    collection: 'adminUsers'
+  }
   jobs: {
-    tasks: unknown;
-    workflows: unknown;
-  };
+    tasks: unknown
+    workflows: unknown
+  }
 }
 export interface AdminUserAuthOperations {
   forgotPassword: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
   login: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
   registerFirstUser: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
   unlock: {
-    email: string;
-    password: string;
-  };
+    email: string
+    password: string
+  }
 }
 /**
  * Main collection for storing website inspiration entries. Automatically captures screenshots and favicons from provided URLs. Supports categorization, styling tags, and additional media attachments.
@@ -142,42 +152,42 @@ export interface AdminUserAuthOperations {
  * via the `definition` "inspiration-websites".
  */
 export interface InspirationWebsite {
-  id: string;
-  title: string;
-  description: string;
-  category?: string | null;
-  style: string[];
+  id: string
+  title: string
+  description: string
+  category?: string | null
+  style: string[]
   /**
    * Original website URL (for screenshots)
    */
-  pageUrl?: string | null;
+  pageUrl?: string | null
   /**
    * Screenshot URL (auto-generated from pageUrl)
    */
-  imgUrl?: string | null;
+  imgUrl?: string | null
   /**
    * Base64-encoded blurred placeholder (auto-generated from imgUrl)
    */
-  imgPlaceholder?: string | null;
+  imgPlaceholder?: string | null
   /**
    * Original favicon URL
    */
-  faviconUrl?: string | null;
+  faviconUrl?: string | null
   /**
    * Favicon URL (auto-generated from faviconUrl)
    */
-  favicon?: string | null;
+  favicon?: string | null
   /**
    * Additional media (video or image)
    */
-  additionalMedia?: (string | null) | Media;
+  additionalMedia?: (string | null) | Media
   /**
    * Pre-computed gradient color extracted from screenshot
    */
-  gradientColor?: string | null;
-  isVisible?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
+  gradientColor?: string | null
+  isVisible?: boolean | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * Upload and manage additional media assets (images and videos) for inspiration websites. Media items are automatically linked to InspirationWebsites when pageUrl matches.
@@ -186,27 +196,27 @@ export interface InspirationWebsite {
  * via the `definition` "media".
  */
 export interface Media {
-  id: string;
+  id: string
   /**
    * The original website's url
    */
-  pageUrl: string;
+  pageUrl: string
   /**
    * Type of media (auto-detected from file)
    */
-  type?: ('image' | 'video') | null;
+  type?: ('image' | 'video') | null
   /**
    * Upload image or video directly to Supabase
    */
-  mediaUrl?: string | null;
-  altText?: string | null;
-  description?: string | null;
+  mediaUrl?: string | null
+  altText?: string | null
+  description?: string | null
   /**
    * File size in bytes
    */
-  size?: number | null;
-  updatedAt: string;
-  createdAt: string;
+  size?: number | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * Manage client accounts and their subscription plans. Each client is linked to their credit history.
@@ -215,41 +225,41 @@ export interface Media {
  * via the `definition` "clients".
  */
 export interface Client {
-  id: string;
+  id: string
   /**
    * Supabase user ID (unique identifier)
    */
-  userId: string;
+  userId: string
   /**
    * User email address (optional, can be provided by user)
    */
-  email?: string | null;
+  email?: string | null
   /**
    * User subscription plan
    */
-  currentPlan?: ('free' | 'hobby' | 'pro' | 'enterprise') | null;
+  currentPlan?: ('free' | 'hobby' | 'pro' | 'enterprise') | null
   /**
    * Block this user from using credits and accessing services
    */
-  isBlocked?: boolean | null;
+  isBlocked?: boolean | null
   /**
    * Authentication provider used during registration
    */
-  provider?: ('n/a' | 'email' | 'google' | 'github') | null;
+  provider?: ('n/a' | 'email' | 'google' | 'github') | null
   /**
    * Whether the user has verified their email address
    */
-  isVerified?: boolean | null;
+  isVerified?: boolean | null
   /**
    * All credit transactions for this user
    */
   creditHistory?: {
-    docs?: (string | CreditHistory)[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
-  };
-  updatedAt: string;
-  createdAt: string;
+    docs?: (string | CreditHistory)[]
+    hasNextPage?: boolean
+    totalDocs?: number
+  }
+  updatedAt: string
+  createdAt: string
 }
 /**
  * Track user credit history including monthly free credits and purchased credits. Credits expire after 1 month.
@@ -258,34 +268,34 @@ export interface Client {
  * via the `definition` "credit-history".
  */
 export interface CreditHistory {
-  id: string;
-  client?: (string | null) | Client;
+  id: string
+  client?: (string | null) | Client
   /**
    * Supabase user ID
    */
-  userId: string;
+  userId: string
   /**
    * Number of credits (3 for monthly free, variable for purchased)
    */
-  creditAmount: number;
+  creditAmount: number
   /**
    * Type of credit allocation
    */
-  source: 'monthly_free' | 'purchased' | 'signup_bonus';
+  source: 'monthly_free' | 'purchased' | 'signup_bonus'
   /**
    * Status of the credit
    */
-  status?: ('active' | 'expired' | 'used') | null;
+  status?: ('active' | 'expired' | 'used') | null
   /**
    * Amount of credits spent from this allocation
    */
-  creditsSpent?: number | null;
+  creditsSpent?: number | null
   /**
    * Date when these credits expire
    */
-  expirationDate?: string | null;
-  updatedAt: string;
-  createdAt: string;
+  expirationDate?: string | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * User-submitted website requests for the inspiration gallery. Review and approve submissions to add them to the main collection.
@@ -294,20 +304,20 @@ export interface CreditHistory {
  * via the `definition` "website-submissions".
  */
 export interface WebsiteSubmission {
-  id: string;
-  name?: string | null;
-  email?: string | null;
+  id: string
+  name?: string | null
+  email?: string | null
   /**
    * URL of the website being submitted
    */
-  websiteUrl: string;
-  message?: string | null;
+  websiteUrl: string
+  message?: string | null
   /**
    * Review status of the submission
    */
-  status: 'pending' | 'approved' | 'rejected';
-  updatedAt: string;
-  createdAt: string;
+  status: 'pending' | 'approved' | 'rejected'
+  updatedAt: string
+  createdAt: string
 }
 /**
  * Manage newsletter subscribers. Users can subscribe publicly, but only admins can view and manage subscriptions.
@@ -316,21 +326,21 @@ export interface WebsiteSubmission {
  * via the `definition` "subscribers".
  */
 export interface Subscriber {
-  id: string;
+  id: string
   /**
    * Subscriber email address (must be unique)
    */
-  email: string;
+  email: string
   /**
    * Current subscription status
    */
-  status: 'active' | 'unsubscribed';
+  status: 'active' | 'unsubscribed'
   /**
    * Where the subscriber signed up (e.g., homepage, footer)
    */
-  source?: string | null;
-  updatedAt: string;
-  createdAt: string;
+  source?: string | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * Create and send newsletters to subscribers. Use the rich text editor to compose your newsletter content.
@@ -339,47 +349,47 @@ export interface Subscriber {
  * via the `definition` "newsletters".
  */
 export interface Newsletter {
-  id: string;
+  id: string
   /**
    * Email subject line
    */
-  subject: string;
+  subject: string
   /**
    * Short preview text shown in email clients (optional)
    */
-  previewText?: string | null;
+  previewText?: string | null
   /**
    * Main newsletter content (supports rich formatting)
    */
   content: {
     root: {
-      type: string;
+      type: string
       children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+        type: any
+        version: number
+        [k: string]: unknown
+      }[]
+      direction: ('ltr' | 'rtl') | null
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
+      indent: number
+      version: number
+    }
+    [k: string]: unknown
+  }
   /**
    * Newsletter status
    */
-  status: 'draft' | 'sent';
+  status: 'draft' | 'sent'
   /**
    * Date and time when newsletter was sent
    */
-  sentDate?: string | null;
+  sentDate?: string | null
   /**
    * Number of subscribers who received this newsletter
    */
-  recipientCount?: number | null;
-  updatedAt: string;
-  createdAt: string;
+  recipientCount?: number | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * Manage website categories for organizing inspiration entries. Categories provide taxonomical classification to help filter and group websites by type or purpose.
@@ -388,10 +398,10 @@ export interface Newsletter {
  * via the `definition` "categories".
  */
 export interface Category {
-  id: string;
-  category: string;
-  value: string;
-  order?: number | null;
+  id: string
+  category: string
+  value: string
+  order?: number | null
 }
 /**
  * Define and manage style tags for inspiration websites. Style tags help categorize websites by visual design patterns, aesthetics, or UI/UX approaches (e.g., minimalist, glassmorphism, dark mode).
@@ -400,10 +410,10 @@ export interface Category {
  * via the `definition` "website-style".
  */
 export interface WebsiteStyle {
-  id: string;
-  style: string;
-  value: string;
-  order?: number | null;
+  id: string
+  style: string
+  value: string
+  order?: number | null
 }
 /**
  * Manage admin panel users and their access permissions. Configure user roles (admin, moderator, guest) to control who can create, edit, and delete content.
@@ -412,333 +422,332 @@ export interface WebsiteStyle {
  * via the `definition` "adminUsers".
  */
 export interface AdminUser {
-  id: string;
-  name?: string | null;
-  phone?: string | null;
-  isBlocked?: boolean | null;
-  roles?: ('admin' | 'moderator' | 'guest')[] | null;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
+  id: string
+  name?: string | null
+  phone?: string | null
+  isBlocked?: boolean | null
+  roles?: ('admin' | 'moderator' | 'guest')[] | null
+  updatedAt: string
+  createdAt: string
+  email: string
+  resetPasswordToken?: string | null
+  resetPasswordExpiration?: string | null
+  salt?: string | null
+  hash?: string | null
+  loginAttempts?: number | null
+  lockUntil?: string | null
   sessions?:
     | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
+        id: string
+        createdAt?: string | null
+        expiresAt: string
       }[]
-    | null;
-  password?: string | null;
+    | null
+  password?: string | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: string;
-  key: string;
+  id: string
+  key: string
   data:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
+    | null
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: string;
+  id: string
   document?:
     | ({
-        relationTo: 'inspiration-websites';
-        value: string | InspirationWebsite;
+        relationTo: 'inspiration-websites'
+        value: string | InspirationWebsite
       } | null)
     | ({
-        relationTo: 'clients';
-        value: string | Client;
+        relationTo: 'clients'
+        value: string | Client
       } | null)
     | ({
-        relationTo: 'credit-history';
-        value: string | CreditHistory;
+        relationTo: 'credit-history'
+        value: string | CreditHistory
       } | null)
     | ({
-        relationTo: 'website-submissions';
-        value: string | WebsiteSubmission;
+        relationTo: 'website-submissions'
+        value: string | WebsiteSubmission
       } | null)
     | ({
-        relationTo: 'subscribers';
-        value: string | Subscriber;
+        relationTo: 'subscribers'
+        value: string | Subscriber
       } | null)
     | ({
-        relationTo: 'newsletters';
-        value: string | Newsletter;
+        relationTo: 'newsletters'
+        value: string | Newsletter
       } | null)
     | ({
-        relationTo: 'media';
-        value: string | Media;
+        relationTo: 'media'
+        value: string | Media
       } | null)
     | ({
-        relationTo: 'categories';
-        value: string | Category;
+        relationTo: 'categories'
+        value: string | Category
       } | null)
     | ({
-        relationTo: 'website-style';
-        value: string | WebsiteStyle;
+        relationTo: 'website-style'
+        value: string | WebsiteStyle
       } | null)
     | ({
-        relationTo: 'adminUsers';
-        value: string | AdminUser;
+        relationTo: 'adminUsers'
+        value: string | AdminUser
       } | null)
     | ({
-        relationTo: 'payload-kv';
-        value: string | PayloadKv;
-      } | null);
-  globalSlug?: string | null;
+        relationTo: 'payload-kv'
+        value: string | PayloadKv
+      } | null)
+  globalSlug?: string | null
   user: {
-    relationTo: 'adminUsers';
-    value: string | AdminUser;
-  };
-  updatedAt: string;
-  createdAt: string;
+    relationTo: 'adminUsers'
+    value: string | AdminUser
+  }
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: string;
+  id: string
   user: {
-    relationTo: 'adminUsers';
-    value: string | AdminUser;
-  };
-  key?: string | null;
+    relationTo: 'adminUsers'
+    value: string | AdminUser
+  }
+  key?: string | null
   value?:
     | {
-        [k: string]: unknown;
+        [k: string]: unknown
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null;
-  updatedAt: string;
-  createdAt: string;
+    | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: string;
-  name?: string | null;
-  batch?: number | null;
-  updatedAt: string;
-  createdAt: string;
+  id: string
+  name?: string | null
+  batch?: number | null
+  updatedAt: string
+  createdAt: string
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "inspiration-websites_select".
  */
 export interface InspirationWebsitesSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  category?: T;
-  style?: T;
-  pageUrl?: T;
-  imgUrl?: T;
-  imgPlaceholder?: T;
-  faviconUrl?: T;
-  favicon?: T;
-  additionalMedia?: T;
-  gradientColor?: T;
-  isVisible?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  title?: T
+  description?: T
+  category?: T
+  style?: T
+  pageUrl?: T
+  imgUrl?: T
+  imgPlaceholder?: T
+  faviconUrl?: T
+  favicon?: T
+  additionalMedia?: T
+  gradientColor?: T
+  isVisible?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "clients_select".
  */
 export interface ClientsSelect<T extends boolean = true> {
-  userId?: T;
-  email?: T;
-  currentPlan?: T;
-  isBlocked?: T;
-  provider?: T;
-  isVerified?: T;
-  creditHistory?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  userId?: T
+  email?: T
+  currentPlan?: T
+  isBlocked?: T
+  provider?: T
+  isVerified?: T
+  creditHistory?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "credit-history_select".
  */
 export interface CreditHistorySelect<T extends boolean = true> {
-  client?: T;
-  userId?: T;
-  creditAmount?: T;
-  source?: T;
-  status?: T;
-  creditsSpent?: T;
-  expirationDate?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  client?: T
+  userId?: T
+  creditAmount?: T
+  source?: T
+  status?: T
+  creditsSpent?: T
+  expirationDate?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "website-submissions_select".
  */
 export interface WebsiteSubmissionsSelect<T extends boolean = true> {
-  name?: T;
-  email?: T;
-  websiteUrl?: T;
-  message?: T;
-  status?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  name?: T
+  email?: T
+  websiteUrl?: T
+  message?: T
+  status?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "subscribers_select".
  */
 export interface SubscribersSelect<T extends boolean = true> {
-  email?: T;
-  status?: T;
-  source?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  email?: T
+  status?: T
+  source?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "newsletters_select".
  */
 export interface NewslettersSelect<T extends boolean = true> {
-  subject?: T;
-  previewText?: T;
-  content?: T;
-  status?: T;
-  sentDate?: T;
-  recipientCount?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  subject?: T
+  previewText?: T
+  content?: T
+  status?: T
+  sentDate?: T
+  recipientCount?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  pageUrl?: T;
-  type?: T;
-  mediaUrl?: T;
-  altText?: T;
-  description?: T;
-  size?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  pageUrl?: T
+  type?: T
+  mediaUrl?: T
+  altText?: T
+  description?: T
+  size?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories_select".
  */
 export interface CategoriesSelect<T extends boolean = true> {
-  category?: T;
-  value?: T;
-  order?: T;
+  category?: T
+  value?: T
+  order?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "website-style_select".
  */
 export interface WebsiteStyleSelect<T extends boolean = true> {
-  style?: T;
-  value?: T;
-  order?: T;
+  style?: T
+  value?: T
+  order?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "adminUsers_select".
  */
 export interface AdminUsersSelect<T extends boolean = true> {
-  name?: T;
-  phone?: T;
-  isBlocked?: T;
-  roles?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
+  name?: T
+  phone?: T
+  isBlocked?: T
+  roles?: T
+  updatedAt?: T
+  createdAt?: T
+  email?: T
+  resetPasswordToken?: T
+  resetPasswordExpiration?: T
+  salt?: T
+  hash?: T
+  loginAttempts?: T
+  lockUntil?: T
   sessions?:
     | T
     | {
-        id?: T;
-        createdAt?: T;
-        expiresAt?: T;
-      };
+        id?: T
+        createdAt?: T
+        expiresAt?: T
+      }
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
-  key?: T;
-  data?: T;
+  key?: T
+  data?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
-  document?: T;
-  globalSlug?: T;
-  user?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  document?: T
+  globalSlug?: T
+  user?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences_select".
  */
 export interface PayloadPreferencesSelect<T extends boolean = true> {
-  user?: T;
-  key?: T;
-  value?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  user?: T
+  key?: T
+  value?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations_select".
  */
 export interface PayloadMigrationsSelect<T extends boolean = true> {
-  name?: T;
-  batch?: T;
-  updatedAt?: T;
-  createdAt?: T;
+  name?: T
+  batch?: T
+  updatedAt?: T
+  createdAt?: T
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
-  [k: string]: unknown;
+  [k: string]: unknown
 }
-
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}

@@ -68,6 +68,7 @@ description: Gsap Component Refactoring Workflow
   import { useGSAP } from '@gsap/react'
   import gsap from 'gsap'
   import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
   // Register plugins
   gsap.registerPlugin(ScrollTrigger)
   ```
@@ -113,11 +114,12 @@ description: Gsap Component Refactoring Workflow
 #### Animation Upgrade & Optimization
 
 **Modern GSAP Patterns:**
+
 ```typescript
 // Use useGSAP hook with proper scope
 useGSAP(() => {
   const tl = gsap.timeline({ ... })
-  
+
   tl.to(elementRef.current, {
     x: 100,
     duration: 1,
@@ -134,6 +136,7 @@ const handleClick = contextSafe(() => {
 ```
 
 **Performance Optimization:**
+
 - Use `will-change` sparingly and remove after animation
 - Animate transform and opacity properties for GPU acceleration
 - Avoid animating layout-triggering properties (width, height, etc.)
@@ -143,6 +146,7 @@ const handleClick = contextSafe(() => {
 - Debounce or throttle resize handlers
 
 **Advanced Features:**
+
 - Implement timeline sequences for complex animations
 - Use GSAP's built-in easing functions or custom eases
 - Add scrubbing capabilities with ScrollTrigger
@@ -150,10 +154,14 @@ const handleClick = contextSafe(() => {
 - Use GSAP's utility functions (gsap.utils.clamp, mapRange, etc.)
 
 **Accessibility:**
+
 - Respect `prefers-reduced-motion` media query:
+
   ```typescript
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  
+  const prefersReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  ).matches
+
   useGSAP(() => {
     gsap.to(element, {
       duration: prefersReducedMotion ? 0 : 1,
@@ -161,6 +169,7 @@ const handleClick = contextSafe(() => {
     })
   })
   ```
+
 - Ensure keyboard navigation works during animations
 - Maintain focus indicators during animated state changes
 
@@ -175,9 +184,12 @@ const handleClick = contextSafe(() => {
 - **Extract complex animations** into helper functions or custom hooks:
   ```typescript
   const useScrollAnimation = (triggerRef) => {
-    useGSAP(() => {
-      // Complex scroll animation logic
-    }, { scope: triggerRef })
+    useGSAP(
+      () => {
+        // Complex scroll animation logic
+      },
+      { scope: triggerRef }
+    )
   }
   ```
 - **Refactor component structure:**
@@ -227,6 +239,7 @@ const handleClick = contextSafe(() => {
     return gsap.from(element, { opacity: 0, duration })
   }
   ```
+
 ## 3. Quality Assurance
 
 ### 3.1 Functionality Verification
@@ -245,7 +258,6 @@ const handleClick = contextSafe(() => {
   - Proper cleanup when component re-renders
   - ScrollTrigger instances are killed appropriately
 
-
 ## 4. Documentation Implementation
 
 ### 4.1 Component Documentation
@@ -254,4 +266,3 @@ const handleClick = contextSafe(() => {
 - Create/Update component file: `src/components/node-ui-components/[kebab-case-name].tsx`
 - Follow the established template structure from `Create Component and Docs` skill
 - Ensure proper file organization and naming conventions
-

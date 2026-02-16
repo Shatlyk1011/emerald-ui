@@ -8,7 +8,6 @@
  * @license: MIT
  * @website: https://emerald-ui.com
  */
-
 import { useCallback, useRef, useState } from 'react'
 import {
   ArrowUp,
@@ -20,6 +19,7 @@ import {
   File as FileIcon,
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'motion/react'
+import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
@@ -29,7 +29,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { toast } from 'sonner'
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -54,12 +53,11 @@ interface FileUploadInputProps {
 
 function getFileIcon(file: File) {
   if (file.type.startsWith('image/'))
-    return <ImageIcon className="size-4 shrink-0" />
+    return <ImageIcon className='size-4 shrink-0' />
   if (file.type.startsWith('video/'))
-    return <Film className="size-4 shrink-0" />
-  if (file.type.includes('pdf'))
-    return <FileText className="size-4 shrink-0" />
-  return <FileIcon className="size-4 shrink-0" />
+    return <Film className='size-4 shrink-0' />
+  if (file.type.includes('pdf')) return <FileText className='size-4 shrink-0' />
+  return <FileIcon className='size-4 shrink-0' />
 }
 
 function formatSize(bytes: number) {
@@ -88,8 +86,8 @@ function GradientBorder({
     <div className={cn('relative p-px', className)}>
       <motion.div
         variants={variants}
-        initial="initial"
-        animate="animate"
+        initial='initial'
+        animate='animate'
         transition={{ duration: 5, repeat: Infinity, repeatType: 'reverse' }}
         style={{ backgroundSize: '200% 200%' }}
         className={cn(
@@ -100,8 +98,8 @@ function GradientBorder({
       />
       <motion.div
         variants={variants}
-        initial="initial"
-        animate="animate"
+        initial='initial'
+        animate='animate'
         transition={{ duration: 5, repeat: Infinity, repeatType: 'reverse' }}
         style={{ backgroundSize: '400% 400%' }}
         className={cn(
@@ -109,7 +107,7 @@ function GradientBorder({
           'bg-[radial-gradient(circle_farthest-side_at_0_100%,#00ccb1,transparent),radial-gradient(circle_farthest-side_at_100%_0,#7b61ff,transparent),radial-gradient(circle_farthest-side_at_100%_100%,#ffc414,transparent),radial-gradient(circle_farthest-side_at_0_0,#1ca0fb,#141316)]'
         )}
       />
-      <div className="relative z-10 w-full">{children}</div>
+      <div className='relative z-10 w-full'>{children}</div>
     </div>
   )
 }
@@ -199,7 +197,7 @@ export default function FileUploadInput({
   // — Submit
   const handleSubmit = () => {
     if (!input.trim() && files.length === 0) return
-    toast.success(`Submit with: ${input}`, {position:'top-center'})
+    toast.success(`Submit with: ${input}`, { position: 'top-center' })
     // onSubmit?.({ message: input, files })
     setInput('')
     setFiles([])
@@ -213,154 +211,157 @@ export default function FileUploadInput({
   }
 
   return (
-    <GradientBorder isActive={isActive} className={cn('max-w-xl w-full', className)}>
+    <GradientBorder
+      isActive={isActive}
+      className={cn('w-full max-w-xl', className)}
+    >
       <TooltipProvider>
-          <div
-            onDragEnter={handleDragEnter}
-            onDragLeave={handleDragLeave}
-            onDragOver={handleDragOver}
-            onDrop={handleDrop}
-            onClick={() => textareaRef.current?.focus()}
-            className={cn(
-              'border-input bg-background relative flex cursor-text flex-col rounded-3xl border p-2.5 shadow-xs',
-              'dark:bg-neutral-950 dark:border-neutral-800',
-              'min-h-20 w-full'
+        <div
+          onDragEnter={handleDragEnter}
+          onDragLeave={handleDragLeave}
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+          onClick={() => textareaRef.current?.focus()}
+          className={cn(
+            'border-input bg-background relative flex cursor-text flex-col rounded-3xl border p-2.5 shadow-xs',
+            'dark:border-neutral-800 dark:bg-neutral-950',
+            'min-h-20 w-full'
+          )}
+        >
+          {/* Drag overlay */}
+          <AnimatePresence>
+            {isDragging && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className='bg-primary/5 border-primary/40 absolute inset-0 z-20 flex items-center justify-center rounded-3xl border-2 border-dashed'
+              >
+                <span className='text-primary text-sm font-medium'>
+                  Drop files here
+                </span>
+              </motion.div>
             )}
-          >
-            {/* Drag overlay */}
-            <AnimatePresence>
-              {isDragging && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="bg-primary/5 border-primary/40 absolute inset-0 z-20 flex items-center justify-center rounded-3xl border-2 border-dashed"
-                >
-                  <span className="text-primary font-medium text-sm">
-                    Drop files here
-                  </span>
-                </motion.div>
-              )}
-            </AnimatePresence>
+          </AnimatePresence>
 
-            {/* File chips */}
-            <AnimatePresence>
-              {files.length > 0 && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="mb-2 flex flex-wrap gap-2 overflow-hidden"
-                >
-                  {files.map((file, i) => (
-                    <motion.div
-                      key={`${file.name}-${i}`}
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0.8, opacity: 0 }}
-                      className={cn(
-                        'flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs',
-                        'bg-muted/60 text-foreground dark:bg-neutral-800 dark:text-neutral-200'
-                      )}
+          {/* File chips */}
+          <AnimatePresence>
+            {files.length > 0 && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className='mb-2 flex flex-wrap gap-2 overflow-hidden'
+              >
+                {files.map((file, i) => (
+                  <motion.div
+                    key={`${file.name}-${i}`}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.8, opacity: 0 }}
+                    className={cn(
+                      'flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs',
+                      'bg-muted/60 text-foreground dark:bg-neutral-800 dark:text-neutral-200'
+                    )}
+                  >
+                    {getFileIcon(file)}
+                    <span className='max-w-24 truncate'>{file.name}</span>
+                    <span className='text-muted-foreground'>
+                      {formatSize(file.size)}
+                    </span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        removeFile(i)
+                      }}
+                      className='text-muted-foreground hover:text-foreground ml-0.5 transition-colors'
                     >
-                      {getFileIcon(file)}
-                      <span className="max-w-24 truncate">{file.name}</span>
-                      <span className="text-muted-foreground">
-                        {formatSize(file.size)}
-                      </span>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          removeFile(i)
-                        }}
-                        className="text-muted-foreground hover:text-foreground ml-0.5 transition-colors"
-                      >
-                        <X className="size-3.5" />
-                      </button>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
+                      <X className='size-3.5' />
+                    </button>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-            {/* Error message */}
-            <AnimatePresence>
-              {error && (
-                <motion.p
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  className="text-destructive mb-1 px-1 text-xs"
+          {/* Error message */}
+          <AnimatePresence>
+            {error && (
+              <motion.p
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                className='text-destructive mb-1 px-1 text-xs'
+              >
+                {error}
+              </motion.p>
+            )}
+          </AnimatePresence>
+
+          {/* Textarea */}
+          <Textarea
+            ref={textareaRef}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault()
+                handleSubmit()
+              }
+            }}
+            className='h-full min-h-30 w-full resize-none rounded-2xl border-none bg-transparent font-mono shadow-none outline-none placeholder:font-mono focus-visible:ring-0 focus-visible:ring-offset-0'
+            placeholder={placeholder}
+          />
+
+          {/* Actions */}
+          <div className='flex items-center justify-between gap-2 pt-2'>
+            {/* Attach button */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  type='button'
+                  variant='ghost'
+                  size='icon'
+                  className='h-8 w-8 rounded-full'
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    fileInputRef.current?.click()
+                  }}
                 >
-                  {error}
-                </motion.p>
-              )}
-            </AnimatePresence>
+                  <Paperclip className='size-4' />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side='top'>Attach files</TooltipContent>
+            </Tooltip>
 
-            {/* Textarea */}
-            <Textarea
-              ref={textareaRef}
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault()
-                  handleSubmit()
-                }
-              }}
-              className="h-full min-h-30 w-full resize-none rounded-2xl border-none bg-transparent font-mono shadow-none outline-none placeholder:font-mono focus-visible:ring-0 focus-visible:ring-offset-0"
-              placeholder={placeholder}
+            {/* Hidden file input */}
+            <input
+              ref={fileInputRef}
+              type='file'
+              accept={accept}
+              multiple={multiple}
+              onChange={handleFileChange}
+              className='hidden'
             />
 
-            {/* Actions */}
-            <div className="flex items-center justify-between gap-2 pt-2">
-              {/* Attach button */}
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    className="h-8 w-8 rounded-full"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      fileInputRef.current?.click()
-                    }}
-                  >
-                    <Paperclip className="size-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent side="top">Attach files</TooltipContent>
-              </Tooltip>
-
-              {/* Hidden file input */}
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept={accept}
-                multiple={multiple}
-                onChange={handleFileChange}
-                className="hidden"
-              />
-
-              {/* Submit button */}
-              <Button
-                variant="default"
-                size="icon"
-                className="h-8 w-8 rounded-full"
-                onClick={(e) => {
-                  e.stopPropagation()
-                  handleSubmit()
-                }}
-                disabled={!input.trim() && files.length === 0}
-              >
-                <ArrowUp className="size-5" />
-              </Button>
-            </div>
+            {/* Submit button */}
+            <Button
+              variant='default'
+              size='icon'
+              className='h-8 w-8 rounded-full'
+              onClick={(e) => {
+                e.stopPropagation()
+                handleSubmit()
+              }}
+              disabled={!input.trim() && files.length === 0}
+            >
+              <ArrowUp className='size-5' />
+            </Button>
           </div>
+        </div>
       </TooltipProvider>
     </GradientBorder>
   )

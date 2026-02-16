@@ -24,9 +24,17 @@ export default function SignInModal() {
       <DialogContent className='max-h-max p-0 px-6 max-sm:px-0 sm:max-w-max'>
         <DialogTitle className='sr-only'>Sign In</DialogTitle>
         {!signIn ? (
-          <SignInPage isModal handleSwitch={handleSwitch} redirectTo={pathname} />
+          <SignInPage
+            isModal
+            handleSwitch={handleSwitch}
+            redirectTo={pathname}
+          />
         ) : (
-            <SignUpPage isModal handleSwitch={handleSwitch} redirectTo={pathname} />
+          <SignUpPage
+            isModal
+            handleSwitch={handleSwitch}
+            redirectTo={pathname}
+          />
         )}
       </DialogContent>
     </Dialog>

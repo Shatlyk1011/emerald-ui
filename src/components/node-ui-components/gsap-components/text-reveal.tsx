@@ -22,7 +22,11 @@ interface Props {
   delay?: number
 }
 
-export default function TextReveal({ children, animateOnScroll = true, delay = 0 }: Props) {
+export default function TextReveal({
+  children,
+  animateOnScroll = true,
+  delay = 0,
+}: Props) {
   const containerRef = useRef<HTMLDivElement>(null)
   const elementRefs = useRef<HTMLElement[]>([])
   const splitRefs = useRef<SplitText[]>([])
@@ -111,10 +115,12 @@ export default function TextReveal({ children, animateOnScroll = true, delay = 0
   }
 
   return (
-    <div ref={containerRef} data-copy-wrapper='true' className='overflow-hidden'>
+    <div
+      ref={containerRef}
+      data-copy-wrapper='true'
+      className='overflow-hidden'
+    >
       {children}
     </div>
   )
 }
-
-

@@ -13,7 +13,7 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { SplitText } from 'gsap/SplitText'
 
-gsap.registerPlugin(SplitText);
+gsap.registerPlugin(SplitText)
 
 interface TeamMember {
   name: string
@@ -162,33 +162,33 @@ export default function InteractiveTeam({
 
   return (
     <section
-      className='relative w-full z-10 h-svh bg-[#0f0f0f] text-[#e3e3db] flex flex-col justify-center items-center gap-[2.5em] overflow-hidden px-4'
+      className='relative z-10 flex h-svh w-full flex-col items-center justify-center gap-[2.5em] overflow-hidden bg-[#0f0f0f] px-4 text-[#e3e3db]'
       ref={containerRef}
     >
       <div
-        className='profile-images w-full flex flex-wrap justify-center items-center'
+        className='profile-images flex w-full flex-wrap items-center justify-center'
         ref={profileImagesContainerRef}
       >
         {teamMembers.map(({ img, name }, index) => (
           <div
             key={name}
-            className='img relative size-18 max-xl:size-14 cursor-pointer will-change-[width,height] p-1.5'
+            className='img relative size-18 cursor-pointer p-1.5 will-change-[width,height] max-xl:size-14'
             ref={(el) => {
               profileImagesRef.current[index] = el
             }}
           >
             <img
               src={img}
-              className='rounded-lg w-full h-full bg-neutral-600 object-cover'
+              className='h-full w-full rounded-lg bg-neutral-600 object-cover'
               alt={`Team member ${name}`}
             />
           </div>
         ))}
       </div>
 
-      <div className='profile-names relative w-full h-29 max-xl:h-22.5 max-lg:h-14.5 overflow-hidden clip-path-[polygon(0_0,100%_0,100%_100%,0_100%)]'>
+      <div className='profile-names clip-path-[polygon(0_0,100%_0,100%_100%,0_100%)] relative h-29 w-full overflow-hidden max-xl:h-22.5 max-lg:h-14.5'>
         <div
-          className='name default absolute text-nowrap w-full text-center uppercase text-[6.5rem] font-black tracking-[-0.2rem] leading-none select-none max-xl:text-[5rem] max-lg:text-[3.2rem] -translate-y-full'
+          className='name default absolute w-full -translate-y-full text-center text-[6.5rem] leading-none font-black tracking-[-0.2rem] text-nowrap uppercase select-none max-xl:text-[5rem] max-lg:text-[3.2rem]'
           ref={(el) => {
             nameElementsRef.current[0] = el
           }}
@@ -204,7 +204,7 @@ export default function InteractiveTeam({
         {teamMembers.map((person, index) => (
           <div
             key={person.name}
-            className='name absolute w-full text-center uppercase text-nowrap text-[6.5rem] max-xl:text-[5rem] max-lg:text-[3.2rem] font-black tracking-[-0.2rem] leading-none text-primary select-none translate-y-full'
+            className='name text-primary absolute w-full translate-y-full text-center text-[6.5rem] leading-none font-black tracking-[-0.2rem] text-nowrap uppercase select-none max-xl:text-[5rem] max-lg:text-[3.2rem]'
             ref={(el) => {
               nameElementsRef.current[index + 1] = el
             }}

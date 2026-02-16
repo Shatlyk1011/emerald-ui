@@ -1,11 +1,11 @@
-import { AnimatePresence, motion } from 'motion/react';
-import { FC } from 'react';
+import { FC } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
 
 interface Props {
   buttonRef: React.RefObject<HTMLButtonElement>
-};
+}
 
-const SuccessParticles:FC<Props> = ({buttonRef}) => {
+const SuccessParticles: FC<Props> = ({ buttonRef }) => {
   const rect = buttonRef.current?.getBoundingClientRect()
   if (!rect) return null
 
@@ -46,5 +46,5 @@ const SuccessParticles:FC<Props> = ({buttonRef}) => {
       ))}
     </AnimatePresence>
   )
-};
+}
 export default SuccessParticles

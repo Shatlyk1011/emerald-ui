@@ -70,7 +70,7 @@ function SiteCard({ item, index }: SiteCardProps) {
         style={{ background: bgColor }}
       >
         <div className='relative aspect-4/3 w-full overflow-hidden'>
-          <figure className='absolute inset-0 overflow-hidden rounded-lg border bg-background'>
+          <figure className='bg-background absolute inset-0 overflow-hidden rounded-lg border'>
             {imageUrl || videoUrl ? (
               <>
                 {/* Always show image */}
@@ -107,7 +107,7 @@ function SiteCard({ item, index }: SiteCardProps) {
                     muted
                     loop
                     playsInline
-                    preload="none"
+                    preload='none'
                     draggable={false}
                     onContextMenu={(e) => e.preventDefault()}
                   />

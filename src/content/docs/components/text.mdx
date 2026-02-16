@@ -4,11 +4,11 @@ description: Explore high quality text components with stunning animations and e
 full: false
 ---
 
-import TypingEffect from '@/components/node-ui-components/typing-effect'
-import TextShimmerSection from '@/components/node-ui-components/text-shimmer'
 import TextScramble from '@/components/node-ui-components/text-scramble'
+import TextShimmerSection from '@/components/node-ui-components/text-shimmer'
+import TypingEffect from '@/components/node-ui-components/typing-effect'
 
-## Typing effect 
+## Typing effect
 
 A typing effect component that cycles through words with a cursor animation.
 
@@ -18,7 +18,6 @@ A typing effect component that cycles through words with a cursor animation.
 
 <Separator />
 
-
 ## Text Shimmer
 
 An animated gradient shimmer effect for text
@@ -27,16 +26,25 @@ An animated gradient shimmer effect for text
   <TextShimmerSection />
 </Preview>
 
-
 <Separator />
 
 ## Text Scramble
 
-A text scrambling animation** **effect.
+A text scrambling animation\*\* \*\*effect.
 
 <Preview link='text-scramble' isReload>
   <div className='flex flex-col gap-4'>
-    <TextScramble classes="text-2xl font-mono font-semibold" triggerOnHover={false}>Trigger once</TextScramble>
-    <TextScramble classes="text-2xl font-mono font-semibold" triggerOnHover={true}>Trigger on hover</TextScramble>
+    <TextScramble
+      classes='text-2xl font-mono font-semibold'
+      triggerOnHover={false}
+    >
+      Trigger once
+    </TextScramble>
+    <TextScramble
+      classes='text-2xl font-mono font-semibold'
+      triggerOnHover={true}
+    >
+      Trigger on hover
+    </TextScramble>
   </div>
 </Preview>

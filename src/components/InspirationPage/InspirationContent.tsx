@@ -25,10 +25,7 @@ interface Props {
 }
 // USE IDB AS DEFAULT BUT FETCH ANYWAY
 
-export default function InspirationContent({
-  categories,
-  styles,
-}: Props) {
+export default function InspirationContent({ categories, styles }: Props) {
   const [filterQuery, setFilterQuery] = useState<Where>({
     isVisible: { equals: true },
   })
@@ -46,7 +43,6 @@ export default function InspirationContent({
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
     useInfiniteInspirationSites(filterQuery)
 
-
   const isLoading = isFetching || isFetchingNextPage
 
   // Fetch next page when the sentinel element comes into view
@@ -61,7 +57,9 @@ export default function InspirationContent({
 
   // Calculate totalDocs and images if not provided (from client data)
   const currentTotalDocs = data?.pages[0]?.totalDocs || 0
-  const currentImages = allWebsites.map((i: InspirationWebsite) => i.imgUrl).filter(Boolean) as string[]
+  const currentImages = allWebsites
+    .map((i: InspirationWebsite) => i.imgUrl)
+    .filter(Boolean) as string[]
 
   // Build filter query from selected categories and styles
   const filterQueryFromSelections = useMemo(() => {

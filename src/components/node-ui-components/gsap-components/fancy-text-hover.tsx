@@ -14,7 +14,10 @@ import gsap from 'gsap'
 import { cn } from '@/lib/utils'
 
 /** max letters = 8. add more record if needed */
-const SCATTER_TRANSFORMS: Record<number, { x: string; y: string; rotate: number }> = {
+const SCATTER_TRANSFORMS: Record<
+  number,
+  { x: string; y: string; rotate: number }
+> = {
   1: { x: '-30%', y: '60%', rotate: 8 },
   2: { x: '-30%', y: '30%', rotate: 4 },
   3: { x: '-20%', y: '40%', rotate: -6 },
@@ -51,7 +54,8 @@ export default function FancyTextHover({
     () => {
       if (!containerRef.current) return
 
-      const fancyEls = containerRef.current.querySelectorAll<HTMLAnchorElement>('.fancy-word')
+      const fancyEls =
+        containerRef.current.querySelectorAll<HTMLAnchorElement>('.fancy-word')
 
       fancyEls.forEach((anchor) => {
         const text = anchor.textContent ?? ''
@@ -60,7 +64,9 @@ export default function FancyTextHover({
         text.split('').forEach((char, i) => {
           const outer = document.createElement('span')
           outer.className = 'inline-block'
-          gsap.set(outer, { transition: 'transform 0.3s cubic-bezier(0.76, 0, 0.24, 1)' })
+          gsap.set(outer, {
+            transition: 'transform 0.3s cubic-bezier(0.76, 0, 0.24, 1)',
+          })
 
           const inner = document.createElement('span')
           inner.className = 'inline-block'
@@ -100,7 +106,6 @@ export default function FancyTextHover({
               repeat: -1,
               delay: randomDelay,
             })
-
           }
 
           /** Reset all transforms on leave */
@@ -113,7 +118,11 @@ export default function FancyTextHover({
               duration: 0.35,
               ease: 'power3.inOut',
             })
-            gsap.to(inner, { yPercent: 0, duration: 0.35, ease: 'power3.inOut' })
+            gsap.to(inner, {
+              yPercent: 0,
+              duration: 0.35,
+              ease: 'power3.inOut',
+            })
           }
 
           anchor.addEventListener('mouseenter', onEnter)
@@ -128,7 +137,7 @@ export default function FancyTextHover({
     <div
       ref={containerRef}
       className={cn(
-        'flex flex-col w-full items-center justify-between gap-20 p-10 ',
+        'flex w-full flex-col items-center justify-between gap-20 p-10',
         className
       )}
     >
@@ -136,9 +145,9 @@ export default function FancyTextHover({
         <a
           key={link.label}
           href={link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="fancy-word text-5xl font-medium uppercase transition hover:text-primary no-underline duration-250 ease-[cubic-bezier(0.76,0,0.24,1)]"
+          target='_blank'
+          rel='noopener noreferrer'
+          className='fancy-word hover:text-primary text-5xl font-medium uppercase no-underline transition duration-250 ease-[cubic-bezier(0.76,0,0.24,1)]'
         >
           {link.label}
         </a>

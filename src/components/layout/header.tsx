@@ -55,12 +55,15 @@ const Header: FC<Props> = ({ isFumadocs }) => {
       className={cn(
         'fixed top-0 z-50 mx-auto flex h-14 w-full items-center justify-between border px-8 py-2 font-sans max-sm:px-5',
         isScrolled && !isFumadocs && 'bg-background/90 backdrop-blur-sm',
-        isFumadocs && 'static w-full flex-1 px-0 border-none'
+        isFumadocs && 'static w-full flex-1 border-none px-0'
       )}
     >
       <Link
         href='/'
-        className={cn('w-20 max-sm:mr-4 max-sm:max-w-max max-sm:min-w-8', isFumadocs && 'hidden')}
+        className={cn(
+          'w-20 max-sm:mr-4 max-sm:max-w-max max-sm:min-w-8',
+          isFumadocs && 'hidden'
+        )}
       >
         <span className=''>Logo</span>
       </Link>
@@ -72,23 +75,33 @@ const Header: FC<Props> = ({ isFumadocs }) => {
               href={home}
               className={cn(
                 'hover:bg-primary/5 rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2',
-                pathname === home ? 'text-primary ' : 'hover:text-foreground hover:bg-foreground/5'
+                pathname === home
+                  ? 'text-primary'
+                  : 'hover:text-foreground hover:bg-foreground/5'
               )}
             >
-              Website Inspiration 
+              Website Inspiration
             </Link>
           </li>
           <li>
             <DropdownMenu>
               <DropdownMenuTrigger
                 className={cn(
-                  'group flex items-center gap-1 hover:bg-primary/5 rounded-md px-3 py-2 text-nowrap transition ease-out focus:outline-none',
+                  'group hover:bg-primary/5 flex items-center gap-1 rounded-md px-3 py-2 text-nowrap transition ease-out focus:outline-none',
                   pathname.startsWith(motionComponents)
                     ? 'text-primary'
                     : 'hover:text-foreground hover:bg-foreground/5'
                 )}
               >
-                <TextShimmer duration={7} spread={15} className={cn("transition", pathname.startsWith(motionComponents || gsapComponents) && 'text-primary')}>
+                <TextShimmer
+                  duration={7}
+                  spread={15}
+                  className={cn(
+                    'transition',
+                    pathname.startsWith(motionComponents || gsapComponents) &&
+                      'text-primary'
+                  )}
+                >
                   Components
                 </TextShimmer>
                 <ChevronDown className='ml-1 size-3 text-current transition-transform duration-300 group-data-[state=open]:rotate-180' />

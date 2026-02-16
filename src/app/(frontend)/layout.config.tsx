@@ -20,8 +20,8 @@ export const baseOptions = (): BaseLayoutProps => ({
   },
   links: [
     {
-      type: "custom",
-      children:<Header isFumadocs />,
+      type: 'custom',
+      children: <Header isFumadocs />,
     },
   ],
   themeSwitch: { enabled: false },

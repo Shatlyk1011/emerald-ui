@@ -8,7 +8,6 @@
  * @license: MIT
  * @website: https://emerald-ui.com
  */
-
 import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 
@@ -18,18 +17,18 @@ interface ThreeDMarqueeProps {
 }
 
 const defaultImages = [
-  "https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/becane.webp",
-  "https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/chdartmaker--1-.webp",
-  "https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/www-instituteofhealth-com-.webp",
-  "https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/wadeandleta-com-.webp",
-  "https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/felixpeault.webp",
-  "https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/1820productions.webp",
-  "https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/emilie.webp",
-  "https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/telhaclarke.webp",
-  "https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/jonasreymondin.webp",
-  "https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/www-anima-ai.webp",
-  "https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/dulcedo-com-.webp",
-  "https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/15thplus.webp"
+  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/becane.webp',
+  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/chdartmaker--1-.webp',
+  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/www-instituteofhealth-com-.webp',
+  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/wadeandleta-com-.webp',
+  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/felixpeault.webp',
+  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/1820productions.webp',
+  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/emilie.webp',
+  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/telhaclarke.webp',
+  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/jonasreymondin.webp',
+  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/www-anima-ai.webp',
+  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/dulcedo-com-.webp',
+  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/15thplus.webp',
 ]
 
 const ThreeDMarquee = ({
@@ -41,7 +40,7 @@ const ThreeDMarquee = ({
     const start = colIndex * chunkSize
     return images.slice(start, start + chunkSize)
   })
-  
+
   return (
     <div
       className={cn(

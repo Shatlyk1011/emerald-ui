@@ -7,7 +7,7 @@ const ThreeDMarquee = ({
   images,
   className,
 }: {
-    // provide at least 12 img sources  
+  // provide at least 12 img sources
   images: string[]
   className?: string
 }) => {
