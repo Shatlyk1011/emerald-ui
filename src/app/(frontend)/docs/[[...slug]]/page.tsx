@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils'
 import Separator from '@/components/ui/separator'
 import Preview from '@/components/mdx/preview'
 import PreviewClient from '@/components/mdx/preview-client'
+import GridComponents from '@/components/mdx/grid-components'
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params
@@ -51,6 +52,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
             Preview,
             Separator,
             PreviewClient,
+            GridComponents
           }}
         />
       </DocsBody>
