@@ -11,6 +11,9 @@
     "components/animated-dropdown",
     "components/animated-input",
 
+    "---AI---",
+    "components/gradient-file-upload",
+
     "---UI Elements---",
     "components/buttons",
     "components/text",
