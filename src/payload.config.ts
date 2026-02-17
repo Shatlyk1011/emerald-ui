@@ -48,13 +48,13 @@ export default buildConfig({
     AdminUsers,
   ],
 
-  // Email configuration using Nodemailer adapter with Amazon SES
+  // Email configuration using Nodemailer adapter with Plunk SMTP
   email: nodemailerAdapter({
     defaultFromAddress: process.env.EMAIL_FROM || 'noreply@emerald-ui.com',
     defaultFromName: 'Emerald UI',
     transportOptions: {
-      host: process.env.SMTP_HOST || 'email-smtp.us-east-1.amazonaws.com',
-      port: parseInt(process.env.SMTP_PORT || '587'),
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT!),
       secure: false, // Use STARTTLS
       auth: {
         user: process.env.SMTP_USER,

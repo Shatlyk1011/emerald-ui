@@ -1,9 +1,12 @@
-import nodemailer from 'nodemailer'
+import nodemailer from 'nodemailer';
+
+
+
 
 export const createEmailTransporter = () => {
   const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'email-smtp.us-east-1.amazonaws.com',
-    port: parseInt(process.env.SMTP_PORT || '587'),
+    host: process.env.SMTP_HOST || 'next-smtp.useplunk.com',
+    port: parseInt(process.env.SMTP_PORT || '2587'),
     secure: false, // STARTTLS
     auth: {
       user: process.env.SMTP_USER,

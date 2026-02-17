@@ -1,8 +1,6 @@
 'use client'
-import { useState } from 'react'
 import { CheckCircle, Hammer } from 'lucide-react'
 import Link from 'next/link'
-import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { Button } from '../ui/button'
 
@@ -33,47 +31,6 @@ export function PricingCard({
   classes,
 }: PricingCardProps) {
   const isEnterprice = item.name === 'Enterprise'
-  const [isLoading, setIsLoading] = useState(false)
-
-  const handleUpgrade = async () => {
-    if (!isAuth || isEnterprice) {
-      return // Link will handle redirect to sign-in
-    }
-
-    setIsLoading(true)
-    try {
-      const response = await fetch('/api/stripe/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          plan: item.name.toLowerCase(), // 'hobby' or 'pro'
-          billingPeriod: isAnnual ? 'yearly' : 'monthly',
-        }),
-      })
-
-      if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.error || 'Failed to create checkout session')
-      }
-
-      const { url } = await response.json()
-
-      if (url) {
-        window.location.assign(url)
-      } else {
-        throw new Error('No checkout URL returned')
-      }
-    } catch (error) {
-      console.error('Checkout error:', error)
-      toast.error(
-        error instanceof Error
-          ? error.message
-          : 'Failed to start checkout. Please try again.'
-      )
-    } finally {
-      setIsLoading(false)
-    }
-  }
 
   return (
     <div
@@ -117,8 +74,6 @@ export function PricingCard({
             'w-full text-sm font-semibold text-white shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2',
             'bg-foreground text-background hover:bg-foreground/80'
           )}
-          onClick={handleUpgrade}
-          disabled={isLoading}
         >
           {item.ctaText}
         </Button>
