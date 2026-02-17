@@ -1,6 +1,11 @@
-import { withPayload } from '@payloadcms/next/withPayload'
-import { createMDX } from 'fumadocs-mdx/next'
-import type { NextConfig } from 'next'
+import { withPayload } from '@payloadcms/next/withPayload';
+import { createMDX } from 'fumadocs-mdx/next';
+import type { NextConfig } from 'next';
+
+
+
+
+
 
 const withMDX = createMDX()
 
@@ -91,6 +96,10 @@ const nextConfig: NextConfig = {
   // cacheComponents: true,
   experimental: {
     turbopackFileSystemCacheForDev: true,
+    staleTimes: {
+      dynamic: 30,
+      static: 180,
+    },
   },
 }
 
