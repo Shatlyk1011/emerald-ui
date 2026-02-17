@@ -12,7 +12,8 @@
     "format": "npx prettier --write .",
     "tc": "tsc --noEmit",
     "generate:types": "payload generate:types",
-    "generate:importmap": "payload generate:importmap"
+    "generate:importmap": "payload generate:importmap",
+    "knip": "knip"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
