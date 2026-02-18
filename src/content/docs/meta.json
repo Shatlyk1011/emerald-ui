@@ -10,6 +10,7 @@
     "components/animated-number",
     "components/animated-dropdown",
     "components/animated-input",
+    "components/parallax-image",
 
     "---AI---",
     "components/gradient-file-upload",
