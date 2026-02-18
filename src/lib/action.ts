@@ -1,16 +1,20 @@
 'use server'
 
-import path from 'path'
-import { cache } from 'react'
-import { promises as fs } from 'fs'
+import path from 'path';
+import { cache } from 'react';
+import { promises as fs } from 'fs';
+
+
+
+
+
 
 // Create a cached version of the file reading operation
 const readFileCache = cache(
   async (filePath: string) => await fs.readFile(filePath, 'utf-8')
 )
 
-// Improve caching for the entire component getter
-export const getComponent = async (fileName: string | null, folder: string) => {
+const getComponent = async (fileName: string | null, folder: string) => {
   const baseDir = path.join(process.cwd(), 'src/components/node-ui-components')
   if (!fileName || fileName === 'undefined') {
     const fullPath = path.join(baseDir, `${folder}.tsx`)
