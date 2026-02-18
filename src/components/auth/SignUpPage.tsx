@@ -28,7 +28,17 @@ export default function SignUpPage({
   const [loading, setLoading] = useState(false)
   const [magicLinkSent, setMagicLinkSent] = useState(false)
 
+  const searchParams = useSearchParams()
   const supabase = createClient()
+
+  // Determine where to redirect after successful auth
+  const returnUrl = redirectTo || searchParams.get('next') || '/'
+
+  // Build the callback URL with the return path
+  const callbackUrl =
+    typeof window !== 'undefined'
+      ? `${window.location.origin}/api/auth/callback?next=${encodeURIComponent(returnUrl)}`
+      : `/api/auth/callback?next=${encodeURIComponent(returnUrl)}`
 
   // Handle OAuth sign-in
   const handleOAuthSignIn = async (provider: AuthProviders) => {
@@ -39,7 +49,7 @@ export default function SignUpPage({
       const { error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
-          redirectTo: redirectTo || '/',
+          redirectTo: callbackUrl,
         },
       })
 
@@ -74,7 +84,7 @@ export default function SignUpPage({
       const { error } = await supabase.auth.signInWithOtp({
         email: result.data.email,
         options: {
-          emailRedirectTo: redirectTo || '/',
+          emailRedirectTo: callbackUrl,
         },
       })
 

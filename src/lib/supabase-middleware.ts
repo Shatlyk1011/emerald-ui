@@ -63,7 +63,8 @@ export async function updateSession(request: NextRequest) {
   )
 
   if (isAuthOnlyPath && user) {
-    return NextResponse.redirect(new URL('/', request.url))
+    const next = request.nextUrl.searchParams.get('next') || '/'
+    return NextResponse.redirect(new URL(next, request.url))
   }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're
