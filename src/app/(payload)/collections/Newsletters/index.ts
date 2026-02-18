@@ -15,14 +15,6 @@ const Newsletters: CollectionConfig = {
     useAsTitle: 'subject',
     description:
       'Create and send newsletters to subscribers. Use the rich text editor to compose your newsletter content.',
-    components: {
-      beforeListTable: [
-        {
-          path: '@/app/(payload)/components/SendNewsletterButton#SendNewsletterButton',
-          exportName: 'SendNewsletterButton',
-        },
-      ],
-    },
   },
   fields: [
     {
@@ -87,6 +79,19 @@ const Newsletters: CollectionConfig = {
       admin: {
         description: 'Number of subscribers who received this newsletter',
         readOnly: true,
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'sendAction',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: {
+            path: '@/app/(payload)/components/SendNewsletterButton#SendNewsletterButton',
+            exportName: 'SendNewsletterButton',
+          },
+        },
         position: 'sidebar',
       },
     },
