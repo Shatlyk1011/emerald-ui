@@ -295,6 +295,10 @@ export interface Newsletter {
    */
   subject: string;
   /**
+   * Email content (text only for now)
+   */
+  content: string;
+  /**
    * Newsletter status
    */
   status: 'draft' | 'sent';
@@ -533,6 +537,7 @@ export interface SubscribersSelect<T extends boolean = true> {
  */
 export interface NewslettersSelect<T extends boolean = true> {
   subject?: T;
+  content?: T;
   status?: T;
   sentDate?: T;
   recipientCount?: T;

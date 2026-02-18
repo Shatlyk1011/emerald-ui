@@ -18,7 +18,7 @@ const SCATTER_TRANSFORMS: Record<
   number,
   { x: string; y: string; rotate: number }
 > = {
-  1: { x: '-30%', y: '60%', rotate: 8 },
+  1: { x: '-15%', y: '60%', rotate: 8 },
   2: { x: '-30%', y: '30%', rotate: 4 },
   3: { x: '-20%', y: '40%', rotate: -6 },
   4: { x: '0%', y: '8%', rotate: -8 },

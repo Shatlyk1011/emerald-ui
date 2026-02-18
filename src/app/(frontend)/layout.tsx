@@ -4,10 +4,11 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import { Toaster } from 'sonner'
 import { siteConfig } from '@/lib/site-config'
 import { Analytics } from '@/components/_providers/analytics'
-import { Providers } from '@/components/_providers/post-hog'
+import { Providers as PostHogProvider } from '@/components/_providers/post-hog'
 import TanstackQueryProvider from '@/components/_providers/tanstack-query'
 import ThemeProvider from '@/components/_providers/theme-provider'
 import './globals.css'
+import { UserProvider } from '@/components/_providers/user-provider'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -46,6 +47,7 @@ export const metadata: Metadata = {
   manifest: '/site.webmanifest',
 }
 
+
 export default function RootLayout({
   children,
   modal,
@@ -58,21 +60,23 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>
-          <RootProvider search={{ enabled: false }}>
-            <ThemeProvider
-              attribute='class'
-              defaultTheme='system'
-              enableSystem
-              disableTransitionOnChange
-            >
-              <TanstackQueryProvider>
-                {children}
-                {modal}
-              </TanstackQueryProvider>
-            </ThemeProvider>
-          </RootProvider>
-        </Providers>
+        <PostHogProvider>
+          <UserProvider>
+            <RootProvider search={{ enabled: false }}>
+              <ThemeProvider
+                attribute='class'
+                defaultTheme='system'
+                enableSystem
+                disableTransitionOnChange
+              >
+                <TanstackQueryProvider>
+                  {children}
+                  {modal}
+                </TanstackQueryProvider>
+              </ThemeProvider>
+            </RootProvider>
+          </UserProvider>
+        </PostHogProvider>
         <Analytics />
 
         <Toaster position='bottom-right' />
