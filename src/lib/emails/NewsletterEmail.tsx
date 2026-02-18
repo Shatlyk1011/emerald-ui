@@ -38,7 +38,11 @@ export const NewsletterEmail = ({
           {/* Content */}
           <Section style={contentSection}>
             <Text style={heading}>{subject}</Text>
-            <Text style={paragraph}>{content}</Text>
+            {content?.split('\n').map((line, i) => (
+              <Text key={i} style={paragraph}>
+                {line}
+              </Text>
+            ))}
           </Section>
 
           <Hr style={hr} />

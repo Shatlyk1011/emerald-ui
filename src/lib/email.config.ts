@@ -1,5 +1,12 @@
-import Plunk from '@plunk/node'
+import nodemailer from 'nodemailer'
 
-export const getPlunkClient = () => {
-  return new Plunk(process.env.PLUNK_API_KEY!)
+export const getNodemailerTransport = () => {
+  return nodemailer.createTransport({
+    host: 'next-smtp.useplunk.com',
+    port: 2587,
+    auth: {
+      user: 'plunk',
+      pass: process.env.SMTP_PASSWORD,
+    },
+  })
 }

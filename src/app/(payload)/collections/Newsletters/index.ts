@@ -9,6 +9,10 @@ import { admins } from '../../utils/admins';
 
 
 
+
+
+
+
 const Newsletters: CollectionConfig = {
   slug: 'newsletters',
   access: {
@@ -32,6 +36,15 @@ const Newsletters: CollectionConfig = {
       required: true,
       admin: {
         description: 'Email subject line',
+      },
+    },
+    {
+      name: 'content',
+      label: 'Content',
+      type: 'textarea',
+      required: true,
+      admin: {
+        description: 'Email content (text only for now)',
       },
     },
     {

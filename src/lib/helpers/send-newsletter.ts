@@ -1,7 +1,7 @@
 import config from '@payload-config';
-import { render } from '@react-email/render'
+import { render } from '@react-email/render';
 import { getPayload } from 'payload'
-import { getPlunkClient } from '../email.config'
+import { getNodemailerTransport } from '../email.config'
 import { NewsletterEmail } from '../emails/NewsletterEmail'
 
 interface SendNewsletterResult {
@@ -11,7 +11,7 @@ interface SendNewsletterResult {
 }
 
 /**
- * Send newsletter to all active subscribers using React Email + Plunk
+ * Send newsletter to all active subscribers using React Email + Nodemailer (Plunk SMTP)
  * @param newsletterId - ID of the newsletter to send
  * @returns Result object with success status and recipient count
  */
@@ -36,9 +36,11 @@ export async function sendNewsletter(
     }
 
     // Type assertion to access newsletter-specific properties
+    // Type assertion to access newsletter-specific properties
     const newsletterData = newsletter as unknown as {
       status: string
       subject: string
+      content?: string
     }
 
     // Check if already sent
@@ -58,7 +60,7 @@ export async function sendNewsletter(
           equals: 'active',
         },
       },
-      limit: 100, // Adjust based on your needs
+      limit: 1000,
     })
 
     if (subscribers.docs.length === 0) {
@@ -69,46 +71,36 @@ export async function sendNewsletter(
       }
     }
 
-    // Get Plunk client
-    const plunk = getPlunkClient()
+    // Get Nodemailer transport
+    const transporter = getNodemailerTransport()
 
     // Render the React Email component to HTML
     const emailHTML = await render(
       NewsletterEmail({
         subject: newsletterData.subject,
         previewText: `New update from Emerald UI: ${newsletterData.subject}`,
+        content: newsletterData.content,
       })
     )
 
-    // Send emails in batches to avoid rate limits
-    const batchSize = 50
-    const batches = []
-    for (let i = 0; i < subscribers.docs.length; i += batchSize) {
-      batches.push(subscribers.docs.slice(i, i + batchSize))
-    }
+    // Verify connection configuration
+    await transporter.verify()
 
     let sentCount = 0
 
-    for (const batch of batches) {
-      const emailPromises = batch.map((subscriber) =>
-        plunk.emails.send({
+    // Send emails sequentially or in small batches to avoid overwhelming SMTP
+    for (const subscriber of subscribers.docs) {
+      try {
+        await transporter.sendMail({
+          from: process.env.SMTP_FROM || '"Emerald UI" <hello@emeraldui.com>',
           to: subscriber.email,
           subject: newsletterData.subject,
-          body: emailHTML,
+          html: emailHTML,
         })
-      )
-
-      try {
-        await Promise.all(emailPromises)
-        sentCount += batch.length
-
-        // Add delay between batches to respect rate limits
-        if (batches.indexOf(batch) < batches.length - 1) {
-          await new Promise((resolve) => setTimeout(resolve, 1000))
-        }
+        sentCount++
       } catch (error) {
-        console.error('Error sending batch:', error)
-        // Continue with next batch even if one fails
+        console.error(`Failed to send to ${subscriber.email}:`, error)
+        // Continue with next subscriber
       }
     }
 
