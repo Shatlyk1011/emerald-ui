@@ -9,7 +9,25 @@ import JobDetailsCard from '@/components/node-ui-components/cards/job-details-ca
 import JobListingCard from '@/components/node-ui-components/cards/job-listing-card'
 import ProfileCard from '@/components/node-ui-components/cards/profile-card'
 import StackedArticleCards from '@/components/node-ui-components/cards/stacked-article-cards'
+import TeamMemberCard from '@/components/node-ui-components/cards/team-member-card'
 
+## Team Member Card
+
+A team member profile card with position label, portrait, display name, and bio section.
+
+<Preview link='cards/team-member-card' comment={['motion']} isReload>
+  <div className='flex flex-col gap-16'>
+    <TeamMemberCard />
+    <TeamMemberCard position='right'
+  jobPosition = 'Frontend Engineer'
+  firstName = 'Johnita'
+  lastName = 'Doe'
+  imageUrl = 'https://images.unsplash.com/photo-1574108233269-86d1199d28de?fm=jpg&q=6'
+  description = 'Johnita is a frontend developer with expertise in modern web technologies and a passion for creating seamless user experiences.' />
+  </div>
+</Preview>
+
+<Separator />
 
 ## Stacked Article Cards
 
