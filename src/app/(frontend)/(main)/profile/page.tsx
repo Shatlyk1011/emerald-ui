@@ -4,8 +4,6 @@ import { cn } from '@/lib/utils'
 import { useUser } from '@/hooks/use-user'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
-export const dynamic = 'force-dynamic'
-
 export default function ProfilePage() {
   const { user: SBUser, isLoading: isSBLoading } = useUser()
 
