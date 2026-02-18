@@ -1,6 +1,10 @@
 import { CollectionConfig } from 'payload'
 import { admins } from '../../utils/admins'
 
+
+
+
+
 const Clients: CollectionConfig = {
   slug: 'clients',
   access: {
@@ -32,8 +36,7 @@ const Clients: CollectionConfig = {
       'isBlocked',
     ],
     useAsTitle: 'userId',
-    description:
-      'Manage client accounts and their subscription plans. Each client is linked to their credit history.',
+    description: 'Manage client accounts and their subscription plans.',
   },
   fields: [
     {
@@ -80,8 +83,7 @@ const Clients: CollectionConfig = {
       type: 'checkbox',
       defaultValue: false,
       admin: {
-        description:
-          'Block this user from using credits and accessing services',
+        description: 'Block this user from accessing services',
         position: 'sidebar',
       },
     },
@@ -112,16 +114,6 @@ const Clients: CollectionConfig = {
         description: 'Whether the user has verified their email address',
         position: 'sidebar',
         readOnly: true,
-      },
-    },
-    {
-      name: 'creditHistory',
-      label: 'Credit History',
-      type: 'join',
-      collection: 'credit-history',
-      on: 'client',
-      admin: {
-        description: 'All credit transactions for this user',
       },
     },
   ],

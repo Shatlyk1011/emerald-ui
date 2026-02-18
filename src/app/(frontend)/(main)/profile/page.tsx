@@ -12,9 +12,6 @@ export default function ProfilePage() {
       {/* Header */}
       <div className='mb-8'>
         <h1 className='mb-2 text-4xl font-bold'>Profile</h1>
-        {/* <p className='text-muted-foreground'>
-          View credit history, download invoices.
-        </p> */}
       </div>
 
       {/* Profile Settings Card */}

@@ -1,10 +1,7 @@
-import config from '@payload-config'
-import { NextResponse } from 'next/server'
+import config from '@payload-config';
+import { NextResponse } from 'next/server';
 import { getPayload } from 'payload'
-import {
-  createClientRecord,
-  createInitialCredits,
-} from '@/lib/helpers/credit-helpers'
+import { createClientRecord } from '@/lib/helpers/client-helpers'
 import { createClient } from '@/lib/supabase-server'
 
 /**
@@ -37,7 +34,7 @@ export async function GET(request: Request) {
             limit: 1,
           })
 
-          // If new user, create client record and initial credits
+          // If new user, create client record
           if (existingClient.docs.length === 0) {
             // Extract provider from user metadata
             const provider = user.app_metadata?.provider || 'email'
@@ -49,14 +46,11 @@ export async function GET(request: Request) {
               provider as 'email' | 'google' | 'github' | null | undefined,
               isVerified
             )
-            await createInitialCredits(user.id)
-            console.log(
-              `✓ Created client and initial credits for new user: ${user.id}`
-            )
+            console.log(`✓ Created client record for new user: ${user.id}`)
           }
         } catch (clientError) {
           // Log error but don't block authentication
-          console.error('Error creating client/credits:', clientError)
+          console.error('Error creating client:', clientError)
         }
       }
 
@@ -68,3 +62,4 @@ export async function GET(request: Request) {
   // If there's an error, redirect to login with error message
   return NextResponse.redirect(`${origin}/sign-in`)
 }
+

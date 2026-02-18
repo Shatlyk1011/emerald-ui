@@ -69,7 +69,6 @@ export interface Config {
   collections: {
     'inspiration-websites': InspirationWebsite;
     clients: Client;
-    'credit-history': CreditHistory;
     'website-submissions': WebsiteSubmission;
     subscribers: Subscriber;
     newsletters: Newsletter;
@@ -82,15 +81,10 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {
-    clients: {
-      creditHistory: 'credit-history';
-    };
-  };
+  collectionsJoins: {};
   collectionsSelect: {
     'inspiration-websites': InspirationWebsitesSelect<false> | InspirationWebsitesSelect<true>;
     clients: ClientsSelect<false> | ClientsSelect<true>;
-    'credit-history': CreditHistorySelect<false> | CreditHistorySelect<true>;
     'website-submissions': WebsiteSubmissionsSelect<false> | WebsiteSubmissionsSelect<true>;
     subscribers: SubscribersSelect<false> | SubscribersSelect<true>;
     newsletters: NewslettersSelect<false> | NewslettersSelect<true>;
@@ -209,7 +203,7 @@ export interface Media {
   createdAt: string;
 }
 /**
- * Manage client accounts and their subscription plans. Each client is linked to their credit history.
+ * Manage client accounts and their subscription plans.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "clients".
@@ -229,7 +223,7 @@ export interface Client {
    */
   currentPlan?: ('free' | 'hobby' | 'pro' | 'enterprise') | null;
   /**
-   * Block this user from using credits and accessing services
+   * Block this user from accessing services
    */
   isBlocked?: boolean | null;
   /**
@@ -240,50 +234,6 @@ export interface Client {
    * Whether the user has verified their email address
    */
   isVerified?: boolean | null;
-  /**
-   * All credit transactions for this user
-   */
-  creditHistory?: {
-    docs?: (string | CreditHistory)[];
-    hasNextPage?: boolean;
-    totalDocs?: number;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * Track user credit history including monthly free credits and purchased credits. Credits expire after 1 month.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "credit-history".
- */
-export interface CreditHistory {
-  id: string;
-  client?: (string | null) | Client;
-  /**
-   * Supabase user ID
-   */
-  userId: string;
-  /**
-   * Number of credits (3 for monthly free, variable for purchased)
-   */
-  creditAmount: number;
-  /**
-   * Type of credit allocation
-   */
-  source: 'monthly_free' | 'purchased' | 'signup_bonus';
-  /**
-   * Status of the credit
-   */
-  status?: ('active' | 'expired' | 'used') | null;
-  /**
-   * Amount of credits spent from this allocation
-   */
-  creditsSpent?: number | null;
-  /**
-   * Date when these credits expire
-   */
-  expirationDate?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -468,10 +418,6 @@ export interface PayloadLockedDocument {
         value: string | Client;
       } | null)
     | ({
-        relationTo: 'credit-history';
-        value: string | CreditHistory;
-      } | null)
-    | ({
         relationTo: 'website-submissions';
         value: string | WebsiteSubmission;
       } | null)
@@ -576,22 +522,6 @@ export interface ClientsSelect<T extends boolean = true> {
   isBlocked?: T;
   provider?: T;
   isVerified?: T;
-  creditHistory?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "credit-history_select".
- */
-export interface CreditHistorySelect<T extends boolean = true> {
-  client?: T;
-  userId?: T;
-  creditAmount?: T;
-  source?: T;
-  status?: T;
-  creditsSpent?: T;
-  expirationDate?: T;
   updatedAt?: T;
   createdAt?: T;
 }

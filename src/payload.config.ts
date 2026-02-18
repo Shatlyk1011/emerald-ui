@@ -9,7 +9,6 @@ import AdminUsers from './app/(payload)/collections/AdminUsers'
 // collections
 import Categories from './app/(payload)/collections/Categories'
 import Clients from './app/(payload)/collections/Clients'
-import CreditHistory from './app/(payload)/collections/CreditHistory'
 import InspirationWebsites from './app/(payload)/collections/InspirationWebsites'
 import Media from './app/(payload)/collections/Media'
 import Newsletters from './app/(payload)/collections/Newsletters'
@@ -38,7 +37,6 @@ export default buildConfig({
   collections: [
     InspirationWebsites,
     Clients,
-    CreditHistory,
     WebsiteSubmissions,
     Subscribers,
     Newsletters,
