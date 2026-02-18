@@ -33,18 +33,17 @@ An animated gradient shimmer effect for text
 A text scrambling animation\*\* \*\*effect.
 
 <Preview link='text-scramble' isReload>
-  <div className='flex flex-col gap-4'>
-    <TextScramble
-      classes='text-2xl font-mono font-semibold'
-      triggerOnHover={false}
-    >
-      Trigger once
-    </TextScramble>
+  <div className='flex flex-col items-end  gap-10'>
     <TextScramble
       classes='text-2xl font-mono font-semibold'
       triggerOnHover={true}
-    >
-      Trigger on hover
-    </TextScramble>
+      label="Trigger on hover"
+    />
+
+    <TextScramble
+      classes='text-2xl font-mono font-semibold'
+      triggerOnHover={false}
+      label="Trigger once"
+    />
   </div>
 </Preview>

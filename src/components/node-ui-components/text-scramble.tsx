@@ -1,42 +1,38 @@
 'use client'
-import { type JSX, useEffect, useState } from 'react'
-import { motion, MotionProps } from 'motion/react'
+import { HTMLAttributes, useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 
-export type TextScrambleProps = {
-  children: string
+interface TextScrambleProps extends HTMLAttributes<HTMLDivElement> {
+  label: string
   duration?: number
   speed?: number
   characterSet?: string
-  as?: React.ElementType
   classes?: string
   triggerAsDefault?: boolean
   triggerOnHover?: boolean
   onScrambleComplete?: () => void
-} & MotionProps
+} 
 
 const defaultChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 
 export default function TextScramble({
-  children,
+  label,
   duration = 1,
   speed = 0.02,
   characterSet = defaultChars,
   classes,
-  as: Component = 'p',
   triggerAsDefault = true,
   triggerOnHover = false,
   onScrambleComplete,
   ...props
 }: TextScrambleProps) {
-  const MotionComponent = motion.create(
-    Component as keyof JSX.IntrinsicElements
-  )
-  const [displayText, setDisplayText] = useState(children)
+  const [displayText, setDisplayText] = useState(label)
   const [isAnimating, setIsAnimating] = useState(false)
-  const text = children
+  const text = label
 
-  const scramble = async () => {
+  console.log('label', label)
+
+  const scramble = () => {
     if (isAnimating) return
     setIsAnimating(true)
 
@@ -46,6 +42,7 @@ export default function TextScramble({
     const interval = setInterval(() => {
       let scrambled = ''
       const progress = step / steps
+      console.log('scrambled', scrambled)
 
       for (let i = 0; i < text.length; i++) {
         if (text[i] === ' ') {
@@ -80,13 +77,8 @@ export default function TextScramble({
   }, [])
 
   return (
-    <MotionComponent
-      // @ts-expect-error valid props
-      onMouseEnter={triggerOnHover ? scramble : undefined}
-      className={cn(classes)}
-      {...props}
-    >
+    <div onMouseEnter={triggerOnHover ? scramble : undefined} className={cn(classes)} {...props}>
       {displayText}
-    </MotionComponent>
+    </div>
   )
 }
