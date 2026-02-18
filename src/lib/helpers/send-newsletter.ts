@@ -1,6 +1,8 @@
-import config from '@payload-config'
+import config from '@payload-config';
+import { render } from '@react-email/render'
 import { getPayload } from 'payload'
-import { createEmailTransporter, generateNewsletterHTML } from '../email.config'
+import { getPlunkClient } from '../email.config'
+import { NewsletterEmail } from '../emails/NewsletterEmail'
 
 interface SendNewsletterResult {
   success: boolean
@@ -9,7 +11,7 @@ interface SendNewsletterResult {
 }
 
 /**
- * Send newsletter to all active subscribers
+ * Send newsletter to all active subscribers using React Email + Plunk
  * @param newsletterId - ID of the newsletter to send
  * @returns Result object with success status and recipient count
  */
@@ -37,8 +39,6 @@ export async function sendNewsletter(
     const newsletterData = newsletter as unknown as {
       status: string
       subject: string
-      content: unknown
-      previewText?: string
     }
 
     // Check if already sent
@@ -69,22 +69,15 @@ export async function sendNewsletter(
       }
     }
 
-    // Create email transporter
-    const transporter = createEmailTransporter()
+    // Get Plunk client
+    const plunk = getPlunkClient()
 
-    // Convert rich text content to HTML
-    // Note: Payload's Lexical editor stores content as JSON
-    // You may need to convert it to HTML based on your editor configuration
-    const contentHTML =
-      typeof newsletterData.content === 'string'
-        ? newsletterData.content
-        : JSON.stringify(newsletterData.content)
-
-    // Generate email HTML
-    const emailHTML = generateNewsletterHTML(
-      newsletterData.subject,
-      contentHTML,
-      newsletterData.previewText || undefined
+    // Render the React Email component to HTML
+    const emailHTML = await render(
+      NewsletterEmail({
+        subject: newsletterData.subject,
+        previewText: `New update from Emerald UI: ${newsletterData.subject}`,
+      })
     )
 
     // Send emails in batches to avoid rate limits
@@ -95,15 +88,13 @@ export async function sendNewsletter(
     }
 
     let sentCount = 0
-    const fromName = 'Emerald UI Newsletter'
 
     for (const batch of batches) {
       const emailPromises = batch.map((subscriber) =>
-        transporter.sendMail({
-          from: `${fromName} <${process.env.EMAIL_FROM}>`,
+        plunk.emails.send({
           to: subscriber.email,
           subject: newsletterData.subject,
-          html: emailHTML,
+          body: emailHTML,
         })
       )
 

@@ -1,5 +1,13 @@
-import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
+import { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
+
+
+
+
+
+
+
+
 
 const Newsletters: CollectionConfig = {
   slug: 'newsletters',
@@ -14,7 +22,7 @@ const Newsletters: CollectionConfig = {
     defaultColumns: ['subject', 'status', 'sentDate', 'recipientCount'],
     useAsTitle: 'subject',
     description:
-      'Create and send newsletters to subscribers. Use the rich text editor to compose your newsletter content.',
+      'Create and send newsletters to subscribers. Email content is defined using React Email components.',
   },
   fields: [
     {
@@ -24,24 +32,6 @@ const Newsletters: CollectionConfig = {
       required: true,
       admin: {
         description: 'Email subject line',
-      },
-    },
-    {
-      name: 'previewText',
-      label: 'Preview Text',
-      type: 'text',
-      required: false,
-      admin: {
-        description: 'Short preview text shown in email clients (optional)',
-      },
-    },
-    {
-      name: 'content',
-      label: 'Newsletter Content',
-      type: 'richText',
-      required: true,
-      admin: {
-        description: 'Main newsletter content (supports rich formatting)',
       },
     },
     {
@@ -56,7 +46,6 @@ const Newsletters: CollectionConfig = {
       ],
       admin: {
         description: 'Newsletter status',
-        readOnly: true,
         position: 'sidebar',
       },
     },

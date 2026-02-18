@@ -283,7 +283,7 @@ export interface Subscriber {
   createdAt: string;
 }
 /**
- * Create and send newsletters to subscribers. Use the rich text editor to compose your newsletter content.
+ * Create and send newsletters to subscribers. Email content is defined using React Email components.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "newsletters".
@@ -294,28 +294,6 @@ export interface Newsletter {
    * Email subject line
    */
   subject: string;
-  /**
-   * Short preview text shown in email clients (optional)
-   */
-  previewText?: string | null;
-  /**
-   * Main newsletter content (supports rich formatting)
-   */
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
   /**
    * Newsletter status
    */
@@ -555,8 +533,6 @@ export interface SubscribersSelect<T extends boolean = true> {
  */
 export interface NewslettersSelect<T extends boolean = true> {
   subject?: T;
-  previewText?: T;
-  content?: T;
   status?: T;
   sentDate?: T;
   recipientCount?: T;

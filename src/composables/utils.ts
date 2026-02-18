@@ -13,14 +13,6 @@ export function debounce<T>(func: (...args: T[]) => void, delay: number) {
   }
 }
 
-export const formatDate = (dateString: string) => {
-  return new Date(dateString).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
-}
-
 export const getUserInitials = (user: User | null) => {
   if (user?.user_metadata?.full_name) {
     const names = user.user_metadata.full_name.split(' ')
