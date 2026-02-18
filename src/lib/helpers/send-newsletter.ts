@@ -1,8 +1,15 @@
 import config from '@payload-config';
 import { render } from '@react-email/render';
-import { getPayload } from 'payload'
-import { getNodemailerTransport } from '../email.config'
-import { NewsletterEmail } from '../emails/NewsletterEmail'
+import { getPayload } from 'payload';
+import { getNodemailerTransport } from '../email.config';
+import { NewsletterEmail } from '../emails/NewsletterEmail';
+
+
+
+
+
+
+
 
 interface SendNewsletterResult {
   success: boolean
@@ -88,11 +95,12 @@ export async function sendNewsletter(
 
     let sentCount = 0
 
+    const fromName = 'Emerald UI Newsletter'
     // Send emails sequentially or in small batches to avoid overwhelming SMTP
     for (const subscriber of subscribers.docs) {
       try {
         await transporter.sendMail({
-          from: process.env.SMTP_FROM || '"Emerald UI" <hello@emeraldui.com>',
+          from: `${fromName} <${process.env.EMAIL_FROM}>`,
           to: subscriber.email,
           subject: newsletterData.subject,
           html: emailHTML,

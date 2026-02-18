@@ -1,17 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { axios } from '@/lib/axios'
 
 function NewsletterSubscribe() {
-  /**
-   * Send a test email to verify SMTP configuration
-   */
-  const sendTestEmail = async () => {
-    await axios.post('/send-test-newsletter', {
-      body: JSON.stringify({ to: ['penguin-99.99@Mail.ru'] }),
-    })
-  }
+
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<{
@@ -84,14 +76,6 @@ function NewsletterSubscribe() {
             className='rounded-md bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50'
           >
             {loading ? 'Subscribing...' : 'Subscribe'}
-          </button>
-          <button
-            type='button'
-            disabled={loading}
-            onClick={sendTestEmail}
-            className='rounded-md bg-blue-600 px-6 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50'
-          >
-            send test email
           </button>
         </div>
 
