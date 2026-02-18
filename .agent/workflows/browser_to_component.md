@@ -3,6 +3,7 @@ description: Convert a browser snippet (HTML/CSS) into a React component
 ---
 
 1. **Analysis & Preparation**
+   - **Read and apply the `Frontend Design` skill** (`.agent/skills/design-guides/SKILL.MD`) to guide the component's aesthetic direction, color choices, typography, spatial composition, and motion design.
    - Analyze the provided HTML/CSS snippet to understand its structure and visual style.
    - Generate a suitable component name (kebab-case).
    - Determine if `motion/react` is needed for animations (default to yes if animations are present or requested).

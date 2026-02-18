@@ -8,6 +8,7 @@ description: Gsap Component Refactoring Workflow
 
 ### 1.1 Code Assessment
 
+- **Read and apply the `Frontend Design` skill** (`.agent/skills/design-guides/SKILL.MD`) to guide the component's aesthetic direction, color choices, typography, spatial composition, and motion design during GSAP refactoring.
 - **Identify the existing component** provided by the user
 - **Analyze core animation features** and essential GSAP functionality that must be preserved
 - **Extract current dependencies:**

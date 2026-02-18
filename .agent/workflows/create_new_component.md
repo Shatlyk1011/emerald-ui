@@ -3,6 +3,7 @@ description: Create a new custom component from scratch and its documentation
 ---
 
 1. **Information Gathering**
+   - **Read and apply the `Frontend Design` skill** (`.agent/skills/design-guides/SKILL.MD`) to guide the component's aesthetic direction, color choices, typography, spatial composition, and motion design.
    - Generate component name and a brief description of its functionality.
    - Ask for any specific requirements (icons, animations, props, design style).
    - Determine the design approach:

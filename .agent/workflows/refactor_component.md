@@ -6,6 +6,7 @@ description: Component Refactoring Workflow
 
    1.1 Code Assessment
 
+- **Read and apply the `Frontend Design` skill** (`.agent/skills/design-guides/SKILL.MD`) to guide the component's aesthetic direction, color choices, typography, spatial composition, and motion design during refactoring.
 - Identify the existing component provided by the user
 - Analyze core functionality and essential features that must be preserved
 - Extract current dependencies, libraries, and styling approaches
