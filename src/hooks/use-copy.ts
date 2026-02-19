@@ -1,9 +1,16 @@
 'use client'
 import { useActionState, useEffect, useState, useTransition } from 'react'
-import { useRouter } from 'next/navigation'
-import { toast } from 'sonner'
-import { copyComponent } from '@/lib/action'
-import { useUser } from './use-user'
+import { usePathname, useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { copyComponent } from '@/lib/action';
+import { useUser } from './use-user';
+
+
+
+
+
+
+
 
 interface Props {
   link: string
@@ -14,6 +21,7 @@ const useCopy = ({ link, isBlock = false }: Props) => {
   const router = useRouter()
   const { user } = useUser()
   const isLogin = !!user
+  const pathname = usePathname()
 
   const isAuthRequired = isBlock && !isLogin
 
@@ -26,8 +34,10 @@ const useCopy = ({ link, isBlock = false }: Props) => {
     success: false,
   })
   const handleCopyClick = async () => {
+    console.log(pathname)
+    // return
     if (isAuthRequired) {
-      router.push(`/sign-in`)
+      router.push(`/sign-in?next=${encodeURIComponent(pathname)}`)
       toast.info('Please sign in to copy the component.', {
         position: 'top-center',
       })

@@ -1,13 +1,12 @@
 'use client'
 import { useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import SignInPage from './SignInPage'
 import SignUpPage from './SignUpPage'
 
-export default function SignInModal() {
+export default function AuthModal() {
   const router = useRouter()
-  const pathname = usePathname()
 
   const [signIn, setSignIn] = useState(false)
 
@@ -27,13 +26,13 @@ export default function SignInModal() {
           <SignInPage
             isModal
             handleSwitch={handleSwitch}
-            redirectTo={pathname}
+            redirectTo={''}
           />
         ) : (
           <SignUpPage
             isModal
             handleSwitch={handleSwitch}
-            redirectTo={pathname}
+            redirectTo={''}
           />
         )}
       </DialogContent>
