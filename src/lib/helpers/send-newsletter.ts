@@ -11,6 +11,13 @@ import { NewsletterEmail } from '../emails/NewsletterEmail';
 
 
 
+
+
+
+
+
+
+
 interface SendNewsletterResult {
   success: boolean
   recipientCount: number
@@ -78,6 +85,8 @@ export async function sendNewsletter(
       }
     }
 
+    console.log('subscribers', subscribers)
+
     // Get Nodemailer transport
     const transporter = getNodemailerTransport()
 
@@ -100,7 +109,7 @@ export async function sendNewsletter(
     for (const subscriber of subscribers.docs) {
       try {
         await transporter.sendMail({
-          from: `${fromName} <${process.env.EMAIL_FROM}>`,
+          from: `${fromName} <${process.env.SMTP_FROM}>`,
           to: subscriber.email,
           subject: newsletterData.subject,
           html: emailHTML,
