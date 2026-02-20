@@ -1,7 +1,8 @@
 import { AxiosResponse } from 'axios'
-import { ICategories, IWebsiteStyles } from '@/types/inspiration'
+import { ICategories, IWebsites, IWebsiteStyles } from '@/types/inspiration'
 import { axios } from '@/lib/axios'
 import InspirationContent from './InspirationContent'
+import { stringify } from 'qs-esm'
 
 const getCategories = async () => {
   return axios(`/categories`)
@@ -11,19 +12,35 @@ const getStyles = async () => {
   return axios(`/website-style`)
 }
 
-export default async function InspirationPageContent() {
-  const categories = await getCategories()
-  const websiteStyles = await getStyles()
+const getInspirationSites = async () => {
+  const stringifiedQuery = stringify(
+    {
+      where: { isVisible: { equals: true } },
+      depth: 1,
+      limit: 12,
+      page: 1,
+    },
+    { addQueryPrefix: true }
+  )
+  return axios(`/inspiration-websites${stringifiedQuery}`)
+}
 
-  const [categoriesData, stylesData]: [
+export default async function InspirationPageContent() {
+  const categoriesUrl = getCategories()
+  const websiteStylesUrl = getStyles()
+  const inspirationSitesUrl = getInspirationSites()
+
+  const [categoriesData, stylesData, inspirationSitesData]: [
     AxiosResponse<ICategories>,
     AxiosResponse<IWebsiteStyles>,
-  ] = await Promise.all([categories, websiteStyles])
+    AxiosResponse<IWebsites>
+  ] = await Promise.all([categoriesUrl, websiteStylesUrl, inspirationSitesUrl])
 
   return (
     <InspirationContent
       categories={categoriesData.data.docs}
       styles={stylesData.data.docs}
+      initialInspirationSites={inspirationSitesData.data}
     />
   )
 }
