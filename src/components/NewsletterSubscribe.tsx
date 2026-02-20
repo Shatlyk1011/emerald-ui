@@ -51,7 +51,7 @@ function NewsletterSubscribe() {
         text:
           error instanceof Error
             ? error.message
-            : 'Failed to subscribe. Please try again.',
+            : 'Failed to subscribe. Please try again later.',
       })
     } finally {
       setLoading(false)
@@ -79,17 +79,6 @@ function NewsletterSubscribe() {
           </button>
         </div>
 
-        {message && (
-          <div
-            className={`rounded-md px-4 py-2 text-sm ${
-              message.type === 'success'
-                ? 'bg-green-50 text-green-800 dark:bg-green-900/20 dark:text-green-400'
-                : 'bg-red-50 text-red-800 dark:bg-red-900/20 dark:text-red-400'
-            }`}
-          >
-            {message.text}
-          </div>
-        )}
       </form>
 
       <p className='mt-2 text-xs text-gray-500 dark:text-gray-400'>

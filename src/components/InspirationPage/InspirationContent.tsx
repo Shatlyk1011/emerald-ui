@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useMemo, Suspense } from 'react'
 import { debounce } from '@/composables/utils'
-import { Category, WebsiteStyle, InspirationWebsite } from '@/payload-types'
+import { Category, WebsiteStyle } from '@/payload-types'
 import { useInfiniteInspirationSites } from '@/services/useGetInspirationSites'
+import { IWebsites } from '@/types/inspiration'
 import dynamic from 'next/dynamic'
 import { Where } from 'payload'
 import { useInView } from 'react-intersection-observer'
@@ -22,10 +23,14 @@ const SubmitWebsiteDialog = dynamic(() => import('./SubmitWebsiteDialog'), {
 interface Props {
   categories: Category[]
   styles: WebsiteStyle[]
+  initialInspirationSites: IWebsites
 }
-// USE IDB AS DEFAULT BUT FETCH ANYWAY
 
-export default function InspirationContent({ categories, styles }: Props) {
+export default function InspirationContent({
+  categories,
+  styles,
+  initialInspirationSites,
+}: Props) {
   const [filterQuery, setFilterQuery] = useState<Where>({
     isVisible: { equals: true },
   })
@@ -33,7 +38,6 @@ export default function InspirationContent({ categories, styles }: Props) {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedStyles, setSelectedStyles] = useState<string[]>([])
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [mounted, setMounted] = useState(false)
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -41,7 +45,9 @@ export default function InspirationContent({ categories, styles }: Props) {
   })
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
-    useInfiniteInspirationSites(filterQuery)
+    useInfiniteInspirationSites(initialInspirationSites, filterQuery)
+
+  const images = initialInspirationSites.docs.map(({ imgUrl }) => imgUrl).filter(Boolean) as string[]
 
   const isLoading = isFetching || isFetchingNextPage
 
@@ -52,22 +58,10 @@ export default function InspirationContent({ categories, styles }: Props) {
     }
   }, [inView, hasNextPage, fetchNextPage, isLoading])
 
-  // Flatten all pages into a single array
   const allWebsites = data?.pages.flatMap((page) => page.docs) ?? []
-
-  // Calculate totalDocs and images if not provided (from client data)
-  const currentTotalDocs = data?.pages[0]?.totalDocs || 0
-  const currentImages = allWebsites
-    .map((i: InspirationWebsite) => i.imgUrl)
-    .filter(Boolean) as string[]
 
   // Build filter query from selected categories and styles
   const filterQueryFromSelections = useMemo(() => {
-    if (!mounted) {
-      // eslint-disable-next-line react-hooks/set-state-in-render
-      setMounted(true)
-      return
-    }
     const query: Where = {
       and: [
         {
@@ -88,7 +82,7 @@ export default function InspirationContent({ categories, styles }: Props) {
       ],
     }
     return query
-  }, [selectedCategories, selectedStyles, mounted])
+  }, [selectedCategories, selectedStyles])
 
   // Create debounced setFilterQuery function (memoized to maintain stable reference)
   const debouncedSetFilterQuery = useMemo(
@@ -98,10 +92,10 @@ export default function InspirationContent({ categories, styles }: Props) {
 
   // Update filter query when selections change (with debounce)
   useEffect(() => {
-    if (filterQueryFromSelections && mounted && selectedCategories.length) {
+    if (filterQueryFromSelections && selectedCategories.length) {
       debouncedSetFilterQuery(filterQueryFromSelections)
     }
-  }, [filterQueryFromSelections, debouncedSetFilterQuery, mounted])
+  }, [filterQueryFromSelections, debouncedSetFilterQuery])
 
   const handleResetFilters = () => {
     setFilterQuery({ isVisible: { equals: true } })
@@ -113,10 +107,9 @@ export default function InspirationContent({ categories, styles }: Props) {
     <>
       <section className='mb-10 flex items-center justify-between gap-10 px-20 py-10 max-2xl:px-6 max-xl:flex-col max-xl:items-start max-xl:px-0 max-lg:py-6 max-sm:mb-6'>
         <div className='relative flex w-full flex-3 flex-col items-start bg-cyan-50/0'>
-          <NewsletterSubscribe />
           <h1 className='-tracking-two mb-2 text-5xl font-semibold'>
             Node Inspiration <br className='hidden max-lg:block' /> Websites (
-            {currentTotalDocs})
+            {initialInspirationSites.totalDocs})
           </h1>
           <div className='text-muted-foreground text-lg'>
             <p className='mb-2'>
@@ -130,9 +123,12 @@ export default function InspirationContent({ categories, styles }: Props) {
               Submit your website
             </Button>
           </div>
+
+          {/* <NewsletterSubscribe /> */}
+
         </div>
         <div className='flex-5 max-xl:w-full max-xl:flex-auto'>
-          <ThreeDMarquee images={currentImages.slice(0, 12)} />
+          <ThreeDMarquee images={images.slice(0, 12)} />
         </div>
       </section>
 

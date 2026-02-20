@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { DialogDescription } from '@radix-ui/react-dialog'
 
 interface SubmitWebsiteDialogProps {
   open: boolean
@@ -79,10 +80,13 @@ export default function SubmitWebsiteDialog({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className='max-w-md'>
-        <DialogHeader>
+        <DialogHeader className='gap-1'>
           <DialogTitle className='text-2xl font-semibold'>
             Submit your website
           </DialogTitle>
+          <DialogDescription className='opacity-70 text-sm'>
+            I&apos;ll add it to the Inspiration Collection
+          </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className='mt-4 space-y-4'>

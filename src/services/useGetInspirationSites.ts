@@ -5,7 +5,10 @@ import { stringify } from 'qs-esm'
 import { axios } from '@/lib/axios'
 
 // Infinite Query for Inspiration Sites
-export const useInfiniteInspirationSites = (query?: Where) => {
+export const useInfiniteInspirationSites = (
+  initialData: IWebsites,
+  query?: Where
+) => {
   return useInfiniteQuery<IWebsites>({
     queryKey: ['inspiration-sites', query],
     queryFn: async ({ pageParam = 1 }) => {
@@ -23,7 +26,9 @@ export const useInfiniteInspirationSites = (query?: Where) => {
     },
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.hasNextPage && lastPage.nextPage,
-    // All pages remain in memory for infinite scroll
-    // Only page 1 is persisted to IndexedDB via custom dehydration filter in provider
+    initialData: {
+      pages: [initialData],
+      pageParams: [1],
+    },
   })
 }
