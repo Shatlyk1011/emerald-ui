@@ -14,10 +14,6 @@ import SiteCards from './SiteCards'
 import EmptyResult from './SiteCards/EmptyResult'
 import SiteCardsSkeleton from './SiteCards/SiteCardsSkeleton'
 
-const SubmitWebsiteDialog = dynamic(() => import('./SubmitWebsiteDialog'), {
-  ssr: false,
-})
-
 interface Props {
   categories: Category[]
   styles: WebsiteStyle[]
@@ -35,7 +31,6 @@ export default function InspirationContent({
 
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedStyles, setSelectedStyles] = useState<string[]>([])
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const { ref, inView } = useInView({
     threshold: 0,
@@ -107,7 +102,6 @@ export default function InspirationContent({
     <>
       <Hero
         images={images}
-        openDialog={() => setIsDialogOpen(true)}
         totalDocs={initialData.totalDocs}
       />
 
@@ -151,14 +145,6 @@ export default function InspirationContent({
           ) : null}
         </div>
       )}
-      <Suspense fallback={null}>
-        {isDialogOpen && (
-          <SubmitWebsiteDialog
-            open={isDialogOpen}
-            onOpenChange={setIsDialogOpen}
-          />
-        )}
-      </Suspense>
     </>
   )
 }

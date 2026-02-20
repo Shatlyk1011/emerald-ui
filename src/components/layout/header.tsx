@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useRef, useState } from 'react'
+import { FC, Suspense, useRef, useState } from 'react'
 import { getUserInitials } from '@/composables/utils'
 import { LogOut, User as UserIcon, ChevronDown } from 'lucide-react'
 import { useScroll, useMotionValueEvent } from 'motion/react'
@@ -21,6 +21,11 @@ import {
 import ThemeToggle from '@/components/ui/theme-toggle'
 import Logo from '../ui/logo'
 import TextShimmer from '../ui/text-shimmer'
+import dynamic from 'next/dynamic'
+
+const SubmitWebsiteDialog = dynamic(() => import('../landing/SubmitWebsiteDialog'), {
+  ssr: false,
+})
 
 const { home, motionComponents, gsapComponents } = {
   home: '/',
@@ -39,6 +44,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
   const { user, isLoading, signOut } = useUser()
 
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isOpen, setOpen] = useState(false)
 
   const { scrollY } = useScroll()
 
@@ -51,137 +57,143 @@ const Header: FC<Props> = ({ isFumadocs }) => {
   }
 
   return (
-    <header
-      ref={headerRef}
-      className={cn(
-        'fixed top-0 z-20 mx-auto flex h-14 w-full items-center justify-between border px-8 py-2 font-sans max-sm:px-5',
-        isScrolled && 'bg-background/90 backdrop-blur-sm',
-        isFumadocs && 'static w-full flex-1 border-none px-0'
-      )}
-    >
-      <Link
-        href='/'
+    <>
+      <header
+        ref={headerRef}
         className={cn(
-          'w-max max-sm:mr-4 max-sm:max-w-max max-sm:min-w-8',
-          isFumadocs && 'hidden'
+          'fixed top-0 z-20 mx-auto flex h-14 w-full items-center justify-between border px-8 py-2 font-sans max-sm:px-5',
+          isScrolled && 'bg-background/90 backdrop-blur-sm',
+          isFumadocs && 'static w-full flex-1 border-none px-0'
         )}
       >
-        <Logo />
-      </Link>
-      <span className='mr-4 ml-6 opacity-50'>|</span>
-      <nav className='text-muted-foreground flex flex-1 justify-start'>
-        <ul className='-tracking-one flex items-center text-sm font-medium max-sm:text-sm'>
-          <li>
-            <Link
-              href={home}
-              className={cn(
-                'hover:bg-primary/5 rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2',
-                pathname === home
-                  ? 'text-primary'
-                  : 'hover:text-foreground hover:bg-foreground/5'
-              )}
-            >
-              Website Inspiration
-            </Link>
-          </li>
-          <li>
-            <DropdownMenu>
-              <DropdownMenuTrigger
-                className={cn(
-                  'group hover:bg-primary/5 flex items-center gap-1 rounded-md px-3 py-2 text-nowrap transition ease-out focus:outline-none',
-                  pathname.startsWith(motionComponents)
-                    ? 'text-primary'
-                    : 'hover:text-foreground hover:bg-foreground/5'
-                )}
+        <Link
+          href='/'
+          className={cn(
+            'w-max max-sm:mr-4 max-sm:max-w-max max-sm:min-w-8',
+            isFumadocs && 'hidden'
+          )}
+        >
+          <Logo />
+        </Link>
+        {/* <span className='mr-4 ml-6 opacity-50'>|</span> */}
+        <nav className='text-muted-foreground flex flex-1 justify-start ml-10'>
+          <ul className='-tracking-one flex items-center text-sm font-medium max-sm:text-sm'>
+            <li>
+              <Link
+                href={home}
+                className={cn('rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2 hover:text-foreground')}
               >
-                <TextShimmer
-                  duration={7}
-                  spread={15}
+                Website Inspiration
+              </Link>
+            </li>
+            <li>
+              <DropdownMenu>
+                <DropdownMenuTrigger
                   className={cn(
-                    'transition',
-                    pathname.startsWith(motionComponents || gsapComponents) &&
-                      'text-primary'
+                    'flex items-center gap-1 rounded-md px-3 py-2 text-nowrap transition ease-out focus:outline-none hover:text-foreground'
                   )}
                 >
-                  Components
-                </TextShimmer>
-                <ChevronDown className='ml-1 size-3 text-current transition-transform duration-300 group-data-[state=open]:rotate-180' />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align='end' className='w-48'>
-                <DropdownMenuItem asChild>
-                  <Link href={motionComponents} className='cursor-pointer'>
-                    Motion Components
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link href={gsapComponents} className='cursor-pointer'>
-                    GSAP Components
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </li>
-        </ul>
-      </nav>
-
-      <div className='flex min-w-20 items-center justify-end gap-2 max-sm:gap-1'>
-        <ThemeToggle />
-
-        {isLoading ? (
-          <div className='border-primary h-5 w-5 animate-spin rounded-full border-2 border-t-transparent' />
-        ) : (
-          <>
-            {user ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <button className='focus:ring-primary flex items-center gap-2 rounded-full focus:ring-2 focus:ring-offset-2 focus:outline-none'>
-                    <Avatar className='size-8 cursor-pointer'>
-                      <AvatarImage
-                        src={user.user_metadata?.avatar_url}
-                        alt={
-                          user.user_metadata?.full_name || user.email || 'User'
-                        }
-                      />
-                      <AvatarFallback>{getUserInitials(user)}</AvatarFallback>
-                    </Avatar>
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align='end' className='w-56'>
-                  <DropdownMenuLabel>
-                    <div className='flex flex-col space-y-1'>
-                      <p className='text-sm leading-none font-medium'>
-                        {user.user_metadata?.full_name || 'User'}
-                      </p>
-                      <p className='text-muted-foreground text-xs leading-none'>
-                        {user.email}
-                      </p>
-                    </div>
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem
-                    onClick={handleSignOut}
-                    className='cursor-pointer'
+                  <TextShimmer
+                    duration={7}
+                    spread={15}
+                    className='transition hover:text-foreground'
                   >
-                    <LogOut className='mr-2 size-4' />
-                    Sign Out
+                    Components
+                  </TextShimmer>
+                  <ChevronDown className='ml-1 size-3 text-current transition-transform duration-300 group-data-[state=open]:rotate-180' />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align='end' className='w-48'>
+                  <DropdownMenuItem asChild>
+                    <Link href={motionComponents} className='cursor-pointer'>
+                      Motion Components
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href={gsapComponents} className='cursor-pointer'>
+                      GSAP Components
+                    </Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            ) : (
-              <Button
-                variant='outline'
-                size='sm'
-                onClick={() => router.push('/login')}
-                className='ml-2'
-              >
-                Sign In
-              </Button>
-            )}
-          </>
+            </li>
+            <span className='mx-1 opacity-50'>|</span>
+            <li>
+              <button onClick={() => setOpen(true)} className='rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2 hover:text-foreground'>
+                <span>Submit a website</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+
+        <div className='flex min-w-20 items-center justify-end gap-2 max-sm:gap-1'>
+          <ThemeToggle />
+
+
+          {isLoading ? (
+            <div className='border-primary h-5 w-5 animate-spin rounded-full border-2 border-t-transparent' />
+          ) : (
+            <>
+              {user ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button className='focus:ring-primary flex items-center gap-2 rounded-full focus:ring-2 focus:ring-offset-2 focus:outline-none'>
+                      <Avatar className='size-8 cursor-pointer'>
+                        <AvatarImage
+                          src={user.user_metadata?.avatar_url}
+                          alt={
+                            user.user_metadata?.full_name || user.email || 'User'
+                          }
+                        />
+                        <AvatarFallback>{getUserInitials(user)}</AvatarFallback>
+                      </Avatar>
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align='end' className='w-56'>
+                    <DropdownMenuLabel>
+                      <div className='flex flex-col space-y-1'>
+                        <p className='text-sm leading-none font-medium'>
+                          {user.user_metadata?.full_name || 'User'}
+                        </p>
+                        <p className='text-muted-foreground text-xs leading-none'>
+                          {user.email}
+                        </p>
+                      </div>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={handleSignOut}
+                      className='cursor-pointer'
+                    >
+                      <LogOut className='mr-2 size-4' />
+                      Sign Out
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Button
+                  variant='outline'
+                  size='sm'
+                  onClick={() => router.push('/login')}
+                  className='ml-2'
+                >
+                  Sign In
+                </Button>
+              )}
+            </>
+          )}
+        </div>
+      </header>
+
+      <Suspense fallback={'loading...'}>
+        {isOpen && (
+          <SubmitWebsiteDialog
+            open={isOpen}
+            onOpenChange={setOpen}
+          />
         )}
-      </div>
-    </header>
+      </Suspense>
+    </>
   )
 }
 export default Header

@@ -267,7 +267,7 @@ const TooltipCat: FC<Props> = ({ children, containerClasses, wrapperClasses, cat
           </div>
         </div>
 
-        <div className='invisible opacity-0 cat-tooltip group-hover:opacity-100 group-hover:visible group-hover:select-auto transition-all delay-[4s]  ease-out select-none absolute flex flex-col gap-1 z-10 text-xs text-left -top-8 right-40 py-1.5 px-3 rounded-lg rounded-br-none  font-mono font-medium tracking-two bg-card border w-72 max-w-max max-md:hidden'>
+        <div className='invisible opacity-0 cat-tooltip group-hover:opacity-100 group-hover:visible group-hover:select-auto transition-all delay-[2.5s]  ease-out select-none absolute flex flex-col gap-1 z-10 text-xs text-left -top-8 right-40 py-1.5 px-3 rounded-lg rounded-br-none  font-mono font-medium tracking-two bg-card border w-72 max-w-max max-md:hidden'>
           
           <span>Meow!</span>
           <span>Like this component?</span>
