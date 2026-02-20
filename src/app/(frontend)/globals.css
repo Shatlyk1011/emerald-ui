@@ -159,7 +159,7 @@
   }
 
   #nd-subnav {
-    @apply z-100!
+    @apply z-100!;
   }
 
   @keyframes shimmer {

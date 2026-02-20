@@ -42,7 +42,11 @@ export default function ParallaxImage({
     offset: ['start end', 'end start'],
   })
 
-  const rawY = useTransform(scrollYProgress, [0, 1], [-150 * speed, 150 * speed])
+  const rawY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [-150 * speed, 150 * speed]
+  )
 
   const y = useSpring(rawY, { stiffness, damping, mass })
 

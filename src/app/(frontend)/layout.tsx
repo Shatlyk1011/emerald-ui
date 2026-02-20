@@ -7,8 +7,8 @@ import { Analytics } from '@/components/_providers/analytics'
 import { Providers as PostHogProvider } from '@/components/_providers/post-hog'
 import TanstackQueryProvider from '@/components/_providers/tanstack-query'
 import ThemeProvider from '@/components/_providers/theme-provider'
-import './globals.css'
 import { UserProvider } from '@/components/_providers/user-provider'
+import './globals.css'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -46,7 +46,6 @@ export const metadata: Metadata = {
   },
   manifest: '/site.webmanifest',
 }
-
 
 export default function RootLayout({
   children,

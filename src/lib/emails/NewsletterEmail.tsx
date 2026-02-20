@@ -1,3 +1,4 @@
+import * as React from 'react'
 import {
   Body,
   Container,
@@ -9,7 +10,6 @@ import {
   Section,
   Text,
 } from '@react-email/components'
-import * as React from 'react'
 
 interface NewsletterEmailProps {
   subject?: string
@@ -23,7 +23,7 @@ export const NewsletterEmail = ({
   content = 'Hello! Here is your latest newsletter update.',
 }: NewsletterEmailProps) => {
   return (
-    <Html lang="en">
+    <Html lang='en'>
       <Head>
         <title>{subject}</title>
       </Head>
@@ -53,7 +53,7 @@ export const NewsletterEmail = ({
               You received this email because you subscribed to our newsletter.
             </Text>
             <Text style={footerText}>
-              <Link href="https://emerald-ui.com" style={link}>
+              <Link href='https://emerald-ui.com' style={link}>
                 Visit Emerald UI
               </Link>
               {' · '}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, FormEvent } from 'react'
+import { DialogDescription } from '@radix-ui/react-dialog'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import {
@@ -11,7 +12,6 @@ import {
 } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { DialogDescription } from '@radix-ui/react-dialog'
 
 interface SubmitWebsiteDialogProps {
   open: boolean
@@ -84,7 +84,7 @@ export default function SubmitWebsiteDialog({
           <DialogTitle className='text-2xl font-semibold'>
             Submit your website
           </DialogTitle>
-          <DialogDescription className='opacity-70 text-sm'>
+          <DialogDescription className='text-sm opacity-70'>
             I&apos;ll add it to the Inspiration Collection
           </DialogDescription>
         </DialogHeader>

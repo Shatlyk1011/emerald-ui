@@ -1,6 +1,6 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared'
-import Header from '@/components/layout/header'
 import Logo from '@/components/ui/logo'
+import Header from '@/components/layout/header'
 
 export const baseOptions = (): BaseLayoutProps => ({
   nav: {
@@ -14,7 +14,6 @@ export const baseOptions = (): BaseLayoutProps => ({
     {
       type: 'custom',
       children: <Header isFumadocs />,
-
     },
   ],
   themeSwitch: { enabled: false },

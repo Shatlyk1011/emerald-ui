@@ -19,8 +19,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import ThemeToggle from '@/components/ui/theme-toggle'
-import TextShimmer from '../ui/text-shimmer'
 import Logo from '../ui/logo'
+import TextShimmer from '../ui/text-shimmer'
 
 const { home, motionComponents, gsapComponents } = {
   home: '/',
@@ -54,7 +54,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
     <header
       ref={headerRef}
       className={cn(
-        'fixed top-0 mx-auto z-20 flex h-14 w-full items-center justify-between border px-8 py-2 font-sans max-sm:px-5',
+        'fixed top-0 z-20 mx-auto flex h-14 w-full items-center justify-between border px-8 py-2 font-sans max-sm:px-5',
         isScrolled && 'bg-background/90 backdrop-blur-sm',
         isFumadocs && 'static w-full flex-1 border-none px-0'
       )}
@@ -158,7 +158,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                       </p>
                     </div>
                   </DropdownMenuLabel>
-                    <DropdownMenuSeparator />
+                  <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={handleSignOut}
                     className='cursor-pointer'

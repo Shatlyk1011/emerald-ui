@@ -1,5 +1,5 @@
-import type { Metadata } from 'next'
 import { Suspense } from 'react'
+import type { Metadata } from 'next'
 import SignInPage from '@/components/auth/SignInPage'
 
 export const metadata: Metadata = {

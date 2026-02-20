@@ -3,7 +3,6 @@
 import { useState } from 'react'
 
 function NewsletterSubscribe() {
-
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<{
@@ -78,7 +77,6 @@ function NewsletterSubscribe() {
             {loading ? 'Subscribing...' : 'Subscribe'}
           </button>
         </div>
-
       </form>
 
       <p className='mt-2 text-xs text-gray-500 dark:text-gray-400'>

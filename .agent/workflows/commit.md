@@ -34,7 +34,7 @@ When the user says "run" or triggers this workflow, follow these steps:
 
 5. **Write the Commit Message**
    - **Subject line**: `<type>(<scope>): <short imperative description>` (max 72 chars, no period at end).
-   - **Body** (if needed): After a blank line, explain *what* and *why* (not *how*). Wrap at 72 chars.
+   - **Body** (if needed): After a blank line, explain _what_ and _why_ (not _how_). Wrap at 72 chars.
    - **Breaking changes**: If applicable, add `BREAKING CHANGE:` footer.
    - If changes touch multiple unrelated areas, use a bulleted list in the body.
 

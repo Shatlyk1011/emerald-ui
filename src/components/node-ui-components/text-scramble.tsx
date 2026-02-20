@@ -11,7 +11,7 @@ interface TextScrambleProps extends HTMLAttributes<HTMLDivElement> {
   triggerAsDefault?: boolean
   triggerOnHover?: boolean
   onScrambleComplete?: () => void
-} 
+}
 
 const defaultChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 
@@ -77,7 +77,11 @@ export default function TextScramble({
   }, [])
 
   return (
-    <div onMouseEnter={triggerOnHover ? scramble : undefined} className={cn(classes)} {...props}>
+    <div
+      onMouseEnter={triggerOnHover ? scramble : undefined}
+      className={cn(classes)}
+      {...props}
+    >
       {displayText}
     </div>
   )

@@ -1,8 +1,8 @@
 import { AxiosResponse } from 'axios'
 import { ICategories, IWebsites, IWebsiteStyles } from '@/types/inspiration'
+import { stringify } from 'qs-esm'
 import { axios } from '@/lib/axios'
 import InspirationContent from './InspirationContent'
-import { stringify } from 'qs-esm'
 
 const getCategories = async () => {
   return axios(`/categories`)
@@ -33,7 +33,7 @@ export default async function InspirationPageContent() {
   const [categoriesData, stylesData, inspirationSitesData]: [
     AxiosResponse<ICategories>,
     AxiosResponse<IWebsiteStyles>,
-    AxiosResponse<IWebsites>
+    AxiosResponse<IWebsites>,
   ] = await Promise.all([categoriesUrl, websiteStylesUrl, inspirationSitesUrl])
 
   return (

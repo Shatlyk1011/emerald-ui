@@ -1,13 +1,12 @@
-import { Button } from "@react-email/components"
-import ThreeDMarquee from "../ui/3d-marquee"
+import { Button } from '@react-email/components'
 import NewsletterSubscribe from '@/components/NewsletterSubscribe'
+import ThreeDMarquee from '../ui/3d-marquee'
 
 interface Props {
   totalDocs: number
   openDialog: () => void
   images: string[]
 }
-
 
 export default function Hero({ totalDocs, openDialog, images }: Props) {
   return (
@@ -31,11 +30,10 @@ export default function Hero({ totalDocs, openDialog, images }: Props) {
         </div>
 
         {/* <NewsletterSubscribe /> */}
-
       </div>
       <div className='flex-5 max-xl:w-full max-xl:flex-auto'>
         <ThreeDMarquee images={images} />
-    </div>
+      </div>
     </section>
   )
 }

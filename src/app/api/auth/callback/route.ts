@@ -1,5 +1,5 @@
-import config from '@payload-config';
-import { NextResponse } from 'next/server';
+import config from '@payload-config'
+import { NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import { createClientRecord } from '@/lib/helpers/client-helpers'
 import { createClient } from '@/lib/supabase-server'
@@ -62,4 +62,3 @@ export async function GET(request: Request) {
   // If there's an error, redirect to login with error message
   return NextResponse.redirect(`${origin}/sign-in`)
 }
-

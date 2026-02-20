@@ -8,11 +8,11 @@ import { IWebsites } from '@/types/inspiration'
 import dynamic from 'next/dynamic'
 import { Where } from 'payload'
 import { useInView } from 'react-intersection-observer'
+import Hero from '../landing/Hero'
 import FilterSection from './FilterSection'
 import SiteCards from './SiteCards'
 import EmptyResult from './SiteCards/EmptyResult'
 import SiteCardsSkeleton from './SiteCards/SiteCardsSkeleton'
-import Hero from '../landing/Hero'
 
 const SubmitWebsiteDialog = dynamic(() => import('./SubmitWebsiteDialog'), {
   ssr: false,
@@ -45,7 +45,9 @@ export default function InspirationContent({
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
     useInfiniteInspirationSites(initialData, filterQuery)
 
-  const images = initialData.docs.map(({ imgUrl }) => imgUrl).filter(Boolean) as string[]
+  const images = initialData.docs
+    .map(({ imgUrl }) => imgUrl)
+    .filter(Boolean) as string[]
 
   const isLoading = isFetching || isFetchingNextPage
 
@@ -103,7 +105,11 @@ export default function InspirationContent({
 
   return (
     <>
-      <Hero images={images} openDialog={() => setIsDialogOpen(true)} totalDocs={initialData.totalDocs} />
+      <Hero
+        images={images}
+        openDialog={() => setIsDialogOpen(true)}
+        totalDocs={initialData.totalDocs}
+      />
 
       <FilterSection
         categories={categories}

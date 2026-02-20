@@ -1,6 +1,10 @@
 'use client'
 import { FC, ReactNode, useState } from 'react'
-import { QueryClient, QueryClientConfig, QueryClientProvider } from '@tanstack/react-query'
+import {
+  QueryClient,
+  QueryClientConfig,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 
 export const QueryConfig: QueryClientConfig = {
   defaultOptions: {
@@ -27,9 +31,7 @@ const TanstackQueryProvider: FC<Props> = ({ children }) => {
   const [queryClient] = useState(() => new QueryClient(QueryConfig))
 
   return (
-    <QueryClientProvider client={queryClient}>
-      {children}
-    </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   )
 }
 export default TanstackQueryProvider

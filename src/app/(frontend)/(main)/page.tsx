@@ -14,9 +14,8 @@ export default function Home() {
     <main className='bg-background mt-14 min-h-screen font-sans'>
       <div className='mx-auto max-w-400 px-10 py-10 max-sm:px-4 max-sm:py-6'>
         <Suspense fallback={<InspirationPageSkeleton />}>
-          <InspirationPageContent /> 
+          <InspirationPageContent />
         </Suspense>
-
       </div>
     </main>
   )

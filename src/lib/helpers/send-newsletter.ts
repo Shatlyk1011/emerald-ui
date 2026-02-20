@@ -1,22 +1,8 @@
-import config from '@payload-config';
-import { render } from '@react-email/render';
-import { getPayload } from 'payload';
-import { getNodemailerTransport } from '../email.config';
-import { NewsletterEmail } from '../emails/NewsletterEmail';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import config from '@payload-config'
+import { render } from '@react-email/render'
+import { getPayload } from 'payload'
+import { getNodemailerTransport } from '../email.config'
+import { NewsletterEmail } from '../emails/NewsletterEmail'
 
 interface SendNewsletterResult {
   success: boolean

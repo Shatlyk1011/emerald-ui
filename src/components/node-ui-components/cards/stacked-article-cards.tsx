@@ -77,7 +77,7 @@ export default function StackedArticleCards({
     setIsActive(true)
   }
 
-  const handleCollapse:MouseEventHandler<HTMLDivElement> = (e) => {
+  const handleCollapse: MouseEventHandler<HTMLDivElement> = (e) => {
     e.stopPropagation()
     setIsActive(false)
   }
@@ -91,33 +91,31 @@ export default function StackedArticleCards({
         <div
           key={index}
           className={cn(
-            'absolute right-6 flex h-28 w-96 max-md:w-72 cursor-pointer items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 shadow-lg shadow-black/5 backdrop-blur-xl transition-all duration-1000 ease-[cubic-bezier(0.075,0.82,0.165,1)] hover:bg-white/10 dark:border-white/5 dark:bg-white/3 dark:hover:bg-white/[0.07]',
-            isActive
-              ? EXPANDED_OFFSETS[index]
-              : COLLAPSED_OFFSETS[index]
+            'absolute right-6 flex h-28 w-96 cursor-pointer items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 shadow-lg shadow-black/5 backdrop-blur-xl transition-all duration-1000 ease-[cubic-bezier(0.075,0.82,0.165,1)] hover:bg-white/10 max-md:w-72 dark:border-white/5 dark:bg-white/3 dark:hover:bg-white/[0.07]',
+            isActive ? EXPANDED_OFFSETS[index] : COLLAPSED_OFFSETS[index]
           )}
         >
           <a
             href={item.url}
-            target="_blank"
-            rel="noopener noreferrer"
+            target='_blank'
+            rel='noopener noreferrer'
             className={cn(
               'flex w-full items-center gap-4 no-underline',
               isActive ? 'pointer-events-auto' : 'pointer-events-none'
             )}
           >
-            <div className="size-16 shrink-0 overflow-hidden rounded-xl ring-2 ring-white/10">
+            <div className='size-16 shrink-0 overflow-hidden rounded-xl ring-2 ring-white/10'>
               <img
                 src={item.img}
                 alt={item.title}
-                className="h-full w-full object-cover transition-transform duration-500 hover:scale-110"
+                className='h-full w-full object-cover transition-transform duration-500 hover:scale-110'
               />
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="mb-1 text-base font-semibold text-foreground truncate">
+            <div className='min-w-0 flex-1'>
+              <p className='text-foreground mb-1 truncate text-base font-semibold'>
                 {item.title}
               </p>
-              <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+              <p className='text-muted-foreground line-clamp-2 text-sm leading-relaxed'>
                 {item.subTitle}
               </p>
             </div>
@@ -128,18 +126,17 @@ export default function StackedArticleCards({
       {/* Show less toggle */}
       <div
         className={cn(
-          'absolute right-6 top-[calc(1.5rem+448px+4rem)] transition-all duration-300 ease-in-out',
+          'absolute top-[calc(1.5rem+448px+4rem)] right-6 transition-all duration-300 ease-in-out',
           isActive
-            ? 'pointer-events-auto opacity-100 visible'
-            : 'pointer-events-none opacity-0 invisible'
+            ? 'pointer-events-auto visible opacity-100'
+            : 'pointer-events-none invisible opacity-0'
         )}
         onClick={handleCollapse}
       >
-        <Button variant={'secondary'} size="sm">
+        <Button variant={'secondary'} size='sm'>
           Show less
         </Button>
       </div>
     </div>
   )
 }
-

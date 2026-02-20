@@ -65,6 +65,7 @@ description: Gsap Component Refactoring Workflow
 
 - Add `'use client'` directive at the top of the file
 - Update imports to use modern GSAP patterns:
+
   ```typescript
   import { useGSAP } from '@gsap/react'
   import gsap from 'gsap'
@@ -73,6 +74,7 @@ description: Gsap Component Refactoring Workflow
   // Register plugins
   gsap.registerPlugin(ScrollTrigger)
   ```
+
 - Always use default export for component
 - Preserve all essential animation functionality and user-facing behavior
 - Maintain existing prop interfaces unless enhancement is requested
