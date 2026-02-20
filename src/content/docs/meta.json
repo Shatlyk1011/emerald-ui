@@ -11,6 +11,7 @@
     "components/animated-dropdown",
     "components/animated-input",
     "components/parallax-image",
+    "components/subscribe-input",
 
     "---AI---",
     "components/gradient-file-upload",
