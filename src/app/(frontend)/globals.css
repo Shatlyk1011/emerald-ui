@@ -162,6 +162,21 @@
     @apply z-100!;
   }
 
+  @keyframes sleep {
+    0% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: translate(-5px, -35px) scale(1.2);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-60px) scale(1.5);
+    }
+  }
+
   @keyframes shimmer {
     0% {
       background-position: 200% 50%;
@@ -179,4 +194,37 @@
       background-position: -200% 0%;
     }
   }
+}
+
+
+.sleep-symbol span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.sleep-symbol span:nth-child(2) {
+  animation-delay: 1s;
+  margin-left: -10px;
+}
+
+.sleep-symbol span:nth-child(3) {
+  animation-delay: 2s;
+  margin-left: -10px;
+}
+
+.cat:hover #righteyelid{
+  visibility: hidden;
+}
+
+.thecat #eyesdown {
+  visibility: hidden;
+}
+
+.cat:has(.content:hover) {
+  #righteyelid, #lefteyelid, .sleep-symbol {
+    visibility: hidden;
+  }
+  #eyesdown {
+    visibility: visible;
+  }
+
 }
