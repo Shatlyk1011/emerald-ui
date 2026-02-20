@@ -6,18 +6,16 @@ import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
 import { SendHorizonal } from 'lucide-react';
 
-const transition: Transition = {
-  type: 'spring',
-  bounce: 0.1,
-  duration: 0.4,
-};
-
 export default function SubscribeInput() {
   const [isOpen, setOpen] = useState(false);
 
   return (
     <OnClickOutside onClickOutside={() => setOpen(false)}>
-      <MotionConfig transition={transition}>
+      <MotionConfig transition={{
+        type: 'spring',
+        bounce: 0.1,
+        duration: 0.4,
+      }}>
         <motion.div
           animate={{ width: isOpen ? '320px' : '100px' }}
           className={cn("h-12 ", isOpen ? 'w-75' : 'w-20' )}
@@ -38,7 +36,11 @@ export default function SubscribeInput() {
                     placeholder='Email'
                     autoFocus
                   />
-                  <motion.label htmlFor="sub" initial={{ bottom: 0, opacity:0 }} animate={{ bottom: -36, opacity: 100 }} transition={{...transition, duration: 1.5, }} className='absolute z-1 flex items-center gap-1 text-[13px] text-nowrap font-medium -tracking-one text-muted-foreground'>
+                    <motion.label htmlFor="sub" initial={{ bottom: 0, opacity: 0 }} animate={{ bottom: -36, opacity: 100 }} transition={{
+                      type: 'spring',
+                      bounce: 0.1,
+                      duration: 0.3, delay: 0.15
+                    }} className='absolute z-1 flex items-center gap-1 text-[13px] text-nowrap font-medium -tracking-one text-muted-foreground'>
                     Get hand-picked updates
                   </motion.label>
                   <div className='absolute right-1 top-0 flex h-full items-center justify-center'></div>
