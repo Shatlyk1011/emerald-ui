@@ -34,8 +34,6 @@ const useCopy = ({ link, isBlock = false }: Props) => {
     success: false,
   })
   const handleCopyClick = async () => {
-    console.log(pathname)
-    // return
     if (isAuthRequired) {
       router.push(`/sign-in?next=${encodeURIComponent(pathname)}`)
       toast.info('Please sign in to copy the component.', {
@@ -43,7 +41,6 @@ const useCopy = ({ link, isBlock = false }: Props) => {
       })
       return
     }
-
     const [folder, filename] = link.split('/')
 
     startTransition(async () => {

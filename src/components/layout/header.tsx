@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import ThemeToggle from '@/components/ui/theme-toggle'
 import TextShimmer from '../ui/text-shimmer'
+import Logo from '../ui/logo'
 
 const { home, motionComponents, gsapComponents } = {
   home: '/',
@@ -53,23 +54,23 @@ const Header: FC<Props> = ({ isFumadocs }) => {
     <header
       ref={headerRef}
       className={cn(
-        'fixed top-0 z-50 mx-auto flex h-14 w-full items-center justify-between border px-8 py-2 font-sans max-sm:px-5',
-        isScrolled && !isFumadocs && 'bg-background/90 backdrop-blur-sm',
+        'fixed top-0 mx-auto flex h-14 w-full items-center justify-between border px-8 py-2 font-sans max-sm:px-5',
+        isScrolled && 'bg-background/90 backdrop-blur-sm',
         isFumadocs && 'static w-full flex-1 border-none px-0'
       )}
     >
       <Link
         href='/'
         className={cn(
-          'w-20 max-sm:mr-4 max-sm:max-w-max max-sm:min-w-8',
+          'w-max max-sm:mr-4 max-sm:max-w-max max-sm:min-w-8',
           isFumadocs && 'hidden'
         )}
       >
-        <span className=''>Logo</span>
+        <Logo />
       </Link>
-
-      <nav className='text-muted-foreground flex flex-1 justify-end'>
-        <ul className='tracking-one flex items-center text-sm font-medium max-sm:text-sm'>
+      <span className='mr-4 ml-6 opacity-50'>|</span>
+      <nav className='text-muted-foreground flex flex-1 justify-start'>
+        <ul className='-tracking-one flex items-center text-sm font-medium max-sm:text-sm'>
           <li>
             <Link
               href={home}
