@@ -8,6 +8,7 @@ import { Providers as PostHogProvider } from '@/components/_providers/post-hog'
 import TanstackQueryProvider from '@/components/_providers/tanstack-query'
 import ThemeProvider from '@/components/_providers/theme-provider'
 import { UserProvider } from '@/components/_providers/user-provider'
+import './tailwind.css'
 import './globals.css'
 
 const geistSans = Geist({
