@@ -100,10 +100,7 @@ export default function InspirationContent({
 
   return (
     <>
-      <Hero
-        images={images}
-        totalDocs={initialData.totalDocs}
-      />
+      <Hero images={images} totalDocs={initialData.totalDocs} />
 
       <FilterSection
         categories={categories}

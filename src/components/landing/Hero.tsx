@@ -1,6 +1,6 @@
 import NewsletterSubscribe from '@/components/NewsletterSubscribe'
-import ThreeDMarquee from '../ui/3d-marquee'
 import TooltipCat from '../TooltipCat'
+import ThreeDMarquee from '../ui/3d-marquee'
 
 interface Props {
   totalDocs: number
@@ -22,12 +22,14 @@ export default function Hero({ totalDocs, images }: Props) {
           <div className='flex flex-col items-start gap-2'>
             <NewsletterSubscribe />
           </div>
-
         </div>
-
       </div>
       <div className='flex-5 max-xl:w-full max-xl:flex-auto'>
-        <TooltipCat catClasses='scale-70 -right-20' containerClasses='max-xl:p-0 max-xl:m-0' catGradientClasses='right-15 max-xl:right-18 max-md:hidden'>
+        <TooltipCat
+          catClasses='scale-70 -right-20'
+          containerClasses='max-xl:p-0 max-xl:m-0'
+          catGradientClasses='right-15 max-xl:right-18 max-md:hidden'
+        >
           <ThreeDMarquee images={images} className='shadow-md' />
         </TooltipCat>
       </div>

@@ -1,52 +1,68 @@
-'use client';
+'use client'
 
-import { FC, ReactNode, RefObject, useEffect, useRef, useState } from 'react';
-import { motion, MotionConfig, Transition } from 'motion/react';
-import { cn } from '@/lib/utils';
-import { Button } from '../ui/button';
-import { SendHorizonal } from 'lucide-react';
+import { FC, ReactNode, RefObject, useEffect, useRef, useState } from 'react'
+import { SendHorizonal } from 'lucide-react'
+import { motion, MotionConfig, Transition } from 'motion/react'
+import { cn } from '@/lib/utils'
+import { Button } from '../ui/button'
 
 export default function SubscribeInput() {
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(false)
 
   return (
     <OnClickOutside onClickOutside={() => setOpen(false)}>
-      <MotionConfig transition={{
-        type: 'spring',
-        bounce: 0.1,
-        duration: 0.4,
-      }}>
+      <MotionConfig
+        transition={{
+          type: 'spring',
+          bounce: 0.1,
+          duration: 0.4,
+        }}
+      >
         <motion.div
           animate={{ width: isOpen ? '320px' : '100px' }}
-          className={cn("h-12 ", isOpen ? 'w-75' : 'w-20' )}
+          className={cn('h-12', isOpen ? 'w-75' : 'w-20')}
           initial={false}
         >
-          <div className='p-1 h-full border rounded-lg bg-card'>
+          <div className='bg-card h-full rounded-lg border p-1'>
             {!isOpen ? (
-              <Button onClick={() => setOpen(true)} className='w-full h-full rounded-lg'>
+              <Button
+                onClick={() => setOpen(true)}
+                className='h-full w-full rounded-lg'
+              >
                 + Sub
               </Button>
             ) : (
-              <div className='flex  gap-2 h-full'>
-                <div className='flex relative w-full '>
+              <div className='flex h-full gap-2'>
+                <div className='relative flex w-full'>
                   <input
-                    id="sub"
-                    className='bg-card w-full h-full rounded-md p-2 z-10 focus:outline-hidden text-sm -tracking-one'
+                    id='sub'
+                    className='bg-card -tracking-one z-10 h-full w-full rounded-md p-2 text-sm focus:outline-hidden'
                     autoComplete='off'
                     placeholder='Email'
                     autoFocus
                   />
-                    <motion.label htmlFor="sub" initial={{ bottom: 0, opacity: 0 }} animate={{ bottom: -36, opacity: 100 }} transition={{
+                  <motion.label
+                    htmlFor='sub'
+                    initial={{ bottom: 0, opacity: 0 }}
+                    animate={{ bottom: -36, opacity: 100 }}
+                    transition={{
                       type: 'spring',
                       bounce: 0.1,
-                      duration: 0.3, delay: 0.15
-                    }} className='absolute z-1 flex items-center gap-1 text-[13px] text-nowrap font-medium -tracking-one text-muted-foreground'>
+                      duration: 0.3,
+                      delay: 0.15,
+                    }}
+                    className='-tracking-one text-muted-foreground absolute z-1 flex items-center gap-1 text-[13px] font-medium text-nowrap'
+                  >
                     Get hand-picked updates
                   </motion.label>
-                  <div className='absolute right-1 top-0 flex h-full items-center justify-center'></div>
+                  <div className='absolute top-0 right-1 flex h-full items-center justify-center'></div>
                 </div>
-                <Button className='px-6 h-full w-11 rounded-md' onClick={() => setOpen(false)} aria-label='Back'>
-                  <SendHorizonal className='size-4'  />
+                <Button
+                  className='h-full w-11 rounded-md px-6'
+                  onClick={() => setOpen(false)}
+                  aria-label='Back'
+                >
+                  <SendHorizonal className='size-4' />
                 </Button>
               </div>
             )}
@@ -54,10 +70,8 @@ export default function SubscribeInput() {
         </motion.div>
       </MotionConfig>
     </OnClickOutside>
-
-  );
+  )
 }
-
 
 // helper functions
 

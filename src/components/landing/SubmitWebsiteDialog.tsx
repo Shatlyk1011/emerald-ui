@@ -19,11 +19,11 @@ interface SubmitWebsiteDialogProps {
 }
 
 const FormInitial = {
-    name: '',
-    email: '',
-    websiteUrl: '',
-    message: '',
-  }
+  name: '',
+  email: '',
+  websiteUrl: '',
+  message: '',
+}
 
 export default function SubmitWebsiteDialog({
   open,
@@ -69,11 +69,17 @@ export default function SubmitWebsiteDialog({
         throw new Error(error.error || 'Submission failed')
       }
 
-      toast.success("Website submitted successfully. Thank you!", {position:'top-center'})
+      toast.success('Website submitted successfully. Thank you!', {
+        position: 'top-center',
+      })
       onOpenChange(false)
       setFormData(FormInitial)
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Failed to submit. Try again later :<')
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : 'Failed to submit. Try again later :<'
+      )
     } finally {
       setIsSubmitting(false)
     }
@@ -91,7 +97,11 @@ export default function SubmitWebsiteDialog({
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} autoComplete='off' className='mt-4 space-y-4'>
+        <form
+          onSubmit={handleSubmit}
+          autoComplete='off'
+          className='mt-4 space-y-4'
+        >
           <div className='space-y-2'>
             <Input
               id='email'
@@ -112,7 +122,6 @@ export default function SubmitWebsiteDialog({
               type='url'
               className='text-sm'
               autoComplete='off'
-
               placeholder='Website URL'
               value={formData.websiteUrl}
               onChange={(e) =>

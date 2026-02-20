@@ -1,8 +1,8 @@
 /* New badge styling */
-a[href="/docs/components/profile-dropdown"]::after,
-a[href="/docs/components/slide-text-button"]::after,
-a[href="/docs/components/morphic-navbar"]::after {
-  content: "New";
+a[href='/docs/components/profile-dropdown']::after,
+a[href='/docs/components/slide-text-button']::after,
+a[href='/docs/components/morphic-navbar']::after {
+  content: 'New';
   position: absolute;
   right: 0.2rem;
   top: 50%;
@@ -31,7 +31,7 @@ a[href="/docs/components/morphic-navbar"]::after {
   margin-left: -10px;
 }
 
-.cat:hover #righteyelid{
+.cat:hover #righteyelid {
   visibility: hidden;
 }
 
@@ -40,11 +40,12 @@ a[href="/docs/components/morphic-navbar"]::after {
 }
 
 .cat:has(.content:hover) {
-  #righteyelid, #lefteyelid, .sleep-symbol {
+  #righteyelid,
+  #lefteyelid,
+  .sleep-symbol {
     visibility: hidden;
   }
   #eyesdown {
     visibility: visible;
   }
-
 }

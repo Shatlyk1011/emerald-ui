@@ -4,6 +4,7 @@ import { FC, Suspense, useRef, useState } from 'react'
 import { getUserInitials } from '@/composables/utils'
 import { LogOut, User as UserIcon, ChevronDown } from 'lucide-react'
 import { useScroll, useMotionValueEvent } from 'motion/react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
@@ -21,11 +22,13 @@ import {
 import ThemeToggle from '@/components/ui/theme-toggle'
 import Logo from '../ui/logo'
 import TextShimmer from '../ui/text-shimmer'
-import dynamic from 'next/dynamic'
 
-const SubmitWebsiteDialog = dynamic(() => import('../landing/SubmitWebsiteDialog'), {
-  ssr: false,
-})
+const SubmitWebsiteDialog = dynamic(
+  () => import('../landing/SubmitWebsiteDialog'),
+  {
+    ssr: false,
+  }
+)
 
 const { home, motionComponents, gsapComponents } = {
   home: '/',
@@ -76,12 +79,14 @@ const Header: FC<Props> = ({ isFumadocs }) => {
           <Logo />
         </Link>
         {/* <span className='mr-4 ml-6 opacity-50'>|</span> */}
-        <nav className='text-muted-foreground flex flex-1 justify-start ml-10'>
+        <nav className='text-muted-foreground ml-10 flex flex-1 justify-start'>
           <ul className='-tracking-one flex items-center text-sm font-medium max-sm:text-sm'>
             <li>
               <Link
                 href={home}
-                className={cn('rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2 hover:text-foreground')}
+                className={cn(
+                  'hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'
+                )}
               >
                 Website Inspiration
               </Link>
@@ -90,13 +95,13 @@ const Header: FC<Props> = ({ isFumadocs }) => {
               <DropdownMenu>
                 <DropdownMenuTrigger
                   className={cn(
-                    'flex items-center gap-1 rounded-md px-3 py-2 text-nowrap transition ease-out focus:outline-none hover:text-foreground'
+                    'hover:text-foreground flex items-center gap-1 rounded-md px-3 py-2 text-nowrap transition ease-out focus:outline-none'
                   )}
                 >
                   <TextShimmer
                     duration={7}
                     spread={15}
-                    className='transition hover:text-foreground'
+                    className='hover:text-foreground transition'
                   >
                     Components
                   </TextShimmer>
@@ -119,7 +124,10 @@ const Header: FC<Props> = ({ isFumadocs }) => {
             </li>
             <span className='mx-1 opacity-50'>|</span>
             <li>
-              <button onClick={() => setOpen(true)} className='rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2 hover:text-foreground'>
+              <button
+                onClick={() => setOpen(true)}
+                className='hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'
+              >
                 <span>Submit a website</span>
               </button>
             </li>
@@ -128,7 +136,6 @@ const Header: FC<Props> = ({ isFumadocs }) => {
 
         <div className='flex min-w-20 items-center justify-end gap-2 max-sm:gap-1'>
           <ThemeToggle />
-
 
           {isLoading ? (
             <div className='border-primary h-5 w-5 animate-spin rounded-full border-2 border-t-transparent' />
@@ -142,7 +149,9 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                         <AvatarImage
                           src={user.user_metadata?.avatar_url}
                           alt={
-                            user.user_metadata?.full_name || user.email || 'User'
+                            user.user_metadata?.full_name ||
+                            user.email ||
+                            'User'
                           }
                         />
                         <AvatarFallback>{getUserInitials(user)}</AvatarFallback>
@@ -186,12 +195,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
       </header>
 
       <Suspense fallback={'loading...'}>
-        {isOpen && (
-          <SubmitWebsiteDialog
-            open={isOpen}
-            onOpenChange={setOpen}
-          />
-        )}
+        {isOpen && <SubmitWebsiteDialog open={isOpen} onOpenChange={setOpen} />}
       </Suspense>
     </>
   )
