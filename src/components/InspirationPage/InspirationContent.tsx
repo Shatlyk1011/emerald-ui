@@ -8,13 +8,11 @@ import { IWebsites } from '@/types/inspiration'
 import dynamic from 'next/dynamic'
 import { Where } from 'payload'
 import { useInView } from 'react-intersection-observer'
-import NewsletterSubscribe from '@/components/NewsletterSubscribe'
-import ThreeDMarquee from '../ui/3d-marquee'
-import { Button } from '../ui/button'
 import FilterSection from './FilterSection'
 import SiteCards from './SiteCards'
 import EmptyResult from './SiteCards/EmptyResult'
 import SiteCardsSkeleton from './SiteCards/SiteCardsSkeleton'
+import Hero from '../landing/Hero'
 
 const SubmitWebsiteDialog = dynamic(() => import('./SubmitWebsiteDialog'), {
   ssr: false,
@@ -23,13 +21,13 @@ const SubmitWebsiteDialog = dynamic(() => import('./SubmitWebsiteDialog'), {
 interface Props {
   categories: Category[]
   styles: WebsiteStyle[]
-  initialInspirationSites: IWebsites
+  initialData: IWebsites
 }
 
 export default function InspirationContent({
   categories,
   styles,
-  initialInspirationSites,
+  initialData,
 }: Props) {
   const [filterQuery, setFilterQuery] = useState<Where>({
     isVisible: { equals: true },
@@ -45,9 +43,9 @@ export default function InspirationContent({
   })
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
-    useInfiniteInspirationSites(initialInspirationSites, filterQuery)
+    useInfiniteInspirationSites(initialData, filterQuery)
 
-  const images = initialInspirationSites.docs.map(({ imgUrl }) => imgUrl).filter(Boolean) as string[]
+  const images = initialData.docs.map(({ imgUrl }) => imgUrl).filter(Boolean) as string[]
 
   const isLoading = isFetching || isFetchingNextPage
 
@@ -105,32 +103,7 @@ export default function InspirationContent({
 
   return (
     <>
-      <section className='mb-10 flex items-center justify-between gap-10 px-20 py-10 max-2xl:px-6 max-xl:flex-col max-xl:items-start max-xl:px-0 max-lg:py-6 max-sm:mb-6'>
-        <div className='relative flex w-full flex-3 flex-col items-start bg-cyan-50/0'>
-          <h1 className='-tracking-two mb-2 text-5xl font-semibold'>
-            Node Inspiration <br className='hidden max-lg:block' /> Websites (
-            {initialInspirationSites.totalDocs})
-          </h1>
-          <div className='text-muted-foreground text-lg'>
-            <p className='mb-2'>
-              Explore selected websites for your next design.
-            </p>
-            <Button
-              className='mt-1 text-sm'
-              // size="sm"
-              onClick={() => setIsDialogOpen(true)}
-            >
-              Submit your website
-            </Button>
-          </div>
-
-          {/* <NewsletterSubscribe /> */}
-
-        </div>
-        <div className='flex-5 max-xl:w-full max-xl:flex-auto'>
-          <ThreeDMarquee images={images.slice(0, 12)} />
-        </div>
-      </section>
+      <Hero images={images} openDialog={() => setIsDialogOpen(true)} totalDocs={initialData.totalDocs} />
 
       <FilterSection
         categories={categories}

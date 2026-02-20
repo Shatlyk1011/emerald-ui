@@ -40,7 +40,7 @@ export default async function InspirationPageContent() {
     <InspirationContent
       categories={categoriesData.data.docs}
       styles={stylesData.data.docs}
-      initialInspirationSites={inspirationSitesData.data}
+      initialData={inspirationSitesData.data}
     />
   )
 }

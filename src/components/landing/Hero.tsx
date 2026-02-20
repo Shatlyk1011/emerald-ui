@@ -1,49 +1,41 @@
-'use client'
+import { Button } from "@react-email/components"
+import ThreeDMarquee from "../ui/3d-marquee"
+import NewsletterSubscribe from '@/components/NewsletterSubscribe'
 
-import Link from 'next/link'
+interface Props {
+  totalDocs: number
+  openDialog: () => void
+  images: string[]
+}
 
-// import { WobbleCard } from "../ui/wobble-card";
 
-export default function Hero() {
+export default function Hero({ totalDocs, openDialog, images }: Props) {
   return (
-    <div className='mx-auto grid h-max w-full grid-cols-2 gap-4.5 max-lg:grid-cols-1 max-lg:gap-3'>
-      <Link href={'/inspiration'} prefetch>
-        <div className='bg-primary text-primary-foreground h-full min-h-[160px] rounded-sm px-10 py-8 max-md:p-8 max-sm:min-h-[180px]'>
-          <div className='max-w-xs'>
-            <h2 className='text-left text-2xl font-semibold tracking-[-0.015em] text-balance max-sm:text-2xl'>
-              Web Design
-            </h2>
-            <p className='mt-3 text-left text-base/6 opacity-90 max-sm:mt-2'>
-              Find the best job offers in your country
-            </p>
-          </div>
-        </div>
-      </Link>
-      <Link href={'/components'} prefetch>
-        <div className='bg-primary text-primary-foreground h-full min-h-[160px] rounded-sm px-10 py-8 max-md:p-8 max-sm:min-h-[180px]'>
-          <h2 className='max-w-80 text-left text-2xl font-semibold tracking-[-0.015em] text-balance max-sm:text-2xl'>
-            Components
-          </h2>
-          <p className='mt-3 max-w-104 text-left text-base/6 opacity-90 max-sm:mt-2'>
-            Upload your resume to increase your visibility
+    <section className='mb-10 flex items-center justify-between gap-10 px-20 py-10 max-2xl:px-6 max-xl:flex-col max-xl:items-start max-xl:px-0 max-lg:py-6 max-sm:mb-6'>
+      <div className='relative flex w-full flex-3 flex-col items-start bg-cyan-50/0'>
+        <h1 className='-tracking-two mb-2 text-5xl font-semibold'>
+          Node Inspiration <br className='hidden max-lg:block' /> Websites (
+          {totalDocs})
+        </h1>
+        <div className='text-muted-foreground text-lg'>
+          <p className='mb-2'>
+            Explore selected websites for your next design.
           </p>
+          <Button
+            className='mt-1 text-sm'
+            // size="sm"
+            onClick={openDialog}
+          >
+            Submit your website
+          </Button>
         </div>
-      </Link>
-      <Link
-        href={'/chat'}
-        className='col-span-2 h-full min-h-[160px] max-lg:col-span-1 max-sm:min-h-[180px]'
-      >
-        <div className='bg-primary-foreground text-primary col-span-2 h-full rounded-sm px-10 py-8 max-lg:col-span-1 max-md:p-8'>
-          <div className='max-w-sm'>
-            <h2 className='w-full text-left text-2xl font-semibold tracking-[-0.015em] max-sm:text-2xl'>
-              AI Chat
-            </h2>
-            <p className='mt-3 max-w-104 text-left text-base/6 opacity-90 max-sm:mt-2'>
-              Get support and advice from experienced professionals
-            </p>
-          </div>
-        </div>
-      </Link>
+
+        {/* <NewsletterSubscribe /> */}
+
+      </div>
+      <div className='flex-5 max-xl:w-full max-xl:flex-auto'>
+        <ThreeDMarquee images={images} />
     </div>
+    </section>
   )
 }

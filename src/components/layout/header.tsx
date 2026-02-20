@@ -158,14 +158,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                       </p>
                     </div>
                   </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link href='/profile' className='cursor-pointer'>
-                      <UserIcon className='mr-2 size-4' />
-                      Profile
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
+                    <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={handleSignOut}
                     className='cursor-pointer'
