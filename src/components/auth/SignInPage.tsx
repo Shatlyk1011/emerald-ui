@@ -11,6 +11,7 @@ import { createClient } from '@/lib/supabase-client'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import Logo from '../ui/logo'
 
 interface Props {
   handleSwitch?: () => void
@@ -113,9 +114,8 @@ export default function SignInPage({
       {/* left */}
       <div className='flex flex-1 justify-center'>
         <div className='relative z-10 w-full max-w-lg space-y-8 rounded-2xl p-8 shadow-2xl backdrop-blur-xl max-md:space-y-5 max-sm:p-5'>
-          {/* Logo/Brand */}
           <h1 className='text-center text-3xl font-bold max-md:text-2xl'>
-            Emerald UI
+            <Logo size="xl" classes='justify-center font-semibold' />
           </h1>
 
           <div className='space-y-2 text-center'>
@@ -148,7 +148,7 @@ export default function SignInPage({
               onClick={() => handleOAuthSignIn('google')}
               disabled={loading}
               size='lg'
-              className='bg-foreground text-background hover:bg-foreground h-12 w-full cursor-pointer rounded-lg border'
+              className='bg-foreground text-background hover:bg-foreground h-10 w-full cursor-pointer rounded-md border'
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -179,7 +179,7 @@ export default function SignInPage({
             <Button
               onClick={() => handleOAuthSignIn('github')}
               disabled={loading}
-              className='bg-background text-foreground hover:bg-background h-12 w-full cursor-pointer rounded-lg border'
+              className='bg-background text-foreground hover:bg-background h-10 w-full cursor-pointer rounded-md border'
             >
               <Github className='size-5' />
               Continue with GitHub
@@ -220,8 +220,8 @@ export default function SignInPage({
             )}
 
             {magicLinkSent && (
-              <div className='rounded-md border border-green-900/50 bg-green-950/50 p-3 text-sm text-green-400'>
-                Check your email! We&apos;ve sent you a magic link to sign in.
+              <div className='rounded-md border border-green-950/70 bg-green-950/35 p-3 text-sm text-green-300'>
+                Check your email and sign-in using link we&apos;ve sent.
               </div>
             )}
 
