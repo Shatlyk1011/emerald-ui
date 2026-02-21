@@ -8,6 +8,7 @@ import { Providers as PostHogProvider } from '@/components/_providers/post-hog'
 import TanstackQueryProvider from '@/components/_providers/tanstack-query'
 import ThemeProvider from '@/components/_providers/theme-provider'
 import { UserProvider } from '@/components/_providers/user-provider'
+import Footer from '@/components/layout/footer'
 import './globals.css'
 import './tailwind.css'
 
@@ -72,6 +73,7 @@ export default function RootLayout({
                 <TanstackQueryProvider>
                   {children}
                   {modal}
+                  <Footer />
                 </TanstackQueryProvider>
               </ThemeProvider>
             </RootProvider>
