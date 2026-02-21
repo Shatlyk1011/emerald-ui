@@ -291,7 +291,7 @@ const TooltipCat: FC<Props> = ({
           </div>
         </div>
 
-        <div className='cat-tooltip tracking-two bg-card invisible absolute -top-8 right-40 z-10 flex w-72 max-w-max flex-col gap-1 rounded-lg rounded-br-none border px-3 py-1.5 text-left font-mono text-xs font-medium opacity-0 transition-all delay-[2.5s] ease-out select-none group-hover:visible group-hover:opacity-100 group-hover:select-auto max-md:hidden'>
+        <div className='cat-tooltip tracking-two bg-card invisible absolute -top-8 right-40 z-10 flex w-72 max-w-max flex-col gap-1 rounded-lg rounded-br-none border px-3 py-1.5 text-left font-mono text-xs font-medium opacity-0 transition-all delay-[4s] ease-out select-none group-hover:visible group-hover:opacity-100 group-hover:select-auto max-md:hidden'>
           <span>Meow!</span>
           <span>Like this component?</span>
           <Button
