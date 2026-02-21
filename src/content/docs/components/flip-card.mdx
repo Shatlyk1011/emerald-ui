@@ -1,0 +1,40 @@
+---
+title: Flip Card
+description: A 3D animated card that flips on hover or click, revealing hidden content on the back.
+icon: FlipHorizontal2
+---
+
+import FlipCard from "@/components/node-ui-components/flip-card";
+import { Sparkles, FlipVertical2 } from "lucide-react";
+
+
+<Preview link='flip-card' comment={['motion']} isReload>
+  <div className=" w-full items-center justify-center py-12 flex flex-col gap-10">
+    <FlipCard triggerOnHover frontContent={
+      <>
+        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
+          <Sparkles className="h-8 w-8 text-zinc-900 dark:text-zinc-100" />
+        </div>
+        <h3 className="mb-2 text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+          Work on Hover
+        </h3>
+        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+          Discover whats hidden on the other side of this card.
+        </p>
+      </>}
+    />
+    <FlipCard />
+    <FlipCard direction="vertical" frontContent={
+      <>
+        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
+          <FlipVertical2 className="h-8 w-8 text-zinc-900 dark:text-zinc-100" />
+        </div>
+        <h3 className="mb-2 text-xl font-semibold text-zinc-900 dark:text-zinc-100">
+          Vertical Flip
+        </h3>
+        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+          Discover whats hidden on the other side of this card.
+        </p>
+      </>}/>
+  </div>
+</Preview>

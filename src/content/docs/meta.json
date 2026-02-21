@@ -12,6 +12,7 @@
     "components/animated-input",
     "components/parallax-image",
     "components/subscribe-input",
+    "components/flip-card",
 
     "---AI---",
     "components/gradient-file-upload",
