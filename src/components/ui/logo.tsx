@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { cn } from '@/lib/utils'
+import { LogoIcon } from '../icons/LogoIcon'
 
 interface Props {
   classes?: string
@@ -14,11 +15,7 @@ const Logo: FC<Props> = ({ classes, size }) => {
         classes
       )}
     >
-      <img
-        className={cn('size-5', size === 'xl' && 'size-10')}
-        src='/logo.png'
-        alt='Emerald UI Logo'
-      />
+      <LogoIcon className={cn('size-7 fill-red-500', size === 'xl' && 'size-10')} />
       <span
         className={cn(
           '-tracking-two items-center transition',
