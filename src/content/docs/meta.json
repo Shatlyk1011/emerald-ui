@@ -25,6 +25,7 @@
     "components/hero",
     "components/pricing",
     "components/cards",
+    "components/footer",
 
     "---Demo---",
     "components/demo"
