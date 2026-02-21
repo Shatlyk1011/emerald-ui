@@ -1,5 +1,9 @@
-import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
+import { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
+
+
+
+
 
 const Subscribers: CollectionConfig = {
   slug: 'subscribers',
@@ -48,6 +52,7 @@ const Subscribers: CollectionConfig = {
       label: 'Subscription Source',
       type: 'text',
       required: false,
+      defaultValue: 'website (default)',
       admin: {
         description: 'Where the subscriber signed up (e.g., homepage, footer)',
         position: 'sidebar',

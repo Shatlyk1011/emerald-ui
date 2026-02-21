@@ -7,6 +7,8 @@ import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
+const ErrorMsg = 'Failed to subscribe. Please try again later.'
+
 export default function SubscribeInput() {
   const [isOpen, setOpen] = useState(false)
 
@@ -17,6 +19,7 @@ export default function SubscribeInput() {
     e.preventDefault()
     setLoading(true)
 
+
     try {
       const response = await fetch('/api/subscribers', {
         method: 'POST',
@@ -25,24 +28,26 @@ export default function SubscribeInput() {
         },
         body: JSON.stringify({
           email,
-          status: 'active',
-          source: 'website',
         }),
       })
-
       if (response.ok) {
         toast.success('Successfully subscribed to our newsletter!', {
           position: 'top-center',
         })
         setEmail('')
+        setOpen(false)
+      } else {
+        const error = await response.json().then((data) => data.errors[0].message)
+        throw new Error(error)
       }
-    } catch (_: unknown) {
-      toast.error('Failed to subscribe. Please try again later.', {
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : ErrorMsg, {
         position: 'top-center',
+        duration: 5000,
+        richColors: true
       })
     } finally {
       setLoading(false)
-      setOpen(false)
     }
   }
 
@@ -74,18 +79,7 @@ export default function SubscribeInput() {
             </Button>
           ) : (
             <form className='flex h-full gap-2' onSubmit={handleSubmit}>
-              <div className='relative flex w-full'>
-                <input
-                  id='sub'
-                  className='bg-card text-foreground -tracking-one z-10 h-full w-full rounded-md p-2 text-sm focus:outline-hidden'
-                  autoComplete='off'
-                  placeholder='Email'
-                  type='email'
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  autoFocus
-                />
+                <div className='relative flex w-full'>
                 <motion.label
                   htmlFor='sub'
                   initial={{ bottom: 10, opacity: 0 }}
@@ -93,18 +87,30 @@ export default function SubscribeInput() {
                   transition={{ type: 'spring', bounce: 0.3, duration: 0.6 }}
                   className='-tracking-one text-muted-foreground absolute z-1 flex items-center gap-1 text-[13px] font-medium text-nowrap'
                 >
-                  Get hand-picked updates - you won&apos;t regret
-                  <button type='button' className='group'>
+                    Subscribe to get hand-picked updates
+                    <button type='button' className='group'>
                     <Film className='size-4' />
 
                     <img
                       loading='lazy'
                       fetchPriority='low'
-                      className='invisible absolute top-10 left-0 w-40 rounded-lg opacity-0 transition select-none group-hover:visible group-hover:opacity-100 group-focus:visible group-focus:opacity-100'
+                        className='invisible absolute top-8 left-0 w-40 rounded-lg opacity-0 transition select-none group-hover:visible group-hover:opacity-100 group-focus:visible group-focus:opacity-100 delay-150'
                       src='/cat.gif'
                     ></img>
                   </button>
                 </motion.label>
+                  <input
+                    id='sub'
+                    className='bg-card text-foreground -tracking-one z-10 h-full w-full rounded-md p-2 text-sm focus:outline-hidden'
+                    autoComplete='off'
+                    placeholder='Email'
+                    type='email'
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    autoFocus
+                  />
+
               </div>
               <Button
                 type='submit'

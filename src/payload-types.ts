@@ -219,10 +219,6 @@ export interface Client {
    */
   email?: string | null;
   /**
-   * User subscription plan
-   */
-  currentPlan?: ('free' | 'hobby' | 'pro' | 'enterprise') | null;
-  /**
    * Block this user from accessing services
    */
   isBlocked?: boolean | null;
@@ -500,7 +496,6 @@ export interface InspirationWebsitesSelect<T extends boolean = true> {
 export interface ClientsSelect<T extends boolean = true> {
   userId?: T;
   email?: T;
-  currentPlan?: T;
   isBlocked?: T;
   provider?: T;
   isVerified?: T;

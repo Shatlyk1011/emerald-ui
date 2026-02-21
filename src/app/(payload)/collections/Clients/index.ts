@@ -1,5 +1,9 @@
-import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
+import { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
+
+
+
+
 
 const Clients: CollectionConfig = {
   slug: 'clients',
@@ -55,22 +59,6 @@ const Clients: CollectionConfig = {
       admin: {
         description: 'User email address (optional, can be provided by user)',
         readOnly: true,
-      },
-    },
-    {
-      name: 'currentPlan',
-      label: 'Current Plan',
-      type: 'select',
-      required: false,
-      defaultValue: 'free',
-      options: [
-        { label: 'Free Plan', value: 'free' },
-        { label: 'Hobby Plan', value: 'hobby' },
-        { label: 'Pro Plan', value: 'pro' },
-        { label: 'Enterprise Plan', value: 'enterprise' },
-      ],
-      admin: {
-        description: 'User subscription plan',
       },
     },
     {

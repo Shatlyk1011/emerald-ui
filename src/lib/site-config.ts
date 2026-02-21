@@ -4,6 +4,7 @@ export const siteConfig = {
   revalidateTime: 3600,
   siteUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
   ogImage: 'https://emerald-ui.com/og.jpg',
+  totalComponents: '40+',
 }
 
 export type SiteConfig = typeof siteConfig

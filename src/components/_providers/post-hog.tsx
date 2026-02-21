@@ -10,7 +10,7 @@ if (typeof window !== 'undefined' && process.env.NEXT_PUBLIC_POSTHOG_KEY) {
     defaults: '2026-01-30',
     person_profiles: 'identified_only',
     loaded: (posthog) => {
-      if (process.env.NODE_ENV === 'development') posthog.debug()
+      if (false) posthog.debug()
     },
   })
 }
