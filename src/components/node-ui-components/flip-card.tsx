@@ -58,7 +58,7 @@ export default function FlipCard({
                 <FlipHorizontal2 className="h-8 w-8 text-zinc-900 dark:text-zinc-100" />
               </div>
               <h3 className="mb-2 text-xl font-semibold text-zinc-900 dark:text-zinc-100">
-                Work on Click
+                On Click
               </h3>
               <p className="text-sm text-zinc-500 dark:text-zinc-400">
                 Discover what&apos;s hidden on the other side of this card.
