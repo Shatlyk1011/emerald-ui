@@ -25,7 +25,8 @@ export const useInfiniteInspirationSites = (
       return response.data
     },
     initialPageParam: 1,
-    getNextPageParam: (lastPage) => lastPage.hasNextPage && lastPage.nextPage,
+    getNextPageParam: (lastPage) =>
+      lastPage.hasNextPage ? lastPage.nextPage : undefined,
     initialData: {
       pages: [initialData],
       pageParams: [1],

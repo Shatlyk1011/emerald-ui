@@ -5,7 +5,7 @@ import { GsapComponents, MotionComponents, UsefulLinks } from "./footerLinks";
 
 export default function Footer() {
   return (
-    <footer className="w-full max-w-400 mx-auto px-6 py-12">
+    <footer className="w-full max-w-400 mx-auto px-6 py-24 bg-card">
       <div className=" mb-4 gap-4 items-start justify-center flex flex-col">
         <Logo size="xl" classes="text-primary"/>
         <span className="text-muted-foreground">

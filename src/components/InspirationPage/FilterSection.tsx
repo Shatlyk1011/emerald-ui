@@ -17,6 +17,7 @@ interface FilterSectionProps {
   setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>
   selectedStyles: string[]
   setSelectedStyles: React.Dispatch<React.SetStateAction<string[]>>
+  isLoading?: boolean
 }
 
 function FilterSection({
@@ -26,6 +27,7 @@ function FilterSection({
   setSelectedCategories,
   selectedStyles,
   setSelectedStyles,
+  isLoading,
 }: FilterSectionProps) {
   const { closeSiteDialog } = useAppStore()
 
@@ -55,7 +57,7 @@ function FilterSection({
   }
 
   return (
-    <section className='mb-12'>
+    <section className={cn('mb-12 transition-opacity duration-300', isLoading && 'pointer-events-none opacity-60')}>
       <div className='flex gap-12 max-md:flex-col max-md:gap-8'>
         <div className='group flex max-w-md flex-1 flex-col'>
           <h3
@@ -83,6 +85,7 @@ function FilterSection({
                   <button
                     className='-tracking-one transition-colors ease-in-out'
                     onClick={() => toggleCategory(value)}
+                    disabled={isLoading}
                   >
                     {category}
                   </button>
@@ -120,6 +123,7 @@ function FilterSection({
                   <button
                     className='-tracking-one capitalize transition-colors ease-in-out'
                     onClick={() => toggleStyle(item.style)}
+                    disabled={isLoading}
                   >
                     {item.style}
                   </button>

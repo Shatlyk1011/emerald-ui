@@ -1,11 +1,10 @@
 'use client'
 
-import { useState, useEffect, useMemo, Suspense } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { debounce } from '@/composables/utils'
 import { Category, WebsiteStyle } from '@/payload-types'
 import { useInfiniteInspirationSites } from '@/services/useGetInspirationSites'
 import { IWebsites } from '@/types/inspiration'
-import dynamic from 'next/dynamic'
 import { Where } from 'payload'
 import { useInView } from 'react-intersection-observer'
 import Hero from '../landing/Hero'
@@ -34,11 +33,13 @@ export default function InspirationContent({
 
   const { ref, inView } = useInView({
     threshold: 0,
-    rootMargin: '160px',
+    rootMargin: '240px',
   })
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
     useInfiniteInspirationSites(initialData, filterQuery)
+
+  console.log('hasNextPage', hasNextPage)
 
   const images = initialData.docs
     .map(({ imgUrl }) => imgUrl)
@@ -52,8 +53,6 @@ export default function InspirationContent({
       fetchNextPage()
     }
   }, [inView, hasNextPage, fetchNextPage, isLoading])
-
-  const allWebsites = data?.pages.flatMap((page) => page.docs) ?? []
 
   // Build filter query from selected categories and styles
   const filterQueryFromSelections = useMemo(() => {
@@ -85,12 +84,14 @@ export default function InspirationContent({
     []
   )
 
+  console.log('data.pages.length', data.pages)
+
   // Update filter query when selections change (with debounce)
   useEffect(() => {
-    if (filterQueryFromSelections && selectedCategories.length) {
+    if (filterQueryFromSelections && !isLoading) {
       debouncedSetFilterQuery(filterQueryFromSelections)
     }
-  }, [filterQueryFromSelections, debouncedSetFilterQuery])
+  }, [filterQueryFromSelections, debouncedSetFilterQuery, selectedCategories, selectedStyles])
 
   const handleResetFilters = () => {
     setFilterQuery({ isVisible: { equals: true } })
@@ -109,39 +110,51 @@ export default function InspirationContent({
         setSelectedCategories={setSelectedCategories}
         selectedStyles={selectedStyles}
         setSelectedStyles={setSelectedStyles}
+        isLoading={isLoading}
       />
 
-      {isLoading && allWebsites.length === 0 ? (
+      {isLoading && data.pages.length === 0 ? (
         <SiteCardsSkeleton />
-      ) : allWebsites.length === 0 ? (
+      ) : data.pages.length === 0 ? (
         <EmptyResult handleResetFilters={handleResetFilters} />
       ) : (
-        <SiteCards websites={allWebsites} />
+            <div className='relative'>
+              {/* Loading overlay shown when refetching with existing results */}
+              {isFetching && !isFetchingNextPage && (
+                <div className='absolute inset-0 z-10 flex items-start justify-center rounded-xl bg-background/60 pt-24 backdrop-blur-[2px]'>
+                  <div className='flex items-center gap-3 rounded-full border border-border bg-card px-5 py-3 shadow-lg'>
+                    <div className='h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent' />
+                    <span className='text-sm font-medium text-muted-foreground'>Filtering...</span>
+                  </div>
+                </div>
+              )}
+              {data.pages.map(({ docs }, i) => (
+                <SiteCards key={i} websites={docs} />
+              ))}
+            </div>
       )}
 
       {/* Sentinel element for infinite scroll */}
-      {!isLoading && allWebsites.length > 0 && (
-        <div
-          ref={ref}
-          className='flex flex-col items-center justify-center py-16'
-        >
-          {isFetchingNextPage ? (
-            <div className='text-muted-foreground flex items-center gap-3'>
-              <div className='border-primary h-5 w-5 animate-spin rounded-full border-2 border-t-transparent' />
-              <span className='text-sm font-medium'>
-                Loading more websites...
-              </span>
-            </div>
-          ) : !hasNextPage ? (
-            <div className='flex flex-col items-center gap-4'>
-              <div className='bg-border h-0.5 w-24' />
-              <p className='text-muted-foreground text-sm font-medium'>
-                You&apos;ve reached the end of the collection
-              </p>
-            </div>
-          ) : null}
-        </div>
-      )}
+      <div
+        ref={ref}
+        className='flex flex-col items-center justify-center py-16'
+      >
+        {isFetchingNextPage ? (
+          <div className='text-muted-foreground flex items-center gap-3'>
+            <div className='border-primary h-5 w-5 animate-spin rounded-full border-2 border-t-transparent' />
+            <span className='text-sm font-medium'>
+              Loading more websites...
+            </span>
+          </div>
+        ) : !hasNextPage && data.pages.flatMap((page) => page.docs).length > 0 ? (
+          <div className='flex flex-col items-center gap-4'>
+            <div className='bg-border h-0.5 w-24' />
+            <p className='text-muted-foreground text-sm font-medium'>
+              You&apos;ve reached the end of the collection
+            </p>
+          </div>
+        ) : null}
+      </div>
     </>
   )
 }
