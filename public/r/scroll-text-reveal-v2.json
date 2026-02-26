@@ -1,0 +1,16 @@
+{
+  "name": "scroll-text-reveal-v2",
+  "type": "registry:component",
+  "dependencies": [
+    "gsap",
+    "@gsap/react"
+  ],
+  "files": [
+    {
+      "type": "registry:component",
+      "content": "'use client'\n\n/**\n * @author: @codegrid\n * @description: Text Reveal with GSAP\n * @version: 1.0.0\n * @date: 2026-02-11\n * @license: MIT\n * @website: https://emerald-ui.com\n */\nimport React, { useRef, ElementType, ReactNode } from 'react'\nimport { useGSAP } from '@gsap/react'\nimport gsap from 'gsap'\nimport { ScrollTrigger } from 'gsap/ScrollTrigger'\nimport { cn } from '@/lib/utils'\n\ngsap.registerPlugin(ScrollTrigger)\n\ninterface Props {\n  children: ReactNode\n  asElement?: ElementType\n  classes?: string\n}\n\nexport default function TextReveal2({ children, asElement, classes }: Props) {\n  const textRef = useRef<HTMLElement>(null)\n  const Component = asElement || 'div'\n\n  useGSAP(\n    () => {\n      if (!textRef.current) return\n\n      const textElement = textRef.current\n      // Set the data-text attribute for the pseudo-element content\n      if (textElement.textContent) {\n        textElement.setAttribute('data-text', textElement.textContent.trim())\n      }\n\n      ScrollTrigger.create({\n        trigger: textElement,\n        start: 'top 80%', // Adjusted start for better visibility\n        end: 'bottom 20%', // Adjusted end\n        scrub: 1,\n        onUpdate: (self) => {\n          // Calculate clip value based on scroll progress\n          // 100% (hidden) -> 0% (fully visible)\n          const clipValue = Math.max(0, 100 - self.progress * 100)\n          textElement.style.setProperty('--clip-value', `${clipValue}%`)\n        },\n      })\n    },\n    { scope: textRef, dependencies: [children] }\n  )\n\n  return (\n    <Component\n      ref={textRef}\n      style={{ '--clip-value': '100%' } as React.CSSProperties}\n      className={cn(\n        'text-muted-foreground/20 before:text-foreground relative mx-auto w-fit max-w-[80%] before:absolute before:top-0 before:left-0 before:will-change-[clip-path] before:content-[attr(data-text)] before:[clip-path:inset(0_0_var(--clip-value)_0)]',\n        classes\n      )}\n    >\n      {children}\n    </Component>\n  )\n}\n",
+      "path": "/components/emerald-ui-components/gsap-components/scroll-text-reveal-v2.tsx",
+      "target": "components/emerald-ui-components/scroll-text-reveal-v2.tsx"
+    }
+  ]
+}

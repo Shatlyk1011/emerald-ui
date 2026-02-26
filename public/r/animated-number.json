@@ -1,0 +1,15 @@
+{
+  "name": "animated-number",
+  "type": "registry:component",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "type": "registry:component",
+      "content": "'use client'\nimport { useRef, useEffect } from 'react'\nimport { motion, useSpring, useTransform, useInView } from 'motion/react'\nimport { cn } from '@/lib/utils'\n\ninterface AnimatedNumberProps {\n  value: number\n  className?: string\n  springOptions?: { stiffness?: number; damping?: number; mass?: number }\n  asElement?: keyof typeof motionComponents\n}\n\nconst motionComponents = {\n  span: motion.span,\n  div: motion.div,\n  p: motion.p,\n}\n\nexport default function AnimatedNumber({\n  value,\n  className,\n  springOptions,\n  asElement = 'span',\n}: AnimatedNumberProps) {\n  const MotionComponent = motionComponents[asElement] || motion.span\n\n  const ref = useRef(null)\n  const isInView = useInView(ref, { once: true, margin: '-10px' })\n\n  const spring = useSpring(0, springOptions || { stiffness: 50, damping: 15 })\n  const display = useTransform(spring, (current) =>\n    Math.round(current).toLocaleString()\n  )\n\n  useEffect(() => {\n    if (isInView) {\n      spring.set(value)\n    }\n  }, [isInView, spring, value])\n\n  return (\n    <MotionComponent\n      ref={ref}\n      className={cn('tracking-tighter tabular-nums', className)}\n    >\n      {display}\n    </MotionComponent>\n  )\n}\n",
+      "path": "/components/emerald-ui-components/animated-number.tsx",
+      "target": "components/emerald-ui-components/animated-number.tsx"
+    }
+  ]
+}

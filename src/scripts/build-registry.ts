@@ -1,183 +1,184 @@
-import { promises as fs } from "fs";
-import { glob } from "glob";
 import path from "path";
 import type { z } from "zod";
 import type { registryItemFileSchema } from "@/registry/schema";
+import { promises as fs } from "fs";
+import { glob } from "glob";
 import { registry } from "../registry/index";
 
-const REGISTRY_BASE_PATH = process.cwd();
-const PUBLIC_FOLDER_BASE_PATH = "public/r";
+
+
+
+
+
+
+
+
+const REGISTRY_BASE_PATH = process.cwd()
+// Source folder where the actual component files live
+const SRC_FOLDER = 'src'
+const PUBLIC_FOLDER_BASE_PATH = 'public/r'
+// Site branding
+const SITE_URL = 'https://www.emerald-ui.com'
+const SITE_NAME = 'Emerald UI'
+const SITE_DESCRIPTION =
+  'A collection of stunning UI components built with Next.js, React, Tailwind CSS, GSAP, and Motion.'
+const SITE_GITHUB = 'https://github.com/shatlyk1011/ui-application'
 
 // Console colors and symbols
 const colors = {
-  reset: "\x1b[0m",
-  green: "\x1b[32m",
-  yellow: "\x1b[33m",
-  red: "\x1b[31m",
-  cyan: "\x1b[36m",
-  dim: "\x1b[2m",
-} as const;
+  reset: '\x1b[0m',
+  green: '\x1b[32m',
+  yellow: '\x1b[33m',
+  red: '\x1b[31m',
+  cyan: '\x1b[36m',
+  dim: '\x1b[2m',
+} as const
 
 const symbols = {
-  success: "✓",
-  arrow: "→",
-  error: "✗",
-  dot: "•",
-} as const;
+  success: '✓',
+  arrow: '→',
+  error: '✗',
+  dot: '•',
+} as const
 
 function printDivider() {
-  console.log(`${colors.dim}${"─".repeat(80)}${colors.reset}\n`);
+  console.log(`${colors.dim}${'─'.repeat(80)}${colors.reset}\n`)
 }
 
-// const REGISTRY_TYPE_FOLDERS: Record<string, string> = {
-//     "registry:component": "components",
-//     "registry:hook": "hooks",
-//     "registry:lib": "lib",
-//     "registry:block": "blocks",
-// };
-
 /**
- * bun run ./scripts/build-registry.ts
+ * bun run src/scripts/build-registry.ts
  *
  */
-type File = z.infer<typeof registryItemFileSchema>;
+type File = z.infer<typeof registryItemFileSchema>
 
 async function writeFileRecursive(filePath: string, data: string) {
-  const dir = path.dirname(filePath);
+  const dir = path.dirname(filePath)
 
   try {
-    await fs.mkdir(dir, { recursive: true });
-    await fs.writeFile(filePath, data, "utf-8");
+    await fs.mkdir(dir, { recursive: true })
+    await fs.writeFile(filePath, data, 'utf-8')
     console.log(
       `  ${colors.green}${symbols.success}${colors.reset} Output written to ${colors.cyan}${filePath}${colors.reset}`
-    );
+    )
   } catch (error) {
-    console.log();
+    console.log()
     console.error(
       `  ${colors.red}${symbols.error} Error writing file ${filePath}${colors.reset}`
-    );
-    console.error(error);
-    console.log();
+    )
+    console.error(error)
+    console.log()
   }
 }
 
 interface ComponentInfo {
-  name: string;
-  title: string;
-  description: string;
+  name: string
+  title: string
+  description: string
 }
 
 const extractFrontmatter = (
   content: string
 ): { title?: string; description?: string } => {
-  const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
-  if (!frontmatterMatch) return {};
+  const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/)
+  if (!frontmatterMatch) return {}
 
-  const frontmatter = frontmatterMatch[1];
-  const titleMatch = frontmatter.match(/title:\s*(.+)/);
-  const descriptionMatch = frontmatter.match(/description:\s*(.+)/);
+  const frontmatter = frontmatterMatch[1]
+  const titleMatch = frontmatter.match(/title:\s*(.+)/)
+  const descriptionMatch = frontmatter.match(/description:\s*(.+)/)
 
   return {
     title: titleMatch?.[1]?.trim(),
     description: descriptionMatch?.[1]?.trim(),
-  };
-};
+  }
+}
 
 const getComponentsInfo = async (): Promise<ComponentInfo[]> => {
   try {
-    const mdxFiles = await glob("content/docs/**/*.mdx", {
+    // Docs live under src/content/docs/** in this project
+    const mdxFiles = await glob('src/content/docs/**/*.mdx', {
       cwd: REGISTRY_BASE_PATH,
-      ignore: ["content/docs/index.mdx"],
-    });
-    const components: ComponentInfo[] = [];
+      ignore: ['src/content/docs/index.mdx'],
+    })
+    const components: ComponentInfo[] = []
 
     for (const mdxFile of mdxFiles) {
       try {
         const content = await fs.readFile(
           path.join(REGISTRY_BASE_PATH, mdxFile),
-          "utf-8"
-        );
-        const frontmatter = extractFrontmatter(content);
+          'utf-8'
+        )
+        const frontmatter = extractFrontmatter(content)
 
         if (frontmatter.title && frontmatter.description) {
-          const name = path.basename(mdxFile, ".mdx");
+          const name = path.basename(mdxFile, '.mdx')
           components.push({
             name,
             title: frontmatter.title,
             description: frontmatter.description,
-          });
+          })
         }
       } catch (error) {
         console.error(
           `    ${colors.red}${symbols.error} Error reading MDX file ${mdxFile}${colors.reset}`
-        );
+        )
       }
     }
 
-    return components.sort((a, b) => a.title.localeCompare(b.title));
+    return components.sort((a, b) => a.title.localeCompare(b.title))
   } catch (error) {
     console.error(
       `  ${colors.red}${symbols.error} Error getting component info${colors.reset}`
-    );
-    return [];
+    )
+    return []
   }
-};
+}
 
 const generateLLMsFile = async (components: ComponentInfo[]): Promise<void> => {
-  const llmsContent = `# KokonutUI - UI Component Library
+  const llmsContent = `# ${SITE_NAME} - UI Component Library
 
-Collection of 100+ stunning UI components free and open source built with Next.js, React, Tailwind CSS, and Motion.
+${SITE_DESCRIPTION}
 
 ## Components
 
 ${components
   .map(
     (component) =>
-      `**${component.title}** - ${component.description}\nhttps://kokonutui.com/docs/components/${component.name}`
+      `**${component.title}** - ${component.description}\n${SITE_URL}/docs/components/${component.name}`
   )
-  .join("\n\n")}
-
-## Templates and Premium Components (Kokonut UI Pro)
-
-Templates and premium components are available on the premium version of Kokonut UI.
-https://kokonutui.pro/templates
-
-## Premium Components (Kokonut UI Pro)
-
-Premium components are available on the premium version of Kokonut UI.
-https://kokonutui.pro/components
+  .join('\n\n')}
 
 ## Links
 
-- Website: https://kokonutui.com
-- Github: https://github.com/kokonut-labs/kokonutui
-- Sitemap: https://kokonutui.com/sitemap.xml
+- Website: ${SITE_URL}
+- Github: ${SITE_GITHUB}
+- Sitemap: ${SITE_URL}/sitemap.xml
 
-`;
+`
 
   try {
     await fs.writeFile(
-      path.join(REGISTRY_BASE_PATH, "public/llms.txt"),
+      path.join(REGISTRY_BASE_PATH, 'public/llms.txt'),
       llmsContent,
-      "utf-8"
-    );
+      'utf-8'
+    )
     console.log(
       `  ${colors.green}${symbols.success}${colors.reset} LLMs.txt file updated with ${components.length} components`
-    );
+    )
   } catch (error) {
     console.error(
       `  ${colors.red}${symbols.error} Error writing LLMs.txt file${colors.reset}`
-    );
-    console.error(error);
+    )
+    console.error(error)
   }
-};
+}
 
 const getComponentFiles = async (files: File[], registryType: string) => {
   const filesArrayPromises = (files ?? []).map(async (file) => {
     try {
       if (typeof file === "string") {
         const normalizedPath = file.startsWith("/") ? file : `/${file}`;
-        const filePath = path.join(REGISTRY_BASE_PATH, normalizedPath);
+        // Files live inside the src/ folder in this project
+        const filePath = path.join(REGISTRY_BASE_PATH, SRC_FOLDER, normalizedPath);
         const fileContent = await fs.readFile(filePath, "utf-8");
 
         const fileName = normalizedPath.split("/").pop() || "";
@@ -189,13 +190,15 @@ const getComponentFiles = async (files: File[], registryType: string) => {
           type: registryType,
           content: fileContent,
           path: normalizedPath,
-          target: `components/kokonutui/${fileName}`,
+          target: `components/emerald-ui-components/${fileName}`,
         };
       }
+
       const normalizedPath = file.path.startsWith("/")
         ? file.path
         : `/${file.path}`;
-      const filePath = path.join(REGISTRY_BASE_PATH, normalizedPath);
+      // Files live inside the src/ folder in this project
+      const filePath = path.join(REGISTRY_BASE_PATH, SRC_FOLDER, normalizedPath);
       const fileContent = await fs.readFile(filePath, "utf-8");
 
       const fileName = normalizedPath.split("/").pop() || "";
@@ -212,7 +215,7 @@ const getComponentFiles = async (files: File[], registryType: string) => {
           case "registry:block":
             return `blocks/${fileName}`;
           default:
-            return `components/kokonutui/${fileName}`;
+            return `components/emerald-ui-components/${fileName}`;
         }
       };
 

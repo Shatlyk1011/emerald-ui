@@ -1,579 +1,449 @@
 import type { Registry } from "./schema";
 
+
+
+
 export const component: Registry = [
+  // ─── Buttons ──────────────────────────────────────────────────────────────
   {
-    name: "ai-prompt",
-    type: "registry:component",
-    dependencies: ["lucide-react", "motion"],
-    registryDependencies: ["textarea", "button", "dropdown-menu"],
+    name: 'button-colorful',
+    type: 'registry:component',
     files: [
       {
-        path: "components/kokonutui/ai-prompt.tsx",
-        type: "registry:component",
-      },
-      {
-        path: "hooks/use-auto-resize-textarea.ts",
-        type: "registry:hook",
-      },
-      {
-        path: "components/icons/anthropic.tsx",
-        type: "registry:component",
-      },
-      {
-        path: "components/icons/anthropic-dark.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/buttons/button-colorful.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "command-button",
-    type: "registry:component",
-    dependencies: ["lucide-react"],
-    registryDependencies: ["button"],
+    name: 'diagonal-swipe-button',
+    type: 'registry:component',
     files: [
       {
-        path: "components/kokonutui/command-button.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/buttons/diagonal-swipe-button.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "card-flip",
-    type: "registry:component",
-    dependencies: ["lucide-react"],
+    name: 'gradient-borders-button',
+    type: 'registry:component',
     files: [
       {
-        path: "components/kokonutui/card-flip.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/buttons/gradient-borders-button.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "smooth-drawer",
-    type: "registry:component",
-    dependencies: ["motion"],
-    registryDependencies: ["drawer", "button"],
+    name: 'hover-border-gradient',
+    type: 'registry:component',
     files: [
       {
-        path: "components/kokonutui/smooth-drawer.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/buttons/hover-border-gradient.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "shape-hero",
-    type: "registry:component",
-    dependencies: ["motion"],
+    name: 'interactive-hover-button',
+    type: 'registry:component',
+    dependencies: ['lucide-react', 'motion'],
     files: [
       {
-        path: "components/kokonutui/shape-hero.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/buttons/interactive-hover-button.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "ai-text-loading",
-    type: "registry:component",
-    dependencies: ["motion"],
+    name: 'motion-button',
+    type: 'registry:component',
+    dependencies: ['lucide-react'],
     files: [
       {
-        path: "components/kokonutui/ai-text-loading.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/buttons/motion-button.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "shimmer-text",
-    type: "registry:component",
-    dependencies: ["motion"],
+    name: 'shimmer-button',
+    type: 'registry:component',
     files: [
       {
-        path: "components/kokonutui/shimmer-text.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/buttons/shimmer-button.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "carousel-cards",
-    type: "registry:component",
-    dependencies: ["lucide-react"],
-    registryDependencies: ["card", "badge", "button"],
+    name: 'shiny-button',
+    type: 'registry:component',
     files: [
       {
-        path: "components/kokonutui/carousel-cards.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/buttons/shiny-button.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "file-upload",
-    type: "registry:component",
-    dependencies: ["lucide-react", "motion"],
+    name: 'social-button',
+    type: 'registry:component',
+    dependencies: ['lucide-react', 'motion'],
     files: [
       {
-        path: "components/kokonutui/file-upload.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/buttons/social-button.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
+
+  // ─── Cards ────────────────────────────────────────────────────────────────
+  {
+    name: 'checkout-card',
+    type: 'registry:component',
+    dependencies: ['lucide-react'],
+    files: [
+      {
+        path: 'components/emerald-ui-components/cards/checkout-card.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "action-search-bar",
-    type: "registry:component",
-    dependencies: ["lucide-react", "motion"],
-    registryDependencies: ["input"],
+    name: 'job-details-card',
+    type: 'registry:component',
+    dependencies: ['lucide-react'],
+    registryDependencies: ['button'],
     files: [
       {
-        path: "components/kokonutui/action-search-bar.tsx",
-        type: "registry:component",
-      },
-      {
-        path: "hooks/use-debounce.ts",
-        type: "registry:hook",
+        path: 'components/emerald-ui-components/cards/job-details-card.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "ai-input-search",
-    type: "registry:component",
-    dependencies: ["motion"],
-    registryDependencies: ["textarea"],
+    name: 'job-listing-card',
+    type: 'registry:component',
+    dependencies: ['lucide-react', 'motion'],
+    registryDependencies: ['button'],
     files: [
       {
-        path: "components/kokonutui/ai-input-search.tsx",
-        type: "registry:component",
-      },
-      {
-        path: "hooks/use-auto-resize-textarea.ts",
-        type: "registry:hook",
+        path: 'components/emerald-ui-components/cards/job-listing-card.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "currency-transfer",
-    type: "registry:component",
-    dependencies: ["lucide-react", "motion"],
-    registryDependencies: ["card", "tooltip"],
+    name: 'profile-card',
+    type: 'registry:component',
+    dependencies: ['lucide-react', 'motion'],
+    registryDependencies: ['button'],
     files: [
       {
-        path: "components/kokonutui/currency-transfer.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/cards/profile-card.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "background-paths",
-    type: "registry:component",
-    dependencies: ["motion"],
+    name: 'stacked-article-cards',
+    type: 'registry:component',
+    registryDependencies: ['button'],
     files: [
       {
-        path: "components/kokonutui/background-paths.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/cards/stacked-article-cards.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "mouse-effect-card",
-    type: "registry:component",
-    dependencies: ["motion"],
-    registryDependencies: ["card", "button"],
+    name: 'team-member-card',
+    type: 'registry:component',
+    dependencies: ['lucide-react', 'motion'],
     files: [
       {
-        path: "components/kokonutui/mouse-effect-card.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/cards/team-member-card.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
+
+  // ─── GSAP Components ──────────────────────────────────────────────────────
+  {
+    name: 'color-text-reveal',
+    type: 'registry:component',
+    dependencies: ['gsap', '@gsap/react', 'next-themes'],
+    files: [
+      {
+        path: 'components/emerald-ui-components/gsap-components/color-text-reveal.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "beams-background",
-    type: "registry:component",
-    dependencies: ["motion"],
+    name: 'fancy-text-hover',
+    type: 'registry:component',
+    dependencies: ['gsap', '@gsap/react'],
     files: [
       {
-        path: "components/kokonutui/beams-background.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/gsap-components/fancy-text-hover.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "flow-field",
-    type: "registry:component",
-    dependencies: ["motion"],
+    name: 'interactive-team',
+    type: 'registry:component',
+    dependencies: ['gsap', '@gsap/react'],
     files: [
       {
-        path: "components/kokonutui/flow-field.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/gsap-components/interactive-team.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "apple-activity-card",
-    type: "registry:component",
-    dependencies: ["motion"],
+    name: 'link-hover',
+    type: 'registry:component',
+    dependencies: ['gsap', '@gsap/react'],
     files: [
       {
-        path: "components/kokonutui/apple-activity-card.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/gsap-components/link-hover.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "ai-voice",
-    type: "registry:component",
-    dependencies: ["motion", "lucide-react"],
+    name: 'magnetic-effect',
+    type: 'registry:component',
+    dependencies: ['gsap', '@gsap/react'],
     files: [
       {
-        path: "components/kokonutui/ai-voice.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/gsap-components/magnetic-effect.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "smooth-tab",
-    type: "registry:component",
-    dependencies: ["motion", "lucide-react"],
+    name: 'scroll-text-reveal',
+    type: 'registry:component',
+    dependencies: ['gsap', '@gsap/react'],
     files: [
       {
-        path: "components/kokonutui/smooth-tab.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/gsap-components/scroll-text-reveal.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "team-selector",
-    type: "registry:component",
-    dependencies: ["motion"],
+    name: 'scroll-text-reveal-v2',
+    type: 'registry:component',
+    dependencies: ['gsap', '@gsap/react'],
     files: [
       {
-        path: "components/kokonutui/team-selector.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/gsap-components/scroll-text-reveal-v2.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "switch-button",
-    type: "registry:component",
-    dependencies: ["lucide-react"],
-    registryDependencies: ["button"],
+    name: 'text-reveal',
+    type: 'registry:component',
+    dependencies: ['gsap', '@gsap/react'],
     files: [
       {
-        path: "components/kokonutui/switch-button.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/gsap-components/text-reveal.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
+
+  // ─── Hero ─────────────────────────────────────────────────────────────────
+  {
+    name: 'simple-hero',
+    type: 'registry:component',
+    files: [
+      {
+        path: 'components/emerald-ui-components/hero/simple-hero.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
+
+  // ─── Pricing ──────────────────────────────────────────────────────────────
+  {
+    name: 'holographic-pricing-card',
+    type: 'registry:component',
+    dependencies: ['lucide-react', 'motion'],
+    files: [
+      {
+        path: 'components/emerald-ui-components/pricing/holographic-pricing-card.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "bento-grid",
-    type: "registry:component",
-    dependencies: ["lucide-react", "motion"],
+    name: 'node-ui-pricing-card',
+    type: 'registry:component',
+    dependencies: ['lucide-react'],
+    registryDependencies: ['button', 'switch'],
     files: [
       {
-        path: "components/kokonutui/bento-grid.tsx",
-        type: "registry:component",
-      },
-      {
-        path: "components/icons/anthropic.tsx",
-        type: "registry:component",
-      },
-      {
-        path: "components/icons/anthropic-dark.tsx",
-        type: "registry:component",
-      },
-      {
-        path: "components/icons/gemini.tsx",
-        type: "registry:component",
-      },
-      {
-        path: "components/icons/open-ai.tsx",
-        type: "registry:component",
-      },
-      {
-        path: "components/icons/open-ai-dark.tsx",
-        type: "registry:component",
-      },
-      {
-        path: "components/icons/mistral.tsx",
-        type: "registry:component",
-      },
-      {
-        path: "components/icons/deepseek.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/pricing/node-ui-pricing-card.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "social-button",
-    type: "registry:component",
-    dependencies: ["lucide-react", "motion"],
-    registryDependencies: ["button"],
+    name: 'simple-pricing-card',
+    type: 'registry:component',
+    dependencies: ['lucide-react'],
+    registryDependencies: ['button'],
     files: [
       {
-        path: "components/kokonutui/social-button.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/pricing/simple-pricing-card.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
+
+  // ─── Footer ───────────────────────────────────────────────────────────────
+  {
+    name: 'keep-it-touch',
+    type: 'registry:component',
+    dependencies: ['lucide-react'],
+    files: [
+      {
+        path: 'components/emerald-ui-components/footer/keep-it-touch.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
+
+  // ─── Misc ─────────────────────────────────────────────────────────────────
+  {
+    name: '3d-marquee',
+    type: 'registry:component',
+    dependencies: ['motion'],
+    files: [
+      {
+        path: 'components/emerald-ui-components/3d-marquee.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "hold-button",
-    type: "registry:component",
-    dependencies: ["lucide-react", "motion"],
-    registryDependencies: ["button"],
+    name: 'animated-dropdown',
+    type: 'registry:component',
+    dependencies: ['lucide-react', 'motion'],
+    registryDependencies: ['button'],
     files: [
       {
-        path: "components/kokonutui/hold-button.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/animated-dropdown.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "attract-button",
-    type: "registry:component",
-    dependencies: ["lucide-react", "motion"],
-    registryDependencies: ["button"],
+    name: 'animated-input',
+    type: 'registry:component',
+    dependencies: ['lucide-react', 'motion'],
+    registryDependencies: ['button', 'input'],
     files: [
       {
-        path: "components/kokonutui/attract-button.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/animated-input.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "gradient-button",
-    type: "registry:component",
-    registryDependencies: ["button"],
+    name: 'animated-number',
+    type: 'registry:component',
+    dependencies: ['motion'],
     files: [
       {
-        path: "components/kokonutui/gradient-button.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/animated-number.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "v0-button",
-    type: "registry:component",
-    registryDependencies: ["button"],
+    name: 'flip-card',
+    type: 'registry:component',
+    dependencies: ['lucide-react', 'motion'],
     files: [
       {
-        path: "components/kokonutui/v0-button.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/flip-card.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "toolbar",
-    type: "registry:component",
-    dependencies: ["lucide-react", "motion"],
+    name: 'gradient-file-upload',
+    type: 'registry:component',
+    dependencies: ['lucide-react', 'motion', 'sonner'],
+    registryDependencies: ['button', 'textarea', 'tooltip'],
     files: [
       {
-        path: "components/kokonutui/toolbar.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/gradient-file-upload.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "ai-loading",
-    type: "registry:component",
-    dependencies: ["motion"],
+    name: 'parallax-image',
+    type: 'registry:component',
+    dependencies: ['motion'],
     files: [
       {
-        path: "components/kokonutui/ai-loading.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/parallax-image.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "card-stack",
-    type: "registry:component",
-    dependencies: ["motion"],
+    name: 'subscribe-input',
+    type: 'registry:component',
+    dependencies: ['lucide-react', 'motion'],
+    registryDependencies: ['button'],
     files: [
       {
-        path: "components/kokonutui/card-stack.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/subscribe-input.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "avatar-picker",
-    type: "registry:component",
-    dependencies: ["lucide-react", "motion"],
-    registryDependencies: ["card", "button", "input"],
+    name: 'text-scramble',
+    type: 'registry:component',
     files: [
       {
-        path: "components/kokonutui/avatar-picker.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/text-scramble.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "type-writer",
-    type: "registry:component",
-    dependencies: ["motion"],
+    name: 'text-shimmer',
+    type: 'registry:component',
     files: [
       {
-        path: "components/kokonutui/type-writer.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/text-shimmer.tsx',
+        type: 'registry:component',
       },
     ],
   },
   {
-    name: "swoosh-text",
-    type: "registry:component",
-    dependencies: ["motion"],
+    name: 'typing-effect',
+    type: 'registry:component',
+    dependencies: ['motion'],
     files: [
       {
-        path: "components/kokonutui/swoosh-text.tsx",
-        type: "registry:component",
+        path: 'components/emerald-ui-components/typing-effect.tsx',
+        type: 'registry:component',
       },
     ],
   },
-  {
-    name: "sliced-text",
-    type: "registry:component",
-    dependencies: ["motion"],
-    files: [
-      {
-        path: "components/kokonutui/sliced-text.tsx",
-        type: "registry:component",
-      },
-    ],
-  },
-  {
-    name: "glitch-text",
-    type: "registry:component",
-    dependencies: ["motion"],
-    files: [
-      {
-        path: "components/kokonutui/glitch-text.tsx",
-        type: "registry:component",
-      },
-    ],
-  },
-  {
-    name: "matrix-text",
-    type: "registry:component",
-    dependencies: ["motion"],
-    files: [
-      {
-        path: "components/kokonutui/matrix-text.tsx",
-        type: "registry:component",
-      },
-    ],
-  },
-  {
-    name: "dynamic-text",
-    type: "registry:component",
-    dependencies: ["motion"],
-    files: [
-      {
-        path: "components/kokonutui/dynamic-text.tsx",
-        type: "registry:component",
-      },
-    ],
-  },
-  {
-    name: "particle-button",
-    type: "registry:component",
-    dependencies: ["lucide-react", "motion"],
-    registryDependencies: ["button"],
-    files: [
-      {
-        path: "components/kokonutui/particle-button.tsx",
-        type: "registry:component",
-      },
-    ],
-  },
-  {
-    name: "tweet-card",
-    type: "registry:component",
-    dependencies: ["lucide-react"],
-    files: [
-      {
-        path: "components/kokonutui/tweet-card.tsx",
-        type: "registry:component",
-      },
-    ],
-  },
-  {
-    name: "scroll-text",
-    type: "registry:component",
-    dependencies: ["motion"],
-    files: [
-      {
-        path: "components/kokonutui/scroll-text.tsx",
-        type: "registry:component",
-      },
-    ],
-  },
-  {
-    name: "liquid-glass-card",
-    type: "registry:component",
-    dependencies: ["lucide-react"],
-    registryDependencies: ["card", "button"],
-    files: [
-      {
-        path: "components/kokonutui/liquid-glass-card.tsx",
-        type: "registry:component",
-      },
-    ],
-  },
-  {
-    name: "profile-dropdown",
-    type: "registry:component",
-    dependencies: ["lucide-react"],
-    registryDependencies: ["dropdown-menu"],
-    files: [
-      {
-        path: "components/kokonutui/profile-dropdown.tsx",
-        type: "registry:component",
-      },
-      {
-        path: "components/icons/gemini.tsx",
-        type: "registry:component",
-      },
-    ],
-  },
-  {
-    name: "loader",
-    type: "registry:component",
-    dependencies: ["motion"],
-    files: [
-      {
-        path: "components/kokonutui/loader.tsx",
-        type: "registry:component",
-      },
-    ],
-  },
-  {
-    name: "slide-text-button",
-    type: "registry:component",
-    dependencies: ["motion"],
-    registryDependencies: ["button"],
-    files: [
-      {
-        path: "components/kokonutui/slide-text-button.tsx",
-        type: "registry:component",
-      },
-    ],
-  },
-  {
-    name: "morphic-navbar",
-    type: "registry:component",
-    dependencies: ["clsx"],
-    files: [
-      {
-        path: "components/kokonutui/morphic-navbar.tsx",
-        type: "registry:component",
-      },
-    ],
-  },
-  {
-    name: "spotlight-cards",
-    type: "registry:component",
-    dependencies: ["motion", "lucide-react"],
-    files: [
-      {
-        path: "components/kokonutui/spotlight-cards.tsx",
-        type: "registry:component",
-      },
-    ],
-  },
-];
+]

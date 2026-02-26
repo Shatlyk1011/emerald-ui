@@ -15,6 +15,7 @@ type PreviewProps = {
   isBlock?: boolean
   isReload?: boolean
 }
+const PRE_PATH = '@emerald-ui'
 
 function Preview({
   children,
@@ -38,6 +39,7 @@ function Preview({
       <PreviewContent
         isBlock={isBlock}
         link={link}
+        prePath={PRE_PATH}
         onReload={isReload ? handleReload : undefined}
       />
 

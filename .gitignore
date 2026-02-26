@@ -43,8 +43,6 @@ next-env.d.ts
 
 /sites.md
 /todo.md
-
-src/content/docs/components/demo.mdx
-src/components/emerald-ui-components/demo.tsx
+NEW-COMPONENTS.md
 
 public/rss.xml

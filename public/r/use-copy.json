@@ -1,0 +1,12 @@
+{
+  "name": "use-copy",
+  "type": "registry:hook",
+  "files": [
+    {
+      "type": "registry:hook",
+      "content": "'use client'\nimport { useActionState, useEffect, useState, useTransition } from 'react'\nimport { usePathname, useRouter } from 'next/navigation'\nimport { toast } from 'sonner'\nimport { copyComponent } from '@/lib/action'\nimport { useUser } from './use-user'\n\ninterface Props {\n  link: string\n  isBlock?: boolean\n}\n\nconst useCopy = ({ link, isBlock = false }: Props) => {\n  const router = useRouter()\n  const { user } = useUser()\n  const isLogin = !!user\n  const pathname = usePathname()\n\n  const isAuthRequired = isBlock && !isLogin\n\n  const [isPending, startTransition] = useTransition()\n  const [isCopied, setIsCopied] = useState(false)\n\n  const [state, formAction] = useActionState(copyComponent, {\n    error: '',\n    content: '',\n    success: false,\n  })\n  const handleCopyClick = async () => {\n    if (isAuthRequired) {\n      router.push(`/sign-in?next=${encodeURIComponent(pathname)}`)\n      toast.info('Please sign in to copy the component.', {\n        position: 'top-center',\n      })\n      return\n    }\n    const [folder, filename] = link.split('/')\n\n    startTransition(async () => {\n      const formData = new FormData()\n      formData.append('folder', folder)\n      formData.append('fileName', filename)\n\n      formAction(formData)\n    })\n  }\n\n  useEffect(() => {\n    if (state.success && state.content) {\n      // eslint-disable-next-line react-hooks/set-state-in-effect\n      setIsCopied(true)\n      navigator.clipboard.writeText(state.content)\n\n      setTimeout(() => {\n        setIsCopied(false)\n      }, 2000)\n    }\n  }, [state])\n\n  return { handleCopyClick, isCopied, isPending, isAuthRequired }\n}\n\nexport default useCopy\n",
+      "path": "/hooks/use-copy.ts",
+      "target": "hooks/use-copy.ts"
+    }
+  ]
+}

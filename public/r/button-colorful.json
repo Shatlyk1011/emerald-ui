@@ -1,0 +1,12 @@
+{
+  "name": "button-colorful",
+  "type": "registry:component",
+  "files": [
+    {
+      "type": "registry:component",
+      "content": "'use client'\n\n/**\n * @author: @emerald-ui\n * @description: Colorful Gradient Button Component - A button with animated gradient background effects\n * @version: 1.0.0\n * @date: 2026-01-30\n * @license: MIT\n * @website: https://emerald-ui.com\n */\nimport React from 'react'\nimport { cn } from '@/lib/utils'\n\ninterface ButtonColorfulProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  label?: string\n  variant?: 'default'\n}\n\nexport default function ButtonColorful({\n  className,\n  children = 'Explore Components',\n  variant = 'default',\n  ...props\n}: ButtonColorfulProps) {\n  const gradientVariants = {\n    default:\n      'from-cyan-500 via-blue-500 to-purple-500 dark:from-cyan-700 dark:via-blue-700 dark:to-purple-700',\n  }\n\n  return (\n    <button\n      className={cn(\n        'group relative h-10 overflow-hidden rounded-sm px-4 text-sm tracking-[-0.02em] text-white transition-all duration-200',\n        'bg-neutral-400 dark:bg-neutral-300',\n        className\n      )}\n      {...props}\n    >\n      {/* Gradient background effect */}\n      <div\n        className={cn(\n          'absolute inset-0',\n          'bg-linear-to-r',\n          gradientVariants[variant],\n          'opacity-80 group-hover:opacity-100',\n          'blur transition-opacity duration-500'\n        )}\n      />\n\n      {/* Content */}\n      <div className='relative flex items-center justify-center gap-2'>\n        {children}\n      </div>\n    </button>\n  )\n}\n",
+      "path": "/components/emerald-ui-components/buttons/button-colorful.tsx",
+      "target": "components/emerald-ui-components/button-colorful.tsx"
+    }
+  ]
+}

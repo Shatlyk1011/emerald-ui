@@ -1,22 +1,49 @@
 'use client'
 
-import { type RefObject, useEffect, useRef } from 'react'
+import { type RefObject, useEffect, useRef, useState } from 'react'
 import { CheckCheck, Copy, ShieldAlert, RefreshCw } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { cn } from '@/lib/utils'
 import useCopy from '@/hooks/use-copy'
 import SuccessParticles from '../ui/success-particles'
+import { PackageManagerTabs } from './package-manager-tabs'
 
 export default function PreviewContent({
   link,
+  prePath,
   isBlock = false,
   onReload,
 }: {
   link: string
+    prePath: string
   isBlock?: boolean
   onReload?: () => void
 }) {
   const { theme } = useTheme()
+
+
+  const handleTerminalClick = (packageManager: string) => {
+    const [folder, filename] = link.split("/");
+    const componentName = filename ? filename : folder;
+
+    let commandToCopy: string;
+    const componentAddCommand = `shadcn@latest add ${prePath}/${componentName}`;
+
+    if (packageManager === "pnpm") {
+      commandToCopy = `pnpm dlx ${componentAddCommand}`;
+    } else if (packageManager === "npm") {
+      commandToCopy = `npx ${componentAddCommand}`;
+    } else {
+      commandToCopy = `bunx --bun ${componentAddCommand}`;
+    }
+
+    navigator.clipboard.writeText(commandToCopy);
+  };
+
+  const getFileName = () => {
+    const [folder, filename] = link.split("/");
+    return filename ? filename : folder;
+  };
 
   const { handleCopyClick, isCopied, isPending, isAuthRequired } = useCopy({
     link,
@@ -38,6 +65,13 @@ export default function PreviewContent({
           buttonRef={copyButtonRef as RefObject<HTMLButtonElement>}
         />
       ) : null}
+      <div className="w-full sm:w-auto">
+        <PackageManagerTabs
+          commandName={getFileName()}
+          onSelect={handleTerminalClick}
+          prePath={prePath}
+        />
+      </div>
       <div className='mt-1 flex w-full items-center justify-between gap-2 sm:mt-0 sm:w-auto'>
         <form
           className='w-full sm:w-auto'
