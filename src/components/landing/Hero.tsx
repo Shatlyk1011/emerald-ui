@@ -10,11 +10,11 @@ interface Props {
 
 export default function Hero({ totalDocs, images }: Props) {
   return (
-    <section className='mb-10 flex items-center justify-between gap-10 px-20 pb-10 max-2xl:px-6 max-xl:flex-col max-xl:items-start max-xl:px-0 max-lg:py-6 max-sm:mb-6'>
+    <section className='mb-10 flex items-center justify-between gap-10 max-xl:gap-0 px-20 pb-10 max-2xl:px-6 max-xl:flex-col max-xl:items-start max-xl:px-0 max-lg:py-6 max-sm:mb-6'>
       <div className='relative flex w-full flex-3 flex-col items-start bg-cyan-50/0'>
         <span className='text-xs text-muted-foreground mb-1'>Websites - {totalDocs}+ | Components - {siteConfig.totalComponents}</span>
         <h1 className='-tracking-two mb-2 text-4xl font-semibold'>
-          Inspiration  Websites  &<br /> Emerald Components 
+          <span className='text-nowrap'>Inspiration Websites &</span><br /> <span className='text-nowrap'>Emerald Components</span> 
         </h1>
         <div className='text-muted-foreground text-base'>
           <p className='mb-2'>
