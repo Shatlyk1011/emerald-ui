@@ -31,16 +31,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
         {page.data.description} <br />
       </DocsDescription>
 
-      {page.data.credits && (
-        <div className='mt-4'>
-          <h2 className='tracking-one text-base font-normal'>
-            Credits:{' '}
-            <span className='text-primary tracking-[initial]'>
-              {page.data.credits}
-            </span>
-          </h2>
-        </div>
-      )}
+
 
       <DocsBody className={cn(page.data.full && 'min-w-full')}>
         <MDX
@@ -56,6 +47,15 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
           }}
         />
       </DocsBody>
+
+      {page.data.credits && (
+        <h2 className='tracking-one text-base font-normal'>
+          Credits:{' '}
+          <span className='text-primary tracking-[initial]'>
+            {page.data.credits}
+          </span>
+        </h2>
+      )}
     </DocsPage>
   )
 }
