@@ -41,7 +41,6 @@ interface Props {
 }
 
 const Header: FC<Props> = ({ isFumadocs }) => {
-  const pathname = usePathname()
   const router = useRouter()
   const headerRef = useRef<HTMLElement>(null)
   const { user, isLoading, signOut } = useUser()
@@ -65,7 +64,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
         ref={headerRef}
         className={cn(
           'fixed top-0 z-20 mx-auto flex h-14 w-full items-center justify-between border px-8 py-2 font-sans max-sm:px-5',
-          isScrolled && 'bg-background/90 backdrop-blur-sm',
+          isScrolled && !isFumadocs && 'bg-background/90 backdrop-blur-sm',
           isFumadocs && 'static w-full flex-1 border-none px-0'
         )}
       >
