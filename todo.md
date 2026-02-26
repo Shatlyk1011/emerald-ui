@@ -1,20 +1,6 @@
-- improve chat ui - length, options, scale
-
-- Integrate stripe with OAUTH
-
-LLM:
-- research preview editor with multiple page support
-- if image, review image, and generate app component structure
-- using app component structure, generate actual components using react + tailwind + framer motion and unsplash images
-- find a way to deploy the actual app - push to custom page with actual code and token. add is private boolean. verify token by comparing user id and code data id. (for private deployments)
-
 Node ui:
 
-- explore gemini tasks/skills and generate them via llm (github like)
-
 - discord components
-
-<!-- !!! ISSUE WHEN APPLYING FILTER IN dialog - remove this logic?? -->
 
 Result page:
 
@@ -40,15 +26,25 @@ Global:
 
 - update main page ? 
 
+<!-- before production -->
 
-<!-- 
- -->
+- check supabase auth limitations (magic link; custom nodemailer?)
 
-<!-- 
-  weekly newsletter (n8n) 
-  
+<!-- integrate newsletter with supabase auth -->
+
+<!-- video loading states/text -->
+
+<!-- add posthog action states -->
+
+<!-- fix multiple requests issue (test) -->
+
+
+ <!-- 1
+  add new functionality in fumadocs. the Ui elements pages, namely buttons, text hero pricing cards has multiple components in it. i want dynamically show the exactly number of components inside that page, for example, the cards page has 6 unique card components, so in the sidebar will be Cards (6) - like this.
 -->
 
-<!-- make sign in obligatory? for usa ip give 5 credits, or no free credits (is free credits allowed flag) -->
+<!-- once user login, add his email to sub list -->
 
-<!-- add screen sizing -->
+  <!-- 
+    create wrapper component with the following functionality. this wrapper component will trigger on hover, and will show the hand animation with the suggestion alike text"Like this componetn? Check it out in our library". 
+   -->

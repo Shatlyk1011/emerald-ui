@@ -63,7 +63,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
       <header
         ref={headerRef}
         className={cn(
-          'fixed top-0 z-20 mx-auto flex h-14 w-full items-center justify-between border px-8 py-2 font-sans max-sm:px-5',
+          'fixed top-0 z-20 mx-auto flex h-14 w-full items-center justify-between border-b px-8 py-2 font-sans max-sm:px-5',
           isScrolled && !isFumadocs && 'bg-background/90 backdrop-blur-sm',
           isFumadocs && 'static w-full flex-1 border-none px-0'
         )}
