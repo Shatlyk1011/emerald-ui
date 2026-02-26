@@ -18,5 +18,7 @@
     "lib": "@/lib",
     "hooks": "@/hooks"
   },
-  "registries": {}
+  "registries": {
+    "@emerald-ui": "https://emerald-ui.com/r/{name}.json"
+  }
 }

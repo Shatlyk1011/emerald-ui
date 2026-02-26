@@ -40,9 +40,9 @@ function SiteCard({ item, index }: SiteCardProps) {
   }
 
   const handleMouseEnter = () => {
-    if (videoRef.current && hasVideo) {
+    if (videoRef.current && hasVideo && videoUrl) {
+      videoRef.current.src = videoUrl
       setIsHovered(true)
-      videoRef.current.load()
       videoRef.current.play()
     }
   }
@@ -51,6 +51,8 @@ function SiteCard({ item, index }: SiteCardProps) {
     if (videoRef.current && hasVideo) {
       setIsHovered(false)
       videoRef.current.pause()
+      videoRef.current.src = ''
+      videoRef.current.load()
     }
   }
 
@@ -95,11 +97,10 @@ function SiteCard({ item, index }: SiteCardProps) {
                     }}
                   />
                 )}
-                {/* Show video on hover if available */}
+                {/* Show video on hover if available — src is set on hover only */}
                 {hasVideo && videoUrl && (
                   <video
                     ref={videoRef}
-                    src={videoUrl}
                     className={cn(
                       'absolute inset-0 h-full w-full object-cover transition-opacity duration-300',
                       isHovered ? 'inline-block' : 'hidden'

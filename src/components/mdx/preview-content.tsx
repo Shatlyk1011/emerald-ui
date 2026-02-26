@@ -65,83 +65,85 @@ export default function PreviewContent({
           buttonRef={copyButtonRef as RefObject<HTMLButtonElement>}
         />
       ) : null}
-      <div className="w-full sm:w-auto">
-        <PackageManagerTabs
-          commandName={getFileName()}
-          onSelect={handleTerminalClick}
-          prePath={prePath}
-        />
-      </div>
-      <div className='mt-1 flex w-full items-center justify-between gap-2 sm:mt-0 sm:w-auto'>
-        <form
-          className='w-full sm:w-auto'
-          onSubmit={(e) => {
-            e.preventDefault()
-            handleCopyClick()
-          }}
-        >
-          <button
-            className={cn(
-              'relative overflow-hidden',
-              'h-7 px-2 text-xs font-medium',
-              'bg-foreground',
-              'text-background',
-              'hover:bg-foreground/90',
-              'hover:text-background',
-              'transition-all duration-200',
-              'group flex items-center justify-center gap-1',
-              'rounded-sm',
-              'my-0 py-0 shadow-none',
-              'w-fit md:w-full',
-              isAuthRequired && 'opacity-80'
-            )}
-            disabled={isPending}
-            ref={copyButtonRef}
-            type='submit'
+      <div className='flex justify-between gap-10'>
+        <div className="w-full sm:w-auto">
+          <PackageManagerTabs
+            commandName={getFileName()}
+            onSelect={handleTerminalClick}
+            prePath={prePath}
+          />
+        </div>
+        <div className='mt-1 flex w-full items-center justify-between gap-2 sm:mt-0 sm:w-auto'>
+          <form
+            className='w-full sm:w-auto'
+            onSubmit={(e) => {
+              e.preventDefault()
+              handleCopyClick()
+            }}
           >
-            {isCopied ? (
-              <CheckCheck className='text-background h-3.5 w-3.5' />
-            ) : (
-              <>
-                {/* if is block and not auth */}
-                {isAuthRequired ? (
-                  <ShieldAlert
-                    className={cn(
-                      'h-3.5 w-3.5 transition-all duration-200 group-hover:scale-110'
-                    )}
-                  />
-                ) : (
-                  <Copy className='h-3.5 w-3.5 transition-all duration-200 group-hover:rotate-12' />
-                )}
-              </>
-            )}
-            <span>Copy</span>
-          </button>
-        </form>
-        {onReload && (
-          <button
-            onClick={onReload}
-            className={cn(
-              'relative overflow-hidden',
-              'h-7 px-2 text-xs font-medium',
-              'transition-all duration-200',
-              'group flex items-center justify-center gap-1',
-              'rounded-sm',
-              'my-0 py-0 shadow-none',
-              'w-fit'
-            )}
-            type='button'
-            aria-label='Reload component'
-          >
-            <RefreshCw
+            <button
               className={cn(
-                'h-3.5 w-3.5',
-                'transition-all duration-300',
-                'group-hover:rotate-180'
+                'relative overflow-hidden',
+                'h-7 px-2 text-xs font-medium',
+                'bg-foreground',
+                'text-background',
+                'hover:bg-foreground/90',
+                'hover:text-background',
+                'transition-all duration-200',
+                'group flex items-center justify-center gap-1',
+                'rounded-sm',
+                'my-0 py-0 shadow-none',
+                'w-fit md:w-full',
+                isAuthRequired && 'opacity-80'
               )}
-            />
-          </button>
-        )}
+              disabled={isPending}
+              ref={copyButtonRef}
+              type='submit'
+            >
+              {isCopied ? (
+                <CheckCheck className='text-background h-3.5 w-3.5' />
+              ) : (
+                <>
+                  {/* if is block and not auth */}
+                  {isAuthRequired ? (
+                    <ShieldAlert
+                      className={cn(
+                        'h-3.5 w-3.5 transition-all duration-200 group-hover:scale-110'
+                      )}
+                    />
+                  ) : (
+                    <Copy className='h-3.5 w-3.5 transition-all duration-200 group-hover:rotate-12' />
+                  )}
+                </>
+              )}
+              <span>Copy</span>
+            </button>
+          </form>
+          {onReload && (
+            <button
+              onClick={onReload}
+              className={cn(
+                'relative overflow-hidden',
+                'h-7 px-2 text-xs font-medium',
+                'transition-all duration-200',
+                'group flex items-center justify-center gap-1',
+                'rounded-sm',
+                'my-0 py-0 shadow-none',
+                'w-fit'
+              )}
+              type='button'
+              aria-label='Reload component'
+            >
+              <RefreshCw
+                className={cn(
+                  'h-3.5 w-3.5',
+                  'transition-all duration-300',
+                  'group-hover:rotate-180'
+                )}
+              />
+            </button>
+          )}
+        </div>
       </div>
     </>
   )

@@ -31,7 +31,7 @@ export default function SubscribeInput() {
         }),
       })
       if (response.ok) {
-        toast.success('Successfully subscribed to our newsletter!', {
+        toast.success('Successfully subscribed to newsletter!', {
           position: 'top-center',
         })
         setEmail('')
