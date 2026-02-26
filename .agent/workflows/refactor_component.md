@@ -35,7 +35,7 @@ description: Component Refactoring Workflow
 
 2.1 File Structure Setup
 
-- Create/Update component file: `src/components/node-ui-components/[kebab-case-name].tsx`
+- Create/Update component file: `src/components/emerald-ui-components/[kebab-case-name].tsx`
 - Follow the established template structure from `Create Component and Docs` skill
 - Ensure proper file organization and naming conventions
 

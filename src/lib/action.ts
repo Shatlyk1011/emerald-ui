@@ -1,8 +1,13 @@
 'use server'
 
-import path from 'path'
-import { cache } from 'react'
-import { promises as fs } from 'fs'
+import path from 'path';
+import { cache } from 'react';
+import { promises as fs } from 'fs';
+
+
+
+
+
 
 // Create a cached version of the file reading operation
 const readFileCache = cache(
@@ -10,7 +15,10 @@ const readFileCache = cache(
 )
 
 const getComponent = async (fileName: string | null, folder: string) => {
-  const baseDir = path.join(process.cwd(), 'src/components/node-ui-components')
+  const baseDir = path.join(
+    process.cwd(),
+    'src/components/emerald-ui-components'
+  )
   if (!fileName || fileName === 'undefined') {
     const fullPath = path.join(baseDir, `${folder}.tsx`)
     return await readFileCache(fullPath)

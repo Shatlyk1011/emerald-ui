@@ -266,6 +266,6 @@ const handleClick = contextSafe(() => {
 ### 4.1 Component Documentation
 
 - **Create or update** the documentation file in `src/content/docs/gsap/components/[kebab-case-name].mdx`
-- Create/Update component file: `src/components/node-ui-components/[kebab-case-name].tsx`
+- Create/Update component file: `src/components/emerald-ui-components/[kebab-case-name].tsx`
 - Follow the established template structure from `Create Component and Docs` skill
 - Ensure proper file organization and naming conventions

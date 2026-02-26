@@ -9,7 +9,7 @@ description: Convert a browser snippet (HTML/CSS) into a React component
    - Determine if `motion/react` is needed for animations (default to yes if animations are present or requested).
 
 2. **Component Implementation**
-   - Create the component file in `src/components/node-ui-components/[kebab-case-name].tsx`.
+   - Create the component file in `src/components/emerald-ui-components/[kebab-case-name].tsx`.
    - Use the `Create Component and Docs` skill to follow the code template.
    - **Conversion Rules**:
      - **HTML to JSX**: Convert class to className, close self-closing tags, etc.

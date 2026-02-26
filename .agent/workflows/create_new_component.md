@@ -11,7 +11,7 @@ description: Create a new custom component from scratch and its documentation
      - Is this a solid/usable component focused on practical functionality?
 
 2. **Component Design & Implementation**
-   - Create the component file in `src/components/node-ui-components/[kebab-case-name].tsx`.
+   - Create the component file in `src/components/emerald-ui-components/[kebab-case-name].tsx`.
 
    - Use the `Create Component and Docs` skill to follow the code template.
    - Always add dark and light modes. use tailwind colors. for dark mode use dark: utility class. make sure it looks good both in light and dark modes.

@@ -9,7 +9,7 @@ Use this skill when the user asks to create a new UI component. This skill ensur
 
 ## 1. Component Creation
 
-**Location:** `src/components/node-ui-components/<kebab-case-name>.tsx`
+**Location:** `src/components/emerald-ui-components/<kebab-case-name>.tsx`
 
 **Template:**
 
@@ -66,7 +66,7 @@ icon: [Lucide Icon Name]
 full: false
 ---
 
-import [ComponentName] from '@/components/node-ui-components/[kebab-case-name]'
+import [ComponentName] from '@/components/emerald-ui-components/[kebab-case-name]'
 
 <Preview link='[kebab-case-name]' comment={['[additional packages if there is any]']}>
   <[ComponentName] />
@@ -76,7 +76,7 @@ import [ComponentName] from '@/components/node-ui-components/[kebab-case-name]'
 **Key Guidelines:**
 
 - Frontmatter must include `title`, `description`, `icon`, and `full`.
-- Import the component from `@/components/node-ui-components/...`.
+- Import the component from `@/components/emerald-ui-components/...`.
 - Wrap the component in `<Preview>`.
 - `link` prop in `<Preview>` should match the filename (without extension).
 - include only the preview component. not need for props table or usage examples or any other additional information.

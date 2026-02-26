@@ -45,6 +45,6 @@ next-env.d.ts
 /todo.md
 
 src/content/docs/components/demo.mdx
-src/components/node-ui-components/demo.tsx
+src/components/emerald-ui-components/demo.tsx
 
 public/rss.xml
