@@ -113,7 +113,7 @@ export default function SignInPage({
     >
       {/* left */}
       <div className='flex flex-1 justify-center'>
-        <div className='relative z-10 w-full max-w-lg space-y-8 rounded-2xl p-8 shadow-2xl backdrop-blur-xl max-md:space-y-5 max-sm:p-5'>
+        <div className='relative z-10 w-full max-w-lg space-y-8 rounded-2xl p-8 max-md:space-y-5 max-sm:p-5'>
           <h1 className='text-center text-3xl font-bold max-md:text-2xl'>
             <Logo size='xl' classes='justify-center font-semibold' />
           </h1>
@@ -209,7 +209,7 @@ export default function SignInPage({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
-                className='border-border bg-secondary h-10 text-white placeholder:text-sm'
+                className='border-border bg-secondary h-10  placeholder:text-sm'
               />
             </div>
 
@@ -228,7 +228,7 @@ export default function SignInPage({
             <Button
               type='submit'
               disabled={loading}
-              className='bg-primary-foreground hover:bg-primary-foreground/80 h-10 w-full text-white'
+              className='bg-primary-foreground text-foreground hover:bg-primary-foreground/80 h-10 w-full '
             >
               {loading ? 'Sending...' : 'Continue with Email'}
             </Button>
@@ -254,15 +254,7 @@ export default function SignInPage({
         </div>
       </div>
 
-      {/* right */}
-      <div
-        className={cn(
-          'flex h-screen flex-1 items-center justify-center bg-slate-900 max-lg:hidden',
-          isModal && 'hidden'
-        )}
-      >
-        hello world
-      </div>
+
     </div>
   )
 }

@@ -11,6 +11,7 @@ import { createClient } from '@/lib/supabase-client'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import Logo from '../ui/logo'
 
 interface Props {
   isModal?: boolean
@@ -110,12 +111,10 @@ export default function SignUpPage({
         isModal && 'max-h-max min-h-auto py-6'
       )}
     >
-      {/* left */}
       <div className='flex flex-1 justify-center'>
-        <div className='relative z-10 w-full max-w-lg space-y-8 rounded-2xl p-8 shadow-2xl backdrop-blur-xl max-md:space-y-5 max-sm:p-5'>
-          {/* Logo/Brand */}
+        <div className='relative z-10 w-full max-w-lg space-y-8 rounded-2xl p-8 max-md:space-y-5 max-sm:p-5'>
           <h1 className='text-center text-3xl font-bold max-md:text-2xl'>
-            Emerald UI
+            <Logo size="xl" classes='justify-center font-semibold' />
           </h1>
 
           <div className='space-y-2 text-center'>
@@ -148,7 +147,7 @@ export default function SignUpPage({
               onClick={() => handleOAuthSignIn('google')}
               disabled={loading}
               size='lg'
-              className='bg-foreground text-background hover:bg-foreground h-12 w-full cursor-pointer rounded-lg border'
+              className='bg-foreground text-background hover:bg-foreground h-10 w-full cursor-pointer rounded-md border'
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -179,7 +178,7 @@ export default function SignUpPage({
             <Button
               onClick={() => handleOAuthSignIn('github')}
               disabled={loading}
-              className='bg-background text-foreground hover:bg-background h-12 w-full cursor-pointer rounded-lg border'
+              className='bg-background text-foreground hover:bg-background h-10 w-full cursor-pointer rounded-md border'
             >
               <Github className='size-5' />
               Continue with GitHub
@@ -209,7 +208,7 @@ export default function SignUpPage({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={loading}
-                className='border-border bg-secondary h-10 text-white placeholder:text-sm'
+                className='border-border bg-secondary h-10 placeholder:text-sm'
               />
             </div>
 
@@ -228,7 +227,7 @@ export default function SignUpPage({
             <Button
               type='submit'
               disabled={loading}
-              className='bg-primary-foreground hover:bg-primary-foreground/80 h-10 w-full text-white'
+              className='bg-primary-foreground hover:bg-primary-foreground/80 h-10 w-full text-foreground'
             >
               {loading ? 'Sending...' : 'Continue with Email'}
             </Button>
@@ -254,15 +253,7 @@ export default function SignUpPage({
         </div>
       </div>
 
-      {/* right */}
-      <div
-        className={cn(
-          'flex h-screen flex-1 items-center justify-center bg-slate-900 max-lg:hidden',
-          isModal && 'hidden'
-        )}
-      >
-        hello world
-      </div>
+
     </div>
   )
 }
