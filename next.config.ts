@@ -2,14 +2,15 @@ import { withPayload } from '@payloadcms/next/withPayload'
 import { createMDX } from 'fumadocs-mdx/next'
 import type { NextConfig } from 'next'
 
+
+
+
+
+
 const withMDX = createMDX()
 
 const nextConfig: NextConfig = {
   /* config options here */
-
-  images: {
-    domains: ['images.unsplash.com'],
-  },
 
   async headers() {
     return [
@@ -87,8 +88,18 @@ const nextConfig: NextConfig = {
     ]
   },
 
+  images: {
+    remotePatterns: [
+      {
+        hostname: '*',
+      },
+    ],
+    minimumCacheTTL: 2_678_400,
+    qualities: [75, 90],
+  },
   reactStrictMode: true,
-  // cacheComponents: true,
+  cacheComponents: true,
+  serverExternalPackages: ['twoslash', 'typescript'],
   experimental: {
     turbopackFileSystemCacheForDev: true,
   },

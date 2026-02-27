@@ -1,7 +1,5 @@
 /* New badge styling */
-a[href='/docs/gsap/components/interactive-team']::after,
-a[href='/docs/components/slide-text-button']::after,
-a[href='/docs/components/morphic-navbar']::after {
+a[href='/docs/gsap/components/interactive-team']::after {
   content: 'New';
   position: absolute;
   right: 0.3rem;

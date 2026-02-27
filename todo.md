@@ -18,14 +18,6 @@ Global:
 
 - add user form for "what i want to see in this page (or bugs)"
 
-<!-- footer as in aceternity ui -->
-
-- add loading states
-
-- change colors (dark slate as primary?)?
-
-- update main page ? 
-
 <!-- before production -->
 
 - check supabase auth limitations (magic link; custom nodemailer?)
