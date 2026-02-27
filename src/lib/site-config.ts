@@ -1,10 +1,10 @@
 export const siteConfig = {
-  name: 'UI Design App',
-  description: 'A modern UI design application with AI capabilities.',
+  name: 'Emerald UI - Inspiration Websites & Components',
+  description: 'A modern UI design inspiration website and components.',
   revalidateTime: 3600,
   github: 'https://github.com/shatlyk1011',
-  siteUrl: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
-  ogImage: 'https://emerald-ui.com/og.jpg',
+  siteUrl: 'https://emerald-ui.com',
+  ogImage: '../app/opengraph-image.png',
   totalComponents: '40+',
 }
 

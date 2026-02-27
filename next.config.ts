@@ -48,6 +48,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: '/docs/gsap',
+        destination: '/docs/gsap/components/interactive-team',
+        permanent: true,
+      },
+      {
         source: '/components/:path*',
         destination: '/docs/components/:path*',
         permanent: true,
