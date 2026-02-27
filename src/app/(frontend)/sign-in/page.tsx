@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import SignInPage from '@/components/auth/SignInPage'
 
 export const metadata: Metadata = {
-  title: 'Sign In - UI',
+  title: 'Sign In | Emerald UI',
   description: 'Sign in to your UI account',
 }
 

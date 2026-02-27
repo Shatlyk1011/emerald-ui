@@ -2,7 +2,6 @@ import { Suspense } from 'react'
 import InspirationPageContent from '@/components/InspirationPage/InspirationPageContent'
 import InspirationPageSkeleton from '@/components/InspirationPage/InspirationPageSkeleton'
 
-
 export default function Home() {
   return (
     <main className='bg-background mt-14 min-h-screen font-sans'>
