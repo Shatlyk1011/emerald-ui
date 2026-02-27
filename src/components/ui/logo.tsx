@@ -5,9 +5,10 @@ import { LogoIcon } from '../icons/LogoIcon'
 interface Props {
   classes?: string
   size?: 'sm' | 'xl'
+  logoColor?: string
 }
 
-const Logo: FC<Props> = ({ classes, size }) => {
+const Logo: FC<Props> = ({ classes, size, logoColor }) => {
   return (
     <figure
       className={cn(
@@ -15,7 +16,7 @@ const Logo: FC<Props> = ({ classes, size }) => {
         classes
       )}
     >
-      <LogoIcon className={cn('size-7 fill-red-500', size === 'xl' && 'size-10')} />
+      <LogoIcon className={cn('size-7', logoColor || 'current', size === 'xl' && 'size-10')} />
       <span
         className={cn(
           '-tracking-two items-center transition',

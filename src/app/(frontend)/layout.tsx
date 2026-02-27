@@ -28,6 +28,19 @@ const GOOGLE_SITE_VERIFICATION =
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
   robots: 'index follow',
+  authors: [{ name: "Shatlyk Abdullayev", url: "https://shatlykabdullayev.com" }],
+  creator: "Shatlyk Abdullayev",
+  openGraph: {
+    title: siteConfig.name,
+    description: siteConfig.description,
+    url: siteConfig.siteUrl,
+    siteName: siteConfig.name,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+  },
   verification: {
     google: GOOGLE_SITE_VERIFICATION,
   },
