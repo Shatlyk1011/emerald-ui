@@ -23,7 +23,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const MDX = page.data.body
 
   return (
-    <DocsPage footer={{ enabled: false }}>
+    <DocsPage footer={{ enabled: false }} >
       <DocsTitle className='text-4xl font-semibold tracking-tighter'>
         {page.data.title}
       </DocsTitle>
@@ -56,6 +56,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
           </span>
         </h2>
       )}
+      <span className='pb-20'></span>
     </DocsPage>
   )
 }

@@ -124,7 +124,7 @@ export default function InspirationContent({
                 <div className='absolute inset-0 z-10 flex items-start justify-center rounded-xl bg-background/60 pt-24 backdrop-blur-[2px]'>
                   <div className='flex items-center gap-3 rounded-full border border-border bg-card px-5 py-3 shadow-lg'>
                     <div className='h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent' />
-                    <span className='text-sm font-medium text-muted-foreground'>Filtering...</span>
+                    <span className='text-sm font-medium text-muted-foreground'>Loading...</span>
                   </div>
                 </div>
               )}

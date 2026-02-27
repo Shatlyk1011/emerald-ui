@@ -1,13 +1,7 @@
 import { Suspense } from 'react'
-import type { Metadata } from 'next'
-import { siteConfig } from '@/lib/site-config'
 import InspirationPageContent from '@/components/InspirationPage/InspirationPageContent'
 import InspirationPageSkeleton from '@/components/InspirationPage/InspirationPageSkeleton'
 
-export const metadata: Metadata = {
-  title: 'Home',
-  description: siteConfig.description,
-}
 
 export default function Home() {
   return (
