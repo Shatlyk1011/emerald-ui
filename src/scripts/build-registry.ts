@@ -190,7 +190,7 @@ const getComponentFiles = async (files: File[], registryType: string) => {
           type: registryType,
           content: fileContent,
           path: normalizedPath,
-          target: `components/emerald-ui-components/${fileName}`,
+          target: `components/ui/${fileName}`,
         };
       }
 
@@ -215,7 +215,7 @@ const getComponentFiles = async (files: File[], registryType: string) => {
           case "registry:block":
             return `blocks/${fileName}`;
           default:
-            return `components/emerald-ui-components/${fileName}`;
+            return `components/ui/${fileName}`;
         }
       };
 
