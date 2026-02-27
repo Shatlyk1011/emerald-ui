@@ -14,6 +14,7 @@ export const baseOptions = (): BaseLayoutProps => ({
     {
       type: 'custom',
       children: <Header isFumadocs />,
+
     },
   ],
   themeSwitch: { enabled: false },

@@ -1,3 +1,4 @@
+import Footer from '@/components/layout/footer';
 import Header from '@/components/layout/header'
 import { Metadata } from 'next';
 
@@ -18,6 +19,7 @@ export default function RootLayout({
     <div className='flex min-h-svh flex-col'>
       <Header />
       {children}
+      <Footer />
     </div>
   )
 }

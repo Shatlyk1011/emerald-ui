@@ -2,11 +2,11 @@
 
 import { FC, Suspense, useRef, useState } from 'react'
 import { getUserInitials } from '@/composables/utils'
-import { LogOut, User as UserIcon, ChevronDown } from 'lucide-react'
+import { LogOut, ChevronDown } from 'lucide-react'
 import { useScroll, useMotionValueEvent } from 'motion/react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { useUser } from '@/hooks/use-user'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -65,7 +65,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
         className={cn(
           'fixed top-0 z-20 mx-auto flex h-14 w-full items-center justify-between border-b px-8 py-2 font-sans max-sm:px-5',
           isScrolled && !isFumadocs && 'bg-background/90 backdrop-blur-sm',
-          isFumadocs && 'static w-full flex-1 border-none px-0'
+          isFumadocs && 'static w-full flex-1 justify-start border-none px-0'
         )}
       >
         <Link
@@ -182,7 +182,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                 <Button
                   variant='outline'
                   size='sm'
-                  onClick={() => router.push('/login')}
+                      onClick={() => router.push('/sign-in')}
                   className='ml-2'
                 >
                   Sign In

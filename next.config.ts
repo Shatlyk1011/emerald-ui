@@ -1,6 +1,11 @@
-import { withPayload } from '@payloadcms/next/withPayload'
-import { createMDX } from 'fumadocs-mdx/next'
-import type { NextConfig } from 'next'
+import { withPayload } from '@payloadcms/next/withPayload';
+import { createMDX } from 'fumadocs-mdx/next';
+import type { NextConfig } from 'next';
+
+
+
+
+
 
 
 
@@ -107,6 +112,9 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ['twoslash', 'typescript'],
   experimental: {
     turbopackFileSystemCacheForDev: true,
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
   },
 }
 
