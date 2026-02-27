@@ -4,7 +4,7 @@ export const siteConfig = {
   revalidateTime: 3600,
   github: 'https://github.com/shatlyk1011',
   siteUrl: 'https://emerald-ui.com',
-  ogImage: '../app/opengraph-image.png',
+  ogImage: 'https://emerald-ui.com/opengraph-image.png',
   totalComponents: '40+',
 }
 

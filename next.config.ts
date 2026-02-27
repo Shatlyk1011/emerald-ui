@@ -12,6 +12,26 @@ import type { NextConfig } from 'next';
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const withMDX = createMDX()
 
 const nextConfig: NextConfig = {
@@ -108,11 +128,6 @@ const nextConfig: NextConfig = {
     qualities: [75, 90],
   },
   reactStrictMode: true,
-  cacheComponents: true,
-  serverExternalPackages: ['twoslash', 'typescript'],
-  experimental: {
-    turbopackFileSystemCacheForDev: true,
-  },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
