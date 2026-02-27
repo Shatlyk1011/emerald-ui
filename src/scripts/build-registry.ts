@@ -5,14 +5,6 @@ import { promises as fs } from "fs";
 import { glob } from "glob";
 import { registry } from "../registry/index";
 
-
-
-
-
-
-
-
-
 const REGISTRY_BASE_PATH = process.cwd()
 // Source folder where the actual component files live
 const SRC_FOLDER = 'src'
