@@ -39,8 +39,6 @@ export default function InspirationContent({
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
     useInfiniteInspirationSites(initialData, filterQuery)
 
-  console.log('hasNextPage', hasNextPage)
-
   const images = initialData.docs
     .map(({ imgUrl }) => imgUrl)
     .filter(Boolean) as string[]

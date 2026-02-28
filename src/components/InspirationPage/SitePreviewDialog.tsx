@@ -90,6 +90,7 @@ export default function SitePreviewDialog({
                         background={selectedSite.gradientColor!}
                       >
                         <img
+                          draggable={false}
                           src={selectedSite.imgUrl!}
                           alt={`${selectedSite.title} screenshot`}
                           className='aspect-4/3 h-full w-full object-contain object-top'
@@ -123,6 +124,7 @@ export default function SitePreviewDialog({
                               background={selectedSite.gradientColor!}
                             >
                               <img
+                                draggable={false}
                                 src={selectedSite.additionalMedia!.mediaUrl!}
                                 alt={
                                   selectedSite.additionalMedia!.altText ||
@@ -145,6 +147,7 @@ export default function SitePreviewDialog({
                       background={selectedSite.gradientColor!}
                     >
                       <img
+                          draggable={false}
                         src={selectedSite.imgUrl!}
                         alt={`${selectedSite.title} screenshot`}
                         className='h-full w-full object-contain object-top'
