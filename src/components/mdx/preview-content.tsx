@@ -1,6 +1,6 @@
 'use client'
 
-import { type RefObject, useEffect, useRef, useState } from 'react'
+import { type RefObject, useEffect, useRef } from 'react'
 import { CheckCheck, Copy, ShieldAlert, RefreshCw } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { cn } from '@/lib/utils'
@@ -20,7 +20,6 @@ export default function PreviewContent({
   onReload?: () => void
 }) {
   const { theme } = useTheme()
-
 
   const handleTerminalClick = (packageManager: string) => {
     const [folder, filename] = link.split("/");
@@ -65,14 +64,16 @@ export default function PreviewContent({
           buttonRef={copyButtonRef as RefObject<HTMLButtonElement>}
         />
       ) : null}
-      <div className='flex justify-between gap-10'>
-        <div className="w-full sm:w-auto">
-          <PackageManagerTabs
-            commandName={getFileName()}
-            onSelect={handleTerminalClick}
-            prePath={prePath}
-          />
-        </div>
+      <div className={cn('flex justify-between gap-10', isAuthRequired && 'justify-end')}>
+        {!isAuthRequired && (
+          <div className="w-full sm:w-auto">
+            <PackageManagerTabs
+              commandName={getFileName()}
+              onSelect={handleTerminalClick}
+              prePath={prePath}
+            />
+          </div>
+        )}
         <div className='mt-1 flex w-full items-center justify-between gap-2 sm:mt-0 sm:w-auto'>
           <form
             className='w-full sm:w-auto'

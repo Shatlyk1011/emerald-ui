@@ -112,7 +112,7 @@ export function PackageManagerTabs({
             x: dimensions.left + 2,
             opacity: 1,
           }}
-          className="absolute z-[1] rounded-sm bg-black dark:bg-white"
+          className="absolute z-1 rounded-sm bg-black dark:bg-white"
           initial={false}
           style={{ height: "calc(100% - 4px)", top: "2px" }}
           transition={{

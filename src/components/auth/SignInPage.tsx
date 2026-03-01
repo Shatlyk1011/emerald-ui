@@ -114,9 +114,9 @@ export default function SignInPage({
       {/* left */}
       <div className='flex flex-1 justify-center'>
         <div className='relative z-10 w-full max-w-lg space-y-8 rounded-2xl p-8 max-md:space-y-5 max-sm:p-5'>
-          <h1 className='text-center text-3xl font-bold max-md:text-2xl'>
+          <Link href="/" className='text-center block text-3xl font-bold max-md:text-2xl'>
             <Logo size='xl' classes='justify-center font-semibold' />
-          </h1>
+          </Link>
 
           <div className='space-y-2 text-center'>
             <h2 className='text-3xl font-semibold max-md:text-2xl'>

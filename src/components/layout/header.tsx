@@ -6,7 +6,7 @@ import { LogOut, ChevronDown } from 'lucide-react'
 import { useScroll, useMotionValueEvent } from 'motion/react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { useUser } from '@/hooks/use-user'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -42,6 +42,8 @@ interface Props {
 
 const Header: FC<Props> = ({ isFumadocs }) => {
   const router = useRouter()
+  const pathname = usePathname()
+
   const headerRef = useRef<HTMLElement>(null)
   const { user, isLoading, signOut } = useUser()
 
@@ -157,7 +159,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                       </Avatar>
                     </button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align='end' className='w-56'>
+                    <DropdownMenuContent align='end' className='w-56 z-500'>
                     <DropdownMenuLabel>
                       <div className='flex flex-col space-y-1'>
                         <p className='text-sm leading-none font-medium'>
@@ -182,7 +184,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                 <Button
                   variant='outline'
                   size='sm'
-                      onClick={() => router.push('/sign-in')}
+                      onClick={() => router.push(`/sign-in?next=${encodeURIComponent(pathname)}`)}
                   className='ml-2'
                 >
                   Sign In
