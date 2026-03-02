@@ -1,19 +1,27 @@
 import { FC } from 'react'
 import { InspirationWebsite } from '@/payload-types'
 import SiteCard from './SiteCard'
+import EmptyResult from './EmptyResult'
 
 interface Props {
   websites: InspirationWebsite[]
+  handleResetFilters: () => void
 }
 
-const SiteCards: FC<Props> = ({ websites }) => {
-  console.log('websites', websites)
+const SiteCards: FC<Props> = ({ websites, handleResetFilters }) => {
+
   return (
-    <section className='grid grid-cols-3 gap-x-4 gap-y-16 max-xl:grid-cols-2 max-sm:grid-cols-1'>
-      {websites.map((item, index) => (
-        <SiteCard key={item.id} item={item} index={index} />
-      ))}
-    </section>
+    <>
+      <section className='grid grid-cols-3 gap-x-4 gap-y-16 max-xl:grid-cols-2 max-sm:grid-cols-1'>
+        {websites.map((item, index) => (
+          <SiteCard key={item.id} item={item} index={index} />
+        ))}
+      </section>
+      {websites.length === 0 && (
+        <EmptyResult handleResetFilters={handleResetFilters} />
+      )}
+    </>
+
   )
 }
 
