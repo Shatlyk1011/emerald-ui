@@ -1,10 +1,7 @@
 {
   "name": "fancy-text-hover",
   "type": "registry:component",
-  "dependencies": [
-    "gsap",
-    "@gsap/react"
-  ],
+  "dependencies": ["gsap", "@gsap/react"],
   "files": [
     {
       "type": "registry:component",

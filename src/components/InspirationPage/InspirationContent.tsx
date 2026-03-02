@@ -89,7 +89,12 @@ export default function InspirationContent({
     if (filterQueryFromSelections && !isLoading) {
       debouncedSetFilterQuery(filterQueryFromSelections)
     }
-  }, [filterQueryFromSelections, debouncedSetFilterQuery, selectedCategories, selectedStyles])
+  }, [
+    filterQueryFromSelections,
+    debouncedSetFilterQuery,
+    selectedCategories,
+    selectedStyles,
+  ])
 
   const handleResetFilters = () => {
     setFilterQuery({ isVisible: { equals: true } })
@@ -114,20 +119,26 @@ export default function InspirationContent({
       {isLoading ? (
         <SiteCardsSkeleton />
       ) : (
-          <div className='relative'>
-            {/* Loading overlay shown when refetching with existing results */}
-            {isFetching && !isFetchingNextPage && (
-              <div className='absolute inset-0 z-10 flex items-start justify-center rounded-xl bg-background/60 pt-24 backdrop-blur-[2px]'>
-                <div className='flex items-center gap-3 rounded-full border border-border bg-card px-5 py-3 shadow-lg'>
-                  <div className='h-4 w-4 animate-spin rounded-full border-2 border-primary border-t-transparent' />
-                  <span className='text-sm font-medium text-muted-foreground'>Loading...</span>
-                </div>
+        <div className='relative'>
+          {/* Loading overlay shown when refetching with existing results */}
+          {isFetching && !isFetchingNextPage && (
+            <div className='bg-background/60 absolute inset-0 z-10 flex items-start justify-center rounded-xl pt-24 backdrop-blur-[2px]'>
+              <div className='border-border bg-card flex items-center gap-3 rounded-full border px-5 py-3 shadow-lg'>
+                <div className='border-primary h-4 w-4 animate-spin rounded-full border-2 border-t-transparent' />
+                <span className='text-muted-foreground text-sm font-medium'>
+                  Loading...
+                </span>
               </div>
-            )}
-            {data.pages.map(({ docs }, i) => (
-              <SiteCards key={i} websites={docs} handleResetFilters={handleResetFilters} />
-            ))}
-          </div>
+            </div>
+          )}
+          {data.pages.map(({ docs }, i) => (
+            <SiteCards
+              key={i}
+              websites={docs}
+              handleResetFilters={handleResetFilters}
+            />
+          ))}
+        </div>
       )}
 
       {/* Sentinel element for infinite scroll */}
@@ -142,7 +153,8 @@ export default function InspirationContent({
               Loading more websites...
             </span>
           </div>
-        ) : !hasNextPage && data.pages.flatMap((page) => page.docs).length > 0 ? (
+        ) : !hasNextPage &&
+          data.pages.flatMap((page) => page.docs).length > 0 ? (
           <div className='flex flex-col items-center gap-4'>
             <div className='bg-border h-0.5 w-24' />
             <p className='text-muted-foreground text-sm font-medium'>

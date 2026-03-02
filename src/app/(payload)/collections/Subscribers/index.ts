@@ -1,9 +1,5 @@
-import { CollectionConfig } from 'payload';
-import { admins } from '../../utils/admins';
-
-
-
-
+import { CollectionConfig } from 'payload'
+import { admins } from '../../utils/admins'
 
 const Subscribers: CollectionConfig = {
   slug: 'subscribers',

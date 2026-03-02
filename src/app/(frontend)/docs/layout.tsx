@@ -1,8 +1,8 @@
 import { DocsLayout } from 'fumadocs-ui/layouts/notebook'
 import type { Metadata } from 'next'
 import { plainSource, gsapSource } from '@/lib/source'
-import { baseOptions } from '../layout.config'
 import Footer from '@/components/layout/footer'
+import { baseOptions } from '../layout.config'
 
 export const metadata: Metadata = {
   title: {

@@ -1,9 +1,7 @@
 {
   "name": "stacked-article-cards",
   "type": "registry:component",
-  "registryDependencies": [
-    "button"
-  ],
+  "registryDependencies": ["button"],
   "files": [
     {
       "type": "registry:component",

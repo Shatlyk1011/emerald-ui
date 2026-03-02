@@ -1,13 +1,8 @@
 {
   "name": "subscribe-input",
   "type": "registry:component",
-  "dependencies": [
-    "lucide-react",
-    "motion"
-  ],
-  "registryDependencies": [
-    "button"
-  ],
+  "dependencies": ["lucide-react", "motion"],
+  "registryDependencies": ["button"],
   "files": [
     {
       "type": "registry:component",

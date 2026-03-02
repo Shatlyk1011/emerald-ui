@@ -159,7 +159,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                       </Avatar>
                     </button>
                   </DropdownMenuTrigger>
-                    <DropdownMenuContent align='end' className='w-56 z-500'>
+                  <DropdownMenuContent align='end' className='z-500 w-56'>
                     <DropdownMenuLabel>
                       <div className='flex flex-col space-y-1'>
                         <p className='text-sm leading-none font-medium'>
@@ -184,7 +184,9 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                 <Button
                   variant='outline'
                   size='sm'
-                      onClick={() => router.push(`/sign-in?next=${encodeURIComponent(pathname)}`)}
+                  onClick={() =>
+                    router.push(`/sign-in?next=${encodeURIComponent(pathname)}`)
+                  }
                   className='ml-2'
                 >
                   Sign In

@@ -113,8 +113,11 @@ export default function SignUpPage({
     >
       <div className='flex flex-1 justify-center'>
         <div className='relative z-10 w-full max-w-lg space-y-8 rounded-2xl p-8 max-md:space-y-5 max-sm:p-5'>
-          <Link href="/" className='text-center block text-3xl font-bold max-md:text-2xl'>
-            <Logo size="xl" classes='justify-center font-semibold' />
+          <Link
+            href='/'
+            className='block text-center text-3xl font-bold max-md:text-2xl'
+          >
+            <Logo size='xl' classes='justify-center font-semibold' />
           </Link>
 
           <div className='space-y-2 text-center'>
@@ -227,7 +230,7 @@ export default function SignUpPage({
             <Button
               type='submit'
               disabled={loading}
-              className='bg-primary-foreground hover:bg-primary-foreground/80 h-10 w-full text-foreground'
+              className='bg-primary-foreground hover:bg-primary-foreground/80 text-foreground h-10 w-full'
             >
               {loading ? 'Sending...' : 'Continue with Email'}
             </Button>
@@ -252,8 +255,6 @@ export default function SignUpPage({
           </p>
         </div>
       </div>
-
-
     </div>
   )
 }

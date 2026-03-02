@@ -1,9 +1,9 @@
-import path from "path";
-import type { z } from "zod";
-import type { registryItemFileSchema } from "@/registry/schema";
-import { promises as fs } from "fs";
-import { glob } from "glob";
-import { registry } from "../registry/index";
+import path from 'path'
+import type { z } from 'zod'
+import type { registryItemFileSchema } from '@/registry/schema'
+import { promises as fs } from 'fs'
+import { glob } from 'glob'
+import { registry } from '../registry/index'
 
 const REGISTRY_BASE_PATH = process.cwd()
 // Source folder where the actual component files live
@@ -167,126 +167,130 @@ ${components
 const getComponentFiles = async (files: File[], registryType: string) => {
   const filesArrayPromises = (files ?? []).map(async (file) => {
     try {
-      if (typeof file === "string") {
-        const normalizedPath = file.startsWith("/") ? file : `/${file}`;
+      if (typeof file === 'string') {
+        const normalizedPath = file.startsWith('/') ? file : `/${file}`
         // Files live inside the src/ folder in this project
-        const filePath = path.join(REGISTRY_BASE_PATH, SRC_FOLDER, normalizedPath);
-        const fileContent = await fs.readFile(filePath, "utf-8");
+        const filePath = path.join(
+          REGISTRY_BASE_PATH,
+          SRC_FOLDER,
+          normalizedPath
+        )
+        const fileContent = await fs.readFile(filePath, 'utf-8')
 
-        const fileName = normalizedPath.split("/").pop() || "";
+        const fileName = normalizedPath.split('/').pop() || ''
         console.log(
           `    ${colors.yellow}${symbols.dot}${colors.reset} Processing ${colors.cyan}${fileName}${colors.reset}`
-        );
+        )
 
         return {
           type: registryType,
           content: fileContent,
           path: normalizedPath,
           target: `components/ui/${fileName}`,
-        };
+        }
       }
 
-      const normalizedPath = file.path.startsWith("/")
+      const normalizedPath = file.path.startsWith('/')
         ? file.path
-        : `/${file.path}`;
+        : `/${file.path}`
       // Files live inside the src/ folder in this project
-      const filePath = path.join(REGISTRY_BASE_PATH, SRC_FOLDER, normalizedPath);
-      const fileContent = await fs.readFile(filePath, "utf-8");
+      const filePath = path.join(REGISTRY_BASE_PATH, SRC_FOLDER, normalizedPath)
+      const fileContent = await fs.readFile(filePath, 'utf-8')
 
-      const fileName = normalizedPath.split("/").pop() || "";
+      const fileName = normalizedPath.split('/').pop() || ''
       console.log(
         `    ${colors.yellow}${symbols.dot}${colors.reset} Processing ${colors.cyan}${fileName}${colors.reset}`
-      );
+      )
 
       const getTargetPath = (type: string) => {
         switch (type) {
-          case "registry:hook":
-            return `hooks/${fileName}`;
-          case "registry:lib":
-            return `lib/${fileName}`;
-          case "registry:block":
-            return `blocks/${fileName}`;
+          case 'registry:hook':
+            return `hooks/${fileName}`
+          case 'registry:lib':
+            return `lib/${fileName}`
+          case 'registry:block':
+            return `blocks/${fileName}`
           default:
-            return `components/ui/${fileName}`;
+            return `components/ui/${fileName}`
         }
-      };
+      }
 
       const fileType =
-        typeof file === "string" ? registryType : file.type || registryType;
+        typeof file === 'string' ? registryType : file.type || registryType
 
       return {
         type: fileType,
         content: fileContent,
         path: normalizedPath,
         target:
-          typeof file === "string"
+          typeof file === 'string'
             ? getTargetPath(registryType)
             : file.target || getTargetPath(fileType),
-      };
+      }
     } catch (error) {
       console.error(
-        `    ${colors.red}${symbols.error} Error processing file: ${typeof file === "string" ? file : file.path}${colors.reset}`
-      );
-      throw error;
+        `    ${colors.red}${symbols.error} Error processing file: ${typeof file === 'string' ? file : file.path}${colors.reset}`
+      )
+      throw error
     }
-  });
+  })
 
-  const filesArray = await Promise.all(filesArrayPromises);
-  return filesArray;
-};
+  const filesArray = await Promise.all(filesArrayPromises)
+  return filesArray
+}
 
 const main = async () => {
-  console.log(`\n${colors.cyan}Registry Build Process${colors.reset}`);
-  printDivider();
+  console.log(`\n${colors.cyan}Registry Build Process${colors.reset}`)
+  printDivider()
 
-  const totalComponents = registry.length;
+  const totalComponents = registry.length
 
   for (let i = 0; i < registry.length; i++) {
-    const component = registry[i];
-    const files = component.files;
-    if (!files) throw new Error("No files found for component");
+    const component = registry[i]
+    const files = component.files
+    if (!files) throw new Error('No files found for component')
 
     console.log(
       `${colors.yellow}${symbols.arrow} Component ${i + 1}/${totalComponents}: ${colors.reset}${component.name}`
-    );
+    )
 
-    const filesArray = await getComponentFiles(files, component.type);
-    const jsonPath = `${PUBLIC_FOLDER_BASE_PATH}/${component.name}.json`;
+    const filesArray = await getComponentFiles(files, component.type)
+    const jsonPath = `${PUBLIC_FOLDER_BASE_PATH}/${component.name}.json`
 
     await writeFileRecursive(
       jsonPath,
       JSON.stringify({ ...component, files: filesArray }, null, 2)
-    );
+    )
 
     if (i < registry.length - 1) {
-      console.log(); // Add space between components
+      console.log() // Add space between components
     }
   }
 
-  printDivider();
+  printDivider()
 
   // Generate LLMs.txt file
   console.log(
     `${colors.yellow}${symbols.arrow} Generating LLMs.txt file${colors.reset}`
-  );
-  const componentsInfo = await getComponentsInfo();
-  await generateLLMsFile(componentsInfo);
+  )
+  const componentsInfo = await getComponentsInfo()
+  await generateLLMsFile(componentsInfo)
 
-  printDivider();
-};
+  printDivider()
+}
 
 main()
   .then(() => {
     console.log(
       `${colors.green}${symbols.success} Registry build completed successfully!${colors.reset}\n`
-    );
+    )
   })
   .catch((err) => {
-    console.log();
+    console.log()
     console.error(
       `${colors.red}${symbols.error} Registry build failed:${colors.reset}`
-    );
-    console.error(err);
-    console.log();
-    process.exit(1);
-  });
+    )
+    console.error(err)
+    console.log()
+    process.exit(1)
+  })

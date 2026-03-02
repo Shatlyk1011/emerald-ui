@@ -12,8 +12,10 @@ Emerald UI provides a seamless way to integrate beautifully crafted components d
 
 The `components.json` file manages your project's component architecture, allowing the standard CLI to automatically configure paths and dependencies.
 
-<Card title="Optional Configuration">
-While the CLI relies on `components.json` for automatic installation, it's not strictly required. You can always copy and paste the component source code manually!
+<Card title='Optional Configuration'>
+  While the CLI relies on `components.json` for automatic installation, it's not
+  strictly required. You can always copy and paste the component source code
+  manually!
 </Card>
 
 If you prefer the streamlined CLI experience, initialize your setup by running:
@@ -38,9 +40,9 @@ Next, connect the Emerald UI registry by appending this block to your `component
 
 ```json
 {
-    "registries": {
-        "@emerald-ui": "https://emerald-ui.com/r/{name}.json"
-    }
+  "registries": {
+    "@emerald-ui": "https://emerald-ui.com/r/{name}.json"
+  }
 }
 ```
 
@@ -99,7 +101,7 @@ export default function Page() {
 }
 ```
 
-import { Tab, Tabs } from "fumadocs-ui/components/tabs";
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
 
 ### 4. Optional Dependencies
 

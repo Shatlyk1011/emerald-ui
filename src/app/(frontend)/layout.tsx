@@ -29,8 +29,10 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   metadataBase: new URL(siteConfig.siteUrl),
   robots: 'index follow',
-  authors: [{ name: "Shatlyk Abdullayev", url: "https://shatlykabdullayev.com" }],
-  creator: "Shatlyk Abdullayev",
+  authors: [
+    { name: 'Shatlyk Abdullayev', url: 'https://shatlykabdullayev.com' },
+  ],
+  creator: 'Shatlyk Abdullayev',
   openGraph: {
     title: siteConfig.name,
     description: siteConfig.description,
@@ -46,7 +48,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: siteConfig.name,
     description: siteConfig.description,
   },

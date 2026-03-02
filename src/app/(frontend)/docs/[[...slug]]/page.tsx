@@ -23,15 +23,13 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const MDX = page.data.body
 
   return (
-    <DocsPage footer={{ enabled: false }} >
+    <DocsPage footer={{ enabled: false }}>
       <DocsTitle className='text-4xl font-semibold tracking-tighter'>
         {page.data.title}
       </DocsTitle>
       <DocsDescription className='text-xl tracking-tighter'>
         {page.data.description} <br />
       </DocsDescription>
-
-
 
       <DocsBody className={cn(page.data.full && 'min-w-full')}>
         <MDX

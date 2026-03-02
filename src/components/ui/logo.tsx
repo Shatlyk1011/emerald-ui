@@ -16,7 +16,13 @@ const Logo: FC<Props> = ({ classes, size, logoColor }) => {
         classes
       )}
     >
-      <LogoIcon className={cn('size-7', logoColor || 'current', size === 'xl' && 'size-10')} />
+      <LogoIcon
+        className={cn(
+          'size-7',
+          logoColor || 'current',
+          size === 'xl' && 'size-10'
+        )}
+      />
       <span
         className={cn(
           '-tracking-two items-center transition',

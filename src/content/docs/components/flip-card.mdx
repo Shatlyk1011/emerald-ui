@@ -4,9 +4,8 @@ description: A 3D animated card that flips on hover or click, revealing hidden c
 icon: FlipHorizontal2
 ---
 
-import FlipCard from "@/components/emerald-ui-components/flip-card";
-import { Sparkles, FlipVertical2 } from "lucide-react";
-
+import { Sparkles, FlipVertical2 } from 'lucide-react'
+import FlipCard from '@/components/emerald-ui-components/flip-card'
 
 <Preview link='flip-card' comment={['motion']} isReload>
   <div className=" w-full items-center justify-center py-12 flex flex-col gap-10">
@@ -25,7 +24,7 @@ import { Sparkles, FlipVertical2 } from "lucide-react";
         </p>
       </>}
     />
-    
+
     <FlipCard direction="vertical" frontContent={
       <>
         <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
@@ -38,5 +37,6 @@ import { Sparkles, FlipVertical2 } from "lucide-react";
           Discover whats hidden on the other side of this card.
         </p>
       </>}/>
+
   </div>
 </Preview>

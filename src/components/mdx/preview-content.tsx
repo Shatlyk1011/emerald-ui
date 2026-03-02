@@ -15,34 +15,34 @@ export default function PreviewContent({
   onReload,
 }: {
   link: string
-    prePath: string
+  prePath: string
   isBlock?: boolean
   onReload?: () => void
 }) {
   const { theme } = useTheme()
 
   const handleTerminalClick = (packageManager: string) => {
-    const [folder, filename] = link.split("/");
-    const componentName = filename ? filename : folder;
+    const [folder, filename] = link.split('/')
+    const componentName = filename ? filename : folder
 
-    let commandToCopy: string;
-    const componentAddCommand = `shadcn@latest add ${prePath}/${componentName}`;
+    let commandToCopy: string
+    const componentAddCommand = `shadcn@latest add ${prePath}/${componentName}`
 
-    if (packageManager === "pnpm") {
-      commandToCopy = `pnpm dlx ${componentAddCommand}`;
-    } else if (packageManager === "npm") {
-      commandToCopy = `npx ${componentAddCommand}`;
+    if (packageManager === 'pnpm') {
+      commandToCopy = `pnpm dlx ${componentAddCommand}`
+    } else if (packageManager === 'npm') {
+      commandToCopy = `npx ${componentAddCommand}`
     } else {
-      commandToCopy = `bunx --bun ${componentAddCommand}`;
+      commandToCopy = `bunx --bun ${componentAddCommand}`
     }
 
-    navigator.clipboard.writeText(commandToCopy);
-  };
+    navigator.clipboard.writeText(commandToCopy)
+  }
 
   const getFileName = () => {
-    const [folder, filename] = link.split("/");
-    return filename ? filename : folder;
-  };
+    const [folder, filename] = link.split('/')
+    return filename ? filename : folder
+  }
 
   const { handleCopyClick, isCopied, isPending, isAuthRequired } = useCopy({
     link,
@@ -64,9 +64,14 @@ export default function PreviewContent({
           buttonRef={copyButtonRef as RefObject<HTMLButtonElement>}
         />
       ) : null}
-      <div className={cn('flex justify-between gap-10', isAuthRequired && 'justify-end')}>
+      <div
+        className={cn(
+          'flex justify-between gap-10',
+          isAuthRequired && 'justify-end'
+        )}
+      >
         {!isAuthRequired && (
-          <div className="w-full sm:w-auto">
+          <div className='w-full sm:w-auto'>
             <PackageManagerTabs
               commandName={getFileName()}
               onSelect={handleTerminalClick}

@@ -147,7 +147,7 @@ export default function SitePreviewDialog({
                       background={selectedSite.gradientColor!}
                     >
                       <img
-                          draggable={false}
+                        draggable={false}
                         src={selectedSite.imgUrl!}
                         alt={`${selectedSite.title} screenshot`}
                         className='h-full w-full object-contain object-top'
