@@ -3,6 +3,41 @@ import { admins } from '../../utils/admins'
 
 const WebsiteSubmissions: CollectionConfig = {
   slug: 'website-submissions',
+  hooks: {
+    afterChange: [
+      async ({ doc, req, operation }) => {
+        if (operation === 'create' && doc.email) {
+          try {
+            const existingSubscriber = await req.payload.find({
+              collection: 'subscribers',
+              where: {
+                email: {
+                  equals: doc.email,
+                },
+              },
+            })
+
+            if (existingSubscriber.totalDocs === 0) {
+              await req.payload.create({
+                collection: 'subscribers',
+                req,
+                data: {
+                  email: doc.email,
+                  source: 'website submit form',
+                  status: 'active',
+                },
+              })
+            }
+          } catch (error) {
+            req.payload.logger.error(
+              `Error adding website submission email to subscribers: ${error}`
+            )
+          }
+        }
+        return doc
+      },
+    ],
+  },
   access: {
     create: () => true, // Public can create submissions
     read: admins,
