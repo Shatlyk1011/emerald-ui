@@ -63,7 +63,7 @@ export default function ParallaxImage({
         alt={alt}
         style={{ y, scale: 1.2 }}
         className={cn(
-          'h-full w-full object-cover aspect-video bg-secondary border will-change-transform',
+          'bg-secondary aspect-video h-full w-full border object-cover will-change-transform',
           className
         )}
       />

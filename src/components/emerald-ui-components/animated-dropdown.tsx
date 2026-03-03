@@ -9,10 +9,10 @@
  * @website: https://emerald-ui.com
  */
 import { useState, useRef, FC, ReactNode } from 'react'
-import { useClickOutside } from '@/hooks/use-click-outside'
 import { ChevronDown } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { cn } from '@/lib/utils'
+import { useClickOutside } from '@/hooks/use-click-outside'
 import { Button } from '@/components/ui/button'
 
 interface DropdownItem {
@@ -118,7 +118,6 @@ export default function AnimatedDropdown({
     </OnClickOutside>
   )
 }
-
 
 interface Props {
   children: ReactNode

@@ -10,9 +10,9 @@
  */
 import { useState, FC, ReactNode, useRef } from 'react'
 import { Check, Copy, Instagram, Linkedin, Share2, Twitter } from 'lucide-react'
-import { useClickOutside } from '@/hooks/use-click-outside'
 import { AnimatePresence, motion } from 'motion/react'
 import { cn } from '@/lib/utils'
+import { useClickOutside } from '@/hooks/use-click-outside'
 
 const shareButtons = [
   {

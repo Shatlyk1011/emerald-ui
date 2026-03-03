@@ -1,10 +1,10 @@
 'use client'
 
 import { FC, ReactNode, useRef, useState } from 'react'
-import { useClickOutside } from '@/hooks/use-click-outside'
 import { SendHorizonal } from 'lucide-react'
 import { motion, MotionConfig } from 'motion/react'
 import { cn } from '@/lib/utils'
+import { useClickOutside } from '@/hooks/use-click-outside'
 import { Button } from '../ui/button'
 
 export default function SubscribeInput() {
@@ -24,7 +24,12 @@ export default function SubscribeInput() {
           className={cn('h-12', isOpen ? 'w-75' : 'w-20')}
           initial={false}
         >
-          <div className={cn('bg-card h-full rounded-lg p-1', isOpen ? 'border' : '')}>
+          <div
+            className={cn(
+              'bg-card h-full rounded-lg p-1',
+              isOpen ? 'border' : ''
+            )}
+          >
             {!isOpen ? (
               <Button
                 onClick={() => setOpen(true)}

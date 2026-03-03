@@ -35,8 +35,14 @@ export default function InspirationContent({
     rootMargin: '50px',
   })
 
-  const { data, fetchNextPage, hasNextPage, isLoading: isInitialLoading, isFetchingNextPage, isFetching } =
-    useInfiniteInspirationSites(initialData, filterQuery)
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isLoading: isInitialLoading,
+    isFetchingNextPage,
+    isFetching,
+  } = useInfiniteInspirationSites(initialData, filterQuery)
 
   const images = initialData.docs
     .map(({ imgUrl }) => imgUrl)

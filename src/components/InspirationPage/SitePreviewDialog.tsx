@@ -2,6 +2,7 @@
 
 import { useAppStore } from '@/store/useAppStore'
 import { ExternalLink } from 'lucide-react'
+import { siteConfig } from '@/lib/site-config'
 import {
   Dialog,
   DialogContent,
@@ -11,9 +12,8 @@ import {
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Button } from '../ui/button'
 import Lens from '../ui/lens'
-import { Switch } from '../ui/switch'
 import { ScrollArea } from '../ui/scroll-area'
-import { siteConfig } from '@/lib/site-config'
+import { Switch } from '../ui/switch'
 
 interface SitePreviewDialogProps {
   onCategoryClick: (category: string) => void
@@ -49,11 +49,9 @@ export default function SitePreviewDialog({
         }
       }}
     >
-
-      <DialogContent className='scrollbar-thin overflow-hidden p-0 max-h-[96%] max-lg:overflow-auto'>
+      <DialogContent className='scrollbar-thin max-h-[96%] overflow-hidden p-0 max-lg:overflow-auto'>
         {/* Two-column layout */}
-        <ScrollArea className='w-full h-full'>
-
+        <ScrollArea className='h-full w-full'>
           <div className='grid grid-cols-[1fr_320px] max-lg:grid-cols-1'>
             {/* Left: Image Preview Area */}
             <div
@@ -256,10 +254,7 @@ export default function SitePreviewDialog({
             </div>
           </div>
         </ScrollArea>
-
       </DialogContent>
-
     </Dialog>
-
   )
 }
