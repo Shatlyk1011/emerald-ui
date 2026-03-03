@@ -1,4 +1,7 @@
-import type { Registry } from './schema'
+import type { Registry } from './schema';
+
+
+
 
 export const component: Registry = [
   // ─── Buttons ──────────────────────────────────────────────────────────────
@@ -88,11 +91,14 @@ export const component: Registry = [
     name: 'social-button',
     type: 'registry:component',
     dependencies: ['lucide-react', 'motion'],
-    registryDependencies: ['use-click-outside'],
     files: [
       {
         path: 'components/emerald-ui-components/buttons/social-button.tsx',
         type: 'registry:component',
+      },
+      {
+        path: 'hooks/use-click-outside.ts',
+        type: 'registry:hook',
       },
     ],
   },
@@ -336,11 +342,15 @@ export const component: Registry = [
     name: 'animated-dropdown',
     type: 'registry:component',
     dependencies: ['lucide-react', 'motion'],
-    registryDependencies: ['button', 'use-click-outside'],
+    registryDependencies: ['button'],
     files: [
       {
         path: 'components/emerald-ui-components/animated-dropdown.tsx',
         type: 'registry:component',
+      },
+      {
+        path: 'hooks/use-click-outside.ts',
+        type: 'registry:hook',
       },
     ],
   },
@@ -405,11 +415,15 @@ export const component: Registry = [
     name: 'subscribe-input',
     type: 'registry:component',
     dependencies: ['lucide-react', 'motion'],
-    registryDependencies: ['button', 'use-click-outside'],
+    registryDependencies: ['button'],
     files: [
       {
         path: 'components/emerald-ui-components/subscribe-input.tsx',
         type: 'registry:component',
+      },
+      {
+        path: 'hooks/use-click-outside.ts',
+        type: 'registry:hook',
       },
     ],
   },

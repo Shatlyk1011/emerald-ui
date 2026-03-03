@@ -6,8 +6,7 @@
     "motion"
   ],
   "registryDependencies": [
-    "button",
-    "use-click-outside"
+    "button"
   ],
   "files": [
     {
@@ -15,6 +14,12 @@
       "content": "'use client'\n\nimport { FC, ReactNode, useRef, useState } from 'react'\nimport { SendHorizonal } from 'lucide-react'\nimport { motion, MotionConfig } from 'motion/react'\nimport { cn } from '@/lib/utils'\nimport { useClickOutside } from '@/hooks/use-click-outside'\nimport { Button } from '../ui/button'\n\nexport default function SubscribeInput() {\n  const [isOpen, setOpen] = useState(false)\n\n  return (\n    <OnClickOutside onClickOutside={() => setOpen(false)}>\n      <MotionConfig\n        transition={{\n          type: 'spring',\n          bounce: 0.1,\n          duration: 0.4,\n        }}\n      >\n        <motion.div\n          animate={{ width: isOpen ? '320px' : '100px' }}\n          className={cn('h-12', isOpen ? 'w-75' : 'w-20')}\n          initial={false}\n        >\n          <div\n            className={cn(\n              'bg-card h-full rounded-lg p-1',\n              isOpen ? 'border' : ''\n            )}\n          >\n            {!isOpen ? (\n              <Button\n                onClick={() => setOpen(true)}\n                className='h-full w-full rounded-lg'\n              >\n                + Sub\n              </Button>\n            ) : (\n              <div className='flex h-full gap-2'>\n                <div className='relative flex w-full'>\n                  <input\n                    id='sub'\n                    className='bg-card -tracking-one z-10 h-full w-full rounded-md p-2 text-sm focus:outline-hidden'\n                    autoComplete='off'\n                    placeholder='Email'\n                    autoFocus\n                  />\n                  <motion.label\n                    htmlFor='sub'\n                    initial={{ bottom: 0, opacity: 0 }}\n                    animate={{ bottom: -36, opacity: 100 }}\n                    transition={{\n                      type: 'spring',\n                      bounce: 0.1,\n                      duration: 0.3,\n                      delay: 0.15,\n                    }}\n                    className='-tracking-one text-muted-foreground absolute z-1 flex items-center gap-1 text-[13px] font-medium text-nowrap'\n                  >\n                    Get hand-picked updates\n                  </motion.label>\n                  <div className='absolute top-0 right-1 flex h-full items-center justify-center'></div>\n                </div>\n                <Button\n                  className='h-full w-11 rounded-md px-6'\n                  onClick={() => setOpen(false)}\n                  aria-label='Back'\n                >\n                  <SendHorizonal className='size-4' />\n                </Button>\n              </div>\n            )}\n          </div>\n        </motion.div>\n      </MotionConfig>\n    </OnClickOutside>\n  )\n}\n\n// helper functions\n\ninterface Props {\n  children: ReactNode\n  onClickOutside: () => void\n  classes?: string\n}\n\nconst OnClickOutside: FC<Props> = ({ children, onClickOutside, classes }) => {\n  const wrapperRef = useRef<HTMLDivElement>(null)\n\n  useClickOutside(wrapperRef, onClickOutside)\n\n  return (\n    <div ref={wrapperRef} className={cn(classes)}>\n      {children}\n    </div>\n  )\n}\n",
       "path": "/components/emerald-ui-components/subscribe-input.tsx",
       "target": "components/ui/subscribe-input.tsx"
+    },
+    {
+      "type": "registry:hook",
+      "content": "import { useEffect, type RefObject } from 'react'\n\nexport function useClickOutside(\n  ref: RefObject<HTMLElement | null>,\n  handler: () => void\n) {\n  useEffect(() => {\n    const handleClickOutside = (event: MouseEvent) => {\n      if (ref.current && !ref.current.contains(event.target as Node)) {\n        handler()\n      }\n    }\n\n    document.addEventListener('mousedown', handleClickOutside)\n    return () => document.removeEventListener('mousedown', handleClickOutside)\n  }, [ref, handler])\n}\n",
+      "path": "/hooks/use-click-outside.ts",
+      "target": "hooks/use-click-outside.ts"
     }
   ]
 }
