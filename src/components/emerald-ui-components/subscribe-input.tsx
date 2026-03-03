@@ -2,7 +2,7 @@
 
 import { FC, ReactNode, RefObject, useEffect, useRef, useState } from 'react'
 import { SendHorizonal } from 'lucide-react'
-import { motion, MotionConfig, Transition } from 'motion/react'
+import { motion, MotionConfig } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { Button } from '../ui/button'
 
@@ -23,7 +23,7 @@ export default function SubscribeInput() {
           className={cn('h-12', isOpen ? 'w-75' : 'w-20')}
           initial={false}
         >
-          <div className='bg-card h-full rounded-lg border p-1'>
+          <div className={cn('bg-card h-full rounded-lg p-1', isOpen ? 'border' : '')}>
             {!isOpen ? (
               <Button
                 onClick={() => setOpen(true)}

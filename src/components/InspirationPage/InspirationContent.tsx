@@ -10,7 +10,6 @@ import { useInView } from 'react-intersection-observer'
 import Hero from '../landing/Hero'
 import FilterSection from './FilterSection'
 import SiteCards from './SiteCards'
-import EmptyResult from './SiteCards/EmptyResult'
 import SiteCardsSkeleton from './SiteCards/SiteCardsSkeleton'
 
 interface Props {
@@ -33,7 +32,7 @@ export default function InspirationContent({
 
   const { ref, inView } = useInView({
     threshold: 0,
-    rootMargin: '240px',
+    rootMargin: '50px',
   })
 
   const { data, fetchNextPage, hasNextPage, isLoading: isInitialLoading, isFetchingNextPage, isFetching } =
