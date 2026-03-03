@@ -36,7 +36,7 @@ export default function InspirationContent({
     rootMargin: '240px',
   })
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
+  const { data, fetchNextPage, hasNextPage, isLoading: isInitialLoading, isFetchingNextPage, isFetching } =
     useInfiniteInspirationSites(initialData, filterQuery)
 
   const images = initialData.docs
@@ -116,7 +116,7 @@ export default function InspirationContent({
         isLoading={isLoading}
       />
 
-      {isLoading ? (
+      {isInitialLoading ? (
         <SiteCardsSkeleton />
       ) : (
         <div className='relative'>
