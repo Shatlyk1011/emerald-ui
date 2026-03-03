@@ -6,7 +6,7 @@
       "type": "registry:component",
       "content": "'use client'\n\n/**\n * @author: @emerald-ui\n * @description: Diagonal Swipe Button Component - A button with a diagonal swipe hover effect\n * @version: 1.0.0\n * @date: 2026-02-11\n * @license: MIT\n * @website: https://emerald-ui.com\n */\nimport React from 'react'\nimport { cn } from '@/lib/utils'\n\ninterface DiagonalSwipeButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  children?: React.ReactNode\n}\n\nexport default function DiagonalSwipeButton({\n  className,\n  children = 'Diagonal Swipe',\n  ...props\n}: DiagonalSwipeButtonProps) {\n  return (\n    <button\n      className={cn(\n        \"relative overflow-hidden rounded-sm border-2 border-solid border-emerald-500 px-4 py-2 text-sm text-black transition-colors duration-700 ease-out before:absolute before:top-0 before:-left-10 before:z-[-1] before:h-full before:w-[0%] before:skew-x-45 before:bg-emerald-500 before:transition-all before:delay-75 before:duration-700 before:content-[''] hover:before:w-[150%] focus:ring-emerald-400 focus:ring-offset-1 focus:ring-offset-white focus:outline-none focus:before:w-[150%] focus-visible:ring-2 dark:border-emerald-700 dark:text-white dark:before:bg-emerald-700 dark:focus:ring-emerald-800 dark:focus:ring-offset-black\",\n        className\n      )}\n      type='button'\n      {...props}\n    >\n      {children}\n    </button>\n  )\n}\n",
       "path": "/components/emerald-ui-components/buttons/diagonal-swipe-button.tsx",
-      "target": "components/emerald-ui-components/diagonal-swipe-button.tsx"
+      "target": "components/ui/diagonal-swipe-button.tsx"
     }
   ]
 }

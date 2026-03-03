@@ -6,7 +6,7 @@
       "type": "registry:component",
       "content": "'use client'\n\n/**\n * @author: @emerald-ui\n * @description: An animated button with a shimmer gradient effect that moves across the surface\n * @version: 1.0.0\n * @date: 2026-02-11\n * @license: MIT\n * @website: https://emerald-ui.com\n */\n// add this utility class to your tailwind config\n// @layer utilities {\n//  @keyframes shimmer2 {\n//     0% {\n//      background-position: 0% 0%;\n//    }\n//    100% {\n//       background-position: -200% 0%;\n//    }\n//  }\n// }\nimport { cn } from '@/lib/utils'\n\ninterface ShimmerButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  children?: React.ReactNode\n  className?: string\n}\n\nexport default function ShimmerButton({\n  children = 'Shimmer',\n  className,\n  ...props\n}: ShimmerButtonProps) {\n  return (\n    <button\n      className={cn(\n        'inline-flex h-12 animate-[shimmer2_2s_infinite_linear] items-center justify-center rounded-md border border-slate-200 bg-[linear-gradient(110deg,#fff,45%,#f1f1f1,55%,#fff)] bg-size-[200%_100%] px-6 font-medium text-slate-600 transition-colors focus:ring-slate-700 focus:ring-offset-2 focus:ring-offset-slate-400 focus:outline-none focus-visible:ring-2 dark:border-slate-800 dark:bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] dark:text-slate-400 dark:focus:ring-slate-300',\n        className\n      )}\n      {...props}\n    >\n      {children}\n    </button>\n  )\n}\n",
       "path": "/components/emerald-ui-components/buttons/shimmer-button.tsx",
-      "target": "components/emerald-ui-components/shimmer-button.tsx"
+      "target": "components/ui/shimmer-button.tsx"
     }
   ]
 }

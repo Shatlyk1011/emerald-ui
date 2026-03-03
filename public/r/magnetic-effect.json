@@ -1,13 +1,16 @@
 {
   "name": "magnetic-effect",
   "type": "registry:component",
-  "dependencies": ["gsap", "@gsap/react"],
+  "dependencies": [
+    "gsap",
+    "@gsap/react"
+  ],
   "files": [
     {
       "type": "registry:component",
       "content": "'use client'\n\n/**\n * @author: @codegrid\n * @description: Magnetic Hover Effect wrapper with GSAP\n * @version: 2.0.0\n * @date: 2026-02-17\n * @license: MIT\n * @website: https://emerald-ui.com\n */\nimport { useRef } from 'react'\nimport { useGSAP } from '@gsap/react'\nimport gsap, { Elastic } from 'gsap'\nimport { cn } from '@/lib/utils'\n\ninterface MagneticEffectProps {\n  /** Content to apply the magnetic effect to */\n  children: React.ReactNode\n  /** Parallax movement intensity in px (default 50) */\n  strength?: number\n  /** Animation duration on mouse move in seconds (default 0.3) */\n  duration?: number\n  /** Spring-back duration on mouse leave in seconds (default 2) */\n  resetDuration?: number\n  className?: string\n}\n\nexport default function MagneticEffect({\n  children,\n  strength = 35,\n  duration = 0.3,\n  resetDuration = 2,\n  className,\n}: MagneticEffectProps) {\n  const wrapperRef = useRef<HTMLDivElement>(null)\n  const innerRef = useRef<HTMLDivElement>(null)\n\n  useGSAP(\n    () => {\n      const wrapper = wrapperRef.current!\n      const inner = innerRef.current!\n\n      function handleMouseLeave() {\n        gsap.to(inner, {\n          duration: resetDuration,\n          scale: 1,\n          x: 0,\n          y: 0,\n          ease: Elastic.easeOut.config(2, 0.3),\n        })\n      }\n\n      function handleMouseMove(e: MouseEvent) {\n        const boundingRect = wrapper.getBoundingClientRect()\n        const relX = e.pageX - boundingRect.left\n        const relY = e.pageY - boundingRect.top\n\n        gsap.to(inner, {\n          duration,\n          x: ((relX - boundingRect.width / 2) / boundingRect.width) * strength,\n          y: ((relY - boundingRect.height / 2) / boundingRect.width) * strength,\n        })\n      }\n\n      wrapper.addEventListener('mouseleave', handleMouseLeave)\n      wrapper.addEventListener('mousemove', handleMouseMove)\n\n      return () => {\n        wrapper.removeEventListener('mouseleave', handleMouseLeave)\n        wrapper.removeEventListener('mousemove', handleMouseMove)\n      }\n    },\n    { scope: wrapperRef }\n  )\n\n  return (\n    <div\n      className={cn(\n        'relative inline-flex items-center justify-center p-10',\n        className\n      )}\n      ref={wrapperRef}\n    >\n      <div ref={innerRef}>{children}</div>\n    </div>\n  )\n}\n",
       "path": "/components/emerald-ui-components/gsap-components/magnetic-effect.tsx",
-      "target": "components/emerald-ui-components/magnetic-effect.tsx"
+      "target": "components/ui/magnetic-effect.tsx"
     }
   ]
 }

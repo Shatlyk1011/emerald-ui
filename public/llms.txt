@@ -37,9 +37,6 @@ https://www.emerald-ui.com/docs/components/footer
 **Gradient File Input** - A modern file upload input with drag-and-drop support, animated gradient border, and AI-style prompt textarea.
 https://www.emerald-ui.com/docs/components/gradient-file-upload
 
-**GSAP Components** - High-performance animations powered by GSAP
-https://www.emerald-ui.com/docs/components/index
-
 **Hero** - Explore high quality hero components. Dark and Light modes available.
 https://www.emerald-ui.com/docs/components/hero
 
@@ -76,5 +73,6 @@ https://www.emerald-ui.com/docs/components/text-reveal
 ## Links
 
 - Website: https://www.emerald-ui.com
+- Github: https://github.com/shatlyk1011/ui-application
 - Sitemap: https://www.emerald-ui.com/sitemap.xml
 

@@ -1,13 +1,15 @@
 {
   "name": "motion-button",
   "type": "registry:component",
-  "dependencies": ["lucide-react"],
+  "dependencies": [
+    "lucide-react"
+  ],
   "files": [
     {
       "type": "registry:component",
       "content": "'use client'\n\nimport { FC } from 'react'\nimport { ArrowRight } from 'lucide-react'\nimport { cn } from '@/lib/utils'\n\ninterface Props {\n  label: string\n  variant?: 'primary' | 'secondary'\n  classes?: string\n  animate?: boolean\n  delay?: number\n}\n\nconst MotionButton: FC<Props> = ({ label, classes }) => {\n  return (\n    <button\n      className={cn(\n        'bg-background group relative h-auto w-50 cursor-pointer rounded-full border-[none] p-1 outline-none',\n        classes\n      )}\n    >\n      <span\n        className='circle bg-primary m-0 block h-12 w-12 overflow-hidden rounded-full duration-500 group-hover:w-full'\n        aria-hidden='true'\n      ></span>\n      <div className='icon absolute top-1/2 left-4 translate-x-0 -translate-y-1/2 duration-500 group-hover:translate-x-[0.4rem]'>\n        <ArrowRight className='text-background size-6' />\n      </div>\n      <span className='button-text text-foreground group-hover:text-background font-manrope absolute top-2/4 left-2/4 ml-4 -translate-x-2/4 -translate-y-2/4 text-center text-lg font-medium tracking-tight whitespace-nowrap duration-500'>\n        {label}\n      </span>\n    </button>\n  )\n}\n\nexport default MotionButton\n",
       "path": "/components/emerald-ui-components/buttons/motion-button.tsx",
-      "target": "components/emerald-ui-components/motion-button.tsx"
+      "target": "components/ui/motion-button.tsx"
     }
   ]
 }
