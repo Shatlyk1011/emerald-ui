@@ -140,17 +140,10 @@ function SiteCard({ item, index }: SiteCardProps) {
             <Sticker />
           )}
         </div>
-        <div className='flex flex-col'>
-          <h3 className='text-lg leading-tight font-semibold transition-colors'>
-            {item.title}
-          </h3>
-          <time
-            className='text-muted-foreground text-xs'
-            dateTime={item.createdAt}
-          >
-            {formatDateFull(item.createdAt)}
-          </time>
-        </div>
+        <h3 className='text-lg leading-tight font-semibold transition-colors'>
+          {item.title}
+        </h3>
+
       </div>
     </div>
   )
