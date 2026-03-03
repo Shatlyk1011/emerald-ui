@@ -2,7 +2,7 @@
 
 import { FC, Suspense, useRef, useState } from 'react'
 import { getUserInitials } from '@/composables/utils'
-import { LogOut, ChevronDown, Menu } from 'lucide-react'
+import { LogOut, ChevronDown, Menu, Megaphone, Flag } from 'lucide-react'
 import { useScroll, useMotionValueEvent } from 'motion/react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
@@ -30,6 +30,13 @@ const SubmitWebsiteDialog = dynamic(
   }
 )
 
+const SubmitIssueDialog = dynamic(
+  () => import('../landing/SubmitIssueDialog'),
+  {
+    ssr: false,
+  }
+)
+
 const { home, motionComponents, gsapComponents } = {
   home: '/',
   motionComponents: '/docs',
@@ -49,9 +56,10 @@ const Header: FC<Props> = ({ isFumadocs }) => {
 
   const [isScrolled, setIsScrolled] = useState(false)
   const [isDialogOpen, setDialogOpen] = useState(false)
+  const [isIssueDialogOpen, setIssueDialogOpen] = useState(false)
   const [menu, setMenu] = useState(false)
 
-
+  const closeMenu = () => setMenu(false)
   const { scrollY } = useScroll()
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
@@ -67,7 +75,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
       <header
         ref={headerRef}
         className={cn(
-          'fixed top-0 z-20 mx-auto flex h-14 w-full items-center justify-between border-b px-8 py-2 font-sans max-sm:px-4',
+          'fixed top-0 z-20 mx-auto flex h-14 w-full items-center justify-between border-b px-8 py-2 font-sans max-md:px-4',
           isScrolled && !isFumadocs && 'bg-background/90 backdrop-blur-sm',
           isFumadocs && 'static w-full flex-1 justify-start border-none px-0 max-lg:hidden'
         )}
@@ -86,6 +94,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
             <li>
               <Link
                 href={home}
+                onClick={closeMenu}
                 className={cn(
                   'hover:text-foreground rounded-md px-3 min-h-10 py-2 text-nowrap transition ease-out max-sm:px-2'
                 )}
@@ -147,7 +156,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
             <span className='mx-1 opacity-50 max-md:hidden'>|</span>
             <li>
               <button
-                onClick={() => setDialogOpen(true)}
+                onClick={() => { setDialogOpen(true); closeMenu() }}
                 className='hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'
               >
                 <span>Submit a website</span>
@@ -157,6 +166,13 @@ const Header: FC<Props> = ({ isFumadocs }) => {
         </nav>
 
         <div className='flex min-w-20 items-center justify-end gap-3 max-sm:gap-1'>
+          <Button
+            variant={"ghost"}
+            onClick={() => setIssueDialogOpen(true)}
+            className='hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'
+          >
+            <Flag className='size-5 text-foreground' />
+          </Button>
           <ThemeToggle />
 
           {isLoading ? (
@@ -223,6 +239,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
 
       <Suspense fallback={'loading...'}>
         {isDialogOpen && <SubmitWebsiteDialog open={isDialogOpen} onOpenChange={setDialogOpen} />}
+        {isIssueDialogOpen && <SubmitIssueDialog open={isIssueDialogOpen} onOpenChange={setIssueDialogOpen} />}
       </Suspense>
     </>
   )

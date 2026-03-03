@@ -76,6 +76,7 @@ export interface Config {
     categories: Category;
     'website-style': WebsiteStyle;
     adminUsers: AdminUser;
+    reports: Report;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -92,6 +93,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'website-style': WebsiteStyleSelect<false> | WebsiteStyleSelect<true>;
     adminUsers: AdminUsersSelect<false> | AdminUsersSelect<true>;
+    reports: ReportsSelect<false> | ReportsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -364,6 +366,23 @@ export interface AdminUser {
   password?: string | null;
 }
 /**
+ * User-reported issues or bugs from the website. Details and email provided by the user.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reports".
+ */
+export interface Report {
+  id: string;
+  email?: string | null;
+  message: string;
+  /**
+   * Current status of the issue reported
+   */
+  status: 'open' | 'resolved' | 'closed';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -422,6 +441,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'adminUsers';
         value: string | AdminUser;
+      } | null)
+    | ({
+        relationTo: 'reports';
+        value: string | Report;
       } | null)
     | ({
         relationTo: 'payload-kv';
@@ -596,6 +619,17 @@ export interface AdminUsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reports_select".
+ */
+export interface ReportsSelect<T extends boolean = true> {
+  email?: T;
+  message?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

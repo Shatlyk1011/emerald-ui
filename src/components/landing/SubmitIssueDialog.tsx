@@ -13,7 +13,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 
-interface SubmitWebsiteDialogProps {
+interface SubmitIssueDialogProps {
   open: boolean
   onOpenChange: (open: boolean) => void
 }
@@ -21,14 +21,13 @@ interface SubmitWebsiteDialogProps {
 const FormInitial = {
   name: '',
   email: '',
-  websiteUrl: '',
   message: '',
 }
 
-export default function SubmitWebsiteDialog({
+export default function SubmitIssueDialog({
   open,
   onOpenChange,
-}: SubmitWebsiteDialogProps) {
+}: SubmitIssueDialogProps) {
   const [formData, setFormData] = useState(FormInitial)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -36,16 +35,8 @@ export default function SubmitWebsiteDialog({
     e.preventDefault()
 
     // Client-side validation
-    if (!formData.websiteUrl.trim()) {
-      toast.error('Website URL is required')
-      return
-    }
-
-    // Validate URL format
-    try {
-      new URL(formData.websiteUrl)
-    } catch {
-      toast.error('Please enter a valid URL')
+    if (!formData.message.trim()) {
+      toast.error('Message is required')
       return
     }
 
@@ -58,7 +49,7 @@ export default function SubmitWebsiteDialog({
     setIsSubmitting(true)
 
     try {
-      const response = await fetch('/api/submit-website', {
+      const response = await fetch('/api/submit-issue', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -69,7 +60,7 @@ export default function SubmitWebsiteDialog({
         throw new Error(error.error || 'Submission failed')
       }
 
-      toast.success('Website submitted successfully. Thank you!', {
+      toast.success('Issue submitted successfully. Thank you!', {
         position: 'top-center',
       })
       onOpenChange(false)
@@ -90,63 +81,44 @@ export default function SubmitWebsiteDialog({
       <DialogContent className='max-w-md'>
         <DialogHeader className='gap-1'>
           <DialogTitle className='text-2xl font-semibold'>
-            Submit a website
+            Find an issue?
           </DialogTitle>
           <DialogDescription className='text-sm opacity-70'>
-            Suggest a website for our Inspiration Collection.
+            Please, describe the problem you found or feedback you have.
           </DialogDescription>
         </DialogHeader>
 
         <form
           onSubmit={handleSubmit}
           autoComplete='off'
-          className='mt-4 space-y-4'
+          className='mt-4 flex flex-col gap-4'
         >
-          <div className='space-y-2'>
-            <Input
-              id='email'
-              type='email'
-              className='text-sm'
-              autoComplete='off'
-              placeholder='Email'
-              value={formData.email}
-              onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
-              }
-              disabled={isSubmitting}
-            />
-          </div>
+          <Input
+            id='email'
+            type='email'
+            autoComplete='off'
+            className='text-sm placeholder:font-sans placeholder:text-sm'
+            placeholder='Email (Optional)'
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+            disabled={isSubmitting}
+          />
 
-          <div className='space-y-2'>
-            <Input
-              id='websiteUrl'
-              type='url'
-              className='text-sm'
-              autoComplete='off'
-              placeholder='Website URL'
-              value={formData.websiteUrl}
-              onChange={(e) =>
-                setFormData({ ...formData, websiteUrl: e.target.value })
-              }
-              disabled={isSubmitting}
-              required
-            />
-          </div>
-
-          <div className='space-y-2'>
-            <Textarea
-              id='message'
-              className='max-h-40 min-h-20 text-sm placeholder:font-sans placeholder:text-sm'
-              placeholder='What this website about'
-              autoComplete='off'
-              value={formData.message}
-              onChange={(e) =>
-                setFormData({ ...formData, message: e.target.value })
-              }
-              disabled={isSubmitting}
-              rows={4}
-            />
-          </div>
+          <Textarea
+            id='message'
+            className='max-h-60 min-h-40 text-sm placeholder:font-sans placeholder:text-sm'
+            placeholder='Describe the issue or feedback...'
+            autoComplete='off'
+            value={formData.message}
+            onChange={(e) =>
+              setFormData({ ...formData, message: e.target.value })
+            }
+            disabled={isSubmitting}
+            rows={4}
+            required
+          />
 
           <Button
             type='submit'
@@ -154,7 +126,7 @@ export default function SubmitWebsiteDialog({
             className='mt-1 w-full'
             size='sm'
           >
-            {isSubmitting ? 'Submitting...' : 'Submit'}
+            {isSubmitting ? 'Submitting...' : 'Submit Issue'}
           </Button>
         </form>
       </DialogContent>
