@@ -50,14 +50,14 @@ export default function SitePreviewDialog({
       }}
     >
 
-      <DialogContent className='scrollbar-thin overflow-hidden p-0 max-h-screen max-lg:overflow-auto'>
+      <DialogContent className='scrollbar-thin overflow-hidden p-0 max-h-[96%] max-lg:overflow-auto'>
         {/* Two-column layout */}
         <ScrollArea className='w-full h-full'>
 
           <div className='grid grid-cols-[1fr_320px] max-lg:grid-cols-1'>
             {/* Left: Image Preview Area */}
             <div
-              className='flex flex-col overflow-y-auto px-4 py-4 max-lg:py-6 max-md:p-4'
+              className='flex flex-col overflow-y-auto px-4 py-4 max-lg:py-6 max-md:p-4 max-sm:pt-2'
               style={{ background: selectedSite.gradientColor! }}
             >
               {/* Media Gallery with Tabs */}
