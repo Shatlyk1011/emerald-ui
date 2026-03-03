@@ -13,6 +13,7 @@ import { Button } from '../ui/button'
 import Lens from '../ui/lens'
 import { Switch } from '../ui/switch'
 import { ScrollArea } from '../ui/scroll-area'
+import { siteConfig } from '@/lib/site-config'
 
 interface SitePreviewDialogProps {
   onCategoryClick: (category: string) => void
@@ -210,7 +211,7 @@ export default function SitePreviewDialog({
                       {selectedSite.style.map((style) => (
                         <span
                           key={style}
-                          className='bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-lg px-2.25 py-1.75 text-xs leading-[0.9] font-medium capitalize transition-colors'
+                          className='bg-secondary hover:bg-secondary/80 text-secondary-foreground rounded-md px-2.25 py-1.75 text-xs leading-[0.9] font-medium capitalize transition-colors'
                         >
                           {style}
                         </span>
@@ -241,12 +242,12 @@ export default function SitePreviewDialog({
                 {selectedSite.pageUrl && (
                   <Button asChild variant={'secondary'}>
                     <a
-                      href={selectedSite.pageUrl}
+                      href={`${selectedSite.pageUrl}?ref=${siteConfig.siteUrl}`}
                       target='_blank'
                       rel='noopener noreferrer'
                       className='w-full'
                     >
-                      <ExternalLink className='h-4 w-4' />
+                      <ExternalLink className='size-3.5' />
                       Visit Site
                     </a>
                   </Button>
