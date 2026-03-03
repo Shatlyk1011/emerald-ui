@@ -1,6 +1,7 @@
 export const siteConfig = {
   name: 'Emerald UI - Inspiration Websites & Components',
-  description: 'A modern UI design inspiration website and components.',
+  description:
+    'A modern UI design inspiration websites and collection of 40+ components free and open source built with Next.js, React, Tailwind CSS, GSAP, and Motion.',
   revalidateTime: 3600,
   github: 'https://github.com/shatlyk1011',
   siteUrl: 'https://emerald-ui.com',
