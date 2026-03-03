@@ -143,7 +143,6 @@ function SiteCard({ item, index }: SiteCardProps) {
         <h3 className='text-lg leading-tight font-semibold transition-colors'>
           {item.title}
         </h3>
-
       </div>
     </div>
   )

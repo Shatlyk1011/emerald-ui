@@ -46,14 +46,13 @@ const ProjectReports: CollectionConfig = {
   },
 
   admin: {
-    defaultColumns: ['createdAt', 'status', "description", 'email'],
+    defaultColumns: ['createdAt', 'status', 'description', 'email'],
     useAsTitle: 'email',
     description:
       'User-reported issues or bugs from the website. Details and email provided by the user.',
   },
 
   fields: [
-
     {
       name: 'email',
       label: 'Email',

@@ -18,14 +18,14 @@ const Logo: FC<Props> = ({ classes, size, logoColor }) => {
     >
       <LogoIcon
         className={cn(
-          'min-w-7 max-w-7 min-h-7 max-h-7',
+          'max-h-7 min-h-7 max-w-7 min-w-7',
           logoColor || 'current',
-          size === 'xl' && 'min-w-10 max-w-10 min-h-10 max-h-10'
+          size === 'xl' && 'max-h-10 min-h-10 max-w-10 min-w-10'
         )}
       />
       <span
         className={cn(
-          '-tracking-two items-center transition ',
+          '-tracking-two items-center transition',
           size === 'xl' && 'text-2xl'
         )}
       >

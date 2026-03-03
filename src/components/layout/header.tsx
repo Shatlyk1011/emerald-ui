@@ -77,26 +77,32 @@ const Header: FC<Props> = ({ isFumadocs }) => {
         className={cn(
           'fixed top-0 z-20 mx-auto flex h-14 w-full items-center justify-between border-b px-8 py-2 font-sans max-md:px-4',
           isScrolled && !isFumadocs && 'bg-background/90 backdrop-blur-sm',
-          isFumadocs && 'static w-full flex-1 justify-start border-none px-0 max-lg:hidden'
+          isFumadocs &&
+            'static w-full flex-1 justify-start border-none px-0 max-lg:hidden'
         )}
       >
         <Link
           href='/'
           className={cn(
-            'w-max max-sm:mr-4 max-sm:max-w-max max-sm:min-w-8 z-50',
+            'z-50 w-max max-sm:mr-4 max-sm:max-w-max max-sm:min-w-8',
             isFumadocs && 'hidden'
           )}
         >
           <Logo />
         </Link>
-        <nav className={cn('text-muted-foreground ml-6 flex flex-1 justify-start max-md:ml-0 z-49 max-md:absolute max-md:h-svh max-md:w-screen max-md:inset-0 transition-all max-md:translate-x-full', menu ? 'max-md:translate-x-0' : 'max-md:translate-x-full')}>
-          <ul className='-tracking-one flex items-center max-md:flex-col max-md:gap-3 max-md:bg-secondary max-md:w-full max-md:text-base max-md:pt-40 text-sm font-medium'>
+        <nav
+          className={cn(
+            'text-muted-foreground z-49 ml-6 flex flex-1 justify-start transition-all max-md:absolute max-md:inset-0 max-md:ml-0 max-md:h-svh max-md:w-screen max-md:translate-x-full',
+            menu ? 'max-md:translate-x-0' : 'max-md:translate-x-full'
+          )}
+        >
+          <ul className='-tracking-one max-md:bg-secondary flex items-center text-sm font-medium max-md:w-full max-md:flex-col max-md:gap-3 max-md:pt-40 max-md:text-base'>
             <li>
               <Link
                 href={home}
                 onClick={closeMenu}
                 className={cn(
-                  'hover:text-foreground rounded-md px-3 min-h-10 py-2 text-nowrap transition ease-out max-sm:px-2'
+                  'hover:text-foreground min-h-10 rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'
                 )}
               >
                 Website Inspiration
@@ -137,7 +143,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
               <Link
                 href={motionComponents}
                 className={cn(
-                  'hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2 hidden max-md:inline'
+                  'hover:text-foreground hidden rounded-md px-3 py-2 text-nowrap transition ease-out max-md:inline max-sm:px-2'
                 )}
               >
                 Motion Components
@@ -147,7 +153,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
               <Link
                 href={gsapComponents}
                 className={cn(
-                  'hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2 hidden max-md:inline'
+                  'hover:text-foreground hidden rounded-md px-3 py-2 text-nowrap transition ease-out max-md:inline max-sm:px-2'
                 )}
               >
                 Gsap Components
@@ -156,7 +162,10 @@ const Header: FC<Props> = ({ isFumadocs }) => {
             <span className='mx-1 opacity-50 max-md:hidden'>|</span>
             <li>
               <button
-                onClick={() => { setDialogOpen(true); closeMenu() }}
+                onClick={() => {
+                  setDialogOpen(true)
+                  closeMenu()
+                }}
                 className='hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'
               >
                 <span>Submit a website</span>
@@ -167,11 +176,11 @@ const Header: FC<Props> = ({ isFumadocs }) => {
 
         <div className='flex min-w-20 items-center justify-end gap-3 max-sm:gap-1'>
           <Button
-            variant={"ghost"}
+            variant={'ghost'}
             onClick={() => setIssueDialogOpen(true)}
             className='hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'
           >
-            <Flag className='size-5 text-foreground' />
+            <Flag className='text-foreground size-5' />
           </Button>
           <ThemeToggle />
 
@@ -224,22 +233,37 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                   onClick={() =>
                     router.push(`/sign-in?next=${encodeURIComponent(pathname)}`)
                   }
-                      className=''
+                  className=''
                 >
                   Sign In
                 </Button>
               )}
             </>
           )}
-          <Button size="icon-sm" className='hidden max-md:flex z-50' variant={'ghost'} onClick={() => setMenu(!menu)}>
+          <Button
+            size='icon-sm'
+            className='z-50 hidden max-md:flex'
+            variant={'ghost'}
+            onClick={() => setMenu(!menu)}
+          >
             <Menu className='size-4' />
           </Button>
         </div>
       </header>
 
       <Suspense fallback={'loading...'}>
-        {isDialogOpen && <SubmitWebsiteDialog open={isDialogOpen} onOpenChange={setDialogOpen} />}
-        {isIssueDialogOpen && <SubmitIssueDialog open={isIssueDialogOpen} onOpenChange={setIssueDialogOpen} />}
+        {isDialogOpen && (
+          <SubmitWebsiteDialog
+            open={isDialogOpen}
+            onOpenChange={setDialogOpen}
+          />
+        )}
+        {isIssueDialogOpen && (
+          <SubmitIssueDialog
+            open={isIssueDialogOpen}
+            onOpenChange={setIssueDialogOpen}
+          />
+        )}
       </Suspense>
     </>
   )
