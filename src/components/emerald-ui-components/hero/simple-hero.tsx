@@ -1,4 +1,14 @@
 'use client'
+
+/**
+ * @author: @emerald-ui
+ * @description: Simple ready to use hero section
+ * @version: 1.0.0
+ * @date: 2026-02.26
+ * @license: MIT
+ * @website: https://emerald-ui.com
+ */
+
 import { useState } from 'react'
 import Link from 'next/link'
 
