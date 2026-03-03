@@ -15,7 +15,7 @@ export default function Footer() {
           <span className='text-muted-foreground -mt-2 ml-11.5'>
             Build by{' '}
             <a
-              href='https://shatlykabdullayev.com/?ref=https://emerald-ui.com'
+              href='https://shatlykabdullayev.com'
               target='_blank'
               rel='noopener noreferrer'
               className='hover:text-foreground'
