@@ -1,5 +1,8 @@
 import type { Registry } from './schema'
 
+
+
+
 export const component: Registry = [
   // ─── Buttons ──────────────────────────────────────────────────────────────
   {
@@ -88,6 +91,7 @@ export const component: Registry = [
     name: 'social-button',
     type: 'registry:component',
     dependencies: ['lucide-react', 'motion'],
+    registryDependencies: ['use-click-outside'],
     files: [
       {
         path: 'components/emerald-ui-components/buttons/social-button.tsx',
@@ -335,7 +339,7 @@ export const component: Registry = [
     name: 'animated-dropdown',
     type: 'registry:component',
     dependencies: ['lucide-react', 'motion'],
-    registryDependencies: ['button'],
+    registryDependencies: ['button', 'use-click-outside'],
     files: [
       {
         path: 'components/emerald-ui-components/animated-dropdown.tsx',
@@ -404,7 +408,7 @@ export const component: Registry = [
     name: 'subscribe-input',
     type: 'registry:component',
     dependencies: ['lucide-react', 'motion'],
-    registryDependencies: ['button'],
+    registryDependencies: ['button', 'use-click-outside'],
     files: [
       {
         path: 'components/emerald-ui-components/subscribe-input.tsx',

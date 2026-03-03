@@ -174,7 +174,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
           </ul>
         </nav>
 
-        <div className='flex min-w-20 items-center justify-end gap-3 max-sm:gap-1'>
+        <div className='flex min-w-20 items-center justify-end gap-2.5 max-sm:gap-1'>
           <Button
             variant={'ghost'}
             onClick={() => setIssueDialogOpen(true)}

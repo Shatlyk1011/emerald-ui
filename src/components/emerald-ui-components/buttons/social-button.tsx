@@ -8,11 +8,9 @@
  * @license: MIT
  * @website: https://emerald-ui.com
  */
-import { useState } from 'react'
-// helper functions (suggestion: move them to seperate component file)
-import { useEffect, RefObject } from 'react'
-import { FC, ReactNode, useRef } from 'react'
+import { useState, FC, ReactNode, useRef } from 'react'
 import { Check, Copy, Instagram, Linkedin, Share2, Twitter } from 'lucide-react'
+import { useClickOutside } from '@/hooks/use-click-outside'
 import { AnimatePresence, motion } from 'motion/react'
 import { cn } from '@/lib/utils'
 
@@ -135,23 +133,6 @@ export default function SocialButton({ className }: { className?: string }) {
   )
 }
 
-const useClickOutside = (
-  ref: RefObject<HTMLDivElement | null>,
-  onClickOutside: () => void
-) => {
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        onClickOutside()
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [ref])
-}
-
 interface Props {
   children: ReactNode
   onClickOutside: () => void
@@ -159,7 +140,7 @@ interface Props {
 }
 
 const OnClickOutside: FC<Props> = ({ children, onClickOutside, classes }) => {
-  const wrapperRef = useRef<HTMLDivElement | null>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
 
   useClickOutside(wrapperRef, onClickOutside)
 

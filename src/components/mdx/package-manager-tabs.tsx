@@ -13,8 +13,8 @@ type PackageManagerTabsProps = {
 
 const packageManagers = [
   { id: 'npm', title: 'npm' },
-  { id: 'bun', title: 'bun' },
   { id: 'pnpm', title: 'pnpm' },
+  { id: 'bun', title: 'bun' },
 ]
 
 export function PackageManagerTabs({
@@ -22,7 +22,7 @@ export function PackageManagerTabs({
   commandName,
   prePath,
 }: PackageManagerTabsProps) {
-  const [selected, setSelected] = React.useState<string>('bun')
+  const [selected, setSelected] = React.useState<string>('pnpm')
   const [dimensions, setDimensions] = React.useState({ width: 0, left: 0 })
   const [isCopied, setIsCopied] = React.useState(false)
 

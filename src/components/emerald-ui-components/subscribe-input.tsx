@@ -1,6 +1,7 @@
 'use client'
 
-import { FC, ReactNode, RefObject, useEffect, useRef, useState } from 'react'
+import { FC, ReactNode, useRef, useState } from 'react'
+import { useClickOutside } from '@/hooks/use-click-outside'
 import { SendHorizonal } from 'lucide-react'
 import { motion, MotionConfig } from 'motion/react'
 import { cn } from '@/lib/utils'
@@ -75,24 +76,6 @@ export default function SubscribeInput() {
 
 // helper functions
 
-const useClickOutside = (
-  ref: RefObject<HTMLDivElement | null>,
-  onClickOutside: () => void
-) => {
-  console.log('here')
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        onClickOutside()
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [ref])
-}
-
 interface Props {
   children: ReactNode
   onClickOutside: () => void
@@ -100,7 +83,7 @@ interface Props {
 }
 
 const OnClickOutside: FC<Props> = ({ children, onClickOutside, classes }) => {
-  const wrapperRef = useRef<HTMLDivElement | null>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
 
   useClickOutside(wrapperRef, onClickOutside)
 

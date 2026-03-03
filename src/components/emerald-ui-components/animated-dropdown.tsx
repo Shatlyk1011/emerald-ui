@@ -8,7 +8,8 @@
  * @license: MIT
  * @website: https://emerald-ui.com
  */
-import { useState, useRef, useEffect, FC, ReactNode, RefObject } from 'react'
+import { useState, useRef, FC, ReactNode } from 'react'
+import { useClickOutside } from '@/hooks/use-click-outside'
 import { ChevronDown } from 'lucide-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { cn } from '@/lib/utils'
@@ -118,24 +119,6 @@ export default function AnimatedDropdown({
   )
 }
 
-// helper functions
-
-const useClickOutside = (
-  ref: RefObject<HTMLDivElement | null>,
-  onClickOutside: () => void
-) => {
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        onClickOutside()
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [ref])
-}
 
 interface Props {
   children: ReactNode
@@ -144,7 +127,7 @@ interface Props {
 }
 
 const OnClickOutside: FC<Props> = ({ children, onClickOutside, classes }) => {
-  const wrapperRef = useRef<HTMLDivElement | null>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
 
   useClickOutside(wrapperRef, onClickOutside)
 

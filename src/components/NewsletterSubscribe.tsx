@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, ReactNode, RefObject, useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { Film, Send } from 'lucide-react'
 import { motion, MotionConfig } from 'motion/react'
 import { toast } from 'sonner'
@@ -125,43 +125,5 @@ export default function SubscribeInput() {
         </div>
       </motion.div>
     </MotionConfig>
-  )
-}
-
-// helper functions
-
-const useClickOutside = (
-  ref: RefObject<HTMLDivElement | null>,
-  onClickOutside: () => void
-) => {
-  console.log('here')
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
-        onClickOutside()
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [ref])
-}
-
-interface Props {
-  children: ReactNode
-  onClickOutside: () => void
-  classes?: string
-}
-
-const OnClickOutside: FC<Props> = ({ children, onClickOutside, classes }) => {
-  const wrapperRef = useRef<HTMLDivElement | null>(null)
-
-  useClickOutside(wrapperRef, onClickOutside)
-
-  return (
-    <div ref={wrapperRef} className={cn(classes)}>
-      {children}
-    </div>
   )
 }

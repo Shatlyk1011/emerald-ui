@@ -1,12 +1,15 @@
-import type { Registry } from './schema'
+import type { Registry } from './schema';
+
+
+
 
 export const hooks: Registry = [
   {
-    name: 'use-copy',
+    name: 'use-click-outside',
     type: 'registry:hook',
     files: [
       {
-        path: 'hooks/use-copy.ts',
+        path: 'hooks/use-click-outside.ts',
         type: 'registry:hook',
       },
     ],

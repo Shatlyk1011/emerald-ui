@@ -98,7 +98,7 @@ export default function SubmitIssueDialog({
             type='email'
             autoComplete='off'
             className='text-sm placeholder:font-sans placeholder:text-sm'
-            placeholder='Email (Optional)'
+            placeholder='Email'
             value={formData.email}
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
