@@ -48,9 +48,9 @@ const Subscribers: CollectionConfig = {
       label: 'Subscription Source',
       type: 'text',
       required: false,
-      defaultValue: 'website (default)',
+      defaultValue: 'website',
       admin: {
-        description: 'Where the subscriber signed up (e.g., homepage, footer)',
+        description: 'Where the subscriber signed up (e.g., hero)',
         position: 'sidebar',
       },
     },

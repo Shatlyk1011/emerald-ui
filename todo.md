@@ -12,11 +12,7 @@ Result page:
 
 Global:
 
-- add seo (blog)
-
 - add what's new section in main layout
-
-- add user form for "what i want to see in this page (or bugs)"
 
 <!-- before production -->
 

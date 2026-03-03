@@ -91,6 +91,23 @@ export default function SignInPage({
 
       if (error) throw error
 
+      // Store email in newsletter collection
+      try {
+        await fetch('/api/subscribers', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: result.data.email,
+            source: 'magic_link_signin',
+          }),
+        })
+      } catch (err) {
+        // Silently caught, ignore error if user is already subscribed so we don't break the flow
+        console.error('Failed to add to newsletter:', err)
+      }
+
       setMagicLinkSent(true)
       setEmail('')
 
@@ -223,7 +240,7 @@ export default function SignInPage({
             )}
 
             {magicLinkSent && (
-              <div className='rounded-md border border-green-950/70 bg-green-950/35 p-3 text-sm text-green-300'>
+              <div className='rounded-md border border-green-200  bg-green-100/80 text-green-800 dark:border-green-950/70 dark:bg-green-950/35 p-3 text-sm dark:text-green-300'>
                 Check your email and sign-in using link we&apos;ve sent.
               </div>
             )}
@@ -231,7 +248,7 @@ export default function SignInPage({
             <Button
               type='submit'
               disabled={loading}
-              className='bg-primary-foreground text-foreground hover:bg-primary-foreground/80 h-10 w-full'
+              className='bg-primary-foreground border text-foreground hover:bg-primary-foreground/80 h-10 w-full'
             >
               {loading ? 'Sending...' : 'Continue with Email'}
             </Button>
