@@ -81,7 +81,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
         >
           <Logo />
         </Link>
-        <nav className={cn('text-muted-foreground ml-6 flex flex-1 justify-start max-md:ml-0 z-49 max-md:absolute max-md:h-svh max-md:w-svw max-md:inset-0 transition-all max-md:translate-x-full', menu ? 'max-md:translate-x-0' : 'max-md:translate-x-full')}>
+        <nav className={cn('text-muted-foreground ml-6 flex flex-1 justify-start max-md:ml-0 z-49 max-md:absolute max-md:h-svh max-md:w-screen max-md:inset-0 transition-all max-md:translate-x-full', menu ? 'max-md:translate-x-0' : 'max-md:translate-x-full')}>
           <ul className='-tracking-one flex items-center max-md:flex-col max-md:gap-3 max-md:bg-secondary max-md:w-full max-md:text-base max-md:pt-40 text-sm font-medium'>
             <li>
               <Link
