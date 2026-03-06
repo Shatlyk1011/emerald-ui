@@ -128,7 +128,6 @@ export default function SignInPage({
         isModal && 'max-h-max min-h-auto py-6'
       )}
     >
-      {/* left */}
       <div className='flex flex-1 justify-center'>
         <div className='relative z-10 w-full max-w-lg space-y-8 rounded-2xl p-8 max-md:space-y-5 max-sm:p-5'>
           <Link

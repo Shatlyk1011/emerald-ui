@@ -14,9 +14,9 @@
     "components/text",
 
     "---Blocks & Sections---",
-    "components/hero",
     "components/pricing",
     "components/cards",
+    "components/hero",
     "components/footer",
 
     "---Components---",

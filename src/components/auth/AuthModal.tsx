@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import SignInPage from './SignInPage'
 import SignUpPage from './SignUpPage'
