@@ -79,7 +79,7 @@ export default function SitePreviewDialog({
                         className='rounded-px px-4 py-2 transition-all data-[state=active]:bg-transparent'
                         value='screenshot'
                       >
-                        Screenshot
+                        Image
                       </TabsTrigger>
                     </TabsList>
                     <TabsContent
