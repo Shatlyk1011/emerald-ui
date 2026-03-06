@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { formatDateFull } from '@/composables/utils'
 import { InspirationWebsite } from '@/payload-types'
 import { useAppStore } from '@/store/useAppStore'
 import { BotIcon, Sticker } from 'lucide-react'
@@ -133,7 +132,8 @@ function SiteCard({ item, index }: SiteCardProps) {
             <img
               src={item.favicon}
               className='h-full w-full object-contain'
-              alt=''
+              alt='favicon'
+              loading="lazy"
               draggable={false}
             />
           ) : (

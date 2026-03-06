@@ -95,6 +95,7 @@ export default function SitePreviewDialog({
                           <img
                             draggable={false}
                             src={selectedSite.imgUrl!}
+                            loading="lazy"
                             alt={`${selectedSite.title} screenshot`}
                             className='aspect-4/3 h-full w-full object-contain object-top'
                           />
@@ -129,6 +130,7 @@ export default function SitePreviewDialog({
                                 <img
                                   draggable={false}
                                   src={selectedSite.additionalMedia!.mediaUrl!}
+                                  loading="lazy"
                                   alt={
                                     selectedSite.additionalMedia!.altText ||
                                     `${selectedSite.title} additional media`
@@ -151,6 +153,7 @@ export default function SitePreviewDialog({
                       >
                         <img
                           draggable={false}
+                            loading="lazy"
                           src={selectedSite.imgUrl!}
                           alt={`${selectedSite.title} screenshot`}
                           className='h-full w-full object-contain object-top'
