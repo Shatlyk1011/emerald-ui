@@ -87,8 +87,6 @@ export default function InspirationContent({
     []
   )
 
-  console.log('data.pages.length', data.pages)
-
   // Update filter query when selections change (with debounce)
   useEffect(() => {
     if (filterQueryFromSelections && !isLoading) {
@@ -106,6 +104,8 @@ export default function InspirationContent({
     setSelectedCategories([])
     setSelectedStyles([])
   }
+  const allWebsites = data?.pages.flatMap((page) => page.docs)
+  console.log('data!.pages.flatMap((page) => page.docs)', data!.pages.flatMap((page) => page.docs))
 
   return (
     <>
@@ -136,13 +136,12 @@ export default function InspirationContent({
               </div>
             </div>
           )}
-          {data.pages.map(({ docs }, i) => (
+            {allWebsites?.length && (
             <SiteCards
-              key={i}
-              websites={docs}
+                websites={allWebsites!}
               handleResetFilters={handleResetFilters}
             />
-          ))}
+            )}
         </div>
       )}
 
@@ -158,8 +157,7 @@ export default function InspirationContent({
               Loading more websites...
             </span>
           </div>
-        ) : !hasNextPage &&
-          data.pages.flatMap((page) => page.docs).length > 0 ? (
+        ) : !hasNextPage ? (
           <div className='flex flex-col items-center gap-4'>
             <div className='bg-border h-0.5 w-24' />
             <p className='text-muted-foreground text-sm font-medium'>
