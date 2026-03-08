@@ -2,6 +2,7 @@ import { DocsLayout } from 'fumadocs-ui/layouts/notebook'
 import type { Metadata } from 'next'
 import { plainSource, gsapSource } from '@/lib/source'
 import Footer from '@/components/layout/footer'
+import { GsapTabHint } from '@/components/layout/gsap-tab-hint'
 import { baseOptions } from '../layout.config'
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default function Layout({ children }: LayoutProps<'/docs'>) {
         {...baseOptions()}
         sidebar={{
           defaultOpenLevel: 1,
+          banner: <GsapTabHint />,
           tabs: [
             {
               title: 'Motion Components',
