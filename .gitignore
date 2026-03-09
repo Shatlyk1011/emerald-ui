@@ -41,7 +41,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/sites.md
 /todo.md
 NEW-COMPONENTS.md
 
