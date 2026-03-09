@@ -40,6 +40,9 @@ https://www.emerald-ui.com/docs/components/gradient-file-upload
 **Hero** - Explore high quality hero components. Dark and Light modes available.
 https://www.emerald-ui.com/docs/components/hero
 
+**Installation** - Getting started with Emerald UI
+https://www.emerald-ui.com/docs/components/index
+
 **Interactive Team** - Interactive team component with hover effects
 https://www.emerald-ui.com/docs/components/interactive-team
 

@@ -1,7 +1,9 @@
 {
   "name": "parallax-image",
   "type": "registry:component",
-  "dependencies": ["motion"],
+  "dependencies": [
+    "motion"
+  ],
   "files": [
     {
       "type": "registry:component",
