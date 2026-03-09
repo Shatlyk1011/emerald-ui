@@ -8,7 +8,6 @@
  * @license: MIT
  * @website: https://emerald-ui.com
  */
-
 import { useState } from 'react'
 import Link from 'next/link'
 

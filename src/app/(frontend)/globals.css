@@ -50,5 +50,5 @@ a[href='/docs/gsap/components/interactive-team']::after {
 }
 
 [data-radix-scroll-area-viewport] {
-  padding-top:0
+  padding-top: 0;
 }

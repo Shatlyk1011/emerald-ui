@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import { IWebsites } from '@/types/inspiration'
 import { Where } from 'payload'
 import { stringify } from 'qs-esm'
-import { axios } from '@/lib/axios';
+import { axios } from '@/lib/axios'
 
 // Infinite Query for Inspiration Sites
 export const useInfiniteInspirationSites = (
@@ -12,7 +12,6 @@ export const useInfiniteInspirationSites = (
   return useInfiniteQuery<IWebsites>({
     queryKey: ['inspiration-sites', query],
     queryFn: async ({ pageParam = 1 }) => {
-
       const stringifiedQuery = stringify(
         {
           where: query || { isVisible: { equals: true } },

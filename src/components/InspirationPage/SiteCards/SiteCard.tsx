@@ -133,7 +133,7 @@ function SiteCard({ item, index }: SiteCardProps) {
               src={item.favicon}
               className='h-full w-full object-contain'
               alt='favicon'
-              loading="lazy"
+              loading='lazy'
               draggable={false}
             />
           ) : (

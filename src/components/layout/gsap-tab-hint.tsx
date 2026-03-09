@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import { ArrowUp, X } from 'lucide-react'
 import Link from 'next/link'
-import { cn } from '@/lib/utils'
 import { usePathname } from 'next/navigation'
+import { cn } from '@/lib/utils'
 
 export function GsapTabHint() {
   const [dismissed, setDismissed] = useState(false)
@@ -16,7 +16,7 @@ export function GsapTabHint() {
   return (
     <div
       className={cn(
-        'relative mx- overflow-hidden rounded-md border px-3 py-2.5',
+        'mx- relative overflow-hidden rounded-md border px-3 py-2.5',
         'border-emerald-500/30 bg-emerald-50/60 dark:bg-emerald-950/40',
         'text-emerald-900 dark:text-emerald-100'
       )}
@@ -28,10 +28,11 @@ export function GsapTabHint() {
         <div className='flex items-start gap-2'>
           <ArrowUp className='mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500' />
           <p className='text-xs leading-snug'>
-            <span className='font-semibold'>Switch tabs above</span> <br /> to explore{' '}
+            <span className='font-semibold'>Switch tabs above</span> <br /> to
+            explore{' '}
             <Link
               href={`${isGsapPage ? '/docs' : '/docs/gsap/components'}`}
-              className='underline underline-offset-2 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors'
+              className='underline underline-offset-2 transition-colors hover:text-emerald-600 dark:hover:text-emerald-400'
             >
               {isGsapPage ? 'GSAP Components' : 'Motion Components'}
             </Link>{' '}
@@ -40,7 +41,7 @@ export function GsapTabHint() {
         <button
           aria-label='Dismiss hint'
           onClick={() => setDismissed(true)}
-          className='shrink-0 rounded p-0.5 opacity-60 hover:opacity-100 transition-opacity'
+          className='shrink-0 rounded p-0.5 opacity-60 transition-opacity hover:opacity-100'
           type='button'
         >
           <X className='h-3 w-3' />

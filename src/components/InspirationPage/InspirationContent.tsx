@@ -105,7 +105,10 @@ export default function InspirationContent({
     setSelectedStyles([])
   }
   const allWebsites = data?.pages.flatMap((page) => page.docs)
-  console.log('data!.pages.flatMap((page) => page.docs)', data!.pages.flatMap((page) => page.docs))
+  console.log(
+    'data!.pages.flatMap((page) => page.docs)',
+    data!.pages.flatMap((page) => page.docs)
+  )
 
   return (
     <>
@@ -136,12 +139,12 @@ export default function InspirationContent({
               </div>
             </div>
           )}
-            {allWebsites?.length && (
+          {allWebsites?.length && (
             <SiteCards
-                websites={allWebsites!}
+              websites={allWebsites!}
               handleResetFilters={handleResetFilters}
             />
-            )}
+          )}
         </div>
       )}
 
