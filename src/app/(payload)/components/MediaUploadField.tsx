@@ -25,7 +25,7 @@ export const MediaUploadField = () => {
   const [deleting, setDeleting] = useState(false) // Track deletion state
   const [error, setError] = useState<string | null>(null)
   const [uploadProgress, setUploadProgress] = useState(0)
-  const [uploadMode, setUploadMode] = useState<'file' | 'url'>('file')
+  const [uploadMode, setUploadMode] = useState<'file' | 'url'>('url')
   const [urlInput, setUrlInput] = useState('')
 
   const handleDelete = async () => {
@@ -227,29 +227,6 @@ export const MediaUploadField = () => {
       >
         <button
           type='button'
-          onClick={() => setUploadMode('file')}
-          style={{
-            padding: '0.5rem 1rem',
-            backgroundColor: 'transparent',
-            border: 'none',
-            borderBottom:
-              uploadMode === 'file'
-                ? '2px solid var(--theme-success-500)'
-                : '2px solid transparent',
-            cursor: 'pointer',
-            fontSize: '0.875rem',
-            fontWeight: uploadMode === 'file' ? '600' : '500',
-            color:
-              uploadMode === 'file'
-                ? 'var(--theme-elevation-900)'
-                : 'var(--theme-elevation-600)',
-            transition: 'all 0.2s',
-          }}
-        >
-          Upload File
-        </button>
-        <button
-          type='button'
           onClick={() => setUploadMode('url')}
           style={{
             padding: '0.5rem 1rem',
@@ -270,6 +247,29 @@ export const MediaUploadField = () => {
           }}
         >
           From URL
+        </button>
+        <button
+          type='button'
+          onClick={() => setUploadMode('file')}
+          style={{
+            padding: '0.5rem 1rem',
+            backgroundColor: 'transparent',
+            border: 'none',
+            borderBottom:
+              uploadMode === 'file'
+                ? '2px solid var(--theme-success-500)'
+                : '2px solid transparent',
+            cursor: 'pointer',
+            fontSize: '0.875rem',
+            fontWeight: uploadMode === 'file' ? '600' : '500',
+            color:
+              uploadMode === 'file'
+                ? 'var(--theme-elevation-900)'
+                : 'var(--theme-elevation-600)',
+            transition: 'all 0.2s',
+          }}
+        >
+          Upload File
         </button>
       </div>
 
