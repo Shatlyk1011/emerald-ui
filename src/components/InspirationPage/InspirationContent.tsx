@@ -11,6 +11,7 @@ import Hero from '../landing/Hero'
 import FilterSection from './FilterSection'
 import SiteCards from './SiteCards'
 import SiteCardsSkeleton from './SiteCards/SiteCardsSkeleton'
+import { Button } from '../ui/button'
 
 interface Props {
   categories: Category[]
@@ -105,10 +106,6 @@ export default function InspirationContent({
     setSelectedStyles([])
   }
   const allWebsites = data?.pages.flatMap((page) => page.docs)
-  console.log(
-    'data!.pages.flatMap((page) => page.docs)',
-    data!.pages.flatMap((page) => page.docs)
-  )
 
   return (
     <>
@@ -139,7 +136,7 @@ export default function InspirationContent({
               </div>
             </div>
           )}
-          {allWebsites?.length && (
+            {allWebsites && allWebsites?.length > 0 && (
             <SiteCards
               websites={allWebsites!}
               handleResetFilters={handleResetFilters}
@@ -160,14 +157,19 @@ export default function InspirationContent({
               Loading more websites...
             </span>
           </div>
-        ) : !hasNextPage ? (
+        ) : !hasNextPage && allWebsites?.length !== 0 ? (
           <div className='flex flex-col items-center gap-4'>
             <div className='bg-border h-0.5 w-24' />
             <p className='text-muted-foreground text-sm font-medium'>
               You&apos;ve reached the end of the collection
             </p>
           </div>
-        ) : null}
+        ) :
+          <div className='text-muted-foreground text-base font-medium flex flex-col gap-4 items-center'>
+            <span>Try adjusting your filters</span>
+            <Button onClick={handleResetFilters} size="sm" variant="secondary">Reset Filters</Button>
+          </div>
+        }
       </div>
     </>
   )
