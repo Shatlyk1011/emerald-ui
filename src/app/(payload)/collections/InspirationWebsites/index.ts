@@ -1,7 +1,13 @@
-import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
-import { extractGradientColor } from '../../utils/extractColor'
-import { beforeDeleteHook, beforeChangeHook } from './hooks'
+import { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
+import { extractGradientColor } from '../../utils/extractColor';
+import { beforeDeleteHook, beforeChangeHook } from './hooks';
+
+
+
+
+
+
 
 const InspirationWebsites: CollectionConfig = {
   slug: 'inspiration-websites',
@@ -205,7 +211,7 @@ const InspirationWebsites: CollectionConfig = {
       name: 'isVisible',
       type: 'checkbox',
       required: false,
-      defaultValue: true,
+      defaultValue: false,
       admin: {
         position: 'sidebar',
       },
