@@ -204,7 +204,7 @@ export default function InteractiveTeam({
         {teamMembers.map((person, index) => (
           <div
             key={person.name}
-            className='name text-primary absolute w-full translate-y-full text-center text-[6.5rem] leading-none font-black tracking-[-0.2rem] text-nowrap uppercase select-none max-xl:text-[5rem] max-lg:text-[3.2rem]'
+            className='name text-primary absolute w-full translate-y-full text-center text-[6.5rem] leading-none font-black tracking-[-0.2rem] text-nowrap uppercase select-none max-xl:text-[5rem] max-lg:text-[3.3rem]'
             ref={(el) => {
               nameElementsRef.current[index + 1] = el
             }}
