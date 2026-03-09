@@ -127,7 +127,7 @@ export default function InspirationContent({
       {isInitialLoading ? (
         <SiteCardsSkeleton />
       ) : (
-        <div className='relative'>
+          <section className='relative'>
           {/* Loading overlay shown when refetching with existing results */}
           {isFetching && !isFetchingNextPage && (
             <div className='bg-background/60 absolute inset-0 z-10 flex items-start justify-center rounded-xl pt-24 backdrop-blur-[2px]'>
@@ -145,7 +145,7 @@ export default function InspirationContent({
               handleResetFilters={handleResetFilters}
             />
           )}
-        </div>
+          </section>
       )}
 
       {/* Sentinel element for infinite scroll */}

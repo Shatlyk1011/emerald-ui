@@ -10,7 +10,7 @@ interface Props {
 
 export default function Hero({ totalDocs, images }: Props) {
   return (
-    <section className='mb-10 flex items-center justify-between gap-10 px-20 pb-10 max-2xl:px-6 max-xl:flex-col max-xl:items-start max-xl:gap-0 max-xl:px-0 max-lg:py-6 max-sm:mb-6'>
+    <section className=' flex items-center justify-between gap-10 px-20 max-2xl:px-6 max-xl:flex-col max-xl:items-start max-xl:gap-0 max-xl:px-0 max-lg:pt-6 '>
       <div className='relative flex w-full flex-3 flex-col items-start bg-cyan-50/0'>
         <span className='text-muted-foreground mb-1 text-xs'>
           Websites - {totalDocs}+ | Components - {siteConfig.totalComponents}
