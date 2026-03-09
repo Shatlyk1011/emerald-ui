@@ -3,11 +3,15 @@
   "description": "GSAP-powered animations",
   "root": true,
   "pages": [
+    "---Get Started---",
+    "index",
+
     "---Components---",
     "components/interactive-team",
     "components/fancy-text-hover",
     "components/link-hover",
     "components/magnetic-effect",
+
     "---Text---",
     "components/text-reveal",
     "components/color-text-reveal",

@@ -1,0 +1,108 @@
+---
+title: Installation
+description: Getting started with Emerald UI
+icon: SquareTerminal
+---
+
+# Installation
+
+Emerald UI provides a seamless way to integrate beautifully crafted components directly into your application. Rather than installing a bloated npm package, you embed exactly what you need.
+
+### 1. Initialize Configuration
+
+The `components.json` file manages your project's component architecture, allowing the standard CLI to automatically configure paths and dependencies.
+
+<Card title='Optional Configuration'>
+  While the CLI relies on `components.json` for automatic installation, it's not
+  strictly required. You can always copy and paste the component source code
+  manually!
+</Card>
+
+If you prefer the streamlined CLI experience, initialize your setup by running:
+
+<Tabs items={["bun", "npx", "pnpm"]}>
+ 
+```bash tab="bun"
+bunx --bun shadcn@latest init
+```
+ 
+```bash tab="npx"
+npx shadcn@latest init
+```
+
+```bash tab="pnpm"
+pnpm dlx shadcn@latest init
+```
+
+</Tabs>
+
+Next, connect the Emerald UI registry by appending this block to your `components.json`:
+
+```json
+{
+  "registries": {
+    "@emerald-ui": "https://emerald-ui.com/r/{name}.json"
+  }
+}
+```
+
+### 2. Add Base Utilities
+
+Our component designs leverage [Tailwind CSS v4](https://tailwindcss.com/docs/installation/framework-guides/nextjs). Please ensure your environment is configured for it.
+Additionally, most components depend on our core utility function `cn`. You can effortlessly add it via:
+
+<Tabs items={["bun", "npx", "pnpm"]}>
+ 
+```bash tab="bun"
+bunx --bun shadcn@latest add https://emerald-ui.com/r/utils.json 
+```
+ 
+```bash tab="npx"
+npx shadcn@latest add https://emerald-ui.com/r/utils.json
+```
+
+```bash tab="pnpm"
+pnpm dlx shadcn@latest add https://emerald-ui.com/r/utils.json
+```
+
+</Tabs>
+
+### 3. Start Adding Components 🎉
+
+Emerald UI components often incorporate elegant [lucide-icons](https://lucide.dev/guide/installation) and occasionally build upon existing [shadcn/ui](https://ui.shadcn.com/) primitives. Relying on the CLI takes the guesswork out of installation by fetching all required dependencies automatically.
+
+For example, to drop the `3D Marquee` into your project:
+
+<Tabs items={["bun", "npx", "pnpm"]}>
+ 
+```bash tab="bun"
+bunx --bun shadcn@latest add @emerald-ui/3d-marquee
+```
+ 
+```bash tab="npx"
+npx shadcn@latest add @emerald-ui/3d-marquee
+```
+
+```bash tab="pnpm"
+pnpm dlx shadcn@latest add @emerald-ui/3d-marquee
+```
+
+</Tabs>
+
+_Tip: Although copying and pasting source files works fine, using the CLI guarantees all related internal files, styles, and animation utilities are correctly linked._
+
+You are now ready to render your sleek new component!
+
+```jsx
+import 3DMarquee from "@/components/ui/3d-marquee";
+
+export default function Page() {
+    return <3DMarquee />;
+}
+```
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
+
+### 4. Optional Dependencies
+
+Certain interactive or visually rich components may depend on external libraries (like `framer-motion` or `gsap`). These prerequisites are always prominently listed on the component's documentation page. Be sure to install them to prevent runtime errors.

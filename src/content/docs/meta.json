@@ -5,7 +5,6 @@
   "pages": [
     "---Get Started---",
     "index",
-
     "---AI---",
     "components/gradient-file-upload",
 
