@@ -34,7 +34,7 @@ export function GsapTabHint() {
               href={`${isGsapPage ? '/docs' : '/docs/gsap/components'}`}
               className='underline underline-offset-2 transition-colors hover:text-emerald-600 dark:hover:text-emerald-400'
             >
-              {isGsapPage ? 'GSAP Components' : 'Motion Components'}
+              {isGsapPage ? 'Motion Components' : 'GSAP Components'}
             </Link>{' '}
           </p>
         </div>
