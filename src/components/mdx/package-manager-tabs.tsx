@@ -4,6 +4,7 @@ import React from 'react'
 import { CheckCheck } from 'lucide-react'
 import { motion } from 'motion/react'
 import { cn } from '@/lib/utils'
+import { usePostHog } from 'posthog-js/react'
 
 type PackageManagerTabsProps = {
   onSelect: (packageManager: string) => void
@@ -22,6 +23,7 @@ export function PackageManagerTabs({
   commandName,
   prePath,
 }: PackageManagerTabsProps) {
+  const posthog = usePostHog()
   const [selected, setSelected] = React.useState<string>('pnpm')
   const [dimensions, setDimensions] = React.useState({ width: 0, left: 0 })
   const [isCopied, setIsCopied] = React.useState(false)
@@ -87,6 +89,13 @@ export function PackageManagerTabs({
     const commandToCopy = getCommand(selected)
     navigator.clipboard.writeText(commandToCopy)
     setIsCopied(true)
+
+    posthog.capture('registry_command_copied', {
+      component: commandName,
+      package_manager: selected,
+      command: commandToCopy,
+    })
+
     setTimeout(() => {
       setIsCopied(false)
     }, 1000)

@@ -1,7 +1,8 @@
 'use client'
-import { useActionState, useEffect, useState, useTransition } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
-import { toast } from 'sonner'
+import { useActionState, useEffect, useState, useTransition } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { usePostHog } from 'posthog-js/react';
+import { toast } from 'sonner';
 import { copyComponent } from '@/lib/action'
 import { useUser } from './use-user'
 
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const useCopy = ({ link, isBlock = false }: Props) => {
+  const posthog = usePostHog()
   const router = useRouter()
   const { user } = useUser()
   const isLogin = !!user
@@ -50,6 +52,11 @@ const useCopy = ({ link, isBlock = false }: Props) => {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsCopied(true)
       navigator.clipboard.writeText(state.content)
+
+      posthog.capture('component_copied', {
+        component: link,
+        type: isBlock ? 'block' : 'component',
+      })
 
       setTimeout(() => {
         setIsCopied(false)
