@@ -22,6 +22,7 @@ interface SitePreviewDialogProps {
 export default function SitePreviewDialog({
   onCategoryClick,
 }: SitePreviewDialogProps) {
+
   const {
     selectedSite,
     isDialogOpen,
@@ -62,7 +63,7 @@ export default function SitePreviewDialog({
               <div className='flex-1'>
                 {showTabs ? (
                   <Tabs
-                    defaultValue='media'
+                    defaultValue='video'
                     className='h-full w-full'
                     autoFocus={false}
                   >
@@ -70,20 +71,20 @@ export default function SitePreviewDialog({
                       <TabsTrigger
                         autoFocus={false}
                         className='rounded-px px-4 py-2 transition-all data-[state=active]:bg-transparent'
-                        value='media'
+                        value='video'
                       >
                         Video
                       </TabsTrigger>
                       <TabsTrigger
                         autoFocus={false}
                         className='rounded-px px-4 py-2 transition-all data-[state=active]:bg-transparent'
-                        value='screenshot'
+                        value='image'
                       >
                         Image
                       </TabsTrigger>
                     </TabsList>
                     <TabsContent
-                      value='screenshot'
+                      value='image'
                       className='mt-0 h-[calc(100%-3rem)]'
                     >
                       <div className='bg-background relative flex h-full w-full items-center overflow-hidden rounded-lg border shadow-lg'>
@@ -103,7 +104,7 @@ export default function SitePreviewDialog({
                       </div>
                     </TabsContent>
                     <TabsContent
-                      value='media'
+                      value='video'
                       className='mt-0 h-[calc(100%-3rem)]'
                     >
                       {hasAdditionalMedia &&
