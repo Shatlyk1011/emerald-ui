@@ -54,7 +54,6 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
           </span>
         </h2>
       )}
-      <span className='pb-20'></span>
     </DocsPage>
   )
 }

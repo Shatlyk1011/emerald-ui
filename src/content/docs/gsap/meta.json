@@ -8,9 +8,9 @@
 
     "---Components---",
     "components/interactive-team",
-    "components/fancy-text-hover",
     "components/link-hover",
     "components/magnetic-effect",
+    "components/fancy-text-hover",
 
     "---Text---",
     "components/text-reveal",

@@ -34,7 +34,7 @@ interface FancyLinkItem {
 }
 
 const DefaultLinks: FancyLinkItem[] = [
-  { label: 'Blog', href: 'https://blog.shatlykabdullayev.com' },
+  { label: 'Github', href: 'https://github.com/shatlyk1011' },
   { label: 'Linkedin', href: 'https://www.linkedin/in/shatlyk1011' },
 ]
 
@@ -91,7 +91,7 @@ export default function FancyTextHover({
                 xPercent: parseFloat(transform.x),
                 yPercent: parseFloat(transform.y),
                 rotation: transform.rotate,
-                duration: 0.5,
+                duration: 0.2,
                 ease: 'power3.inOut',
               })
             }
