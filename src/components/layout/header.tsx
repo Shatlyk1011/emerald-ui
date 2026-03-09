@@ -99,7 +99,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
           <ul className='-tracking-one max-md:bg-secondary flex items-center text-sm font-medium max-md:w-full max-md:flex-col max-md:gap-3 max-md:pt-40 max-md:text-base'>
             <li>
               <Link
-                href={home}
+                href={`${home}#website-inspirations`}
                 onClick={closeMenu}
                 className={cn(
                   'hover:text-foreground min-h-10 rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'

@@ -14,6 +14,37 @@ a[href='/docs/gsap/components/interactive-team']::after {
   border: 1px solid rgba(34, 197, 9, 0.2);
 }
 
+a[href='/docs/components/pricing']::before,
+a[href='/docs/components/cards']::before,
+a[href='/docs/components/hero']::before,
+a[href='/docs/components/footer']::before {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+a[href='/docs/components/pricing']::before {
+  content: '3'
+}
+
+a[href='/docs/components/cards']::before {
+  content: '7'
+}
+
+a[href='/docs/components/hero']::before {
+  content: '1'
+}
+
+a[href='/docs/components/footer']::before {
+  content: '1'
+}
+
+
 /* Cat styling */
 
 .sleep-symbol span:nth-child(1) {

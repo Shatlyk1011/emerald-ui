@@ -27,7 +27,7 @@ export default function Footer() {
 
         <Separator className='my-0' />
 
-        <nav className='w-full py-12' aria-label='Footer navigation'>
+        <nav className='w-full py-12 relative' aria-label='Footer navigation'>
           <div className='grid grid-cols-1 gap-8 sm:grid-cols-3'>
             <div>
               <h3 className='mb-4 font-bold'>Motion Components</h3>
@@ -36,7 +36,7 @@ export default function Footer() {
                   <li key={title}>
                     <a
                       href={href}
-                      className='text-muted-foreground hover:text-primary transition-colors after:hidden'
+                      className='text-muted-foreground before:hidden hover:text-primary transition-colors after:hidden'
                     >
                       {title}
                     </a>
@@ -52,7 +52,7 @@ export default function Footer() {
                   <li key={title}>
                     <a
                       href={href}
-                      className='text-muted-foreground hover:text-primary transition-colors after:hidden'
+                      className='text-muted-foreground before:hidden hover:text-primary transition-colors after:hidden'
                     >
                       {title}
                     </a>
@@ -62,13 +62,13 @@ export default function Footer() {
             </div>
 
             <div>
-              <h3 className='mb-4 font-bold'>Useful Links</h3>
+              <h3 className='mb-4 font-bold'>Links</h3>
               <ul className='space-y-2'>
                 {UsefulLinks.map(({ href, title }) => (
                   <li key={title}>
                     <a
                       href={href}
-                      className='text-muted-foreground hover:text-primary transition-colors after:hidden'
+                      className='text-muted-foreground before:hidden hover:text-primary transition-colors after:hidden'
                     >
                       {title}
                     </a>
