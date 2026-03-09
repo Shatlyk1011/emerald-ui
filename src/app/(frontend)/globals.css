@@ -48,3 +48,7 @@ a[href='/docs/gsap/components/interactive-team']::after {
     visibility: visible;
   }
 }
+
+[data-radix-scroll-area-viewport] {
+  padding-top:0
+}
