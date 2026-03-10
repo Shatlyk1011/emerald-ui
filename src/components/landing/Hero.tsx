@@ -13,7 +13,7 @@ export default function Hero({ totalDocs, images }: Props) {
     <section className=' flex items-center justify-between gap-10 px-20 max-2xl:px-6 max-xl:flex-col max-xl:items-start max-xl:gap-0 max-xl:px-0 max-lg:pt-6 '>
       <div className='relative flex w-full flex-3 flex-col items-start bg-cyan-50/0'>
         <span className='text-muted-foreground mb-1 text-xs'>
-          Websites - {totalDocs}+ | Components - {siteConfig.totalComponents}
+          Websites {totalDocs}+ | Components {siteConfig.totalComponents}
         </span>
         <h1 className='-tracking-two mb-2 text-4xl font-semibold'>
           <span className='text-nowrap'>Inspiration Websites &</span>
