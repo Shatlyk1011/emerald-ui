@@ -12,33 +12,32 @@ import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 
-const DefaultImg =
-  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/emilie.webp'
+const DefaultImg = 'https://images.unsplash.com/photo-1491555103944-7c647fd857e6?w=400&q=80'
 
 const DefaultItems: Item[] = [
   {
     imgUrl:
-      'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/1820productions.webp',
+      'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&q=80',
     title: 'Home',
   },
   {
     imgUrl:
-      'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/telhaclarke.webp',
+      'https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=400&q=80',
     title: 'Blog',
   },
   {
     imgUrl:
-      'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/jonasreymondin.webp',
+      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&q=80',
     title: 'About',
   },
   {
     imgUrl:
-      'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/www-anima-ai.webp',
+      'https://images.unsplash.com/photo-1510797215324-95aa89f43c33?w=400&q=80',
     title: 'Projects',
   },
   {
     imgUrl:
-      'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/dulcedo-com-.webp',
+      'https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?w=400&q=80',
     title: 'Contacts',
   },
 ]
