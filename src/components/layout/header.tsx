@@ -51,7 +51,6 @@ const Header: FC<Props> = ({ isFumadocs }) => {
   const router = useRouter()
   const pathname = usePathname()
 
-  const headerRef = useRef<HTMLElement>(null)
   const { user, isLoading, signOut } = useUser()
 
   const [isScrolled, setIsScrolled] = useState(false)
@@ -73,7 +72,6 @@ const Header: FC<Props> = ({ isFumadocs }) => {
   return (
     <>
       <header
-        ref={headerRef}
         className={cn(
           'fixed top-0 z-20 mx-auto flex h-14 w-full items-center justify-between border-b px-8 py-2 font-sans max-md:px-4',
           isScrolled && !isFumadocs && 'bg-background/90 backdrop-blur-sm',
