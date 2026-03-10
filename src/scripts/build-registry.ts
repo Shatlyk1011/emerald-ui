@@ -1,8 +1,8 @@
-import path from 'path'
-import type { z } from 'zod'
-import type { registryItemFileSchema } from '@/registry/schema'
-import { promises as fs } from 'fs'
-import { glob } from 'glob'
+import path from 'path';
+import type { z } from 'zod';
+import type { registryItemFileSchema } from '@/registry/schema';
+import { promises as fs } from 'fs';
+import { glob } from 'glob';
 import { registry } from '../registry/index'
 
 const REGISTRY_BASE_PATH = process.cwd()
@@ -10,7 +10,8 @@ const REGISTRY_BASE_PATH = process.cwd()
 const SRC_FOLDER = 'src'
 const PUBLIC_FOLDER_BASE_PATH = 'public/r'
 // Site branding
-const SITE_URL = 'https://www.emerald-ui.com'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL
+console.log('SITE_URL', SITE_URL)
 const SITE_NAME = 'Emerald UI'
 const SITE_DESCRIPTION =
   'A collection of stunning UI components built with Next.js, React, Tailwind CSS, GSAP, and Motion.'
@@ -37,10 +38,6 @@ function printDivider() {
   console.log(`${colors.dim}${'─'.repeat(80)}${colors.reset}\n`)
 }
 
-/**
- * bun run src/scripts/build-registry.ts
- *
- */
 type File = z.infer<typeof registryItemFileSchema>
 
 async function writeFileRecursive(filePath: string, data: string) {

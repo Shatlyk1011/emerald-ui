@@ -14,18 +14,7 @@ Global:
 
 - add what's new section in main layout
 
-<!-- before production -->
-
-- check supabase auth limitations (magic link; custom nodemailer?)
-
-<!-- integrate newsletter with supabase auth -->
-
 <!-- video loading states/text -->
-
-<!-- add posthog action states -->
-
-<!-- fix multiple requests issue (test) -->
-
 
  <!-- 1
   add new functionality in fumadocs. the Ui elements pages, namely buttons, text hero pricing cards has multiple components in it. i want dynamically show the exactly number of components inside that page, for example, the cards page has 6 unique card components, so in the sidebar will be Cards (6) - like this.

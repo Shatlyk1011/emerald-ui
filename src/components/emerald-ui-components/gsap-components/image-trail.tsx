@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * @author: @codrops
+ * @author: @emerald-ui
  * @description: Image trail effect — images cascade behind the cursor on mouse move using GSAP
  * @version: 1.0.0
  * @date: 2026-03-10
