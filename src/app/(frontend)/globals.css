@@ -1,5 +1,5 @@
 /* New badge styling */
-a[href='/docs/gsap/components/interactive-team']::after {
+a[href='/docs/gsap/components/image-trail']::after {
   content: 'New';
   position: absolute;
   right: 0.3rem;

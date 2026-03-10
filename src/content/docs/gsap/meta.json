@@ -11,6 +11,7 @@
     "components/link-hover",
     "components/magnetic-effect",
     "components/fancy-text-hover",
+    "components/image-trail",
 
     "---Text---",
     "components/text-reveal",
