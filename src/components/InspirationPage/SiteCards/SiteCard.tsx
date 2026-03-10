@@ -40,7 +40,6 @@ function SiteCard({ item, index }: SiteCardProps) {
 
   const handleMouseEnter = () => {
     if (videoRef.current && hasVideo && videoUrl) {
-      videoRef.current.src = videoUrl
       setIsHovered(true)
       videoRef.current.play()
     }
@@ -49,9 +48,6 @@ function SiteCard({ item, index }: SiteCardProps) {
   const handleMouseLeave = () => {
     if (videoRef.current && hasVideo) {
       setIsHovered(false)
-      videoRef.current.pause()
-      videoRef.current.src = ''
-      videoRef.current.load()
     }
   }
 
@@ -100,9 +96,10 @@ function SiteCard({ item, index }: SiteCardProps) {
                 {hasVideo && videoUrl && (
                   <video
                     ref={videoRef}
+                    src={videoUrl}
                     className={cn(
                       'absolute inset-0 h-full w-full object-cover transition-opacity duration-300',
-                      isHovered ? 'inline-block' : 'hidden'
+                      isHovered ? 'inline-block opacity-100' : 'opacity-0'
                     )}
                     muted
                     loop
