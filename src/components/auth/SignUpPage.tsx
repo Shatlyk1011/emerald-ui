@@ -91,6 +91,23 @@ export default function SignUpPage({
 
       if (error) throw error
 
+      // Store email in newsletter collection
+      try {
+        await fetch('/api/subscribers', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: result.data.email,
+            source: 'magic_link_signup',
+          }),
+        })
+      } catch (err) {
+        // Silently caught, ignore error if user is already subscribed so we don't break the flow
+        console.error('Failed to add to newsletter:', err)
+      }
+
       setMagicLinkSent(true)
       setEmail('')
 

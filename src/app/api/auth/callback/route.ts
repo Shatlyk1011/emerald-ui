@@ -1,8 +1,15 @@
-import config from '@payload-config'
-import { NextResponse } from 'next/server'
-import { getPayload } from 'payload'
-import { createClientRecord } from '@/lib/helpers/client-helpers'
-import { createClient } from '@/lib/supabase-server'
+import config from '@payload-config';
+import { NextResponse } from 'next/server';
+import { getPayload } from 'payload';
+import { createClientRecord } from '@/lib/helpers/client-helpers';
+import { createClient } from '@/lib/supabase-server';
+
+
+
+
+
+
+
 
 /**
  * OAuth callback handler
@@ -24,10 +31,10 @@ export async function GET(request: Request) {
         data: { user },
       } = await supabase.auth.getUser()
 
+      const payload = await getPayload({ config })
       if (user) {
         try {
           // Check if client record exists
-          const payload = await getPayload({ config })
           const existingClient = await payload.find({
             collection: 'clients',
             where: { userId: { equals: user.id } },
@@ -51,6 +58,35 @@ export async function GET(request: Request) {
         } catch (clientError) {
           // Log error but don't block authentication
           console.error('Error creating client:', clientError)
+        }
+
+        // Store user's email in newsletter collection
+        if (user.email) {
+          try {
+            const existingSubscriber = await payload.find({
+              collection: 'subscribers',
+              where: { email: { equals: user.email } },
+              limit: 1,
+            })
+
+            if (existingSubscriber.docs.length === 0) {
+              const provider = user.app_metadata?.provider || 'email'
+              await payload.create({
+                collection: 'subscribers',
+                data: {
+                  email: user.email,
+                  source: `${provider}_auth`,
+                  status: 'active',
+                },
+              })
+            }
+          } catch (subscriberError) {
+            // Silently catch to not break the auth flow
+            console.error(
+              'Failed to add to newsletter in callback:',
+              subscriberError
+            )
+          }
         }
       }
 
