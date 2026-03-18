@@ -12,6 +12,7 @@
     "components/magnetic-effect",
     "components/fancy-text-hover",
     "components/image-trail",
+    "components/sticky-cards-section",
 
     "---Text---",
     "components/text-reveal",

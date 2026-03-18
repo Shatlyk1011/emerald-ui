@@ -1,7 +1,8 @@
 /* New badge styling */
-a[href='/docs/gsap/components/image-trail']::after {
+a[href='/docs/gsap/components/sticky-cards-section']::after {
   content: 'New';
   position: absolute;
+  z-index: 20;
   right: 0.3rem;
   top: 50%;
   transform: translateY(-50%);
@@ -21,6 +22,7 @@ a[href='/docs/components/cards']::before,
 a[href='/docs/components/hero']::before,
 a[href='/docs/components/footer']::before {
   position: absolute;
+  z-index: 20;
   right: 1rem;
   top: 50%;
   transform: translateY(-50%);

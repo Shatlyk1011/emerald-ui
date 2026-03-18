@@ -1,5 +1,9 @@
-import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
+import { CollectionConfig } from 'payload';
+import { admins } from '../../utils/admins';
+
+
+
+
 
 const Clients: CollectionConfig = {
   slug: 'clients',
@@ -26,7 +30,6 @@ const Clients: CollectionConfig = {
       'userId',
       'createdAt',
       'email',
-      'currentPlan',
       'provider',
       'isVerified',
       'isBlocked',

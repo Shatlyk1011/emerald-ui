@@ -3,6 +3,9 @@ import type { Registry } from './schema';
 
 
 
+
+
+
 export const component: Registry = [
   // ─── Buttons ──────────────────────────────────────────────────────────────
   {
@@ -198,17 +201,6 @@ export const component: Registry = [
     ],
   },
   {
-    name: 'image-trail',
-    type: 'registry:component',
-    dependencies: ['gsap', '@gsap/react'],
-    files: [
-      {
-        path: 'components/emerald-ui-components/gsap-components/image-trail.tsx',
-        type: 'registry:component',
-      },
-    ],
-  },
-  {
     name: 'interactive-team',
     type: 'registry:component',
     dependencies: ['gsap', '@gsap/react'],
@@ -270,6 +262,30 @@ export const component: Registry = [
     files: [
       {
         path: 'components/emerald-ui-components/gsap-components/text-reveal.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
+
+  {
+    name: 'image-trail',
+    type: 'registry:component',
+    dependencies: ['gsap', '@gsap/react'],
+    files: [
+      {
+        path: 'components/emerald-ui-components/gsap-components/image-trail.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
+
+  {
+    name: 'sticky-cards-section',
+    type: 'registry:component',
+    dependencies: ['gsap', '@gsap/react'],
+    files: [
+      {
+        path: 'components/emerald-ui-components/gsap-components/sticky-cards-section.tsx',
         type: 'registry:component',
       },
     ],
