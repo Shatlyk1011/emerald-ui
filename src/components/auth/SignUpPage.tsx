@@ -128,8 +128,7 @@ export default function SignUpPage({
         isModal && 'max-h-max min-h-auto py-6'
       )}
     >
-      <div className='flex flex-1 justify-center'>
-        <div className='relative z-10 w-full max-w-lg space-y-8 rounded-2xl p-8 max-md:space-y-5 max-sm:p-5'>
+      <div className={cn('relative  max-w- z-10 w-full max-w-md space-y-8 rounded-2xl p-8 max-md:space-y-5 max-sm:p-5', !isModal && 'border shadow-md')}>
           <Link
             href='/'
             className='block text-center text-3xl font-bold max-md:text-2xl'
@@ -269,8 +268,7 @@ export default function SignUpPage({
             >
               Privacy Policy
             </a>
-          </p>
-        </div>
+        </p>
       </div>
     </div>
   )
