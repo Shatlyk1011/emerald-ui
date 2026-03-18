@@ -80,3 +80,33 @@ import [ComponentName] from '@/components/emerald-ui-components/[kebab-case-name
 - Wrap the component in `<Preview>`.
 - `link` prop in `<Preview>` should match the filename (without extension).
 - include only the preview component. not need for props table or usage examples or any other additional information.
+
+## 3. Registry Addition
+
+**Location:** `src/registry/registry-components.ts`
+
+**Action:** Add an entry to the `component` array in the registry file. Place it under the correct category comment (e.g., `// ─── Buttons ─────`, `// ─── Cards ─────`, etc.).
+
+**Template:**
+
+```ts
+  {
+    name: '[kebab-case-name]',
+    type: 'registry:component',
+    dependencies: ['[any npm dependencies e.g., motion, lucide-react]'],
+    registryDependencies: ['[any other registry components e.g., button]'],
+    files: [
+      {
+        path: 'components/emerald-ui-components/[category-folder-if-any]/[kebab-case-name].tsx',
+        type: 'registry:component',
+      },
+      // Include any context or hook files if necessary
+    ],
+  },
+```
+
+**Key Guidelines:**
+
+- `name` should be the kebab-case name of the component.
+- `files[].path` must be the correct relative path from the `src/` directory (e.g., `components/emerald-ui-components/buttons/my-button.tsx`).
+- Specify any `dependencies` (npm packages) or `registryDependencies` (other registry components) if the component uses them.
