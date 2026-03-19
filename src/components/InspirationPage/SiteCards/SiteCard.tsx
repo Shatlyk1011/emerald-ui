@@ -79,17 +79,9 @@ function SiteCard({ item, index }: SiteCardProps) {
                       isHovered && hasVideo ? 'opacity-0' : 'opacity-100'
                     )}
                     alt={item.title + ' image'}
-                    crossOrigin='anonymous'
                     loading={loadingStrategy}
                     draggable={false}
                     onContextMenu={(e) => e.preventDefault()}
-                    style={{
-                      backgroundImage: item.imgPlaceholder
-                        ? `url(${item.imgPlaceholder})`
-                        : undefined,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                    }}
                   />
                 )}
                 {/* Show video on hover if available — src is set on hover only */}
