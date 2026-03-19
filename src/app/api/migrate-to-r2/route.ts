@@ -55,7 +55,7 @@ export async function POST(req: Request) {
     // Paginate through all inspiration-websites docs up to `limit`
     let page = 1
     let hasMore = true
-    const pageSize = Math.min(limit, 80)
+    const pageSize = 80
 
     outer: while (hasMore) {
       const { docs, totalPages } = await payload.find({
@@ -66,7 +66,7 @@ export async function POST(req: Request) {
       })
 
       for (const doc of docs) {
-        if (processed >= limit) {
+        if (migrated >= limit) {
           hasMore = false
           break outer
         }
