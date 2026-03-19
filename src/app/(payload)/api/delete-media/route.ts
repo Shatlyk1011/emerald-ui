@@ -1,4 +1,4 @@
-import { deleteMediaFromUrl } from '@/app/(payload)/utils/supabase'
+import { deleteMediaFromUrl } from '@/app/(payload)/utils/r2'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(request: NextRequest) {

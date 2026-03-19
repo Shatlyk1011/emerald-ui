@@ -1,5 +1,5 @@
 import { CollectionBeforeDeleteHook, CollectionAfterChangeHook } from 'payload'
-import { deleteMediaFromUrl } from '../../utils/supabase'
+import { deleteMediaFromUrl } from '../../utils/r2'
 
 export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({
   req,

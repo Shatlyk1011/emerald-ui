@@ -8,7 +8,7 @@ import {
   deleteMediaFromUrl,
   uploadScreenshot,
   uploadFavicon,
-} from '../../utils/supabase'
+} from '../../utils/r2'
 import { createUrlSlug, getFaviconExtension } from './utils'
 
 export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({
@@ -31,7 +31,7 @@ export const beforeDeleteHook: CollectionBeforeDeleteHook = async ({
     if (doc.favicon) {
       await deleteMediaFromUrl(
         doc.favicon,
-        process.env.SUPABASE_FAVICONS_BUCKET || 'favicons'
+        process.env.R2_FAVICONS_BUCKET || 'favicons'
       )
     }
 

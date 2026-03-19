@@ -1,4 +1,4 @@
-import { uploadMedia } from '@/app/(payload)/utils/supabase'
+import { uploadMedia } from '@/app/(payload)/utils/r2'
 import { NextRequest, NextResponse } from 'next/server'
 import sharp from 'sharp'
 
