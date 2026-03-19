@@ -28,6 +28,14 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      afterNavLinks: [
+        {
+          path: '@/app/(payload)/components/MigrateToR2Button#MigrateToR2Button',
+          exportName: 'MigrateToR2Button',
+        },
+      ],
+    },
   },
 
   // Define and configure your collections in this array
