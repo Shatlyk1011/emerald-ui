@@ -8,10 +8,10 @@ import { IWebsites } from '@/types/inspiration'
 import { Where } from 'payload'
 import { useInView } from 'react-intersection-observer'
 import Hero from '../landing/Hero'
+import { Button } from '../ui/button'
 import FilterSection from './FilterSection'
 import SiteCards from './SiteCards'
 import SiteCardsSkeleton from './SiteCards/SiteCardsSkeleton'
-import { Button } from '../ui/button'
 
 interface Props {
   categories: Category[]
@@ -124,7 +124,7 @@ export default function InspirationContent({
       {isInitialLoading ? (
         <SiteCardsSkeleton />
       ) : (
-          <section className='relative'>
+        <section className='relative'>
           {/* Loading overlay shown when refetching with existing results */}
           {isFetching && !isFetchingNextPage && (
             <div className='bg-background/60 absolute inset-0 z-10 flex items-start justify-center rounded-xl pt-24 backdrop-blur-[2px]'>
@@ -136,13 +136,13 @@ export default function InspirationContent({
               </div>
             </div>
           )}
-            {allWebsites && allWebsites?.length > 0 && (
+          {allWebsites && allWebsites?.length > 0 && (
             <SiteCards
               websites={allWebsites!}
               handleResetFilters={handleResetFilters}
             />
           )}
-          </section>
+        </section>
       )}
 
       {/* Sentinel element for infinite scroll */}
@@ -164,12 +164,14 @@ export default function InspirationContent({
               You&apos;ve reached the end of the collection
             </p>
           </div>
-        ) :
-          <div className='text-muted-foreground text-base font-medium flex flex-col gap-4 items-center'>
+        ) : (
+          <div className='text-muted-foreground flex flex-col items-center gap-4 text-base font-medium'>
             <span>Try adjusting your filters</span>
-            <Button onClick={handleResetFilters} size="sm" variant="secondary">Reset Filters</Button>
+            <Button onClick={handleResetFilters} size='sm' variant='secondary'>
+              Reset Filters
+            </Button>
           </div>
-        }
+        )}
       </div>
     </>
   )

@@ -91,8 +91,12 @@ export default function ImageTrail({
       const onMouseMove = (ev: MouseEvent) => {
         mousePos = getRelativePos(ev)
       }
-      const onMouseEnter = () => { isInsideContainer = true }
-      const onMouseLeave = () => { isInsideContainer = false }
+      const onMouseEnter = () => {
+        isInsideContainer = true
+      }
+      const onMouseLeave = () => {
+        isInsideContainer = false
+      }
 
       container.addEventListener('mousemove', onMouseMove)
       container.addEventListener('mouseenter', onMouseEnter)
@@ -181,14 +185,14 @@ export default function ImageTrail({
     <div
       ref={containerRef}
       className={cn(
-        'relative flex h-160 w-full select-none items-center justify-center overflow-hidden rounded-xl bg-zinc-50 dark:bg-zinc-950',
+        'relative flex h-160 w-full items-center justify-center overflow-hidden rounded-xl bg-zinc-50 select-none dark:bg-zinc-950',
         className
       )}
     >
-      <div className='pointer-events-none absolute inset-0 z-10 ' />
+      <div className='pointer-events-none absolute inset-0 z-10' />
 
       {/* Title anchor */}
-      <h3 className='relative z-20 tracking-two text-7xl font-black text-primary select-none max-md:text-5xl'>
+      <h3 className='tracking-two text-primary relative z-20 text-7xl font-black select-none max-md:text-5xl'>
         {title}
       </h3>
 

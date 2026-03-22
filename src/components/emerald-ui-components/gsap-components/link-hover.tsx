@@ -12,7 +12,8 @@ import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 
-const DefaultImg = 'https://images.unsplash.com/photo-1491555103944-7c647fd857e6?w=400&q=80'
+const DefaultImg =
+  'https://images.unsplash.com/photo-1491555103944-7c647fd857e6?w=400&q=80'
 
 const DefaultItems: Item[] = [
   {

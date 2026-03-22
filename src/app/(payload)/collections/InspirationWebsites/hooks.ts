@@ -1,4 +1,7 @@
-import type { CollectionBeforeDeleteHook, CollectionBeforeChangeHook } from 'payload';
+import type {
+  CollectionBeforeDeleteHook,
+  CollectionBeforeChangeHook,
+} from 'payload'
 import { extractGradientColor } from '../../utils/extractColor'
 import {
   deleteMediaFromUrl,

@@ -24,7 +24,8 @@ export const MigrateToR2Button = () => {
   const [showDetails, setShowDetails] = useState(false)
 
   const handleMigrate = async () => {
-    const effectiveLimit = typeof limit === 'number' && limit > 0 ? limit : undefined
+    const effectiveLimit =
+      typeof limit === 'number' && limit > 0 ? limit : undefined
     const preview = effectiveLimit
       ? `first ${effectiveLimit} item(s)`
       : 'ALL items'
@@ -73,7 +74,10 @@ export const MigrateToR2Button = () => {
     outline: 'none',
   }
 
-  const btnStyle = (color: string, disabled?: boolean): React.CSSProperties => ({
+  const btnStyle = (
+    color: string,
+    disabled?: boolean
+  ): React.CSSProperties => ({
     padding: '0.6rem 1.25rem',
     backgroundColor: disabled ? 'var(--theme-elevation-300)' : color,
     color: '#fff',
@@ -119,7 +123,14 @@ export const MigrateToR2Button = () => {
       </p>
 
       {/* Controls */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.75rem',
+          flexWrap: 'wrap',
+        }}
+      >
         <label
           style={{
             display: 'flex',
@@ -128,16 +139,23 @@ export const MigrateToR2Button = () => {
             fontSize: '0.875rem',
           }}
         >
-          <span style={{ color: 'var(--theme-elevation-700)', whiteSpace: 'nowrap' }}>
+          <span
+            style={{
+              color: 'var(--theme-elevation-700)',
+              whiteSpace: 'nowrap',
+            }}
+          >
             Limit (leave blank for all):
           </span>
           <input
-            type="number"
+            type='number'
             min={1}
             value={limit}
-            placeholder="e.g. 5"
+            placeholder='e.g. 5'
             onChange={(e) =>
-              setLimit(e.target.value === '' ? '' : parseInt(e.target.value, 10))
+              setLimit(
+                e.target.value === '' ? '' : parseInt(e.target.value, 10)
+              )
             }
             style={inputStyle}
             disabled={loading}
@@ -152,8 +170,8 @@ export const MigrateToR2Button = () => {
           {loading
             ? '⏳ Migrating…'
             : typeof limit === 'number' && limit > 0
-            ? `▶ Migrate ${limit} item(s)`
-            : '▶ Migrate ALL'}
+              ? `▶ Migrate ${limit} item(s)`
+              : '▶ Migrate ALL'}
         </button>
       </div>
 
@@ -176,13 +194,27 @@ export const MigrateToR2Button = () => {
             fontSize: '0.875rem',
           }}
         >
-          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '0.5rem' }}>
-            <span>✅ <strong>Processed:</strong> {result.processed}</span>
-            <span>📦 <strong>Migrated:</strong> {result.migrated}</span>
+          <div
+            style={{
+              display: 'flex',
+              gap: '1.5rem',
+              flexWrap: 'wrap',
+              marginBottom: '0.5rem',
+            }}
+          >
+            <span>
+              ✅ <strong>Processed:</strong> {result.processed}
+            </span>
+            <span>
+              📦 <strong>Migrated:</strong> {result.migrated}
+            </span>
             <span
-              style={{ color: result.errors > 0 ? 'var(--theme-error-600)' : 'inherit' }}
+              style={{
+                color: result.errors > 0 ? 'var(--theme-error-600)' : 'inherit',
+              }}
             >
-              {result.errors > 0 ? '❌' : '✔️'} <strong>Errors:</strong> {result.errors}
+              {result.errors > 0 ? '❌' : '✔️'} <strong>Errors:</strong>{' '}
+              {result.errors}
             </span>
           </div>
 
@@ -202,7 +234,13 @@ export const MigrateToR2Button = () => {
           </button>
 
           {showDetails && (
-            <div style={{ marginTop: '0.75rem', maxHeight: '300px', overflowY: 'auto' }}>
+            <div
+              style={{
+                marginTop: '0.75rem',
+                maxHeight: '300px',
+                overflowY: 'auto',
+              }}
+            >
               {result.details.map((d) => (
                 <div
                   key={d.id}

@@ -16,7 +16,9 @@ const r2Client = new S3Client({
 })
 
 // Custom domain for serving public assets: https://<bucket>.emerald-ui.com/<filename>
-const R2_CUSTOM_DOMAIN = (process.env.R2_CUSTOM_DOMAIN || 'emerald-ui.com').replace(/^\/+|\/+$/g, '')
+const R2_CUSTOM_DOMAIN = (
+  process.env.R2_CUSTOM_DOMAIN || 'emerald-ui.com'
+).replace(/^\/+|\/+$/g, '')
 
 const IMAGES_BUCKET = process.env.R2_IMAGES_BUCKET || 'images'
 const FAVICONS_BUCKET = process.env.R2_FAVICONS_BUCKET || 'favicons'
@@ -125,7 +127,8 @@ export async function deleteMediaFromUrl(
       // Infer bucket from subdomain: e.g. images.emerald-ui.com → images
       const subdomainBucket = url.hostname.split('.')[0]
       resolvedBucket =
-        process.env[`R2_${subdomainBucket.toUpperCase()}_BUCKET`] || subdomainBucket
+        process.env[`R2_${subdomainBucket.toUpperCase()}_BUCKET`] ||
+        subdomainBucket
       key = pathParts.join('/')
     }
 

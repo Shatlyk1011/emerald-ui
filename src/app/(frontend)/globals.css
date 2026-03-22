@@ -33,29 +33,28 @@ a[href='/docs/components/footer']::before {
 }
 
 a[href='/docs/components/buttons']::before {
-  content: '9'
+  content: '9';
 }
 
 a[href='/docs/components/text']::before {
-  content: '3'
+  content: '3';
 }
 
 a[href='/docs/components/pricing']::before {
-  content: '3'
+  content: '3';
 }
 
 a[href='/docs/components/cards']::before {
-  content: '7'
+  content: '7';
 }
 
 a[href='/docs/components/hero']::before {
-  content: '1'
+  content: '1';
 }
 
 a[href='/docs/components/footer']::before {
-  content: '1'
+  content: '1';
 }
-
 
 /* Cat styling */
 

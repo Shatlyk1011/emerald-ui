@@ -1,10 +1,7 @@
 {
   "name": "flip-card",
   "type": "registry:component",
-  "dependencies": [
-    "lucide-react",
-    "motion"
-  ],
+  "dependencies": ["lucide-react", "motion"],
   "files": [
     {
       "type": "registry:component",

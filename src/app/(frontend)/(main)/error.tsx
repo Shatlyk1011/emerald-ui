@@ -1,8 +1,8 @@
-'use client' 
+'use client'
 
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
 import Link from 'next/link'
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 
 type GeneralErrorProps = React.HTMLAttributes<HTMLDivElement> & {
   minimal?: boolean
@@ -27,7 +27,7 @@ export default function Error({
             <Button variant='outline' onClick={() => history.go(-1)}>
               Go Back
             </Button>
-            <Link href="/">Back to Home</Link>
+            <Link href='/'>Back to Home</Link>
           </div>
         )}
       </div>

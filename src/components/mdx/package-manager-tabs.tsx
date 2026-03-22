@@ -3,8 +3,8 @@
 import React from 'react'
 import { CheckCheck } from 'lucide-react'
 import { motion } from 'motion/react'
-import { cn } from '@/lib/utils'
 import { usePostHog } from 'posthog-js/react'
+import { cn } from '@/lib/utils'
 
 type PackageManagerTabsProps = {
   onSelect: (packageManager: string) => void

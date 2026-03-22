@@ -128,7 +128,12 @@ export default function SignInPage({
         isModal && 'max-h-max min-h-auto py-6'
       )}
     >
-      <div className={cn('relative  max-w- z-10 w-full max-w-md space-y-8 rounded-2xl p-8 max-md:space-y-5 max-sm:p-5', !isModal && 'border shadow-md')}>
+      <div
+        className={cn(
+          'max-w- relative z-10 w-full max-w-md space-y-8 rounded-2xl p-8 max-md:space-y-5 max-sm:p-5',
+          !isModal && 'border shadow-md'
+        )}
+      >
         <Link
           href='/'
           className='block text-center text-3xl font-bold max-md:text-2xl'

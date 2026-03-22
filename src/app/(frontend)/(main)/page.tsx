@@ -1,10 +1,9 @@
 import { Suspense } from 'react'
-import InspirationPageSkeleton from '@/components/InspirationPage/InspirationPageSkeleton'
-
+import { unstable_cache } from 'next/cache'
 import { stringify } from 'qs-esm'
 import { axios } from '@/lib/axios'
 import InspirationContent from '@/components/InspirationPage/InspirationContent'
-import { unstable_cache } from 'next/cache'
+import InspirationPageSkeleton from '@/components/InspirationPage/InspirationPageSkeleton'
 
 const getCategories = unstable_cache(
   async () => axios('/categories'),
@@ -30,11 +29,12 @@ const getInspirationSites = unstable_cache(
       { addQueryPrefix: true }
     )
     return axios(`/inspiration-websites${stringifiedQuery}`)
-  }, ['inspiration-websites'], { revalidate: 3600 })
-
+  },
+  ['inspiration-websites'],
+  { revalidate: 3600 }
+)
 
 export default async function Home() {
-
   return (
     <main className='bg-background mt-14 min-h-screen font-sans'>
       <div className='mx-auto max-w-400 px-10 py-10 max-sm:px-4 max-sm:py-6'>
@@ -48,7 +48,9 @@ export default async function Home() {
 
 async function InspirationDataLoader() {
   const [categoriesData, stylesData, inspirationSitesData] = await Promise.all([
-    getCategories(), getStyles(), getInspirationSites()
+    getCategories(),
+    getStyles(),
+    getInspirationSites(),
   ])
 
   return (

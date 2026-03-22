@@ -1,12 +1,12 @@
-import { getPayload } from 'payload'
-import config from '@payload-config'
-import { headers as nextHeaders } from 'next/headers'
 import {
   uploadScreenshot,
   uploadFavicon,
   uploadMedia,
   downloadMediaFromUrl,
 } from '@/app/(payload)/utils/r2'
+import config from '@payload-config'
+import { headers as nextHeaders } from 'next/headers'
+import { getPayload } from 'payload'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -33,7 +33,10 @@ export async function POST(req: Request) {
   const incomingHeaders = await nextHeaders()
   const { user } = await payload.auth({ headers: incomingHeaders })
   if (!user) {
-    return Response.json({ error: 'Unauthorized — must be logged in as admin' }, { status: 401 })
+    return Response.json(
+      { error: 'Unauthorized — must be logged in as admin' },
+      { status: 401 }
+    )
   }
 
   const { searchParams } = new URL(req.url)
@@ -100,7 +103,9 @@ export async function POST(req: Request) {
         if (doc.favicon && isSupabaseUrl(doc.favicon)) {
           try {
             const filename = getFilenameFromUrl(doc.favicon)
-            const { buffer, contentType } = await downloadMediaFromUrl(doc.favicon)
+            const { buffer, contentType } = await downloadMediaFromUrl(
+              doc.favicon
+            )
             const newUrl = await uploadFavicon(buffer, filename, contentType)
             updates.favicon = newUrl
             entry.actions.push(`favicon → ${newUrl}`)
@@ -132,10 +137,17 @@ export async function POST(req: Request) {
           if (mediaDoc.mediaUrl && isSupabaseUrl(mediaDoc.mediaUrl)) {
             try {
               const filename = getFilenameFromUrl(mediaDoc.mediaUrl)
-              const { buffer, contentType } = await downloadMediaFromUrl(mediaDoc.mediaUrl)
+              const { buffer, contentType } = await downloadMediaFromUrl(
+                mediaDoc.mediaUrl
+              )
               const isVideo = contentType.startsWith('video/')
               const bucket = isVideo ? 'videos' : 'images'
-              const newUrl = await uploadMedia(buffer, filename, contentType, bucket)
+              const newUrl = await uploadMedia(
+                buffer,
+                filename,
+                contentType,
+                bucket
+              )
 
               await payload.update({
                 collection: 'media',

@@ -1,8 +1,8 @@
 'use client'
-import { useActionState, useEffect, useState, useTransition } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
-import { usePostHog } from 'posthog-js/react';
-import { toast } from 'sonner';
+import { useActionState, useEffect, useState, useTransition } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { usePostHog } from 'posthog-js/react'
+import { toast } from 'sonner'
 import { copyComponent } from '@/lib/action'
 import { useUser } from './use-user'
 

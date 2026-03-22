@@ -58,9 +58,9 @@ function FilterSection({
 
   return (
     <section
-      id="website-inspirations"
+      id='website-inspirations'
       className={cn(
-        'mb-12 transition-opacity duration-300 pt-20 max-xl:pt-12 max-md:pt-8',
+        'mb-12 pt-20 transition-opacity duration-300 max-xl:pt-12 max-md:pt-8',
         isLoading && 'pointer-events-none opacity-60'
       )}
     >

@@ -8,7 +8,6 @@
  * @license: MIT
  * @website: https://emerald-ui.com
  */
-
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
@@ -83,49 +82,47 @@ export default function StickyWorkSection() {
   )
 
   return (
-    <section ref={containerRef} className="relative w-full bg-background pt-1">
-
+    <section ref={containerRef} className='bg-background relative w-full pt-1'>
       <div
         ref={stickyWorkHeaderRef}
-        className="relative z-0 flex h-svh w-full flex-col items-center justify-center overflow-hidden bg-background px-8 text-center"
+        className='bg-background relative z-0 flex h-svh w-full flex-col items-center justify-center overflow-hidden px-8 text-center'
       >
-        <h1 className="text-3xl font-black uppercase leading-[0.85] tracking-tighter opacity-15 md:text-[10vw]">
+        <h1 className='text-3xl leading-[0.85] font-black tracking-tighter uppercase opacity-15 md:text-[10vw]'>
           SELECTED
         </h1>
       </div>
 
-
       <ul
         ref={listWrapperRef}
-        className="relative z-10 w-full px-8 py-32 max-md:px-4"
+        className='relative z-10 w-full px-8 py-32 max-md:px-4'
       >
-        <li className="mx-auto flex w-full max-w-md flex-col gap-32">
+        <li className='mx-auto flex w-full max-w-md flex-col gap-32'>
           {workList.map((work, index) => (
             <a
-              href="#"
+              href='#'
               key={work.id}
-              className="group flex flex-col items-center justify-center gap-6 text-center"
+              className='group flex flex-col items-center justify-center gap-6 text-center'
             >
-              <div className="flex w-full items-end justify-between px-2">
-                <p className="font-mono text-sm tracking-widest text-muted-foreground">
+              <div className='flex w-full items-end justify-between px-2'>
+                <p className='text-muted-foreground font-mono text-sm tracking-widest'>
                   {String(index + 1).padStart(2, '0')} -{' '}
                   {String(workList.length).padStart(2, '0')}
                 </p>
-                <h4 className="text-sm uppercase tracking-wider text-muted-foreground">
+                <h4 className='text-muted-foreground text-sm tracking-wider uppercase'>
                   {work.category}
                 </h4>
               </div>
 
-              <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
+              <div className='bg-muted relative aspect-[4/5] w-full overflow-hidden'>
                 <img
                   src={work.image}
                   alt={work.title}
-                  className="h-full w-full object-cover transition-transform ease-out group-hover:scale-105"
-                  loading="lazy"
+                  className='h-full w-full object-cover transition-transform ease-out group-hover:scale-105'
+                  loading='lazy'
                 />
               </div>
 
-              <h3 className="mt-2 text-3xl font-bold uppercase tracking-tight md:text-5xl">
+              <h3 className='mt-2 text-3xl font-bold tracking-tight uppercase md:text-5xl'>
                 {work.title}
               </h3>
             </a>

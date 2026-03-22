@@ -1,10 +1,7 @@
 {
   "name": "sticky-cards-section",
   "type": "registry:component",
-  "dependencies": [
-    "gsap",
-    "@gsap/react"
-  ],
+  "dependencies": ["gsap", "@gsap/react"],
   "files": [
     {
       "type": "registry:component",

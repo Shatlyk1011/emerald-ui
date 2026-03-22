@@ -22,7 +22,6 @@ interface SitePreviewDialogProps {
 export default function SitePreviewDialog({
   onCategoryClick,
 }: SitePreviewDialogProps) {
-
   const {
     selectedSite,
     isDialogOpen,

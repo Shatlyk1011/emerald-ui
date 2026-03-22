@@ -1,8 +1,8 @@
-import path from 'path';
-import type { z } from 'zod';
-import type { registryItemFileSchema } from '@/registry/schema';
-import { promises as fs } from 'fs';
-import { glob } from 'glob';
+import path from 'path'
+import type { z } from 'zod'
+import type { registryItemFileSchema } from '@/registry/schema'
+import { promises as fs } from 'fs'
+import { glob } from 'glob'
 import { registry } from '../registry/index'
 
 const REGISTRY_BASE_PATH = process.cwd()
