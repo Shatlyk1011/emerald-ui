@@ -1,8 +1,8 @@
 'use client'
 
-import { FC, Suspense, useRef, useState } from 'react'
+import { FC, Suspense, useState } from 'react'
 import { getUserInitials } from '@/composables/utils'
-import { LogOut, ChevronDown, Menu, Megaphone, Flag } from 'lucide-react'
+import { LogOut, ChevronDown, Menu, Flag } from 'lucide-react'
 import { useScroll, useMotionValueEvent } from 'motion/react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
@@ -182,7 +182,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
           </Button>
           <ThemeToggle />
 
-          {isLoading ? (
+          {/* {isLoading ? (
             <div className='border-primary h-5 w-5 animate-spin rounded-full border-2 border-t-transparent' />
           ) : (
             <>
@@ -237,7 +237,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                 </Button>
               )}
             </>
-          )}
+          )} */}
           <Button
             size='icon-sm'
             className='z-50 hidden max-md:flex'
