@@ -1,17 +1,61 @@
 import { Suspense } from 'react'
-import InspirationPageContent from '@/components/InspirationPage/InspirationPageContent'
 import InspirationPageSkeleton from '@/components/InspirationPage/InspirationPageSkeleton'
 
-export const dynamic = 'force-dynamic'
+import { stringify } from 'qs-esm'
+import { axios } from '@/lib/axios'
+import InspirationContent from '@/components/InspirationPage/InspirationContent'
+import { unstable_cache } from 'next/cache'
 
-export default function Home() {
+const getCategories = unstable_cache(
+  async () => axios('/categories'),
+  ['categories'],
+  { revalidate: 3600 } // cache for 1 hour
+)
+
+const getStyles = unstable_cache(
+  async () => axios(`/website-style`),
+  ['website-style'],
+  { revalidate: 3600 } // cache for 1 hour
+)
+
+const getInspirationSites = unstable_cache(
+  async () => {
+    const stringifiedQuery = stringify(
+      {
+        where: { isVisible: { equals: true } },
+        depth: 1,
+        limit: 12,
+        page: 1,
+      },
+      { addQueryPrefix: true }
+    )
+    return axios(`/inspiration-websites${stringifiedQuery}`)
+  }, ['inspiration-websites'], { revalidate: 3600 })
+
+
+export default async function Home() {
+
   return (
     <main className='bg-background mt-14 min-h-screen font-sans'>
       <div className='mx-auto max-w-400 px-10 py-10 max-sm:px-4 max-sm:py-6'>
         <Suspense fallback={<InspirationPageSkeleton />}>
-          <InspirationPageContent />
+          <InspirationDataLoader />
         </Suspense>
       </div>
     </main>
+  )
+}
+
+async function InspirationDataLoader() {
+  const [categoriesData, stylesData, inspirationSitesData] = await Promise.all([
+    getCategories(), getStyles(), getInspirationSites()
+  ])
+
+  return (
+    <InspirationContent
+      categories={categoriesData.data.docs}
+      styles={stylesData.data.docs}
+      initialData={inspirationSitesData.data}
+    />
   )
 }
