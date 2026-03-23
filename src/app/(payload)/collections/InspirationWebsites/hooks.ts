@@ -7,6 +7,8 @@ import {
   deleteMediaFromUrl,
   uploadScreenshot,
   uploadFavicon,
+  downloadMediaFromUrl,
+  uploadMedia,
 } from '../../utils/r2'
 import { createUrlSlug, getFaviconExtension } from './utils'
 
@@ -60,10 +62,12 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({
   data,
   operation,
   originalDoc,
+  req,
 }) => {
   // Only auto-fetch images and favicons on creation, not on updates
   // This prevents re-fetching when users manually delete media
   const isCreating = operation === 'create' || !originalDoc
+  let isExtracted = false
 
   // Handle screenshot capture
   if (data && data.pageUrl && !data.imgUrl && isCreating) {
@@ -102,6 +106,7 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({
           const gradientColor = await extractGradientColor(publicUrl)
           data.gradientColor = gradientColor
           console.log('Gradient color extracted:', gradientColor)
+          isExtracted = true
         } catch (error) {
           console.error('Error extracting gradient color:', error)
         }
@@ -147,7 +152,8 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({
     data &&
     data.imgUrl &&
     originalDoc &&
-    data.imgUrl !== originalDoc.imgUrl
+    data.imgUrl !== originalDoc.imgUrl &&
+    !isExtracted
   ) {
     try {
       const gradientColor = await extractGradientColor(data.imgUrl)
@@ -155,6 +161,49 @@ export const beforeChangeHook: CollectionBeforeChangeHook = async ({
       console.log('Gradient color extracted from manual URL:', gradientColor)
     } catch (error) {
       console.error('Error extracting gradient color from URL:', error)
+    }
+  }
+
+  // Handle videoUrl downloading and Media collection creation
+  if (data && data.videoUrl) {
+    const isNewVideoUrl =
+      isCreating || (originalDoc && data.videoUrl !== originalDoc.videoUrl)
+
+    if (isNewVideoUrl) {
+      try {
+        console.log(`Downloading video from: ${data.videoUrl}`)
+        const { buffer, contentType, filename } = await downloadMediaFromUrl(
+          data.videoUrl
+        )
+
+        const publicUrl = await uploadMedia(
+          buffer,
+          filename,
+          contentType,
+          'videos'
+        )
+        console.log(`Video downloaded and uploaded to R2: ${publicUrl}`)
+
+        const newMedia = await req.payload.create({
+          collection: 'media',
+          data: {
+            pageUrl: data.pageUrl || '',
+            type: 'video',
+            mediaUrl: publicUrl,
+            altText: data.title
+              ? `${data.title} video preview`
+              : 'Video Preview',
+          },
+        })
+        console.log(`Created new media document: ${newMedia.id}`)
+
+        // Attach the new media to the inspiration website if not already present
+        if (!data.additionalMedia) {
+          data.additionalMedia = newMedia.id
+        }
+      } catch (error) {
+        console.error('Error processing videoUrl:', error)
+      }
     }
   }
 
