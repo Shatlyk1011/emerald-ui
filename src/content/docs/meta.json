@@ -5,8 +5,16 @@
   "pages": [
     "---Get Started---",
     "index",
-    "---AI---",
+
+    "---Components---",
     "components/gradient-file-upload",
+    "components/3d-marquee",
+    "components/animated-number",
+    "components/animated-dropdown",
+    "components/animated-input",
+    "components/parallax-image",
+    "components/subscribe-input",
+    "components/flip-card",
 
     "---UI Elements---",
     "components/buttons",
@@ -16,15 +24,6 @@
     "components/pricing",
     "components/cards",
     "components/hero",
-    "components/footer",
-
-    "---Components---",
-    "components/3d-marquee",
-    "components/animated-number",
-    "components/animated-dropdown",
-    "components/animated-input",
-    "components/parallax-image",
-    "components/subscribe-input",
-    "components/flip-card"
+    "components/footer"
   ]
 }
