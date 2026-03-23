@@ -5,6 +5,7 @@ import {
   QueryClientConfig,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 export const QueryConfig: QueryClientConfig = {
   defaultOptions: {
@@ -31,7 +32,10 @@ const TanstackQueryProvider: FC<Props> = ({ children }) => {
   const [queryClient] = useState(() => new QueryClient(QueryConfig))
 
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      {children}
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   )
 }
 export default TanstackQueryProvider
