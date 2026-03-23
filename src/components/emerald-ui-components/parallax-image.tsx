@@ -24,8 +24,10 @@ interface ParallaxImageProps {
   className?: string
 }
 
+
+
 export default function ParallaxImage({
-  src = 'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/emilie.webp',
+  src = 'https://images.emerald-ui.com/www-neonrated-com-.webp',
   alt = 'Parallax image',
   speed = 1,
   stiffness = 80,

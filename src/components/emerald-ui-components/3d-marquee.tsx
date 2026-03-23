@@ -17,18 +17,18 @@ interface ThreeDMarqueeProps {
 }
 
 const defaultImages = [
-  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/becane.webp',
-  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/chdartmaker--1-.webp',
-  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/www-instituteofhealth-com-.webp',
-  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/wadeandleta-com-.webp',
-  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/felixpeault.webp',
-  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/1820productions.webp',
-  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/emilie.webp',
-  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/telhaclarke.webp',
-  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/jonasreymondin.webp',
-  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/www-anima-ai.webp',
-  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/dulcedo-com-.webp',
-  'https://pyengguphcmeqlelpozr.supabase.co/storage/v1/object/public/images/15thplus.webp',
+  'https://images.emerald-ui.com/bellakitchenware-com-.webp',
+  'https://images.emerald-ui.com/graza.webp',
+  'https://images.emerald-ui.com/dolce-gabbana.webp',
+  'https://images.emerald-ui.com/screenshot-2026-03-09-at-18.07.53.webp',
+  'https://images.emerald-ui.com/screenshot-2026-03-09-at-18.00.33.webp',
+  'https://images.emerald-ui.com/www-neonrated-com-.webp',
+  'https://images.emerald-ui.com/freshman-tv-.webp',
+  'https://images.emerald-ui.com/www-newyorker-com-.webp',
+  'https://images.emerald-ui.com/www-zipline-com-.webp',
+  'https://images.emerald-ui.com/www-yellowbirdfoods-com-.webp',
+  'https://images.emerald-ui.com/cassettemusic.webp',
+  'https://images.emerald-ui.com/giga-ai-.webp'
 ]
 
 const ThreeDMarquee = ({
