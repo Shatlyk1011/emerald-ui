@@ -31,6 +31,17 @@ export default function InspirationContent({
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedStyles, setSelectedStyles] = useState<string[]>([])
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href)
+      
+      if (url.search) {
+        url.search = ''
+        window.history.replaceState({}, '', url.toString())
+      }
+    }
+  }, [])
+
   const { ref, inView } = useInView({
     threshold: 0,
     rootMargin: '50px',
