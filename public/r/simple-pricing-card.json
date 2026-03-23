@@ -1,8 +1,12 @@
 {
   "name": "simple-pricing-card",
   "type": "registry:component",
-  "dependencies": ["lucide-react"],
-  "registryDependencies": ["button"],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
   "files": [
     {
       "type": "registry:component",

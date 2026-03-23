@@ -1,8 +1,16 @@
 {
   "name": "gradient-file-upload",
   "type": "registry:component",
-  "dependencies": ["lucide-react", "motion", "sonner"],
-  "registryDependencies": ["button", "textarea", "tooltip"],
+  "dependencies": [
+    "lucide-react",
+    "motion",
+    "sonner"
+  ],
+  "registryDependencies": [
+    "button",
+    "textarea",
+    "tooltip"
+  ],
   "files": [
     {
       "type": "registry:component",
