@@ -16,12 +16,14 @@ Global:
 
 <!-- video loading states/text -->
 
- <!-- 1
-  add new functionality in fumadocs. the Ui elements pages, namely buttons, text hero pricing cards has multiple components in it. i want dynamically show the exactly number of components inside that page, for example, the cards page has 6 unique card components, so in the sidebar will be Cards (6) - like this.
--->
-
 <!-- once user login, add his email to sub list -->
 
   <!-- 
     create wrapper component with the following functionality. this wrapper component will trigger on hover, and will show the hand animation with the suggestion alike text"Like this componetn? Check it out in our library". 
    -->
+
+
+in main page, i want remove the source urls like ?utm_source=ui.shadcn.com&utm_medium=referral&utm_campaign=directory or ref=github.com. 
+
+
+docker run -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n
