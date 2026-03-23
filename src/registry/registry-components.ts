@@ -1,4 +1,7 @@
-import type { Registry } from './schema'
+import type { Registry } from './schema';
+
+
+
 
 
 
@@ -451,12 +454,14 @@ export const component: Registry = [
       },
     ],
   },
+
+  // Texts component
   {
     name: 'text-scramble',
     type: 'registry:component',
     files: [
       {
-        path: 'components/emerald-ui-components/text-scramble.tsx',
+        path: 'components/emerald-ui-components/texts/text-scramble.tsx',
         type: 'registry:component',
       },
     ],
@@ -466,7 +471,7 @@ export const component: Registry = [
     type: 'registry:component',
     files: [
       {
-        path: 'components/emerald-ui-components/text-shimmer.tsx',
+        path: 'components/emerald-ui-components/texts/text-shimmer.tsx',
         type: 'registry:component',
       },
     ],
@@ -477,7 +482,7 @@ export const component: Registry = [
     dependencies: ['motion'],
     files: [
       {
-        path: 'components/emerald-ui-components/text-typing-effect.tsx',
+        path: 'components/emerald-ui-components/texts/text-typing-effect.tsx',
         type: 'registry:component',
       },
     ],
