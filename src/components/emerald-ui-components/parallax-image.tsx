@@ -24,8 +24,6 @@ interface ParallaxImageProps {
   className?: string
 }
 
-
-
 export default function ParallaxImage({
   src = 'https://images.emerald-ui.com/www-neonrated-com-.webp',
   alt = 'Parallax image',

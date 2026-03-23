@@ -28,7 +28,7 @@ const defaultImages = [
   'https://images.emerald-ui.com/www-zipline-com-.webp',
   'https://images.emerald-ui.com/www-yellowbirdfoods-com-.webp',
   'https://images.emerald-ui.com/cassettemusic.webp',
-  'https://images.emerald-ui.com/giga-ai-.webp'
+  'https://images.emerald-ui.com/giga-ai-.webp',
 ]
 
 const ThreeDMarquee = ({
