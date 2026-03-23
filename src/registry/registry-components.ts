@@ -1,5 +1,8 @@
 import type { Registry } from './schema'
 
+
+
+
 export const component: Registry = [
   // ─── Buttons ──────────────────────────────────────────────────────────────
   {
@@ -469,12 +472,12 @@ export const component: Registry = [
     ],
   },
   {
-    name: 'typing-effect',
+    name: 'text-typing-effect',
     type: 'registry:component',
     dependencies: ['motion'],
     files: [
       {
-        path: 'components/emerald-ui-components/typing-effect.tsx',
+        path: 'components/emerald-ui-components/text-typing-effect.tsx',
         type: 'registry:component',
       },
     ],

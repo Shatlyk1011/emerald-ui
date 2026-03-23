@@ -1,9 +1,17 @@
-import path from 'path'
-import type { z } from 'zod'
-import type { registryItemFileSchema } from '@/registry/schema'
-import { promises as fs } from 'fs'
-import { glob } from 'glob'
-import { registry } from '../registry/index'
+import path from 'path';
+import type { z } from 'zod';
+import type { registryItemFileSchema } from '@/registry/schema';
+import { promises as fs } from 'fs';
+import { glob } from 'glob';
+import { registry } from '../registry/index';
+
+
+
+
+
+
+
+
 
 const REGISTRY_BASE_PATH = process.cwd()
 // Source folder where the actual component files live
@@ -11,7 +19,6 @@ const SRC_FOLDER = 'src'
 const PUBLIC_FOLDER_BASE_PATH = 'public/r'
 // Site branding
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL
-console.log('SITE_URL', SITE_URL)
 const SITE_NAME = 'Emerald UI'
 const SITE_DESCRIPTION =
   'A collection of stunning UI components built with Next.js, React, Tailwind CSS, GSAP, and Motion.'

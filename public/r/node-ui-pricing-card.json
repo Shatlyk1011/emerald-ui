@@ -1,8 +1,13 @@
 {
   "name": "node-ui-pricing-card",
   "type": "registry:component",
-  "dependencies": ["lucide-react"],
-  "registryDependencies": ["button", "switch"],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "switch"
+  ],
   "files": [
     {
       "type": "registry:component",
