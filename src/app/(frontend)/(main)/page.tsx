@@ -6,13 +6,13 @@ import InspirationContent from '@/components/InspirationPage/InspirationContent'
 import InspirationPageSkeleton from '@/components/InspirationPage/InspirationPageSkeleton'
 
 const getCategories = unstable_cache(
-  async () => axios('/categories'),
+  async () => (await axios('/categories')).data.docs,
   ['categories'],
   { revalidate: 3600 } // cache for 1 hour
 )
 
 const getStyles = unstable_cache(
-  async () => axios(`/website-style`),
+  async () => (await axios(`/website-style`)).data.docs,
   ['website-style'],
   { revalidate: 3600 } // cache for 1 hour
 )
@@ -28,7 +28,7 @@ const getInspirationSites = unstable_cache(
       },
       { addQueryPrefix: true }
     )
-    return axios(`/inspiration-websites${stringifiedQuery}`)
+    return (await axios(`/inspiration-websites${stringifiedQuery}`)).data
   },
   ['inspiration-websites'],
   { revalidate: 3600 }
@@ -55,9 +55,9 @@ async function InspirationDataLoader() {
 
   return (
     <InspirationContent
-      categories={categoriesData.data.docs}
-      styles={stylesData.data.docs}
-      initialData={inspirationSitesData.data}
+      categories={categoriesData}
+      styles={stylesData}
+      initialData={inspirationSitesData}
     />
   )
 }
