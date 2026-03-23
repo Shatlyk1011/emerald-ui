@@ -9,9 +9,6 @@ import type { Registry } from './schema';
 
 
 
-
-
-
 export const component: Registry = [
   // ─── Buttons ──────────────────────────────────────────────────────────────
   {
@@ -120,17 +117,6 @@ export const component: Registry = [
     files: [
       {
         path: 'components/emerald-ui-components/cards/checkout-card.tsx',
-        type: 'registry:component',
-      },
-    ],
-  },
-  {
-    name: 'flip-card',
-    type: 'registry:component',
-    dependencies: ['lucide-react', 'motion'],
-    files: [
-      {
-        path: 'components/emerald-ui-components/cards/flip-card.tsx',
         type: 'registry:component',
       },
     ],
@@ -417,6 +403,17 @@ export const component: Registry = [
     files: [
       {
         path: 'components/emerald-ui-components/animated-number.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
+  {
+    name: 'flip-card',
+    type: 'registry:component',
+    dependencies: ['lucide-react', 'motion'],
+    files: [
+      {
+        path: 'components/emerald-ui-components/flip-card.tsx',
         type: 'registry:component',
       },
     ],
