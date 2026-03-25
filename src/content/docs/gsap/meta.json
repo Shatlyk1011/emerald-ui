@@ -13,6 +13,7 @@
     "components/fancy-text-hover",
     "components/image-trail",
     "components/sticky-cards-section",
+    "components/morphing-highlighter",
 
     "---Text---",
     "components/text-reveal",

@@ -9,6 +9,9 @@ import type { Registry } from './schema';
 
 
 
+
+
+
 export const component: Registry = [
   // ─── Buttons ──────────────────────────────────────────────────────────────
   {
@@ -289,6 +292,17 @@ export const component: Registry = [
     files: [
       {
         path: 'components/emerald-ui-components/gsap-components/sticky-cards-section.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
+  {
+    name: 'morphing-highlighter',
+    type: 'registry:component',
+    dependencies: ['gsap', '@gsap/react'],
+    files: [
+      {
+        path: 'components/emerald-ui-components/gsap-components/morphing-highlighter.tsx',
         type: 'registry:component',
       },
     ],
