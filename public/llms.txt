@@ -55,6 +55,9 @@ https://www.emerald-ui.com/docs/components/link-hover
 **Magnetic Effect** - Magnetic hover effect that pulls elements towards the cursor
 https://www.emerald-ui.com/docs/components/magnetic-effect
 
+**Morphing Highlighter** - SplitText character hover animation and a morphing highlighter bar
+https://www.emerald-ui.com/docs/components/morphing-highlighter
+
 **Parallax Image** - Smooth scroll-driven parallax image effect powered by motion/react
 https://www.emerald-ui.com/docs/components/parallax-image
 
