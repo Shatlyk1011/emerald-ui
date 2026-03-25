@@ -31,7 +31,7 @@ export function GsapTabHint() {
             <span className='font-semibold'>Switch tabs above</span> <br /> to
             explore{' '}
             <Link
-              href={`${isGsapPage ? '/docs' : '/docs/gsap/components'}`}
+              href={`${isGsapPage ? '/docs' : '/docs/gsap'}`}
               className='underline underline-offset-2 transition-colors hover:text-emerald-600 dark:hover:text-emerald-400'
             >
               {isGsapPage ? 'Motion Components' : 'GSAP Components'}
