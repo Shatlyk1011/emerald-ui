@@ -257,7 +257,7 @@ export default function MorphingHighlighter({
     <div
       ref={menuOverlayRef}
       className={cn(
-        'relative h-120 bg-emerald-500 w-full overflow-hidden ',
+        'relative h-120 w-full overflow-hidden bg-emerald-500',
         className
       )}
     >
@@ -282,16 +282,18 @@ export default function MorphingHighlighter({
                 menuLinksRef.current[index] = el
               }}
               className={cn(
-                'relative inline-block overflow-hidden no-underline text-foreground',
-                'text-[clamp(3rem,9vw,10rem)] font-black uppercase leading-tight -tracking-[4%]',
+                'text-foreground relative inline-block overflow-hidden no-underline',
+                'text-[clamp(3rem,9vw,10rem)] leading-tight font-black -tracking-[4%] uppercase'
               )}
               style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
             >
               {/* Layer 1 – visible at rest */}
-              <span className='absolute left-0 top-0 block text-white'>{item.label}</span>
+              <span className='absolute top-0 left-0 block text-white'>
+                {item.label}
+              </span>
               {/* Layer 2 – animates in from below on hover */}
               <span
-                className='absolute left-0 top-0 block text-white'
+                className='absolute top-0 left-0 block text-white'
                 aria-hidden
               >
                 {item.label}

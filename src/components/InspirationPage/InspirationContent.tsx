@@ -34,7 +34,7 @@ export default function InspirationContent({
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const url = new URL(window.location.href)
-      
+
       if (url.search) {
         url.search = ''
         window.history.replaceState({}, '', url.toString())
