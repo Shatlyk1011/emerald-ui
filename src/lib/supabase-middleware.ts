@@ -41,21 +41,6 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  // Protected routes - redirect to login if not authenticated
-  const protectedPaths =
-    process.env.NODE_ENV === 'development' ? [] : ['/result']
-
-  const isProtectedPath = protectedPaths.some((path) =>
-    request.nextUrl.pathname.startsWith(path)
-  )
-
-  if (isProtectedPath && !user) {
-    // Store the original URL to redirect back after login
-    const redirectUrl = new URL('/sign-in', request.url)
-    redirectUrl.searchParams.set('next', request.nextUrl.pathname)
-    return NextResponse.redirect(redirectUrl)
-  }
-
   // Auth-only routes - redirect to home if already authenticated
   const authOnlyPaths = ['/sign-in', '/sign-up']
   const isAuthOnlyPath = authOnlyPaths.some((path) =>

@@ -43,24 +43,8 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/docs/gsap/components',
-        destination: '/docs/gsap/components/interactive-team',
-        permanent: true,
-      },
-      {
         source: '/components/:path*',
         destination: '/docs/components/:path*',
-        permanent: true,
-      },
-
-      {
-        source: '/gsap',
-        destination: '/docs/gsap',
-        permanent: true,
-      },
-      {
-        source: '/docs/gsap/components',
-        destination: '/docs/gsap',
         permanent: true,
       },
       {
@@ -77,11 +61,6 @@ const nextConfig: NextConfig = {
       // temporary
       {
         source: '/pricing',
-        destination: '/',
-        permanent: true,
-      },
-      {
-        source: '/node-inspiration',
         destination: '/',
         permanent: true,
       },
