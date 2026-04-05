@@ -182,7 +182,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
           </Button>
           <ThemeToggle />
 
-          {/* {isLoading ? (
+          {isLoading ? (
             <div className='border-primary h-5 w-5 animate-spin rounded-full border-2 border-t-transparent' />
           ) : (
             <>
@@ -237,7 +237,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                 </Button>
               )}
             </>
-          )} */}
+          )}
           <Button
             size='icon-sm'
             className='z-50 hidden max-md:flex'
