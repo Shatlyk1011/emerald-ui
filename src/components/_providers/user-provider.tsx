@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import { User } from '@supabase/supabase-js'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase-client'
@@ -17,6 +17,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
+  // Use a ref so the router never causes the effect to re-run
+  const routerRef = useRef(router)
+  useEffect(() => {
+    routerRef.current = router
+  })
   const supabase = createClient()
 
   useEffect(() => {
@@ -37,19 +42,22 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
     getInitialSession()
 
-    // Listen for auth changes
+    // Listen for auth changes — only refresh on real events, not the initial
+    // session hydration, to avoid an infinite refresh loop.
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null)
       setIsLoading(false)
-      router.refresh()
+      if (event !== 'INITIAL_SESSION') {
+        routerRef.current.refresh()
+      }
     })
 
     return () => {
       subscription.unsubscribe()
     }
-  }, [supabase, router])
+  }, [supabase]) // router intentionally excluded — accessed via ref
 
   const signOut = async () => {
     try {
