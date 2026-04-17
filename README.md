@@ -5,18 +5,21 @@
 ## ✨ Features
 
 ### 🧩 UI Components & Registry
+
 - **CLI Integration:** Powered by an integrated shadcn-like CLI (`pnpm dlx shadcn@latest add <component>`).
 - **Custom Built Registry:** Uses a fully customized registry script to manage and deliver Emerald UI components directly to your projects.
 - **GSAP & Motion Collections:** Includes dedicated sections showcasing complex, beautiful animations built with GSAP and Framer Motion.
 - **Client-Side Validation:** Fully typed and validated client-side workflows using Zod.
 
 ### 🌐 Inspiration Gallery
+
 - **Handpicked Websites:** A curated collection with high-quality screenshots and detailed video previews.
 - **Automated Capture (Scrnify):** Custom server-side Next.js hooks integrated with `api.scrnify.com` to automatically capture, process, and optimize website screenshots into WebP upon adding URLs via Payload CMS.
 - **Smart Color Extraction:** Dynamically extracts dominant/gradient colors from screenshots to adapt UI elements automatically.
 - **Advanced Filtering:** Easily filter inspiration galleries by specific categories or design styles.
 
 ### 🛠️ Architecture & Core
+
 - **Next.js & App Router:** Built leveraging Next.js capabilities with React 19.
 - **Enhanced Payload CMS:** Payload CMS v3 dashboard baked natively into the Next.js App router (`/admin`), seamlessly connected to Cloudflare R2 and MongoDB.
 - **Optimized Performance:** Blazing fast experience via SSG (Static Site Generation), caching, and optimized Edge-ready deployments.
@@ -44,6 +47,7 @@
 ## 🚀 Quick Start
 
 ### 1. Clone & Install dependencies
+
 ```bash
 git clone https://github.com/Shatlyk1011/ui-application.git
 cd ui-application
@@ -53,19 +57,25 @@ pnpm install
 ```
 
 ### 2. Environment Variables
+
 Copy the example environment file and fill in the necessary keys. Make sure to provide keys for Supabase, MongoDB, Payload CMS, and Cloudflare R2.
+
 ```bash
 cp env.example .env
 ```
-*(Note: Refer to `env.example` in the directory, not `.env.example`)*
+
+_(Note: Refer to `env.example` in the directory, not `.env.example`)_
 
 ### 3. Run Development Server
+
 ```bash
 pnpm dev
 ```
+
 Your Next.js app will be securely available at `http://localhost:3000`.
 
 ### 4. Payload CMS Admin
+
 The Payload CMS admin panel runs seamlessly within the Next.js project. You can access it directly at `http://localhost:3000/admin`.
 
 ## 📦 Scripts Overview
