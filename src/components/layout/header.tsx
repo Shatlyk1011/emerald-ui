@@ -157,7 +157,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                 Gsap Components
               </Link>
             </li>
-            <span className='mx-1 opacity-50 max-md:hidden'>|</span>
+            <li className='mx-1 opacity-50 max-md:hidden'>|</li>
             <li>
               <button
                 onClick={() => {
@@ -176,6 +176,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
           <Button
             variant={'ghost'}
             onClick={() => setIssueDialogOpen(true)}
+            aria-label='Report an issue'
             className='hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'
           >
             <Flag className='text-foreground size-5' />

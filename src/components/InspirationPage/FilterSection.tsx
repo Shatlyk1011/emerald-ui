@@ -66,14 +66,14 @@ function FilterSection({
     >
       <div className='flex gap-12 max-md:flex-col max-md:gap-8'>
         <div className='group flex max-w-md flex-1 flex-col'>
-          <h3
+          <h4
             className={cn(
               'tracking-three mb-3 text-xs font-medium uppercase transition-colors ease-in-out',
               isCategorySelected && 'text-muted-foreground'
             )}
           >
             Categories
-          </h3>
+          </h4>
           <ul className='-ml-1 flex h-max flex-1 flex-wrap place-content-start gap-x-1 gap-y-1 text-sm font-normal'>
             {categories.map(({ value, category }) => {
               const isActive = selectedCategories.some((c) => c == value)

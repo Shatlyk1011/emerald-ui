@@ -4,18 +4,18 @@ import { GsapComponents, MotionComponents, UsefulLinks } from './footerLinks'
 
 export default function Footer() {
   return (
-    <footer className='bg-secondary dark:bg-card w-full border-t'>
+    <footer className='bg-card/80 w-full border-t'>
       <div className='mx-auto max-w-400 px-20 pt-40 pb-24 max-lg:px-16 max-lg:py-16 max-sm:px-5 max-sm:py-12'>
-        <div className='mb-4 flex flex-col items-start justify-center gap-0'>
+        <div className='mb-4 flex flex-col  items-start justify-center gap-0'>
           <Logo
             size='xl'
             classes='text-card-foreground items-start'
             logoColor='text-primary'
           />
-          <span className='text-muted-foreground -mt-2 ml-11.5'>
+          <span className=' -mt-2 ml-11.5 opacity-80'>
             Build by{' '}
             <a
-              href='https://shatlykabdullayev.com'
+              href='https://github.com/shatlyk1011'
               target='_blank'
               rel='noopener noreferrer'
               className='hover:text-foreground'
