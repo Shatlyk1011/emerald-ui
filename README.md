@@ -49,8 +49,8 @@
 ### 1. Clone & Install dependencies
 
 ```bash
-git clone https://github.com/Shatlyk1011/ui-application.git
-cd ui-application
+git clone https://github.com/Shatlyk1011/emerald-ui.git
+cd emerald-ui
 
 # Install dependencies using pnpm
 pnpm install

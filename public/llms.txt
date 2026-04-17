@@ -85,6 +85,6 @@ undefined/docs/components/text-reveal
 ## Links
 
 - Website: undefined
-- Github: https://github.com/shatlyk1011/ui-application
+- Github: https://github.com/shatlyk1011/emerald-ui
 - Sitemap: undefined/sitemap.xml
 

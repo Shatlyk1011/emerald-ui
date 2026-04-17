@@ -2,7 +2,7 @@
 
 import { FC, Suspense, useState } from 'react'
 import { getUserInitials } from '@/composables/utils'
-import { LogOut, ChevronDown, Menu, Flag } from 'lucide-react'
+import { LogOut, ChevronDown, Menu, Flag, Github } from 'lucide-react'
 import { useScroll, useMotionValueEvent } from 'motion/react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
@@ -173,6 +173,20 @@ const Header: FC<Props> = ({ isFumadocs }) => {
         </nav>
 
         <div className='flex min-w-20 items-center justify-end gap-2.5 max-sm:gap-1'>
+          <Button
+            variant={'ghost'}
+            asChild
+            className='hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'
+          >
+            <Link
+              href='https://github.com/Shatlyk1011/emerald-ui'
+              target='_blank'
+              rel='noopener noreferrer'
+              aria-label='GitHub Repository'
+            >
+              <Github className='text-foreground size-5' />
+            </Link>
+          </Button>
           <Button
             variant={'ghost'}
             onClick={() => setIssueDialogOpen(true)}
