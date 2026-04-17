@@ -22,6 +22,7 @@ import {
 import ThemeToggle from '@/components/ui/theme-toggle'
 import Logo from '../ui/logo'
 import TextShimmer from '../ui/text-shimmer'
+import { siteConfig } from '@/lib/site-config'
 
 const SubmitWebsiteDialog = dynamic(
   () => import('../landing/SubmitWebsiteDialog'),
@@ -176,22 +177,20 @@ const Header: FC<Props> = ({ isFumadocs }) => {
           <Button
             variant={'ghost'}
             asChild
-            className='hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'
           >
-            <Link
-              href='https://github.com/Shatlyk1011/emerald-ui'
+            <a
+              href={siteConfig.githubRepo}
               target='_blank'
               rel='noopener noreferrer'
               aria-label='GitHub Repository'
             >
               <Github className='text-foreground size-5' />
-            </Link>
+            </a>
           </Button>
           <Button
             variant={'ghost'}
             onClick={() => setIssueDialogOpen(true)}
             aria-label='Report an issue'
-            className='hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'
           >
             <Flag className='text-foreground size-5' />
           </Button>

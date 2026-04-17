@@ -2,6 +2,8 @@
 
 **Emerald UI** is a specialized platform offering an inspirational gallery of website designs and a collection of stunning, interactive UI components. Built with top-tier modern web technologies, it allows developers to explore handpicked website screens (including dialogs and video previews) and seamlessly install finely-crafted components powered by motion and GSAP—directly via CLI.
 
+> Give it a ⭐️ on GitHub. It helps a lot and motivates for further projects!
+
 ## ✨ Features
 
 ### 🧩 UI Components & Registry
