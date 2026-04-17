@@ -8,13 +8,13 @@ import InspirationPageSkeleton from '@/components/InspirationPage/InspirationPag
 const getCategories = unstable_cache(
   async () => (await axios('/categories')).data.docs,
   ['categories'],
-  { revalidate: 3600 } // cache for 1 hour
+  { revalidate: 3600 * 24 } // 24 hours
 )
 
 const getStyles = unstable_cache(
   async () => (await axios(`/website-style`)).data.docs,
   ['website-style'],
-  { revalidate: 3600 } // cache for 1 hour
+  { revalidate: 3600 * 24 } // 24 hours
 )
 
 const getInspirationSites = unstable_cache(

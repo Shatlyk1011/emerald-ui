@@ -25,7 +25,7 @@ export const useInfiniteInspirationSites = (
       return response.data
     },
     initialPageParam: 1,
-    staleTime: 1000 * 60 * 30, // 30 minutes (immediate revalidation)
+    staleTime: 1000 * 60 * 60 * 24, // 1 day
     getNextPageParam: (lastPage) =>
       lastPage.hasNextPage ? lastPage.nextPage : undefined,
     placeholderData: {

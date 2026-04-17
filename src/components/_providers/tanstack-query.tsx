@@ -11,8 +11,7 @@ export const QueryConfig: QueryClientConfig = {
   defaultOptions: {
     queries: {
       gcTime: 1000 * 60 * 60 * 72, // 72 hours
-      // fix it IT TO 30 MIN
-      staleTime: 0, // 30 minutes (immediate revalidation)
+      staleTime: 30 * 1000 * 60, // 30 minutes
       refetchOnWindowFocus: false,
     },
     mutations: {
