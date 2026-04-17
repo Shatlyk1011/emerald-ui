@@ -1,4 +1,8 @@
-# Emerald UI
+# Emerald UI - Inspiration Websites & JSX Components
+
+<p align="center">
+  <a href="https://emerald-ui.com/" target="_blank"><img height="360" src="public/emerald-ui.jpg" alt="Emerald UI image"></a>
+</p>
 
 **Emerald UI** is a specialized platform offering an inspirational gallery of website designs and a collection of stunning, interactive UI components. Built with top-tier modern web technologies, it allows developers to explore handpicked website screens (including dialogs and video previews) and seamlessly install finely-crafted components powered by motion and GSAP—directly via CLI.
 
