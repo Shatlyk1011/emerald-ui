@@ -93,6 +93,7 @@ The Payload CMS admin panel runs seamlessly within the Next.js project. You can 
 This project includes a set of AI workflows and skills stored in the `.agent` folder to streamline development and maintenance tasks. You can trigger them using AI assistants that support this convention.
 
 ### Available Workflows (`.agent/workflows/`)
+
 - **/browser_to_component:** Converts a web snippet (HTML/CSS) directly into a React component.
 - **/commit:** Automatically stages and commits changes following the Conventional Commits specification.
 - **/create_new_component:** Scaffolds a new custom React component from scratch alongside its Fumadocs MDX documentation.
@@ -101,6 +102,7 @@ This project includes a set of AI workflows and skills stored in the `.agent` fo
 - **/seo-optimization:** A generic workflow template to ensure SEO best practices across metadata, crawler configs, and syndication.
 
 ### Available Skills (`.agent/skills/`)
+
 - **Create Component and Docs:** Established guidelines and conventions for creating new React components and their corresponding MDX documentation.
 - **Design Guides:** Core design parameters, theming rules, and aesthetics for the project.
 

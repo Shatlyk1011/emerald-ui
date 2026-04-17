@@ -7,6 +7,7 @@ import { useScroll, useMotionValueEvent } from 'motion/react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
+import { siteConfig } from '@/lib/site-config'
 import { cn } from '@/lib/utils'
 import { useUser } from '@/hooks/use-user'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -22,7 +23,6 @@ import {
 import ThemeToggle from '@/components/ui/theme-toggle'
 import Logo from '../ui/logo'
 import TextShimmer from '../ui/text-shimmer'
-import { siteConfig } from '@/lib/site-config'
 
 const SubmitWebsiteDialog = dynamic(
   () => import('../landing/SubmitWebsiteDialog'),
@@ -174,10 +174,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
         </nav>
 
         <div className='flex min-w-20 items-center justify-end gap-2.5 max-sm:gap-1'>
-          <Button
-            variant={'ghost'}
-            asChild
-          >
+          <Button variant={'ghost'} asChild>
             <a
               href={siteConfig.githubRepo}
               target='_blank'
