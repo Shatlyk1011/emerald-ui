@@ -1,6 +1,5 @@
 /* New badge styling */
-a[href='/docs/gsap/components/sticky-cards-section']::after,
-a[href='/docs/gsap/components/morphing-highlighter']::after {
+a[href='/docs/gsap/components/gsap-projects-section']::after {
   content: 'New';
   position: absolute;
   z-index: 20;

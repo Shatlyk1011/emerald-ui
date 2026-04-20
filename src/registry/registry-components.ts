@@ -260,6 +260,17 @@ export const component: Registry = [
       },
     ],
   },
+  {
+    name: 'gsap-projects-section',
+    type: 'registry:component',
+    dependencies: ['gsap', '@gsap/react', 'lucide-react'],
+    files: [
+      {
+        path: 'components/emerald-ui-components/gsap-components/gsap-projects-section.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
 
   {
     name: 'image-trail',
