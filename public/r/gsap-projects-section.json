@@ -1,11 +1,7 @@
 {
   "name": "gsap-projects-section",
   "type": "registry:component",
-  "dependencies": [
-    "gsap",
-    "@gsap/react",
-    "lucide-react"
-  ],
+  "dependencies": ["gsap", "@gsap/react", "lucide-react"],
   "files": [
     {
       "type": "registry:component",

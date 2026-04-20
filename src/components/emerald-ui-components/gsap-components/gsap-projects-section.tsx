@@ -39,7 +39,8 @@ const DEFAULT_PROJECTS: Project[] = [
     leftText: 'SaaS Dashboard',
     rightList: ['#react', '#tailwind'],
     location: 'New York',
-    description: 'A comprehensive analytics dashboard for enterprise resource planning.',
+    description:
+      'A comprehensive analytics dashboard for enterprise resource planning.',
     stroke1: '#101828',
   },
   {
@@ -50,7 +51,8 @@ const DEFAULT_PROJECTS: Project[] = [
     leftText: 'Online Retail',
     rightList: ['#nextjs', '#stripe'],
     location: 'London',
-    description: 'Modern e-commerce platform with seamless checkout and inventory management.',
+    description:
+      'Modern e-commerce platform with seamless checkout and inventory management.',
     stroke1: '#5B91FF',
   },
   {
@@ -61,7 +63,8 @@ const DEFAULT_PROJECTS: Project[] = [
     leftText: 'Mobile Application',
     rightList: ['#react-native', '#firebase'],
     location: 'Tokyo',
-    description: 'A cross-platform mobile application focused on habit tracking and productivity.',
+    description:
+      'A cross-platform mobile application focused on habit tracking and productivity.',
     stroke1: '#E7EBEB',
   },
 ]
@@ -69,19 +72,37 @@ const DEFAULT_PROJECTS: Project[] = [
 // Internal Project Card component
 const Card = ({ item, linkText }: { item: Project; linkText: string }) => {
   return (
-    <div className="flex flex-col gap-4 ">
-      <div className="relative w-full aspect-4/3 bg-muted-foreground/50 overflow-hidden rounded-2xl">
-        <img src={item.img} alt={item.title} className="object-cover w-full h-full" />
+    <div className='flex flex-col gap-4'>
+      <div className='bg-muted-foreground/50 relative aspect-4/3 w-full overflow-hidden rounded-2xl'>
+        <img
+          src={item.img}
+          alt={item.title}
+          className='h-full w-full object-cover'
+        />
       </div>
-      <div className="flex flex-col gap-1 px-2">
-        <div className="flex justify-between items-center">
-          <h3 className="text-2xl font-semibold dark:text-white text-zinc-900">{item.title}</h3>
-          <a href={item.link} className="text-sm font-medium border border-black/10 dark:border-white/10 px-4 py-2 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors">{linkText}</a>
+      <div className='flex flex-col gap-1 px-2'>
+        <div className='flex items-center justify-between'>
+          <h3 className='text-2xl font-semibold text-zinc-900 dark:text-white'>
+            {item.title}
+          </h3>
+          <a
+            href={item.link}
+            className='rounded-full border border-black/10 px-4 py-2 text-sm font-medium transition-colors hover:bg-black hover:text-white dark:border-white/10 dark:hover:bg-white dark:hover:text-black'
+          >
+            {linkText}
+          </a>
         </div>
-        <p className="text-zinc-500 dark:text-zinc-400 leading-[145%]">{item.description}</p>
-        <div className="flex gap-2 mt-2">
-          {item.rightList.map(tag => (
-            <span key={tag} className="text-xs bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 px-2 py-1 rounded-md">{tag}</span>
+        <p className='leading-[145%] text-zinc-500 dark:text-zinc-400'>
+          {item.description}
+        </p>
+        <div className='mt-2 flex gap-2'>
+          {item.rightList.map((tag) => (
+            <span
+              key={tag}
+              className='rounded-md bg-zinc-100 px-2 py-1 text-xs text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300'
+            >
+              {tag}
+            </span>
           ))}
         </div>
       </div>
@@ -94,7 +115,10 @@ interface GsapProjectsSectionProps {
   title?: string
 }
 
-export default function GsapProjectsSection({ projects = DEFAULT_PROJECTS, title = "Selected Works" }: GsapProjectsSectionProps) {
+export default function GsapProjectsSection({
+  projects = DEFAULT_PROJECTS,
+  title = 'Selected Works',
+}: GsapProjectsSectionProps) {
   const container = useRef<HTMLDivElement>(null)
 
   const totalProjectCount = projects.length
@@ -142,9 +166,12 @@ export default function GsapProjectsSection({ projects = DEFAULT_PROJECTS, title
           projectIndexHeight
         moveDistanceNames =
           spotlightSectionHeight - spotlightSectionPadding * 2 - containerHeight
-          
+
         // Ensure image container moves appropriately
-        moveDistanceImages = Math.min(window.innerHeight - imagesHeight, -(imagesHeight - window.innerHeight * 0.7))
+        moveDistanceImages = Math.min(
+          window.innerHeight - imagesHeight,
+          -(imagesHeight - window.innerHeight * 0.7)
+        )
       }
 
       calculateMetrics()
@@ -199,12 +226,12 @@ export default function GsapProjectsSection({ projects = DEFAULT_PROJECTS, title
 
   return (
     <section
-      className='relative w-full pt-32 max-lg:h-auto max-lg:px-10 max-lg:pt-16 max-md:px-5 max-sm:px-4 max-sm:pt-12 bg-white dark:bg-zinc-950 text-foreground overflow-hidden'
+      className='text-foreground relative w-full overflow-hidden bg-white pt-32 max-lg:h-auto max-lg:px-10 max-lg:pt-16 max-md:px-5 max-sm:px-4 max-sm:pt-12 dark:bg-zinc-950'
       id='works'
     >
-      <div className='container mx-auto px-4 lg:px-12 relative'>
+      <div className='relative container mx-auto px-4 lg:px-12'>
         <div className='absolute top-0 left-0 px-10 max-lg:static max-lg:mb-20 max-lg:px-0 max-md:mb-12'>
-          <h2 className='text-6xl font-bold uppercase tracking-tighter relative inline-block mb-[-13svh] max-lg:mb-0'>
+          <h2 className='relative mb-[-13svh] inline-block text-6xl font-bold tracking-tighter uppercase max-lg:mb-0'>
             {title}
           </h2>
         </div>
@@ -212,14 +239,13 @@ export default function GsapProjectsSection({ projects = DEFAULT_PROJECTS, title
 
       <div
         ref={container}
-        className='container mx-auto px-4 lg:px-12 relative h-full min-h-svh w-full pt-36 pb-10 max-lg:min-h-auto max-lg:px-0 max-lg:pt-0'
+        className='relative container mx-auto h-full min-h-svh w-full px-4 pt-36 pb-10 max-lg:min-h-auto max-lg:px-0 max-lg:pt-0 lg:px-12'
       >
-       
-        <div className='flex items-center justify-between max-lg:hidden relative'>
-          <div className='project-index z-50 mix-blend-difference text-white dark:text-black dark:mix-blend-normal'>
-            <h1 className='text-[140px] font-light leading-none tracking-tighter text-zinc-900 dark:text-zinc-50'>
+        <div className='relative flex items-center justify-between max-lg:hidden'>
+          <div className='project-index z-50 text-white mix-blend-difference dark:text-black dark:mix-blend-normal'>
+            <h1 className='text-[140px] leading-none font-light tracking-tighter text-zinc-900 dark:text-zinc-50'>
               01
-              <span className='tracking-tight text-[28px] font-normal text-zinc-400'>
+              <span className='text-[28px] font-normal tracking-tight text-zinc-400'>
                 /0{projects.length}
               </span>
             </h1>
@@ -228,19 +254,15 @@ export default function GsapProjectsSection({ projects = DEFAULT_PROJECTS, title
 
         <div className='project-images absolute top-0 left-1/2 z-10 flex w-[45%] -translate-x-1/2 flex-col gap-32 px-0 pt-[30svh] pb-[30svh] max-lg:static max-lg:w-full max-lg:translate-x-0 max-lg:gap-16 max-lg:py-0 max-lg:pt-0 max-md:gap-10'>
           {projects.map((item) => (
-            <Card
-              key={item.title}
-              item={item}
-              linkText="VISIT"
-            />
+            <Card key={item.title} item={item} linkText='VISIT' />
           ))}
         </div>
 
-        <div className='project-names text-zinc-400 absolute right-8 bottom-8 flex flex-col gap-2 text-2xl whitespace-nowrap max-lg:hidden translate-y-4'>
+        <div className='project-names absolute right-8 bottom-8 flex translate-y-4 flex-col gap-2 text-2xl whitespace-nowrap text-zinc-400 max-lg:hidden'>
           {projects.map(({ title }, i) => (
             <p
               key={i}
-              className='transition-colors duration-300 font-medium text-zinc-300 dark:text-zinc-700 data-[active=true]:text-zinc-900 dark:data-[active=true]:text-zinc-100'
+              className='font-medium text-zinc-300 transition-colors duration-300 data-[active=true]:text-zinc-900 dark:text-zinc-700 dark:data-[active=true]:text-zinc-100'
             >
               {title}
             </p>

@@ -1,14 +1,8 @@
 {
   "name": "animated-input",
   "type": "registry:component",
-  "dependencies": [
-    "lucide-react",
-    "motion"
-  ],
-  "registryDependencies": [
-    "button",
-    "input"
-  ],
+  "dependencies": ["lucide-react", "motion"],
+  "registryDependencies": ["button", "input"],
   "files": [
     {
       "type": "registry:component",
