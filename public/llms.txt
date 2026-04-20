@@ -5,86 +5,89 @@ A collection of stunning UI components built with Next.js, React, Tailwind CSS, 
 ## Components
 
 **3D Marquee** - A 3D marquee component that rotates images in a 3D space.
-undefined/docs/components/3d-marquee
+https://www.emerald-ui.com/docs/components/3d-marquee
 
 **Animated Dropdown** - A smooth dropdown menu with staggered animations and click-outside behavior.
-undefined/docs/components/animated-dropdown
+https://www.emerald-ui.com/docs/components/animated-dropdown
 
 **Animated Input** - An interactive search input with dynamic typing effect.
-undefined/docs/components/animated-input
+https://www.emerald-ui.com/docs/components/animated-input
 
 **Animated Number** - A number that animates from 0 to a target value with spring physics.
-undefined/docs/components/animated-number
+https://www.emerald-ui.com/docs/components/animated-number
 
 **Buttons** - Explore high quality button components with stunning animations and effects. Dark and Light modes available.
-undefined/docs/components/buttons
+https://www.emerald-ui.com/docs/components/buttons
 
 **Cards** - Explore high quality card components. Dark and Light modes available.
-undefined/docs/components/cards
+https://www.emerald-ui.com/docs/components/cards
 
 **Color Text Reveal** - Character-by-character color transition animation with accent highlights on scroll
-undefined/docs/components/color-text-reveal
+https://www.emerald-ui.com/docs/components/color-text-reveal
 
 **Fancy Text Hover** - Scattered letter hover effect with floating animation
-undefined/docs/components/fancy-text-hover
+https://www.emerald-ui.com/docs/components/fancy-text-hover
 
 **Flip Card** - A 3D animated card that flips on hover or click, revealing hidden content on the back.
-undefined/docs/components/flip-card
+https://www.emerald-ui.com/docs/components/flip-card
 
 **Footer** - A responsive, beautifully designed footer component with a contact section and links.
-undefined/docs/components/footer
+https://www.emerald-ui.com/docs/components/footer
 
 **Gradient File Input** - A modern file upload input with drag-and-drop support, animated gradient border, and AI-style prompt textarea.
-undefined/docs/components/gradient-file-upload
+https://www.emerald-ui.com/docs/components/gradient-file-upload
+
+**GSAP Projects Section** - A scroll-triggered, smoothly animated projects section using GSAP and ScrollTrigger. It highlights items one by one with a parallax feel.
+https://www.emerald-ui.com/docs/components/gsap-projects-section
 
 **Hero** - Explore high quality hero components. Dark and Light modes available.
-undefined/docs/components/hero
+https://www.emerald-ui.com/docs/components/hero
 
 **Image Trail** - Images cascade behind the cursor in a cinematic trail on mouse move
-undefined/docs/components/image-trail
+https://www.emerald-ui.com/docs/components/image-trail
 
 **Installation** - Getting started with Emerald UI
-undefined/docs/components/index
+https://www.emerald-ui.com/docs/components/index
 
 **Interactive Team** - Interactive team component with hover effects
-undefined/docs/components/interactive-team
+https://www.emerald-ui.com/docs/components/interactive-team
 
 **Link Hover** - Fancy hover effect on menu items
-undefined/docs/components/link-hover
+https://www.emerald-ui.com/docs/components/link-hover
 
 **Magnetic Effect** - Magnetic hover effect that pulls elements towards the cursor
-undefined/docs/components/magnetic-effect
+https://www.emerald-ui.com/docs/components/magnetic-effect
 
 **Morphing Highlighter** - SplitText character hover animation and a morphing highlighter bar
-undefined/docs/components/morphing-highlighter
+https://www.emerald-ui.com/docs/components/morphing-highlighter
 
 **Parallax Image** - Smooth scroll-driven parallax image effect powered by motion/react
-undefined/docs/components/parallax-image
+https://www.emerald-ui.com/docs/components/parallax-image
 
 **Pricing** - Explore high quality pricing card components. Dark and Light modes available.
-undefined/docs/components/pricing
+https://www.emerald-ui.com/docs/components/pricing
 
 **Scroll Text Reveal** - Word-by-word scroll reveal animation with keyword highlighting and pinned sections
-undefined/docs/components/scroll-text-reveal
+https://www.emerald-ui.com/docs/components/scroll-text-reveal
 
 **Scroll Text Reveal v2** - Line by line clipped scroll reveal animation
-undefined/docs/components/scroll-text-reveal-v2
+https://www.emerald-ui.com/docs/components/scroll-text-reveal-v2
 
 **Sticky Cards Section** - A stunning layout where a massive header text stays pinned behind the scrolling work items.
-undefined/docs/components/sticky-cards-section
+https://www.emerald-ui.com/docs/components/sticky-cards-section
 
 **Subscribe Input** - An expanding input field for email subscriptions.
-undefined/docs/components/subscribe-input
+https://www.emerald-ui.com/docs/components/subscribe-input
 
 **Text** - Explore high quality text components with stunning animations and effects..
-undefined/docs/components/text
+https://www.emerald-ui.com/docs/components/text
 
 **Text Reveal** - Line-by-line text reveal animation with smooth transitions on scroll
-undefined/docs/components/text-reveal
+https://www.emerald-ui.com/docs/components/text-reveal
 
 ## Links
 
-- Website: undefined
+- Website: https://www.emerald-ui.com
 - Github: https://github.com/shatlyk1011/emerald-ui
-- Sitemap: undefined/sitemap.xml
+- Sitemap: https://www.emerald-ui.com/sitemap.xml
 

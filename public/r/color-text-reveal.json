@@ -1,7 +1,11 @@
 {
   "name": "color-text-reveal",
   "type": "registry:component",
-  "dependencies": ["gsap", "@gsap/react", "next-themes"],
+  "dependencies": [
+    "gsap",
+    "@gsap/react",
+    "next-themes"
+  ],
   "files": [
     {
       "type": "registry:component",
