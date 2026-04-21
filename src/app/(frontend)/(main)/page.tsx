@@ -34,7 +34,7 @@ const getInspirationSites = unstable_cache(
   { revalidate: 3600 }
 )
 
-export default async function Home() {
+export default function Home() {
   return (
     <main className='bg-background mt-14 min-h-screen font-sans'>
       <div className='mx-auto max-w-400 px-10 py-10 max-sm:px-4 max-sm:py-6'>

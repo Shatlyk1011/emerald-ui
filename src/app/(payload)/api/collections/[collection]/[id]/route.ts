@@ -1,7 +1,13 @@
-import config from '@payload-config'
-import { NextRequest, NextResponse } from 'next/server'
-import { getPayload } from 'payload'
-import type { CollectionSlug } from 'payload'
+import config from '@payload-config';
+import { NextRequest, NextResponse } from 'next/server';
+import { getPayload } from 'payload';
+import type { CollectionSlug } from 'payload';
+
+
+
+
+
+
 
 /**
  * Generic API endpoint to fetch any collection document by ID
@@ -12,8 +18,10 @@ export async function GET(
   { params }: { params: Promise<{ collection: string; id: string }> }
 ) {
   try {
-    const { collection, id } = await params
-    const payload = await getPayload({ config })
+    const [payload, { collection, id }] = await Promise.all([
+      getPayload({ config }),
+      params,
+    ])
 
     const document = await payload.findByID({
       collection: collection as CollectionSlug,
