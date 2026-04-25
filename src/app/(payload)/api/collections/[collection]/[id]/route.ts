@@ -1,13 +1,7 @@
-import config from '@payload-config';
-import { NextRequest, NextResponse } from 'next/server';
-import { getPayload } from 'payload';
-import type { CollectionSlug } from 'payload';
-
-
-
-
-
-
+import config from '@payload-config'
+import { NextRequest, NextResponse } from 'next/server'
+import { getPayload } from 'payload'
+import type { CollectionSlug } from 'payload'
 
 /**
  * Generic API endpoint to fetch any collection document by ID

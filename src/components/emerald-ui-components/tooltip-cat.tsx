@@ -8,51 +8,41 @@
  * @license: MIT
  * @website: https://emerald-ui.com
  */
-
 // ! Please, add these styles to your globals.css file to avoid animation bugs
-
 /* Cat styling */
-
 // @layer utilities {
-  // @keyframes sleep {
-  //   0% {
-  //     opacity: 1;
-  //     transform: translateY(0) scale(1);
-  //   }
-  //   50% {
-  //     opacity: 0.5;
-  //     transform: translate(-5px, -35px) scale(1.2);
-  //   }
-  //   100% {
-  //     opacity: 0;
-  //     transform: translateY(-60px) scale(1.5);
-  //   }
-  // }
-
+// @keyframes sleep {
+//   0% {
+//     opacity: 1;
+//     transform: translateY(0) scale(1);
+//   }
+//   50% {
+//     opacity: 0.5;
+//     transform: translate(-5px, -35px) scale(1.2);
+//   }
+//   100% {
+//     opacity: 0;
+//     transform: translateY(-60px) scale(1.5);
+//   }
 // }
-
+// }
 // .sleep-symbol span:nth-child(1) {
 //   animation-delay: 0s;
 // }
-
 // .sleep-symbol span:nth-child(2) {
 //   animation-delay: 1s;
 //   margin-left: -10px;
 // }
-
 // .sleep-symbol span:nth-child(3) {
 //   animation-delay: 2s;
 //   margin-left: -10px;
 // }
-
 // .cat:hover #righteyelid {
 //   visibility: hidden;
 // }
-
 // .thecat #eyesdown {
 //   visibility: hidden;
 // }
-
 // .cat:has(.content:hover) {
 //   #righteyelid,
 //   #lefteyelid,
@@ -63,9 +53,7 @@
 //     visibility: visible;
 //   }
 // }
-
 import { ReactNode } from 'react'
-import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
 interface Props {
@@ -360,7 +348,13 @@ export default function TooltipCat({
           <span>Meow!</span>
           <span>Like this component?</span>
           <button className='mt-1 max-h-max max-w-max cursor-pointer text-xs underline'>
-            <a target="_blank" rel="noopener" href='https://github.com/Shatlyk1011/emerald-ui'>Give it a star ⭐</a>
+            <a
+              target='_blank'
+              rel='noopener'
+              href='https://github.com/Shatlyk1011/emerald-ui'
+            >
+              Give it a star ⭐
+            </a>
           </button>
           {/* paws */}
           <span className='absolute top-[-1.5] left-4 z-[-2] text-3xl opacity-5 dark:opacity-20'>

@@ -3,13 +3,13 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Toaster } from 'sonner'
 import { siteConfig } from '@/lib/site-config'
+import Analytics from '@/components/_providers/dynamicAnalitics'
 import { Providers as PostHogProvider } from '@/components/_providers/post-hog'
 import TanstackQueryProvider from '@/components/_providers/tanstack-query'
 import ThemeProvider from '@/components/_providers/theme-provider'
 import { UserProvider } from '@/components/_providers/user-provider'
 import './globals.css'
 import './tailwind.css'
-import Analytics from '@/components/_providers/dynamicAnalitics'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
