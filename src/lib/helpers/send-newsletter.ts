@@ -36,12 +36,7 @@ export async function sendNewsletter(
     }
 
     // Type assertion to access newsletter-specific properties
-    // Type assertion to access newsletter-specific properties
-    const newsletterData = newsletter as unknown as {
-      status: string
-      subject: string
-      content?: string
-    }
+    const newsletterData = newsletter
 
     // Check if already sent
     if (newsletterData.status === 'sent') {
@@ -70,8 +65,6 @@ export async function sendNewsletter(
         error: 'No active subscribers found',
       }
     }
-
-    console.log('subscribers', subscribers)
 
     // Get Nodemailer transport
     const transporter = getNodemailerTransport()

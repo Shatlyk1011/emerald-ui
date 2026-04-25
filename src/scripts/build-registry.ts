@@ -5,6 +5,14 @@ import { promises as fs } from 'fs'
 import { glob } from 'glob'
 import { registry } from '../registry/index'
 
+
+
+
+
+
+
+
+
 const REGISTRY_BASE_PATH = process.cwd()
 // Source folder where the actual component files live
 const SRC_FOLDER = 'src'
@@ -85,7 +93,7 @@ const getComponentsInfo = async (): Promise<ComponentInfo[]> => {
     // Docs live under src/content/docs/** in this project
     const mdxFiles = await glob('src/content/docs/**/*.mdx', {
       cwd: REGISTRY_BASE_PATH,
-      ignore: ['src/content/docs/index.mdx'],
+      ignore: ['src/content/docs/index.mdx', 'src/content/docs/gsap/index.mdx'],
     })
     const components: ComponentInfo[] = []
 
@@ -241,7 +249,7 @@ const main = async () => {
 
   const totalComponents = registry.length
 
-  for (let i = 0; i < registry.length; i++) {
+  for (let i = 0; i < totalComponents; i++) {
     const component = registry[i]
     const files = component.files
     if (!files) throw new Error('No files found for component')
