@@ -15,6 +15,7 @@
     "components/parallax-image",
     "components/subscribe-input",
     "components/flip-card",
+    "components/tooltip-cat",
 
     "---UI Elements---",
     "components/buttons",

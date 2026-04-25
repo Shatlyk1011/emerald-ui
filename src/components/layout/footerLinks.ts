@@ -6,6 +6,7 @@ export const MotionComponents = [
   { title: 'Buttons', href: '/docs/components/buttons' },
   { title: 'Cards', href: '/docs/components/cards' },
   { title: 'Flip Card', href: '/docs/components/flip-card' },
+  { title: 'Tooltip Cat', href: '/docs/components/tooltip-cat' },
   { title: 'Footer', href: '/docs/components/footer' },
   {
     title: 'Gradient File Upload',

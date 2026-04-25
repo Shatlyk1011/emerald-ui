@@ -1,7 +1,9 @@
 {
   "name": "keep-it-touch",
   "type": "registry:component",
-  "dependencies": ["lucide-react"],
+  "dependencies": [
+    "lucide-react"
+  ],
   "files": [
     {
       "type": "registry:component",

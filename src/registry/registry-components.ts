@@ -1,4 +1,7 @@
-import type { Registry } from './schema'
+import type { Registry } from './schema';
+
+
+
 
 export const component: Registry = [
   // ─── Buttons ──────────────────────────────────────────────────────────────
@@ -302,6 +305,16 @@ export const component: Registry = [
     files: [
       {
         path: 'components/emerald-ui-components/gsap-components/morphing-highlighter.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
+  {
+    name: 'tooltip-cat',
+    type: 'registry:component',
+    files: [
+      {
+        path: 'components/emerald-ui-components/tooltip-cat.tsx',
         type: 'registry:component',
       },
     ],

@@ -85,6 +85,9 @@ https://www.emerald-ui.com/docs/components/text
 **Text Reveal** - Line-by-line text reveal animation with smooth transitions on scroll
 https://www.emerald-ui.com/docs/components/text-reveal
 
+**Tooltip Cat** - A playful cat tooltip component that sleeps until hovered
+https://www.emerald-ui.com/docs/components/tooltip-cat
+
 ## Links
 
 - Website: https://www.emerald-ui.com

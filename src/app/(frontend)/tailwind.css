@@ -195,3 +195,39 @@
     }
   }
 }
+
+
+/* Cat styling */
+
+.sleep-symbol span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.sleep-symbol span:nth-child(2) {
+  animation-delay: 1s;
+  margin-left: -10px;
+}
+
+.sleep-symbol span:nth-child(3) {
+  animation-delay: 2s;
+  margin-left: -10px;
+}
+
+.cat:hover #righteyelid {
+  visibility: hidden;
+}
+
+.thecat #eyesdown {
+  visibility: hidden;
+}
+
+.cat:has(.content:hover) {
+  #righteyelid,
+  #lefteyelid,
+  .sleep-symbol {
+    visibility: hidden;
+  }
+  #eyesdown {
+    visibility: visible;
+  }
+}
