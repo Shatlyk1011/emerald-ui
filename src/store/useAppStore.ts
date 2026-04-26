@@ -1,11 +1,8 @@
-import { InspirationWebsite } from '@/payload-types'
-import { create } from 'zustand'
+import { InspirationWebsite } from '@/payload-types';
+import { create } from 'zustand';
 import { persist } from 'zustand/middleware'
 
 interface AppState {
-  generatedFiles: Record<string, string> | null
-  setGeneratedFiles: (files: Record<string, string>) => void
-
   // Site preview dialog state
   selectedSite: InspirationWebsite | null
   isDialogOpen: boolean
@@ -20,9 +17,6 @@ interface AppState {
 export const useAppStore = create<AppState>()(
   persist(
     (set) => ({
-      generatedFiles: null,
-      setGeneratedFiles: (files) => set({ generatedFiles: files }),
-
       // Site preview dialog actions
       selectedSite: null,
       isDialogOpen: false,
