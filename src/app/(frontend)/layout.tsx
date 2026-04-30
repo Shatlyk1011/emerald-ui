@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Toaster } from 'sonner'
 import { siteConfig } from '@/lib/site-config'
+import { TooltipProvider } from '@/components/ui/tooltip'
+import WhatsNewModal from '@/components/WhatsNewModal'
 import Analytics from '@/components/_providers/dynamicAnalitics'
 import { Providers as PostHogProvider } from '@/components/_providers/post-hog'
 import TanstackQueryProvider from '@/components/_providers/tanstack-query'
@@ -91,13 +93,16 @@ export default function RootLayout({
                 enableSystem
                 disableTransitionOnChange
               >
-                <TanstackQueryProvider>
-                  {children}
-                  {modal}
-                </TanstackQueryProvider>
+                <TooltipProvider>
+                  <TanstackQueryProvider>
+                    {children}
+                    {modal}
+                  </TanstackQueryProvider>
+                </TooltipProvider>
               </ThemeProvider>
             </RootProvider>
           </UserProvider>
+          <WhatsNewModal />
         </PostHogProvider>
         <Analytics />
 
