@@ -69,13 +69,13 @@ export interface Config {
   collections: {
     'inspiration-websites': InspirationWebsite;
     clients: Client;
-    'website-submissions': WebsiteSubmission;
     subscribers: Subscriber;
     newsletters: Newsletter;
     media: Media;
     categories: Category;
     'website-style': WebsiteStyle;
     adminUsers: AdminUser;
+    'website-submissions': WebsiteSubmission;
     reports: Report;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
@@ -86,13 +86,13 @@ export interface Config {
   collectionsSelect: {
     'inspiration-websites': InspirationWebsitesSelect<false> | InspirationWebsitesSelect<true>;
     clients: ClientsSelect<false> | ClientsSelect<true>;
-    'website-submissions': WebsiteSubmissionsSelect<false> | WebsiteSubmissionsSelect<true>;
     subscribers: SubscribersSelect<false> | SubscribersSelect<true>;
     newsletters: NewslettersSelect<false> | NewslettersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'website-style': WebsiteStyleSelect<false> | WebsiteStyleSelect<true>;
     adminUsers: AdminUsersSelect<false> | AdminUsersSelect<true>;
+    'website-submissions': WebsiteSubmissionsSelect<false> | WebsiteSubmissionsSelect<true>;
     reports: ReportsSelect<false> | ReportsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -236,28 +236,6 @@ export interface Client {
   createdAt: string;
 }
 /**
- * User-submitted website requests for the inspiration gallery. Review and approve submissions to add them to the main collection.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "website-submissions".
- */
-export interface WebsiteSubmission {
-  id: string;
-  name?: string | null;
-  email?: string | null;
-  /**
-   * URL of the website being submitted
-   */
-  websiteUrl: string;
-  message?: string | null;
-  /**
-   * Review status of the submission
-   */
-  status: 'pending' | 'approved' | 'rejected';
-  updatedAt: string;
-  createdAt: string;
-}
-/**
  * Manage newsletter subscribers. Users can subscribe publicly, but only admins can view and manage subscriptions.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -366,6 +344,28 @@ export interface AdminUser {
   password?: string | null;
 }
 /**
+ * User-submitted website requests for the inspiration gallery. Review and approve submissions to add them to the main collection.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "website-submissions".
+ */
+export interface WebsiteSubmission {
+  id: string;
+  name?: string | null;
+  email?: string | null;
+  /**
+   * URL of the website being submitted
+   */
+  websiteUrl: string;
+  message?: string | null;
+  /**
+   * Review status of the submission
+   */
+  status: 'pending' | 'approved' | 'rejected';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * User-reported issues or bugs from the website. Details and email provided by the user.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -415,10 +415,6 @@ export interface PayloadLockedDocument {
         value: string | Client;
       } | null)
     | ({
-        relationTo: 'website-submissions';
-        value: string | WebsiteSubmission;
-      } | null)
-    | ({
         relationTo: 'subscribers';
         value: string | Subscriber;
       } | null)
@@ -441,6 +437,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'adminUsers';
         value: string | AdminUser;
+      } | null)
+    | ({
+        relationTo: 'website-submissions';
+        value: string | WebsiteSubmission;
       } | null)
     | ({
         relationTo: 'reports';
@@ -527,19 +527,6 @@ export interface ClientsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "website-submissions_select".
- */
-export interface WebsiteSubmissionsSelect<T extends boolean = true> {
-  name?: T;
-  email?: T;
-  websiteUrl?: T;
-  message?: T;
-  status?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "subscribers_select".
  */
 export interface SubscribersSelect<T extends boolean = true> {
@@ -619,6 +606,19 @@ export interface AdminUsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "website-submissions_select".
+ */
+export interface WebsiteSubmissionsSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  websiteUrl?: T;
+  message?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -1,4 +1,7 @@
-import type { Registry } from './schema'
+import type { Registry } from './schema';
+
+
+
 
 export const component: Registry = [
   // ─── Buttons ──────────────────────────────────────────────────────────────
@@ -476,6 +479,22 @@ export const component: Registry = [
       },
       {
         path: 'hooks/use-click-outside.ts',
+        type: 'registry:hook',
+      },
+    ],
+  },
+  {
+    name: 'voice-record',
+    type: 'registry:component',
+    dependencies: ['lucide-react', 'sonner'],
+    registryDependencies: ['button', 'tooltip'],
+    files: [
+      {
+        path: 'components/emerald-ui-components/voice-record.tsx',
+        type: 'registry:component',
+      },
+      {
+        path: 'hooks/use-audio-recorder.ts',
         type: 'registry:hook',
       },
     ],

@@ -8,6 +8,7 @@
 
     "---Components---",
     "components/gradient-file-upload",
+    "components/voice-record",
     "components/3d-marquee",
     "components/animated-number",
     "components/animated-dropdown",
