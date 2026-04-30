@@ -8,7 +8,7 @@
  * @license: MIT
  * @website: https://emerald-ui.com
  */
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { Check, Mic, Pause, PlayCircle, RefreshCcw, Square } from 'lucide-react'
 import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
@@ -41,12 +41,12 @@ export default function VoiceRecord() {
     totalDuration,
   } = useAudioRecorder()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
     setIsUploading(true)
     // Simulate upload delay
     setTimeout(() => {
-      ;(setIsUploading(false), 1000)
+      setIsUploading(false), 1000
       toast.success('Successfully simulated upload', { position: 'top-center' })
     })
   }
