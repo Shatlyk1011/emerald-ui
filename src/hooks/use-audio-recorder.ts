@@ -20,7 +20,10 @@ export function useAudioRecorder() {
   useEffect(() => {
     return () => {
       if (timerIntervalRef.current) clearInterval(timerIntervalRef.current)
-      if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
+      if (
+        mediaRecorderRef.current &&
+        mediaRecorderRef.current.state === 'recording'
+      ) {
         mediaRecorderRef.current.stop()
       }
       if (audioUrl) URL.revokeObjectURL(audioUrl)
@@ -55,12 +58,17 @@ export function useAudioRecorder() {
       }, 1000)
     } catch (err) {
       console.error('Microphone error:', err)
-      alert('Could not access microphone. Please grant permission and try again.')
+      alert(
+        'Could not access microphone. Please grant permission and try again.'
+      )
     }
   }
 
   const stopRecording = () => {
-    if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
+    if (
+      mediaRecorderRef.current &&
+      mediaRecorderRef.current.state === 'recording'
+    ) {
       mediaRecorderRef.current.stop()
     }
     if (timerIntervalRef.current) {
@@ -92,7 +100,9 @@ export function useAudioRecorder() {
 
   const handleTimeUpdate = () => {
     if (audioRef.current) {
-      setPlaybackProgress((audioRef.current.currentTime / audioRef.current.duration) * 100)
+      setPlaybackProgress(
+        (audioRef.current.currentTime / audioRef.current.duration) * 100
+      )
     }
   }
 

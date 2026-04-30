@@ -9,19 +9,17 @@
  * @website: https://emerald-ui.com
  */
 import { useState } from 'react'
-import {
-  Check,
-  Mic,
-  Pause,
-  PlayCircle,
-  RefreshCcw,
-  Square,
-} from 'lucide-react'
+import { Check, Mic, Pause, PlayCircle, RefreshCcw, Square } from 'lucide-react'
+import { toast } from 'sonner'
 import { cn } from '@/lib/utils'
 import { useAudioRecorder } from '@/hooks/use-audio-recorder'
 import { Button } from '@/components/ui/button'
-import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '@/components/ui/tooltip'
-import { toast } from 'sonner'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+  TooltipProvider,
+} from '@/components/ui/tooltip'
 
 export default function VoiceRecord() {
   const [isUploading, setIsUploading] = useState(false)
@@ -48,15 +46,15 @@ export default function VoiceRecord() {
     setIsUploading(true)
     // Simulate upload delay
     setTimeout(() => {
-      setIsUploading(false), 1000
-      toast.success("Successfully simulated upload", {position:'top-center'})
+      ;(setIsUploading(false), 1000)
+      toast.success('Successfully simulated upload', { position: 'top-center' })
     })
   }
 
   return (
     // Note: You may want to wrap TooltipProvider on the root page
     <TooltipProvider>
-      <div className='relative mt-4 w-full transition-colors max-w-sm pt-20 pb-10 px-10 bg-card rounded-2xl border-2 border-transparent'>
+      <div className='bg-card relative mt-4 w-full max-w-sm rounded-2xl border-2 border-transparent px-10 pt-20 pb-10 transition-colors'>
         <form
           onSubmit={handleSubmit}
           className='relative mx-auto flex w-full max-w-xl min-w-66 flex-col items-center gap-2.5'
@@ -88,21 +86,28 @@ export default function VoiceRecord() {
                     <Mic className='text-foreground/90 size-6 transition duration-300 group-hover:-translate-y-0.5 group-hover:scale-105' />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>
-                  Click to start recording
-                </TooltipContent>
+                <TooltipContent>Click to start recording</TooltipContent>
               </Tooltip>
 
-              <span className='text-foreground/70 font-mono text-sm'>00:00</span>
+              <span className='text-foreground/70 font-mono text-sm'>
+                00:00
+              </span>
 
               {/* Static flat waveform */}
               <SoundWave isStatic />
 
               <div className='flex h-32 w-full flex-col justify-end gap-2'>
-                <p className='text-foreground/70 text-xs text-center'>Click to speak</p>
+                <p className='text-foreground/70 text-center text-xs'>
+                  Click to speak
+                </p>
 
-                <Button type='button' onClick={startRecording} size='lg' aria-label='Start recording'>
-                  <Mic className='size-4 mr-2' />
+                <Button
+                  type='button'
+                  onClick={startRecording}
+                  size='lg'
+                  aria-label='Start recording'
+                >
+                  <Mic className='mr-2 size-4' />
                   Start Recording
                 </Button>
               </div>
@@ -129,23 +134,31 @@ export default function VoiceRecord() {
                   </Button>
                 </TooltipTrigger>
 
-                <TooltipContent>
-                  Stop recording
-                </TooltipContent>
+                <TooltipContent>Stop recording</TooltipContent>
               </Tooltip>
 
               {/* Live timer */}
-              <span className='text-foreground/70 font-mono text-sm'>{formatTime(recordingTime)}</span>
+              <span className='text-foreground/70 font-mono text-sm'>
+                {formatTime(recordingTime)}
+              </span>
 
               {/* Animated waveform bars */}
               <SoundWave />
 
               <div className='flex h-32 w-full flex-col justify-end gap-2'>
-                <p className='text-foreground/70 text-xs text-center'>Listening…</p>
+                <p className='text-foreground/70 text-center text-xs'>
+                  Listening…
+                </p>
 
                 {/* Stop button */}
-                <Button type='button' size='lg' variant='destructive' onClick={stopRecording} className='w-full'>
-                  <Square className='size-4 mr-2' />
+                <Button
+                  type='button'
+                  size='lg'
+                  variant='destructive'
+                  onClick={stopRecording}
+                  className='w-full'
+                >
+                  <Square className='mr-2 size-4' />
                   Stop Recording
                 </Button>
               </div>
@@ -172,14 +185,13 @@ export default function VoiceRecord() {
                     )}
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>
-                  {isPlaying ? 'Pause' : 'Play'}
-                </TooltipContent>
+                <TooltipContent>{isPlaying ? 'Pause' : 'Play'}</TooltipContent>
               </Tooltip>
 
               {/* Playback timer */}
               <span className='text-foreground/70 font-mono text-sm'>
-                {formatTime((playbackProgress / 100) * totalDuration)} / {formatTime(totalDuration)}
+                {formatTime((playbackProgress / 100) * totalDuration)} /{' '}
+                {formatTime(totalDuration)}
               </span>
 
               <SoundWave
@@ -189,7 +201,9 @@ export default function VoiceRecord() {
               />
 
               <div className='flex h-32 w-full flex-col justify-end gap-2'>
-                <p className='text-foreground/70 h-4 text-xs text-center'>Recording ready</p>
+                <p className='text-foreground/70 h-4 text-center text-xs'>
+                  Recording ready
+                </p>
 
                 {/* Actions */}
                 <div className='flex w-full items-center justify-center gap-2'>
@@ -209,7 +223,7 @@ export default function VoiceRecord() {
                     type='submit'
                     disabled={isUploading}
                     size='lg'
-                    className='flex-1 min-w-30 items-center justify-center gap-1.5'
+                    className='min-w-30 flex-1 items-center justify-center gap-1.5'
                     aria-label='Use recording'
                   >
                     {isUploading ? (
@@ -246,13 +260,22 @@ const SoundWave = ({
 
   return (
     <div className={cn('flex h-3.5', containerClasses)}>
-      <div className={cn('relative flex h-full items-center justify-center gap-[3px] overflow-hidden', classes)}>
+      <div
+        className={cn(
+          'relative flex h-full items-center justify-center gap-[3px] overflow-hidden',
+          classes
+        )}
+      >
         {[...Array(BAR_COUNT)].map((_, i) => {
-          const animationName = isStatic ? 'none' : animations[i % animations.length]
+          const animationName = isStatic
+            ? 'none'
+            : animations[i % animations.length]
           return (
             <div
               key={i}
-              className={cn('bg-muted-foreground/70 h-[inherit] w-0.5 origin-bottom')}
+              className={cn(
+                'bg-muted-foreground/70 h-[inherit] w-0.5 origin-bottom'
+              )}
               style={{
                 height: '100%',
                 animationName,

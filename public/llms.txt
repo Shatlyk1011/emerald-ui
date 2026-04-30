@@ -46,9 +46,6 @@ https://www.emerald-ui.com/docs/components/hero
 **Image Trail** - Images cascade behind the cursor in a cinematic trail on mouse move
 https://www.emerald-ui.com/docs/components/image-trail
 
-**Installation** - Getting started with Emerald UI
-https://www.emerald-ui.com/docs/components/index
-
 **Interactive Team** - Interactive team component with hover effects
 https://www.emerald-ui.com/docs/components/interactive-team
 
@@ -87,6 +84,9 @@ https://www.emerald-ui.com/docs/components/text-reveal
 
 **Tooltip Cat** - A playful cat tooltip component that sleeps until hovered
 https://www.emerald-ui.com/docs/components/tooltip-cat
+
+**Voice Record** - A dynamic voice recorder component with waveform visualization
+https://www.emerald-ui.com/docs/components/voice-record
 
 ## Links
 
