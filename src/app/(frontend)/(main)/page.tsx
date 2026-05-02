@@ -6,13 +6,13 @@ import InspirationContent from '@/components/InspirationPage/InspirationContent'
 import InspirationPageSkeleton from '@/components/InspirationPage/InspirationPageSkeleton'
 
 const getCategories = unstable_cache(
-  async () => (await axios('/categories')).data.docs,
+  async () => (await axios('/categories?limit=12')).data.docs,
   ['categories'],
   { revalidate: 3600 * 24 } // 24 hours
 )
 
 const getStyles = unstable_cache(
-  async () => (await axios(`/website-style`)).data.docs,
+  async () => (await axios(`/website-style?limit=12`)).data.docs,
   ['website-style'],
   { revalidate: 3600 * 24 } // 24 hours
 )

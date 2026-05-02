@@ -107,37 +107,25 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                 Website Inspiration
               </Link>
             </li>
-            <li className='max-md:hidden'>
-              <DropdownMenu>
-                <DropdownMenuTrigger
-                  className={cn(
-                    'hover:text-foreground flex items-center gap-1 rounded-md px-3 py-2 text-nowrap transition ease-out focus:outline-none'
-                  )}
-                >
-                  <TextShimmer
+
+            <li>
+              <Link
+                href={motionComponents}
+                onClick={closeMenu}
+                className={cn(
+                  'hover:text-foreground min-h-10 rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'
+                )}
+              >
+                <TextShimmer
                     duration={7}
                     spread={15}
                     className='hover:text-foreground transition'
                   >
                     Components
-                  </TextShimmer>
-                  <ChevronDown className='ml-1 size-3 text-current transition-transform duration-300 group-data-[state=open]:rotate-180' />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align='end' className='w-48'>
-                  <DropdownMenuItem asChild>
-                    <Link href={motionComponents} className='cursor-pointer'>
-                      Motion Components
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link href={gsapComponents} className='cursor-pointer'>
-                      GSAP Components
-                    </Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                </TextShimmer>
+              </Link>
             </li>
+
             <li>
               <Link
                 href={motionComponents}
