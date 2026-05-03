@@ -77,6 +77,7 @@ export interface Config {
     adminUsers: AdminUser;
     'website-submissions': WebsiteSubmission;
     reports: Report;
+    'open-source-projects': OpenSourceProject;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -94,6 +95,7 @@ export interface Config {
     adminUsers: AdminUsersSelect<false> | AdminUsersSelect<true>;
     'website-submissions': WebsiteSubmissionsSelect<false> | WebsiteSubmissionsSelect<true>;
     reports: ReportsSelect<false> | ReportsSelect<true>;
+    'open-source-projects': OpenSourceProjectsSelect<false> | OpenSourceProjectsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -383,6 +385,24 @@ export interface Report {
   createdAt: string;
 }
 /**
+ * Manage open source components to be featured on the open-source page.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "open-source-projects".
+ */
+export interface OpenSourceProject {
+  id: string;
+  title: string;
+  description: string;
+  author: string;
+  linkToRepo: string;
+  linkToProject?: string | null;
+  type?: ('dashboard' | 'blog' | 'portfolio' | 'landing-page' | 'ecommerce' | 'other') | null;
+  ui?: ('shadcn' | 'mui' | 'chakra' | 'ant-design' | 'other') | null;
+  css?: ('tailwind' | 'scss' | 'bootstrap' | 'vanilla' | 'other') | null;
+  cms?: ('payload' | 'prisma' | 'supabase' | 'strapi' | 'sanity' | 'other') | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -445,6 +465,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'reports';
         value: string | Report;
+      } | null)
+    | ({
+        relationTo: 'open-source-projects';
+        value: string | OpenSourceProject;
       } | null)
     | ({
         relationTo: 'payload-kv';
@@ -630,6 +654,21 @@ export interface ReportsSelect<T extends boolean = true> {
   status?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "open-source-projects_select".
+ */
+export interface OpenSourceProjectsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  author?: T;
+  linkToRepo?: T;
+  linkToProject?: T;
+  type?: T;
+  ui?: T;
+  css?: T;
+  cms?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
