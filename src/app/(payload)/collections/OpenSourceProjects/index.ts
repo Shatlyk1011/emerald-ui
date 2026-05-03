@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload'
-import { admins } from '../../utils/admins'
 import { OPEN_SOURCE_FILTER_OPTIONS } from '../../../../constants/open-source'
+import { admins } from '../../utils/admins'
 
 const OpenSourceProjects: CollectionConfig = {
   slug: 'open-source-projects',
@@ -13,7 +13,8 @@ const OpenSourceProjects: CollectionConfig = {
 
   admin: {
     useAsTitle: 'title',
-    description: 'Manage open source components to be featured on the open-source page.',
+    description:
+      'Manage open source components to be featured on the open-source page.',
   },
 
   fields: [
@@ -103,8 +104,11 @@ const OpenSourceProjects: CollectionConfig = {
       },
     },
   ],
-  labels: { plural: 'Open Source Components', singular: 'Open Source Component' },
-  timestamps:false
+  labels: {
+    plural: 'Open Source Components',
+    singular: 'Open Source Component',
+  },
+  timestamps: false,
 }
 
 export default OpenSourceProjects

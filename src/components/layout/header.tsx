@@ -117,11 +117,11 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                 )}
               >
                 <TextShimmer
-                    duration={7}
-                    spread={15}
-                    className='hover:text-foreground transition'
-                  >
-                    Components
+                  duration={7}
+                  spread={15}
+                  className='hover:text-foreground transition'
+                >
+                  Components
                 </TextShimmer>
               </Link>
             </li>
@@ -137,7 +137,6 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                 Open Source
               </Link>
             </li> */}
-
 
             <li className='mx-1 opacity-50 max-md:hidden'>|</li>
             <li>

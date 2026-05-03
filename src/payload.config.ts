@@ -1,18 +1,18 @@
-import path from 'path';
-import { mongooseAdapter } from '@payloadcms/db-mongodb';
-import { fileURLToPath } from 'node:url';
-import { buildConfig } from 'payload';
-import sharp from 'sharp';
-import AdminUsers from './app/(payload)/collections/AdminUsers';
+import path from 'path'
+import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { fileURLToPath } from 'node:url'
+import { buildConfig } from 'payload'
+import sharp from 'sharp'
+import AdminUsers from './app/(payload)/collections/AdminUsers'
 // collections
-import Categories from './app/(payload)/collections/Categories';
-import Clients from './app/(payload)/collections/Clients';
-import InspirationWebsites from './app/(payload)/collections/InspirationWebsites';
-import Media from './app/(payload)/collections/Media';
-import Newsletters from './app/(payload)/collections/Newsletters';
-import OpenSourceProjects from './app/(payload)/collections/OpenSourceProjects';
-import ProjectReports from './app/(payload)/collections/ProjectReports';
-import Subscribers from './app/(payload)/collections/Subscribers';
+import Categories from './app/(payload)/collections/Categories'
+import Clients from './app/(payload)/collections/Clients'
+import InspirationWebsites from './app/(payload)/collections/InspirationWebsites'
+import Media from './app/(payload)/collections/Media'
+import Newsletters from './app/(payload)/collections/Newsletters'
+import OpenSourceProjects from './app/(payload)/collections/OpenSourceProjects'
+import ProjectReports from './app/(payload)/collections/ProjectReports'
+import Subscribers from './app/(payload)/collections/Subscribers'
 import WebsiteStyle from './app/(payload)/collections/WebsiteStyle'
 import WebsiteSubmissions from './app/(payload)/collections/WebsiteSubmissions'
 

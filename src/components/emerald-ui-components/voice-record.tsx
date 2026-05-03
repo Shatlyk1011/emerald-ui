@@ -46,7 +46,7 @@ export default function VoiceRecord() {
     setIsUploading(true)
     // Simulate upload delay
     setTimeout(() => {
-      setIsUploading(false), 1000
+      ;(setIsUploading(false), 1000)
       toast.success('Successfully simulated upload', { position: 'top-center' })
     })
   }
