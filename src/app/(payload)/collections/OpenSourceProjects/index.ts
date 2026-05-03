@@ -53,6 +53,16 @@ const OpenSourceProjects: CollectionConfig = {
       label: 'Banner image (R2)',
       type: 'text',
       required: false,
+      admin: {
+        components: {
+          afterInput: [
+            {
+              path: '@/app/(payload)/components/R2ImageUploadField#R2ImageUploadField',
+              exportName: 'R2ImageUploadField',
+            },
+          ],
+        },
+      },
     },
     {
       name: 'type',
