@@ -397,10 +397,12 @@ export interface OpenSourceProject {
   author: string;
   linkToRepo: string;
   linkToProject?: string | null;
+  imgUrl?: string | null;
   type?: ('dashboard' | 'blog' | 'portfolio' | 'landing-page' | 'ecommerce' | 'other') | null;
   ui?: ('shadcn' | 'mui' | 'chakra' | 'ant-design' | 'other') | null;
   css?: ('tailwind' | 'scss' | 'bootstrap' | 'vanilla' | 'other') | null;
   cms?: ('payload' | 'prisma' | 'supabase' | 'strapi' | 'sanity' | 'other') | null;
+  order?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -665,10 +667,12 @@ export interface OpenSourceProjectsSelect<T extends boolean = true> {
   author?: T;
   linkToRepo?: T;
   linkToProject?: T;
+  imgUrl?: T;
   type?: T;
   ui?: T;
   css?: T;
   cms?: T;
+  order?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

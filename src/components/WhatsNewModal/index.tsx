@@ -43,10 +43,10 @@ const WhatsNewModal = () => {
       <Tooltip>
         <TooltipTrigger
           asChild
-          className='bg-foreground text-background fixed right-10 bottom-10 rounded-full p-4'
+          className='bg-foreground text-background fixed right-10 bottom-10 rounded-full p-2'
         >
           <DialogTrigger>
-            <Info className='size-8' />
+            <Info className='size-6' />
           </DialogTrigger>
         </TooltipTrigger>
 

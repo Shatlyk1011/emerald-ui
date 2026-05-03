@@ -38,10 +38,10 @@ const SubmitIssueDialog = dynamic(
   }
 )
 
-const { home, motionComponents, gsapComponents } = {
+const { home, motionComponents, openSource } = {
   home: '/',
   motionComponents: '/docs',
-  gsapComponents: '/docs/gsap',
+  openSource: '/open-source',
 }
 
 interface Props {
@@ -126,26 +126,19 @@ const Header: FC<Props> = ({ isFumadocs }) => {
               </Link>
             </li>
 
-            <li>
+            {/* <li>
               <Link
-                href={motionComponents}
+                href={openSource}
+                onClick={closeMenu}
                 className={cn(
-                  'hover:text-foreground hidden rounded-md px-3 py-2 text-nowrap transition ease-out max-md:inline max-sm:px-2'
+                  'hover:text-foreground min-h-10 rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'
                 )}
               >
-                Motion Components
+                Open Source
               </Link>
-            </li>
-            <li>
-              <Link
-                href={gsapComponents}
-                className={cn(
-                  'hover:text-foreground hidden rounded-md px-3 py-2 text-nowrap transition ease-out max-md:inline max-sm:px-2'
-                )}
-              >
-                Gsap Components
-              </Link>
-            </li>
+            </li> */}
+
+
             <li className='mx-1 opacity-50 max-md:hidden'>|</li>
             <li>
               <button
