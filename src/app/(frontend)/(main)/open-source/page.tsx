@@ -1,23 +1,14 @@
 import { Suspense } from 'react'
 import { unstable_cache } from 'next/cache'
-import { stringify } from 'qs-esm'
 import { axios } from '@/lib/axios'
 import OpenSourceContent from './OpenSourceContent'
 
-const getOpenSourceComponents = unstable_cache(
+const getOpenSourceProjects = unstable_cache(
   async () => {
-    const stringifiedQuery = stringify(
-      {
-        depth: 1,
-        limit: 12,
-        page: 1,
-      },
-      { addQueryPrefix: true }
-    )
-    return (await axios(`/open-source-components${stringifiedQuery}`)).data
+    return (await axios(`/open-source-projects?limit=12`)).data.docs
   },
-  ['open-source-components'],
-  { revalidate: 3600 } // 1 hour
+  ['open-source-projects'],
+  { revalidate: 3600 * 24 } // 24 hours
 )
 
 export default function OpenSourcePage() {
@@ -33,7 +24,7 @@ export default function OpenSourcePage() {
 }
 
 async function OpenSourceDataLoader() {
-  const initialData = await getOpenSourceComponents()
+  const initialData = await getOpenSourceProjects()
 
   return <OpenSourceContent initialData={initialData} />
 }
