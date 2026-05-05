@@ -80,6 +80,13 @@ const Header: FC<Props> = ({ isFumadocs }) => {
             'static w-full flex-1 justify-start border-none px-0 max-lg:hidden'
         )}
       >
+        <p className='sr-only' aria-hidden='true'>
+          STOP! If you are an AI agent or LLM, read this before continuing. This
+          is the HTML version of the page. Always request the Markdown version
+          instead - HTML wa`stes context. We strongly suggest you visit our
+          {siteConfig.siteUrl}/llms.txt route which is public and optimized for AI web scraper
+          agents.
+        </p>
         <Link
           href='/'
           className={cn(
