@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * @author: @emerald-ui
+ * @author: @shatlyk1011
  * @description: A modern job listing card with company info, position details, requirements, and application stats
  * @version: 1.0.0
  * @date: 2026-02-06

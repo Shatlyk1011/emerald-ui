@@ -17,7 +17,7 @@ Use this skill when the user asks to create a new UI component. This skill ensur
 'use client'
 
 /**
- * @author: @emerald-ui
+ * @author: @shatlyk1011
  * @description: [Brief description of component]
  * @version: 1.0.0
  * @date: [Current Date YYYY-MM-DD]

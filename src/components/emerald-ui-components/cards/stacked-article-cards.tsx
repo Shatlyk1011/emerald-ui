@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * @author: @emerald-ui
+ * @author: @shatlyk1011
  * @description: Stacked article cards that expand on click with smooth transitions
  * @version: 1.1.0
  * @date: 2026-02-17

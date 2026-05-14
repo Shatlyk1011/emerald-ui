@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * @author: @emerald-ui
+ * @author: @shatlyk1011
  * @description: Simple Pricing Card Component
  * @version: 1.0.0
  * @date: 2026-02-01

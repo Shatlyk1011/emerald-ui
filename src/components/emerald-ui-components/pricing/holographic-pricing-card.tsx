@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * @author: @emerald-ui
+ * @author: @shatlyk1011
  * @description: Holographic Pricing Card with RGB chromatic aberration
  * @version: 1.0.0
  * @date: 2026-01-30

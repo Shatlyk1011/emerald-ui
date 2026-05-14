@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * @author: @emerald-ui
+ * @author: @shatlyk1011
  * @description: Colorful Gradient Button Component - A button with animated gradient background effects
  * @version: 1.0.0
  * @date: 2026-01-30

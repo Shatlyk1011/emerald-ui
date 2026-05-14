@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * @author: @emerald-ui
+ * @author: @shatlyk1011
  * @description: A 3D marquee component that rotates images in a 3D space.
  * @version: 1.0.0
  * @date: 2026-02-12

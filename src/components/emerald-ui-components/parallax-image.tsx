@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * @author: @emerald-ui
+ * @author: @shatlyk1011
  * @description: Parallax image that smoothly translates on scroll using motion/react
  * @version: 1.0.0
  * @date: 2026-02-19

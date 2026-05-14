@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * @author: @emerald-ui
+ * @author: @shatlyk1011
  * @description: Editorial-style team member card with overlapping layers and motion
  * @version: 2.0.0
  * @date: 2026-02-19

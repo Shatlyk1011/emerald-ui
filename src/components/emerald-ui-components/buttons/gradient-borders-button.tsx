@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * @author: @emerald-ui
+ * @author: @shatlyk1011
  * @description: Gradient Borders Button Component - A button with animated gradient borders
  * @version: 1.0.0
  * @date: 2026-02-11

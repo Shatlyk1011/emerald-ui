@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * @author: @emerald-ui
+ * @author: @shatlyk1011
  * @description: Diagonal Swipe Button Component - A button with a diagonal swipe hover effect
  * @version: 1.0.0
  * @date: 2026-02-11

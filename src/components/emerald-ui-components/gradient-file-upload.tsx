@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * @author: @emerald-ui
+ * @author: @shatlyk1011
  * @description: A modern file upload input with drag-and-drop, animated gradient border, and AI-style prompt textarea.
  * @version: 1.0.0
  * @date: 2026-02-17

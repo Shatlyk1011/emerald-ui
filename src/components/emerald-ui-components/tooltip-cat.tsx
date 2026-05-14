@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * @author: @emerald-ui
+ * @author: @shatlyk1011
  * @description: A playful cat tooltip component with CSS sleep animations
  * @version: 1.0.0
  * @date: 2026-04-25

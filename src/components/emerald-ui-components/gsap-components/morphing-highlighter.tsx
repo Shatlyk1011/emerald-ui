@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * @author: @emerald-ui
+ * @author: @shatlyk1011
  * @description: SplitText character hover animation and a morphing link highlighter
  * @version: 1.0.0
  * @date: 2026-03-25

@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * @author: @emerald-ui
+ * @author: @shatlyk1011
  * @description: Animated Dropdown Component with smooth transitions and click-outside behavior
  * @version: 1.0.0
  * @date: 2026-02-03

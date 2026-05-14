@@ -1,7 +1,7 @@
 'use client'
 
 /**
- * @author: @emerald-ui
+ * @author: @shatlyk1011
  * @description: Sticky Work Section with pinned header text that stays behind scrolling items
  * @version: 1.0.0
  * @date: 2026-03-17
