@@ -14,7 +14,6 @@ import OpenSourceProjects from './app/(payload)/collections/OpenSourceProjects'
 import ProjectReports from './app/(payload)/collections/ProjectReports'
 import Subscribers from './app/(payload)/collections/Subscribers'
 import WebsiteStyle from './app/(payload)/collections/WebsiteStyle'
-import WebsiteSubmissions from './app/(payload)/collections/WebsiteSubmissions'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -41,7 +40,6 @@ export default buildConfig({
     Categories,
     WebsiteStyle,
     AdminUsers,
-    WebsiteSubmissions,
     ProjectReports,
     OpenSourceProjects,
   ],

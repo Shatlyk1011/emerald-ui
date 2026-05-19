@@ -24,13 +24,6 @@ import ThemeToggle from '@/components/ui/theme-toggle'
 import Logo from '../ui/logo'
 import TextShimmer from '../ui/text-shimmer'
 
-const SubmitWebsiteDialog = dynamic(
-  () => import('../landing/SubmitWebsiteDialog'),
-  {
-    ssr: false,
-  }
-)
-
 const SubmitIssueDialog = dynamic(
   () => import('../landing/SubmitIssueDialog'),
   {
@@ -55,7 +48,6 @@ const Header: FC<Props> = ({ isFumadocs }) => {
   const { user, isLoading, signOut } = useUser()
 
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isDialogOpen, setDialogOpen] = useState(false)
   const [isIssueDialogOpen, setIssueDialogOpen] = useState(false)
   const [menu, setMenu] = useState(false)
 
@@ -145,18 +137,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
               </Link>
             </li> */}
 
-            <li className='mx-1 opacity-50 max-md:hidden'>|</li>
-            <li>
-              <button
-                onClick={() => {
-                  setDialogOpen(true)
-                  closeMenu()
-                }}
-                className='hover:text-foreground rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'
-              >
-                <span>Submit a website</span>
-              </button>
-            </li>
+
           </ul>
         </nav>
 
@@ -248,12 +229,6 @@ const Header: FC<Props> = ({ isFumadocs }) => {
       </header>
 
       <Suspense fallback={'loading...'}>
-        {isDialogOpen && (
-          <SubmitWebsiteDialog
-            open={isDialogOpen}
-            onOpenChange={setDialogOpen}
-          />
-        )}
         {isIssueDialogOpen && (
           <SubmitIssueDialog
             open={isIssueDialogOpen}
