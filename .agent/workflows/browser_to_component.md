@@ -6,7 +6,7 @@ description: Convert a browser snippet (HTML/CSS) into a React component
    - **Read and apply the `Frontend Design` skill** (`.agent/skills/design-guides/SKILL.MD`) to guide the component's aesthetic direction, color choices, typography, spatial composition, and motion design.
    - Analyze the provided HTML/CSS snippet to understand its structure and visual style.
    - Generate a suitable component name (kebab-case).
-   - Determine if `motion/react` is needed for animations (default to yes if animations are present or requested).
+   - Determine if `motion/react` is needed for animations.
 
 2. **Component Implementation**
    - Create the component file in `src/components/emerald-ui-components/[kebab-case-name].tsx`.
