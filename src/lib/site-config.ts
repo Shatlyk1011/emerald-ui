@@ -1,4 +1,4 @@
-const totalComponents = 50
+const totalComponents = 52
 
 export const siteConfig = {
   name: 'Emerald UI - Inspiration Websites & Components',

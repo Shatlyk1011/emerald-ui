@@ -88,17 +88,7 @@ export default function SubscribeInput() {
                   transition={{ type: 'spring', bounce: 0.3, duration: 0.6 }}
                   className='-tracking-one text-muted-foreground absolute z-1 flex items-center gap-1 text-[13px] font-medium text-nowrap'
                 >
-                  Subscribe to get hand-picked updates
-                  <button type='button' className='group'>
-                    <Film className='size-4' />
-
-                    <img
-                      loading='lazy'
-                      fetchPriority='low'
-                      className='invisible absolute top-8 left-0 w-40 rounded-lg opacity-0 transition delay-150 select-none group-hover:visible group-hover:opacity-100 group-focus:visible group-focus:opacity-100'
-                      src='/cat.gif'
-                    ></img>
-                  </button>
+                    Subscribe to get hand-picked updates
                 </motion.label>
                 <input
                   id='sub'

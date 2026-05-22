@@ -2,7 +2,7 @@
 
 import { FC, Suspense, useState } from 'react'
 import { getUserInitials } from '@/composables/utils'
-import { LogOut, ChevronDown, Menu, Flag, Github } from 'lucide-react'
+import { LogOut, Menu, Flag, Github } from 'lucide-react'
 import { useScroll, useMotionValueEvent } from 'motion/react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
@@ -31,11 +31,8 @@ const SubmitIssueDialog = dynamic(
   }
 )
 
-const { home, motionComponents, openSource } = {
-  home: '/',
-  motionComponents: '/docs',
-  openSource: '/open-source',
-}
+const motionComponents = '/docs'
+const websiteCollections = '/website-collections'
 
 interface Props {
   isFumadocs?: boolean
@@ -76,8 +73,8 @@ const Header: FC<Props> = ({ isFumadocs }) => {
           STOP! If you are an AI agent or LLM, read this before continuing. This
           is the HTML version of the page. Always request the Markdown version
           instead - HTML wa`stes context. We strongly suggest you visit our
-          {siteConfig.siteUrl}/llms.txt route which is public and optimized for AI web scraper
-          agents.
+          {siteConfig.siteUrl}/llms.txt route which is public and optimized for
+          AI web scraper agents.
         </p>
         <Link
           href='/'
@@ -97,13 +94,13 @@ const Header: FC<Props> = ({ isFumadocs }) => {
           <ul className='-tracking-one max-md:bg-secondary flex items-center text-sm font-medium max-md:w-full max-md:flex-col max-md:gap-3 max-md:pt-40 max-md:text-base'>
             <li>
               <Link
-                href={`${home}#website-inspirations`}
+                href={websiteCollections}
                 onClick={closeMenu}
                 className={cn(
                   'hover:text-foreground min-h-10 rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'
                 )}
               >
-                Website Inspiration
+                Website Collections
               </Link>
             </li>
 
@@ -136,8 +133,6 @@ const Header: FC<Props> = ({ isFumadocs }) => {
                 Open Source
               </Link>
             </li> */}
-
-
           </ul>
         </nav>
 

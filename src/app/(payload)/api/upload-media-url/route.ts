@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Upload to Supabase
+    // Upload to R2
     const publicUrl = await uploadMedia(buffer, filename, contentType, bucket)
 
     return NextResponse.json({
