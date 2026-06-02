@@ -261,6 +261,17 @@ export const component: Registry = [
     ],
   },
   {
+    name: 'title-mask-effect',
+    type: 'registry:component',
+    dependencies: ['gsap', '@gsap/react'],
+    files: [
+      {
+        path: 'components/emerald-ui-components/gsap-components/title-mask-effect.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
+  {
     name: 'gsap-projects-section',
     type: 'registry:component',
     dependencies: ['gsap', '@gsap/react', 'lucide-react'],

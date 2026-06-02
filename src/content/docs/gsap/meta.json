@@ -17,6 +17,7 @@
     "components/morphing-highlighter",
 
     "---Text---",
+    "components/title-mask-effect",
     "components/text-reveal",
     "components/color-text-reveal",
     "components/scroll-text-reveal",
