@@ -14,7 +14,6 @@ export default function Footer() {
               classes='text-card-foreground items-start'
               logoColor='text-primary'
             />
-
           </div>
           <div className='text-muted-foreground hover:text-foreground mb-4 self-end text-sm font-medium transition'>
             <a

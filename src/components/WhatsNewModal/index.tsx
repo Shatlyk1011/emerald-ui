@@ -16,8 +16,7 @@ const UPDATES = [
     id: '4',
     date: '2026-06-02',
     title: 'Site Update',
-    description:
-      'Updated main page UI.',
+    description: 'Updated main page UI.',
   },
   {
     id: '3',

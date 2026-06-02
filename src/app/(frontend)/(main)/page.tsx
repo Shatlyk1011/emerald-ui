@@ -29,8 +29,6 @@ const features = [
     description:
       'Open a component, copy the install command, and drop the files into your app.',
   },
-
-
 ]
 
 export default function Home() {
@@ -75,7 +73,6 @@ export default function Home() {
               Website Collections
             </Link>
           </div>
-
         </div>
       </section>
 

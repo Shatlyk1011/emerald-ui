@@ -23,6 +23,7 @@
 ## Skills
 
 Use the `import-gsap-animation` skill whenever asked to:
+
 - import animations
 - integrate GSAP/Motion demos
 - convert HTML/CSS/JS animations into React components

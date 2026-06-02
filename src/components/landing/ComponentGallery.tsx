@@ -17,7 +17,7 @@ export default function ComponentGallery() {
     >
       <div className='mb-8 flex items-end justify-between gap-8 max-md:flex-col max-md:items-start'>
         <div>
-          <p className='text-muted-foreground mb-2 text-sm font-medium tracking-four uppercase'>
+          <p className='text-muted-foreground tracking-four mb-2 text-sm font-medium uppercase'>
             Component gallery
           </p>
           <h2 className='max-w-3xl text-4xl font-semibold tracking-[-0.06em] text-balance max-sm:text-3xl'>
@@ -45,7 +45,7 @@ export default function ComponentGallery() {
         <BentoCard
           eyebrow='Profile'
           title='Creator card'
-          className='col-span-3 row-span-2 max-lg:col-span-6 max-md:col-span-12 max-lg:row-span-3 max-md:row-span-1'
+          className='col-span-3 row-span-2 max-lg:col-span-6 max-lg:row-span-3 max-md:col-span-12 max-md:row-span-1'
           contentClassName='flex items-center justify-center overflow-hidden'
         >
           <div className='scale-[0.68] max-lg:scale-[0.72] max-sm:scale-[0.68]'>
@@ -61,7 +61,7 @@ export default function ComponentGallery() {
         <BentoCard
           eyebrow='Commerce'
           title='Checkout flow'
-          className='col-span-3 row-span-2 max-lg:col-span-6 max-md:col-span-12 max-lg:row-span-3 max-md:row-span-1'
+          className='col-span-3 row-span-2 max-lg:col-span-6 max-lg:row-span-3 max-md:col-span-12 max-md:row-span-1'
           contentClassName='flex items-center justify-center overflow-hidden'
         >
           <div className='w-full max-w-sm scale-[0.78] max-lg:scale-[0.84] max-sm:scale-[0.8]'>

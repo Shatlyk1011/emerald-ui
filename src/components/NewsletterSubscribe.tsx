@@ -88,7 +88,7 @@ export default function SubscribeInput() {
                   transition={{ type: 'spring', bounce: 0.3, duration: 0.6 }}
                   className='-tracking-one text-muted-foreground absolute z-1 flex items-center gap-1 text-[13px] font-medium text-nowrap'
                 >
-                    Subscribe to get hand-picked updates
+                  Subscribe to get hand-picked updates
                 </motion.label>
                 <input
                   id='sub'
