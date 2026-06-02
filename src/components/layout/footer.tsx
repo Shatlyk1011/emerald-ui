@@ -1,5 +1,4 @@
 import { Github } from 'lucide-react'
-import { siteConfig } from '@/lib/site-config'
 import Logo from '../ui/logo'
 import Separator from '../ui/separator'
 import { GsapComponents, MotionComponents, UsefulLinks } from './footerLinks'
@@ -15,17 +14,7 @@ export default function Footer() {
               classes='text-card-foreground items-start'
               logoColor='text-primary'
             />
-            <span className='-mt-2 ml-11.5 opacity-80'>
-              Build by{' '}
-              <a
-                href={siteConfig.githubRepo}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='hover:text-foreground'
-              >
-                Shatlyk
-              </a>
-            </span>
+
           </div>
           <div className='text-muted-foreground hover:text-foreground mb-4 self-end text-sm font-medium transition'>
             <a

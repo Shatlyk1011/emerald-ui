@@ -13,6 +13,13 @@ import { Tooltip, TooltipContent } from '../ui/tooltip'
 
 const UPDATES = [
   {
+    id: '4',
+    date: '2026-06-02',
+    title: 'Site Update',
+    description:
+      'Updated main page UI.',
+  },
+  {
     id: '3',
     date: '2026-04-30',
     title: 'Voice Record Components',

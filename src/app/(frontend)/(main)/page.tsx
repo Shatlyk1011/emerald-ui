@@ -12,16 +12,16 @@ export const metadata: Metadata = {
 
 const features = [
   {
-    icon: Blocks,
-    title: 'Copy-ready JSX',
-    description:
-      'Each component ships as editable React code instead of a black-box package.',
-  },
-  {
     icon: Layers3,
     title: 'Built for collections',
     description:
       'Browse buttons, cards, text effects, forms, GSAP pieces, and full sections.',
+  },
+  {
+    icon: Blocks,
+    title: 'Copy-ready JSX',
+    description:
+      'Each component ships as editable React code instead of a black-box package.',
   },
   {
     icon: Code2,
@@ -29,6 +29,8 @@ const features = [
     description:
       'Open a component, copy the install command, and drop the files into your app.',
   },
+
+
 ]
 
 export default function Home() {
@@ -40,7 +42,7 @@ export default function Home() {
         <div className='absolute right-0 bottom-80 h-96 w-96 rounded-full bg-amber-300/12 blur-3xl' />
       </div>
 
-      <section className='mx-auto flex max-w-400 flex-col items-center px-10 pt-24 pb-16 text-center max-sm:px-4 max-sm:pt-14'>
+      <section className='mx-auto flex max-w-400 flex-col items-center px-10 py-16 text-center max-sm:px-4 max-sm:pt-14'>
         <div className='flex min-h-[520px] max-w-5xl flex-col items-center justify-center max-lg:min-h-[440px] max-sm:min-h-[400px]'>
           <div className='border-border/60 bg-card/70 mb-6 flex w-fit items-center gap-2 rounded-full border px-3 py-1.5 text-sm shadow-sm backdrop-blur'>
             <Sparkles className='size-4 text-emerald-500' />
