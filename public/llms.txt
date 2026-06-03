@@ -61,6 +61,9 @@ https://www.emerald-ui.com/docs/components/morphing-highlighter
 **Parallax Image** - Smooth scroll-driven parallax image effect powered by motion/react
 https://www.emerald-ui.com/docs/components/parallax-image
 
+**Perspective Story Card** - Cursor-reactive perspective card layered over oversized editorial typography
+https://www.emerald-ui.com/docs/components/perspective-story-card
+
 **Pricing** - Explore high quality pricing card components. Dark and Light modes available.
 https://www.emerald-ui.com/docs/components/pricing
 
@@ -81,6 +84,9 @@ https://www.emerald-ui.com/docs/components/text
 
 **Text Reveal** - Line-by-line text reveal animation with smooth transitions on scroll
 https://www.emerald-ui.com/docs/components/text-reveal
+
+**Title Mask Effect** - Scroll-scrubbed headline mask animation with stacked word reveals
+https://www.emerald-ui.com/docs/components/title-mask-effect
 
 **Tooltip Cat** - A playful cat tooltip component that sleeps until hovered
 https://www.emerald-ui.com/docs/components/tooltip-cat
