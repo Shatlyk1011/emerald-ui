@@ -43,5 +43,6 @@ export const UsefulLinks = [
   { title: 'Home', href: '/' },
   { title: 'Motion Components', href: '/docs' },
   { title: 'GSAP Components', href: '/docs' },
+  { title: 'Privacy Policy', href: '/privacy-policy' },
   { title: 'Github', href: 'https://github.com/shatlyk1011/emerald-ui' },
 ]

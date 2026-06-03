@@ -267,12 +267,12 @@ export default function SignInPage({
             Terms of Service
           </a>{' '}
           and{' '}
-          <a
-            href='#'
+          <Link
+            href='/privacy-policy'
             className='text-blue-600 transition-colors hover:text-blue-500/80 dark:text-blue-400'
           >
             Privacy Policy
-          </a>
+          </Link>
         </p>
       </div>
     </div>

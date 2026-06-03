@@ -4,12 +4,14 @@ import { source } from '@/lib/source'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const currentDate = new Date()
-  const routes = ['', '/docs'].map((route) => ({
-    url: `${siteConfig.siteUrl}${route}`,
-    lastModified: currentDate,
-    changeFrequency: 'daily' as const,
-    priority: 1,
-  }))
+  const routes = ['', '/docs', '/privacy-policy', '/website-collections'].map(
+    (route) => ({
+      url: `${siteConfig.siteUrl}${route}`,
+      lastModified: currentDate,
+      changeFrequency: 'daily' as const,
+      priority: 1,
+    })
+  )
 
   // does koko uses this strategy?
   const docsUrls: MetadataRoute.Sitemap = source

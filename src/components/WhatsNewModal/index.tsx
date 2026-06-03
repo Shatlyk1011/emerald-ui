@@ -13,6 +13,13 @@ import { Tooltip, TooltipContent } from '../ui/tooltip'
 
 const UPDATES = [
   {
+    id: '5',
+    date: '2026-06-03',
+    title: 'Add Privacy Page',
+    description: 'Add privacy policy page with github link',
+    link: '/privacy-policy',
+  },
+  {
     id: '4',
     date: '2026-06-02',
     title: 'Site Update',
