@@ -142,7 +142,7 @@ export default function PrivacyPolicyPage() {
               <Link
                 href={siteConfig.githubRepo}
                 target='_blank'
-                rel="noopener"
+                rel='noopener'
                 className='text-emerald-600 underline-offset-4 hover:underline dark:text-emerald-400'
               >
                 {siteConfig.githubRepo}

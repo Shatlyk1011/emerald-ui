@@ -63,9 +63,8 @@ export default function TitleMaskEffect() {
   return (
     <section
       ref={sectionRef}
-      className='relative flex min-h-svh w-full flex-col items-center gap-[8vw] overflow-hidden bg-[#10100e] px-4 pt-[50vh] max-md:pt-[30vh] pb-[10vw] text-[#f5f0e8]'
+      className='relative flex min-h-svh w-full flex-col items-center gap-[8vw] overflow-hidden bg-[#10100e] px-4 pt-[50vh] pb-[10vw] text-[#f5f0e8] max-md:pt-[30vh]'
     >
-
       <h2 className='relative z-10 text-center text-[clamp(2rem,5.5vw,6.5rem)] leading-[1.15] font-black tracking-[-0.06em] text-balance uppercase'>
         {titleLines.map((line, lineIndex) => (
           <span key={line.join('-')} className='block'>
@@ -83,7 +82,6 @@ export default function TitleMaskEffect() {
           </span>
         ))}
       </h2>
-
     </section>
   )
 }

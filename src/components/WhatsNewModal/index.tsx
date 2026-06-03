@@ -13,6 +13,14 @@ import { Tooltip, TooltipContent } from '../ui/tooltip'
 
 const UPDATES = [
   {
+    id: '6',
+    date: '2026-06-04',
+    title: 'Title Mask Effect',
+    description:
+      'A scroll-triggered, smoothly animated title mask effect using GSAP and ScrollTrigger',
+    link: '/docs/gsap/components/title-mask-effect',
+  },
+  {
     id: '5',
     date: '2026-06-03',
     title: 'Add Privacy Page',
@@ -76,7 +84,7 @@ const WhatsNewModal = () => {
             <ul className='max-h-160 flex-1 space-y-10 p-5'>
               {UPDATES.map((update) => (
                 <li
-                  key={update.id}
+                  key={update.title}
                   className='border-muted relative border-l-2 pl-4'
                 >
                   <span className='bg-foreground absolute top-1 -left-[5px] h-2 w-2 rounded-full' />
