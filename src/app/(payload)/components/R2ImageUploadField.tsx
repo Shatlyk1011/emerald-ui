@@ -244,12 +244,14 @@ export const R2ImageUploadField = () => {
               }}
               onMouseEnter={(e) => {
                 if (!deleting) {
-                  e.currentTarget.style.backgroundColor = 'var(--theme-error-100)'
+                  e.currentTarget.style.backgroundColor =
+                    'var(--theme-error-100)'
                 }
               }}
               onMouseLeave={(e) => {
                 if (!deleting) {
-                  e.currentTarget.style.backgroundColor = 'var(--theme-error-50)'
+                  e.currentTarget.style.backgroundColor =
+                    'var(--theme-error-50)'
                 }
               }}
             >
@@ -293,6 +295,5 @@ export const R2ImageUploadField = () => {
         </div>
       )}
     </div>
-
   )
 }

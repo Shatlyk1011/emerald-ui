@@ -1,4 +1,3 @@
-
 export default function OpenSourcePageSkeleton() {
   return (
     <div className='flex animate-pulse flex-col gap-12'>

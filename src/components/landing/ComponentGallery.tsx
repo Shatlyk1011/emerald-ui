@@ -3,13 +3,9 @@ import { Sparkles } from 'lucide-react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import ThreeDMarquee from '@/components/emerald-ui-components/3d-marquee'
-import AnimatedDropdown from '@/components/emerald-ui-components/animated-dropdown'
 import AnimatedInput from '@/components/emerald-ui-components/animated-input'
 import CheckoutCard from '@/components/emerald-ui-components/cards/checkout-card'
 import ProfileCard from '@/components/emerald-ui-components/cards/profile-card'
-import StackedArticleCards from '@/components/emerald-ui-components/cards/stacked-article-cards'
-import FlipCard from '@/components/emerald-ui-components/flip-card'
-import SimplePricingCardSection from '@/components/emerald-ui-components/pricing/simple-pricing-card'
 import SubscribeInput from '@/components/emerald-ui-components/subscribe-input'
 import TypingEffect from '@/components/emerald-ui-components/texts/text-typing-effect'
 
@@ -21,11 +17,11 @@ export default function ComponentGallery() {
     >
       <div className='mb-8 flex items-end justify-between gap-8 max-md:flex-col max-md:items-start'>
         <div>
-          <p className='text-muted-foreground mb-2 text-sm font-medium tracking-[0.28em] uppercase'>
+          <p className='text-muted-foreground tracking-four mb-2 text-sm font-medium uppercase'>
             Component gallery
           </p>
           <h2 className='max-w-3xl text-4xl font-semibold tracking-[-0.06em] text-balance max-sm:text-3xl'>
-            Standalone components, arranged as a sharper bento preview.
+            Standalone components.
           </h2>
         </div>
         <Link
@@ -49,7 +45,7 @@ export default function ComponentGallery() {
         <BentoCard
           eyebrow='Profile'
           title='Creator card'
-          className='col-span-3 row-span-2 max-lg:col-span-6 max-md:col-span-12 max-md:row-span-1'
+          className='col-span-3 row-span-2 max-lg:col-span-6 max-lg:row-span-3 max-md:col-span-12 max-md:row-span-1'
           contentClassName='flex items-center justify-center overflow-hidden'
         >
           <div className='scale-[0.68] max-lg:scale-[0.72] max-sm:scale-[0.68]'>
@@ -65,7 +61,7 @@ export default function ComponentGallery() {
         <BentoCard
           eyebrow='Commerce'
           title='Checkout flow'
-          className='col-span-3 row-span-2 max-lg:col-span-6 max-md:col-span-12 max-md:row-span-1'
+          className='col-span-3 row-span-2 max-lg:col-span-6 max-lg:row-span-3 max-md:col-span-12 max-md:row-span-1'
           contentClassName='flex items-center justify-center overflow-hidden'
         >
           <div className='w-full max-w-sm scale-[0.78] max-lg:scale-[0.84] max-sm:scale-[0.8]'>
@@ -103,49 +99,6 @@ export default function ComponentGallery() {
           contentClassName='flex items-center justify-center'
         >
           <SubscribeInput />
-        </BentoCard>
-
-        <BentoCard
-          eyebrow='Pricing'
-          title='Ready section'
-          className='col-span-6 row-span-2 max-lg:col-span-12 max-md:row-span-1'
-          contentClassName='overflow-hidden'
-        >
-          <div className='origin-top scale-[0.64] max-xl:scale-[0.58] max-lg:scale-[0.72] max-md:scale-[0.62] max-sm:scale-[0.5]'>
-            <SimplePricingCardSection />
-          </div>
-        </BentoCard>
-
-        <BentoCard
-          eyebrow='Content'
-          title='Stacked article cards'
-          className='col-span-3 row-span-2 max-lg:col-span-6 max-md:col-span-12 max-md:row-span-1'
-          contentClassName='overflow-hidden p-0'
-        >
-          <div className='flex h-full justify-center bg-linear-to-br from-zinc-950 to-emerald-950/80 pt-2'>
-            <StackedArticleCards className='scale-[0.72] max-sm:scale-[0.68]' />
-          </div>
-        </BentoCard>
-
-        <BentoCard
-          eyebrow='Interaction'
-          title='Flip card stack'
-          className='col-span-3 row-span-2 max-lg:col-span-6 max-md:col-span-12 max-md:row-span-1'
-          contentClassName='flex flex-col items-center justify-center gap-5'
-        >
-          <AnimatedDropdown text='Open menu' />
-          <FlipCard
-            className='h-64 max-w-64'
-            triggerOnHover
-            backContent={
-              <>
-                <h3 className='mb-3 text-xl font-bold'>Composable</h3>
-                <p className='text-sm opacity-90'>
-                  Swap front and back content to fit any product moment.
-                </p>
-              </>
-            }
-          />
         </BentoCard>
       </div>
     </section>
