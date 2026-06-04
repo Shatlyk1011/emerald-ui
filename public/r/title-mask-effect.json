@@ -1,0 +1,16 @@
+{
+  "name": "title-mask-effect",
+  "type": "registry:component",
+  "dependencies": [
+    "gsap",
+    "@gsap/react"
+  ],
+  "files": [
+    {
+      "type": "registry:component",
+      "content": "'use client'\n\n/**\n * @author: @emerald-ui\n * @description: Scroll-driven title mask effect with GSAP\n * @version: 1.0.0\n * @date: 2026-06-02\n * @license: MIT\n * @website: https://emerald-ui.com\n */\nimport { useRef } from 'react'\nimport { useGSAP } from '@gsap/react'\nimport gsap from 'gsap'\nimport { ScrollTrigger } from 'gsap/ScrollTrigger'\n\ngsap.registerPlugin(ScrollTrigger)\n\nconst titleLines = [\n  ['Build', 'things'],\n  ['that', 'feel'],\n  ['impossible.'],\n  ['Ship', 'with'],\n  ['intention.'],\n]\n\nexport default function TitleMaskEffect() {\n  const sectionRef = useRef<HTMLElement | null>(null)\n\n  useGSAP(\n    () => {\n      if (!sectionRef.current) return\n\n      const scrollCue = sectionRef.current.querySelector('.title-mask-scroll')\n      const words = gsap.utils.toArray<HTMLElement>('.title-mask-word')\n\n      gsap.to(scrollCue, {\n        autoAlpha: 0,\n        duration: 0.2,\n        scrollTrigger: {\n          trigger: sectionRef.current,\n          start: 'top top',\n          end: 'top -1',\n          toggleActions: 'play none reverse none',\n        },\n      })\n\n      words.forEach((word) => {\n        gsap.to(word.children, {\n          yPercent: 100,\n          ease: 'power2.inOut',\n          scrollTrigger: {\n            trigger: word,\n            start: 'bottom 90%',\n            end: 'top 45%',\n            scrub: 0.5,\n          },\n        })\n      })\n    },\n    { scope: sectionRef }\n  )\n\n  return (\n    <section\n      ref={sectionRef}\n      className='relative flex min-h-svh w-full flex-col items-center gap-[8vw] overflow-hidden bg-[#10100e] px-4 pt-[50vh] pb-[10vw] text-[#f5f0e8] max-md:pt-[30vh]'\n    >\n      <h2 className='relative z-10 text-center text-[clamp(2rem,5.5vw,6.5rem)] leading-[1.15] font-black tracking-[-0.06em] text-balance uppercase'>\n        {titleLines.map((line, lineIndex) => (\n          <span key={line.join('-')} className='block'>\n            {line.map((word) => (\n              <span\n                key={`${lineIndex}-${word}`}\n                className='title-mask-word relative mr-[0.28em] inline-block overflow-hidden align-top'\n              >\n                <span className='absolute top-0 left-0 inline-block -translate-y-full'>\n                  {word}\n                </span>\n                <span className='inline-block'>{word}</span>\n              </span>\n            ))}\n          </span>\n        ))}\n      </h2>\n    </section>\n  )\n}\n",
+      "path": "/components/emerald-ui-components/gsap-components/title-mask-effect.tsx",
+      "target": "components/ui/title-mask-effect.tsx"
+    }
+  ]
+}
