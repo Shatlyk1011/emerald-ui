@@ -112,7 +112,23 @@ This project includes a set of AI workflows and skills stored in the `.agent` fo
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are highly appreciated! If you have ideas on expanding the component library, optimizing the automated Scrnify pipeline, or want to submit new inspiration sites, feel free to open a PR or an issue.
+Contributions of all kinds are welcome — new components, bug fixes, documentation improvements, or inspiration site additions!
+
+| Type                 | Description                                     |
+| -------------------- | ----------------------------------------------- |
+| 🐛 Bug Fix           | Fix an existing issue or unexpected behavior    |
+| ✨ New Component     | Add a new UI component to the registry          |
+| 📚 Documentation     | Improve or add MDX docs for existing components |
+| 🌐 Inspiration Sites | Suggest or add new entries to the gallery       |
+
+To get started:
+
+1. Fork & clone the repo
+2. Create a branch: `git checkout -b feat/my-change`
+3. Make your changes following the component conventions
+4. Open a PR → [github.com/Shatlyk1011/emerald-ui/pulls](https://github.com/Shatlyk1011/emerald-ui/pulls)
+
+📖 See [CONTRIBUTING.md](./CONTRIBUTING.md) for the full guide including setup, component guidelines, and commit conventions.
 
 ## License
 
