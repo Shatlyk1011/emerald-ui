@@ -17,7 +17,6 @@ interface PerspectiveStoryCardProps {
   className?: string
   imageUrl?: string
 }
-
 export default function PerspectiveStoryCard({
   className,
   imageUrl = 'https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1200&q=80',
@@ -26,11 +25,9 @@ export default function PerspectiveStoryCard({
   const cardRef = useRef<HTMLDivElement | null>(null)
   const mediaRef = useRef<HTMLDivElement | null>(null)
 
-  const isMobile = window.innerWidth < 1000
-
-  console.log(isMobile)
   useGSAP(
     () => {
+      const isMobile = window.innerWidth < 1000
       const root = rootRef.current
       const card = cardRef.current
       const media = mediaRef.current
@@ -137,8 +134,7 @@ export default function PerspectiveStoryCard({
       <div
         ref={cardRef}
         className={cn(
-          'absolute top-1/2 left-1/2 aspect-[0.75] w-[min(22vw,18rem)] min-w-[12rem] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[1.25rem] border border-white/10 bg-black/30 shadow-[0_40px_120px_rgba(0,0,0,0.45)]',
-          isMobile ? 'hidden' : ''
+          'absolute top-1/2 left-1/2 aspect-[0.75] w-[min(22vw,18rem)] min-w-[12rem] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[1.25rem] border border-white/10 bg-black/30 shadow-[0_40px_120px_rgba(0,0,0,0.45)] max-[1000px]:hidden'
         )}
       >
         <div
@@ -151,11 +147,9 @@ export default function PerspectiveStoryCard({
         <div className='absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-white/10' />
       </div>
 
-      {isMobile && (
-        <p className='text-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-sm font-medium tracking-[0.04em] uppercase'>
-          This animation works on desktop <br /> with mouse movement
-        </p>
-      )}
+      <p className='text-primary absolute top-1/2 left-1/2 hidden -translate-x-1/2 -translate-y-1/2 text-center text-sm font-medium tracking-[0.04em] uppercase max-[1000px]:block'>
+        This animation works on desktop <br /> with mouse movement
+      </p>
     </section>
   )
 }
