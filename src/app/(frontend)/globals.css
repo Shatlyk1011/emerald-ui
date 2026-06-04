@@ -1,5 +1,6 @@
 /* New badge styling */
-a[href='/docs/gsap/components/title-mask-effect']::after {
+a[href='/docs/gsap/components/title-mask-effect']::after,
+a[href='/docs/gsap/components/perspective-story-card']::after {
   content: 'New';
   position: absolute;
   z-index: 20;

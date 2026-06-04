@@ -13,6 +13,14 @@ import { Tooltip, TooltipContent } from '../ui/tooltip'
 
 const UPDATES = [
   {
+    id: '7',
+    date: '2026-06-05',
+    title: 'Perspective Story Card',
+    description:
+      'A cursor-reactive perspective card layered over oversized editorial typography',
+    link: '/docs/gsap/components/perspective-story-card',
+  },
+  {
     id: '6',
     date: '2026-06-04',
     title: 'Title Mask Effect',

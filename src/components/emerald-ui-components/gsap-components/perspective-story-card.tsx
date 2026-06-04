@@ -11,7 +11,6 @@
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { Sparkles } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface PerspectiveStoryCardProps {
@@ -27,6 +26,9 @@ export default function PerspectiveStoryCard({
   const cardRef = useRef<HTMLDivElement | null>(null)
   const mediaRef = useRef<HTMLDivElement | null>(null)
 
+  const isMobile = window.innerWidth < 1000
+
+  console.log(isMobile)
   useGSAP(
     () => {
       const root = rootRef.current
@@ -34,6 +36,7 @@ export default function PerspectiveStoryCard({
       const media = mediaRef.current
 
       if (!root || !card || !media) return
+      if (isMobile) return
 
       const xTo = gsap.quickTo(card, 'x', { duration: 1, ease: 'power4' })
       const yTo = gsap.quickTo(card, 'y', { duration: 1, ease: 'power4' })
@@ -91,7 +94,7 @@ export default function PerspectiveStoryCard({
         window.clearTimeout(movementTimeout)
       }
     },
-    { scope: rootRef }
+    { dependencies: [], scope: rootRef }
   )
 
   return (
@@ -107,11 +110,10 @@ export default function PerspectiveStoryCard({
 
       <div className='relative z-10 flex h-full flex-col justify-between'>
         <div className='flex items-start justify-between gap-6'>
-          <div>
-            <p className='text-[clamp(3rem,14vw,12rem)] leading-[0.8] font-medium tracking-[-0.07em]'>
-              Design systems
-            </p>
-          </div>
+          <p className='text-[clamp(2rem,10vw,12rem)] leading-[0.8] font-medium tracking-[-0.07em]'>
+            Design systems
+          </p>
+
           <div className='max-w-[13rem] pt-2 text-right text-[clamp(0.8rem,1.6vw,1.15rem)] leading-[1.1] font-medium tracking-[-0.04em] text-[#b7bac5]'>
             <p>8 launches</p>
             <p>Motion studies</p>
@@ -120,23 +122,12 @@ export default function PerspectiveStoryCard({
         </div>
 
         <div className='flex items-end justify-between gap-6'>
-          <div className='flex flex-col gap-3 text-[clamp(0.82rem,1.6vw,1.15rem)] leading-[1.1] font-medium tracking-[-0.04em] text-[#b7bac5]'>
-            <div className='flex items-center gap-3'>
-              <div className='flex size-[clamp(2.8rem,7vw,5.2rem)] items-center justify-center rounded-full border border-white/15 bg-white/5'>
-                <Sparkles className='size-[clamp(1.1rem,2vw,1.6rem)]' />
-              </div>
-            </div>
-            <p>Studio North</p>
-            <p>Product narratives</p>
-            <p>New York City</p>
-          </div>
-
-          <div className='text-right'>
-            <div className='flex justify-end gap-[0.22em] text-[clamp(3rem,14vw,12rem)] leading-[0.8] font-medium tracking-[-0.07em]'>
+          <div className='w-full text-right text-[clamp(2rem,10vw,12rem)]'>
+            <div className='flex justify-end gap-[0.22em] leading-[0.8] font-medium tracking-[-0.07em]'>
               <span>that</span>
               <span>move</span>
             </div>
-            <p className='text-[clamp(3rem,14vw,12rem)] leading-[0.8] font-medium tracking-[-0.07em]'>
+            <p className='leading-[0.8] font-medium tracking-[-0.07em]'>
               people forward
             </p>
           </div>
@@ -145,7 +136,10 @@ export default function PerspectiveStoryCard({
 
       <div
         ref={cardRef}
-        className='absolute top-1/2 left-1/2 aspect-[0.75] w-[min(22vw,18rem)] min-w-[12rem] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[1.25rem] border border-white/10 bg-black/30 shadow-[0_40px_120px_rgba(0,0,0,0.45)]'
+        className={cn(
+          'absolute top-1/2 left-1/2 aspect-[0.75] w-[min(22vw,18rem)] min-w-[12rem] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[1.25rem] border border-white/10 bg-black/30 shadow-[0_40px_120px_rgba(0,0,0,0.45)]',
+          isMobile ? 'hidden' : ''
+        )}
       >
         <div
           ref={mediaRef}
@@ -156,6 +150,12 @@ export default function PerspectiveStoryCard({
         />
         <div className='absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-white/10' />
       </div>
+
+      {isMobile && (
+        <p className='text-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-sm font-medium tracking-[0.04em] uppercase'>
+          This animation works on desktop <br /> with mouse movement
+        </p>
+      )}
     </section>
   )
 }
