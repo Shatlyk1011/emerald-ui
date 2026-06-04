@@ -61,6 +61,9 @@ https://www.emerald-ui.com/docs/components/morphing-highlighter
 **Parallax Image** - Smooth scroll-driven parallax image effect powered by motion/react
 https://www.emerald-ui.com/docs/components/parallax-image
 
+**Perspective Story Card** - Cursor-reactive perspective card layered over oversized editorial typography
+https://www.emerald-ui.com/docs/components/perspective-story-card
+
 **Pricing** - Explore high quality pricing card components. Dark and Light modes available.
 https://www.emerald-ui.com/docs/components/pricing
 

@@ -13,6 +13,7 @@
     "components/magnetic-effect",
     "components/fancy-text-hover",
     "components/image-trail",
+    "components/perspective-story-card",
     "components/sticky-cards-section",
     "components/morphing-highlighter",
 

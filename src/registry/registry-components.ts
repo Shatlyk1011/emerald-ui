@@ -294,6 +294,17 @@ export const component: Registry = [
       },
     ],
   },
+  {
+    name: 'perspective-story-card',
+    type: 'registry:component',
+    dependencies: ['gsap', '@gsap/react', 'lucide-react'],
+    files: [
+      {
+        path: 'components/emerald-ui-components/gsap-components/perspective-story-card.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
 
   {
     name: 'sticky-cards-section',
