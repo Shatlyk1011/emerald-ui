@@ -13,6 +13,14 @@ import { Tooltip, TooltipContent } from '../ui/tooltip'
 
 const UPDATES = [
   {
+    id: '8',
+    date: '2026-06-05',
+    title: 'Pinned Scroll Fan',
+    description:
+      'A scroll-pinned editorial fan gallery — stacked cards that rotate and reveal through an arc as you scroll',
+    link: '/docs/gsap/components/pinned-scroll-fan',
+  },
+  {
     id: '7',
     date: '2026-06-05',
     title: 'Perspective Story Card',
