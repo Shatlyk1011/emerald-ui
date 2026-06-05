@@ -64,6 +64,9 @@ https://www.emerald-ui.com/docs/components/parallax-image
 **Perspective Story Card** - Cursor-reactive perspective card layered over oversized editorial typography
 https://www.emerald-ui.com/docs/components/perspective-story-card
 
+**Pinned Scroll Fan** - Rounded cards reveal in a pinned rotating fan as the page scrolls
+https://www.emerald-ui.com/docs/components/pinned-scroll-fan
+
 **Pricing** - Explore high quality pricing card components. Dark and Light modes available.
 https://www.emerald-ui.com/docs/components/pricing
 
