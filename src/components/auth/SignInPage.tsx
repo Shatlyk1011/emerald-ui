@@ -7,6 +7,7 @@ import { Github } from 'lucide-react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { loginSchema } from '@/lib/login-schema'
+import { siteConfig } from '@/lib/site-config'
 import { createClient } from '@/lib/supabase-client'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -35,11 +36,8 @@ export default function SignInPage({
   // Determine where to redirect after successful auth
   const returnUrl = redirectTo || searchParams.get('next') || '/'
 
-  // Build the callback URL with the return path
-  const callbackUrl =
-    typeof window !== 'undefined'
-      ? `${window.location.origin}/api/auth/callback?next=${encodeURIComponent(returnUrl)}`
-      : `/api/auth/callback?next=${encodeURIComponent(returnUrl)}`
+  // Build the callback URL against the canonical domain, not the current host.
+  const callbackUrl = `${siteConfig.siteUrl}/api/auth/callback?next=${encodeURIComponent(returnUrl)}`
 
   // Handle OAuth sign-in
   const handleOAuthSignIn = async (provider: AuthProviders) => {

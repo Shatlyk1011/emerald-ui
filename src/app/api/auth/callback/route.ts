@@ -2,6 +2,7 @@ import config from '@payload-config'
 import { NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import { createClientRecord } from '@/lib/helpers/client-helpers'
+import { siteConfig } from '@/lib/site-config'
 import { createClient } from '@/lib/supabase-server'
 
 /**
@@ -11,7 +12,7 @@ import { createClient } from '@/lib/supabase-server'
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url)
   const code = requestUrl.searchParams.get('code')
-  const origin = requestUrl.origin
+  const origin = siteConfig.siteUrl
   const next = requestUrl.searchParams.get('next') ?? '/'
 
   if (code) {
