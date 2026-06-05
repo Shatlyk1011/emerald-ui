@@ -19,6 +19,7 @@
     "hooks": "@/hooks"
   },
   "registries": {
-    "@emerald-ui": "https://emerald-ui.com/r/{name}.json"
+    "@emerald-ui": "https://emerald-ui.com/r/{name}.json",
+    "@react-bits": "https://reactbits.dev/r/{name}.json"
   }
 }

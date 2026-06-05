@@ -52,7 +52,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
   const { scrollY } = useScroll()
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
-    setIsScrolled(latest > 0)
+    setIsScrolled(latest > 500)
   })
 
   const handleSignOut = async () => {
@@ -63,8 +63,10 @@ const Header: FC<Props> = ({ isFumadocs }) => {
     <>
       <header
         className={cn(
-          'fixed top-0 z-20 mx-auto flex h-14 w-full items-center justify-between border-b px-8 py-2 font-sans max-md:px-4',
-          isScrolled && !isFumadocs && 'bg-background/90 backdrop-blur-sm',
+          'fixed top-0 z-20 mx-auto flex h-14 w-full items-center justify-between px-8 py-2 font-sans max-md:px-4',
+          isScrolled &&
+            !isFumadocs &&
+            'bg-background/90 border-b backdrop-blur-sm',
           isFumadocs &&
             'static w-full flex-1 justify-start border-none px-0 max-lg:hidden'
         )}

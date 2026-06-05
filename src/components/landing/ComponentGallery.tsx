@@ -21,7 +21,7 @@ export default function ComponentGallery() {
             Component gallery
           </p>
           <h2 className='max-w-3xl text-4xl font-semibold tracking-[-0.06em] text-balance max-sm:text-3xl'>
-            Standalone components.
+            Demo Section
           </h2>
         </div>
         <Link

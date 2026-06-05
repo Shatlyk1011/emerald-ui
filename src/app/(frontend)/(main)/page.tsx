@@ -2,6 +2,7 @@ import { ArrowRight, Blocks, Code2, Layers3, Sparkles } from 'lucide-react'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import TextShimmer from '@/components/ui/text-shimmer'
+import Lightfall from '@/components/Lightfall'
 import ComponentGallery from '@/components/landing/ComponentGallery'
 
 export const metadata: Metadata = {
@@ -33,15 +34,32 @@ const features = [
 
 export default function Home() {
   return (
-    <main className='bg-background relative mt-14 min-h-screen overflow-hidden font-sans'>
-      <div className='pointer-events-none absolute inset-0 -z-10'>
-        <div className='absolute top-0 left-1/2 h-120 w-120 -translate-x-1/2 rounded-full bg-emerald-400/12 blur-3xl' />
-        <div className='absolute top-80 -left-24 h-96 w-96 rounded-full bg-cyan-300/12 blur-3xl' />
-        <div className='absolute right-0 bottom-80 h-96 w-96 rounded-full bg-amber-300/12 blur-3xl' />
-      </div>
-
-      <section className='mx-auto flex max-w-400 flex-col items-center px-10 py-16 text-center max-sm:px-4 max-sm:pt-14'>
-        <div className='flex min-h-[520px] max-w-5xl flex-col items-center justify-center max-lg:min-h-[440px] max-sm:min-h-[400px]'>
+    <main className='bg-background relative mt-14 min-h-screen font-sans'>
+      <section className='relative isolate mx-auto -mt-16 flex w-full flex-col items-center overflow-hidden px-10 py-16 text-center max-sm:px-4 max-sm:pt-14'>
+        <div
+          aria-hidden='true'
+          className='pointer-events-none absolute inset-0 z-1 overflow-hidden mix-blend-multiply dark:mix-blend-screen'
+        >
+          <Lightfall
+            colors={['#047857', '#059669', '#10b981', '#34d399']}
+            speed={0.15}
+            streakCount={5}
+            streakWidth={0.42}
+            streakLength={1.15}
+            glow={1.55}
+            density={0.78}
+            twinkle={0.55}
+            zoom={2.9}
+            backgroundGlow={0}
+            opacity={0.3}
+            mixBlendMode='screen'
+            alphaFloor={0}
+            mouseInteraction={false}
+          />
+        </div>
+        <div className='bg-background/40 dark:bg-background/10 pointer-events-none absolute inset-0 z-2 backdrop-blur-[0.2px]' />
+        <div className='from-background pointer-events-none absolute inset-x-0 bottom-0 z-10 h-32 bg-linear-to-t to-transparent' />
+        <div className='relative z-20 flex min-h-[520px] max-w-5xl flex-col items-center justify-center max-lg:min-h-[440px] max-sm:min-h-[400px]'>
           <div className='border-border/60 bg-card/70 mb-6 flex w-fit items-center gap-2 rounded-full border px-3 py-1.5 text-sm shadow-sm backdrop-blur'>
             <Sparkles className='size-4 text-emerald-500' />
             <span className='text-muted-foreground'>Copy-ready React UI</span>
