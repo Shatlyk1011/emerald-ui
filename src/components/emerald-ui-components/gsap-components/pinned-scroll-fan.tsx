@@ -106,69 +106,57 @@ export default function PinnedScrollFan({
         ease: 'power2.out',
       })
 
-      const mm = gsap.matchMedia()
+      const trigger = ScrollTrigger.create({
+        trigger: pinHeight,
+        start: 'top top',
+        end: 'bottom bottom',
+        pin: container,
+        onUpdate: (self) => {
+          const nextIndex = Math.floor(self.progress * items.length)
 
-      mm.add('(min-width: 768px)', () => {
-        const trigger = ScrollTrigger.create({
-          trigger: pinHeight,
-          start: 'top top',
-          end: 'bottom bottom',
-          pin: container,
-          onUpdate: (self) => {
-            const nextIndex = Math.floor(self.progress * items.length)
+          if (nextIndex === currentIndex || nextIndex >= items.length) return
 
-            if (nextIndex === currentIndex || nextIndex >= items.length) return
+          if (nextIndex > currentIndex) {
+            for (let index = currentIndex + 1; index <= nextIndex; index += 1) {
+              const circle = items[index]
+              if (!circle) continue
 
-            if (nextIndex > currentIndex) {
-              for (
-                let index = currentIndex + 1;
-                index <= nextIndex;
-                index += 1
-              ) {
-                const circle = items[index]
-                if (!circle) continue
-
-                gsap.set(circle, {
-                  autoAlpha: 1,
-                  rotation: index * FAN_ANGLE,
-                })
-                gsap.fromTo(
-                  circle,
-                  { scale: 0.92 },
-                  {
-                    scale: 1,
-                    ease: 'back.out(1.4)',
-                    duration: 0.45,
-                    overwrite: true,
-                  }
-                )
-              }
-            } else {
-              for (let index = currentIndex; index > nextIndex; index -= 1) {
-                const circle = items[index]
-                if (!circle) continue
-                gsap.set(circle, { autoAlpha: 0 })
-              }
+              gsap.set(circle, {
+                autoAlpha: 1,
+                rotation: index * FAN_ANGLE,
+              })
+              gsap.fromTo(
+                circle,
+                { scale: 0.92 },
+                {
+                  scale: 1,
+                  ease: 'back.out(1.4)',
+                  duration: 0.45,
+                  overwrite: true,
+                }
+              )
             }
+          } else {
+            for (let index = currentIndex; index > nextIndex; index -= 1) {
+              const circle = items[index]
+              if (!circle) continue
+              gsap.set(circle, { autoAlpha: 0 })
+            }
+          }
 
-            rotateTo(-nextIndex * FAN_ANGLE + (FAN_ANGLE / 2) * nextIndex)
+          rotateTo(-nextIndex * FAN_ANGLE + (FAN_ANGLE / 2) * nextIndex)
 
-            currentIndex = nextIndex
-          },
-          onLeaveBack: () => {
-            currentIndex = -1
-            gsap.set(items, { autoAlpha: 0 })
-            gsap.set(circles, { rotation: 0 })
-          },
-        })
-
-        return () => {
-          trigger.kill()
-        }
+          currentIndex = nextIndex
+        },
+        onLeaveBack: () => {
+          currentIndex = -1
+          gsap.set(items, { autoAlpha: 0 })
+          gsap.set(circles, { rotation: 0 })
+        },
       })
 
       return () => {
-        mm.revert()
+        trigger.kill()
       }
     },
     { scope: rootRef, dependencies: [cards.length] }
@@ -183,23 +171,23 @@ export default function PinnedScrollFan({
       )}
     >
       {/* Radial gradient using theme colors */}
-      <div className='absolute inset-0 bg-[radial-gradient(circle_at_top,color-mix(in_oklch,var(--chart-1)_16%,transparent),transparent_34%),linear-gradient(180deg,color-mix(in_oklch,var(--background)_92%,transparent),var(--background)_100%)]' />
+      <div className='absolute inset-0 bg-[radial-gradient(circle_at_top,color-mix(in_oklch,var(--primary)_16%,transparent),transparent_34%),linear-gradient(180deg,color-mix(in_oklch,var(--background)_92%,transparent),var(--background)_100%)]' />
 
       {/* Desktop-first: h-[500svh] is the base; shrink to 420svh on small screens */}
       <div ref={pinHeightRef} className='relative h-[500svh] max-md:h-[420svh]'>
         <div
           ref={containerRef}
-          className='relative flex h-svh w-full overflow-hidden px-16 pt-8 pb-10 max-lg:px-6 max-sm:px-4'
+          className='relative flex h-svh w-full flex-1 overflow-hidden px-16 pt-8 pb-10 max-lg:px-6 max-sm:px-4'
         >
           <div className='relative flex w-full flex-col items-center justify-start'>
-            <div className='relative z-20 mt-2 text-center'>
+            <div className='relative z-20 mt-20 text-center'>
               <p className='text-[clamp(2.6rem,6.4vw,5.7rem)] leading-[0.92] font-semibold tracking-[-0.08em] text-balance'>
                 <span className='text-foreground block'>Rounded spaces</span>
                 <span className='text-muted-foreground block'>
                   opening on scroll
                 </span>
               </p>
-              <p className='text-muted-foreground mx-auto mt-4 max-w-md text-sm leading-6 sm:text-base'>
+              <p className='text-muted-foreground mx-auto mt-4 text-sm leading-6 sm:text-base'>
                 A stacked editorial fan for interior references, campaign
                 frames, and launch stories.
               </p>
@@ -208,7 +196,7 @@ export default function PinnedScrollFan({
             {/* Desktop-first fan container — offset-left so arc fans from center */}
             <div
               ref={circlesRef}
-              className='relative mt-[50svh] ml-[-100%] aspect-square w-[300%] max-w-none max-md:mt-[22svh] max-md:ml-0'
+              className='relative mt-[35svh] ml-[-100%] aspect-square w-[300%] max-w-none max-md:mt-[22svh] max-md:ml-0'
             >
               {cards.map((card, index) => (
                 <div
