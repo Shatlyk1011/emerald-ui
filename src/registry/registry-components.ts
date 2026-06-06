@@ -295,6 +295,17 @@ export const component: Registry = [
     ],
   },
   {
+    name: 'vanishing-mouse-trail',
+    type: 'registry:component',
+    dependencies: ['gsap', '@gsap/react'],
+    files: [
+      {
+        path: 'components/emerald-ui-components/gsap-components/vanishing-mouse-trail.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
+  {
     name: 'pinned-scroll-fan',
     type: 'registry:component',
     dependencies: ['gsap', '@gsap/react'],

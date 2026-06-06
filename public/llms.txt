@@ -94,6 +94,9 @@ https://www.emerald-ui.com/docs/components/title-mask-effect
 **Tooltip Cat** - A playful cat tooltip component that sleeps until hovered
 https://www.emerald-ui.com/docs/components/tooltip-cat
 
+**Vanishing Mouse Trail** - Spawn image cards on cursor movement and let them recede into 3D space before fading out
+https://www.emerald-ui.com/docs/components/vanishing-mouse-trail
+
 **Voice Record** - A dynamic voice recorder component with waveform visualization
 https://www.emerald-ui.com/docs/components/voice-record
 
