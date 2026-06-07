@@ -31,7 +31,7 @@ const SubmitIssueDialog = dynamic(
   }
 )
 
-const motionComponents = '/docs'
+const gsapComponents = '/docs/gsap'
 const websiteCollections = '/website-collections'
 
 interface Props {
@@ -108,7 +108,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
 
             <li>
               <Link
-                href={motionComponents}
+                href={gsapComponents}
                 onClick={closeMenu}
                 className={cn(
                   'hover:text-foreground min-h-10 rounded-md px-3 py-2 text-nowrap transition ease-out max-sm:px-2'

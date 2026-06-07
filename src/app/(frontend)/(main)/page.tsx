@@ -78,7 +78,7 @@ export default function Home() {
 
           <div className='mt-8 flex flex-wrap items-center justify-center gap-3'>
             <Link
-              href='/docs'
+              href='/docs/gsap'
               className='bg-primary text-primary-foreground hover:bg-primary/90 inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-sm font-medium shadow-sm transition-colors'
             >
               Browse Components
