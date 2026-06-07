@@ -45,11 +45,6 @@ const DEFAULT_IMAGES: TrailImage[] = [
       'https://images.unsplash.com/photo-1520034475321-cbe63696469a?auto=format&fit=crop&w=900&q=80',
   },
   {
-    title: 'Glass Static',
-    image:
-      'https://images.unsplash.com/photo-1518544889280-685f0805b421?auto=format&fit=crop&w=900&q=80',
-  },
-  {
     title: 'Amber Relay',
     image:
       'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80',
