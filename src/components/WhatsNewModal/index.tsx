@@ -13,6 +13,22 @@ import { Tooltip, TooltipContent } from '../ui/tooltip'
 
 const UPDATES = [
   {
+    id: '10',
+    date: '2026-06-07',
+    title: 'Vanishing Mouse Trail',
+    description:
+      'A mouse-driven image trail that spawns image frames and sends them backward in 3D space until they vanish',
+    link: '/docs/gsap/components/vanishing-mouse-trail',
+  },
+  {
+    id: '9',
+    date: '2026-06-07',
+    title: 'Title Mask Effect — Hover Trigger',
+    description:
+      'Extended Title Mask Effect with an optional hover trigger mode alongside the existing scroll-driven animation',
+    link: '/docs/gsap/components/title-mask-effect',
+  },
+  {
     id: '8',
     date: '2026-06-05',
     title: 'Pinned Scroll Fan',
