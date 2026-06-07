@@ -1,6 +1,6 @@
 ---
 title: Title Mask Effect
-description: Scroll-scrubbed headline mask animation with stacked word reveals
+description: Scroll-scrubbed or hover-driven headline mask animation with stacked word reveals
 icon: AudioWaveform
 credits: codegrid
 full: true
@@ -14,5 +14,17 @@ import TitleMaskEffect from '@/components/emerald-ui-components/gsap-components/
   isReload
   isBlock
 >
-  <TitleMaskEffect />
+  <div className='flex flex-col w-full'>
+    <TitleMaskEffect />
+
+    <div className='relative flex items-center justify-center bg-[#10100e] py-6'>
+      <div className='absolute inset-x-0 top-1/2 h-px bg-white/10' />
+      <span className='relative z-10 rounded-full border border-white/10 bg-[#10100e] px-4 py-1 text-xs font-medium tracking-[0.2em] text-white/40 uppercase'>
+        hover effect
+      </span>
+    </div>
+
+    <TitleMaskEffect hoverEffect />
+
+  </div>
 </Preview>
