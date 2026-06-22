@@ -70,6 +70,9 @@ https://www.emerald-ui.com/docs/components/pinned-scroll-fan
 **Pricing** - Explore high quality pricing card components. Dark and Light modes available.
 https://www.emerald-ui.com/docs/components/pricing
 
+**Scroll Float** - Pinned editorial titles release their letters upward as the page scrolls
+https://www.emerald-ui.com/docs/components/scroll-float
+
 **Scroll Text Reveal** - Word-by-word scroll reveal animation with keyword highlighting and pinned sections
 https://www.emerald-ui.com/docs/components/scroll-text-reveal
 

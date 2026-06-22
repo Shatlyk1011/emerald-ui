@@ -317,6 +317,17 @@ export const component: Registry = [
     ],
   },
   {
+    name: 'scroll-float',
+    type: 'registry:component',
+    dependencies: ['gsap', '@gsap/react'],
+    files: [
+      {
+        path: 'components/emerald-ui-components/gsap-components/scroll-float.tsx',
+        type: 'registry:component',
+      },
+    ],
+  },
+  {
     name: 'perspective-story-card',
     type: 'registry:component',
     dependencies: ['gsap', '@gsap/react', 'lucide-react'],

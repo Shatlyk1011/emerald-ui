@@ -15,6 +15,7 @@
     "components/image-trail",
     "components/vanishing-mouse-trail",
     "components/pinned-scroll-fan",
+    "components/scroll-float",
     "components/perspective-story-card",
     "components/sticky-cards-section",
     "components/morphing-highlighter",

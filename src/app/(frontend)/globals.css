@@ -1,8 +1,6 @@
 /* New badge styling */
-a[href='/docs/gsap/components/title-mask-effect']::after,
-a[href='/docs/gsap/components/perspective-story-card']::after,
-a[href='/docs/gsap/components/pinned-scroll-fan']::after,
-a[href='/docs/gsap/components/vanishing-mouse-trail']::after {
+a[href='/docs/gsap/components/vanishing-mouse-trail']::after,
+a[href='/docs/gsap/components/scroll-float']::after {
   content: 'New';
   position: absolute;
   z-index: 20;
