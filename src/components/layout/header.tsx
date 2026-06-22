@@ -2,7 +2,7 @@
 
 import { FC, Suspense, useState } from 'react'
 import { getUserInitials } from '@/composables/utils'
-import { LogOut, Menu, Flag, Github } from 'lucide-react'
+import { LogOut, Menu, Flag } from 'lucide-react'
 import { useScroll, useMotionValueEvent } from 'motion/react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
@@ -23,6 +23,7 @@ import {
 import ThemeToggle from '@/components/ui/theme-toggle'
 import Logo from '../ui/logo'
 import TextShimmer from '../ui/text-shimmer'
+import GitHubStarButton from './github-star-button'
 
 const SubmitIssueDialog = dynamic(
   () => import('../landing/SubmitIssueDialog'),
@@ -139,16 +140,7 @@ const Header: FC<Props> = ({ isFumadocs }) => {
         </nav>
 
         <div className='flex min-w-20 items-center justify-end gap-2.5 max-sm:gap-1'>
-          <Button variant={'ghost'} asChild>
-            <a
-              href={siteConfig.githubRepo}
-              target='_blank'
-              rel='noopener noreferrer'
-              aria-label='GitHub Repository'
-            >
-              <Github className='text-foreground size-5' />
-            </a>
-          </Button>
+          <GitHubStarButton />
           <Button
             variant={'ghost'}
             onClick={() => setIssueDialogOpen(true)}

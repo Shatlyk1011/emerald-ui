@@ -13,6 +13,14 @@ import { Tooltip, TooltipContent } from '../ui/tooltip'
 
 const UPDATES = [
   {
+    id: '11',
+    date: '2026-06-22',
+    title: 'Scroll Float',
+    description:
+      'Pinned editorial titles release their letters upward as the page scrolls',
+    link: '/docs/gsap/components/scroll-float',
+  },
+  {
     id: '10',
     date: '2026-06-07',
     title: 'Vanishing Mouse Trail',
